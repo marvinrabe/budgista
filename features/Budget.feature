@@ -6,7 +6,7 @@ Feature: Budgets
   Rules:
   - New budgets contain sample categories
   - I can create as many budgets as I want
-  - Budgets have localisation features (e.g. currencies)
+  - Budgets have different currencies
 
   Scenario: Creating budget
     When I create a Budget with Name "Test"
@@ -30,21 +30,17 @@ Feature: Budgets
     When I delete the Budget with Name "Test"
     Then I shouldnt have a Budget with Name "Test"
 
-  Scenario: Currency and localisation German defaults
+  Scenario: Currency German defaults
     Given There is a User with locale "de_DE"
     When I create a Budget
     Then Currency should be "EUR"
-    And Number format shoud be "1.000,00"
-    And Currency placement should be "After"
 
-  Scenario: Currency and localisation US defaults
+  Scenario: Currency US defaults
     Given There is a User with locale "en_US"
     When I create a Budget
-    Then Currency should be "USD"
-    And Number format shoud be "1,000.00"
-    And Currency placement should be "Before"
+    Then Budget currency should be "USD"
 
   Scenario: Changing currency
     Given There is a User with locale "en_US"
-    When I change Curreny to "EUR"
-    Then Currency should be "EUR"
+    When I change Budget curreny to "EUR"
+    Then Budget currency should be "EUR"
