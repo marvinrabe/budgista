@@ -17,30 +17,16 @@ Feature: Budgets
     Then Budget contains more than 1 Categories
 
   Scenario: Creating multiple budgets
-    Given I have a Budget with Name "Test"
+    Given I have a Budget called "Test"
     When I create a Budget with Name "Test 2"
-    Then I have 2 Budgets
+    Then I should have 2 Budgets
 
   Scenario: Unicode and Emojis
-    When I create a Budget with name "M҉y҉ ҉B҉u҉d҉g҉e҉t҉ 😂"
+    When I create a Budget with Name "M҉y҉ ҉B҉u҉d҉g҉e҉t҉ 😂"
     Then I should have a Budget with Name "M҉y҉ ҉B҉u҉d҉g҉e҉t҉ 😂"
 
   Scenario: Deleting budget
-    Given I have a Budget with Name "Test"
+    Given I have a Budget called "Test"
     When I delete the Budget with Name "Test"
     Then I shouldnt have a Budget with Name "Test"
-
-  Scenario: Currency German defaults
-    Given There is a User with locale "de_DE"
-    When I create a Budget
-    Then Currency should be "EUR"
-
-  Scenario: Currency US defaults
-    Given There is a User with locale "en_US"
-    When I create a Budget
-    Then Budget currency should be "USD"
-
-  Scenario: Changing currency
-    Given There is a User with locale "en_US"
-    When I change Budget curreny to "EUR"
-    Then Budget currency should be "EUR"
+    And I should have 0 Budgets
