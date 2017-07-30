@@ -7,6 +7,8 @@ use AppBundle\Entity\Payee;
 interface PayeeRepository
 {
 
-    public function findByNameOrCreate($payee): Payee;
+    public function exists($name): bool;
+
+    public function findByName($name): Payee;
 
 }

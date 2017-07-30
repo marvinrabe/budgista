@@ -31,7 +31,7 @@ class Category
 
     public function __construct(string $name)
     {
-        $this->name;
+        $this->name = $name;
     }
 
     public function getName(): string

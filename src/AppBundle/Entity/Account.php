@@ -41,12 +41,27 @@ class Account
 
     public function __construct(string $name)
     {
+        $this->setName($name);
         $this->transactions = new ArrayCollection();
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getName()
     {
         return $this->name;
+    }
+
+    public function setName($name)
+    {
+        if (empty($name)) {
+            throw new \Exception('Account name can not be empty.');
+        }
+
+        $this->name = $name;
     }
 
     public function getTransactions()

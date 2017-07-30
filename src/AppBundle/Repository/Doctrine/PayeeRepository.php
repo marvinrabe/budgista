@@ -8,8 +8,31 @@ use Doctrine\ORM\EntityRepository;
 class PayeeRepository extends EntityRepository implements \AppBundle\Repository\PayeeRepository
 {
 
-    public function findByNameOrCreate($payee): Payee
+    public function exists($name): bool
     {
-        // TODO: Implement findByNameOrCreate() method.
+        /**
+         * @var Payee $payee
+         */
+        $payee = $this->findOneBy(['name' => $name]);
+
+        if ($payee === null) {
+            return false;
+        }
+        return true;
     }
+
+    public function findByName($name): Payee
+    {
+        /**
+         * @var Payee $payee
+         */
+        $payee = $this->findOneBy(['name' => $name]);
+
+        if ($payee === null) {
+            throw new \Exception('Payee "' . $name . '" not found.');
+        }
+
+        return $payee;
+    }
+
 }

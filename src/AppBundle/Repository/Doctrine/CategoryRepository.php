@@ -8,9 +8,31 @@ use Doctrine\ORM\EntityRepository;
 class CategoryRepository extends EntityRepository implements \AppBundle\Repository\CategoryRepository
 {
 
-    public function findByName($category): Category
+    public function exists($name): bool
     {
-        // TODO: Implement findByName() method.
+        /**
+         * @var Category $category
+         */
+        $category = $this->findOneBy(['name' => $name]);
+
+        if ($category === null) {
+            return false;
+        }
+        return true;
+    }
+
+    public function findByName($name): Category
+    {
+        /**
+         * @var Category $category
+         */
+        $category = $this->findOneBy(['name' => $name]);
+
+        if ($category === null) {
+            throw new \Exception('Category "' . $name . '" not found.');
+        }
+
+        return $category;
     }
 
 }

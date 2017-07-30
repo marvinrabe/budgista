@@ -9,6 +9,8 @@ use AppBundle\Entity\Category;
 interface CategoryRepository
 {
 
-    public function findByName($category): Category;
+    public function exists($name): bool;
+
+    public function findByName($name): Category;
 
 }

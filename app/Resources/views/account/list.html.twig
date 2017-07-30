@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('account_new') }}">{{ 'action.new'|trans }}</a>
+    <ul>
+        {% for account in accounts %}
+            <li>
+                <a href="{{ path('account_edit', {'id': account.id}) }}">{{ account.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

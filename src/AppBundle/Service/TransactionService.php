@@ -25,7 +25,7 @@ class TransactionService
     public function createTransaction(CreateTransactionData $data)
     {
         $category = $this->categoryRepository->findByName($data->category);
-        $payee = $this->payeeRepository->findByNameOrCreate($data->payee);
+        $payee = $this->payeeRepository->findByName($data->payee);
         $money = new Money($data->amount);
 
         return new Transaction($data->date, $category, $payee, $money);
