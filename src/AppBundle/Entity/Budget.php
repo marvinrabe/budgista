@@ -2,25 +2,56 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Budget
+ *
+ * @ORM\Table(name="budget")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\Doctrine\BudgetRepository")
+ */
 class Budget
 {
-    protected $name;
-    protected $categories;
 
-    public function __construct(string $name)
-    {
-        $this->name = $name;
-        $this->categories = ['Rent', 'Groceries', 'Car', 'Electricity', 'Internet', 'Fun Money'];
-    }
+    /**
+     * @var string
+     *
+     * @ORM\Id
+     * @ORM\Column(name="id", type="guid")
+     * @ORM\GeneratedValue(strategy="UUID")
+     */
+    protected $id;
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
+    /**
+     * @var Month
+     *
+     * @ORM\Embedded(class="Month")
+     */
+    protected $month;
 
-    public function getCategories(): array
+    /**
+     * @var Category
+     *
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    protected $category;
+
+    /**
+     * @var Money
+     *
+     * @ORM\Embedded(class="Money")
+     */
+    protected $money;
+
+    public function __construct(Month $month, Category $category, Money $money)
     {
-        return $this->categories;
+        if (!$money->isPositive()) {
+            throw new \InvalidArgumentException('Money has to be positive.');
+        }
+        $this->month = $month;
+        $this->category = $category;
+        $this->money = $money;
     }
 
 }
