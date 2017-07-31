@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('category_new') }}">{{ 'action.new'|trans }}</a>
+    <ul>
+        {% for category in categories %}
+            <li>
+                <a href="{{ path('category_edit', {'id': category.id}) }}">{{ category.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -30,19 +30,9 @@ class Account
      */
     protected $name;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Transaction")
-     * @ORM\JoinTable(name="account_transaction",
-     *      joinColumns={@ORM\JoinColumn(name="account_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="transaction_id", referencedColumnName="id", unique=true)}
-     *      )
-     */
-    protected $transactions = [];
-
     public function __construct(string $name)
     {
         $this->setName($name);
-        $this->transactions = new ArrayCollection();
     }
 
     public function getId()
@@ -62,16 +52,6 @@ class Account
         }
 
         $this->name = $name;
-    }
-
-    public function getTransactions()
-    {
-        return $this->transactions;
-    }
-
-    public function addTransaction($transaction)
-    {
-        $this->transactions[] = $transaction;
     }
 
 }

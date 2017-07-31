@@ -2,13 +2,11 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\DTO\CreateAccountData;
-use AppBundle\DTO\EditAccountData;
+use AppBundle\Command\CreateAccountCommand;
+use AppBundle\Command\UpdateAccountSettingsCommand;
 use AppBundle\Entity\Account;
-use AppBundle\Entity\Category;
-use AppBundle\Entity\Payee;
 use AppBundle\Form\AccountEditForm;
-use AppBundle\Service\AccountService;
+use AppBundle\Service\CommandBus;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -30,7 +28,7 @@ class AccountController extends Controller
     {
         $accounts = $this->getDoctrine()->getRepository(Account::class)->findAll();
 
-        return $this->render('account/list.html.twig', [
+        return $this->render('list/account.html.twig', [
             'accounts' => $accounts
         ]);
     }
@@ -41,24 +39,18 @@ class AccountController extends Controller
      */
     public function newAction(Request $request)
     {
-        $data = new CreateAccountData();
+        $data = new CreateAccountCommand();
         $form = $this->createForm(AccountNewForm::class, $data);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $account = $this->get(AccountService::class)->createAccount($data);
 
-            $this->getDoctrine()->getManager()->persist($account);
-            foreach ($account->getTransactions() as $transaction) {
-                $this->getDoctrine()->getManager()->persist($transaction);
-            }
-
-            $this->getDoctrine()->getManager()->flush();
+            $this->get(CommandBus::class)->execute($data);
 
             return $this->redirectToRoute('account_list');
         }
 
-        return $this->render('account/new.html.twig', [
+        return $this->render('form.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -69,21 +61,18 @@ class AccountController extends Controller
      */
     public function editAction(Request $request, Account $account)
     {
-
-        $data = new EditAccountData($account);
+        $data = new UpdateAccountSettingsCommand($account);
         $form = $this->createForm(AccountEditForm::class, $data);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->get(AccountService::class)->editAccount($data);
-
-            $this->getDoctrine()->getManager()->flush();
+            $this->get(CommandBus::class)->execute($data);
 
             return $this->redirectToRoute('account_list');
         }
 
-        return $this->render('account/new.html.twig', [
+        return $this->render('form.html.twig', [
             'form' => $form->createView()
         ]);
     }

@@ -1,34 +1,31 @@
 <?php
 
-
 namespace AppBundle\Service;
 
-
-use AppBundle\DTO\CreateTransactionData;
+use AppBundle\Entity\Account;
+use AppBundle\Entity\Category;
 use AppBundle\Entity\Money;
+use AppBundle\Entity\Payee;
 use AppBundle\Entity\Transaction;
-use AppBundle\Repository\CategoryRepository;
-use AppBundle\Repository\PayeeRepository;
 
 class TransactionService
 {
 
-    protected $categoryRepository;
-    protected $payeeRepository;
-
-    public function __construct(CategoryRepository $categoryRepository, PayeeRepository $payeeRepository)
+    public function __construct()
     {
-        $this->categoryRepository = $categoryRepository;
-        $this->payeeRepository = $payeeRepository;
+
     }
 
-    public function createTransaction(CreateTransactionData $data)
+    public function createTransaction(Account $account, Money $amount, Category $category = null, Payee $payee = null): Transaction
     {
-        $category = $this->categoryRepository->findByName($data->category);
-        $payee = $this->payeeRepository->findByName($data->payee);
-        $money = new Money($data->amount);
-
-        return new Transaction($data->date, $category, $payee, $money);
+        $transaction = new Transaction($account, $amount);
+        if ($category !== null) {
+            $transaction->setCategory($category);
+        }
+        if ($payee !== null) {
+            $transaction->setPayee($payee);
+        }
+        return $transaction;
     }
 
 }

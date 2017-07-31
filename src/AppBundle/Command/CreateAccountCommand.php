@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\DTO;
+namespace AppBundle\Command;
 
-class CreateAccountData
+class CreateAccountCommand
 {
 
     public $name;

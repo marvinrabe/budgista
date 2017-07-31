@@ -2,60 +2,56 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\DTO\CreateAccountData;
-use AppBundle\DTO\CreateTransactionData;
-use AppBundle\DTO\EditAccountData;
+use AppBundle\Command\CreateTransactionCommand;
 use AppBundle\Entity\Account;
-use AppBundle\Entity\Transaction;
 use AppBundle\Repository\AccountRepository;
 
 class AccountService
 {
 
+    protected $commandBus;
     protected $accountRepository;
-    protected $transactionService;
 
-    public function __construct(AccountRepository $accountRepository, TransactionService $transactionService)
+    public function __construct(CommandBus $commandBus, AccountRepository $accountRepository)
     {
+        $this->commandBus = $commandBus;
         $this->accountRepository = $accountRepository;
-        $this->transactionService = $transactionService;
     }
 
-    public function createAccount(CreateAccountData $data): Account
+    public function createAccount(string $name, float $initialBalance = 0): Account
     {
-        if ($this->accountRepository->exists($data->name)) {
-            throw new \InvalidArgumentException('Account with name "' . $data->name . '" already exists.');
+        if ($this->accountRepository->exists($name)) {
+            throw new \InvalidArgumentException('Account with name "' . $name . '" already exists.');
         }
 
-        $account = new Account($data->name);
+        $account = new Account($name);
 
-        if ($data->initialBalance > 0) {
-            $transaction = $this->getInitialTransaction($data->initialBalance);
-            $account->addTransaction($transaction);
+        if ($initialBalance > 0) {
+            $this->createInitialTransaction($account, $data->initialBalance);
         }
 
         return $account;
     }
 
-    protected function getInitialTransaction(float $balance): Transaction
+    protected function createInitialTransaction(Account $account, float $balance): void
     {
-        $transactionData = new CreateTransactionData();
+        $transactionData = new CreateTransactionCommand($account);
         $transactionData->category = 'Income';
         $transactionData->payee = 'Reconciliation';
         $transactionData->amount = $balance;
 
-        return $this->transactionService->createTransaction($transactionData);
+        $this->commandBus->execute($transactionData);
     }
 
-    public function editAccount(EditAccountData $data): Account
+    public function updateAccountSettings(string $id, string $name): Account
     {
-        $account = $this->accountRepository->find($data->id);
+        $account = $this->accountRepository->find($id);
 
-        if ($this->accountRepository->exists($data->name) && $account->getName() != $data->name) {
-            throw new \InvalidArgumentException('Account with name "' . $data->name . '" already exists.');
+        if ($this->accountRepository->exists($name) && $account->getName() != $name) {
+            throw new \InvalidArgumentException('Account with name "' . $name . '" already exists.');
         }
 
-        $account->setName($data->name);
+        $account->setName($name);
 
         return $account;
     }

@@ -1,11 +1,10 @@
 <?php
 
-
-namespace AppBundle\DTO;
+namespace AppBundle\Command;
 
 use AppBundle\Entity\Account;
 
-class EditAccountData
+class UpdateAccountSettingsCommand
 {
     public $id;
     public $name;
