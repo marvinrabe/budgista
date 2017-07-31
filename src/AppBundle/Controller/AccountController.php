@@ -23,26 +23,6 @@ class AccountController extends Controller
 {
 
     /**
-     * @Route("/PREPARE", name="prepare")
-     * @Method({"GET"})
-     * TODO remove when categroy part is added.
-     */
-    public function prepareAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $category = new Category('Income');
-        $em->persist($category);
-
-        $payee = new Payee('Reconciliation');
-        $em->persist($payee);
-
-        $em->flush();
-
-        return $this->redirectToRoute('account_new');
-    }
-
-    /**
      * @Route("/", name="account_list")
      * @Method({"GET"})
      */
