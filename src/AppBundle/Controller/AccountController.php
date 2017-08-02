@@ -6,7 +6,9 @@ use AppBundle\Command\CreateAccountCommand;
 use AppBundle\Command\UpdateAccountSettingsCommand;
 use AppBundle\Entity\Account;
 use AppBundle\Form\AccountEditForm;
+use AppBundle\Repository\AccountRepository;
 use AppBundle\Service\CommandBus;
+use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -24,9 +26,9 @@ class AccountController extends Controller
      * @Route("/", name="account_list")
      * @Method({"GET"})
      */
-    public function listAction()
+    public function listAction(AccountRepository $repository)
     {
-        $accounts = $this->getDoctrine()->getRepository(Account::class)->findAll();
+        $accounts = $repository->findAll();
 
         return $this->render('list/account.html.twig', [
             'accounts' => $accounts
@@ -45,7 +47,7 @@ class AccountController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->get(CommandBus::class)->execute($data);
+            $this->get('command_bus')->handle($data);
 
             return $this->redirectToRoute('account_list');
         }
@@ -67,7 +69,7 @@ class AccountController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->get(CommandBus::class)->execute($data);
+            $this->get('command_bus')->handle($data);
 
             return $this->redirectToRoute('account_list');
         }

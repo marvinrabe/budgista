@@ -7,7 +7,7 @@ use AppBundle\Command\UpdateCategorySettingsCommand;
 use AppBundle\Entity\Category;
 use AppBundle\Form\CategoryEditForm;
 use AppBundle\Form\CategoryNewForm;
-use AppBundle\Service\CommandBus;
+use AppBundle\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -23,9 +23,9 @@ class CategoryController extends Controller
      * @Route("/", name="category_list")
      * @Method({"GET"})
      */
-    public function listAction()
+    public function listAction(CategoryRepository $repository)
     {
-        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        $categories = $repository->findAll();
 
         return $this->render('list/category.html.twig', [
             'categories' => $categories
@@ -44,7 +44,7 @@ class CategoryController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->get(CommandBus::class)->execute($data);
+            $this->get('command_bus')->handle($data);
 
             return $this->redirectToRoute('category_list');
         }
@@ -66,7 +66,7 @@ class CategoryController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->get(CommandBus::class)->execute($data);
+            $this->get('command_bus')->handle($data);
 
             return $this->redirectToRoute('category_list');
         }

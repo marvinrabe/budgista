@@ -14,4 +14,5 @@ class UpdateAccountSettingsCommand
         $this->id = $account->getId();
         $this->name = $account->getName();
     }
+
 }

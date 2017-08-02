@@ -30,18 +30,8 @@ services:
         tags: ['controller.service_arguments']
 
     # add more services, or override services that need manual wiring
-    AppBundle\Service\AccountService:
-        public: true
-        arguments:
-            - '@AppBundle\Repository\AccountRepository'
-            - '@AppBundle\Service\TransactionService'
 
-    AppBundle\Service\TransactionService:
-        public: true
-        arguments:
-            - '@AppBundle\Repository\CategoryRepository'
-            - '@AppBundle\Repository\PayeeRepository'
-
+    # Repositories
     AppBundle\Repository\AccountRepository:
         class: Doctrine\ORM\EntityRepository
         factory: ['@doctrine.orm.default_entity_manager', getRepository]
@@ -59,3 +49,24 @@ services:
         factory: ['@doctrine.orm.default_entity_manager', getRepository]
         arguments:
             - AppBundle\Entity\Category
+
+    # Command Handler
+    AppBundle\CommandHandler\CreateAccountHandler:
+        public: true
+        tags:
+            - { name: command_handler, handles: AppBundle\Command\CreateAccountCommand }
+
+    AppBundle\CommandHandler\UpdateAccountSettingsHandler:
+        public: true
+        tags:
+            - { name: command_handler, handles: AppBundle\Command\UpdateAccountSettingsCommand }
+
+    AppBundle\CommandHandler\CreateCategoryHandler:
+        public: true
+        tags:
+            - { name: command_handler, handles: AppBundle\Command\CreateCategoryCommand }
+
+    AppBundle\CommandHandler\UpdateCategorySettingsHandler:
+        public: true
+        tags:
+            - { name: command_handler, handles: AppBundle\Command\UpdateCategorySettingsCommand }
