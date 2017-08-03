@@ -31,6 +31,14 @@ class CreateTransactionHandler
         $cashflow = new Money($command->amount);
         $transaction = new Transaction($command->account, $cashflow);
 
+        $payee = $this->payeeRepository->findOrCreateByName($command->payee);
+        $transaction->setPayee($payee);
+
+        if ($this->categoryRepository->exists($command->category)) {
+            $category = $this->categoryRepository->findByName($command->category);
+            $transaction->setCategory($category);
+        }
+
         $transaction->setDate($command->date);
 
         $this->transactionRepository->save($transaction);

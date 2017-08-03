@@ -2,11 +2,26 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Budget{% endblock %}</title>
+        {% block stylesheets %}
+
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        <nav>
+            <ul>
+                <li><a href="{{ path('category_list') }}">{{ 'title.category'|trans }}</a></li>
+                <li>
+                    <a href="{{ path('account_list') }}">{{ 'title.account'|trans }}</a>
+                    <ul>
+                        {% for account in accountRepository.findAll %}
+                        <li><a href="{{ path('transaction_list', {'id': account.id}) }}">{{ account.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </nav>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

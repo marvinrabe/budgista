@@ -36,29 +36,18 @@ class PayeeRepository extends EntityRepository implements \AppBundle\Repository\
         }
     }
 
-    public function exists($name): bool
+    public function findOrCreateByName(string $name): Payee
     {
         /**
          * @var Payee $payee
          */
         $payee = $this->findOneBy(['name' => $name]);
-
-        if ($payee === null) {
-            return false;
+        if ($payee !== null) {
+            return $payee;
         }
-        return true;
-    }
 
-    public function findByName($name): Payee
-    {
-        /**
-         * @var Payee $payee
-         */
-        $payee = $this->findOneBy(['name' => $name]);
-
-        if ($payee === null) {
-            throw new \Exception('Payee "' . $name . '" not found.');
-        }
+        $payee = new Payee($name);
+        $this->save($payee);
 
         return $payee;
     }

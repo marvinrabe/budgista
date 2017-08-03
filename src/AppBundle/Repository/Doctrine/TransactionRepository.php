@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository\Doctrine;
 
+use AppBundle\Entity\Account;
 use AppBundle\Entity\Transaction;
 use AppBundle\Exception\RepositoryException;
 use Doctrine\ORM\EntityRepository;
@@ -34,6 +35,11 @@ class TransactionRepository extends EntityRepository implements \AppBundle\Repos
         } catch (ORMException $e) {
             throw new RepositoryException('Entity couldnt be deleted.');
         }
+    }
+
+    public function findAllByAccount(Account $account)
+    {
+        return $this->findBy(['account' => $account]);
     }
 
 }

@@ -49,7 +49,7 @@ class CategoryRepository extends EntityRepository implements \AppBundle\Reposito
         return true;
     }
 
-    public function findByName($name): Category
+    public function findByName(string $name): Category
     {
         /**
          * @var Category $category
@@ -57,7 +57,7 @@ class CategoryRepository extends EntityRepository implements \AppBundle\Reposito
         $category = $this->findOneBy(['name' => $name]);
 
         if ($category === null) {
-            throw new \Exception('Category "' . $name . '" not found.');
+            throw new RepositoryException('Category "' . $name . '" not found.');
         }
 
         return $category;

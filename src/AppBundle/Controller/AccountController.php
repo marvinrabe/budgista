@@ -23,22 +23,9 @@ class AccountController extends Controller
 
     /**
      * @Route("/", name="account_list")
-     * @Method({"GET"})
-     */
-    public function listAction(AccountRepository $repository)
-    {
-        $accounts = $repository->findAll();
-
-        return $this->render('list/account.html.twig', [
-            'accounts' => $accounts
-        ]);
-    }
-
-    /**
-     * @Route("/new", name="account_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, CommandBus $commandBus)
+    public function listAction(Request $request, CommandBus $commandBus, AccountRepository $repository)
     {
         $data = new CreateAccountCommand();
         $form = $this->createForm(AccountNewType::class, $data);
@@ -48,10 +35,12 @@ class AccountController extends Controller
 
             $commandBus->handle($data);
 
-            return $this->redirectToRoute('account_list');
         }
 
-        return $this->render('form.html.twig', [
+        $accounts = $repository->findAll();
+
+        return $this->render('list/account.html.twig', [
+            'accounts' => $accounts,
             'form' => $form->createView()
         ]);
     }

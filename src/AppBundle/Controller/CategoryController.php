@@ -8,6 +8,7 @@ use AppBundle\Entity\Category;
 use AppBundle\Form\Type\CategoryEditType;
 use AppBundle\Form\Type\CategoryNewType;
 use AppBundle\Repository\CategoryRepository;
+use League\Tactician\CommandBus;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -21,22 +22,9 @@ class CategoryController extends Controller
 {
     /**
      * @Route("/", name="category_list")
-     * @Method({"GET"})
-     */
-    public function listAction(CategoryRepository $repository)
-    {
-        $categories = $repository->findAll();
-
-        return $this->render('list/category.html.twig', [
-            'categories' => $categories
-        ]);
-    }
-
-    /**
-     * @Route("/new", name="category_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function listAction(Request $request, CommandBus $commandBus, CategoryRepository $repository)
     {
         $data = new CreateCategoryCommand();
         $form = $this->createForm(CategoryNewType::class, $data);
@@ -44,12 +32,14 @@ class CategoryController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->get('command_bus')->handle($data);
+            $commandBus->handle($data);
 
-            return $this->redirectToRoute('category_list');
         }
 
-        return $this->render('form.html.twig', [
+        $categories = $repository->findAll();
+
+        return $this->render('list/category.html.twig', [
+            'categories' => $categories,
             'form' => $form->createView()
         ]);
     }
