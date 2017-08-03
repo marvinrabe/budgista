@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\CommandHandler;
+namespace AppBundle\Handler;
 
 use AppBundle\Command\CreateAccountCommand;
 use AppBundle\Command\CreateCategoryCommand;
@@ -8,7 +8,7 @@ use AppBundle\Command\UpdateCategorySettingsCommand;
 use AppBundle\Entity\Category;
 use AppBundle\Repository\CategoryRepository;
 
-class UpdateCategorySettingsHandler implements Handler
+class UpdateCategorySettingsHandler
 {
 
     protected $categoryRepository;

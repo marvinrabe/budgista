@@ -7,8 +7,7 @@ use AppBundle\Command\UpdateAccountSettingsCommand;
 use AppBundle\Entity\Account;
 use AppBundle\Form\AccountEditForm;
 use AppBundle\Repository\AccountRepository;
-use AppBundle\Service\CommandBus;
-use SimpleBus\Message\Bus\MessageBus;
+use League\Tactician\CommandBus;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -39,7 +38,7 @@ class AccountController extends Controller
      * @Route("/new", name="account_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, CommandBus $commandBus)
     {
         $data = new CreateAccountCommand();
         $form = $this->createForm(AccountNewForm::class, $data);
@@ -47,7 +46,7 @@ class AccountController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->get('command_bus')->handle($data);
+            $commandBus->handle($data);
 
             return $this->redirectToRoute('account_list');
         }
@@ -61,7 +60,7 @@ class AccountController extends Controller
      * @Route("/{id}", name="account_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Account $account)
+    public function editAction(Request $request, CommandBus $commandBus, Account $account)
     {
         $data = new UpdateAccountSettingsCommand($account);
         $form = $this->createForm(AccountEditForm::class, $data);
@@ -69,7 +68,7 @@ class AccountController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->get('command_bus')->handle($data);
+            $commandBus->handle($data);
 
             return $this->redirectToRoute('account_list');
         }

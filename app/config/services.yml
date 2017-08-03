@@ -50,23 +50,27 @@ services:
         arguments:
             - AppBundle\Entity\Category
 
-    # Command Handler
-    AppBundle\CommandHandler\CreateAccountHandler:
-        public: true
-        tags:
-            - { name: command_handler, handles: AppBundle\Command\CreateAccountCommand }
+    # Tactician Command Bus
+    League\Tactician\CommandBus:
+        alias: tactician.commandbus.default
 
-    AppBundle\CommandHandler\UpdateAccountSettingsHandler:
+    # TODO Remove the following configurations when autoconfig becomes available https://github.com/thephpleague/tactician-bundle/issues/44
+    AppBundle\Handler\CreateAccountHandler:
         public: true
         tags:
-            - { name: command_handler, handles: AppBundle\Command\UpdateAccountSettingsCommand }
+            - { name: tactician.handler, command: AppBundle\Command\CreateAccountCommand }
 
-    AppBundle\CommandHandler\CreateCategoryHandler:
+    AppBundle\Handler\UpdateAccountSettingsHandler:
         public: true
         tags:
-            - { name: command_handler, handles: AppBundle\Command\CreateCategoryCommand }
+            - { name: tactician.handler, command: AppBundle\Command\UpdateAccountSettingsCommand }
 
-    AppBundle\CommandHandler\UpdateCategorySettingsHandler:
+    AppBundle\Handler\CreateCategoryHandler:
         public: true
         tags:
-            - { name: command_handler, handles: AppBundle\Command\UpdateCategorySettingsCommand }
+            - { name: tactician.handler, command: AppBundle\Command\CreateCategoryCommand }
+
+    AppBundle\Handler\UpdateCategorySettingsHandler:
+        public: true
+        tags:
+            - { name: tactician.handler, command: AppBundle\Command\UpdateCategorySettingsCommand }

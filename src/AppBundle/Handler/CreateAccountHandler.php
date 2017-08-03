@@ -1,12 +1,12 @@
 <?php
 
-namespace AppBundle\CommandHandler;
+namespace AppBundle\Handler;
 
 use AppBundle\Command\CreateAccountCommand;
 use AppBundle\Entity\Account;
 use AppBundle\Repository\AccountRepository;
 
-class CreateAccountHandler implements Handler
+class CreateAccountHandler
 {
 
     protected $accountRepository;

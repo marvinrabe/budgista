@@ -1,12 +1,12 @@
 <?php
 
 
-namespace AppBundle\CommandHandler;
+namespace AppBundle\Handler;
 
 use AppBundle\Command\UpdateAccountSettingsCommand;
 use AppBundle\Repository\AccountRepository;
 
-class UpdateAccountSettingsHandler implements Handler
+class UpdateAccountSettingsHandler
 {
 
     protected $accountRepository;

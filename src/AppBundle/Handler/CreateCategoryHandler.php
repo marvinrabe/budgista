@@ -1,13 +1,12 @@
 <?php
 
-namespace AppBundle\CommandHandler;
+namespace AppBundle\Handler;
 
-use AppBundle\Command\CreateAccountCommand;
 use AppBundle\Command\CreateCategoryCommand;
 use AppBundle\Entity\Category;
 use AppBundle\Repository\CategoryRepository;
 
-class CreateCategoryHandler implements Handler
+class CreateCategoryHandler
 {
 
     protected $categoryRepository;
