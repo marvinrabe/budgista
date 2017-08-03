@@ -17,6 +17,7 @@
                 <li class="button button-clear"><a href="{{ path('account_list') }}">{{ 'title.account'|trans }}</a></li>
             </ul>
             <ul class="accounts">
+                <li><a href="{{ path('budget') }}" class="button">{{ 'title.budget'|trans }}</a></li>
                 {% for account in accountRepository.findAll %}
                     <li><a href="{{ path('transaction_list', {'id': account.id}) }}" class="button button-outline">{{ account.name }}</a></li>
                 {% endfor %}
