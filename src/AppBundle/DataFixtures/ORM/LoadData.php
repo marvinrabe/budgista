@@ -12,8 +12,6 @@ class LoadData extends AbstractFixture
 {
     public function load(ObjectManager $em)
     {
-        // TODO use command bus
-
         $category = new Category('Income');
         $em->persist($category);
 

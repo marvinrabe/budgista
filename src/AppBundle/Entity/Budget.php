@@ -42,16 +42,16 @@ class Budget
      *
      * @ORM\Embedded(class="Money")
      */
-    protected $money; // TODO find better name
+    protected $budgeted;
 
-    public function __construct(Month $date, Category $category, Money $money)
+    public function __construct(Month $date, Category $category, Money $budgeted)
     {
-        if (!$money->isPositive()) {
+        if (!$budgeted->isPositive()) {
             throw new \InvalidArgumentException('Money has to be positive.');
         }
         $this->date = $date;
         $this->category = $category;
-        $this->money = $money;
+        $this->budgeted = $budgeted;
     }
 
 }

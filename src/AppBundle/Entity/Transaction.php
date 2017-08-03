@@ -58,13 +58,13 @@ class Transaction
      *
      * @ORM\Embedded(class="Money")
      */
-    protected $money; // TODO find a better name
+    protected $cashflow;
 
-    public function __construct(Account $account, Money $amount)
+    public function __construct(Account $account, Money $cashflow)
     {
         $this->date = new \DateTime();
         $this->account = $account;
-        $this->money = $amount;
+        $this->cashflow = $cashflow;
     }
 
     /**
@@ -126,17 +126,17 @@ class Transaction
     /**
      * @return Money
      */
-    public function getMoney(): Money
+    public function getCashflow(): Money
     {
-        return $this->money;
+        return $this->cashflow;
     }
 
     /**
-     * @param Money $money
+     * @param Money $cashflow
      */
-    public function setMoney(Money $money)
+    public function setCashflow(Money $cashflow)
     {
-        $this->money = $money;
+        $this->cashflow = $cashflow;
     }
 
 }

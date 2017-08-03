@@ -50,11 +50,17 @@ services:
         arguments:
             - AppBundle\Entity\Category
 
+    AppBundle\Repository\TransactionRepository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - AppBundle\Entity\Transaction
+
     # Tactician Command Bus
     League\Tactician\CommandBus:
         alias: tactician.commandbus.default
 
-    # TODO Remove the following configurations when autoconfig becomes available https://github.com/thephpleague/tactician-bundle/issues/44
+    # Remove the following configurations when autoconfig becomes available. See: https://github.com/thephpleague/tactician-bundle/issues/44
     AppBundle\Handler\CreateAccountHandler:
         public: true
         tags:
@@ -74,3 +80,8 @@ services:
         public: true
         tags:
             - { name: tactician.handler, command: AppBundle\Command\UpdateCategorySettingsCommand }
+
+    AppBundle\Handler\CreateTransactionHandler:
+        public: true
+        tags:
+            - { name: tactician.handler, command: AppBundle\Command\CreateTransactionCommand }

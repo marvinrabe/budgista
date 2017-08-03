@@ -3,16 +3,20 @@
 namespace AppBundle\Handler;
 
 use AppBundle\Command\CreateAccountCommand;
+use AppBundle\Command\CreateTransactionCommand;
 use AppBundle\Entity\Account;
 use AppBundle\Repository\AccountRepository;
+use League\Tactician\CommandBus;
 
 class CreateAccountHandler
 {
 
+    protected $commandBus;
     protected $accountRepository;
 
-    public function __construct(AccountRepository $accountRepository)
+    public function __construct(CommandBus $commandBus, AccountRepository $accountRepository)
     {
+        $this->commandBus = $commandBus;
         $this->accountRepository = $accountRepository;
     }
 
@@ -26,15 +30,13 @@ class CreateAccountHandler
         }
 
         $account = new Account($command->name);
-
-        /* TODO how to add initial transaction?
-         * $transactionData = new CreateTransactionCommand($account);
-         * $transactionData->category = 'Income';
-         * $transactionData->payee = 'Reconciliation';
-         * $transactionData->amount = $balance;
-         */
-
         $this->accountRepository->save($account);
+
+        $transactionData = new CreateTransactionCommand($account);
+        $transactionData->category = 'Income';
+        $transactionData->payee = 'Reconciliation';
+        $transactionData->amount = $command->initialBalance;
+        $this->commandBus->handle($transactionData);
     }
 
 }
