@@ -38,6 +38,14 @@ class AccountRepository extends EntityRepository implements \AppBundle\Repositor
 
     public function exists($name): bool
     {
-        return false; // TODO
+        /**
+         * @var AccountRepository $account
+         */
+        $account = $this->findOneBy(['name' => $name]);
+
+        if ($account === null) {
+            return false;
+        }
+        return true;
     }
 }
