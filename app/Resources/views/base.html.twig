@@ -26,6 +26,10 @@
         <section class="container">
             {% block body %}{% endblock %}
         </section>
+        {% javascripts filter="?jsqueeze" output="assets/app.js"
+        "assets/js/pace.min.js" %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

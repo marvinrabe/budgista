@@ -1,4 +1,7 @@
+$primary-color: #9b4dca;
+
 @import 'milligram';
+@import 'pace';
 
 .navigation {
   @extend .container;
