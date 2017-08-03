@@ -1,5 +1,6 @@
 {
     "name": "marvin/budget",
+    "description": "Application to manage monthly budgets.",
     "license": "proprietary",
     "type": "project",
     "autoload": {
