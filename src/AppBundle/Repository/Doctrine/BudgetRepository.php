@@ -35,4 +35,5 @@ class BudgetRepository extends EntityRepository implements \AppBundle\Repository
             throw new RepositoryException('Entity couldnt be deleted.');
         }
     }
+
 }

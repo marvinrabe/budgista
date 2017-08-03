@@ -62,4 +62,5 @@ class CategoryRepository extends EntityRepository implements \AppBundle\Reposito
 
         return $category;
     }
+
 }

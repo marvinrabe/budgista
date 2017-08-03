@@ -48,4 +48,5 @@ class AccountRepository extends EntityRepository implements \AppBundle\Repositor
         }
         return true;
     }
+
 }
