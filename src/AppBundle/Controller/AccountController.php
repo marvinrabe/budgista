@@ -5,14 +5,14 @@ namespace AppBundle\Controller;
 use AppBundle\Command\CreateAccountCommand;
 use AppBundle\Command\UpdateAccountSettingsCommand;
 use AppBundle\Entity\Account;
-use AppBundle\Form\AccountEditForm;
+use AppBundle\Form\Type\AccountEditType;
 use AppBundle\Repository\AccountRepository;
 use League\Tactician\CommandBus;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Form\AccountNewForm;
+use AppBundle\Form\Type\AccountNewType;
 
 /**
  * Class AccountController
@@ -41,7 +41,7 @@ class AccountController extends Controller
     public function newAction(Request $request, CommandBus $commandBus)
     {
         $data = new CreateAccountCommand();
-        $form = $this->createForm(AccountNewForm::class, $data);
+        $form = $this->createForm(AccountNewType::class, $data);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class AccountController extends Controller
     public function editAction(Request $request, CommandBus $commandBus, Account $account)
     {
         $data = new UpdateAccountSettingsCommand($account);
-        $form = $this->createForm(AccountEditForm::class, $data);
+        $form = $this->createForm(AccountEditType::class, $data);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

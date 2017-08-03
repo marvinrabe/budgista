@@ -5,8 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Command\CreateCategoryCommand;
 use AppBundle\Command\UpdateCategorySettingsCommand;
 use AppBundle\Entity\Category;
-use AppBundle\Form\CategoryEditForm;
-use AppBundle\Form\CategoryNewForm;
+use AppBundle\Form\Type\CategoryEditType;
+use AppBundle\Form\Type\CategoryNewType;
 use AppBundle\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -39,7 +39,7 @@ class CategoryController extends Controller
     public function newAction(Request $request)
     {
         $data = new CreateCategoryCommand();
-        $form = $this->createForm(CategoryNewForm::class, $data);
+        $form = $this->createForm(CategoryNewType::class, $data);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -61,7 +61,7 @@ class CategoryController extends Controller
     public function editAction(Request $request, Category $category)
     {
         $data = new UpdateCategorySettingsCommand($category);
-        $form = $this->createForm(CategoryEditForm::class, $data);
+        $form = $this->createForm(CategoryEditType::class, $data);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
