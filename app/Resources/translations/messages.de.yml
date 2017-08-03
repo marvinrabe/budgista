@@ -6,7 +6,7 @@ form:
   date: Datum
   payee: Zahlungsempfänger
   category: Kategorie
-  cashflow: Geldfluss
+  cashflow: Betrag
 title:
   category: Kategorien
   account: Konten

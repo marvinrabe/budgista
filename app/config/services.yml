@@ -85,3 +85,9 @@ services:
         public: true
         tags:
             - { name: tactician.handler, command: AppBundle\Command\CreateTransactionCommand }
+
+    Twig_Extensions_Extension_Intl:
+        class: Twig_Extensions_Extension_Intl
+        public: false
+        tags:
+            - { name: twig.extension }

@@ -6,6 +6,6 @@ class CreateAccountCommand
 {
 
     public $name;
-    public $initialBalance = 0;
+    public $initialBalance;
 
 }
