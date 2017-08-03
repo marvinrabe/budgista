@@ -1,0 +1,12 @@
+action:
+  new: Neu
+  edit: Bearbeiten
+  delete: Löschen
+form:
+  date: Datum
+  payee: Zahlungsempfänger
+  category: Kategorie
+  cashflow: Geldfluss
+title:
+  category: Kategorien
+  account: Konten

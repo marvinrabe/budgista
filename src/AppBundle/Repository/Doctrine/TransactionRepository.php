@@ -39,7 +39,7 @@ class TransactionRepository extends EntityRepository implements \AppBundle\Repos
 
     public function findAllByAccount(Account $account)
     {
-        return $this->findBy(['account' => $account]);
+        return $this->findBy(['account' => $account], ['date' => 'DESC']);
     }
 
 }

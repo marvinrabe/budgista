@@ -3,26 +3,28 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Budget{% endblock %}</title>
-        {% block stylesheets %}
-
-        {% endblock %}
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        {% stylesheets filter="scssphp" output="assets/css/app.css" "assets/scss/main.scss" %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+        {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <nav>
-            <ul>
-                <li><a href="{{ path('category_list') }}">{{ 'title.category'|trans }}</a></li>
-                <li>
-                    <a href="{{ path('account_list') }}">{{ 'title.account'|trans }}</a>
-                    <ul>
-                        {% for account in accountRepository.findAll %}
-                        <li><a href="{{ path('transaction_list', {'id': account.id}) }}">{{ account.name }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </li>
+        <nav class="navigation">
+            <ul class="settings float-right">
+                <li class="button button-clear"><a href="{{ path('category_list') }}">{{ 'title.category'|trans }}</a></li>
+                <li class="button button-clear"><a href="{{ path('account_list') }}">{{ 'title.account'|trans }}</a></li>
+            </ul>
+            <ul class="accounts">
+                {% for account in accountRepository.findAll %}
+                    <li><a href="{{ path('transaction_list', {'id': account.id}) }}" class="button button-outline">{{ account.name }}</a></li>
+                {% endfor %}
             </ul>
         </nav>
-        {% block body %}{% endblock %}
+        <section class="container">
+            {% block body %}{% endblock %}
+        </section>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

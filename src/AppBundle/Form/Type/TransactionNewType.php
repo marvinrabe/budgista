@@ -15,15 +15,20 @@ class TransactionNewType extends AbstractType
     {
         $builder
             ->add('date', DateType::class, [
+                'widget' => 'single_text',
+                'label' => 'form.date',
                 'required' => true
             ])
             ->add('payee', TextType::class, [
+                'label' => 'form.payee',
                 'required' => true
             ])
             ->add('category', TextType::class, [
+                'label' => 'form.category',
                 'required' => false
             ])
             ->add('amount', MoneyType::class, [
+                'label' => 'form.cashflow',
                 'required' => true
             ]);
     }
