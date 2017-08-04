@@ -23,7 +23,7 @@ class BudgetController extends Controller
     {
 
         return $this->render('list/budget.html.twig', [
-
+            'month' => $month
         ]);
     }
 

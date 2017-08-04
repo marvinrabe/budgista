@@ -67,4 +67,11 @@ class Month
         return new Month($this->month + 1, $this->year);
     }
 
+    public function firstDay(): \DateTime
+    {
+        $date = new \DateTime();
+        $date->setDate($this->year, $this->month, 1);
+        return $date;
+    }
+
 }

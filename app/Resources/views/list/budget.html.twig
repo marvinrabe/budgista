@@ -2,4 +2,6 @@
 
 {% block body %}
 
+    <h1><a href="{{ path('budget_list', {'month': month.previous}) }}">&laquo;</a> {{ month.firstDay|localizeddate('full', 'none', app.request.locale, null, 'MMMM yyyy') }} <a href="{{ path('budget_list', {'month': month.next}) }}">&raquo;</a></h1>
+
 {% endblock %}
