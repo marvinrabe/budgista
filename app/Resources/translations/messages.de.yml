@@ -7,6 +7,10 @@ form:
   payee: Zahlungsempfänger
   category: Kategorie
   cashflow: Betrag
+  budgeted: Geplant
+  activity: Aktivität
+  available: Verfügbar
+  previousMonth: Vormonat
 title:
   category: Kategorien
   account: Konten

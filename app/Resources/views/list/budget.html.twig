@@ -2,6 +2,24 @@
 
 {% block body %}
 
-    <h1><a href="{{ path('budget_list', {'month': month.previous}) }}">&laquo;</a> {{ month.firstDay|localizeddate('full', 'none', app.request.locale, null, 'MMMM yyyy') }} <a href="{{ path('budget_list', {'month': month.next}) }}">&raquo;</a></h1>
+    <div class="float-right">
+        To be Budgeted: <strong>{{ 0|localizedcurrency('EUR', app.request.locale) }}</strong> &middot; Funds for Aug: <strong>+ {{ 0|localizedcurrency('EUR', app.request.locale) }}</strong> &middot; Budgeted in Aug: <strong>- {{ 0|localizedcurrency('EUR', app.request.locale) }}</strong>
+    </div>
+    <h1>
+        <a href="{{ path('budget_list', {'month': month.previous}) }}">&laquo;</a> {{ month.firstDay|localizeddate('full', 'none', app.request.locale, null, 'MMMM yyyy') }}
+        <a href="{{ path('budget_list', {'month': month.next}) }}">&raquo;</a>
+    </h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>{{ 'form.category'|trans }}</th>
+            <th>{{ 'form.previousMonth'|trans }}</th>
+            <th>{{ 'form.budgeted'|trans }}</th>
+            <th>{{ 'form.activity'|trans }}</th>
+            <th>{{ 'form.available'|trans }}</th>
+        </tr>
+        </thead>
+    </table>
 
 {% endblock %}
