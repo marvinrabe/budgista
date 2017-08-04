@@ -50,6 +50,12 @@ services:
         arguments:
             - AppBundle\Entity\Category
 
+    AppBundle\Repository\CategoryBudgetRepository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - AppBundle\Entity\CategoryBudget
+
     AppBundle\Repository\TransactionRepository:
         class: Doctrine\ORM\EntityRepository
         factory: ['@doctrine.orm.default_entity_manager', getRepository]

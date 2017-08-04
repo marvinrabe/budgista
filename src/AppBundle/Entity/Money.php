@@ -39,4 +39,16 @@ class Money
         return $this->amount <= 0;
     }
 
+    public static function sum(... $money): Money
+    {
+        $sum = 0;
+        foreach ($money as $value) {
+            /**
+             * @var Money $value
+             */
+            $sum += (float)$value->getAmount();
+        }
+        return new Money($sum);
+    }
+
 }

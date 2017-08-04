@@ -102,7 +102,7 @@ class Transaction
     /**
      * @param Category $category
      */
-    public function setCategory(Category $category)
+    public function setCategory(?Category $category)
     {
         $this->category = $category;
     }

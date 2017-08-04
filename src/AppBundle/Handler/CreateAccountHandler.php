@@ -33,7 +33,6 @@ class CreateAccountHandler
         $this->accountRepository->save($account);
 
         $transactionData = new CreateTransactionCommand($account);
-        $transactionData->category = 'Income';
         $transactionData->payee = 'Reconciliation';
         $transactionData->amount = $command->initialBalance;
         $this->commandBus->handle($transactionData);

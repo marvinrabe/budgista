@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Budget\BudgetFactory;
 use AppBundle\Entity\Month;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -19,11 +20,12 @@ class BudgetController extends Controller
      * @Route("/{month}", name="budget_list")
      * @Method({"GET"})
      */
-    public function listAction(Request $request, Month $month)
+    public function listAction(Request $request, Month $month, BudgetFactory $factory)
     {
+        $budget = $factory->get($month);
 
         return $this->render('list/budget.html.twig', [
-            'month' => $month
+            'budget' => $budget
         ]);
     }
 

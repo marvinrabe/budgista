@@ -45,6 +45,16 @@ class Month
         return $this->year . str_pad($this->month, 2, "0", STR_PAD_LEFT);
     }
 
+    public function getMonth(): int
+    {
+        return $this->month;
+    }
+
+    public function getYear(): int
+    {
+        return $this->year;
+    }
+
     public static function current(): Month
     {
         $today = new \DateTime('today');
@@ -71,6 +81,14 @@ class Month
     {
         $date = new \DateTime();
         $date->setDate($this->year, $this->month, 1);
+        return $date;
+    }
+
+    public function lastDay(): \DateTime
+    {
+        $day = cal_days_in_month(CAL_GREGORIAN, $this->month, $this->year);
+        $date = new \DateTime();
+        $date->setDate($this->year, $this->month, $day);
         return $date;
     }
 

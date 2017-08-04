@@ -37,6 +37,8 @@ class CreateTransactionHandler
         if ($this->categoryRepository->exists($command->category)) {
             $category = $this->categoryRepository->findByName($command->category);
             $transaction->setCategory($category);
+        } else {
+            $transaction->setCategory(null);
         }
 
         $transaction->setDate($command->date);
