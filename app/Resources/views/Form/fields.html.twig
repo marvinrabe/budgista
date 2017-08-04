@@ -1,0 +1,7 @@
+
+{% block money_widget %}
+    {% spaceless %}
+        {% set attr = attr|merge({autocomplete: "off", placeholder: 0|localizedcurrency('EUR', app.request.locale)}) %}
+        {{ block('form_widget_simple') }}
+    {% endspaceless %}
+{%- endblock money_widget %}

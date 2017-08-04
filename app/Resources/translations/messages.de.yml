@@ -1,0 +1,17 @@
+action:
+  new: Neu
+  edit: Bearbeiten
+  delete: Löschen
+form:
+  date: Datum
+  payee: Zahlungsempfänger
+  category: Kategorie
+  cashflow: Betrag
+  budgeted: Geplant
+  activity: Aktivität
+  available: Verfügbar
+  previousMonth: Vormonat
+title:
+  category: Kategorien
+  account: Konten
+  budget: Budget

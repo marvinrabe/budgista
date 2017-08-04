@@ -13,11 +13,7 @@ interface CategoryRepository
 
     public function exists($name): bool;
 
-    /**
-     * @param string $name
-     * @return Category
-     */
-    public function findByName($name);
+    public function findByName(string $name): Category;
 
     /**
      * @param string $id

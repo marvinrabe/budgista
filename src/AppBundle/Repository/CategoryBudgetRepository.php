@@ -1,0 +1,24 @@
+<?php
+
+
+namespace AppBundle\Repository;
+
+use AppBundle\Entity\Category;
+use AppBundle\Entity\CategoryBudget;
+use AppBundle\Entity\Money;
+use AppBundle\Entity\Month;
+
+interface CategoryBudgetRepository
+{
+
+    public function save(CategoryBudget $budget): void;
+
+    public function remove(CategoryBudget $budget): void;
+
+    public function getBudgeted(Category $category, Month $month): Money;
+
+    public function getPreviousBudgeted(Category $category, Month $month): Money;
+
+    public function getAllPreviousBudgeted(Month $month): Money;
+
+}

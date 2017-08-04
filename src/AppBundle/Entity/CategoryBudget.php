@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * Budget
  *
  * @ORM\Table(name="budget")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\Doctrine\BudgetRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\Doctrine\CategoryBudgetRepository")
  */
-class Budget
+class CategoryBudget
 {
 
     /**
@@ -23,13 +23,6 @@ class Budget
     protected $id;
 
     /**
-     * @var Month
-     *
-     * @ORM\Embedded(class="Month")
-     */
-    protected $date;
-
-    /**
      * @var Category
      *
      * @ORM\ManyToOne(targetEntity="Category")
@@ -38,20 +31,33 @@ class Budget
     protected $category;
 
     /**
+     * @var Month
+     *
+     * @ORM\Embedded(class="Month")
+     */
+    protected $date;
+
+    /**
      * @var Money
      *
      * @ORM\Embedded(class="Money")
      */
     protected $budgeted;
 
-    public function __construct(Month $date, Category $category, Money $budgeted)
+    public function __construct(Category $category, Month $date, Money $budgeted)
     {
         if (!$budgeted->isPositive()) {
             throw new \InvalidArgumentException('Money has to be positive.');
         }
-        $this->date = $date;
+
         $this->category = $category;
+        $this->date = $date;
         $this->budgeted = $budgeted;
+    }
+
+    public function getBudgeted(): Money
+    {
+        return $this->budgeted;
     }
 
 }

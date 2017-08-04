@@ -1,0 +1,33 @@
+$primary-color: #9b4dca;
+
+@import 'milligram';
+@import 'pace';
+
+.navigation {
+  @extend .container;
+  border-bottom: 1px solid #d1d1d1;
+  margin: 2.5rem auto;
+
+  ul {
+
+    list-style-type: none;
+
+    li {
+      display: inline;
+    }
+
+  }
+
+}
+
+.text-red {
+  color: #900000;
+}
+
+.text-green {
+  color: #009000;
+}
+
+.text-right {
+  text-align: right;
+}

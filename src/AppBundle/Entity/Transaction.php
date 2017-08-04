@@ -94,7 +94,7 @@ class Transaction
     /**
      * @return Category
      */
-    public function getCategory(): Category
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
@@ -102,7 +102,7 @@ class Transaction
     /**
      * @param Category $category
      */
-    public function setCategory(Category $category)
+    public function setCategory(?Category $category)
     {
         $this->category = $category;
     }

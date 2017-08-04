@@ -11,8 +11,6 @@ interface PayeeRepository
 
     public function remove(Payee $payee): void;
 
-    public function exists($name): bool;
-
-    public function findByName($name): Payee;
+    public function findOrCreateByName(string $name): Payee;
 
 }

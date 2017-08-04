@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="column">
+            {{ form_row(form.date) }}
+        </div>
+        <div class="column">
+            {{ form_row(form.payee) }}
+        </div>
+        <div class="column">
+            {{ form_row(form.category) }}
+        </div>
+        <div class="column">
+            {{ form_row(form.amount) }}
+        </div>
+    </div>
+    <div class="text-right">
+        <input type="submit" value="{{ 'action.new'|trans }}">
+    </div>
+    {{ form_end(form) }}
+
+    <table>
+        <thead>
+        <tr>
+            <th>{{ 'form.date'|trans }}</th>
+            <th>{{ 'form.payee'|trans }}</th>
+            <th>{{ 'form.category'|trans }}</th>
+            <th>{{ 'form.cashflow'|trans }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.date|date('d.m.Y') }}</td>
+                <td>{{ transaction.payee }}</td>
+                <td>{{ transaction.category }}</td>
+                <td class="{% if transaction.cashflow.isPositive %}text-green{% else %}text-red{% endif %} text-right">
+                    {{ transaction.cashflow.amount|localizedcurrency('EUR', app.request.locale) }}
+                </td>
+                <td></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

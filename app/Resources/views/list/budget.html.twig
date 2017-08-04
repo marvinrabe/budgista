@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="float-right">
+        To be Budgeted: <strong>{{ budget.available.amount|localizedcurrency('EUR', app.request.locale) }}</strong>
+        &middot; {{ 'form.previousMonth'|trans }}: <strong>{{ budget.previousMonth.amount|localizedcurrency('EUR', app.request.locale) }}</strong>
+        &middot; Funds: <strong>{{ budget.funds.amount|localizedcurrency('EUR', app.request.locale) }}</strong>
+        &middot; {{ 'form.budgeted'|trans }}: <strong>{{ budget.budgeted.amount|localizedcurrency('EUR', app.request.locale) }}</strong>
+    </div>
+    <h1>
+        <a href="{{ path('budget_list', {'month': budget.month.previous}) }}">&laquo;</a>
+        {{ budget.month.firstDay|localizeddate('full', 'none', app.request.locale, null, 'MMMM yyyy') }}
+        <a href="{{ path('budget_list', {'month': budget.month.next}) }}">&raquo;</a>
+    </h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>{{ 'form.category'|trans }}</th>
+            <th>{{ 'form.previousMonth'|trans }}</th>
+            <th>{{ 'form.budgeted'|trans }}</th>
+            <th>{{ 'form.activity'|trans }}</th>
+            <th>{{ 'form.available'|trans }}</th>
+        </tr>
+        </thead>
+        {% for row in budget %}
+        <tr>
+            <td>{{ row.category.name }}</td>
+            <th>{{ row.previousMonth.amount|localizedcurrency('EUR', app.request.locale) }}</th>
+            <th>{{ row.budgeted.amount|localizedcurrency('EUR', app.request.locale) }}</th>
+            <th>{{ row.activity.amount|localizedcurrency('EUR', app.request.locale) }}</th>
+            <th>{{ row.available.amount|localizedcurrency('EUR', app.request.locale) }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

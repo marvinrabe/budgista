@@ -50,6 +50,12 @@ services:
         arguments:
             - AppBundle\Entity\Category
 
+    AppBundle\Repository\CategoryBudgetRepository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - AppBundle\Entity\CategoryBudget
+
     AppBundle\Repository\TransactionRepository:
         class: Doctrine\ORM\EntityRepository
         factory: ['@doctrine.orm.default_entity_manager', getRepository]
@@ -85,3 +91,12 @@ services:
         public: true
         tags:
             - { name: tactician.handler, command: AppBundle\Command\CreateTransactionCommand }
+
+    Twig_Extensions_Extension_Intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+    AppBundle\Request\ParamConverter\MonthConverter:
+        tags:
+            - { name: request.param_converter, priority: -2, converter: month_converter }

@@ -2,12 +2,34 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Budget{% endblock %}</title>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        {% stylesheets filter="scssphp" output="assets/css/app.css" "assets/scss/main.scss" %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <nav class="navigation">
+            <ul class="settings float-right">
+                <li class="button button-clear"><a href="{{ path('category_list') }}">{{ 'title.category'|trans }}</a></li>
+                <li class="button button-clear"><a href="{{ path('account_list') }}">{{ 'title.account'|trans }}</a></li>
+            </ul>
+            <ul class="accounts">
+                <li><a href="{{ path('budget') }}" class="button">{{ 'title.budget'|trans }}</a></li>
+                {% for account in accountRepository.findAll %}
+                    <li><a href="{{ path('transaction_list', {'id': account.id}) }}" class="button button-outline">{{ account.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <section class="container">
+            {% block body %}{% endblock %}
+        </section>
+        {% javascripts filter="?jsqueeze" output="assets/app.js"
+        "assets/js/pace.min.js" %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

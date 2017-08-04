@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -34,10 +34,24 @@ framework:
     php_errors:
         log: true
 
+# Assetic
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+        scssphp:
+            formatter: 'Leafo\ScssPhp\Formatter\Compressed'
+        jsqueeze: ~
+
 # Twig Configuration
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes:
+        - ':Form:fields.html.twig'
+    globals:
+        accountRepository: '@AppBundle\Repository\AccountRepository'
 
 # Doctrine Configuration
 doctrine:
