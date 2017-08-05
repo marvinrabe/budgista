@@ -11,7 +11,7 @@ use AppBundle\Entity\Month;
 interface CategoryBudgetRepository
 {
 
-    public function save(CategoryBudget $budget): void;
+    public function add(CategoryBudget $budget): void;
 
     public function remove(CategoryBudget $budget): void;
 

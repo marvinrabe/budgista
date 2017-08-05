@@ -13,30 +13,14 @@ use Doctrine\ORM\ORMException;
 class CategoryBudgetRepository extends EntityRepository implements \AppBundle\Repository\CategoryBudgetRepository
 {
 
-    public function save(CategoryBudget $budget): void
+    public function add(CategoryBudget $budget): void
     {
-        $this->_em->getConnection()->beginTransaction();
-
-        try {
-            $this->_em->persist($budget);
-            $this->_em->flush();
-            $this->_em->getConnection()->commit();
-        } catch (ORMException $e) {
-            throw new RepositoryException('Entity couldnt be added.');
-        }
+        $this->_em->persist($budget);
     }
 
     public function remove(CategoryBudget $budget): void
     {
-        $this->_em->getConnection()->beginTransaction();
-
-        try {
-            $this->_em->remove($budget);
-            $this->_em->flush();
-            $this->_em->getConnection()->commit();
-        } catch (ORMException $e) {
-            throw new RepositoryException('Entity couldnt be deleted.');
-        }
+        $this->_em->remove($budget);
     }
 
     public function getBudgeted(Category $category, Month $month): Money

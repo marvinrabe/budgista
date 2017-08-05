@@ -7,7 +7,7 @@ use AppBundle\Entity\Payee;
 interface PayeeRepository
 {
 
-    public function save(Payee $payee): void;
+    public function add(Payee $payee): void;
 
     public function remove(Payee $payee): void;
 

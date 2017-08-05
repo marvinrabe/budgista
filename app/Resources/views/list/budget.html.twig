@@ -4,7 +4,7 @@
 
     <div class="float-right">
         To be Budgeted: <strong>{{ budget.available.amount|localizedcurrency('EUR', app.request.locale) }}</strong>
-        &middot; {{ 'form.previousMonth'|trans }}: <strong>{{ budget.previousMonth.amount|localizedcurrency('EUR', app.request.locale) }}</strong>
+        &middot; {{ 'form.previousMonth'|trans }}: <strong>{{ budget.previousMonthAvailable.amount|localizedcurrency('EUR', app.request.locale) }}</strong>
         &middot; Funds: <strong>{{ budget.funds.amount|localizedcurrency('EUR', app.request.locale) }}</strong>
         &middot; {{ 'form.budgeted'|trans }}: <strong>{{ budget.budgeted.amount|localizedcurrency('EUR', app.request.locale) }}</strong>
     </div>

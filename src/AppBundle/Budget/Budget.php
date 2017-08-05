@@ -9,7 +9,7 @@ class Budget implements \Iterator
 {
 
     protected $month;
-    protected $previousMonth;
+    protected $previousMonthAvailable;
     protected $funds;
 
     /**
@@ -81,14 +81,14 @@ class Budget implements \Iterator
         $this->index = 0;
     }
 
-    public function getPreviousMonth(): Money
+    public function getPreviousMonthAvailable(): Money
     {
-        return $this->previousMonth;
+        return $this->previousMonthAvailable;
     }
 
-    public function setPreviousMonth(Money $previousMonth): void
+    public function setPreviousMonthAvailable(Money $previousMonthAvailable): void
     {
-        $this->previousMonth = $previousMonth;
+        $this->previousMonthAvailable = $previousMonthAvailable;
     }
 
     public function getFunds(): Money
@@ -112,7 +112,7 @@ class Budget implements \Iterator
 
     public function getAvailable(): Money
     {
-        return Money::sum($this->getPreviousMonth(), $this->getFunds(), $this->getBudgeted());
+        return Money::sum($this->getPreviousMonthAvailable(), $this->getFunds(), $this->getBudgeted());
     }
 
 }

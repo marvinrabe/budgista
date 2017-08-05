@@ -28,8 +28,6 @@ class UpdateAccountSettingsHandler
         }
 
         $account->setName($command->name);
-
-        $this->accountRepository->save($account);
     }
 
 }

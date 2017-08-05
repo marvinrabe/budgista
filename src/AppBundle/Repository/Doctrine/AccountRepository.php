@@ -10,30 +10,14 @@ use Doctrine\ORM\ORMException;
 class AccountRepository extends EntityRepository implements \AppBundle\Repository\AccountRepository
 {
 
-    public function save(Account $account): void
+    public function add(Account $account): void
     {
-        $this->_em->getConnection()->beginTransaction();
-
-        try {
-            $this->_em->persist($account);
-            $this->_em->flush();
-            $this->_em->getConnection()->commit();
-        } catch (ORMException $e) {
-            throw new RepositoryException('Entity couldnt be added.');
-        }
+        $this->_em->persist($account);
     }
 
     public function remove(Account $account): void
     {
-        $this->_em->getConnection()->beginTransaction();
-
-        try {
-            $this->_em->remove($account);
-            $this->_em->flush();
-            $this->_em->getConnection()->commit();
-        } catch (ORMException $e) {
-            throw new RepositoryException('Entity couldnt be deleted.');
-        }
+        $this->_em->remove($account);
     }
 
     public function exists($name): bool

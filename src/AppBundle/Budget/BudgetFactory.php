@@ -42,7 +42,7 @@ class BudgetFactory
         $previousMonthBudgeted = $this->categoryBudgetRepository->getAllPreviousBudgeted($month);
 
         $previousMonth = Money::sum($previousMonthFunds, $previousMonthBudgeted);
-        $sheet->setPreviousMonth($previousMonth);
+        $sheet->setPreviousMonthAvailable($previousMonth);
 
         $funds = $this->transactionRepository->sumActivity(null, $month);
         $sheet->setFunds($funds);

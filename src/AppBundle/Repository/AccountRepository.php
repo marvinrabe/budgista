@@ -7,7 +7,7 @@ use AppBundle\Entity\Account;
 interface AccountRepository
 {
 
-    public function save(Account $account): void;
+    public function add(Account $account): void;
 
     public function remove(Account $account): void;
 

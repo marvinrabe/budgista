@@ -10,30 +10,14 @@ use Doctrine\ORM\ORMException;
 class CategoryRepository extends EntityRepository implements \AppBundle\Repository\CategoryRepository
 {
 
-    public function save(Category $category): void
+    public function add(Category $category): void
     {
-        $this->_em->getConnection()->beginTransaction();
-
-        try {
-            $this->_em->persist($category);
-            $this->_em->flush();
-            $this->_em->getConnection()->commit();
-        } catch (ORMException $e) {
-            throw new RepositoryException('Entity couldnt be added.');
-        }
+        $this->_em->persist($category);
     }
 
     public function remove(Category $category): void
     {
-        $this->_em->getConnection()->beginTransaction();
-
-        try {
-            $this->_em->remove($category);
-            $this->_em->flush();
-            $this->_em->getConnection()->commit();
-        } catch (ORMException $e) {
-            throw new RepositoryException('Entity couldnt be deleted.');
-        }
+        $this->_em->remove($category);
     }
 
     public function exists($name): bool

@@ -43,7 +43,7 @@ class CreateTransactionHandler
 
         $transaction->setDate($command->date);
 
-        $this->transactionRepository->save($transaction);
+        $this->transactionRepository->add($transaction);
     }
 
 }

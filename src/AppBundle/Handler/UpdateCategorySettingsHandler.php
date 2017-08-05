@@ -30,8 +30,6 @@ class UpdateCategorySettingsHandler
         }
 
         $category->setName($command->name);
-
-        $this->categoryRepository->save($category);
     }
 
 }

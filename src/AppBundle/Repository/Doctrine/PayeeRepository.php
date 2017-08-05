@@ -10,30 +10,14 @@ use Doctrine\ORM\ORMException;
 class PayeeRepository extends EntityRepository implements \AppBundle\Repository\PayeeRepository
 {
 
-    public function save(Payee $payee): void
+    public function add(Payee $payee): void
     {
-        $this->_em->getConnection()->beginTransaction();
-
-        try {
-            $this->_em->persist($payee);
-            $this->_em->flush();
-            $this->_em->getConnection()->commit();
-        } catch (ORMException $e) {
-            throw new RepositoryException('Entity couldnt be added.');
-        }
+        $this->_em->persist($payee);
     }
 
     public function remove(Payee $payee): void
     {
-        $this->_em->getConnection()->beginTransaction();
-
-        try {
-            $this->_em->remove($payee);
-            $this->_em->flush();
-            $this->_em->getConnection()->commit();
-        } catch (ORMException $e) {
-            throw new RepositoryException('Entity couldnt be deleted.');
-        }
+        $this->_em->remove($payee);
     }
 
     public function findOrCreateByName(string $name): Payee
@@ -47,7 +31,7 @@ class PayeeRepository extends EntityRepository implements \AppBundle\Repository\
         }
 
         $payee = new Payee($name);
-        $this->save($payee);
+        $this->add($payee);
 
         return $payee;
     }

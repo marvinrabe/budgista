@@ -14,30 +14,14 @@ use Doctrine\ORM\ORMException;
 class TransactionRepository extends EntityRepository implements \AppBundle\Repository\TransactionRepository
 {
 
-    public function save(Transaction $transaction): void
+    public function add(Transaction $transaction): void
     {
-        $this->_em->getConnection()->beginTransaction();
-
-        try {
-            $this->_em->persist($transaction);
-            $this->_em->flush();
-            $this->_em->getConnection()->commit();
-        } catch (ORMException $e) {
-            throw new RepositoryException('Entity couldnt be added.');
-        }
+        $this->_em->persist($transaction);
     }
 
     public function remove(Transaction $transaction): void
     {
-        $this->_em->getConnection()->beginTransaction();
-
-        try {
-            $this->_em->remove($transaction);
-            $this->_em->flush();
-            $this->_em->getConnection()->commit();
-        } catch (ORMException $e) {
-            throw new RepositoryException('Entity couldnt be deleted.');
-        }
+        $this->_em->remove($transaction);
     }
 
     public function findAllByAccount(Account $account)

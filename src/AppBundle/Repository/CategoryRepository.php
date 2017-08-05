@@ -7,7 +7,7 @@ use AppBundle\Entity\Category;
 interface CategoryRepository
 {
 
-    public function save(Category $category): void;
+    public function add(Category $category): void;
 
     public function remove(Category $category): void;
 

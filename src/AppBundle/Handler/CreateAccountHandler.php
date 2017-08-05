@@ -30,7 +30,7 @@ class CreateAccountHandler
         }
 
         $account = new Account($command->name);
-        $this->accountRepository->save($account);
+        $this->accountRepository->add($account);
 
         $transactionData = new CreateTransactionCommand($account);
         $transactionData->payee = 'Reconciliation';

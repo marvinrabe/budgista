@@ -27,7 +27,7 @@ class CreateCategoryHandler
 
         $category = new Category($command->name);
 
-        $this->categoryRepository->save($category);
+        $this->categoryRepository->add($category);
     }
 
 }
