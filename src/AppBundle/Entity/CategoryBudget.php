@@ -46,18 +46,34 @@ class CategoryBudget
 
     public function __construct(Category $category, Month $date, Money $budgeted)
     {
-        if (!$budgeted->isPositive()) {
-            throw new \InvalidArgumentException('Money has to be positive.');
-        }
-
         $this->category = $category;
         $this->date = $date;
-        $this->budgeted = $budgeted;
+
+        $this->setBudgeted($budgeted);
+    }
+
+    public function getCategory(): Category
+    {
+        return $this->category;
+    }
+
+    public function getMonth(): Month
+    {
+        return $this->date;
     }
 
     public function getBudgeted(): Money
     {
         return $this->budgeted;
+    }
+
+    public function setBudgeted(Money $budgeted)
+    {
+        if (!$budgeted->isPositive()) {
+            throw new \InvalidArgumentException('Money has to be positive.');
+        }
+
+        $this->budgeted = $budgeted;
     }
 
 }

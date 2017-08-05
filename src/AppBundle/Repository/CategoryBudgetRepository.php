@@ -21,4 +21,6 @@ interface CategoryBudgetRepository
 
     public function getAllPreviousBudgeted(Month $month): Money;
 
+    public function findOrCreate(Category $category, Month $month): CategoryBudget;
+
 }

@@ -28,7 +28,7 @@
         <tr>
             <td>{{ row.category.name }}</td>
             <th>{{ row.previousMonth.amount|localizedcurrency('EUR', app.request.locale) }}</th>
-            <th>{{ row.budgeted.amount|localizedcurrency('EUR', app.request.locale) }}</th>
+            <th><a href="{{ path('budget_edit', {'month': budget.month, 'category': row.category.id}) }}">{{ row.budgeted.amount|localizedcurrency('EUR', app.request.locale) }}</a></th>
             <th>{{ row.activity.amount|localizedcurrency('EUR', app.request.locale) }}</th>
             <th>{{ row.available.amount|localizedcurrency('EUR', app.request.locale) }}</th>
         </tr>

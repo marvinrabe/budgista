@@ -32,9 +32,7 @@ class AccountController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             $commandBus->handle($data);
-
         }
 
         $accounts = $repository->findAll();

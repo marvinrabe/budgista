@@ -25,15 +25,7 @@ class CategoryBudgetRepository extends EntityRepository implements \AppBundle\Re
 
     public function getBudgeted(Category $category, Month $month): Money
     {
-        /**
-         * @var CategoryBudget $budget ;
-         */
-        $budget = $this->findOneBy(['category' => $category, 'date.month' => $month->getMonth(), 'date.year' => $month->getYear()]);
-
-        if ($budget === null) {
-            return new Money(0);
-        }
-
+        $budget = $this->findOrCreate($category, $month);
         return $budget->getBudgeted();
     }
 
@@ -42,7 +34,7 @@ class CategoryBudgetRepository extends EntityRepository implements \AppBundle\Re
         $dql = "SELECT SUM(b.budgeted.amount) AS balance FROM AppBundle\Entity\CategoryBudget b WHERE ((b.date.year = ?1 AND b.date.month < ?2) OR (b.date.year < ?1)) AND b.category = ?3";
         $balance = $this->_em->createQuery($dql)
             ->setParameter(1, $month->getYear())
-            ->setParameter(2, $month->getYear())
+            ->setParameter(2, $month->getMonth())
             ->setParameter(3, $category)
             ->getSingleScalarResult();
 
@@ -67,4 +59,19 @@ class CategoryBudgetRepository extends EntityRepository implements \AppBundle\Re
 
         return new Money($balance);
     }
+
+    public function findOrCreate(Category $category, Month $month): CategoryBudget
+    {
+        /**
+         * @var CategoryBudget $budget
+         */
+        $budget = $this->findOneBy(['category' => $category, 'date.month' => $month->getMonth(), 'date.year' => $month->getYear()]);
+
+        if($budget === null) {
+            $budget = new CategoryBudget($category, $month, new Money(0));
+        }
+
+        return $budget;
+    }
+
 }

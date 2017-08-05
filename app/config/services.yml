@@ -82,6 +82,11 @@ services:
         tags:
             - { name: tactician.handler, command: AppBundle\Command\CreateCategoryCommand }
 
+    AppBundle\Handler\UpdateCategoryBudgetHandler:
+        public: true
+        tags:
+            - { name: tactician.handler, command: AppBundle\Command\UpdateCategoryBudgetCommand }
+
     AppBundle\Handler\UpdateCategorySettingsHandler:
         public: true
         tags:
@@ -92,11 +97,13 @@ services:
         tags:
             - { name: tactician.handler, command: AppBundle\Command\CreateTransactionCommand }
 
+    # Twig Extensions
     Twig_Extensions_Extension_Intl:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
 
+    # Param Converter
     AppBundle\Request\ParamConverter\MonthConverter:
         tags:
             - { name: request.param_converter, priority: -2, converter: month_converter }
