@@ -15,16 +15,11 @@ interface CategoryRepository
 
     public function findByName(string $name): Category;
 
-    /**
-     * @param string $id
-     * @return Category
-     */
-    public function find($id);
+    public function find(string $id): Category;
 
     /**
      * @return Category[]
      */
     public function findAll();
-
 
 }

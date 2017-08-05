@@ -32,35 +32,8 @@ services:
     # add more services, or override services that need manual wiring
 
     # Repositories
-    AppBundle\Repository\AccountRepository:
-        class: Doctrine\ORM\EntityRepository
-        factory: ['@doctrine.orm.default_entity_manager', getRepository]
-        arguments:
-            - AppBundle\Entity\Account
-
-    AppBundle\Repository\PayeeRepository:
-        class: Doctrine\ORM\EntityRepository
-        factory: ['@doctrine.orm.default_entity_manager', getRepository]
-        arguments:
-            - AppBundle\Entity\Payee
-
-    AppBundle\Repository\CategoryRepository:
-        class: Doctrine\ORM\EntityRepository
-        factory: ['@doctrine.orm.default_entity_manager', getRepository]
-        arguments:
-            - AppBundle\Entity\Category
-
-    AppBundle\Repository\CategoryBudgetRepository:
-        class: Doctrine\ORM\EntityRepository
-        factory: ['@doctrine.orm.default_entity_manager', getRepository]
-        arguments:
-            - AppBundle\Entity\CategoryBudget
-
-    AppBundle\Repository\TransactionRepository:
-        class: Doctrine\ORM\EntityRepository
-        factory: ['@doctrine.orm.default_entity_manager', getRepository]
-        arguments:
-            - AppBundle\Entity\Transaction
+    AppBundle\Repository\Doctrine\:
+        resource: '../../src/AppBundle/Repository/Doctrine/*'
 
     # Tactician Command Bus
     League\Tactician\CommandBus:

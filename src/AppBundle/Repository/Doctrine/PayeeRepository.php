@@ -3,21 +3,27 @@
 namespace AppBundle\Repository\Doctrine;
 
 use AppBundle\Entity\Payee;
-use AppBundle\Exception\RepositoryException;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\ORMException;
 
-class PayeeRepository extends EntityRepository implements \AppBundle\Repository\PayeeRepository
+class PayeeRepository implements \AppBundle\Repository\PayeeRepository
 {
+
+    protected $em;
+
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
 
     public function add(Payee $payee): void
     {
-        $this->_em->persist($payee);
+        $this->em->persist($payee);
     }
 
     public function remove(Payee $payee): void
     {
-        $this->_em->remove($payee);
+        $this->em->remove($payee);
     }
 
     public function findOrCreateByName(string $name): Payee
@@ -25,13 +31,15 @@ class PayeeRepository extends EntityRepository implements \AppBundle\Repository\
         /**
          * @var Payee $payee
          */
-        $payee = $this->findOneBy(['name' => $name]);
-        if ($payee !== null) {
-            return $payee;
-        }
+        $query = $this->em->createQuery('SELECT p FROM AppBundle\Entity\Payee p WHERE p.name = ?1');
+        $query->setParameter(1, $name);
 
-        $payee = new Payee($name);
-        $this->add($payee);
+        $payee = $query->getOneOrNullResult();
+
+        if ($payee === null) {
+            $payee = new Payee($name);
+            $this->add($payee);
+        }
 
         return $payee;
     }

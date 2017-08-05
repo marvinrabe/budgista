@@ -4,30 +4,38 @@ namespace AppBundle\Repository\Doctrine;
 
 use AppBundle\Entity\Category;
 use AppBundle\Exception\RepositoryException;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\ORMException;
 
-class CategoryRepository extends EntityRepository implements \AppBundle\Repository\CategoryRepository
+class CategoryRepository implements \AppBundle\Repository\CategoryRepository
 {
+
+    protected $em;
+
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
 
     public function add(Category $category): void
     {
-        $this->_em->persist($category);
+        $this->em->persist($category);
     }
 
     public function remove(Category $category): void
     {
-        $this->_em->remove($category);
+        $this->em->remove($category);
     }
 
     public function exists($name): bool
     {
-        /**
-         * @var Category $category
-         */
-        $category = $this->findOneBy(['name' => $name]);
 
-        if ($category === null) {
+        $query = $this->em->createQuery('SELECT COUNT(c.id) FROM AppBundle\Entity\Category c WHERE c.name = ?1');
+        $query->setParameter(1, $name);
+        $count = $query->getSingleScalarResult();
+
+        if ($count == 0) {
             return false;
         }
         return true;
@@ -35,16 +43,30 @@ class CategoryRepository extends EntityRepository implements \AppBundle\Reposito
 
     public function findByName(string $name): Category
     {
+        $query = $this->em->createQuery('SELECT c FROM AppBundle\Entity\Category c WHERE c.name = ?1');
+        $query->setParameter(1, $name);
+
         /**
          * @var Category $category
          */
-        $category = $this->findOneBy(['name' => $name]);
-
-        if ($category === null) {
-            throw new RepositoryException('Category "' . $name . '" not found.');
-        }
-
-        return $category;
+        return $query->getOneOrNullResult();
     }
 
+    public function find(string $id): Category
+    {
+        $query = $this->em->createQuery('SELECT c FROM AppBundle\Entity\Category c WHERE c.id = ?1');
+        $query->setParameter(1, $id);
+
+        return $query->getOneOrNullResult();
+    }
+
+    /**
+     * @return Category[]
+     */
+    public function findAll()
+    {
+        $query = $this->em->createQuery('SELECT c FROM AppBundle\Entity\Category c');
+
+        return $query->getResult();
+    }
 }

@@ -11,13 +11,9 @@ interface AccountRepository
 
     public function remove(Account $account): void;
 
-    public function exists($name): bool;
+    public function exists(string $name): bool;
 
-    /**
-     * @param string $id
-     * @return Account
-     */
-    public function find($id);
+    public function find(string $id): Account;
 
     /**
      * @return Account[]

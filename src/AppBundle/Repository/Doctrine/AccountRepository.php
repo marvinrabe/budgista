@@ -3,34 +3,55 @@
 namespace AppBundle\Repository\Doctrine;
 
 use AppBundle\Entity\Account;
-use AppBundle\Exception\RepositoryException;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\EntityManager;
 
-class AccountRepository extends EntityRepository implements \AppBundle\Repository\AccountRepository
+class AccountRepository implements \AppBundle\Repository\AccountRepository
 {
+
+    protected $em;
+
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
 
     public function add(Account $account): void
     {
-        $this->_em->persist($account);
+        $this->em->persist($account);
     }
 
     public function remove(Account $account): void
     {
-        $this->_em->remove($account);
+        $this->em->remove($account);
     }
 
-    public function exists($name): bool
+    public function exists(string $name): bool
     {
-        /**
-         * @var AccountRepository $account
-         */
-        $account = $this->findOneBy(['name' => $name]);
+        $query = $this->em->createQuery('SELECT COUNT(a.id) FROM AppBundle\Entity\Account a WHERE a.name = ?1');
+        $query->setParameter(1, $name);
+        $count = $query->getSingleScalarResult();
 
-        if ($account === null) {
+        if ($count == 0) {
             return false;
         }
         return true;
     }
 
+    public function find(string $id): Account
+    {
+        $query = $this->em->createQuery('SELECT a FROM AppBundle\Entity\Account a WHERE a.id = ?1');
+        $query->setParameter(1, $id);
+
+        return $query->getOneOrNullResult();
+    }
+
+    /**
+     * @return Account[]
+     */
+    public function findAll(): array
+    {
+        $query = $this->em->createQuery('SELECT a FROM AppBundle\Entity\Account a');
+
+        return $query->getResult();
+    }
 }
