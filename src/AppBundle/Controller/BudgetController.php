@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Budget\BudgetFactory;
+use AppBundle\Query\BudgetFactory;
 use AppBundle\Command\UpdateCategoryBudgetCommand;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Month;

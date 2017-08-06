@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Budget;
+namespace AppBundle\Query;
 
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Money;

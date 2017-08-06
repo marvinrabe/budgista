@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Budget;
+namespace AppBundle\Query;
 
 use AppBundle\Entity\Money;
 use AppBundle\Repository\CategoryBudgetRepository;
@@ -28,7 +28,7 @@ class BudgetFactory
         $categories = $this->categoryRepository->findAll();
         foreach ($categories as $category) {
             $row = $this->buildRow($category, $month);
-            $sheet->add($row);
+            $sheet->addRow($row);
         }
 
         return $sheet;

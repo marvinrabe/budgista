@@ -24,7 +24,7 @@
             <th>{{ 'form.available'|trans }}</th>
         </tr>
         </thead>
-        {% for row in budget %}
+        {% for row in budget.rows %}
         <tr>
             <td>{{ row.category.name }}</td>
             <th>{{ row.previousMonth.amount|localizedcurrency('EUR', app.request.locale) }}</th>
