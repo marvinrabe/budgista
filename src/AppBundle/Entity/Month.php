@@ -42,7 +42,7 @@ class Month
 
     public function __toString()
     {
-        return $this->year . str_pad($this->month, 2, "0", STR_PAD_LEFT);
+        return $this->year . '-' . str_pad($this->month, 2, "0", STR_PAD_LEFT);
     }
 
     public static function fromString(string $string): Month

@@ -25,7 +25,7 @@ class BudgetController extends Controller
      * @Route("/{month}", name="budget_list")
      * @Method({"GET"})
      */
-    public function listAction(Request $request, Month $month, BudgetFactory $factory)
+    public function listAction(Month $month, BudgetFactory $factory)
     {
         $budget = $factory->get($month);
 
