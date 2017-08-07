@@ -48,8 +48,7 @@ class CategoryBudget
     {
         $this->category = $category;
         $this->date = $date;
-
-        $this->setBudgeted($budgeted);
+        $this->budgeted = $budgeted;
     }
 
     public function getCategory(): Category
@@ -69,10 +68,6 @@ class CategoryBudget
 
     public function setBudgeted(Money $budgeted)
     {
-        if (!$budgeted->isPositive()) {
-            throw new \InvalidArgumentException('Money has to be positive.');
-        }
-
         $this->budgeted = $budgeted;
     }
 

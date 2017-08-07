@@ -8,9 +8,13 @@ form:
   category: Kategorie
   cashflow: Betrag
   budgeted: Geplant
+  amount: Betrag
   activity: Aktivität
   available: Verfügbar
   previousMonth: Vormonat
+  toCategory: Ziel-Kategorie
+placeholder:
+  toCategory: Ziel-Kategorie auswählen
 title:
   category: Kategorien
   account: Konten

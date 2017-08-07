@@ -18,7 +18,6 @@ class UpdateCategoryBudgetCommand
     public $category;
 
     /**
-     * @Assert\GreaterThanOrEqual(0)
      * @Assert\Type("double")
      */
     public $amount;
