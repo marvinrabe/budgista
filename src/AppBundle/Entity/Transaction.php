@@ -46,10 +46,9 @@ class Transaction
     protected $category;
 
     /**
-     * @var Payee
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Payee")
-     * @ORM\JoinColumn(name="payee_id", referencedColumnName="id")
+     * @ORM\Column(type="string", length=255)
      */
     protected $payee;
 
@@ -108,17 +107,17 @@ class Transaction
     }
 
     /**
-     * @return Payee
+     * @return string
      */
-    public function getPayee(): Payee
+    public function getPayee(): string
     {
         return $this->payee;
     }
 
     /**
-     * @param Payee $payee
+     * @param string $payee
      */
-    public function setPayee(Payee $payee)
+    public function setPayee(string $payee)
     {
         $this->payee = $payee;
     }
