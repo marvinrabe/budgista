@@ -3,21 +3,17 @@
 namespace AppBundle\Handler;
 
 use AppBundle\Command\CreateAccountCommand;
-use AppBundle\Command\CreateTransactionCommand;
-use AppBundle\Entity\Account;
-use AppBundle\Repository\AccountRepository;
-use League\Tactician\CommandBus;
+use AppBundle\Entity\Money;
+use AppBundle\Services\Manager\AccountManager;
 
 class CreateAccountHandler
 {
 
-    protected $commandBus;
-    protected $accountRepository;
+    protected $accountManager;
 
-    public function __construct(CommandBus $commandBus, AccountRepository $accountRepository)
+    public function __construct(AccountManager $accountManager)
     {
-        $this->commandBus = $commandBus;
-        $this->accountRepository = $accountRepository;
+        $this->accountManager = $accountManager;
     }
 
     /**
@@ -25,17 +21,8 @@ class CreateAccountHandler
      */
     public function handle(CreateAccountCommand $command)
     {
-        if ($this->accountRepository->exists($command->name)) {
-            throw new \InvalidArgumentException('Account with name "' . $command->name . '" already exists.');
-        }
-
-        $account = new Account($command->name);
-        $this->accountRepository->add($account);
-
-        $transactionData = new CreateTransactionCommand($account);
-        $transactionData->payee = 'Reconciliation';
-        $transactionData->amount = $command->initialBalance;
-        $this->commandBus->handle($transactionData);
+        $initialBalance = new Money($command->initialBalance);
+        $this->accountManager->create($command->name, $initialBalance);
     }
 
 }

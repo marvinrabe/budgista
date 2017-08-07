@@ -7,6 +7,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 class CreateTransactionCommand
 {
 
+    /**
+     * @Assert\Uuid
+     */
     public $account;
 
     /**
@@ -21,11 +24,13 @@ class CreateTransactionCommand
 
     public $category;
 
+    /**
+     * @Assert\Type("double")
+     */
     public $amount;
 
-    public function __construct($account)
+    public function __construct()
     {
-        $this->account = $account;
         $this->date = new \DateTime();
     }
 

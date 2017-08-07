@@ -49,7 +49,10 @@ class AccountController extends Controller
      */
     public function editAction(Request $request, CommandBus $commandBus, Account $account)
     {
-        $data = new UpdateAccountSettingsCommand($account);
+        $data = new UpdateAccountSettingsCommand();
+        $data->id = $account->getId();
+        $data->name = $account->getName();
+
         $form = $this->createForm(AccountEditType::class, $data);
 
         $form->handleRequest($request);

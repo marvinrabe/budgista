@@ -5,20 +5,24 @@ namespace AppBundle\Handler;
 use AppBundle\Command\CreateTransactionCommand;
 use AppBundle\Entity\Money;
 use AppBundle\Entity\Transaction;
+use AppBundle\Repository\AccountRepository;
 use AppBundle\Repository\CategoryRepository;
 use AppBundle\Repository\PayeeRepository;
 use AppBundle\Repository\TransactionRepository;
+use AppBundle\Services\Manager\TransactionManager;
 
 class CreateTransactionHandler
 {
 
+    protected $accountRepository;
     protected $categoryRepository;
-    protected $transactionRepository;
+    protected $transactionManager;
 
-    public function __construct(TransactionRepository $transactionRepository, CategoryRepository $categoryRepository)
+    public function __construct(AccountRepository $accountRepository, CategoryRepository $categoryRepository, TransactionManager $transactionManager)
     {
-        $this->transactionRepository = $transactionRepository;
+        $this->accountRepository = $accountRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->transactionManager = $transactionManager;
     }
 
     /**
@@ -26,21 +30,19 @@ class CreateTransactionHandler
      */
     public function handle(CreateTransactionCommand $command)
     {
-        $cashflow = new Money($command->amount);
-        $transaction = new Transaction($command->account, $cashflow);
-
-        $transaction->setPayee($command->payee);
-
-        if ($this->categoryRepository->exists($command->category)) {
-            $category = $this->categoryRepository->findByName($command->category);
-            $transaction->setCategory($category);
-        } else {
-            $transaction->setCategory(null);
+        $account = $this->accountRepository->find($command->account);
+        if ($account === null) {
+            throw new \InvalidArgumentException('Account not found.');
         }
 
-        $transaction->setDate($command->date);
+        $cashflow = new Money($command->amount);
 
-        $this->transactionRepository->add($transaction);
+        $category = null;
+        if ($this->categoryRepository->exists($command->category)) {
+            $category = $this->categoryRepository->findByName($command->category);
+        }
+
+        $this->transactionManager->create($account, $command->date, $cashflow, $category, $command->payee);
     }
 
 }

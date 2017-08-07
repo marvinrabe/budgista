@@ -22,10 +22,8 @@ class MonthConverter implements ParamConverterInterface
 
         $attribute = $request->attributes->get($name);
 
-        $year = substr($attribute, 0, 4);
-        $month = substr($attribute, -2);
+        $object = Month::fromString($attribute);
 
-        $object = new Month($month,$year);
         $request->attributes->set($name, $object);
 
         return true;

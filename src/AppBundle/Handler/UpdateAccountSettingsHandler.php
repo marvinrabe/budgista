@@ -23,6 +23,10 @@ class UpdateAccountSettingsHandler
     {
         $account = $this->accountRepository->find($command->id);
 
+        if ($account === null) {
+            throw new \InvalidArgumentException('Account not found.');
+        }
+
         if ($this->accountRepository->exists($command->name) && $account->getName() != $command->name) {
             throw new \InvalidArgumentException('Account with name "' . $command->name . '" already exists.');
         }

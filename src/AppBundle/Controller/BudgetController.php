@@ -42,14 +42,18 @@ class BudgetController extends Controller
     {
         $budget = $repository->findOrCreate($category, $month);
 
-        $data = new UpdateCategoryBudgetCommand($budget);
+        $data = new UpdateCategoryBudgetCommand();
+        $data->category = $category->getId();
+        $data->month = (string) $month;
+        $data->amount = $budget->getBudgeted()->getAmount();
+
         $form = $this->createForm(BudgetEditType::class, $data);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $commandBus->handle($data);
 
-            return $this->redirectToRoute('budget_list', ['month' => (string) $month]);
+            return $this->redirectToRoute('budget_list', ['month' => (string)$month]);
         }
 
         return $this->render('form.html.twig', [

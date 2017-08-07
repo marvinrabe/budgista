@@ -12,6 +12,9 @@ class CreateAccountCommand
      */
     public $name;
 
+    /**
+     * @Assert\Type("double")
+     */
     public $initialBalance;
 
 }

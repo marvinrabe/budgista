@@ -32,6 +32,7 @@ class Account
 
     public function __construct(string $name)
     {
+        $this->id = uniqid();
         $this->setName($name);
     }
 

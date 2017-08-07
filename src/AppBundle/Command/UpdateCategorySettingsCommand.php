@@ -18,10 +18,4 @@ class UpdateCategorySettingsCommand
      */
     public $name;
 
-    public function __construct(Category $category)
-    {
-        $this->id = $category->getId();
-        $this->name = $category->getName();
-    }
-
 }

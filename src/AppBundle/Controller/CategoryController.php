@@ -48,15 +48,18 @@ class CategoryController extends Controller
      * @Route("/{id}", name="category_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Category $category)
+    public function editAction(Request $request, CommandBus $commandBus, Category $category)
     {
-        $data = new UpdateCategorySettingsCommand($category);
+        $data = new UpdateCategorySettingsCommand();
+        $data->id = $category->getId();
+        $data->name = $category->getName();
+
         $form = $this->createForm(CategoryEditType::class, $data);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->get('command_bus')->handle($data);
+            $commandBus->handle($data);
 
             return $this->redirectToRoute('category_list');
         }

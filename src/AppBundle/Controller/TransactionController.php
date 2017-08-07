@@ -25,7 +25,9 @@ class TransactionController extends Controller
      */
     public function listAction(Request $request, CommandBus $commandBus, TransactionRepository $repository, Account $account)
     {
-        $data = new CreateTransactionCommand($account);
+        $data = new CreateTransactionCommand();
+        $data->account = $account->getId();
+
         $form = $this->createForm(TransactionNewType::class, $data);
 
         $form->handleRequest($request);

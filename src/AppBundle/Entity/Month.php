@@ -26,7 +26,7 @@ class Month
      */
     protected $year;
 
-    public function __construct(int $month, int $year)
+    public function __construct(int $year, int $month)
     {
         if ($month > 12 || $month < 1) {
             throw new \InvalidArgumentException('Value ' . $month . ' for month is invalid.');
@@ -45,6 +45,19 @@ class Month
         return $this->year . str_pad($this->month, 2, "0", STR_PAD_LEFT);
     }
 
+    public static function fromString(string $string): Month
+    {
+        $year = substr($string, 0, 4);
+        $month = substr($string, -2);
+        return new Month($year, $month);
+    }
+
+    public static function current(): Month
+    {
+        $today = new \DateTime('now');
+        return new Month($today->format('Y'), $today->format('m'));
+    }
+
     public function getMonth(): int
     {
         return $this->month;
@@ -55,26 +68,20 @@ class Month
         return $this->year;
     }
 
-    public static function current(): Month
-    {
-        $today = new \DateTime('today');
-        return new Month($today->format('m'), $today->format('Y'));
-    }
-
     public function previous(): Month
     {
         if ($this->month == 1) {
-            return new Month(12, $this->year - 1);
+            return new Month($this->year - 1, 12);
         }
-        return new Month($this->month - 1, $this->year);
+        return new Month($this->year, $this->month - 1);
     }
 
     public function next(): Month
     {
         if ($this->month == 12) {
-            return new Month(1, $this->year + 1);
+            return new Month($this->year + 1, 1);
         }
-        return new Month($this->month + 1, $this->year);
+        return new Month($this->year, $this->month + 1);
     }
 
     public function firstDay(): \DateTime

@@ -25,6 +25,10 @@ class UpdateCategorySettingsHandler
     {
         $category = $this->categoryRepository->find($command->id);
 
+        if ($category === null) {
+            throw new \InvalidArgumentException('Category not found.');
+        }
+
         if ($this->categoryRepository->exists($command->name) && $category->getName() != $command->name) {
             throw new \InvalidArgumentException('Category with name "' . $command->name . '" already exists.');
         }
