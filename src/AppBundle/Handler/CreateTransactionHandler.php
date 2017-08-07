@@ -9,7 +9,7 @@ use AppBundle\Repository\AccountRepository;
 use AppBundle\Repository\CategoryRepository;
 use AppBundle\Repository\PayeeRepository;
 use AppBundle\Repository\TransactionRepository;
-use AppBundle\Services\Manager\TransactionManager;
+use AppBundle\Service\Manager\TransactionManager;
 
 class CreateTransactionHandler
 {

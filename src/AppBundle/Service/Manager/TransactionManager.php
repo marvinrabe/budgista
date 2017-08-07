@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Services\Manager;
+namespace AppBundle\Service\Manager;
 
 use AppBundle\Entity\Account;
 use AppBundle\Entity\Category;
