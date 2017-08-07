@@ -3,14 +3,14 @@
 namespace AppBundle\Repository\Doctrine;
 
 use AppBundle\Entity\Account;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class AccountRepository implements \AppBundle\Repository\AccountRepository
 {
 
     protected $em;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
     }

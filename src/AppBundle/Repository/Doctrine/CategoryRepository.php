@@ -3,17 +3,14 @@
 namespace AppBundle\Repository\Doctrine;
 
 use AppBundle\Entity\Category;
-use AppBundle\Exception\RepositoryException;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\EntityManagerInterface;
 
 class CategoryRepository implements \AppBundle\Repository\CategoryRepository
 {
 
     protected $em;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
     }

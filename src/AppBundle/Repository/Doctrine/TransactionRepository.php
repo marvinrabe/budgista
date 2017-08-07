@@ -7,17 +7,14 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\Money;
 use AppBundle\Entity\Month;
 use AppBundle\Entity\Transaction;
-use AppBundle\Exception\RepositoryException;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\EntityManagerInterface;
 
 class TransactionRepository implements \AppBundle\Repository\TransactionRepository
 {
 
     protected $em;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
     }

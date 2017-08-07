@@ -35,6 +35,18 @@ services:
     AppBundle\Repository\Doctrine\:
         resource: '../../src/AppBundle/Repository/Doctrine/*'
 
+    AppBundle\Repository\AccountRepository:
+        alias: AppBundle\Repository\Doctrine\AccountRepository
+
+    AppBundle\Repository\CategoryRepository:
+        alias: AppBundle\Repository\Doctrine\CategoryRepository
+
+    AppBundle\Repository\CategoryBudgetRepository:
+        alias: AppBundle\Repository\Doctrine\CategoryBudgetRepository
+
+    AppBundle\Repository\TransactionRepository:
+        alias: AppBundle\Repository\Doctrine\TransactionRepository
+
     # Tactician Command Bus
     League\Tactician\CommandBus:
         alias: tactician.commandbus.default

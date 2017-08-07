@@ -6,14 +6,14 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\CategoryBudget;
 use AppBundle\Entity\Money;
 use AppBundle\Entity\Month;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class CategoryBudgetRepository implements \AppBundle\Repository\CategoryBudgetRepository
 {
 
     protected $em;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
     }
