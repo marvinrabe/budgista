@@ -2,6 +2,8 @@
 
 namespace AppBundle\Command;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class CreateTransactionCommand
 {
 
