@@ -5,7 +5,7 @@ namespace AppBundle\Handler;
 use AppBundle\Command\CreateAccountCommand;
 use AppBundle\Command\CreateCategoryCommand;
 use AppBundle\Command\UpdateCategorySettingsCommand;
-use AppBundle\Entity\Category;
+use AppBundle\Entity\Budget\Category;
 use AppBundle\Repository\CategoryRepository;
 
 class UpdateCategorySettingsHandler

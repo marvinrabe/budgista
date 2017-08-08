@@ -1,14 +1,17 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace AppBundle\Entity\Budget;
 
+use AppBundle\Entity\Budget\Category;
+use AppBundle\Entity\Money;
+use AppBundle\Entity\Month;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Budget
  *
  * @ORM\Table(name="budget")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\Doctrine\CategoryBudgetRepository")
+ * @ORM\Entity()
  */
 class CategoryBudget
 {
@@ -33,14 +36,14 @@ class CategoryBudget
     /**
      * @var Month
      *
-     * @ORM\Embedded(class="Month")
+     * @ORM\Embedded(class="AppBundle\Entity\Month")
      */
     protected $date;
 
     /**
      * @var Money
      *
-     * @ORM\Embedded(class="Money")
+     * @ORM\Embedded(class="AppBundle\Entity\Money")
      */
     protected $budgeted;
 

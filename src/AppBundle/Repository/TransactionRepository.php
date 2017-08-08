@@ -2,11 +2,11 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Account;
-use AppBundle\Entity\Category;
+use AppBundle\Entity\Budget\Account;
+use AppBundle\Entity\Budget\Category;
 use AppBundle\Entity\Money;
 use AppBundle\Entity\Month;
-use AppBundle\Entity\Transaction;
+use AppBundle\Entity\Budget\Transaction;
 
 interface TransactionRepository
 {

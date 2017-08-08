@@ -1,15 +1,14 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace AppBundle\Entity\Budget;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Account
  *
  * @ORM\Table(name="account")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\Doctrine\AccountRepository")
+ * @ORM\Entity()
  */
 class Account
 {

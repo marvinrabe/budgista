@@ -2,7 +2,8 @@
 
 namespace AppBundle\Repository\Doctrine;
 
-use AppBundle\Entity\Account;
+use AppBundle\Domain\BudgetId;
+use AppBundle\Entity\Budget\Account;
 use Doctrine\ORM\EntityManagerInterface;
 
 class AccountRepository implements \AppBundle\Repository\AccountRepository
@@ -10,7 +11,7 @@ class AccountRepository implements \AppBundle\Repository\AccountRepository
 
     protected $em;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, BudgetId $budgetId)
     {
         $this->em = $em;
     }
@@ -27,7 +28,7 @@ class AccountRepository implements \AppBundle\Repository\AccountRepository
 
     public function exists(string $name): bool
     {
-        $query = $this->em->createQuery('SELECT COUNT(a.id) FROM AppBundle\Entity\Account a WHERE a.name = ?1');
+        $query = $this->em->createQuery('SELECT COUNT(a.id) FROM AppBundle\Entity\Budget\Account a WHERE a.name = ?1');
         $query->setParameter(1, $name);
         $count = $query->getSingleScalarResult();
 
@@ -39,7 +40,7 @@ class AccountRepository implements \AppBundle\Repository\AccountRepository
 
     public function find(string $id): Account
     {
-        $query = $this->em->createQuery('SELECT a FROM AppBundle\Entity\Account a WHERE a.id = ?1');
+        $query = $this->em->createQuery('SELECT a FROM AppBundle\Entity\Budget\Account a WHERE a.id = ?1');
         $query->setParameter(1, $id);
 
         return $query->getOneOrNullResult();
@@ -50,7 +51,7 @@ class AccountRepository implements \AppBundle\Repository\AccountRepository
      */
     public function findAll(): array
     {
-        $query = $this->em->createQuery('SELECT a FROM AppBundle\Entity\Account a');
+        $query = $this->em->createQuery('SELECT a FROM AppBundle\Entity\Budget\Account a');
 
         return $query->getResult();
     }

@@ -1,14 +1,15 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace AppBundle\Entity\Budget;
 
+use AppBundle\Entity\Money;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Transaction
  *
  * @ORM\Table(name="transaction")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\Doctrine\TransactionRepository")
+ * @ORM\Entity()
  */
 class Transaction
 {
@@ -55,7 +56,7 @@ class Transaction
     /**
      * @var Money
      *
-     * @ORM\Embedded(class="Money")
+     * @ORM\Embedded(class="AppBundle\Entity\Money")
      */
     protected $cashflow;
 

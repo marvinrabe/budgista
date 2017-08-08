@@ -2,11 +2,12 @@
 
 namespace AppBundle\Repository\Doctrine;
 
-use AppBundle\Entity\Account;
-use AppBundle\Entity\Category;
+use AppBundle\Domain\BudgetId;
+use AppBundle\Entity\Budget\Account;
+use AppBundle\Entity\Budget\Category;
 use AppBundle\Entity\Money;
 use AppBundle\Entity\Month;
-use AppBundle\Entity\Transaction;
+use AppBundle\Entity\Budget\Transaction;
 use Doctrine\ORM\EntityManagerInterface;
 
 class TransactionRepository implements \AppBundle\Repository\TransactionRepository
@@ -14,7 +15,7 @@ class TransactionRepository implements \AppBundle\Repository\TransactionReposito
 
     protected $em;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, BudgetId $budgetId)
     {
         $this->em = $em;
     }
@@ -31,7 +32,7 @@ class TransactionRepository implements \AppBundle\Repository\TransactionReposito
 
     public function findAllByAccount(Account $account)
     {
-        $query = $this->em->createQuery('SELECT t FROM AppBundle\Entity\Transaction t WHERE t.account = ?1 ORDER BY t.date DESC');
+        $query = $this->em->createQuery('SELECT t FROM AppBundle\Entity\Budget\Transaction t WHERE t.account = ?1 ORDER BY t.date DESC');
         $query->setParameter(1, $account);
 
         return $query->getResult();
@@ -40,13 +41,13 @@ class TransactionRepository implements \AppBundle\Repository\TransactionReposito
     public function sumActivity(?Category $category, Month $month): Money
     {
         if ($category === null) {
-            $dql = "SELECT SUM(t.cashflow.amount) AS balance FROM AppBundle\Entity\Transaction t WHERE t.category is null AND t.date >= ?2 AND t.date <= ?3";
+            $dql = "SELECT SUM(t.cashflow.amount) AS balance FROM AppBundle\Entity\Budget\Transaction t WHERE t.category is null AND t.date >= ?2 AND t.date <= ?3";
             $balance = $this->em->createQuery($dql)
                 ->setParameter(2, $month->firstDay())
                 ->setParameter(3, $month->lastDay())
                 ->getSingleScalarResult();
         } else {
-            $dql = "SELECT SUM(t.cashflow.amount) AS balance FROM AppBundle\Entity\Transaction t WHERE t.category = ?1 AND t.date >= ?2 AND t.date <= ?3";
+            $dql = "SELECT SUM(t.cashflow.amount) AS balance FROM AppBundle\Entity\Budget\Transaction t WHERE t.category = ?1 AND t.date >= ?2 AND t.date <= ?3";
             $balance = $this->em->createQuery($dql)
                 ->setParameter(1, $category)
                 ->setParameter(2, $month->firstDay())
@@ -64,12 +65,12 @@ class TransactionRepository implements \AppBundle\Repository\TransactionReposito
     public function sumPreviousActivity(?Category $category, Month $month): Money
     {
         if ($category === null) {
-            $dql = "SELECT SUM(t.cashflow.amount) AS balance FROM AppBundle\Entity\Transaction t WHERE t.category is null AND t.date < ?2";
+            $dql = "SELECT SUM(t.cashflow.amount) AS balance FROM AppBundle\Entity\Budget\Transaction t WHERE t.category is null AND t.date < ?2";
             $balance = $this->em->createQuery($dql)
                 ->setParameter(2, $month->firstDay())
                 ->getSingleScalarResult();
         } else {
-            $dql = "SELECT SUM(t.cashflow.amount) AS balance FROM AppBundle\Entity\Transaction t WHERE t.category = ?1 AND t.date < ?2";
+            $dql = "SELECT SUM(t.cashflow.amount) AS balance FROM AppBundle\Entity\Budget\Transaction t WHERE t.category = ?1 AND t.date < ?2";
             $balance = $this->em->createQuery($dql)
                 ->setParameter(1, $category)
                 ->setParameter(2, $month->firstDay())

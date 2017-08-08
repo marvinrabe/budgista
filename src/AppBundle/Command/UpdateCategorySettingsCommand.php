@@ -2,7 +2,7 @@
 
 namespace AppBundle\Command;
 
-use AppBundle\Entity\Category;
+use AppBundle\Entity\Budget\Category;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class UpdateCategorySettingsCommand

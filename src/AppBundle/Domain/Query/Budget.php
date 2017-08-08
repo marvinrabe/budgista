@@ -1,9 +1,10 @@
 <?php
 
-namespace AppBundle\Query;
+namespace AppBundle\Domain\Query;
 
 use AppBundle\Entity\Money;
 use AppBundle\Entity\Month;
+use AppBundle\Domain\Query\BudgetRow;
 
 class Budget
 {

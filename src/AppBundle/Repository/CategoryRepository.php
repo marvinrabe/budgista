@@ -2,7 +2,7 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Category;
+use AppBundle\Entity\Budget\Category;
 
 interface CategoryRepository
 {

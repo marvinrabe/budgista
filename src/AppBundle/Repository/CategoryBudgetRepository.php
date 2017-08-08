@@ -3,8 +3,8 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Category;
-use AppBundle\Entity\CategoryBudget;
+use AppBundle\Entity\Budget\Category;
+use AppBundle\Entity\Budget\CategoryBudget;
 use AppBundle\Entity\Money;
 use AppBundle\Entity\Month;
 

@@ -1,11 +1,13 @@
 <?php
 
-namespace AppBundle\Query;
+namespace AppBundle\Domain\Query;
 
 use AppBundle\Entity\Money;
+use AppBundle\Domain\Query\BudgetRow;
 use AppBundle\Repository\CategoryBudgetRepository;
 use AppBundle\Repository\CategoryRepository;
 use AppBundle\Repository\TransactionRepository;
+use AppBundle\Domain\Query\Budget;
 
 class BudgetFactory
 {

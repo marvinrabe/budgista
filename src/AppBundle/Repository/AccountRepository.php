@@ -2,7 +2,7 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Account;
+use AppBundle\Entity\Budget\Account;
 
 interface AccountRepository
 {

@@ -4,9 +4,9 @@ namespace AppBundle\Controller;
 
 use AppBundle\Command\MoveCategoryAvailableCommand;
 use AppBundle\Form\Type\BudgetMoveType;
-use AppBundle\Query\BudgetFactory;
+use AppBundle\Domain\Query\BudgetFactory;
 use AppBundle\Command\UpdateCategoryBudgetCommand;
-use AppBundle\Entity\Category;
+use AppBundle\Entity\Budget\Category;
 use AppBundle\Entity\Month;
 use AppBundle\Form\Type\BudgetEditType;
 use AppBundle\Repository\CategoryBudgetRepository;

@@ -4,7 +4,7 @@ namespace AppBundle\Handler;
 
 use AppBundle\Command\CreateAccountCommand;
 use AppBundle\Entity\Money;
-use AppBundle\Service\Manager\AccountManager;
+use AppBundle\Domain\Manager\AccountManager;
 
 class CreateAccountHandler
 {

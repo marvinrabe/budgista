@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Command\CreateTransactionCommand;
-use AppBundle\Entity\Account;
+use AppBundle\Entity\Budget\Account;
 use AppBundle\Form\Type\TransactionNewType;
 use AppBundle\Repository\TransactionRepository;
 use League\Tactician\CommandBus;

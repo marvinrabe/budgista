@@ -2,7 +2,7 @@
 
 namespace AppBundle\Command;
 
-use AppBundle\Entity\Account;
+use AppBundle\Entity\Budget\Account;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class UpdateAccountSettingsCommand

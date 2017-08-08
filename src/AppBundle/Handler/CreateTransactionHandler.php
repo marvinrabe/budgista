@@ -4,12 +4,12 @@ namespace AppBundle\Handler;
 
 use AppBundle\Command\CreateTransactionCommand;
 use AppBundle\Entity\Money;
-use AppBundle\Entity\Transaction;
+use AppBundle\Entity\Budget\Transaction;
 use AppBundle\Repository\AccountRepository;
 use AppBundle\Repository\CategoryRepository;
 use AppBundle\Repository\PayeeRepository;
 use AppBundle\Repository\TransactionRepository;
-use AppBundle\Service\Manager\TransactionManager;
+use AppBundle\Domain\Manager\TransactionManager;
 
 class CreateTransactionHandler
 {

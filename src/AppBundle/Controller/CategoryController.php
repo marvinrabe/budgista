@@ -4,7 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Command\CreateCategoryCommand;
 use AppBundle\Command\UpdateCategorySettingsCommand;
-use AppBundle\Entity\Category;
+use AppBundle\Entity\Budget\Category;
 use AppBundle\Form\Type\CategoryEditType;
 use AppBundle\Form\Type\CategoryNewType;
 use AppBundle\Repository\CategoryRepository;

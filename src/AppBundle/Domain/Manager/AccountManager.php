@@ -1,11 +1,11 @@
 <?php
 
-namespace AppBundle\Service\Manager;
+namespace AppBundle\Domain\Manager;
 
-use AppBundle\Entity\Account;
+use AppBundle\Entity\Budget\Account;
 use AppBundle\Entity\Money;
 use AppBundle\Repository\AccountRepository;
-use AppBundle\Service\DomainException;
+use AppBundle\Domain\DomainException;
 
 class AccountManager
 {

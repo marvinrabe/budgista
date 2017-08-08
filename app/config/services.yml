@@ -31,6 +31,9 @@ services:
 
     # add more services, or override services that need manual wiring
 
+    AppBundle\Domain\BudgetId:
+        alias: AppBundle\Request\BudgetId
+
     # Repositories
     AppBundle\Repository\Doctrine\:
         resource: '../../src/AppBundle/Repository/Doctrine/*'

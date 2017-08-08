@@ -3,7 +3,7 @@
 namespace AppBundle\Handler;
 
 use AppBundle\Command\CreateCategoryCommand;
-use AppBundle\Entity\Category;
+use AppBundle\Entity\Budget\Category;
 use AppBundle\Repository\CategoryRepository;
 
 class CreateCategoryHandler

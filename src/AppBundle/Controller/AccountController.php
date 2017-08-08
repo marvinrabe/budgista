@@ -4,7 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Command\CreateAccountCommand;
 use AppBundle\Command\UpdateAccountSettingsCommand;
-use AppBundle\Entity\Account;
+use AppBundle\Entity\Budget\Account;
 use AppBundle\Form\Type\AccountEditType;
 use AppBundle\Repository\AccountRepository;
 use League\Tactician\CommandBus;

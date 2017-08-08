@@ -2,8 +2,9 @@
 
 namespace AppBundle\Repository\Doctrine;
 
-use AppBundle\Entity\Category;
-use AppBundle\Entity\CategoryBudget;
+use AppBundle\Domain\BudgetId;
+use AppBundle\Entity\Budget\Category;
+use AppBundle\Entity\Budget\CategoryBudget;
 use AppBundle\Entity\Money;
 use AppBundle\Entity\Month;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,7 +14,7 @@ class CategoryBudgetRepository implements \AppBundle\Repository\CategoryBudgetRe
 
     protected $em;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, BudgetId $budgetId)
     {
         $this->em = $em;
     }
@@ -36,7 +37,7 @@ class CategoryBudgetRepository implements \AppBundle\Repository\CategoryBudgetRe
 
     public function getPreviousBudgeted(Category $category, Month $month): Money
     {
-        $dql = "SELECT SUM(b.budgeted.amount) AS balance FROM AppBundle\Entity\CategoryBudget b WHERE ((b.date.year = ?1 AND b.date.month < ?2) OR (b.date.year < ?1)) AND b.category = ?3";
+        $dql = "SELECT SUM(b.budgeted.amount) AS balance FROM AppBundle\Entity\Budget\CategoryBudget b WHERE ((b.date.year = ?1 AND b.date.month < ?2) OR (b.date.year < ?1)) AND b.category = ?3";
         $balance = $this->em->createQuery($dql)
             ->setParameter(1, $month->getYear())
             ->setParameter(2, $month->getMonth())
@@ -52,7 +53,7 @@ class CategoryBudgetRepository implements \AppBundle\Repository\CategoryBudgetRe
 
     public function getAllPreviousBudgeted(Month $month): Money
     {
-        $dql = "SELECT SUM(b.budgeted.amount) AS balance FROM AppBundle\Entity\CategoryBudget b WHERE (b.date.year = ?1 AND b.date.month < ?2) OR (b.date.year < ?1)";
+        $dql = "SELECT SUM(b.budgeted.amount) AS balance FROM AppBundle\Entity\Budget\CategoryBudget b WHERE (b.date.year = ?1 AND b.date.month < ?2) OR (b.date.year < ?1)";
         $balance = $this->em->createQuery($dql)
             ->setParameter(1, $month->getYear())
             ->setParameter(2, $month->getMonth())
@@ -70,7 +71,7 @@ class CategoryBudgetRepository implements \AppBundle\Repository\CategoryBudgetRe
         /**
          * @var CategoryBudget $budget
          */
-        $query = $this->em->createQuery('SELECT b FROM AppBundle\Entity\CategoryBudget b WHERE b.category = ?1 AND b.date.month = ?2 AND b.date.year = ?3');
+        $query = $this->em->createQuery('SELECT b FROM AppBundle\Entity\Budget\CategoryBudget b WHERE b.category = ?1 AND b.date.month = ?2 AND b.date.year = ?3');
         $query->setParameter(1, $category);
         $query->setParameter(2, $month->getMonth());
         $query->setParameter(3, $month->getYear());

@@ -1,11 +1,11 @@
 <?php
 
-namespace AppBundle\Service\Manager;
+namespace AppBundle\Domain\Manager;
 
-use AppBundle\Entity\Account;
-use AppBundle\Entity\Category;
+use AppBundle\Entity\Budget\Account;
+use AppBundle\Entity\Budget\Category;
 use AppBundle\Entity\Money;
-use AppBundle\Entity\Transaction;
+use AppBundle\Entity\Budget\Transaction;
 use AppBundle\Repository\TransactionRepository;
 
 class TransactionManager

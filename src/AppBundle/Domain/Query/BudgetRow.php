@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Query;
+namespace AppBundle\Domain\Query;
 
-use AppBundle\Entity\Category;
+use AppBundle\Entity\Budget\Category;
 use AppBundle\Entity\Money;
 
 class BudgetRow
