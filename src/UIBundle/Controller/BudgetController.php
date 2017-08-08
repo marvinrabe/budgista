@@ -1,15 +1,15 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace UIBundle\Controller;
 
 use AppBundle\Command\MoveCategoryAvailableCommand;
-use AppBundle\Form\Type\BudgetMoveType;
+use UIBundle\Form\Type\BudgetMoveType;
 use AppBundle\Domain\Query\BudgetFactory;
 use AppBundle\Command\UpdateCategoryBudgetCommand;
 use AppBundle\Entity\Budget\Category;
 use AppBundle\Entity\Month;
-use AppBundle\Form\Type\BudgetEditType;
-use AppBundle\Repository\CategoryBudgetRepository;
+use UIBundle\Form\Type\BudgetEditType;
+use AppBundle\Domain\Repository\CategoryBudgetRepository;
 use League\Tactician\CommandBus;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;

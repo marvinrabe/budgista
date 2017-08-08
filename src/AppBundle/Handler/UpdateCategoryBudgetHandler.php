@@ -5,8 +5,8 @@ namespace AppBundle\Handler;
 use AppBundle\Command\UpdateCategoryBudgetCommand;
 use AppBundle\Entity\Money;
 use AppBundle\Entity\Month;
-use AppBundle\Repository\CategoryBudgetRepository;
-use AppBundle\Repository\CategoryRepository;
+use AppBundle\Domain\Repository\CategoryBudgetRepository;
+use AppBundle\Domain\Repository\CategoryRepository;
 
 class UpdateCategoryBudgetHandler
 {

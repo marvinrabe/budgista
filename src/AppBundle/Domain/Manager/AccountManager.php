@@ -4,7 +4,7 @@ namespace AppBundle\Domain\Manager;
 
 use AppBundle\Entity\Budget\Account;
 use AppBundle\Entity\Money;
-use AppBundle\Repository\AccountRepository;
+use AppBundle\Domain\Repository\AccountRepository;
 use AppBundle\Domain\DomainException;
 
 class AccountManager

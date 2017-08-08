@@ -6,7 +6,7 @@ use AppBundle\Command\CreateAccountCommand;
 use AppBundle\Command\CreateCategoryCommand;
 use AppBundle\Command\UpdateCategorySettingsCommand;
 use AppBundle\Entity\Budget\Category;
-use AppBundle\Repository\CategoryRepository;
+use AppBundle\Domain\Repository\CategoryRepository;
 
 class UpdateCategorySettingsHandler
 {

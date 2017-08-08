@@ -1,11 +1,11 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace UIBundle\Controller;
 
 use AppBundle\Command\CreateTransactionCommand;
 use AppBundle\Entity\Budget\Account;
-use AppBundle\Form\Type\TransactionNewType;
-use AppBundle\Repository\TransactionRepository;
+use UIBundle\Form\Type\TransactionNewType;
+use AppBundle\Domain\Repository\TransactionRepository;
 use League\Tactician\CommandBus;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

@@ -6,7 +6,7 @@ use AppBundle\Entity\Budget\Account;
 use AppBundle\Entity\Budget\Category;
 use AppBundle\Entity\Money;
 use AppBundle\Entity\Budget\Transaction;
-use AppBundle\Repository\TransactionRepository;
+use AppBundle\Domain\Repository\TransactionRepository;
 
 class TransactionManager
 {

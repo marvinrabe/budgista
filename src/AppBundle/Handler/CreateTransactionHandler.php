@@ -5,10 +5,10 @@ namespace AppBundle\Handler;
 use AppBundle\Command\CreateTransactionCommand;
 use AppBundle\Entity\Money;
 use AppBundle\Entity\Budget\Transaction;
-use AppBundle\Repository\AccountRepository;
-use AppBundle\Repository\CategoryRepository;
+use AppBundle\Domain\Repository\AccountRepository;
+use AppBundle\Domain\Repository\CategoryRepository;
 use AppBundle\Repository\PayeeRepository;
-use AppBundle\Repository\TransactionRepository;
+use AppBundle\Domain\Repository\TransactionRepository;
 use AppBundle\Domain\Manager\TransactionManager;
 
 class CreateTransactionHandler

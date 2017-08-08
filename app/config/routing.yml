@@ -1,4 +1,3 @@
 app:
-    prefix: /{_budget}
-    resource: '@AppBundle/Controller/'
+    resource: '@UIBundle/Controller/'
     type: annotation

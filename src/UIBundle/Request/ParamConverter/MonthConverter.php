@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Request\ParamConverter;
+namespace UIBundle\Request\ParamConverter;
 
 use AppBundle\Entity\Month;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;

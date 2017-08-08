@@ -4,9 +4,9 @@ namespace AppBundle\Domain\Query;
 
 use AppBundle\Entity\Money;
 use AppBundle\Domain\Query\BudgetRow;
-use AppBundle\Repository\CategoryBudgetRepository;
-use AppBundle\Repository\CategoryRepository;
-use AppBundle\Repository\TransactionRepository;
+use AppBundle\Domain\Repository\CategoryBudgetRepository;
+use AppBundle\Domain\Repository\CategoryRepository;
+use AppBundle\Domain\Repository\TransactionRepository;
 use AppBundle\Domain\Query\Budget;
 
 class BudgetFactory

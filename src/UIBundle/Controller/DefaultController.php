@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace UIBundle\Controller;
 
 use AppBundle\Entity\Month;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

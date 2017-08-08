@@ -1,18 +1,18 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace UIBundle\Controller;
 
 use AppBundle\Command\CreateAccountCommand;
 use AppBundle\Command\UpdateAccountSettingsCommand;
 use AppBundle\Entity\Budget\Account;
-use AppBundle\Form\Type\AccountEditType;
-use AppBundle\Repository\AccountRepository;
+use UIBundle\Form\Type\AccountEditType;
+use AppBundle\Domain\Repository\AccountRepository;
 use League\Tactician\CommandBus;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Form\Type\AccountNewType;
+use UIBundle\Form\Type\AccountNewType;
 
 /**
  * Class AccountController

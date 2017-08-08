@@ -51,7 +51,7 @@ twig:
     form_themes:
         - ':Form:fields.html.twig'
     globals:
-        accountRepository: '@AppBundle\Repository\Doctrine\AccountRepository'
+        accountRepository: '@AppBundle\Domain\Repository\AccountRepository'
 
 # Doctrine Configuration
 doctrine:

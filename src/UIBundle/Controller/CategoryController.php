@@ -1,13 +1,13 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace UIBundle\Controller;
 
 use AppBundle\Command\CreateCategoryCommand;
 use AppBundle\Command\UpdateCategorySettingsCommand;
 use AppBundle\Entity\Budget\Category;
-use AppBundle\Form\Type\CategoryEditType;
-use AppBundle\Form\Type\CategoryNewType;
-use AppBundle\Repository\CategoryRepository;
+use UIBundle\Form\Type\CategoryEditType;
+use UIBundle\Form\Type\CategoryNewType;
+use AppBundle\Domain\Repository\CategoryRepository;
 use League\Tactician\CommandBus;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

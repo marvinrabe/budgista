@@ -4,7 +4,7 @@
 namespace AppBundle\Handler;
 
 use AppBundle\Command\UpdateAccountSettingsCommand;
-use AppBundle\Repository\AccountRepository;
+use AppBundle\Domain\Repository\AccountRepository;
 
 class UpdateAccountSettingsHandler
 {
