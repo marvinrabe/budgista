@@ -16,11 +16,11 @@
                     </div>
                 @endif
 
-                {{ Form::model($budget, array('route' => array('budget.update', $budget->id), 'method' => 'PUT', 'id' => 'form')) }}
+                {{ Form::model($budget, ['route' => ['budgets.update', $budget->id], 'method' => 'PUT', 'id' => 'form']) }}
 
                 <div class="form-group">
                     {{ Form::label('name', 'Name') }}
-                    {{ Form::text('name', null, array('class' => 'form-control')) }}
+                    {{ Form::text('name', null, ['class' => 'form-control']) }}
                 </div>
 
                 {{ Form::close() }}
@@ -31,7 +31,7 @@
                     </div>
                     <div class="col text-right">
                         <div class="d-inline">
-                            {{ Form::open(array('url' => 'budget/' . $budget->id, 'class' => 'pull-right')) }}
+                            {{ Form::open(['route' => ['budgets.destroy', $budget->id], 'class' => 'pull-right']) }}
                             {{ Form::hidden('_method', 'DELETE') }}
                             {{ Form::submit('Delete Budget', array('class' => 'btn btn-outline-danger')) }}
                             {{ Form::close() }}

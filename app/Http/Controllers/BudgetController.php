@@ -6,7 +6,6 @@ use App\Budget;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
@@ -29,7 +28,7 @@ class BudgetController extends Controller
         $budgets = Auth::user()->budgets;
 
         // load the view and pass the nerds
-        return View::make('budget.index')
+        return View::make('budgets.index')
             ->with('budgets', $budgets);
     }
 
@@ -40,7 +39,7 @@ class BudgetController extends Controller
      */
     public function create()
     {
-        return View::make('budget.create');
+        return View::make('budgets.create');
     }
 
     /**
@@ -59,7 +58,8 @@ class BudgetController extends Controller
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('budget/create')
+            return redirect()
+                ->route('budgets.create')
                 ->withErrors($validator)
                 ->withInput(Input::all());
         } else {
@@ -71,7 +71,7 @@ class BudgetController extends Controller
 
             // redirect
             Session::flash('message', 'Successfully created budget!');
-            return Redirect::to('budget');
+            return redirect()->route('budgets.index');
         }
     }
 
@@ -83,7 +83,7 @@ class BudgetController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect()->route('sheet', ['budget' => $id]);
     }
 
     /**
@@ -97,7 +97,7 @@ class BudgetController extends Controller
         $budget = Budget::find($id);
 
         // show the edit form and pass the nerd
-        return View::make('budget.edit')
+        return View::make('budgets.edit')
             ->with('budget', $budget);
     }
 
@@ -118,7 +118,8 @@ class BudgetController extends Controller
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('budget/' . $id . '/edit')
+            return redirect()
+                ->route('budgets.edit', [$id])
                 ->withErrors($validator)
                 ->withInput(Input::all());
         } else {
@@ -129,7 +130,7 @@ class BudgetController extends Controller
 
             // redirect
             Session::flash('message', 'Successfully updated budget!');
-            return Redirect::to('budget');
+            return redirect()->route('budgets.index');
         }
     }
 
@@ -147,7 +148,7 @@ class BudgetController extends Controller
 
         // redirect
         Session::flash('message', 'Successfully deleted the budget!');
-        return Redirect::to('budget');
+        return redirect()->route('budgets.index');
     }
 
 }

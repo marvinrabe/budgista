@@ -16,7 +16,7 @@
                     </div>
                 @endif
 
-                {{ Form::open(array('url' => 'budget')) }}
+                {{ Form::open(['route' => ['budgets.store']]) }}
 
                 <div class="form-group">
                     {{ Form::label('name', 'Name') }}
