@@ -1,5 +1,11 @@
 <?php
 
+$herokuDatabaseURL = ['host' => null, 'database' => null, 'user' => null, 'pass' => null];
+$databaseUrl = parse_url(getenv("DATABASE_URL"));
+if($databaseUrl !== false) {
+    $herokuDatabaseURL = array_merge ($herokuDatabaseURL, $databaseUrl);
+}
+
 return [
 
     /*
@@ -80,10 +86,10 @@ return [
 
         'heroku-pg' => [
             'driver'   => 'pgsql',
-            'host'     => parse_url(getenv("DATABASE_URL"))["host"],
-            'database' => substr(parse_url(getenv("DATABASE_URL"))["path"], 1),
-            'username' => parse_url(getenv("DATABASE_URL"))["user"],
-            'password' => parse_url(getenv("DATABASE_URL"))["pass"],
+            'host'     => $herokuDatabaseURL['host'],
+            'database' => substr($herokuDatabaseURL['path'], 1),
+            'username' => $herokuDatabaseURL['user'],
+            'password' => $herokuDatabaseURL['pass'],
             'charset'  => 'utf8',
             'prefix'   => '',
             'schema'   => 'public',
