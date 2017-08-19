@@ -6,7 +6,12 @@
             <div class="card-header">Dashboard</div>
 
             <div class="card-body">
-                You are logged in!
+                <strong>Budgets:</strong>
+                <ul>
+                @foreach (Auth::user()->budgets as $budget)
+                    <li>{{ $budget->name }}</li>
+                @endforeach
+                </ul>
             </div>
         </div>
     </div>

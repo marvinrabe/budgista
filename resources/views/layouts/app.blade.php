@@ -18,7 +18,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                {{ config('app.name') }}
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
