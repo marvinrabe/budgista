@@ -6,6 +6,10 @@
  */
 
 require('./bootstrap');
+require('./pace.min');
+
+import instantclick from 'instantclick'
+instantclick.init();
 
 window.Vue = require('vue');
 

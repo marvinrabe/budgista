@@ -773,13 +773,17 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(9);
-module.exports = __webpack_require__(41);
+module.exports = __webpack_require__(43);
 
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_instantclick__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_instantclick___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_instantclick__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -788,8 +792,12 @@ module.exports = __webpack_require__(41);
  */
 
 __webpack_require__(10);
+__webpack_require__(36);
 
-window.Vue = __webpack_require__(36);
+
+__WEBPACK_IMPORTED_MODULE_0_instantclick___default.a.init();
+
+window.Vue = __webpack_require__(38);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -797,7 +805,7 @@ window.Vue = __webpack_require__(36);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', __webpack_require__(37));
+Vue.component('example', __webpack_require__(39));
 
 var app = new Vue({
   el: '#app'
@@ -35593,6 +35601,365 @@ module.exports = function spread(callback) {
 /* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/*! pace 1.0.0 */
+(function () {
+  var a,
+      b,
+      c,
+      d,
+      e,
+      f,
+      g,
+      h,
+      i,
+      j,
+      k,
+      l,
+      m,
+      n,
+      o,
+      p,
+      q,
+      r,
+      s,
+      t,
+      u,
+      _v,
+      w,
+      x,
+      y,
+      z,
+      A,
+      B,
+      C,
+      D,
+      E,
+      F,
+      G,
+      H,
+      I,
+      J,
+      K,
+      L,
+      M,
+      N,
+      O,
+      P,
+      Q,
+      R,
+      S,
+      T,
+      U,
+      V,
+      W,
+      X = [].slice,
+      Y = {}.hasOwnProperty,
+      Z = function Z(a, b) {
+    function c() {
+      this.constructor = a;
+    }for (var d in b) {
+      Y.call(b, d) && (a[d] = b[d]);
+    }return c.prototype = b.prototype, a.prototype = new c(), a.__super__ = b.prototype, a;
+  },
+      $ = [].indexOf || function (a) {
+    for (var b = 0, c = this.length; c > b; b++) {
+      if (b in this && this[b] === a) return b;
+    }return -1;
+  };for (u = { catchupTime: 100, initialRate: .03, minTime: 250, ghostTime: 100, maxProgressPerFrame: 20, easeFactor: 1.25, startOnPageLoad: !0, restartOnPushState: !0, restartOnRequestAfter: 500, target: "body", elements: { checkInterval: 100, selectors: ["body"] }, eventLag: { minSamples: 10, sampleCount: 3, lagThreshold: 3 }, ajax: { trackMethods: ["GET"], trackWebSockets: !0, ignoreURLs: [] } }, C = function C() {
+    var a;return null != (a = "undefined" != typeof performance && null !== performance && "function" == typeof performance.now ? performance.now() : void 0) ? a : +new Date();
+  }, E = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame, t = window.cancelAnimationFrame || window.mozCancelAnimationFrame, null == E && (E = function E(a) {
+    return setTimeout(a, 50);
+  }, t = function t(a) {
+    return clearTimeout(a);
+  }), G = function G(a) {
+    var b, _c;return b = C(), (_c = function c() {
+      var d;return d = C() - b, d >= 33 ? (b = C(), a(d, function () {
+        return E(_c);
+      })) : setTimeout(_c, 33 - d);
+    })();
+  }, F = function F() {
+    var a, b, c;return c = arguments[0], b = arguments[1], a = 3 <= arguments.length ? X.call(arguments, 2) : [], "function" == typeof c[b] ? c[b].apply(c, a) : c[b];
+  }, _v = function v() {
+    var a, b, c, d, e, f, g;for (b = arguments[0], d = 2 <= arguments.length ? X.call(arguments, 1) : [], f = 0, g = d.length; g > f; f++) {
+      if (c = d[f]) for (a in c) {
+        Y.call(c, a) && (e = c[a], null != b[a] && "object" == _typeof(b[a]) && null != e && "object" == (typeof e === "undefined" ? "undefined" : _typeof(e)) ? _v(b[a], e) : b[a] = e);
+      }
+    }return b;
+  }, q = function q(a) {
+    var b, c, d, e, f;for (c = b = 0, e = 0, f = a.length; f > e; e++) {
+      d = a[e], c += Math.abs(d), b++;
+    }return c / b;
+  }, x = function x(a, b) {
+    var c, d, e;if (null == a && (a = "options"), null == b && (b = !0), e = document.querySelector("[data-pace-" + a + "]")) {
+      if (c = e.getAttribute("data-pace-" + a), !b) return c;try {
+        return JSON.parse(c);
+      } catch (f) {
+        return d = f, "undefined" != typeof console && null !== console ? console.error("Error parsing inline pace options", d) : void 0;
+      }
+    }
+  }, g = function () {
+    function a() {}return a.prototype.on = function (a, b, c, d) {
+      var e;return null == d && (d = !1), null == this.bindings && (this.bindings = {}), null == (e = this.bindings)[a] && (e[a] = []), this.bindings[a].push({ handler: b, ctx: c, once: d });
+    }, a.prototype.once = function (a, b, c) {
+      return this.on(a, b, c, !0);
+    }, a.prototype.off = function (a, b) {
+      var c, d, e;if (null != (null != (d = this.bindings) ? d[a] : void 0)) {
+        if (null == b) return delete this.bindings[a];for (c = 0, e = []; c < this.bindings[a].length;) {
+          e.push(this.bindings[a][c].handler === b ? this.bindings[a].splice(c, 1) : c++);
+        }return e;
+      }
+    }, a.prototype.trigger = function () {
+      var a, b, c, d, e, f, g, h, i;if (c = arguments[0], a = 2 <= arguments.length ? X.call(arguments, 1) : [], null != (g = this.bindings) ? g[c] : void 0) {
+        for (e = 0, i = []; e < this.bindings[c].length;) {
+          h = this.bindings[c][e], d = h.handler, b = h.ctx, f = h.once, d.apply(null != b ? b : this, a), i.push(f ? this.bindings[c].splice(e, 1) : e++);
+        }return i;
+      }
+    }, a;
+  }(), j = window.Pace || {}, window.Pace = j, _v(j, g.prototype), D = j.options = _v({}, u, window.paceOptions, x()), U = ["ajax", "document", "eventLag", "elements"], Q = 0, S = U.length; S > Q; Q++) {
+    K = U[Q], D[K] === !0 && (D[K] = u[K]);
+  }i = function (a) {
+    function b() {
+      return V = b.__super__.constructor.apply(this, arguments);
+    }return Z(b, a), b;
+  }(Error), b = function () {
+    function a() {
+      this.progress = 0;
+    }return a.prototype.getElement = function () {
+      var a;if (null == this.el) {
+        if (a = document.querySelector(D.target), !a) throw new i();this.el = document.createElement("div"), this.el.className = "pace pace-active", document.body.className = document.body.className.replace(/pace-done/g, ""), document.body.className += " pace-running", this.el.innerHTML = '<div class="pace-progress">\n  <div class="pace-progress-inner"></div>\n</div>\n<div class="pace-activity"></div>', null != a.firstChild ? a.insertBefore(this.el, a.firstChild) : a.appendChild(this.el);
+      }return this.el;
+    }, a.prototype.finish = function () {
+      var a;return a = this.getElement(), a.className = a.className.replace("pace-active", ""), a.className += " pace-inactive", document.body.className = document.body.className.replace("pace-running", ""), document.body.className += " pace-done";
+    }, a.prototype.update = function (a) {
+      return this.progress = a, this.render();
+    }, a.prototype.destroy = function () {
+      try {
+        this.getElement().parentNode.removeChild(this.getElement());
+      } catch (a) {
+        i = a;
+      }return this.el = void 0;
+    }, a.prototype.render = function () {
+      var a, b, c, d, e, f, g;if (null == document.querySelector(D.target)) return !1;for (a = this.getElement(), d = "translate3d(" + this.progress + "%, 0, 0)", g = ["webkitTransform", "msTransform", "transform"], e = 0, f = g.length; f > e; e++) {
+        b = g[e], a.children[0].style[b] = d;
+      }return (!this.lastRenderedProgress || this.lastRenderedProgress | 0 !== this.progress | 0) && (a.children[0].setAttribute("data-progress-text", "" + (0 | this.progress) + "%"), this.progress >= 100 ? c = "99" : (c = this.progress < 10 ? "0" : "", c += 0 | this.progress), a.children[0].setAttribute("data-progress", "" + c)), this.lastRenderedProgress = this.progress;
+    }, a.prototype.done = function () {
+      return this.progress >= 100;
+    }, a;
+  }(), h = function () {
+    function a() {
+      this.bindings = {};
+    }return a.prototype.trigger = function (a, b) {
+      var c, d, e, f, g;if (null != this.bindings[a]) {
+        for (f = this.bindings[a], g = [], d = 0, e = f.length; e > d; d++) {
+          c = f[d], g.push(c.call(this, b));
+        }return g;
+      }
+    }, a.prototype.on = function (a, b) {
+      var c;return null == (c = this.bindings)[a] && (c[a] = []), this.bindings[a].push(b);
+    }, a;
+  }(), P = window.XMLHttpRequest, O = window.XDomainRequest, N = window.WebSocket, w = function w(a, b) {
+    var c, d, e, f;f = [];for (d in b.prototype) {
+      try {
+        e = b.prototype[d], f.push(null == a[d] && "function" != typeof e ? a[d] = e : void 0);
+      } catch (g) {
+        c = g;
+      }
+    }return f;
+  }, A = [], j.ignore = function () {
+    var a, b, c;return b = arguments[0], a = 2 <= arguments.length ? X.call(arguments, 1) : [], A.unshift("ignore"), c = b.apply(null, a), A.shift(), c;
+  }, j.track = function () {
+    var a, b, c;return b = arguments[0], a = 2 <= arguments.length ? X.call(arguments, 1) : [], A.unshift("track"), c = b.apply(null, a), A.shift(), c;
+  }, J = function J(a) {
+    var b;if (null == a && (a = "GET"), "track" === A[0]) return "force";if (!A.length && D.ajax) {
+      if ("socket" === a && D.ajax.trackWebSockets) return !0;if (b = a.toUpperCase(), $.call(D.ajax.trackMethods, b) >= 0) return !0;
+    }return !1;
+  }, k = function (a) {
+    function b() {
+      var a,
+          c = this;b.__super__.constructor.apply(this, arguments), a = function a(_a) {
+        var b;return b = _a.open, _a.open = function (d, e) {
+          return J(d) && c.trigger("request", { type: d, url: e, request: _a }), b.apply(_a, arguments);
+        };
+      }, window.XMLHttpRequest = function (b) {
+        var c;return c = new P(b), a(c), c;
+      };try {
+        w(window.XMLHttpRequest, P);
+      } catch (d) {}if (null != O) {
+        window.XDomainRequest = function () {
+          var b;return b = new O(), a(b), b;
+        };try {
+          w(window.XDomainRequest, O);
+        } catch (d) {}
+      }if (null != N && D.ajax.trackWebSockets) {
+        window.WebSocket = function (a, b) {
+          var d;return d = null != b ? new N(a, b) : new N(a), J("socket") && c.trigger("request", { type: "socket", url: a, protocols: b, request: d }), d;
+        };try {
+          w(window.WebSocket, N);
+        } catch (d) {}
+      }
+    }return Z(b, a), b;
+  }(h), R = null, y = function y() {
+    return null == R && (R = new k()), R;
+  }, I = function I(a) {
+    var b, c, d, e;for (e = D.ajax.ignoreURLs, c = 0, d = e.length; d > c; c++) {
+      if (b = e[c], "string" == typeof b) {
+        if (-1 !== a.indexOf(b)) return !0;
+      } else if (b.test(a)) return !0;
+    }return !1;
+  }, y().on("request", function (b) {
+    var c, d, e, f, g;return f = b.type, e = b.request, g = b.url, I(g) ? void 0 : j.running || D.restartOnRequestAfter === !1 && "force" !== J(f) ? void 0 : (d = arguments, c = D.restartOnRequestAfter || 0, "boolean" == typeof c && (c = 0), setTimeout(function () {
+      var b, c, g, h, i, k;if (b = "socket" === f ? e.readyState < 2 : 0 < (h = e.readyState) && 4 > h) {
+        for (j.restart(), i = j.sources, k = [], c = 0, g = i.length; g > c; c++) {
+          if (K = i[c], K instanceof a) {
+            K.watch.apply(K, d);break;
+          }k.push(void 0);
+        }return k;
+      }
+    }, c));
+  }), a = function () {
+    function a() {
+      var a = this;this.elements = [], y().on("request", function () {
+        return a.watch.apply(a, arguments);
+      });
+    }return a.prototype.watch = function (a) {
+      var b, c, d, e;return d = a.type, b = a.request, e = a.url, I(e) ? void 0 : (c = "socket" === d ? new n(b) : new o(b), this.elements.push(c));
+    }, a;
+  }(), o = function () {
+    function a(a) {
+      var b,
+          c,
+          d,
+          e,
+          f,
+          g,
+          h = this;if (this.progress = 0, null != window.ProgressEvent) for (c = null, a.addEventListener("progress", function (a) {
+        return h.progress = a.lengthComputable ? 100 * a.loaded / a.total : h.progress + (100 - h.progress) / 2;
+      }, !1), g = ["load", "abort", "timeout", "error"], d = 0, e = g.length; e > d; d++) {
+        b = g[d], a.addEventListener(b, function () {
+          return h.progress = 100;
+        }, !1);
+      } else f = a.onreadystatechange, a.onreadystatechange = function () {
+        var b;return 0 === (b = a.readyState) || 4 === b ? h.progress = 100 : 3 === a.readyState && (h.progress = 50), "function" == typeof f ? f.apply(null, arguments) : void 0;
+      };
+    }return a;
+  }(), n = function () {
+    function a(a) {
+      var b,
+          c,
+          d,
+          e,
+          f = this;for (this.progress = 0, e = ["error", "open"], c = 0, d = e.length; d > c; c++) {
+        b = e[c], a.addEventListener(b, function () {
+          return f.progress = 100;
+        }, !1);
+      }
+    }return a;
+  }(), d = function () {
+    function a(a) {
+      var b, c, d, f;for (null == a && (a = {}), this.elements = [], null == a.selectors && (a.selectors = []), f = a.selectors, c = 0, d = f.length; d > c; c++) {
+        b = f[c], this.elements.push(new e(b));
+      }
+    }return a;
+  }(), e = function () {
+    function a(a) {
+      this.selector = a, this.progress = 0, this.check();
+    }return a.prototype.check = function () {
+      var a = this;return document.querySelector(this.selector) ? this.done() : setTimeout(function () {
+        return a.check();
+      }, D.elements.checkInterval);
+    }, a.prototype.done = function () {
+      return this.progress = 100;
+    }, a;
+  }(), c = function () {
+    function a() {
+      var a,
+          b,
+          c = this;this.progress = null != (b = this.states[document.readyState]) ? b : 100, a = document.onreadystatechange, document.onreadystatechange = function () {
+        return null != c.states[document.readyState] && (c.progress = c.states[document.readyState]), "function" == typeof a ? a.apply(null, arguments) : void 0;
+      };
+    }return a.prototype.states = { loading: 0, interactive: 50, complete: 100 }, a;
+  }(), f = function () {
+    function a() {
+      var a,
+          b,
+          c,
+          d,
+          e,
+          f = this;this.progress = 0, a = 0, e = [], d = 0, c = C(), b = setInterval(function () {
+        var g;return g = C() - c - 50, c = C(), e.push(g), e.length > D.eventLag.sampleCount && e.shift(), a = q(e), ++d >= D.eventLag.minSamples && a < D.eventLag.lagThreshold ? (f.progress = 100, clearInterval(b)) : f.progress = 100 * (3 / (a + 3));
+      }, 50);
+    }return a;
+  }(), m = function () {
+    function a(a) {
+      this.source = a, this.last = this.sinceLastUpdate = 0, this.rate = D.initialRate, this.catchup = 0, this.progress = this.lastProgress = 0, null != this.source && (this.progress = F(this.source, "progress"));
+    }return a.prototype.tick = function (a, b) {
+      var c;return null == b && (b = F(this.source, "progress")), b >= 100 && (this.done = !0), b === this.last ? this.sinceLastUpdate += a : (this.sinceLastUpdate && (this.rate = (b - this.last) / this.sinceLastUpdate), this.catchup = (b - this.progress) / D.catchupTime, this.sinceLastUpdate = 0, this.last = b), b > this.progress && (this.progress += this.catchup * a), c = 1 - Math.pow(this.progress / 100, D.easeFactor), this.progress += c * this.rate * a, this.progress = Math.min(this.lastProgress + D.maxProgressPerFrame, this.progress), this.progress = Math.max(0, this.progress), this.progress = Math.min(100, this.progress), this.lastProgress = this.progress, this.progress;
+    }, a;
+  }(), L = null, H = null, r = null, M = null, p = null, s = null, j.running = !1, z = function z() {
+    return D.restartOnPushState ? j.restart() : void 0;
+  }, null != window.history.pushState && (T = window.history.pushState, window.history.pushState = function () {
+    return z(), T.apply(window.history, arguments);
+  }), null != window.history.replaceState && (W = window.history.replaceState, window.history.replaceState = function () {
+    return z(), W.apply(window.history, arguments);
+  }), l = { ajax: a, elements: d, document: c, eventLag: f }, (B = function B() {
+    var a, c, d, e, f, g, h, i;for (j.sources = L = [], g = ["ajax", "elements", "document", "eventLag"], c = 0, e = g.length; e > c; c++) {
+      a = g[c], D[a] !== !1 && L.push(new l[a](D[a]));
+    }for (i = null != (h = D.extraSources) ? h : [], d = 0, f = i.length; f > d; d++) {
+      K = i[d], L.push(new K(D));
+    }return j.bar = r = new b(), H = [], M = new m();
+  })(), j.stop = function () {
+    return j.trigger("stop"), j.running = !1, r.destroy(), s = !0, null != p && ("function" == typeof t && t(p), p = null), B();
+  }, j.restart = function () {
+    return j.trigger("restart"), j.stop(), j.start();
+  }, j.go = function () {
+    var a;return j.running = !0, r.render(), a = C(), s = !1, p = G(function (b, c) {
+      var d, e, f, g, h, i, k, l, n, o, p, q, t, u, v, w;for (l = 100 - r.progress, e = p = 0, f = !0, i = q = 0, u = L.length; u > q; i = ++q) {
+        for (K = L[i], o = null != H[i] ? H[i] : H[i] = [], h = null != (w = K.elements) ? w : [K], k = t = 0, v = h.length; v > t; k = ++t) {
+          g = h[k], n = null != o[k] ? o[k] : o[k] = new m(g), f &= n.done, n.done || (e++, p += n.tick(b));
+        }
+      }return d = p / e, r.update(M.tick(b, d)), r.done() || f || s ? (r.update(100), j.trigger("done"), setTimeout(function () {
+        return r.finish(), j.running = !1, j.trigger("hide");
+      }, Math.max(D.ghostTime, Math.max(D.minTime - (C() - a), 0)))) : c();
+    });
+  }, j.start = function (a) {
+    _v(D, a), j.running = !0;try {
+      r.render();
+    } catch (b) {
+      i = b;
+    }return document.querySelector(".pace") ? (j.trigger("start"), j.go()) : setTimeout(j.start, 50);
+  },  true ? !(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+    return j;
+  }.call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? module.exports = j : D.startOnPageLoad && j.start();
+}).call(this);
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports) {
+
+/* InstantClick 3.1.0 | (C) 2014 Alexandre Dieulot | http://instantclick.io/license */
+var InstantClick=function(d,e){function w(a){var b=a.indexOf("#");return 0>b?a:a.substr(0,b)}function z(a){for(;a&&"A"!=a.nodeName;)a=a.parentNode;return a}function A(a){var b=e.protocol+"//"+e.host;if(!(b=a.target||a.hasAttribute("download")||0!=a.href.indexOf(b+"/")||-1<a.href.indexOf("#")&&w(a.href)==k)){if(J){a:{do{if(!a.hasAttribute)break;if(a.hasAttribute("data-no-instant"))break;if(a.hasAttribute("data-instant")){a=!0;break a}}while(a=a.parentNode);a=!1}a=!a}else a:{do{if(!a.hasAttribute)break;
+if(a.hasAttribute("data-instant"))break;if(a.hasAttribute("data-no-instant")){a=!0;break a}}while(a=a.parentNode);a=!1}b=a}return b?!1:!0}function t(a,b,c,g){for(var d=!1,e=0;e<B[a].length;e++)if("receive"==a){var f=B[a][e](b,c,g);f&&("body"in f&&(c=f.body),"title"in f&&(g=f.title),d=f)}else B[a][e](b,c,g);return d}function K(a,b,c,g){d.documentElement.replaceChild(b,d.body);if(c){history.pushState(null,null,c);b=c.indexOf("#");b=-1<b&&d.getElementById(c.substr(b+1));g=0;if(b)for(;b.offsetParent;)g+=
+b.offsetTop,b=b.offsetParent;scrollTo(0,g);k=w(c)}else scrollTo(0,g);d.title=S&&d.title==a?a+String.fromCharCode(160):a;L();C.done();t("change",!1);a=d.createEvent("HTMLEvents");a.initEvent("instantclick:newpage",!0,!0);dispatchEvent(a)}function M(a){G>+new Date-500||(a=z(a.target))&&A(a)&&x(a.href)}function N(a){G>+new Date-500||(a=z(a.target))&&A(a)&&(a.addEventListener("mouseout",T),H?(O=a.href,l=setTimeout(x,H)):x(a.href))}function U(a){G=+new Date;(a=z(a.target))&&A(a)&&(D?a.removeEventListener("mousedown",
+M):a.removeEventListener("mouseover",N),x(a.href))}function V(a){var b=z(a.target);!b||!A(b)||1<a.which||a.metaKey||a.ctrlKey||(a.preventDefault(),P(b.href))}function T(){l?(clearTimeout(l),l=!1):v&&!m&&(p.abort(),m=v=!1)}function W(){if(!(4>p.readyState)&&0!=p.status){q.ready=+new Date-q.start;if(p.getResponseHeader("Content-Type").match(/\/(x|ht|xht)ml/)){var a=d.implementation.createHTMLDocument("");a.documentElement.innerHTML=p.responseText.replace(/<noscript[\s\S]+<\/noscript>/gi,"");y=a.title;
+u=a.body;var b=t("receive",r,u,y);b&&("body"in b&&(u=b.body),"title"in b&&(y=b.title));b=w(r);h[b]={body:u,title:y,scrollY:b in h?h[b].scrollY:0};for(var a=a.head.children,b=0,c,g=a.length-1;0<=g;g--)if(c=a[g],c.hasAttribute("data-instant-track")){c=c.getAttribute("href")||c.getAttribute("src")||c.innerHTML;for(var e=E.length-1;0<=e;e--)E[e]==c&&b++}b!=E.length&&(F=!0)}else F=!0;m&&(m=!1,P(r))}}function L(a){d.body.addEventListener("touchstart",U,!0);D?d.body.addEventListener("mousedown",M,!0):d.body.addEventListener("mouseover",
+N,!0);d.body.addEventListener("click",V,!0);if(!a){a=d.body.getElementsByTagName("script");var b,c,g,e;i=0;for(j=a.length;i<j;i++)b=a[i],b.hasAttribute("data-no-instant")||(c=d.createElement("script"),b.src&&(c.src=b.src),b.innerHTML&&(c.innerHTML=b.innerHTML),g=b.parentNode,e=b.nextSibling,g.removeChild(b),g.insertBefore(c,e))}}function x(a){!D&&"display"in q&&100>+new Date-(q.start+q.display)||(l&&(clearTimeout(l),l=!1),a||(a=O),v&&(a==r||m))||(v=!0,m=!1,r=a,F=u=!1,q={start:+new Date},t("fetch"),
+p.open("GET",a),p.send())}function P(a){"display"in q||(q.display=+new Date-q.start);l||!v?l&&r&&r!=a?e.href=a:(x(a),C.start(0,!0),t("wait"),m=!0):m?e.href=a:F?e.href=r:u?(h[k].scrollY=pageYOffset,m=v=!1,K(y,u,r)):(C.start(0,!0),t("wait"),m=!0)}var I=navigator.userAgent,S=-1<I.indexOf(" CriOS/"),Q="createTouch"in d,k,O,l,G,h={},p,r=!1,y=!1,F=!1,u=!1,q={},v=!1,m=!1,E=[],J,D,H,B={fetch:[],receive:[],wait:[],change:[]},C=function(){function a(a,e){n=a;d.getElementById(f.id)&&d.body.removeChild(f);f.style.opacity=
+"1";d.getElementById(f.id)&&d.body.removeChild(f);g();e&&setTimeout(b,0);clearTimeout(l);l=setTimeout(c,500)}function b(){n=10;g()}function c(){n+=1+2*Math.random();98<=n?n=98:l=setTimeout(c,500);g()}function g(){h.style[k]="translate("+n+"%)";d.getElementById(f.id)||d.body.appendChild(f)}function e(){d.getElementById(f.id)?(clearTimeout(l),n=100,g(),f.style.opacity="0"):(a(100==n?0:n),setTimeout(e,0))}function m(){f.style.left=pageXOffset+"px";f.style.width=innerWidth+"px";f.style.top=pageYOffset+
+"px";var a="orientation"in window&&90==Math.abs(orientation);f.style[k]="scaleY("+innerWidth/screen[a?"height":"width"]*2+")"}var f,h,k,n,l;return{init:function(){f=d.createElement("div");f.id="instantclick";h=d.createElement("div");h.id="instantclick-bar";h.className="instantclick-bar";f.appendChild(h);var a=["Webkit","Moz","O"];k="transform";if(!(k in h.style))for(var b=0;3>b;b++)a[b]+"Transform"in h.style&&(k=a[b]+"Transform");var c="transition";if(!(c in h.style))for(b=0;3>b;b++)a[b]+"Transition"in
+h.style&&(c="-"+a[b].toLowerCase()+"-"+c);a=d.createElement("style");a.innerHTML="#instantclick{position:"+(Q?"absolute":"fixed")+";top:0;left:0;width:100%;pointer-events:none;z-index:2147483647;"+c+":opacity .25s .1s}.instantclick-bar{background:#29d;width:100%;margin-left:-100%;height:2px;"+c+":all .25s}";d.head.appendChild(a);Q&&(m(),addEventListener("resize",m),addEventListener("scroll",m))},start:a,done:e}}(),R="pushState"in history&&(!I.match("Android")||I.match("Chrome/"))&&"file:"!=e.protocol;
+return{supported:R,init:function(){if(!k)if(R){for(var a=arguments.length-1;0<=a;a--){var b=arguments[a];!0===b?J=!0:"mousedown"==b?D=!0:"number"==typeof b&&(H=b)}k=w(e.href);h[k]={body:d.body,title:d.title,scrollY:pageYOffset};for(var b=d.head.children,c,a=b.length-1;0<=a;a--)c=b[a],c.hasAttribute("data-instant-track")&&(c=c.getAttribute("href")||c.getAttribute("src")||c.innerHTML,E.push(c));p=new XMLHttpRequest;p.addEventListener("readystatechange",W);L(!0);C.init();t("change",!0);addEventListener("popstate",
+function(){var a=w(e.href);a!=k&&(a in h?(h[k].scrollY=pageYOffset,k=a,K(h[a].title,h[a].body,!1,h[a].scrollY)):e.href=e.href)})}else t("change",!0)},on:function(a,b){B[a].push(b)}}}(document,location);
+
+module.exports = InstantClick
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {/*!
  * Vue.js v2.4.2
@@ -45685,15 +46052,15 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(38)(
+var Component = __webpack_require__(40)(
   /* script */
-  __webpack_require__(39),
+  __webpack_require__(41),
   /* template */
-  __webpack_require__(40),
+  __webpack_require__(42),
   /* styles */
   null,
   /* scopeId */
@@ -45725,7 +46092,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -45822,7 +46189,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45851,7 +46218,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 40 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -45880,7 +46247,7 @@ if (false) {
 }
 
 /***/ }),
-/* 41 */
+/* 43 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
