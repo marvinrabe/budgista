@@ -4,7 +4,7 @@
     <div class="container">
 
         <a class="btn btn-primary float-right my-4" href="{{ route('budgets.create') }}">New Budget</a>
-        <p class="display-4">Your Budgets</p>
+        <p class="display-4">My Budgets</p>
         <p class="lead">Manage your Budgets.</p>
 
         <div class="row">

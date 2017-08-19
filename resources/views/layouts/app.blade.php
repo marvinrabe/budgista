@@ -14,6 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
         <div class="container">
@@ -43,6 +44,9 @@
                             </a>
 
                             <div class="dropdown-menu" role="menu" aria-labelledby="user-menu">
+                                <a class="dropdown-item" href="{{ route('budgets.index') }}">
+                                    My Budgets
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     Logout
