@@ -127,11 +127,11 @@ class AccountController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Budget $budget, $id)
     {
         // delete
-        $budget = Account::find($id);
-        $budget->delete();
+        $account = Account::find($id);
+        $account->delete();
 
         // redirect
         Session::flash('message', 'Successfully deleted the accounts!');

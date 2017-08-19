@@ -2,6 +2,13 @@
 
 @section('content')
 
+
+    <div class="float-right my-3 ml-4 btn-group">
+        <a class="btn btn-light" href="{{ route('accounts.edit', [$budget->id, $account->id]) }}" title="Edit Account">
+            <span class="fa fa-pencil"></span>
+        </a>
+    </div>
+
     <div class="float-right my-4">
         Cleared Balance: <strong>0€</strong>
         + Uncleared Balance: <strong>0€</strong>
