@@ -25,10 +25,11 @@
         </div>
 
         <nav class="nav nav-pills">
-            <a class="nav-link active" href="#">Budget</a>
-            <a class="nav-link" href="#">Longer nav link</a>
-            <a class="nav-link" href="#">Link</a>
-            <a class="nav-link text-muted" href="#">+ Add Account</a>
+            <a class="nav-link active" href="{{ route('sheet', [$budget->id]) }}">Budget</a>
+            @foreach ($budget->accounts as $account)
+                <a class="nav-link" href="{{ route('accounts.show', [$budget->id, $account->id]) }}">{{ $account->name }}</a>
+            @endforeach
+            <a class="nav-link text-muted" href="{{ route('accounts.create', [$budget->id]) }}">+ Add Account</a>
         </nav>
 
         <hr>

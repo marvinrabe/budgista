@@ -10,4 +10,10 @@ class Budget extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function accounts()
+    {
+        return $this->hasMany('App\Account');
+    }
+
 }
