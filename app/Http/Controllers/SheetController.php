@@ -11,12 +11,11 @@ class SheetController extends Controller
 
     public function index(Budget $budget, $month = null)
     {
-        if ($month == null) {
-            $currentMonth = Month::current();
-            return redirect()->route('sheet', [$budget->id, (string)$currentMonth]);
+        if ($month === null) {
+            $month = Month::current();
+        } else {
+            $month = Month::fromString($month);
         }
-
-        $month = Month::fromString($month);
 
         return View::make('sheet.index')
             ->with('budget', $budget)
