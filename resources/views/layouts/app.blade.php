@@ -49,7 +49,7 @@
                                 <a class="dropdown-item" href="{{ route('budgets.index') }}">
                                     My Budgets
                                 </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="dropdown-item" href="#"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
