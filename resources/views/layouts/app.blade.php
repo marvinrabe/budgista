@@ -19,7 +19,9 @@
     <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{ asset('img/logo.svg') }}">
                 {{ config('app.name') }}
+                <span class="badge badge-secondary">BETA</span>
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
