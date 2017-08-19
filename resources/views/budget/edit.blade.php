@@ -33,7 +33,7 @@
                         <div class="d-inline">
                             {{ Form::open(array('url' => 'budget/' . $budget->id, 'class' => 'pull-right')) }}
                             {{ Form::hidden('_method', 'DELETE') }}
-                            {{ Form::submit('Delete Budget', array('class' => 'btn btn-danger')) }}
+                            {{ Form::submit('Delete Budget', array('class' => 'btn btn-outline-danger')) }}
                             {{ Form::close() }}
                         </div>
                     </div>
