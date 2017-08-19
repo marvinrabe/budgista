@@ -14,7 +14,7 @@ class AddActiveBudgetToUser extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('active_budget_id')->unsigned()->nullable();
+            $table->uuid('active_budget_id')->nullable();
             $table->foreign('active_budget_id')->references('id')->on('budgets');
         });
     }

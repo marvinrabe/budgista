@@ -14,11 +14,12 @@ class CreateBudgetsTable extends Migration
     public function up()
     {
         Schema::create('budgets', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
             $table->string('name');
-            $table->integer('user_id')->unsigned();
+            $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
+            $table->primary('id');
         });
     }
 
