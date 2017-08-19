@@ -83,6 +83,11 @@ class BudgetController extends Controller
      */
     public function show($id)
     {
+        $budget = Budget::find($id);
+
+        Auth::user()->active_budget_id = $budget->id;
+        Auth::user()->save();
+
         return redirect()->route('sheet', ['budget' => $id]);
     }
 
@@ -112,7 +117,7 @@ class BudgetController extends Controller
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'name'       => 'required'
+            'name' => 'required'
         );
         $validator = Validator::make(Input::all(), $rules);
 
@@ -125,7 +130,7 @@ class BudgetController extends Controller
         } else {
             // store
             $nerd = Budget::find($id);
-            $nerd->name       = Input::get('name');
+            $nerd->name = Input::get('name');
             $nerd->save();
 
             // redirect
@@ -142,6 +147,11 @@ class BudgetController extends Controller
      */
     public function destroy($id)
     {
+        if (Auth::user()->active_budget_id == $id) {
+            Auth::user()->active_budget_id = null;
+            Auth::user()->save();
+        }
+
         // delete
         $budget = Budget::find($id);
         $budget->delete();
