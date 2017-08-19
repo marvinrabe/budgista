@@ -16,3 +16,15 @@ body {
     vertical-align: text-bottom;
   }
 }
+
+.card-placeholder {
+
+  &:hover {
+    text-decoration: none;
+    color: rgba($black,.35);
+  }
+
+  text-decoration: none;
+  color: rgba($black,.25);
+
+}

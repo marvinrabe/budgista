@@ -3,7 +3,6 @@
 @section('content')
     <div class="container">
 
-        <a class="btn btn-primary float-right my-4" href="{{ route('budgets.create') }}">New Budget</a>
         <p class="display-4">My Budgets</p>
         <p class="lead">Manage your Budgets.</p>
 
@@ -14,7 +13,7 @@
                         <div class="card-body">
                             <h4 class="card-title">{{ $budget->name }}</h4>
                             <p class="card-text">
-                                <small class="text-muted">Last updated 3 mins ago</small>
+                                <small class="text-muted">Last used 3 mins ago</small>
                             </p>
                             <a class="btn btn-primary" href="{{ route('budgets.show', ['id' => $budget->id])  }}">
                                 Open Budget
@@ -27,6 +26,14 @@
                     </div>
                 </div>
             @endforeach
+                <div class="col-sm-6 col-lg-4 mb-4">
+                    <a class="card card-placeholder text-center" href="{{ route('budgets.create') }}">
+                        <div class="card-body">
+                            <span class="fa fa-5x fa-plus-circle mb-2"></span>
+                            <h4 class="card-title mb-0">Create New Budget</h4>
+                        </div>
+                    </a>
+                </div>
         </div>
     </div>
 @endsection

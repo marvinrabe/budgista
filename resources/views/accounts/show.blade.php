@@ -22,12 +22,21 @@
     <table class="table">
         <thead>
         <tr>
+            <th></th>
+            <th></th>
             <th>Date</th>
             <th>Payee</th>
             <th>Category</th>
-            <th>Activity</th>
-            <th>Amount</th>
+            <th>Memo</th>
+            <th>Outflow</th>
+            <th>Inflow</th>
+            <th></th>
         </tr>
         </thead>
+        <tr>
+            <td colspan="9" class="text-muted text-center">
+                No transactions available.
+            </td>
+        </tr>
     </table>
 @endsection

@@ -19,12 +19,16 @@
         <thead>
         <tr>
             <th>Category</th>
-            <th>Previous Month</th>
             <th>Budgeted</th>
             <th>Activity</th>
             <th>Available</th>
         </tr>
         </thead>
+        <tr>
+            <td colspan="4" class="text-muted text-center">
+                No categories available.
+            </td>
+        </tr>
     </table>
 
 @endsection
