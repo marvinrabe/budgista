@@ -1,10 +1,15 @@
+/**
+ * Budgetist
+ */
+
 // Variables
 @import "variables";
 // Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "pace";
-// Fonts
-@import "node_modules/font-awesome/scss/font-awesome";
+
+@import "errors";
+@import "font-awesome";
 
 body {
   padding-top: 5rem;

@@ -1,0 +1,22 @@
+.error {
+  margin-top: 128px;
+  margin-bottom: 128px;
+  text-align: center;
+
+  .fa {
+    -webkit-animation: pulsate 1s ease-out;
+    -webkit-animation-iteration-count: infinite;
+  }
+
+  .fa-lock {
+    color: #ffcc00;
+  }
+
+  .fa-exclamation-triangle {
+    color: #990000;
+  }
+
+  .fa-question-circle {
+    color: #00b3ee;
+  }
+}
