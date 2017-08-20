@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Budget;
+use App\Models\Budget;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;

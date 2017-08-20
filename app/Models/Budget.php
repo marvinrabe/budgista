@@ -1,22 +1,23 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Alsofronie\Uuid\UuidModelTrait;
 
 class Budget extends Model
 {
+
     use UuidModelTrait;
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function accounts()
     {
-        return $this->hasMany('App\Account');
+        return $this->hasMany('App\Models\Account');
     }
 
 }

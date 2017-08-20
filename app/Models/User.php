@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -30,7 +30,7 @@ class User extends Authenticatable
 
     public function budgets()
     {
-        return $this->hasMany('App\Budget');
+        return $this->hasMany('App\Models\Budget');
     }
 
 }

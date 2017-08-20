@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Budget;
+use App\Models\Budget;
 use App\Month;
 use Illuminate\Support\Facades\View;
 

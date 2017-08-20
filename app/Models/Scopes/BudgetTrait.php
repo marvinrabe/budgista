@@ -12,7 +12,7 @@ trait BudgetTrait
 
     public function budget()
     {
-        return $this->belongsTo('App\Budget');
+        return $this->belongsTo('App\Models\Budget');
     }
 
 }
