@@ -65,7 +65,7 @@ class AccountController extends Controller
      */
     public function show(Budget $budget, $id)
     {
-        $account = Account::find($id);
+        $account = Account::findOrFail($id);
 
         return View::make('accounts.show')
             ->with('account', $account)
@@ -80,7 +80,7 @@ class AccountController extends Controller
      */
     public function edit(Budget $budget, $id)
     {
-        $account = Account::find($id);
+        $account = Account::findOrFail($id);
 
         // show the edit form and pass the nerd
         return View::make('accounts.edit')
@@ -111,7 +111,7 @@ class AccountController extends Controller
                 ->withInput(Input::all());
         } else {
             // store
-            $account = Account::find($id);
+            $account = Account::findOrFail($id);
             $account->name = Input::get('name');
             $account->save();
 
@@ -130,11 +130,10 @@ class AccountController extends Controller
     public function destroy(Budget $budget, $id)
     {
         // delete
-        $account = Account::find($id);
-        $account->delete();
+        Account::destroy($id);
 
         // redirect
-        Session::flash('message', 'Successfully deleted the accounts!');
+        Session::flash('message', 'Successfully deleted the account!');
         return redirect()->route('sheet', [$budget->id]);
     }
 
