@@ -9,7 +9,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        if (Auth::user()->active_budget_id == null) {
+        if (Auth::user()->active_budget_id === null) {
             return redirect()->route('budgets.index');
         }
 

@@ -13,35 +13,17 @@ use Illuminate\Support\Facades\View;
 class BudgetController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
     public function index()
     {
-        $budgets = Auth::user()->budgets;
-
-        // load the view and pass the nerds
         return View::make('budgets.index')
-            ->with('budgets', $budgets);
+            ->with('budgets', Auth::user()->budgets);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
     public function create()
     {
         return View::make('budgets.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
     public function store()
     {
         // validate
@@ -50,64 +32,38 @@ class BudgetController extends Controller
             'name' => 'required'
         );
         $validator = Validator::make(Input::all(), $rules);
-
-        // process the login
         if ($validator->fails()) {
             return redirect()
                 ->route('budgets.create')
                 ->withErrors($validator)
                 ->withInput(Input::all());
-        } else {
-            // store
-            $nerd = new Budget;
-            $nerd->name = Input::get('name');
-            $nerd->user_id = Auth::user()->id;
-            $nerd->save();
-
-            // redirect
-            Session::flash('message', 'Successfully created budget!');
-            return redirect()->route('budgets.index');
         }
+
+        $budget = new Budget;
+        $budget->name = Input::get('name');
+        $budget->user_id = Auth::user()->id;
+        $budget->save();
+
+        // redirect
+        Session::flash('message', 'Successfully created budget!');
+        return redirect()->route('budgets.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function show($id)
+    public function show(Budget $budget)
     {
-        $budget = Budget::find($id);
-
         Auth::user()->active_budget_id = $budget->id;
         Auth::user()->save();
 
-        return redirect()->route('sheet', ['budget' => $id]);
+        return redirect()->route('sheet', ['budget' => $budget->id]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function edit($id)
+    public function edit(Budget $budget)
     {
-        $budget = Budget::find($id);
-
-        // show the edit form and pass the nerd
         return View::make('budgets.edit')
             ->with('budget', $budget);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function update($id)
+    public function update(Budget $budget)
     {
         // validate
         // read more on validation at http://laravel.com/docs/validation
@@ -115,23 +71,18 @@ class BudgetController extends Controller
             'name' => 'required'
         );
         $validator = Validator::make(Input::all(), $rules);
-
-        // process the login
         if ($validator->fails()) {
             return redirect()
                 ->route('budgets.edit', [$id])
                 ->withErrors($validator)
                 ->withInput(Input::all());
-        } else {
-            // store
-            $nerd = Budget::find($id);
-            $nerd->name = Input::get('name');
-            $nerd->save();
-
-            // redirect
-            Session::flash('message', 'Successfully updated budget!');
-            return redirect()->route('budgets.index');
         }
+
+        $budget->name = Input::get('name');
+        $budget->save();
+
+        Session::flash('message', 'Successfully updated budget!');
+        return redirect()->route('budgets.index');
     }
 
     /**
@@ -140,18 +91,16 @@ class BudgetController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Budget $budget)
     {
-        if (Auth::user()->active_budget_id == $id) {
+        // Remove as active budget.
+        if (Auth::user()->active_budget_id == $budget->id) {
             Auth::user()->active_budget_id = null;
             Auth::user()->save();
         }
 
-        // delete
-        $budget = Budget::find($id);
         $budget->delete();
 
-        // redirect
         Session::flash('message', 'Successfully deleted the budget!');
         return redirect()->route('budgets.index');
     }

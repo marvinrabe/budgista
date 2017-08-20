@@ -13,22 +13,12 @@ use Illuminate\Support\Facades\View;
 class AccountController extends Controller
 {
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
     public function create(Budget $budget)
     {
         return View::make('accounts.create')
             ->with('budget', $budget);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
     public function store(Budget $budget)
     {
         // validate
@@ -37,64 +27,39 @@ class AccountController extends Controller
             'name' => 'required'
         );
         $validator = Validator::make(Input::all(), $rules);
-
-        // process the login
         if ($validator->fails()) {
             return redirect()
                 ->route('accounts.create', [$budget->id])
                 ->withErrors($validator)
                 ->withInput(Input::all());
-        } else {
-            // store
-            $account = new Account();
-            $account->name = Input::get('name');
-            $account->budget_id = $budget->id;
-            $account->save();
-
-            // redirect
-            Session::flash('message', 'Successfully created account!');
-            return redirect()->route('accounts.show', [$budget->id, $account->id]);
         }
+
+        $account = new Account();
+        $account->name = Input::get('name');
+        $account->budget_id = $budget->id;
+        $account->save();
+
+        // redirect
+        Session::flash('message', 'Successfully created account!');
+        return redirect()->route('accounts.show', [$budget->id, $account->id]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function show(Budget $budget, $id)
+    public function show(Budget $budget, Account $account)
     {
-        $account = Account::findOrFail($id);
-
         return View::make('accounts.show')
             ->with('account', $account)
             ->with('budget', $budget);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function edit(Budget $budget, $id)
-    {
-        $account = Account::findOrFail($id);
 
-        // show the edit form and pass the nerd
+    public function edit(Budget $budget, Account $account)
+    {
         return View::make('accounts.edit')
             ->with('account', $account)
             ->with('budget', $budget);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function update(Budget $budget, $id)
+    public function update(Budget $budget, Account $account)
     {
         // validate
         // read more on validation at http://laravel.com/docs/validation
@@ -102,35 +67,24 @@ class AccountController extends Controller
             'name' => 'required'
         );
         $validator = Validator::make(Input::all(), $rules);
-
-        // process the login
         if ($validator->fails()) {
             return redirect()
-                ->route('accounts.edit', [$budget->id, $id])
+                ->route('accounts.edit', [$budget->id, $account->id])
                 ->withErrors($validator)
                 ->withInput(Input::all());
-        } else {
-            // store
-            $account = Account::findOrFail($id);
-            $account->name = Input::get('name');
-            $account->save();
-
-            // redirect
-            Session::flash('message', 'Successfully updated account!');
-            return redirect()->route('accounts.show', [$budget->id, $account->id]);
         }
+
+        $account->name = Input::get('name');
+        $account->save();
+
+        // redirect
+        Session::flash('message', 'Successfully updated account!');
+        return redirect()->route('accounts.show', [$budget->id, $account->id]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function destroy(Budget $budget, $id)
+    public function destroy(Budget $budget, Account $account)
     {
-        // delete
-        Account::destroy($id);
+        $account->delete();
 
         // redirect
         Session::flash('message', 'Successfully deleted the account!');
