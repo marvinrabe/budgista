@@ -11,15 +11,24 @@ class SheetController extends Controller
 
     public function index(Budget $budget, $month = null)
     {
-        if ($month === null) {
-            $month = Month::current();
-        } else {
-            $month = Month::fromString($month);
-        }
+        $month = $this->getMonth($month);
 
         return View::make('sheet.index')
             ->with('budget', $budget)
             ->with('month', $month);
+    }
+
+    private function getMonth($string)
+    {
+        try {
+            if ($string !== null) {
+                return Month::fromString($string);
+            }
+
+            return Month::current();
+        } catch (\InvalidArgumentException $exception) {
+            abort(404);
+        }
     }
 
 }
