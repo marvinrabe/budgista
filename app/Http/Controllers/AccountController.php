@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Budget;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;

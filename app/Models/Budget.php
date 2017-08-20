@@ -20,4 +20,9 @@ class Budget extends Model
         return $this->hasMany('App\Models\Account');
     }
 
+    public function categories()
+    {
+        return $this->hasMany('App\Models\Category');
+    }
+
 }

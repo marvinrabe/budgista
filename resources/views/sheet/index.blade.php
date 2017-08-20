@@ -18,17 +18,36 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Category</th>
+            <th>
+                Category
+                <a href="{{ route('categories.create', [$budget->id]) }}" title="Create New Category" class="text-muted">
+                    <span class="fa fa-plus"></span>
+                </a>
+            </th>
             <th>Budgeted</th>
             <th>Activity</th>
             <th>Available</th>
         </tr>
         </thead>
-        <tr>
-            <td colspan="4" class="text-muted text-center">
-                No categories available.
-            </td>
-        </tr>
+        @forelse ($budget->categories as $category)
+            <tr>
+                <td>
+                    {{ $category->name }}
+                    <a href="{{ route('categories.edit', [$budget->id, $category->id]) }}" title="Edit Category" class="text-muted">
+                        <span class="fa fa-pencil"></span>
+                    </a>
+                </td>
+                <td>0€</td>
+                <td>0€</td>
+                <td>0€</td>
+            </tr>
+        @empty
+                <tr>
+                    <td colspan="4" class="text-muted text-center">
+                        No categories available.
+                    </td>
+                </tr>
+        @endforelse
     </table>
 
 @endsection

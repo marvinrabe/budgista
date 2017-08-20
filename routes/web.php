@@ -21,6 +21,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('accounts', 'AccountController', ['except' => [
             'index'
         ]]);
+        Route::resource('categories', 'CategoryController', ['only' => [
+            'create', 'store', 'edit', 'destroy', 'update'
+        ]]);
     });
 });
 
