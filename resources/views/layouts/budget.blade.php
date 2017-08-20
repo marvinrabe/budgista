@@ -27,7 +27,12 @@
         <nav class="nav nav-pills">
             <a class="nav-link active" href="{{ route('sheet', [$budget->id]) }}">Budget</a>
             @foreach ($budget->accounts as $account)
-                <a class="nav-link" href="{{ route('accounts.show', [$budget->id, $account->id]) }}">{{ $account->name }}</a>
+                <a class="nav-link" href="{{ route('accounts.show', [$budget->id, $account->id]) }}">
+                    {{ $account->name }}
+                    <span class="badge @if($account->workingBalance() < 0) badge-danger @else badge-success @endif">
+                        {{ $account->workingBalance() }}
+                    </span>
+                </a>
             @endforeach
             <a class="nav-link text-muted" href="{{ route('accounts.create', [$budget->id]) }}">+ Add Account</a>
         </nav>

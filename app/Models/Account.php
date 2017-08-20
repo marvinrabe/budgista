@@ -16,4 +16,16 @@ class Account extends Model
         return $this->hasMany('App\Models\Transaction');
     }
 
+    public function clearedBalance() {
+        return $this->transactions()->where('cleared', true)->sum('amount');
+    }
+
+    public function unclearedBalance() {
+        return $this->transactions()->where('cleared', false)->sum('amount');
+    }
+
+    public function workingBalance() {
+        return $this->transactions()->sum('amount');
+    }
+
 }

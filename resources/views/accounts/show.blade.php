@@ -13,9 +13,9 @@
     </div>
 
     <div class="float-right my-4">
-        Cleared Balance: <strong>0€</strong>
-        + Uncleared Balance: <strong>0€</strong>
-        = Working Balance: <strong>0€</strong>
+        Cleared Balance: <strong class=" @if($account->clearedBalance() < 0) text-danger @else text-success @endif ">{{ $account->clearedBalance() }}</strong>
+        + Uncleared Balance: <strong class=" @if($account->unclearedBalance() < 0) text-danger @else text-success @endif ">{{ $account->unclearedBalance() }}</strong>
+        = Working Balance: <strong class=" @if($account->workingBalance() < 0) text-danger @else text-success @endif ">{{ $account->workingBalance() }}</strong>
     </div>
 
     <p class="display-4">
@@ -35,7 +35,7 @@
             <th></th>
         </tr>
         </thead>
-        @forelse ($account->transactions as $transaction)
+        @forelse ($account->transactions()->orderBy('date', 'desc')->orderBy('created_at', 'desc')->get() as $transaction)
             <tr>
                 <td width="32">
                     {{ Form::open(['route' => ['transactions.clear', $budget->id, $account->id, $transaction->id]]) }}
