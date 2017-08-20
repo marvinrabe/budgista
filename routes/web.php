@@ -24,6 +24,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('categories', 'CategoryController', ['only' => [
             'create', 'store', 'edit', 'destroy', 'update'
         ]]);
+        Route::group(['prefix' => 'accounts/{account}'], function () {
+            Route::resource('transactions', 'TransactionController', ['only' => [
+                'create', 'store', 'edit', 'destroy', 'update'
+            ]]);
+        });
     });
 });
 

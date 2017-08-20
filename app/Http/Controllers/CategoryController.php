@@ -28,7 +28,7 @@ class CategoryController extends Controller
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
             return redirect()
-                ->route('category.create', [$budget->id])
+                ->route('categories.create', [$budget->id])
                 ->withErrors($validator)
                 ->withInput(Input::all());
         }

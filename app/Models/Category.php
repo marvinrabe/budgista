@@ -11,4 +11,9 @@ class Category extends Model
 
     use UuidModelTrait, BudgetTrait;
 
+    public function transactions()
+    {
+        return $this->hasMany('App\Models\Transactions');
+    }
+
 }

@@ -7,6 +7,9 @@
         <a class="btn btn-light" href="{{ route('accounts.edit', [$budget->id, $account->id]) }}" title="Edit Account">
             <span class="fa fa-pencil"></span>
         </a>
+        <a class="btn btn-primary" href="{{ route('transactions.create', [$budget->id, $account->id]) }}">
+            <span class="fa fa-plus"></span> Create Transaction
+        </a>
     </div>
 
     <div class="float-right my-4">
