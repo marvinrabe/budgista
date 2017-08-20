@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::resource('transactions', 'TransactionController', ['only' => [
                 'create', 'store', 'edit', 'destroy', 'update'
             ]]);
+            Route::put('/transactions/{transaction}/clear', 'TransactionController@clear')->name('transactions.clear');
         });
     });
 });

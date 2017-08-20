@@ -23,8 +23,6 @@ class TransactionController extends Controller
 
     public function store(Budget $budget, Account $account)
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
         $rules = array(
             'payee' => 'required'
         );
@@ -49,7 +47,6 @@ class TransactionController extends Controller
         $transaction->account_id = $account->id;
         $transaction->save();
 
-        // redirect
         Session::flash('message', 'Successfully created transaction!');
         return redirect()->route('accounts.show', [$budget->id, $account->id]);
     }
@@ -65,8 +62,6 @@ class TransactionController extends Controller
 
     public function update(Budget $budget, Account $account, Transaction $transaction)
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
         $rules = array(
             'payee' => 'required'
         );
@@ -87,7 +82,6 @@ class TransactionController extends Controller
         $transaction->category_id = empty($category)?null:$category;
         $transaction->save();
 
-        // redirect
         Session::flash('message', 'Successfully updated transaction!');
         return redirect()->route('accounts.show', [$budget->id, $account->id]);
     }
@@ -96,8 +90,15 @@ class TransactionController extends Controller
     {
         $transaction->delete();
 
-        // redirect
         Session::flash('message', 'Successfully deleted the transaction!');
+        return redirect()->route('accounts.show', [$budget->id, $account->id]);
+    }
+
+    public function clear(Budget $budget, Account $account, Transaction $transaction)
+    {
+        $transaction->cleared = !$transaction->cleared;
+        $transaction->save();
+
         return redirect()->route('accounts.show', [$budget->id, $account->id]);
     }
 

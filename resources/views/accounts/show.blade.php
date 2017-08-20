@@ -37,11 +37,29 @@
         </thead>
         @forelse ($account->transactions as $transaction)
             <tr>
-                <td></td
-                <td></td>
+                <td width="32">
+                    {{ Form::open(['route' => ['transactions.clear', $budget->id, $account->id, $transaction->id]]) }}
+                    {{ Form::hidden('_method', 'PUT') }}
+                    <button class="btn btn-sm
+                    @if ($transaction->cleared)
+                    btn-success
+                    @else
+                    btn-light
+                    @endif
+                    ">
+                        <span class="fa fa-check"></span>
+                    </button>
+                    {{ Form::close() }}
+                </td>
                 <td>{{ $transaction->date }}</td>
                 <td>{{ $transaction->payee }}</td>
-                <td>{{ $transaction->category->name }}</td>
+                <td>
+                    @if($transaction->category === null)
+                        Income
+                    @else
+                        {{ $transaction->category->name }}
+                    @endif
+                </td>
                 <td>{{ $transaction->memo }}</td>
                 <td class="text-danger">
                     @if ( $transaction->amount < 0)
