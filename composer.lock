@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6793444d3e9906ec89c15b691e3da4e7",
+    "content-hash": "a00acce5766dd521099f10cff27f342a",
     "packages": [
         {
             "name": "alsofronie/eloquent-uuid",
@@ -3918,7 +3918,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6.4"
+        "php": ">=5.6.4",
+        "ext-calendar": "*"
     },
     "platform-dev": []
 }
