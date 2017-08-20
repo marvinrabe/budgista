@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Scopes\BudgetTrait;
+use App\Models\Traits\BudgetTrait;
 use Illuminate\Database\Eloquent\Model;
 use Alsofronie\Uuid\UuidModelTrait;
 

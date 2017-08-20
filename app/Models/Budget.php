@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Month;
+use App\Sheet;
 use Illuminate\Database\Eloquent\Model;
 use Alsofronie\Uuid\UuidModelTrait;
 
@@ -28,6 +30,11 @@ class Budget extends Model
     public function transactions()
     {
         return $this->hasMany('App\Models\Transaction');
+    }
+
+    public function month(Month $month)
+    {
+        return new Sheet($this, $month);
     }
 
 }

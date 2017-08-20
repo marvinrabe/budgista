@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Models\Scopes;
+namespace App\Models\Traits;
+
+use App\Models\Scopes\BudgetScope;
 
 trait BudgetTrait
 {

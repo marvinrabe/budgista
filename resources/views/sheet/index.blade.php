@@ -3,10 +3,10 @@
 @section('content')
 
     <div class="float-right my-4">
-        To be Budgeted: <strong>0€</strong>
-        &middot; Previous Month: <strong>0€</strong>
-        &middot; Funds: <strong>0€</strong>
-        &middot; Budgeted: <strong>0€</strong>
+        To be Budgeted: <strong>{{ $sheet->getAvailable() }}</strong>
+        &middot; Previous Month: <strong>{{ $sheet->getPreviousMonthAvailable() }}</strong>
+        &middot; Funds: <strong>{{ $sheet->getFunds() }}</strong>
+        &middot; Budgeted: <strong>{{ $sheet->getBudgeted() }}</strong>
     </div>
 
     <p class="display-4">
@@ -29,25 +29,21 @@
             <th>Available</th>
         </tr>
         </thead>
-        @forelse ($budget->categories as $category)
+        @forelse ($sheet->getRows() as $row)
             <tr>
                 <td>
-                    {{ $category->name }}
-                    <a href="{{ route('categories.edit', [$budget->id, $category->id]) }}" title="Edit Category" class="text-muted">
+                    {{ $row->getCategory()->name }}
+                    <a href="{{ route('categories.edit', [$budget->id, $row->getCategory()->id]) }}" title="Edit Category" class="text-muted">
                         <span class="fa fa-pencil"></span>
                     </a>
                 </td>
                 <td>
-                    <a href="{{ route('categories.budget', [$budget->id, $category->id, (string) $month]) }}">
-                        @if($category->month($month)->amount === null)
-                            0.00
-                        @else
-                            {{ $category->month($month)->amount }}
-                        @endif
+                    <a href="{{ route('categories.budget', [$budget->id, $row->getCategory()->id, (string) $month]) }}">
+                        {{ $row->getBudgeted() }}
                     </a>
                 </td>
-                <td>0€</td>
-                <td>0€</td>
+                <td>{{ $row->getActivity() }}</td>
+                <td>{{ $row->getAvailable() }}</td>
             </tr>
         @empty
                 <tr>

@@ -15,7 +15,8 @@ class SheetController extends Controller
 
         return View::make('sheet.index')
             ->with('budget', $budget)
-            ->with('month', $month);
+            ->with('month', $month)
+            ->with('sheet', $budget->month($month));
     }
 
     private function getMonth($string)
