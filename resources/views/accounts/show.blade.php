@@ -79,7 +79,7 @@
             </tr>
         @empty
             <tr>
-                <td colspan="9" class="text-muted text-center">
+                <td colspan="8" class="text-muted text-center">
                     No transactions available.
                 </td>
             </tr>

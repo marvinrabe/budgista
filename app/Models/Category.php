@@ -16,4 +16,13 @@ class Category extends Model
         return $this->hasMany('App\Models\Transaction');
     }
 
+    public function budgets()
+    {
+        return $this->hasMany('App\Models\CategoryBudget');
+    }
+
+    public function month($month) {
+        return CategoryBudget::firstOrNew(['budget_id' => $this->budget->id, 'category_id' => $this->id, 'month' => $month]);
+    }
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Budget;
 use App\Models\Category;
+use App\Models\CategoryBudget;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -80,6 +81,38 @@ class CategoryController extends Controller
         // redirect
         Session::flash('message', 'Successfully deleted the category!');
         return redirect()->route('sheet', [$budget->id]);
+    }
+
+    public function budget(Budget $budget, Category $category, $month)
+    {
+        $categoryBudget = $category->month($month);
+
+        return View::make('categories.budget')
+            ->with('budget', $budget)
+            ->with('category', $category)
+            ->with('month', $month)
+            ->with('categoryBudget', $categoryBudget);
+    }
+
+    public function storeBudget(Budget $budget, Category $category, $month)
+    {
+        $categoryBudget = $category->month($month);
+
+        $rules = [];
+        $validator = Validator::make(Input::all(), $rules);
+        if ($validator->fails()) {
+            return redirect()
+                ->route('categories.budget', [$budget->id])
+                ->withErrors($validator)
+                ->withInput(Input::all());
+        }
+
+        $categoryBudget->amount = Input::get('amount');
+        $categoryBudget->save();
+
+        // redirect
+        Session::flash('message', 'Successfully updated budget!');
+        return redirect()->route('sheet', [$budget->id, $month]);
     }
 
 }

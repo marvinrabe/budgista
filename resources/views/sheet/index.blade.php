@@ -37,7 +37,15 @@
                         <span class="fa fa-pencil"></span>
                     </a>
                 </td>
-                <td>0€</td>
+                <td>
+                    <a href="{{ route('categories.budget', [$budget->id, $category->id, (string) $month]) }}">
+                        @if($category->month($month)->amount === null)
+                            0.00
+                        @else
+                            {{ $category->month($month)->amount }}
+                        @endif
+                    </a>
+                </td>
                 <td>0€</td>
                 <td>0€</td>
             </tr>

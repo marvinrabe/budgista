@@ -24,6 +24,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('categories', 'CategoryController', ['only' => [
             'create', 'store', 'edit', 'destroy', 'update'
         ]]);
+        Route::get('/categories/{category}/budget/{month}', 'CategoryController@budget')->name('categories.budget');
+        Route::put('/categories/{category}/budget/{month}', 'CategoryController@storeBudget')->name('categories.storeBudget');
+
         Route::group(['prefix' => 'accounts/{account}'], function () {
             Route::resource('transactions', 'TransactionController', ['only' => [
                 'create', 'store', 'edit', 'destroy', 'update'
