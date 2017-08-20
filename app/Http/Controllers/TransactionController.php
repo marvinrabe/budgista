@@ -44,8 +44,8 @@ class TransactionController extends Controller
         $transaction->payee = Input::get('payee');
         $transaction->memo = Input::get('memo');
         $transaction->amount = Input::get('amount');
-        $transaction->budget_id = $budget->id;
         $transaction->category_id = empty($category)?null:$category;
+        $transaction->budget_id = $budget->id;
         $transaction->account_id = $account->id;
         $transaction->save();
 
@@ -68,7 +68,7 @@ class TransactionController extends Controller
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $rules = array(
-            'name' => 'required'
+            'payee' => 'required'
         );
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
@@ -78,7 +78,13 @@ class TransactionController extends Controller
                 ->withInput(Input::all());
         }
 
-        $transaction->name = Input::get('name');
+        $category = Input::get('category_id');
+
+        $transaction->date = Input::get('date');
+        $transaction->payee = Input::get('payee');
+        $transaction->memo = Input::get('memo');
+        $transaction->amount = Input::get('amount');
+        $transaction->category_id = empty($category)?null:$category;
         $transaction->save();
 
         // redirect

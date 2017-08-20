@@ -26,7 +26,6 @@
         <thead>
         <tr>
             <th></th>
-            <th></th>
             <th>Date</th>
             <th>Payee</th>
             <th>Category</th>
@@ -36,10 +35,36 @@
             <th></th>
         </tr>
         </thead>
-        <tr>
-            <td colspan="9" class="text-muted text-center">
-                No transactions available.
-            </td>
-        </tr>
+        @forelse ($account->transactions as $transaction)
+            <tr>
+                <td></td
+                <td></td>
+                <td>{{ $transaction->date }}</td>
+                <td>{{ $transaction->payee }}</td>
+                <td>{{ $transaction->category->name }}</td>
+                <td>{{ $transaction->memo }}</td>
+                <td class="text-danger">
+                    @if ( $transaction->amount < 0)
+                    {{ $transaction->amount }}
+                    @endif
+                </td>
+                <td class="text-success">
+                    @if ( $transaction->amount >= 0)
+                    +{{ $transaction->amount }}
+                    @endif
+                </td>
+                <td>
+                    <a href="{{ route('transactions.edit', [$budget->id, $account->id, $transaction->id]) }}" title="Edit Transaction" class="text-muted">
+                        <span class="fa fa-pencil"></span>
+                    </a>
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="9" class="text-muted text-center">
+                    No transactions available.
+                </td>
+            </tr>
+        @endforelse
     </table>
 @endsection
