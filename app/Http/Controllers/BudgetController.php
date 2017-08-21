@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Budget;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
@@ -26,8 +25,6 @@ class BudgetController extends Controller
 
     public function store()
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
         $rules = array(
             'name' => 'required'
         );
@@ -65,8 +62,6 @@ class BudgetController extends Controller
 
     public function update(Budget $budget)
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
         $rules = array(
             'name' => 'required'
         );
@@ -85,12 +80,6 @@ class BudgetController extends Controller
         return redirect()->route('budgets.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
     public function destroy(Budget $budget)
     {
         // Remove as active budget.
