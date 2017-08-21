@@ -1,3 +1,7 @@
 # Budget
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/297b0fbf-a850-42ab-9c57-6631d1116443/small.png)](https://insight.sensiolabs.com/projects/297b0fbf-a850-42ab-9c57-6631d1116443)
+## Local Development Environment
+
+Setup local environment with Valet: https://laravel.com/docs/5.4/valet
+
+See here how to configure PhpStorm: https://blog.jetbrains.com/phpstorm/2015/01/laravel-development-using-phpstorm/
