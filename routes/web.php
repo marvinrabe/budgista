@@ -16,7 +16,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('budgets', 'BudgetController');
-    Route::group(['prefix' => 'budget/{budget}'], function () {
+    Route::group(['prefix' => 'budget/{budget}', 'middleware' => ['can:view,budget']], function () {
         Route::get('/month/{month?}', 'SheetController@index')->name('sheet');
         Route::resource('accounts', 'AccountController', ['except' => [
             'index'
