@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="card panel-default">
-            <div class="card-header">Create Budget</div>
+            <div class="card-header">{{ __('Create Budget') }}</div>
 
             <div class="card-body">
                 @if ($errors->any())
@@ -19,11 +19,15 @@
                 {{ Form::open(['route' => ['budgets.store']]) }}
 
                 <div class="form-group">
-                    {{ Form::label('name', 'Name') }}
+                    {{ Form::label('name', __('Name')) }}
                     {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
                 </div>
 
-                {{ Form::submit('Create Budget', array('class' => 'btn btn-primary')) }}
+                <div class="form-group">
+                    {{ Form::label('currency', __('Currency')) }}
+                    {{ Form::select('currency', Intl::getCurrencyBundle()->getCurrencyNames(), Input::old('currency'), ['class' => 'form-control']) }}
+                </div>
+                {{ Form::submit(__('Create Budget'), array('class' => 'btn btn-primary')) }}
 
                 {{ Form::close() }}
             </div>

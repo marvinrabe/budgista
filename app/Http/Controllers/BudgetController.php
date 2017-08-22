@@ -26,7 +26,8 @@ class BudgetController extends Controller
     public function store()
     {
         $rules = array(
-            'name' => 'required'
+            'name' => 'required',
+            'currency' => 'required'
         );
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
@@ -38,6 +39,7 @@ class BudgetController extends Controller
 
         $budget = new Budget;
         $budget->name = Input::get('name');
+        $budget->currency = Input::get('currency');
         $budget->user_id = Auth::user()->id;
         $budget->save();
 
@@ -63,7 +65,8 @@ class BudgetController extends Controller
     public function update(Budget $budget)
     {
         $rules = array(
-            'name' => 'required'
+            'name' => 'required',
+            'currency' => 'required'
         );
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
@@ -74,6 +77,7 @@ class BudgetController extends Controller
         }
 
         $budget->name = Input::get('name');
+        $budget->currency = Input::get('currency');
         $budget->save();
 
         Session::flash('message', 'Successfully updated budget!');

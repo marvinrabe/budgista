@@ -17,6 +17,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/', 'HomeController@index')->name('home');
 
+    Route::get('/settings', 'Auth\SettingsController@get')->name('settings');
+    Route::put('/settings', 'Auth\SettingsController@put')->name('settings.store');
+
     Route::resource('budgets', 'BudgetController');
     Route::group(['prefix' => 'budgets/{budget}', 'middleware' => ['can:view,budget']], function () {
 

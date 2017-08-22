@@ -5,11 +5,13 @@
     "require": {
         "php": ">=5.6.4",
         "ext-calendar": "*",
+        "ext-intl": "*",
         "alsofronie/eloquent-uuid": "^1.0",
         "doctrine/dbal": "^2.5",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.4.0"
+        "laravelcollective/html": "^5.4.0",
+        "symfony/intl": "^3.3"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.4",
@@ -23,7 +25,8 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": ["app/Http/Helpers.php"]
     },
     "autoload-dev": {
         "psr-4": {

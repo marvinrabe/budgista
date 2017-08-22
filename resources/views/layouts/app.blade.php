@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -36,8 +36,8 @@
                 <ul class="navbar-nav">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                     @else
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" id="user-menu" data-toggle="dropdown"
@@ -47,11 +47,14 @@
 
                             <div class="dropdown-menu" role="menu" aria-labelledby="user-menu">
                                 <a class="dropdown-item" href="{{ route('budgets.index') }}">
-                                    My Budgets
+                                    {{ __('My Budgets') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('settings') }}">
+                                    {{ __('Account Settings') }}
                                 </a>
                                 <a class="dropdown-item" href="#"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Logout
+                                    {{ __('Logout') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">

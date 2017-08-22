@@ -13,9 +13,9 @@
     </div>
 
     <div class="float-right my-4">
-        Cleared Balance: <strong class=" @if($account->clearedBalance() < 0) text-danger @else text-success @endif ">{{ $account->clearedBalance() }}</strong>
-        + Uncleared Balance: <strong class=" @if($account->unclearedBalance() < 0) text-danger @else text-success @endif ">{{ $account->unclearedBalance() }}</strong>
-        = Working Balance: <strong class=" @if($account->workingBalance() < 0) text-danger @else text-success @endif ">{{ $account->workingBalance() }}</strong>
+        Cleared Balance: <strong class=" @if($account->clearedBalance() < 0) text-danger @else text-success @endif ">{{ currency_format($account->clearedBalance(), $budget) }}</strong>
+        + Uncleared Balance: <strong class=" @if($account->unclearedBalance() < 0) text-danger @else text-success @endif ">{{ currency_format($account->unclearedBalance(), $budget) }}</strong>
+        = Working Balance: <strong class=" @if($account->workingBalance() < 0) text-danger @else text-success @endif ">{{ currency_format($account->workingBalance(), $budget) }}</strong>
     </div>
 
     <p class="display-4">
@@ -63,12 +63,12 @@
                 <td>{{ $transaction->memo }}</td>
                 <td class="text-danger">
                     @if ( $transaction->amount < 0)
-                    {{ $transaction->amount }}
+                    - {{ currency_format($transaction->amount*-1, $budget) }}
                     @endif
                 </td>
                 <td class="text-success">
                     @if ( $transaction->amount >= 0)
-                    +{{ $transaction->amount }}
+                    + {{ currency_format($transaction->amount, $budget) }}
                     @endif
                 </td>
                 <td>
