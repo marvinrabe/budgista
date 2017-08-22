@@ -15,7 +15,12 @@
                 </div>
             @endif
 
-            {{ Form::model($transaction, ['route' => ['transactions.update', $budget->id, $account->id, $transaction->id], 'method' => 'PUT', 'id' => 'form']) }}
+            {{ Form::model($transaction, ['route' => ['transactions.update', $budget->id, $transaction->id], 'method' => 'PUT', 'id' => 'form']) }}
+
+                <div class="form-group">
+                    {{ Form::label('account_id', 'Account') }}
+                    {{ Form::select('account_id', $accounts, null, ['class' => 'form-control']) }}
+                </div>
 
                 <div class="form-group">
                     {{ Form::label('date', 'Date') }}
@@ -50,7 +55,7 @@
                 </div>
                 <div class="col text-right">
                     <div class="d-inline">
-                        {{ Form::open(['route' => ['transactions.destroy', $budget->id, $account->id, $transaction->id], 'class' => 'pull-right']) }}
+                        {{ Form::open(['route' => ['transactions.destroy', $budget->id, $transaction->id], 'class' => 'pull-right']) }}
                         {{ Form::hidden('_method', 'DELETE') }}
                         {{ Form::submit('Delete Transaction', array('class' => 'btn btn-outline-danger')) }}
                         {{ Form::close() }}

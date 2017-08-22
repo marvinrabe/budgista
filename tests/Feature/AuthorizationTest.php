@@ -30,10 +30,11 @@ class AuthorizationTest extends TestCase
         $this->routes = [
             //'/budgets/'.$budget->id,
             '/budgets/'.$budget->id.'/edit',
-            '/budget/'.$budget->id.'/month',
-            '/budget/'.$budget->id.'/month/2017-09',
-            '/budget/'.$budget->id.'/accounts/create',
-            '/budget/'.$budget->id.'/categories/create',
+            '/budgets/'.$budget->id.'/month',
+            '/budgets/'.$budget->id.'/month/2017-09',
+            '/budgets/'.$budget->id.'/accounts/create',
+            '/budgets/'.$budget->id.'/categories/create',
+            '/budgets/'.$budget->id.'/transactions/create',
         ];
     }
 

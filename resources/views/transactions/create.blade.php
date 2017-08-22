@@ -15,7 +15,12 @@
                 </div>
             @endif
 
-            {{ Form::open(['route' => ['transactions.store', $budget->id, $account->id]]) }}
+            {{ Form::open(['route' => ['transactions.store', $budget->id]]) }}
+
+            <div class="form-group">
+                {{ Form::label('account_id', 'Account') }}
+                {{ Form::select('account_id', $accounts, Input::old('account_id', Request::query('account')), ['class' => 'form-control']) }}
+            </div>
 
             <div class="form-group">
                 {{ Form::label('date', 'Date') }}

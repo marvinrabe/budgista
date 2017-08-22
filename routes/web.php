@@ -14,25 +14,30 @@
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
+
     Route::get('/', 'HomeController@index')->name('home');
+
     Route::resource('budgets', 'BudgetController');
-    Route::group(['prefix' => 'budget/{budget}', 'middleware' => ['can:view,budget']], function () {
+    Route::group(['prefix' => 'budgets/{budget}', 'middleware' => ['can:view,budget']], function () {
+
         Route::get('/month/{month?}', 'SheetController@index')->name('sheet');
-        Route::resource('accounts', 'AccountController', ['except' => [
+
+        Route::resource('categories', 'CategoryController', ['except' => [
             'index'
-        ]]);
-        Route::resource('categories', 'CategoryController', ['only' => [
-            'create', 'store', 'edit', 'destroy', 'update'
         ]]);
         Route::get('/categories/{category}/budget/{month}', 'CategoryController@budget')->name('categories.budget');
         Route::put('/categories/{category}/budget/{month}', 'CategoryController@storeBudget')->name('categories.storeBudget');
 
-        Route::group(['prefix' => 'accounts/{account}'], function () {
-            Route::resource('transactions', 'TransactionController', ['only' => [
-                'create', 'store', 'edit', 'destroy', 'update'
-            ]]);
-            Route::put('/transactions/{transaction}/clear', 'TransactionController@clear')->name('transactions.clear');
-        });
+        Route::resource('accounts', 'AccountController', ['except' => [
+            'index'
+        ]]);
+
+        Route::resource('transactions', 'TransactionController', ['except' => [
+            'index'
+        ]]);
+        Route::put('/transactions/{transaction}/clear', 'TransactionController@clear')->name('transactions.clear');
+
     });
+
 });
 

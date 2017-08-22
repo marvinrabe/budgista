@@ -7,7 +7,7 @@
         <a class="btn btn-light" href="{{ route('accounts.edit', [$budget->id, $account->id]) }}" title="Edit Account">
             <span class="fa fa-pencil"></span>
         </a>
-        <a class="btn btn-primary" href="{{ route('transactions.create', [$budget->id, $account->id]) }}">
+        <a class="btn btn-primary" href="{{ route('transactions.create', [$budget->id, 'account' => $account->id]) }}">
             <span class="fa fa-plus"></span> Create Transaction
         </a>
     </div>
@@ -38,7 +38,7 @@
         @forelse ($account->transactions()->orderBy('date', 'desc')->orderBy('created_at', 'desc')->get() as $transaction)
             <tr>
                 <td width="32">
-                    {{ Form::open(['route' => ['transactions.clear', $budget->id, $account->id, $transaction->id]]) }}
+                    {{ Form::open(['route' => ['transactions.clear', $budget->id, $transaction->id]]) }}
                     {{ Form::hidden('_method', 'PUT') }}
                     <button class="btn btn-sm
                     @if ($transaction->cleared)
@@ -72,7 +72,7 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('transactions.edit', [$budget->id, $account->id, $transaction->id]) }}" title="Edit Transaction" class="text-muted">
+                    <a href="{{ route('transactions.edit', [$budget->id, $transaction->id]) }}" title="Edit Transaction" class="text-muted">
                         <span class="fa fa-pencil"></span>
                     </a>
                 </td>
