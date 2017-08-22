@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card panel-default">
-        <div class="card-header">Edit Account</div>
+        <div class="card-header">Account Settings</div>
 
         <div class="card-body">
             @if ($errors->any())
@@ -26,7 +26,7 @@
 
             <div class="row">
                 <div class="col">
-                    <button form="form" class="btn btn-primary">Edit Account</button>
+                    <button form="form" class="btn btn-primary">Save</button>
                 </div>
                 <div class="col text-right">
                     <div class="d-inline">

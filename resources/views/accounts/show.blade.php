@@ -4,8 +4,8 @@
 
 
     <div class="float-right my-3 ml-4 btn-group">
-        <a class="btn btn-light" href="{{ route('accounts.edit', [$budget->id, $account->id]) }}" title="Edit Account">
-            <span class="fa fa-pencil"></span>
+        <a class="btn btn-light" href="{{ route('accounts.edit', [$budget->id, $account->id]) }}" title="Account Settings">
+            <span class="fa fa-cog"></span>
         </a>
         <a class="btn btn-primary" href="{{ route('transactions.create', [$budget->id, 'account' => $account->id]) }}">
             <span class="fa fa-plus"></span> Create Transaction

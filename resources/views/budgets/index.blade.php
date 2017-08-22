@@ -15,13 +15,15 @@
                             <p class="card-text">
                                 <small class="text-muted">Last used 3 mins ago</small>
                             </p>
-                            <a class="btn btn-primary" href="{{ route('budgets.show', ['id' => $budget->id])  }}">
-                                Open Budget
-                            </a>
-                            <a class="btn btn-light" href="{{  route('budgets.edit', ['id' => $budget->id]) }}"
-                               title="Edit Budget">
-                                <span class="fa fa-pencil"></span>
-                            </a>
+                            <div class="btn-group">
+                                <a class="btn btn-primary" href="{{ route('budgets.show', ['id' => $budget->id])  }}">
+                                    Open Budget
+                                </a>
+                                <a class="btn btn-light" href="{{  route('budgets.edit', ['id' => $budget->id]) }}"
+                                   title="Budget Settings">
+                                    <span class="fa fa-cog"></span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
