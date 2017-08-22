@@ -3,15 +3,15 @@
 @section('content')
 
     <div class="float-right my-4">
-        To be Budgeted: <strong>{{ currency_format($sheet->getAvailable(), $budget) }}</strong>
-        &middot; Previous Month: <strong>{{ currency_format($sheet->getPreviousMonthAvailable(), $budget) }}</strong>
-        &middot; Funds: <strong>{{ currency_format($sheet->getFunds(), $budget) }}</strong>
-        &middot; Budgeted: <strong>{{ currency_format($sheet->getBudgeted(), $budget) }}</strong>
+        To be Budgeted: <strong>{{ format_currency($sheet->getAvailable(), $budget) }}</strong>
+        &middot; Previous Month: <strong>{{ format_currency($sheet->getPreviousMonthAvailable(), $budget) }}</strong>
+        &middot; Funds: <strong>{{ format_currency($sheet->getFunds(), $budget) }}</strong>
+        &middot; Budgeted: <strong>{{ format_currency($sheet->getBudgeted(), $budget) }}</strong>
     </div>
 
     <p class="display-4">
         <a href="{{ route('sheet', [$budget->id, (string) $month->previous()]) }}">&laquo;</a>
-        {{ $month }}
+        {{ format_month($month) }}
         <a href="{{ route('sheet', [$budget->id, (string) $month->next()]) }}">&raquo;</a>
     </p>
 
@@ -41,11 +41,11 @@
                 </td>
                 <td>
                     <a href="{{ route('categories.budget', [$budget->id, $row->getCategory()->id, (string) $month]) }}">
-                        {{ currency_format($row->getBudgeted(), $budget) }}
+                        {{ format_currency($row->getBudgeted(), $budget) }}
                     </a>
                 </td>
-                <td>{{ currency_format($row->getActivity(), $budget) }}</td>
-                <td>{{ currency_format($row->getAvailable(), $budget) }}</td>
+                <td>{{ format_currency($row->getActivity(), $budget) }}</td>
+                <td>{{ format_currency($row->getAvailable(), $budget) }}</td>
             </tr>
         @empty
             <tr>

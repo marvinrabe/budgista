@@ -30,7 +30,7 @@
                 <a class="nav-link" href="{{ route('accounts.show', [$budget->id, $account->id]) }}">
                     {{ $account->name }}
                     <span class="badge @if($account->workingBalance() < 0) badge-danger @else badge-success @endif">
-                        {{ currency_format($account->workingBalance(), $budget) }}
+                        {{ format_currency($account->workingBalance(), $budget) }}
                     </span>
                 </a>
             @endforeach
