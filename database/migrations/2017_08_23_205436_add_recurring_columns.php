@@ -27,7 +27,8 @@ class AddRecurringColumns extends Migration
     public function down()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->dropColumn(['recurring', 'rrule']);
+            $table->dropColumn(['recurring']);
+            $table->dropColumn(['rrule']);
         });
     }
 }
