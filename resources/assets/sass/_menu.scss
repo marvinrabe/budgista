@@ -1,7 +1,10 @@
-.menu-icon {
+.menu-open,
+.menu-close{
   cursor: pointer;
-  border-color: $gray-200;
+}
 
+.menu-open.btn-outline-light {
+  border-color: $gray-200;
   &:hover {
     border-color: $gray-300;
   }

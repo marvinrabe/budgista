@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('body')
-    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="{{ asset('img/logo.svg') }}">
@@ -9,11 +9,9 @@
                 <span class="badge badge-secondary">BETA</span>
             </a>
 
-            <ul class="navbar-nav mr-auto">
+            <div class="navbar-nav mr-auto"></div>
 
-            </ul>
-
-            <button class="menu-icon btn btn-outline-light d-lg-none" type="button">
+            <button class="menu-open btn btn-outline-light d-lg-none" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -58,6 +56,18 @@
             <div class="col-lg-3 col-xl-3">
                 <div class="menu">
                     <div class="app-menu">
+
+                        <nav class="navbar navbar-dark bg-primary mb-3 d-lg-none">
+                            <a class="navbar-brand" href="{{ url('/') }}">
+                                <img src="{{ asset('img/logo_white.svg') }}">
+                                {{ config('app.name') }}
+                            </a>
+                            <div class="navbar-nav mr-auto"></div>
+                            <button class="menu-close btn btn-primary" type="button">
+                                <span class="fa fa-times 2x"></span>
+                            </button>
+                        </nav>
+
                         <nav class="nav flex-column">
                             <a href="#" class="nav-header h6 dropdown-toggle" id="chooseBudgets" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">

@@ -12522,12 +12522,16 @@ a.text-dark:hover {
   clip: auto;
 }
 
-.menu-icon {
+.menu-open,
+.menu-close {
   cursor: pointer;
+}
+
+.menu-open.btn-outline-light {
   border-color: #e9ecef;
 }
 
-.menu-icon:hover {
+.menu-open.btn-outline-light:hover {
   border-color: #dee2e6;
 }
 
