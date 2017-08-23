@@ -12,14 +12,14 @@
         </a>
     </div>
 
-    <div class="float-right my-4">
+    <p class="display-4">
+        {{ $account->name }}
+    </p>
+
+    <p>
         Cleared Balance: <strong class=" @if($account->clearedBalance() < 0) text-danger @else text-success @endif ">{{ format_currency($account->clearedBalance(), $budget) }}</strong>
         + Uncleared Balance: <strong class=" @if($account->unclearedBalance() < 0) text-danger @else text-success @endif ">{{ format_currency($account->unclearedBalance(), $budget) }}</strong>
         = Working Balance: <strong class=" @if($account->workingBalance() < 0) text-danger @else text-success @endif ">{{ format_currency($account->workingBalance(), $budget) }}</strong>
-    </div>
-
-    <p class="display-4">
-        {{ $account->name }}
     </p>
 
     <table class="table">

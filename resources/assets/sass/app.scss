@@ -1,13 +1,11 @@
 /**
  * Budgetist
  */
-
 // Variables
 @import "variables";
 // Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "pace";
-
 @import "errors";
 @import "font-awesome";
 
@@ -22,14 +20,25 @@ body {
   }
 }
 
+.nav-header {
+  @extend .nav-link;
+  margin-bottom: 0; // for use with heading elements
+  font-size: $font-size-sm;
+  color: $gray-600;
+}
+a.nav-header:hover,
+a.text-muted:hover {
+  color: $gray-700 !important;
+}
+
 .card-placeholder {
 
   &:hover {
     text-decoration: none;
-    color: rgba($black,.35);
+    color: rgba($black, .35);
   }
 
   text-decoration: none;
-  color: rgba($black,.25);
+  color: rgba($black, .25);
 
 }

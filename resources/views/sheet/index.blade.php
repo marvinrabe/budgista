@@ -2,17 +2,17 @@
 
 @section('content')
 
-    <div class="float-right my-4">
-        To be Budgeted: <strong>{{ format_currency($sheet->getAvailable(), $budget) }}</strong>
-        &middot; Previous Month: <strong>{{ format_currency($sheet->getPreviousMonthAvailable(), $budget) }}</strong>
-        &middot; Funds: <strong>{{ format_currency($sheet->getFunds(), $budget) }}</strong>
-        &middot; Budgeted: <strong>{{ format_currency($sheet->getBudgeted(), $budget) }}</strong>
-    </div>
-
     <p class="display-4">
         <a href="{{ route('sheet', [$budget->id, (string) $month->previous()]) }}">&laquo;</a>
         {{ format_month($month) }}
         <a href="{{ route('sheet', [$budget->id, (string) $month->next()]) }}">&raquo;</a>
+    </p>
+
+    <p>
+        To be Budgeted: <strong>{{ format_currency($sheet->getAvailable(), $budget) }}</strong>
+        &middot; Previous Month: <strong>{{ format_currency($sheet->getPreviousMonthAvailable(), $budget) }}</strong>
+        &middot; Funds: <strong>{{ format_currency($sheet->getFunds(), $budget) }}</strong>
+        &middot; Budgeted: <strong>{{ format_currency($sheet->getBudgeted(), $budget) }}</strong>
     </p>
 
     <table class="table">
