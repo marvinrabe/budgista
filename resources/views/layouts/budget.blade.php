@@ -1,45 +1,104 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
-@section('content')
+@section('body')
+    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{ asset('img/logo.svg') }}">
+                {{ config('app.name') }}
+                <span class="badge badge-secondary">BETA</span>
+            </a>
+
+            <ul class="navbar-nav mr-auto">
+
+            </ul>
+
+            <button class="menu-icon btn btn-outline-light d-lg-none" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <ul class="navbar-nav d-none d-lg-block">
+                <!-- Authentication Links -->
+                @if (Auth::guest())
+                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                @else
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="user-menu" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            {{ Auth::user()->name }}
+                        </a>
+
+                        <div class="dropdown-menu" role="menu" aria-labelledby="user-menu">
+                            <a class="dropdown-item" href="{{ route('budgets.index') }}">
+                                {{ __('My Budgets') }}
+                            </a>
+                            <a class="dropdown-item" href="{{ route('settings') }}">
+                                {{ __('Account Settings') }}
+                            </a>
+                            <a class="dropdown-item" href="#"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                {{ csrf_field() }}
+                            </form>
+                        </div>
+                    </li>
+                @endif
+            </ul>
+        </div>
+    </nav>
+
     <div class="container">
 
         <div class="row">
             <div class="col-lg-3 col-xl-3">
-                <nav class="nav flex-column">
-                    <a href="#" class="nav-header h6 dropdown-toggle" id="chooseBudgets" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ $budget->name }}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="chooseBudgets">
-                        <h6 class="dropdown-header">Budgets</h6>
-                        @foreach (Auth::user()->budgets as $otherBudget)
-                            @if ($otherBudget->id != $budget->id)
-                                <a class="dropdown-item" href="{{ route('budgets.show', ['id' => $otherBudget->id])  }}">
-                                    {{ $otherBudget->name }}
-                                </a>
-                            @else
-                                <a class="dropdown-item disabled" href="#">{{ $otherBudget->name }}</a>
-                            @endif
-                        @endforeach
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('budgets.index') }}"><span class="fa fa-cog"></span> Manage
-                            Budgets</a>
-                    </div>
-                    <a class="nav-link" href="{{ route('sheet', [$budget->id]) }}">
-                        <span class="fa fa-envelope-o fa-fw"></span> Budget
-                    </a>
-                    <h6 class="nav-header">Accounts</h6>
-                    @foreach ($budget->accounts as $account)
-                        <a class="nav-link" href="{{ route('accounts.show', [$budget->id, $account->id]) }}">
+                <div class="menu">
+                    <div class="app-menu">
+                        <nav class="nav flex-column">
+                            <a href="#" class="nav-header h6 dropdown-toggle" id="chooseBudgets" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                {{ $budget->name }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="chooseBudgets">
+                                <h6 class="dropdown-header">Budgets</h6>
+                                @foreach (Auth::user()->budgets as $otherBudget)
+                                    @if ($otherBudget->id != $budget->id)
+                                        <a class="dropdown-item"
+                                           href="{{ route('budgets.show', ['id' => $otherBudget->id])  }}">
+                                            {{ $otherBudget->name }}
+                                        </a>
+                                    @else
+                                        <a class="dropdown-item disabled" href="#">{{ $otherBudget->name }}</a>
+                                    @endif
+                                @endforeach
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('budgets.index') }}"><span
+                                            class="fa fa-cog"></span> Manage
+                                    Budgets</a>
+                            </div>
+                            <a class="nav-link" href="{{ route('sheet', [$budget->id]) }}">
+                                <span class="fa fa-envelope-o fa-fw"></span> Budget
+                            </a>
+                            <h6 class="nav-header">Accounts</h6>
+                            @foreach ($budget->accounts as $account)
+                                <a class="nav-link" href="{{ route('accounts.show', [$budget->id, $account->id]) }}">
                             <span class="float-right badge @if($account->workingBalance() < 0) badge-danger @else badge-success @endif">
                                 {{ format_currency($account->workingBalance(), $budget) }}
                             </span>
-                            {{ $account->name }}
-                        </a>
-                    @endforeach
-                    <a class="nav-link text-muted small text-right" href="{{ route('accounts.create', [$budget->id]) }}">
-                        <span  class="fa fa-plus"></span> Add Account
-                    </a>
-                </nav>
+                                    {{ $account->name }}
+                                </a>
+                            @endforeach
+                            <a class="nav-link text-muted small text-right"
+                               href="{{ route('accounts.create', [$budget->id]) }}">
+                                <span class="fa fa-plus"></span> Add Account
+                            </a>
+                        </nav>
+                    </div>
+                </div>
             </div>
             <div class="col">
                 @yield('content')
@@ -47,4 +106,4 @@
         </div>
 
     </div>
-@overwrite
+@endsection
