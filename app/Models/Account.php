@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\BudgetTrait;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Alsofronie\Uuid\UuidModelTrait;
 
@@ -10,6 +11,15 @@ class Account extends Model
 {
 
     use UuidModelTrait, BudgetTrait;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('name', function (Builder $builder) {
+            $builder->orderBy('name', 'asc');
+        });
+    }
 
     public function transactions()
     {
