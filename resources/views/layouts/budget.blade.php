@@ -75,7 +75,7 @@
                             @foreach ($budget->accounts as $account)
                                 <a class="nav-link" href="{{ route('accounts.show', [$budget->id, $account->id]) }}">
                             <span class="float-right badge @if($account->workingBalance() < 0) badge-danger @else badge-success @endif">
-                                {{ format_currency($account->workingBalance(), $budget) }}
+                                {{ Currency::format($account->workingBalance(), $budget->currency) }}
                             </span>
                                     {{ $account->name }}
                                 </a>
