@@ -13,7 +13,7 @@
                         <div class="card-body">
                             <h4 class="card-title">{{ $budget->name }}</h4>
                             <p class="card-text">
-                                <small class="text-muted">Last used 3 mins ago</small>
+                                <small class="text-muted">{{ __('Last used :diff', ['diff' => $budget->updated_at->diffForHumans()]) }}</small>
                             </p>
                             <div class="btn-group">
                                 <a class="btn btn-primary" href="{{ route('budgets.show', ['id' => $budget->id])  }}">

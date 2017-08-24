@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -22,6 +23,9 @@ class Authenticate extends \Illuminate\Auth\Middleware\Authenticate
         if ($user = Auth::user()) {
 
             \Locale::setDefault($user->locale);
+            setlocale(LC_ALL, $user->locale);
+            Carbon::setLocale($user->locale);
+
             list($language,) = explode('_', $user->locale, 1);
             app()->setLocale($language);
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Budget;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
@@ -50,6 +51,11 @@ class BudgetController extends Controller
 
     public function show(Budget $budget)
     {
+        $this->authorize('view', $budget);
+
+        $budget->updated_at = Carbon::now();
+        $budget->save(['timestamps' => FALSE]);
+
         Auth::user()->active_budget_id = $budget->id;
         Auth::user()->save();
 
@@ -58,12 +64,16 @@ class BudgetController extends Controller
 
     public function edit(Budget $budget)
     {
+        $this->authorize('update', $budget);
+
         return View::make('budgets.edit')
             ->with('budget', $budget);
     }
 
     public function update(Budget $budget)
     {
+        $this->authorize('update', $budget);
+
         $rules = array(
             'name' => 'required',
             'currency' => 'required'
@@ -84,8 +94,10 @@ class BudgetController extends Controller
         return redirect()->route('budgets.index');
     }
 
-    public function destroy(Budget $budget)
+    public function delete(Budget $budget)
     {
+        $this->authorize('delete', $budget);
+
         // Remove as active budget.
         if (Auth::user()->active_budget_id == $budget->id) {
             Auth::user()->active_budget_id = null;

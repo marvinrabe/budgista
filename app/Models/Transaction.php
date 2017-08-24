@@ -11,6 +11,8 @@ class Transaction extends Model
 
     use UuidModelTrait, BudgetTrait;
 
+    protected $dates = ['date'];
+
     public function account()
     {
         return $this->belongsTo('App\Models\Account');

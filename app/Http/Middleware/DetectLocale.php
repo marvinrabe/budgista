@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\Cookie;
 use Locale;
@@ -29,6 +30,8 @@ class DetectLocale
         }
 
         \Locale::setDefault($locale);
+        setlocale(LC_ALL, $locale);
+        Carbon::setLocale($locale);
 
         list($language,) = explode('_', $locale, 1);
 
