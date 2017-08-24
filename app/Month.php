@@ -44,8 +44,7 @@ class Month
 
     public function forHumans()
     {
-        $date = Carbon::createFromDate($this->year, $this->month, 1);
-        return $date->formatLocalized('%b. %Y');
+        return $this->firstDay()->format('M. Y');
     }
 
     public static function current()
@@ -82,14 +81,12 @@ class Month
 
     public function firstDay()
     {
-        $date = Carbon::createFromDate($this->year, $this->month, 1);
-        return $date;
+        return Carbon::createFromDate($this->year, $this->month, 1);
     }
 
     public function lastDay()
     {
         $day = cal_days_in_month(CAL_GREGORIAN, $this->month, $this->year);
-        $date = Carbon::createFromDate($this->year, $this->month, $day);
-        return $date;
+        return Carbon::createFromDate($this->year, $this->month, $day);
     }
 }

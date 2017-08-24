@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed6e86711174dbdedceed5c6763ae904",
+    "content-hash": "7c23052d60936c1120292ea87ce6b406",
     "packages": [
         {
             "name": "alsofronie/eloquent-uuid",
@@ -45,6 +45,62 @@
             ],
             "description": "A Laravel Eloquent Model trait for using UUID's as primary keys",
             "time": "2017-07-20T18:09:53+00:00"
+        },
+        {
+            "name": "approached/laravel-date-international",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/approached/laravel-date-international.git",
+                "reference": "378c3614e7bbaeb5f60b82f68043dd7c73c95b3d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/approached/laravel-date-international/zipball/378c3614e7bbaeb5f60b82f68043dd7c73c95b3d",
+                "reference": "378c3614e7bbaeb5f60b82f68043dd7c73c95b3d",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "~5.0",
+                "nesbot/carbon": "^1.20"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-intl": "to use the component with locales other than \"en\""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Approached\\LaravelDateInternational\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexej Kloos",
+                    "email": "alexejkloos@gmail.com",
+                    "homepage": "http://alcodo.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Date manipulator for laravel",
+            "homepage": "https://github.com/approached/laravel-date-international",
+            "keywords": [
+                "date",
+                "international",
+                "intl",
+                "laravel",
+                "manipulator"
+            ],
+            "time": "2016-10-11T06:59:17+00:00"
         },
         {
             "name": "commerceguys/intl",
@@ -4305,9 +4361,9 @@
     "prefer-lowest": false,
     "platform": {
         "php": ">=5.6.4",
+        "ext-bcmath": "*",
         "ext-calendar": "*",
-        "ext-intl": "*",
-        "ext-bcmath": "*"
+        "ext-intl": "*"
     },
     "platform-dev": []
 }

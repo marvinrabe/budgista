@@ -51,7 +51,7 @@
                     </button>
                     {{ Form::close() }}
                 </td>
-                <td>{{ $transaction->date->formatLocalized('%x') }}</td>
+                <td>{{ DateIntl::date('medium', $transaction->date) }}</td>
                 <td>{{ $transaction->payee }}</td>
                 <td>
                     @if($transaction->category === null)

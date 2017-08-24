@@ -168,7 +168,12 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+
+        /*
+         * Intl
+         */
         Propaganistas\LaravelIntl\IntlServiceProvider::class,
+        Approached\LaravelDateInternational\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -210,6 +215,7 @@ return [
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
+        'Input' => Illuminate\Support\Facades\Input::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
@@ -227,12 +233,20 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /*
+         * Front End (Remove?)
+         */
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Input' => Illuminate\Support\Facades\Input::class,
+
+        /*
+         * Intl
+         */
+        'Carbon' => Propaganistas\LaravelIntl\Facades\Carbon::class,
         'Currency' => Propaganistas\LaravelIntl\Facades\Currency::class,
+        'DateIntl'=> Approached\LaravelDateInternational\DateIntlFacade::class,
         'Language' => Propaganistas\LaravelIntl\Facades\Language::class,
-        'Carbon' => Propaganistas\LaravelIntl\Facades\Carbon::class
     ],
 
 ];
