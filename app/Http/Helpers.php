@@ -10,3 +10,8 @@ function format_month(\App\Month $month) {
     $formatter = new IntlDateFormatter(Locale::getDefault(), IntlDateFormatter::FULL, IntlDateFormatter::NONE, NULL, NULL, 'MMMM yyyy');
     return $formatter->format($month->firstDay());
 }
+
+function format_date($date) {
+    $formatter = new IntlDateFormatter(Locale::getDefault(), IntlDateFormatter::SHORT, IntlDateFormatter::NONE);
+    return $formatter->format($date);
+}
