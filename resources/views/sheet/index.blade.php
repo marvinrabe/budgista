@@ -20,24 +20,18 @@
         <tr>
             <th>
                 Category
-                <a href="{{ route('categories.create', [$budget->id]) }}" title="Create New Category"
-                   class="text-muted">
-                    <span class="fa fa-plus"></span>
-                </a>
+
             </th>
             <th>Budgeted</th>
             <th>Activity</th>
             <th>Available</th>
+            <th></th>
         </tr>
         </thead>
         @forelse ($sheet->getRows() as $row)
             <tr>
                 <td>
                     {{ $row->getCategory()->name }}
-                    <a href="{{ route('categories.edit', [$budget->id, $row->getCategory()->id]) }}"
-                       title="Edit Category" class="text-muted">
-                        <span class="fa fa-pencil"></span>
-                    </a>
                 </td>
                 <td>
                     <a href="{{ route('categories.budget', [$budget->id, $row->getCategory()->id, (string) $month]) }}">
@@ -46,6 +40,12 @@
                 </td>
                 <td>{{ format_currency($row->getActivity(), $budget) }}</td>
                 <td>{{ format_currency($row->getAvailable(), $budget) }}</td>
+                <td>
+                    <a href="{{ route('categories.edit', [$budget->id, $row->getCategory()->id]) }}"
+                       title="Edit Category" class="text-muted">
+                        <span class="fa fa-pencil"></span>
+                    </a>
+                </td>
             </tr>
         @empty
             <tr>
@@ -55,5 +55,11 @@
             </tr>
         @endforelse
     </table>
+
+    <p class="text-right">
+        <a href="{{ route('categories.create', [$budget->id]) }}" class="text-muted small ">
+            <span class="fa fa-plus"></span> Create New Category
+        </a>
+    </p>
 
 @endsection

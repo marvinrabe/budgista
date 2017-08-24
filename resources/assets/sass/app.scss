@@ -27,9 +27,11 @@ body {
   font-size: $font-size-sm;
   color: $gray-600;
 }
+
 a.nav-header:hover,
 a.text-muted:hover {
   color: $gray-700 !important;
+  text-decoration: none;
 }
 
 .card-placeholder {
