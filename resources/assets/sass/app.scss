@@ -28,6 +28,13 @@ body {
   color: $gray-600;
 }
 
+.dropdown-static {
+  @extend .dropdown-item;
+  &:hover {
+    background: none;
+  }
+}
+
 a.nav-header:hover,
 a.text-muted:hover {
   color: $gray-700 !important;

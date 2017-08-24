@@ -1,0 +1,30 @@
+<li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" id="user-menu" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        {{ Auth::user()->name }}
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="user-menu">
+        <div class="dropdown-static">
+            <strong>{{ Auth::user()->name }}</strong><br>
+            <span class="text-muted">{{ Auth::user()->email }}</span>
+        </div>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{{ route('settings') }}">
+            <span class="fa fa-cogs fa-fw"></span>
+            {{ __('Settings') }}
+        </a>
+        <a class="dropdown-item" href="{{ route('budgets.index') }}">
+            <span class="fa fa-list fa-fw"></span>
+            {{ __('Budgets') }}
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#"
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+            {{ csrf_field() }}
+        </form>
+    </div>
+</li>

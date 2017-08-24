@@ -22,29 +22,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     </li>
                 @else
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" id="user-menu" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            {{ Auth::user()->name }}
-                        </a>
-
-                        <div class="dropdown-menu" role="menu" aria-labelledby="user-menu">
-                            <a class="dropdown-item" href="{{ route('budgets.index') }}">
-                                {{ __('My Budgets') }}
-                            </a>
-                            <a class="dropdown-item" href="{{ route('settings') }}">
-                                {{ __('Account Settings') }}
-                            </a>
-                            <a class="dropdown-item" href="#"
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                                {{ csrf_field() }}
-                            </form>
-                        </div>
-                    </li>
+                    @include('auth.menu')
                 @endif
             </ul>
         </div>
