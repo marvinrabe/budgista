@@ -17,9 +17,9 @@
     </p>
 
     <p>
-        Cleared Balance: <strong class=" @if($account->clearedBalance() < 0) text-danger @else text-success @endif ">{{ format_currency($account->clearedBalance(), $budget) }}</strong>
-        + Uncleared Balance: <strong class=" @if($account->unclearedBalance() < 0) text-danger @else text-success @endif ">{{ format_currency($account->unclearedBalance(), $budget) }}</strong>
-        = Working Balance: <strong class=" @if($account->workingBalance() < 0) text-danger @else text-success @endif ">{{ format_currency($account->workingBalance(), $budget) }}</strong>
+        Cleared Balance: <strong class=" @if($account->clearedBalance() < 0) text-danger @else text-success @endif ">{{ Currency::format($account->clearedBalance(), $budget->currency) }}</strong>
+        + Uncleared Balance: <strong class=" @if($account->unclearedBalance() < 0) text-danger @else text-success @endif ">{{ Currency::format($account->unclearedBalance(), $budget->currency) }}</strong>
+        = Working Balance: <strong class=" @if($account->workingBalance() < 0) text-danger @else text-success @endif ">{{ Currency::format($account->workingBalance(), $budget->currency) }}</strong>
     </p>
 
     <table class="table">
@@ -51,7 +51,7 @@
                     </button>
                     {{ Form::close() }}
                 </td>
-                <td>{{ format_date($transaction->date) }}</td>
+                <td>{{ $transaction->date->formatLocalized('%x') }}</td>
                 <td>{{ $transaction->payee }}</td>
                 <td>
                     @if($transaction->category === null)
@@ -63,12 +63,12 @@
                 <td>{{ $transaction->memo }}</td>
                 <td class="text-danger">
                     @if ( $transaction->amount < 0)
-                    - {{ format_currency($transaction->amount*-1, $budget) }}
+                    - {{ Currency::format($transaction->amount*-1, $budget->currency) }}
                     @endif
                 </td>
                 <td class="text-success">
                     @if ( $transaction->amount >= 0)
-                    + {{ format_currency($transaction->amount, $budget) }}
+                    + {{ Currency::format($transaction->amount, $budget->currency) }}
                     @endif
                 </td>
                 <td>

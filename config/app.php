@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Propaganistas\LaravelIntl\IntlServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -229,7 +230,9 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Input' => Illuminate\Support\Facades\Input::class,
-        'Intl' => Symfony\Component\Intl\Intl::class
+        'Currency' => Propaganistas\LaravelIntl\Facades\Currency::class,
+        'Language' => Propaganistas\LaravelIntl\Facades\Language::class,
+        'Carbon' => Propaganistas\LaravelIntl\Facades\Carbon::class
     ],
 
 ];

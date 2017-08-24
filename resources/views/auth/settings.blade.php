@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     {{ Form::label('locale', __('Locale')) }}
-                    {{ Form::select('locale', Intl::getLocaleBundle()->getLocaleNames(), null, ['class' => 'form-control']) }}
+                    {{ Form::select('locale', Language::all(), null, ['class' => 'form-control']) }}
                 </div>
 
                 <button class="btn btn-primary">{{ __('Save') }}</button>

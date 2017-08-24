@@ -25,7 +25,7 @@
 
                 <div class="form-group">
                     {{ Form::label('currency', __('Currency')) }}
-                    {{ Form::select('currency', Intl::getCurrencyBundle()->getCurrencyNames(), null, ['class' => 'form-control']) }}
+                    {{ Form::select('currency', Currency::all(), null, ['class' => 'form-control']) }}
                 </div>
 
                 {{ Form::close() }}

@@ -4,15 +4,15 @@
 
     <p class="display-4">
         <a href="{{ route('sheet', [$budget->id, (string) $month->previous()]) }}">&laquo;</a>
-        {{ format_month($month) }}
+        {{ $month->forHumans() }}
         <a href="{{ route('sheet', [$budget->id, (string) $month->next()]) }}">&raquo;</a>
     </p>
 
     <p>
-        To be Budgeted: <strong>{{ format_currency($sheet->getAvailable(), $budget) }}</strong>
-        &middot; Previous Month: <strong>{{ format_currency($sheet->getPreviousMonthAvailable(), $budget) }}</strong>
-        &middot; Funds: <strong>{{ format_currency($sheet->getFunds(), $budget) }}</strong>
-        &middot; Budgeted: <strong>{{ format_currency($sheet->getBudgeted(), $budget) }}</strong>
+        To be Budgeted: <strong>{{ Currency::format($sheet->getAvailable(), $budget->currency) }}</strong>
+        &middot; Previous Month: <strong>{{ Currency::format($sheet->getPreviousMonthAvailable(), $budget->currency) }}</strong>
+        &middot; Funds: <strong>{{ Currency::format($sheet->getFunds(), $budget->currency) }}</strong>
+        &middot; Budgeted: <strong>{{ Currency::format($sheet->getBudgeted(), $budget->currency) }}</strong>
     </p>
 
     <table class="table">
@@ -35,14 +35,14 @@
                 </td>
                 <td>
                     <a href="{{ route('categories.budget', [$budget->id, $row->getCategory()->id, (string) $month]) }}">
-                        {{ format_currency($row->getBudgeted(), $budget) }}
+                        {{ Currency::format($row->getBudgeted(), $budget->currency) }}
                     </a>
                 </td>
-                <td>{{ format_currency($row->getActivity(), $budget) }}</td>
-                <td>{{ format_currency($row->getAvailable(), $budget) }}</td>
+                <td>{{ Currency::format($row->getActivity(), $budget->currency) }}</td>
+                <td>{{ Currency::format($row->getAvailable(), $budget->currency) }}</td>
                 <td>
                     <a href="{{ route('categories.edit', [$budget->id, $row->getCategory()->id]) }}"
-                       title="Edit Category" class="text-muted">
+                       title="{{ __('Edit Category') }}" class="text-muted">
                         <span class="fa fa-pencil"></span>
                     </a>
                 </td>
@@ -50,7 +50,7 @@
         @empty
             <tr>
                 <td colspan="4" class="text-muted text-center">
-                    No categories available.
+                    {{ __('No categories available.') }}
                 </td>
             </tr>
         @endforelse
@@ -58,7 +58,7 @@
 
     <p class="text-right">
         <a href="{{ route('categories.create', [$budget->id]) }}" class="text-muted small ">
-            <span class="fa fa-plus"></span> Create New Category
+            <span class="fa fa-plus"></span> {{ __('Create New Category') }}
         </a>
     </p>
 

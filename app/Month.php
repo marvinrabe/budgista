@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Propaganistas\LaravelIntl\Facades\Carbon;
+
 class Month
 {
 
@@ -40,6 +42,12 @@ class Month
         return new Month($year, $month);
     }
 
+    public function forHumans()
+    {
+        $date = Carbon::createFromDate($this->year, $this->month, 1);
+        return $date->formatLocalized('%b. %Y');
+    }
+
     public static function current()
     {
         $today = new \DateTime('now');
@@ -74,16 +82,14 @@ class Month
 
     public function firstDay()
     {
-        $date = new \DateTime();
-        $date->setDate($this->year, $this->month, 1);
+        $date = Carbon::createFromDate($this->year, $this->month, 1);
         return $date;
     }
 
     public function lastDay()
     {
         $day = cal_days_in_month(CAL_GREGORIAN, $this->month, $this->year);
-        $date = new \DateTime();
-        $date->setDate($this->year, $this->month, $day);
+        $date = Carbon::createFromDate($this->year, $this->month, $day);
         return $date;
     }
 }

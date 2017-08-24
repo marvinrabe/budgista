@@ -25,7 +25,7 @@
 
                 <div class="form-group">
                     {{ Form::label('currency', __('Currency')) }}
-                    {{ Form::select('currency', Intl::getCurrencyBundle()->getCurrencyNames(), Input::old('currency'), ['class' => 'form-control']) }}
+                    {{ Form::select('currency', Currency::all(), Input::old('currency'), ['class' => 'form-control']) }}
                 </div>
                 {{ Form::submit(__('Create Budget'), array('class' => 'btn btn-primary')) }}
 
