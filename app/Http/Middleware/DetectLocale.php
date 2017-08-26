@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Carbon\Carbon;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
-use Locale;
+use Propaganistas\LaravelIntl\Facades\Language;
 
 class DetectLocale
 {
@@ -19,24 +19,31 @@ class DetectLocale
      */
     public function handle($request, Closure $next)
     {
-        $locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        $languages = array_keys(Language::all());
 
-        if (Cookie::has('locale')) {
-            $locale = Cookie::get('locale');
+        if (Auth::guest()) {
+            $language = $request->getPreferredLanguage($languages);
+
+            if (Cookie::has('language')) {
+                $language = Cookie::get('language');
+            }
+        } else {
+            $language = Auth::user()->locale;
         }
 
-        if (empty($locale)) {
-            $locale = $request->getPreferredLanguage();
+        if (!in_array($language, $languages)) {
+            $language = config('app.fallback_locale');
         }
-
-        \Locale::setDefault($locale);
-        setlocale(LC_ALL, $locale);
-        Carbon::setLocale($locale);
-
-        list($language,) = explode('_', $locale, 1);
 
         app()->setLocale($language);
 
-        return $next($request);
+        $response = $next($request);
+
+        if (Cookie::get('language', null) != $language) {
+            $response->withCookie(Cookie::forever('language', $language));
+        }
+
+        return $response;
     }
+
 }
