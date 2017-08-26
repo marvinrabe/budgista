@@ -3,28 +3,25 @@
 @section('content')
 
     <p class="display-4">
-        <a href="{{ route('sheet', [$budget->id, (string) $month->previous()]) }}">&laquo;</a>
+        <a href="{{ route('sheet', [$budget->id, (string) $month->previous()]) }}" title="{{ __('Previous Month') }}">&laquo;</a>
         {{ $month->forHumans() }}
-        <a href="{{ route('sheet', [$budget->id, (string) $month->next()]) }}">&raquo;</a>
+        <a href="{{ route('sheet', [$budget->id, (string) $month->next()]) }}" title="{{ __('Next Month') }}">&raquo;</a>
     </p>
 
     <p>
-        To be Budgeted: <strong>{{ Currency::format($sheet->getAvailable(), $budget->currency) }}</strong>
-        &middot; Previous Month: <strong>{{ Currency::format($sheet->getPreviousMonthAvailable(), $budget->currency) }}</strong>
-        &middot; Funds: <strong>{{ Currency::format($sheet->getFunds(), $budget->currency) }}</strong>
-        &middot; Budgeted: <strong>{{ Currency::format($sheet->getBudgeted(), $budget->currency) }}</strong>
+        {{ __('To be Budgeted') }}: <strong>{{ Currency::format($sheet->getAvailable(), $budget->currency) }}</strong>
+        &middot; {{ __('Previous Month') }}: <strong>{{ Currency::format($sheet->getPreviousMonthAvailable(), $budget->currency) }}</strong>
+        &middot; {{ __('Funds') }}: <strong>{{ Currency::format($sheet->getFunds(), $budget->currency) }}</strong>
+        &middot; {{ __('Budgeted') }}: <strong>{{ Currency::format($sheet->getBudgeted(), $budget->currency) }}</strong>
     </p>
 
     <table class="table">
         <thead>
         <tr>
-            <th>
-                Category
-
-            </th>
-            <th>Budgeted</th>
-            <th>Activity</th>
-            <th>Available</th>
+            <th>{{ __('Category') }}</th>
+            <th>{{ __('Budgeted') }}</th>
+            <th>{{ __('Activity') }}</th>
+            <th>{{ __('Available') }}</th>
             <th></th>
         </tr>
         </thead>

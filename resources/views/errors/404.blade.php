@@ -7,8 +7,8 @@
         <section class="main padder">
             <div class="error">
                 <span class="fa fa-question-circle fa-5x"></span>
-                <h1>Not found</h1>
-                <p>The requested page couldnt be found.</p>
+                <h1>{{ __('Not Found') }}</h1>
+                <p>{{ __('The requested page could not be found.') }}</p>
             </div>
         </section>
 

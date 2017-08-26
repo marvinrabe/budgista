@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card panel-default">
-        <div class="card-header">Edit Transaction</div>
+        <div class="card-header">{{ __('Edit Transaction') }}</div>
 
         <div class="card-body">
             @if ($errors->any())
@@ -18,32 +18,32 @@
             {{ Form::model($transaction, ['route' => ['transactions.update', $budget->id, $transaction->id], 'method' => 'PUT', 'id' => 'form']) }}
 
                 <div class="form-group">
-                    {{ Form::label('account_id', 'Account') }}
+                    {{ Form::label('account_id', __('Account')) }}
                     {{ Form::select('account_id', $accounts, null, ['class' => 'form-control']) }}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label('date', 'Date') }}
+                    {{ Form::label('date', __('Date')) }}
                     {{ Form::date('date', null, array('class' => 'form-control')) }}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label('payee', 'Payee') }}
+                    {{ Form::label('payee', __('Payee')) }}
                     {{ Form::text('payee', null, array('class' => 'form-control')) }}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label('category_id', 'Category') }}
+                    {{ Form::label('category_id', __('Category')) }}
                     {{ Form::select('category_id', $categories, null, ['class' => 'form-control']) }}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label('memo', 'Memo') }}
+                    {{ Form::label('memo', __('Memo')) }}
                     {{ Form::text('memo', null, array('class' => 'form-control')) }}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label('amount', 'Amount') }}
+                    {{ Form::label('amount', __('Amount')) }}
                     {{ Form::number('amount', null, array('class' => 'form-control')) }}
                 </div>
 
@@ -51,13 +51,13 @@
 
             <div class="row">
                 <div class="col">
-                    <button form="form" class="btn btn-primary">Edit Transaction</button>
+                    <button form="form" class="btn btn-primary">{{ __('Edit Transaction') }}</button>
                 </div>
                 <div class="col text-right">
                     <div class="d-inline">
                         {{ Form::open(['route' => ['transactions.destroy', $budget->id, $transaction->id], 'class' => 'pull-right']) }}
                         {{ Form::hidden('_method', 'DELETE') }}
-                        {{ Form::submit('Delete Transaction', array('class' => 'btn btn-outline-danger')) }}
+                        {{ Form::submit(__('Delete Transaction'), array('class' => 'btn btn-outline-danger')) }}
                         {{ Form::close() }}
                     </div>
                 </div>

@@ -11,12 +11,12 @@
 
             <div class="navbar-nav mr-auto"></div>
 
-            <button class="menu-open btn btn-outline-light d-lg-none" type="button">
+            <button class="menu-open btn btn-outline-light d-lg-none" type="button"
+                    aria-controls="menu" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <ul class="navbar-nav d-none d-lg-block">
-                <!-- Authentication Links -->
                 @if (Auth::guest())
                     <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -52,7 +52,7 @@
                                 {{ $budget->name }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="chooseBudgets">
-                                <h6 class="dropdown-header">Budgets</h6>
+                                <h6 class="dropdown-header">{{ __('Budgets') }}</h6>
                                 @foreach (Auth::user()->budgets as $otherBudget)
                                     @if ($otherBudget->id != $budget->id)
                                         <a class="dropdown-item"
@@ -64,9 +64,10 @@
                                     @endif
                                 @endforeach
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('budgets.index') }}"><span
-                                            class="fa fa-cog"></span> Manage
-                                    Budgets</a>
+                                <a class="dropdown-item" href="{{ route('budgets.index') }}">
+                                    <span class="fa fa-cog"></span>
+                                    {{ __('Manage Budgets') }}
+                                </a>
                             </div>
                             <a class="nav-link" href="{{ route('sheet', [$budget->id]) }}">
                                 <span class="fa fa-envelope-o fa-fw"></span> Budget
@@ -82,7 +83,7 @@
                             @endforeach
                             <a class="nav-link text-muted small text-right"
                                href="{{ route('accounts.create', [$budget->id]) }}">
-                                <span class="fa fa-plus"></span> Add Account
+                                <span class="fa fa-plus"></span> {{ __('Add Account') }}
                             </a>
                         </nav>
                     </div>

@@ -13,60 +13,63 @@ class AuthorizationTest extends TestCase
 {
     use DatabaseMigrations;
 
+    protected $budget_id = '8c37f1ae-e90c-4a9d-8d87-169a5d4a1448';
+
     protected $adam;
 
     protected $eve;
 
     protected $routes;
 
-    public function setup() {
+    protected $budget;
+
+    public function setUp() {
+        parent::setUp();
+
         $this->adam = factory(User::class)->create();
         $this->eve = factory(User::class)->create();
 
-        $budget = factory(Budget::class)->make([
+        $this->budget = factory(Budget::class)->make([
             'user_id' => $this->adam->id
         ]);
+        $this->budget->save();
+    }
 
-        $this->routes = [
-            //'/budgets/'.$budget->id,
-            '/budgets/'.$budget->id.'/edit',
-            '/budgets/'.$budget->id.'/month',
-            '/budgets/'.$budget->id.'/month/2017-09',
-            '/budgets/'.$budget->id.'/accounts/create',
-            '/budgets/'.$budget->id.'/categories/create',
-            '/budgets/'.$budget->id.'/transactions/create',
+
+    public function getRoutes() {
+        return [
+            ['/budgets/%s/edit'],
+            ['/budgets/%s/month'],
+            ['/budgets/%s/month/2017-09'],
+            ['/budgets/%s/accounts/create'],
+            ['/budgets/%s/categories/create'],
+            ['/budgets/%s/transactions/create'],
         ];
     }
 
     /**
      * A basic test example.
-     *
+     * @dataProvider getRoutes
      * @return void
      */
-    public function testBadAccess()
+    public function testBadAccess($route)
     {
-        foreach($this->routes as $route) {
-            $response = $this->actingAs($this->eve)
-                ->withSession(['foo' => 'bar'])
-                ->get($route);
+        $response = $this->actingAs($this->eve)
+            ->get(sprintf($route, $this->budget->id));
 
-            $response->assertStatus(401);
-        }
+        $response->assertStatus(403);
     }
 
     /**
      * A basic test example.
-     *
+     * @dataProvider getRoutes
      * @return void
      */
-    public function testValidAccess()
+    public function testValidAccess($route)
     {
-        foreach($this->routes as $route) {
-            $response = $this->actingAs($this->adam)
-                ->withSession(['foo' => 'bar'])
-                ->get($route);
+        $response = $this->actingAs($this->adam)
+            ->get(sprintf($route, $this->budget->id));
 
-            $response->assertStatus(200);
-        }
+        $response->assertStatus(200);
     }
 }

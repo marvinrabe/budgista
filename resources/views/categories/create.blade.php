@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card panel-default">
-        <div class="card-header">Add Category</div>
+        <div class="card-header">{{ __('Add Category') }}</div>
 
         <div class="card-body">
             @if ($errors->any())
@@ -18,11 +18,11 @@
             {{ Form::open(['route' => ['categories.store', $budget->id]]) }}
 
             <div class="form-group">
-                {{ Form::label('name', 'Name') }}
+                {{ Form::label('name', __('Name')) }}
                 {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
             </div>
 
-            {{ Form::submit('Add Category', array('class' => 'btn btn-primary')) }}
+            {{ Form::submit(__('Add Category'), array('class' => 'btn btn-primary')) }}
 
             {{ Form::close() }}
         </div>

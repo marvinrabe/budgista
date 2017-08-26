@@ -2,13 +2,12 @@
 
 @section('content')
 
-
     <div class="float-right my-3 ml-4 btn-group">
-        <a class="btn btn-light" href="{{ route('accounts.edit', [$budget->id, $account->id]) }}" title="Account Settings">
+        <a class="btn btn-light" href="{{ route('accounts.edit', [$budget->id, $account->id]) }}" title="{{ __('Account Settings') }}">
             <span class="fa fa-cog"></span>
         </a>
         <a class="btn btn-primary" href="{{ route('transactions.create', [$budget->id, 'account' => $account->id]) }}">
-            <span class="fa fa-plus"></span> Create Transaction
+            <span class="fa fa-plus"></span> {{ __('Create Transaction') }}
         </a>
     </div>
 
@@ -17,21 +16,21 @@
     </p>
 
     <p>
-        Cleared Balance: <strong class=" @if($account->clearedBalance() < 0) text-danger @else text-success @endif ">{{ Currency::format($account->clearedBalance(), $budget->currency) }}</strong>
-        + Uncleared Balance: <strong class=" @if($account->unclearedBalance() < 0) text-danger @else text-success @endif ">{{ Currency::format($account->unclearedBalance(), $budget->currency) }}</strong>
-        = Working Balance: <strong class=" @if($account->workingBalance() < 0) text-danger @else text-success @endif ">{{ Currency::format($account->workingBalance(), $budget->currency) }}</strong>
+        {{ __('Cleared Balance') }}: <strong class=" @if($account->clearedBalance() < 0) text-danger @else text-success @endif ">{{ Currency::format($account->clearedBalance(), $budget->currency) }}</strong>
+        + {{ __('Uncleared Balance') }}: <strong class=" @if($account->unclearedBalance() < 0) text-danger @else text-success @endif ">{{ Currency::format($account->unclearedBalance(), $budget->currency) }}</strong>
+        = {{ __('Working Balance') }}: <strong class=" @if($account->workingBalance() < 0) text-danger @else text-success @endif ">{{ Currency::format($account->workingBalance(), $budget->currency) }}</strong>
     </p>
 
     <table class="table">
         <thead>
         <tr>
             <th></th>
-            <th>Date</th>
-            <th>Payee</th>
-            <th>Category</th>
-            <th>Memo</th>
-            <th>Outflow</th>
-            <th>Inflow</th>
+            <th>{{ __('Date') }}</th>
+            <th>{{ __('Payee') }}</th>
+            <th>{{ __('Category') }}</th>
+            <th>{{ __('Memo') }}</th>
+            <th>{{ __('Outflow') }}</th>
+            <th>{{ __('Inflow') }}</th>
             <th></th>
         </tr>
         </thead>
@@ -55,7 +54,7 @@
                 <td>{{ $transaction->payee }}</td>
                 <td>
                     @if($transaction->category === null)
-                        Income
+                        {{ __('To be Budgeted') }}
                     @else
                         {{ $transaction->category->name }}
                     @endif
@@ -72,7 +71,7 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('transactions.edit', [$budget->id, $transaction->id]) }}" title="Edit Transaction" class="text-muted">
+                    <a href="{{ route('transactions.edit', [$budget->id, $transaction->id]) }}" title="{{ __('Edit Transaction') }}" class="text-muted">
                         <span class="fa fa-pencil"></span>
                     </a>
                 </td>
@@ -80,7 +79,7 @@
         @empty
             <tr>
                 <td colspan="8" class="text-muted text-center">
-                    No transactions available.
+                    {{ __('No transactions available.') }}
                 </td>
             </tr>
         @endforelse

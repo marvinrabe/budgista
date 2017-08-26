@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
 
-        <p class="display-4">My Budgets</p>
+        <p class="display-4">{{ __('My Budgets') }}</p>
         <p class="lead">Manage your Budgets.</p>
 
         <div class="row">
@@ -17,10 +17,10 @@
                             </p>
                             <div class="btn-group">
                                 <a class="btn btn-primary" href="{{ route('budgets.show', ['id' => $budget->id])  }}">
-                                    Open Budget
+                                    {{ __('Open Budget') }}
                                 </a>
                                 <a class="btn btn-light" href="{{  route('budgets.edit', ['id' => $budget->id]) }}"
-                                   title="Budget Settings">
+                                   title="{{ __('Budget Settings') }}">
                                     <span class="fa fa-cog"></span>
                                 </a>
                             </div>
@@ -28,14 +28,14 @@
                     </div>
                 </div>
             @endforeach
-                <div class="col-sm-6 col-lg-4 mb-4">
-                    <a class="card card-placeholder text-center" href="{{ route('budgets.create') }}">
-                        <div class="card-body">
-                            <span class="fa fa-5x fa-plus-circle mb-2"></span>
-                            <h4 class="card-title mb-0">Create New Budget</h4>
-                        </div>
-                    </a>
-                </div>
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <a class="card card-placeholder text-center" href="{{ route('budgets.create') }}">
+                    <div class="card-body">
+                        <span class="fa fa-5x fa-plus-circle mb-2"></span>
+                        <h4 class="card-title mb-0">{{ __('Create New Budget') }}</h4>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 @endsection
