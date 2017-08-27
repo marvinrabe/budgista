@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.base', ['body_class' => 'layout-general'])
 
 @section('body')
     <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">

@@ -11,7 +11,7 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="{{$body_class}}">
 
 <div id="app">
 
