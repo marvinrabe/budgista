@@ -32,7 +32,7 @@
                     <div class="d-inline">
                         {{ Form::open(['route' => ['accounts.destroy', $budget->id, $account->id], 'class' => 'pull-right']) }}
                         {{ Form::hidden('_method', 'DELETE') }}
-                        {{ Form::submit(__('Delete Account'), array('class' => 'btn btn-outline-danger')) }}
+                        {{ Form::submit(__('Delete Account'), array('class' => 'btn btn-outline-danger btn-delete')) }}
                         {{ Form::close() }}
                     </div>
                 </div>

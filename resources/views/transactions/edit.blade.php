@@ -59,7 +59,7 @@
                     <div class="d-inline">
                         {{ Form::open(['route' => ['transactions.destroy', $budget->id, $transaction->id], 'class' => 'pull-right']) }}
                         {{ Form::hidden('_method', 'DELETE') }}
-                        {{ Form::submit(__('Delete Transaction'), array('class' => 'btn btn-outline-danger')) }}
+                        {{ Form::submit(__('Delete Transaction'), array('class' => 'btn btn-outline-danger btn-delete')) }}
                         {{ Form::close() }}
                     </div>
                 </div>

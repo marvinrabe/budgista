@@ -6,6 +6,7 @@
 
 require('./bootstrap');
 require('./pace.min');
+require('./jquery.popconfirm');
 
 window.Vue = require('vue');
 
@@ -44,3 +45,11 @@ var closeMenu = document.querySelector(".menu-close");
 myMenu.addEventListener("transitionend", OnTransitionEnd, false);
 openMenu.addEventListener("click", toggleClassMenu, false);
 closeMenu.addEventListener("click", toggleClassMenu, false);
+
+$(document).ready(function() {
+    $(".btn-delete").popConfirm({
+        title: "Delete Item",
+        content: "Are you sure you want to delete this item?",
+        placement: "top"
+    });
+});
