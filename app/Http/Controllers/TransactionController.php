@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
 use App\Models\Budget;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Input;
@@ -13,6 +12,11 @@ use RRule\RRule;
 
 class TransactionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Transaction::class);
+    }
 
     public function create(Budget $budget)
     {
@@ -45,10 +49,10 @@ class TransactionController extends Controller
         $transaction->memo = Input::get('memo');
         $transaction->amount = Input::get('amount');
         $transaction->account_id = Input::get('account_id');
-        $transaction->category_id = empty($category)?null:$category;
+        $transaction->category_id = empty($category) ? null : $category;
         $transaction->budget_id = $budget->id;
 
-        if(!empty(Input::get('rrule'))) {
+        if (!empty(Input::get('rrule'))) {
             $transaction->rrule = new RRule(Input::get('rrule'));
         } else {
             $transaction->rrule = null;
@@ -90,9 +94,9 @@ class TransactionController extends Controller
         $transaction->memo = Input::get('memo');
         $transaction->amount = Input::get('amount');
         $transaction->account_id = Input::get('account_id');
-        $transaction->category_id = empty($category)?null:$category;
+        $transaction->category_id = empty($category) ? null : $category;
 
-        if(!empty(Input::get('rrule'))) {
+        if (!empty(Input::get('rrule'))) {
             $transaction->rrule = new RRule(Input::get('rrule'));
         } else {
             $transaction->rrule = null;
@@ -114,6 +118,8 @@ class TransactionController extends Controller
 
     public function clear(Budget $budget, Transaction $transaction)
     {
+        $this->authorize('update', $transaction);
+
         $transaction->cleared = !$transaction->cleared;
         $transaction->save();
 

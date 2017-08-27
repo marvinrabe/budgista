@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\View;
 class AccountController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->authorizeResource(Account::class);
+    }
+
     public function create(Budget $budget)
     {
         return View::make('accounts.create')

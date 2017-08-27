@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\View;
 class BudgetController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->authorizeResource(Budget::class);
+    }
+
     public function index()
     {
         return View::make('budgets.index')
@@ -51,8 +56,6 @@ class BudgetController extends Controller
 
     public function show(Budget $budget)
     {
-        $this->authorize('view', $budget);
-
         $budget->updated_at = Carbon::now();
         $budget->save(['timestamps' => FALSE]);
 
@@ -64,16 +67,12 @@ class BudgetController extends Controller
 
     public function edit(Budget $budget)
     {
-        $this->authorize('update', $budget);
-
         return View::make('budgets.edit')
             ->with('budget', $budget);
     }
 
     public function update(Budget $budget)
     {
-        $this->authorize('update', $budget);
-
         $rules = array(
             'name' => 'required',
             'currency' => 'required'
@@ -96,8 +95,6 @@ class BudgetController extends Controller
 
     public function delete(Budget $budget)
     {
-        $this->authorize('delete', $budget);
-
         // Remove as active budget.
         if (Auth::user()->active_budget_id == $budget->id) {
             Auth::user()->active_budget_id = null;

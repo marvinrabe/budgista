@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\View;
 class CategoryController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->authorizeResource(Category::class);
+    }
+
     public function create(Budget $budget)
     {
         return View::make('categories.create')
@@ -85,6 +90,8 @@ class CategoryController extends Controller
 
     public function budget(Budget $budget, Category $category, $month)
     {
+        $this->authorize('update', $category);
+
         $categoryBudget = $category->month($month);
 
         return View::make('categories.budget')
@@ -96,6 +103,8 @@ class CategoryController extends Controller
 
     public function storeBudget(Budget $budget, Category $category, $month)
     {
+        $this->authorize('update', $category);
+
         $categoryBudget = $category->month($month);
 
         $rules = [];
