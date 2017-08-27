@@ -8,15 +8,30 @@ require('./bootstrap');
 require('./pace.min');
 require('./jquery.popconfirm');
 
-window.Vue = require('vue');
-
 /**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
+ * i18n
  */
 
+const _ = require('lodash');
+window.trans = (string) => _.get(window.i18n, string);
+
+/**
+ * Vue
+ */
+
+window.Vue = require('vue');
+
 Vue.component('recurrence', require('./components/Recurrence.vue'));
+
+Vue.prototype.trans = (string, args) => {
+    let value = _.get(window.i18n, string);
+
+    _.eachRight(args, (paramVal, paramKey) => {
+        value = _.replace(value, `:${paramKey}`, paramVal);
+    });
+
+    return value;
+};
 
 const app = new Vue({
     el: '#app'
@@ -46,10 +61,16 @@ myMenu.addEventListener("transitionend", OnTransitionEnd, false);
 openMenu.addEventListener("click", toggleClassMenu, false);
 closeMenu.addEventListener("click", toggleClassMenu, false);
 
+/**
+ * Document ready
+ */
+
 $(document).ready(function() {
     $(".btn-delete").popConfirm({
-        title: "Delete Item",
-        content: "Are you sure you want to delete this item?",
+        title: trans('are-you-sure.title'),
+        content: trans('are-you-sure.message'),
+        yesBtn: trans('action.yes'),
+        noBtn: trans('action.no'),
         placement: "top"
     });
 });

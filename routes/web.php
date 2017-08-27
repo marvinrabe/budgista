@@ -13,6 +13,31 @@
 
 Auth::routes();
 
+Route::get('/js/lang/{locale}.js', function ($lang) {
+    $strings = Cache::rememberForever($lang . '.js', function () use ($lang) {
+        $files = [
+            resource_path('lang/' . config('app.fallback_locale') . '/javascript.php'),
+            resource_path('lang/' . $lang . '/javascript.php')
+        ];
+
+        $strings = [];
+
+        foreach ($files as $file) {
+            if(!file_exists($file)) {
+                continue;
+            }
+
+            $strings = array_merge($strings, require $file);
+        }
+
+        return $strings;
+    });
+
+    header('Content-Type: text/javascript');
+    echo('window.i18n = ' . json_encode($strings) . ';');
+    exit();
+})->name('assets.lang');
+
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/', 'HomeController@index')->name('home');

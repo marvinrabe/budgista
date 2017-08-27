@@ -40,6 +40,7 @@
 
 </div>
 
+<script src="{{ route('assets.lang', ['locale' => config('app.locale')]) }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 
 </body>

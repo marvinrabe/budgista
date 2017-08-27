@@ -5,36 +5,36 @@
         <div class="form-check">
             <label class="form-check-label">
                 <input type="checkbox" class="form-check-input" v-model="recurring">
-                Recurring?
+                {{ trans('form.recurring') }}
             </label>
         </div>
 
         <div class="form-row" v-if="recurring">
             <div class="col">
-                <label for="freq">Repeats</label>
+                <label for="freq">{{ trans('form.recurringFrequency') }}</label>
                 <select id="freq" class="form-control" v-model="freq">
-                    <option value="3">Daily</option>
-                    <option value="2">Weekly</option>
-                    <option value="1">Monthly</option>
-                    <option value="0">Yearly</option>
+                    <option value="3">{{ trans('frequency.daily') }}</option>
+                    <option value="2">{{ trans('frequency.weekly') }}</option>
+                    <option value="1">{{ trans('frequency.monthly') }}</option>
+                    <option value="0">{{ trans('frequency.yearly') }}</option>
                 </select>
             </div>
             <div class="col">
-                <label for="interval">Repeat every</label>
+                <label for="interval">{{ trans('form.recurringInterval') }}</label>
                 <div class="input-group mb-2 mb-sm-0">
                     <input type="number" min="1" max="50" step="1" id="interval"
                            class="form-control" v-model="interval"/>
                     <div class="input-group-addon" v-if="freq == 3">
-                        days
+                        {{ trans('frequencyUnit.days') }}
                     </div>
                     <div class="input-group-addon" v-if="freq == 2">
-                        weeks
+                        {{ trans('frequencyUnit.weeks') }}
                     </div>
                     <div class="input-group-addon" v-if="freq == 1">
-                        months
+                        {{ trans('frequencyUnit.months') }}
                     </div>
                     <div class="input-group-addon" v-if="freq == 0">
-                        years
+                        {{ trans('frequencyUnit.years') }}
                     </div>
                 </div>
             </div>
@@ -79,5 +79,3 @@
         }
     }
 </script>
-
-<style></style>
