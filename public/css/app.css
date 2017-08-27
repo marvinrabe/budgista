@@ -12653,15 +12653,17 @@ a.text-muted:hover {
   color: rgba(0, 0, 0, 0.35);
 }
 
-html {
-  height: 100%;
+.layout-auth {
+  padding-top: 1rem;
+  background: #f8f9fa;
 }
 
-.layout-auth {
-  height: 100%;
-  padding-top: 1rem;
-  background: #003166;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #006fe6), color-stop(50%, #0056b3));
-  background: linear-gradient(to bottom, #006fe6 10%, #0056b3 50%);
+.layout-auth .logo {
+  margin-bottom: 1rem;
+}
+
+.layout-auth .logo img {
+  height: 3rem;
+  vertical-align: text-bottom;
 }
 
