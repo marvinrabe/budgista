@@ -35,22 +35,23 @@
         </tr>
         </thead>
         @forelse ($account->transactions()->orderBy('date', 'desc')->orderBy('created_at', 'desc')->get() as $transaction)
-            <tr>
+            <tr class="{{ ($transaction->date > Carbon::now())?'text-muted':'' }}">
                 <td width="32">
-                    {{ Form::open(['route' => ['transactions.clear', $budget->id, $transaction->id]]) }}
-                    {{ Form::hidden('_method', 'PUT') }}
-                    <button class="btn btn-sm
-                    @if ($transaction->cleared)
-                    btn-success
-                    @else
-                    btn-light
+                    @if($transaction->date <= Carbon::now())
+                        {{ Form::open(['route' => ['transactions.clear', $budget->id, $transaction->id]]) }}
+                        {{ Form::hidden('_method', 'PUT') }}
+                        <button class="btn btn-sm {{ ($transaction->cleared)?'btn-success':'btn-light' }}">
+                            <span class="fa fa-check"></span>
+                        </button>
+                        {{ Form::close() }}
                     @endif
-                    ">
-                        <span class="fa fa-check"></span>
-                    </button>
-                    {{ Form::close() }}
                 </td>
-                <td>{{ DateIntl::date('medium', $transaction->date) }}</td>
+                <td>
+                    {{ DateIntl::date('medium', $transaction->date) }}
+                    @if($transaction->recurring)
+                        <span class="fa fa-refresh" title="{{ $transaction->rrule->humanReadable(['locale' => app()->getLocale()]) }}"></span>
+                    @endif
+                </td>
                 <td>{{ $transaction->payee }}</td>
                 <td>
                     @if($transaction->category === null)

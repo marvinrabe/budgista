@@ -14,7 +14,7 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
         "propaganistas/laravel-intl": "^1.2",
-        "tplaner/when": "2.*"
+        "rlanvin/php-rrule": "1.*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.4",

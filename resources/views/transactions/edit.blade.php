@@ -24,8 +24,10 @@
 
                 <div class="form-group">
                     {{ Form::label('date', __('Date')) }}
-                    {{ Form::date('date', null, array('class' => 'form-control')) }}
+                    {{ Form::date('date', $transaction->date, array('class' => 'form-control')) }}
                 </div>
+
+                <recurrence rule="{{ $transaction->rrule }}"></recurrence>
 
                 <div class="form-group">
                     {{ Form::label('payee', __('Payee')) }}

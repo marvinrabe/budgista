@@ -27,6 +27,8 @@
                 {{ Form::date('date', Input::old('date', new \DateTime), array('class' => 'form-control')) }}
             </div>
 
+            <recurrence rule="{{ Input::old('rrule') }}"></recurrence>
+
             <div class="form-group">
                 {{ Form::label('payee', __('Payee')) }}
                 {{ Form::text('payee', Input::old('payee'), array('class' => 'form-control')) }}

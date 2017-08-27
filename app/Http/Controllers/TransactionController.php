@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use RRule\RRule;
 
 class TransactionController extends Controller
 {
@@ -46,6 +47,13 @@ class TransactionController extends Controller
         $transaction->account_id = Input::get('account_id');
         $transaction->category_id = empty($category)?null:$category;
         $transaction->budget_id = $budget->id;
+
+        if(!empty(Input::get('rrule'))) {
+            $transaction->rrule = new RRule(Input::get('rrule'));
+        } else {
+            $transaction->rrule = null;
+        }
+
         $transaction->save();
 
         Session::flash('message', 'Successfully created transaction!');
@@ -83,6 +91,13 @@ class TransactionController extends Controller
         $transaction->amount = Input::get('amount');
         $transaction->account_id = Input::get('account_id');
         $transaction->category_id = empty($category)?null:$category;
+
+        if(!empty(Input::get('rrule'))) {
+            $transaction->rrule = new RRule(Input::get('rrule'));
+        } else {
+            $transaction->rrule = null;
+        }
+
         $transaction->save();
 
         Session::flash('message', 'Successfully updated transaction!');
