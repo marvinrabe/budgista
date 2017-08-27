@@ -6,7 +6,6 @@
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="{{ asset('img/logo.svg') }}">
                 {{ config('app.name') }}
-                <span class="badge badge-secondary">BETA</span>
             </a>
 
             <div class="navbar-nav mr-auto"></div>
