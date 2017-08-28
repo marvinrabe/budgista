@@ -1,31 +1,29 @@
-<?php
+<?php 
 
 return [
-
     'action' => [
         'yes' => 'Yes',
-        'no' => 'No'
+        'no' => 'No',
     ],
     'are-you-sure' => [
         'title' => 'Delete Item',
-        'message' => 'Are you sure you want to delete this item?'
+        'message' => 'Are you sure you want to delete this item?',
     ],
     'form' => [
         'recurring' => 'Recurring?',
         'recurringFrequency' => 'Repeats',
-        'recurringInterval' => 'Repeat every'
+        'recurringInterval' => 'Repeat every',
     ],
     'frequency' => [
         'daily' => 'Daily',
         'weekly' => 'Weekly',
         'monthly' => 'Monthly',
-        'yearly' => 'Yearly'
+        'yearly' => 'Yearly',
     ],
-    'word' => [
+    'frequencyUnit' => [
         'days' => 'Days',
         'weeks' => 'Weeks',
         'months' => 'Months',
-        'years' => 'Years'
+        'years' => 'Years',
     ]
-
 ];

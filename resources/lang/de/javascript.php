@@ -1,31 +1,29 @@
-<?php
+<?php 
 
 return [
-
     'action' => [
         'yes' => 'Ja',
-        'no' => 'Nein'
+        'no' => 'Nein',
     ],
     'are-you-sure' => [
         'title' => 'Eintrag löschen',
-        'message' => 'Bist du dir sicher, dass du diesen Eintrag löschen möchtest?'
+        'message' => 'Bist du dir sicher, dass du diesen Eintrag löschen möchtest?',
     ],
     'form' => [
         'recurring' => 'Wiederkehrend?',
         'recurringFrequency' => 'Wird wiederholt',
-        'recurringInterval' => 'Wiederholen alle'
+        'recurringInterval' => 'Wiederholen alle',
     ],
     'frequency' => [
         'daily' => 'Täglich',
         'weekly' => 'Wöchentlich',
         'monthly' => 'Montlich',
-        'yearly' => 'Jährlich'
+        'yearly' => 'Jährlich',
     ],
     'frequencyUnit' => [
         'days' => 'Tage',
         'weeks' => 'Wochen',
         'months' => 'Monate',
-        'years' => 'Jahre'
+        'years' => 'Jahre',
     ]
-
 ];
