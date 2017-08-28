@@ -5,15 +5,7 @@
         <div class="card-header">{{ __('Add Category') }}</div>
 
         <div class="card-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            @include('helpers.errors')
 
             {{ Form::open(['route' => ['categories.store', $budget->id]]) }}
 

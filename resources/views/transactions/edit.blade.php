@@ -5,15 +5,7 @@
         <div class="card-header">{{ __('Edit Transaction') }}</div>
 
         <div class="card-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            @include('helpers.errors')
 
             {{ Form::model($transaction, ['route' => ['transactions.update', $budget->id, $transaction->id], 'method' => 'PUT', 'id' => 'form']) }}
 

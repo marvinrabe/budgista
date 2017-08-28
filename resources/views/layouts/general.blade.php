@@ -30,6 +30,10 @@
         </div>
     </nav>
 
-    @yield('content')
+    <div class="container">
+        @include('helpers.successes')
+
+        @yield('content')
+    </div>
 
 @endsection('body')

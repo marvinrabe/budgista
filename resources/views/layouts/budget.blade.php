@@ -89,6 +89,9 @@
                 </div>
             </div>
             <div class="col">
+
+                @include('helpers.successes')
+
                 @yield('content')
             </div>
         </div>
