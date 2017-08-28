@@ -38,7 +38,7 @@
 
                 <div class="form-group">
                     {{ Form::label('amount', __('Amount')) }}
-                    {{ Form::number('amount', null, array('class' => 'form-control')) }}
+                    {{ Form::number('amount', null, array('class' => 'form-control', 'step' => '0.01')) }}
                 </div>
 
             {{ Form::close() }}

@@ -11,7 +11,7 @@
 
             <div class="form-group">
                 {{ Form::label('amount', __('Amount')) }}
-                {{ Form::text('amount', null, ['class' => 'form-control']) }}
+                {{ Form::number('amount', null, ['class' => 'form-control', 'step' => '0.01']) }}
             </div>
 
             {{ Form::submit(__('Budget'), array('class' => 'btn btn-primary')) }}
