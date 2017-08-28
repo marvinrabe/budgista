@@ -84,7 +84,7 @@ return [
             'prefix' => '',
         ],
 
-        'heroku-pg' => [
+        'heroku-pgsql' => [
             'driver'   => 'pgsql',
             'host'     => $herokuDatabaseURL['host'],
             'database' => substr($herokuDatabaseURL['path'], 1),
@@ -94,6 +94,21 @@ return [
             'prefix'   => '',
             'schema'   => 'public',
         ],
+
+        'dokku-mysql' => [
+            'driver' => 'mysql',
+            'host' => $herokuDatabaseURL['host'],
+            'port' => '3306',
+            'database' => substr($herokuDatabaseURL['path'], 1),
+            'username' => $herokuDatabaseURL['user'],
+            'password' => $herokuDatabaseURL['pass'],
+            'unix_socket' => '',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ]
 
     ],
 
