@@ -10,4 +10,9 @@ trait BudgetTrait
         return $this->belongsTo('App\Models\Budget');
     }
 
+    public function scopeInBudget($query, $budget)
+    {
+        return $query->where('budget_id', $budget->id);
+    }
+
 }

@@ -38,7 +38,7 @@ class Sheet
 
     public function getPreviousMonthAvailable()
     {
-        $budgeted = CategoryBudget::where('month', '<', (string) $this->month)->sum('amount');
+        $budgeted = CategoryBudget::inBudget($this->budget)->where('month', '<', (string) $this->month)->sum('amount');
         $funds = $this->budget->transactions()->where('date', '<=', $this->month->previous()->lastDay())->whereNull('category_id')->sum('amount');
         return $funds - $budgeted;
     }
