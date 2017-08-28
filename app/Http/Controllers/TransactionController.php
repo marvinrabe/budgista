@@ -128,7 +128,7 @@ class TransactionController extends Controller
 
     private function getCategories(Budget $budget)
     {
-        $result = ['' => 'Income'];
+        $result = ['' => __('To be Budgeted')];
         foreach ($budget->categories as $category) {
             $result[$category->id] = $category->name;
         }

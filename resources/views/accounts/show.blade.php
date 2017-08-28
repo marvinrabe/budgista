@@ -61,12 +61,12 @@
                     @endif
                 </td>
                 <td>{{ $transaction->memo }}</td>
-                <td class="text-danger">
+                <td class="text-danger text-right">
                     @if ( $transaction->amount < 0)
                     - {{ Currency::format($transaction->amount*-1, $budget->currency) }}
                     @endif
                 </td>
-                <td class="text-success">
+                <td class="text-success text-right">
                     @if ( $transaction->amount >= 0)
                     + {{ Currency::format($transaction->amount, $budget->currency) }}
                     @endif
