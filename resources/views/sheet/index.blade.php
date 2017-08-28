@@ -15,7 +15,7 @@
         &middot; {{ __('Budgeted') }}: <strong>{{ Currency::format($sheet->getBudgeted(), $budget->currency) }}</strong>
     </p>
 
-    <table class="table">
+    <table class="table table-sm">
         <thead>
         <tr>
             <th>{{ __('Category') }}</th>

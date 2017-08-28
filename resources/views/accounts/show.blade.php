@@ -21,7 +21,7 @@
         = {{ __('Working Balance') }}: <strong class=" @if($account->workingBalance() < 0) text-danger @else text-success @endif ">{{ Currency::format($account->workingBalance(), $budget->currency) }}</strong>
     </p>
 
-    <table class="table">
+    <table class="table table-sm">
         <thead>
         <tr>
             <th></th>
@@ -35,12 +35,12 @@
         </tr>
         </thead>
         @forelse ($account->transactions()->orderBy('date', 'desc')->orderBy('created_at', 'desc')->get() as $transaction)
-            <tr class="{{ ($transaction->date > Carbon::now())?'text-muted':'' }}">
+            <tr class="{{ ($transaction->date > Carbon::now())?'text-muted bg-light':'' }}">
                 <td width="32">
                     @if($transaction->date <= Carbon::now())
                         {{ Form::open(['route' => ['transactions.clear', $budget->id, $transaction->id]]) }}
                         {{ Form::hidden('_method', 'PUT') }}
-                        <button class="btn btn-sm {{ ($transaction->cleared)?'btn-success':'btn-light' }}">
+                        <button class="btn btn-xs {{ ($transaction->cleared)?'btn-success':'btn-light' }}">
                             <span class="fa fa-check"></span>
                         </button>
                         {{ Form::close() }}
