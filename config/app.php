@@ -170,6 +170,11 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
 
         /*
+         * Proxy
+         */
+        Fideloper\Proxy\TrustedProxyServiceProvider::class,
+
+        /*
          * Intl
          */
         Propaganistas\LaravelIntl\IntlServiceProvider::class,
