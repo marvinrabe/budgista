@@ -4,8 +4,9 @@ namespace App;
 
 use App\Models\Category;
 use App\Models\CategoryBudget;
+use JsonSerializable;
 
-class Row
+class Row implements JsonSerializable
 {
 
     protected $category;
@@ -44,4 +45,15 @@ class Row
         return $this->getPreviousMonth() + $this->getBudgeted() + $this->getActivity();
     }
 
+    function jsonSerialize()
+    {
+        return [
+            'id' => $this->category->id,
+            'name' => $this->category->name,
+            'previousMonth' => (double) $this->getPreviousMonth(),
+            'budgeted' => (double) $this->getBudgeted(),
+            'activity' => (double) $this->getActivity(),
+            'available' => (double) $this->getAvailable(),
+        ];
+    }
 }

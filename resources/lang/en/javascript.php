@@ -13,6 +13,10 @@ return [
         'recurring' => 'Recurring?',
         'recurringFrequency' => 'Repeats',
         'recurringInterval' => 'Repeat every',
+        'category' => 'Category',
+        'budgeted' => 'Budgeted',
+        'activity' => 'Activity',
+        'available' => 'Available'
     ],
     'frequency' => [
         'daily' => 'Daily',

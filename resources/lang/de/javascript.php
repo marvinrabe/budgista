@@ -13,6 +13,10 @@ return [
         'recurring' => 'Wiederkehrend?',
         'recurringFrequency' => 'Wird wiederholt',
         'recurringInterval' => 'Wiederholen alle',
+        'category' => 'Kategorie',
+        'budgeted' => 'Geplant',
+        'activity' => 'Aktivität',
+        'available' => 'Verfügbar'
     ],
     'frequency' => [
         'daily' => 'Täglich',

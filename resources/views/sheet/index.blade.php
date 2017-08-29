@@ -56,45 +56,7 @@
         </div>
     </div>
 
-    <table class="table table-sm">
-        <thead>
-        <tr>
-            <th>{{ __('Category') }}</th>
-            <th class="text-right">{{ __('Budgeted') }}</th>
-            <th class="text-right d-none d-md-table-cell">{{ __('Activity') }}</th>
-            <th class="text-right">{{ __('Available') }}</th>
-        </tr>
-        </thead>
-        @forelse ($sheet->getRows() as $row)
-            <tr>
-                <td>
-                    <a href="{{ route('categories.edit', [$budget->id, $row->getCategory()->id]) }}"
-                       title="{{ __('Edit Category') }}" class="text-dark">
-                        {{ $row->getCategory()->name }}
-                    </a>
-                </td>
-                <td class="text-right">
-                    <a class="{{ ($row->getBudgeted() == 0)?'text-muted':'text-dark' }}"
-                       href="{{ route('categories.budget', [$budget->id, $row->getCategory()->id, (string) $month]) }}">
-                        {{ Currency::format($row->getBudgeted(), $budget->currency) }}
-                    </a>
-                </td>
-                <td class="d-none d-md-table-cell text-right {{ ($row->getActivity() == 0)?'text-muted':'text-dark' }}">{{ Currency::format($row->getActivity(), $budget->currency) }}</td>
-                <td class="text-right">
-                    <span style="font-size: 100%"
-                          class="badge {{ ($row->getAvailable() == 0)?'badge-secondary':(($row->getAvailable() >= 0)?'badge-success':'badge-danger') }}">
-                        {{ Currency::format($row->getAvailable(), $budget->currency) }}
-                    </span>
-                </td>
-            </tr>
-        @empty
-            <tr>
-                <td colspan="4" class="text-muted text-center">
-                    {{ __('No categories available.') }}
-                </td>
-            </tr>
-        @endforelse
-    </table>
+    <budget-monthly-view :rows="{{ json_encode($sheet->getRows()) }}"></budget-monthly-view>
 
     <p class="text-right px-2 px-md-0">
         <a href="{{ route('categories.create', [$budget->id]) }}" class="text-muted small ">

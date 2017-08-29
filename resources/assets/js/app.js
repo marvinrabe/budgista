@@ -21,6 +21,7 @@ window.trans = (string) => _.get(window.i18n, string);
 
 window.Vue = require('vue');
 
+Vue.component('budget-monthly-view', require('./components/BudgetMonthlyView.vue'));
 Vue.component('recurrence', require('./components/Recurrence.vue'));
 
 Vue.prototype.trans = (string, args) => {
