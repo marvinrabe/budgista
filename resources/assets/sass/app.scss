@@ -90,7 +90,7 @@ a.text-muted:hover {
 
 }
 
-@media (max-width: #{map-get($grid-breakpoints, 'md')}) {
+@media (max-width: #{map-get($grid-breakpoints, 'md')}-1px) {
   // xs, sm
   .container {
     max-width: 100%;
