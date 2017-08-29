@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\BudgetTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Alsofronie\Uuid\UuidModelTrait;
@@ -33,7 +34,7 @@ class Account extends Model
 
     public function unclearedBalance()
     {
-        return $this->transactions()->where('cleared', '=', false)->sum('amount');
+        return $this->transactions()->where([['cleared', '=', false], ['date','<=', Carbon::now()]])->sum('amount');
     }
 
     public function workingBalance()
