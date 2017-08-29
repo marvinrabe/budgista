@@ -3,31 +3,29 @@
 @section('body')
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('img/logo.svg') }}">
-                {{ config('app.name') }}
-            </a>
+            <div class="d-lg-none width-100">
+                <button class="menu-open btn btn-outline-light float-left" type="button"
+                        aria-controls="menu" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="navbar-nav mr-auto"></div>
+                @yield('navbar')
+            </div>
 
-            <button class="menu-open btn btn-outline-light d-lg-none" type="button"
-                    aria-controls="menu" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="d-none d-lg-block width-100">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{ asset('img/logo.svg') }}">
+                    {{ config('app.name') }}
+                </a>
 
-            <ul class="navbar-nav d-none d-lg-block">
-                @if (Auth::guest())
-                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
-                @else
+                <ul class="navbar-nav float-right">
                     @include('auth.menu')
-                @endif
-            </ul>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container px-0 px-lg-2 pb-2 py-lg-2">
 
         <div class="row">
             <div class="col-lg-3 col-xl-3">
@@ -93,6 +91,7 @@
                 @include('helpers.successes')
 
                 @yield('content')
+
             </div>
         </div>
 

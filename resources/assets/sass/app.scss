@@ -14,6 +14,14 @@ body {
   padding-top: 5rem;
 }
 
+.table {
+  th {
+    @extend .p-1;
+    font-size: $small-font-size;
+    text-transform: uppercase;
+  }
+}
+
 .navbar-brand {
   img {
     height: 24px;
@@ -71,7 +79,27 @@ a.text-muted:hover {
     }
   }
 
-  padding-top: 1rem;
   background: $gray-100;
+  padding-top: 1rem;
 
+}
+
+.layout-budget {
+
+  padding-top: 3.5rem;
+
+}
+
+@media (max-width: #{map-get($grid-breakpoints, 'md')}) {
+  // xs, sm
+  .container {
+    max-width: 100%;
+  }
+}
+
+/*
+ * Helper
+ */
+.width-100 {
+  width: 100%;
 }
