@@ -10,6 +10,11 @@
             {{ Form::model($transaction, ['route' => ['transactions.update', $budget->id, $transaction->id], 'method' => 'PUT', 'id' => 'form']) }}
 
                 <div class="form-group">
+                    {{ Form::label('amount', __('Amount')) }}
+                    {{ Form::number('amount', null, array('class' => 'form-control', 'step' => '0.01', 'autofocus', 'autocomplete' => 'off')) }}
+                </div>
+
+                <div class="form-group">
                     {{ Form::label('account_id', __('Account')) }}
                     {{ Form::select('account_id', $accounts, null, ['class' => 'form-control']) }}
                 </div>
@@ -23,7 +28,7 @@
 
                 <div class="form-group">
                     {{ Form::label('payee', __('Payee')) }}
-                    {{ Form::text('payee', null, array('class' => 'form-control')) }}
+                    {{ Form::text('payee', null, array('class' => 'form-control', 'autocomplete' => 'off')) }}
                 </div>
 
                 <div class="form-group">
@@ -33,12 +38,7 @@
 
                 <div class="form-group">
                     {{ Form::label('memo', __('Memo')) }}
-                    {{ Form::text('memo', null, array('class' => 'form-control')) }}
-                </div>
-
-                <div class="form-group">
-                    {{ Form::label('amount', __('Amount')) }}
-                    {{ Form::number('amount', null, array('class' => 'form-control', 'step' => '0.01')) }}
+                    {{ Form::text('memo', null, array('class' => 'form-control', 'autocomplete' => 'off')) }}
                 </div>
 
             {{ Form::close() }}

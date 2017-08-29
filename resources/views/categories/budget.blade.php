@@ -11,7 +11,7 @@
 
             <div class="form-group">
                 {{ Form::label('amount', __('Amount')) }}
-                {{ Form::number('amount', null, ['class' => 'form-control', 'step' => '0.01']) }}
+                {{ Form::number('amount', null, ['class' => 'form-control', 'step' => '0.01', 'autofocus', 'autocomplete' => 'off']) }}
             </div>
 
             {{ Form::submit(__('Budget'), array('class' => 'btn btn-primary')) }}

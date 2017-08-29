@@ -12,7 +12,7 @@
 
             <div class="form-group">
                 {{ Form::label('name', __('Name')) }}
-                {{ Form::text('name', null, ['class' => 'form-control']) }}
+                {{ Form::text('name', null, ['class' => 'form-control', 'autofocus']) }}
             </div>
 
             <div class="form-group">
