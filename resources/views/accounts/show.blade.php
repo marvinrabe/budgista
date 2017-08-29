@@ -29,8 +29,8 @@
             <th>{{ __('Payee') }}</th>
             <th>{{ __('Category') }}</th>
             <th>{{ __('Memo') }}</th>
-            <th>{{ __('Outflow') }}</th>
-            <th>{{ __('Inflow') }}</th>
+            <th class="text-right">{{ __('Outflow') }}</th>
+            <th class="text-right">{{ __('Inflow') }}</th>
             <th></th>
         </tr>
         </thead>

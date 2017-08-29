@@ -52,9 +52,9 @@
         <thead>
         <tr>
             <th>{{ __('Category') }}</th>
-            <th>{{ __('Budgeted') }}</th>
-            <th class="d-none d-md-table-cell">{{ __('Activity') }}</th>
-            <th>{{ __('Available') }}</th>
+            <th class="text-right">{{ __('Budgeted') }}</th>
+            <th class="text-right d-none d-md-table-cell">{{ __('Activity') }}</th>
+            <th class="text-right">{{ __('Available') }}</th>
         </tr>
         </thead>
         @forelse ($sheet->getRows() as $row)
