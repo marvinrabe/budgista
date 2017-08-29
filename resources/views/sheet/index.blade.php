@@ -4,10 +4,14 @@
 @section('navbar')
     <div class="h3 mt-1 mt-lg-0 mb-0 text-center text-lg-left" style="line-height: 1rem;">
         <a class="btn btn-secondary rounded-circle"
-           href="{{ route('sheet', [$budget->id, (string) $month->previous()]) }}" title="{{ __('Previous Month') }}">&laquo;</a>
+           href="{{ route('sheet', [$budget->id, (string) $month->previous()]) }}" title="{{ __('Previous Month') }}">
+            <span class="fa fa-chevron-left"></span>
+        </a>
         {{ $month->forHumans() }}
         <a class="btn btn-secondary rounded-circle" href="{{ route('sheet', [$budget->id, (string) $month->next()]) }}"
-           title="{{ __('Next Month') }}">&raquo;</a>
+           title="{{ __('Next Month') }}">
+            <span class="fa fa-chevron-right"></span>
+        </a>
     </div>
 @endsection
 
@@ -22,16 +26,20 @@
         </div>
     </div>
 
-    <div class="d-none d-lg-flex form-row mb-3" style="align-items: center;">
-        <div class="col">
-            <div class="h3 mb-0">
+    <div class="d-none d-lg-flex form-row mb-3" style="align-items: flex-end;">
+        <div class="col-6">
+            <div class="h3 display-4 mb-0">
                 <a class="btn btn-secondary rounded-circle"
                    href="{{ route('sheet', [$budget->id, (string) $month->previous()]) }}"
-                   title="{{ __('Previous Month') }}">&laquo;</a>
+                   title="{{ __('Previous Month') }}">
+                    <span class="fa fa-chevron-left"></span>
+                </a>
                 {{ $month->forHumans() }}
                 <a class="btn btn-secondary rounded-circle"
                    href="{{ route('sheet', [$budget->id, (string) $month->next()]) }}"
-                   title="{{ __('Next Month') }}">&raquo;</a>
+                   title="{{ __('Next Month') }}">
+                    <span class="fa fa-chevron-right"></span>
+                </a>
             </div>
         </div>
         <div class="col text-right">
