@@ -33,7 +33,6 @@
 
                         <nav class="navbar navbar-dark bg-primary mb-3 d-lg-none">
                             <a class="navbar-brand logo logo-white" href="{{ url('/') }}">
-                                <img src="{{ asset('img/logo_white.svg') }}">
                                 {{ config('app.name') }}
                             </a>
                             <div class="navbar-nav mr-auto"></div>
