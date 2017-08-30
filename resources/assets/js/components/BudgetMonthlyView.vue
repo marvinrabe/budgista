@@ -15,16 +15,19 @@
                 </a>
             </td>
             <td class="text-right">
-                <a href="" v-bind:class="[{ 'text-muted': row.budgeted == 0 }, 'text-dark']">
-                    {{ row.budgeted }}
+                <a href=""
+                   v-bind:class="[{ 'text-muted': row.budgeted == 0 }, 'text-dark']"
+                   v-html="$formatNumber(row.budgeted, {style: 'currency', currency: currency})">
                 </a>
             </td>
-            <td class="text-right" v-bind:class="[{ 'text-muted': row.activity == 0 }, 'text-dark']">
-                {{ row.activity }}
+            <td class="text-right"
+                v-bind:class="[{ 'text-muted': row.activity == 0 }, 'text-dark']"
+                v-html="$formatNumber(row.activity, {style: 'currency', currency: currency})">
             </td>
             <td class="text-right">
-                <span style="font-size: 100%" class="badge" v-bind:class="[{ 'badge-danger': row.available < 0 }, { 'badge-success': row.available > 0 }, 'badge-secondary']">
-                    {{ row.available }}
+                <span style="font-size: 100%" class="badge"
+                      v-bind:class="[{ 'badge-danger': row.available < 0 }, { 'badge-success': row.available > 0 }, 'badge-secondary']"
+                      v-html="$formatNumber(row.available, {style: 'currency', currency: currency})">
                 </span>
             </td>
         </tr>
@@ -33,6 +36,9 @@
 
 <script>
     export default {
-        props: ['rows']
+        props: ['rows'],
+        computed: {
+            currency: function () { return window.currency; }
+        }
     }
 </script>
