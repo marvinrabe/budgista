@@ -7,39 +7,39 @@
     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
         {{ csrf_field() }}
 
-        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+        <div class="form-group">
             <label for="name" class="control-label">{{ __('Name') }}</label>
 
-            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+            <input id="name" class="form-control {{ $errors->has('name') ? 'is-invald' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
 
             @if ($errors->has('name'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('name') }}</strong>
-                </span>
+                <div class="invalid-feedback">
+                    {{ $errors->first('name') }}
+                </div>
             @endif
         </div>
 
-        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+        <div class="form-group">
             <label for="email" class="control-label">{{ __('E-Mail Address') }}</label>
 
-            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+            <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'is-invald' : '' }}" name="email" value="{{ old('email') }}" required>
 
             @if ($errors->has('email'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
+                <div class="invalid-feedback">
+                    {{ $errors->first('email') }}
+                </div>
             @endif
         </div>
 
-        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+        <div class="form-group">
             <label for="password" class="control-label">{{ __('Password') }}</label>
 
-            <input id="password" type="password" class="form-control" name="password" required>
+            <input id="password" type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" required>
 
             @if ($errors->has('password'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('password') }}</strong>
-                </span>
+                <div class="invalid-feedback">
+                    {{ $errors->first('password') }}
+                </div>
             @endif
         </div>
 
@@ -50,7 +50,7 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">
+            <button class="btn btn-primary">
                 {{ __('Register') }}
             </button>
         </div>
