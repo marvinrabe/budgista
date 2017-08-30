@@ -13,8 +13,7 @@
             </div>
 
             <div class="d-none d-lg-block width-100">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('img/logo.svg') }}">
+                <a class="navbar-brand logo" href="{{ url('/') }}">
                     {{ config('app.name') }}
                 </a>
 
@@ -33,8 +32,7 @@
                     <div class="app-menu">
 
                         <nav class="navbar navbar-dark bg-primary mb-3 d-lg-none">
-                            <a class="navbar-brand" href="{{ url('/') }}">
-                                <img src="{{ asset('img/logo_white.svg') }}">
+                            <a class="navbar-brand logo logo-white" href="{{ url('/') }}">
                                 {{ config('app.name') }}
                             </a>
                             <div class="navbar-nav mr-auto"></div>

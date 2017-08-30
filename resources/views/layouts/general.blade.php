@@ -3,8 +3,7 @@
 @section('body')
     <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('img/logo.svg') }}">
+            <a class="navbar-brand logo" href="{{ url('/') }}">
                 {{ config('app.name') }}
             </a>
 

@@ -6,6 +6,7 @@
 // Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "pace";
+@import "logo";
 @import "errors";
 @import "font-awesome";
 @import "menu";
@@ -69,15 +70,6 @@ a.text-muted:hover {
 }
 
 .layout-auth {
-
-  .logo {
-    margin-bottom: 1rem;
-
-    img {
-      height: 3rem;
-      vertical-align: text-bottom;
-    }
-  }
 
   background: $gray-100;
   padding-top: 1rem;

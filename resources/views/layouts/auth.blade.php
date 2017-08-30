@@ -6,8 +6,7 @@
         <div class="row justify-content-md-center">
             <div class="col-sm-12 col-md-8 col-lg-6 col-lg-4 center">
 
-                <div class="text-center h1 logo">
-                    <img src="{{ asset('img/logo.svg') }}">
+                <div class="text-center h1 logo mb-3">
                     {{ config('app.name') }}
                 </div>
 
