@@ -24,7 +24,7 @@
         </div>
     </nav>
 
-    <div class="container px-0 px-lg-2 pb-2 py-lg-2">
+    <div class="container px-0 px-lg-2 pb-2 py-lg-4">
 
         <div class="row">
             <div class="col-lg-3 col-xl-3">
@@ -33,6 +33,7 @@
 
                         <nav class="navbar navbar-dark bg-primary mb-3 d-lg-none">
                             <a class="navbar-brand logo logo-white" href="{{ url('/') }}">
+                                <img src="{{ asset('img/logo_white.svg') }}">
                                 {{ config('app.name') }}
                             </a>
                             <div class="navbar-nav mr-auto"></div>

@@ -1,18 +1,20 @@
 /**
  * Budgetist
  */
+
 // Variables
 @import "variables";
 // Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
+
 @import "pace";
 @import "logo";
-@import "errors";
 @import "font-awesome";
+@import "errors";
 @import "menu";
 
 body {
-  padding-top: 5rem;
+  padding-top: 3.5rem;
 }
 
 .table {
@@ -20,13 +22,6 @@ body {
     @extend .p-1;
     font-size: $small-font-size;
     text-transform: uppercase;
-  }
-}
-
-.navbar-brand {
-  img {
-    height: 24px;
-    vertical-align: text-bottom;
   }
 }
 
@@ -73,12 +68,6 @@ a.text-muted:hover {
 
   background: $gray-100;
   padding-top: 1rem;
-
-}
-
-.layout-budget {
-
-  padding-top: 3.5rem;
 
 }
 
