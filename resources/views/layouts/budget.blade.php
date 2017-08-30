@@ -24,7 +24,7 @@
         </div>
     </nav>
 
-    <div class="container px-0 px-lg-2 pb-2 py-lg-4">
+    <div class="container px-0 px-lg-2 pb-2 py-lg-2">
 
         <div class="row">
             <div class="col-lg-3 col-xl-3">
