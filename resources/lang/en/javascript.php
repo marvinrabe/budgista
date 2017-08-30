@@ -4,6 +4,8 @@ return [
     'action' => [
         'yes' => 'Yes',
         'no' => 'No',
+        'nextMonth' => 'Next Month',
+        'previousMonth' => 'Previous Month'
     ],
     'are-you-sure' => [
         'title' => 'Delete Item',
@@ -16,7 +18,10 @@ return [
         'category' => 'Category',
         'budgeted' => 'Budgeted',
         'activity' => 'Activity',
-        'available' => 'Available'
+        'available' => 'Available',
+        'funds' => 'Funds',
+        'toBeBudgeted' => 'To be Budgeted',
+        'previousMonth' => 'Previous Month'
     ],
     'frequency' => [
         'daily' => 'Daily',

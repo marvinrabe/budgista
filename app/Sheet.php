@@ -4,8 +4,9 @@ namespace App;
 
 use App\Models\Budget;
 use App\Models\CategoryBudget;
+use JsonSerializable;
 
-class Sheet
+class Sheet implements JsonSerializable
 {
 
     protected $budget;
@@ -62,4 +63,22 @@ class Sheet
         return $this->getPreviousMonthAvailable() + $this->getFunds() - $this->getBudgeted();
     }
 
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize()
+    {
+        return [
+            'month' => (string) $this->month,
+            'previousMonth' => (double) $this->getPreviousMonthAvailable(),
+            'budgeted' => (double) $this->getBudgeted(),
+            'funds' => (double) $this->getFunds(),
+            'available' => (double) $this->getAvailable(),
+            'rows' => $this->rows
+        ];
+    }
 }

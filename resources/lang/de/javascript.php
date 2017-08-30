@@ -4,6 +4,8 @@ return [
     'action' => [
         'yes' => 'Ja',
         'no' => 'Nein',
+        'nextMonth' => 'Nächster Monat',
+        'previousMonth' => 'Vorheriger Monat'
     ],
     'are-you-sure' => [
         'title' => 'Eintrag löschen',
@@ -14,9 +16,12 @@ return [
         'recurringFrequency' => 'Wird wiederholt',
         'recurringInterval' => 'Wiederholen alle',
         'category' => 'Kategorie',
-        'budgeted' => 'Geplant',
+        'budgeted' => 'Budgetiert',
         'activity' => 'Aktivität',
-        'available' => 'Verfügbar'
+        'available' => 'Verfügbar',
+        'funds' => 'Einkünfte',
+        'toBeBudgeted' => 'Zu Budgetieren',
+        'previousMonth' => 'Vormonat'
     ],
     'frequency' => [
         'daily' => 'Täglich',
