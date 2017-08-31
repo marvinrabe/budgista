@@ -10,17 +10,17 @@
         </div>
     @endif
 
-    <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
+    <form class="form-horizontal" method="POST" action="{{ route('password.email') }}" class="{{ $errors->any()?'was-validated':'' }}">
         {{ csrf_field() }}
 
         <div class="form-group">
             <label for="email" class="control-label">{{ __('E-Mail Address') }}</label>
 
-            <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email') }}"
+            <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'border-danger' : '' }}" name="email" value="{{ old('email') }}"
                    required>
 
             @if ($errors->has('email'))
-                <div class="invalid-feedback">
+                <div class="form-text text-danger">
                     {{ $errors->first('email') }}
                 </div>
             @endif

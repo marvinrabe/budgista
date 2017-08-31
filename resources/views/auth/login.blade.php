@@ -7,26 +7,26 @@
     <form method="POST" action="{{ route('login') }}">
         {{ csrf_field() }}
 
-        <div class="form-group {{ $errors->has('email') ? 'is-invald' : '' }}">
+        <div class="form-group">
             <label for="email" class="control-label">{{ __('E-Mail Address') }}</label>
 
-            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required
+            <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'border-danger' : '' }}" name="email" value="{{ old('email') }}" required
                    autofocus>
 
             @if ($errors->has('email'))
-                <div class="invalid-feedback">
+                <div class="form-text text-danger">
                     {{ $errors->first('email') }}
                 </div>
             @endif
         </div>
 
-        <div class="form-group {{ $errors->has('password') ? 'is-invald' : '' }}">
+        <div class="form-group">
             <label for="password" class="control-label">{{ __('Password') }}</label>
 
-            <input id="password" type="password" class="form-control" name="password" required>
+            <input id="password" type="password" class="form-control {{ $errors->has('password') ? 'border-danger' : '' }}" name="password" required>
 
             @if ($errors->has('password'))
-                <div class="invalid-feedback">
+                <div class="form-text text-danger">
                     {{ $errors->first('password') }}
                 </div>
             @endif
