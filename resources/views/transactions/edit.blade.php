@@ -11,24 +11,24 @@
 
                 <div class="form-group">
                     {{ Form::label('amount', __('Amount')) }}
-                    {{ Form::number('amount', null, array('class' => 'form-control', 'step' => '0.01', 'autofocus', 'autocomplete' => 'off')) }}
+                    {{ Form::number('amount', null, array('class' => 'form-control', 'step' => '0.01', 'autofocus', 'autocomplete' => 'off', 'required')) }}
                 </div>
 
                 <div class="form-group">
                     {{ Form::label('account_id', __('Account')) }}
-                    {{ Form::select('account_id', $accounts, null, ['class' => 'form-control']) }}
+                    {{ Form::select('account_id', $accounts, null, ['class' => 'form-control', 'required']) }}
                 </div>
 
                 <div class="form-group">
                     {{ Form::label('date', __('Date')) }}
-                    {{ Form::date('date', $transaction->date, array('class' => 'form-control')) }}
+                    {{ Form::date('date', $transaction->date, array('class' => 'form-control', 'required')) }}
                 </div>
 
                 <recurrence rule="{{ $transaction->rrule }}"></recurrence>
 
                 <div class="form-group">
                     {{ Form::label('payee', __('Payee')) }}
-                    {{ Form::text('payee', null, array('class' => 'form-control', 'autocomplete' => 'off')) }}
+                    {{ Form::text('payee', null, array('class' => 'form-control', 'autocomplete' => 'off', 'required')) }}
                 </div>
 
                 <div class="form-group">

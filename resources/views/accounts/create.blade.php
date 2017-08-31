@@ -19,7 +19,7 @@
 
             <div class="form-group">
                 {{ Form::label('name', __('Name')) }}
-                {{ Form::text('name', Input::old('name'), array('class' => 'form-control', 'autofocus', 'autocomplete' => 'off')) }}
+                {{ Form::text('name', Input::old('name'), array('class' => 'form-control', 'autofocus', 'autocomplete' => 'off', 'required')) }}
             </div>
 
             {{ Form::submit(__('Add Account'), array('class' => 'btn btn-primary')) }}
