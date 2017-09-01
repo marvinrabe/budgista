@@ -4,7 +4,7 @@
 
     <h4 class="card-title">{{ __('Register') }}</h4>
 
-    <form class="form-horizontal" method="POST" action="{{ route('register') }}" class="{{ $errors->any()?'was-validated':'' }}">
+    <form method="POST" action="{{ route('register') }}" class="{{ $errors->any()?'was-validated':'' }}">
         {{ csrf_field() }}
 
         <div class="form-group">

@@ -10,7 +10,7 @@
         </div>
     @endif
 
-    <form class="form-horizontal" method="POST" action="{{ route('password.email') }}" class="{{ $errors->any()?'was-validated':'' }}">
+    <form method="POST" action="{{ route('password.email') }}" class="{{ $errors->any()?'was-validated':'' }}">
         {{ csrf_field() }}
 
         <div class="form-group">
