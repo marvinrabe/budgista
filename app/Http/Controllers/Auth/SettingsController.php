@@ -39,7 +39,7 @@ class SettingsController
         $user->email = Input::get('email');
 
         if (!empty(Input::get('password'))) {
-            $user->password = Input::get('password');
+            $user->password = bcrypt('password');
         }
 
         $user->locale = Input::get('locale');
