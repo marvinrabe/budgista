@@ -1,10 +1,10 @@
 @font-face {
-    font-family: 'Budgetist';
-    src: url('../fonts/budgetist.eot');
-    src: url('../fonts/budgetist.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/budgetist.woff') format('woff'),
-         url('../fonts/budgetist.ttf') format('truetype'),
-         url('../fonts/budgetist.svg#Glyphter') format('svg');
+    font-family: 'Budgista';
+    src: url('../fonts/budgista.eot');
+    src: url('../fonts/budgista.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/budgista.woff') format('woff'),
+         url('../fonts/budgista.ttf') format('truetype'),
+         url('../fonts/budgista.svg#Glyphter') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -21,7 +21,7 @@
 
   &:before{
     display: inline-block;
-    font-family: 'Budgetist';
+    font-family: 'Budgista';
     font-style: normal;
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
