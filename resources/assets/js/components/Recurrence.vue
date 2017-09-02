@@ -72,7 +72,7 @@
                 console.log(exception);
                 return {
                     'recurring': false,
-                    'freq': RRule.DAILY,
+                    'freq': RRule.MONTHLY,
                     'interval': 1
                 }
             }

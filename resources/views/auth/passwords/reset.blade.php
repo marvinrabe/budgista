@@ -10,51 +10,51 @@
         </div>
     @endif
 
-    <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
+    <form method="POST" action="{{ route('password.request') }}" class="{{ $errors->any()?'was-validated':'' }}">
         {{ csrf_field() }}
 
         <input type="hidden" name="token" value="{{ $token }}">
 
-        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+        <div class="form-group">
             <label for="email" class="control-label">{{ __('E-Mail Address') }}</label>
 
-            <input id="email" type="email" class="form-control" name="email"
+            <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'border-danger' : '' }}" name="email"
                    value="{{ $email or old('email') }}" required autofocus>
 
             @if ($errors->has('email'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
-            @endif
-        </div>
-
-        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-            <label for="password" class="control-label">{{ __('Password') }}</label>
-
-            <input id="password" type="password" class="form-control" name="password" required>
-
-            @if ($errors->has('password'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('password') }}</strong>
-                </span>
-            @endif
-        </div>
-
-        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-            <label for="password-confirm" class="control-label">{{ __('Confirm Password') }}</label>
-
-            <input id="password-confirm" type="password" class="form-control"
-                   name="password_confirmation" required>
-
-            @if ($errors->has('password_confirmation'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('password_confirmation') }}</strong>
-                </span>
+                <div class="form-text text-danger">
+                    {{ $errors->first('email') }}
+                </div>
             @endif
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">
+            <label for="password" class="control-label">{{ __('Password') }}</label>
+
+            <input id="password" type="password" class="form-control {{ $errors->has('password') ? 'border-danger' : '' }}" name="password" required>
+
+            @if ($errors->has('password'))
+                <div class="form-text text-danger">
+                    {{ $errors->first('password') }}
+                </div>
+            @endif
+        </div>
+
+        <div class="form-group">
+            <label for="password-confirm" class="control-label">{{ __('Confirm Password') }}</label>
+
+            <input id="password-confirm" type="password" class="form-control {{ $errors->has('password_confirmation') ? 'border-danger' : '' }}"
+                   name="password_confirmation" required>
+
+            @if ($errors->has('password_confirmation'))
+                <div class="form-text text-danger">
+                    {{ $errors->first('password_confirmation') }}
+                </div>
+            @endif
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary">
                 {{ __('Reset Password') }}
             </button>
         </div>

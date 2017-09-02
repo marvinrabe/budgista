@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Budgista';
+    src: url('../fonts/budgista.eot');
+    src: url('../fonts/budgista.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/budgista.woff') format('woff'),
+         url('../fonts/budgista.ttf') format('truetype'),
+         url('../fonts/budgista.svg#Glyphter') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.logo {
+
+  &.logo-white {
+    color: white !important;
+  }
+
+  &.logo-white:before {
+    color: white !important;
+  }
+
+  &:before{
+    display: inline-block;
+    font-family: 'Budgista';
+    font-style: normal;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align: bottom;
+    content:'\0041';
+    color: $link-color;
+  }
+
+  font-weight: 200;
+
+}

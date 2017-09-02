@@ -10,20 +10,25 @@
             {{ Form::open(['route' => ['transactions.store', $budget->id]]) }}
 
             <div class="form-group">
+                {{ Form::label('amount', __('Amount')) }}
+                {{ Form::number('amount', Input::old('amount'), array('class' => 'form-control', 'step' => '0.01', 'autofocus', 'autocomplete' => 'off', 'required')) }}
+            </div>
+
+            <div class="form-group">
                 {{ Form::label('account_id', __('Account')) }}
-                {{ Form::select('account_id', $accounts, Input::old('account_id', Request::query('account')), ['class' => 'form-control']) }}
+                {{ Form::select('account_id', $accounts, Input::old('account_id', Request::query('account')), ['class' => 'form-control', 'required']) }}
             </div>
 
             <div class="form-group">
                 {{ Form::label('date', __('Date')) }}
-                {{ Form::date('date', Input::old('date', new \DateTime), array('class' => 'form-control')) }}
+                {{ Form::date('date', Input::old('date', new \DateTime), array('class' => 'form-control', 'required')) }}
             </div>
 
             <recurrence rule="{{ Input::old('rrule') }}"></recurrence>
 
             <div class="form-group">
                 {{ Form::label('payee', __('Payee')) }}
-                {{ Form::text('payee', Input::old('payee'), array('class' => 'form-control')) }}
+                {{ Form::text('payee', Input::old('payee'), array('class' => 'form-control', 'autocomplete' => 'off', 'required')) }}
             </div>
 
             <div class="form-group">
@@ -33,12 +38,7 @@
 
             <div class="form-group">
                 {{ Form::label('memo', __('Memo')) }}
-                {{ Form::text('memo', Input::old('memo'), array('class' => 'form-control')) }}
-            </div>
-
-            <div class="form-group">
-                {{ Form::label('amount', __('Amount')) }}
-                {{ Form::number('amount', Input::old('amount'), array('class' => 'form-control', 'step' => '0.01')) }}
+                {{ Form::text('memo', Input::old('memo'), array('class' => 'form-control', 'autocomplete' => 'off')) }}
             </div>
 
             {{ Form::submit(__('Create Transaction'), array('class' => 'btn btn-primary')) }}

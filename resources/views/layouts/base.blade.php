@@ -14,7 +14,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ asset('img/apple-touch-icon-120x120.png') }}"/>
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ asset('img/apple-touch-icon-152x152.png') }}"/>
 
-    <link rel='mask-icon' href='{{ asset('img/logo_black.svg') }}' color='#007BFF'>
+    <link rel='mask-icon' href='{{ asset('img/icon.svg') }}' color='#007BFF'>
     <link rel="manifest" href="{{ asset('manifest.json') }}">
 
     {{--

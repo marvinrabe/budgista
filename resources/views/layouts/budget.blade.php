@@ -3,20 +3,25 @@
 @section('body')
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
+            <div class="d-lg-none width-100">
+                <button class="menu-open btn btn-outline-light float-left" type="button"
+                        aria-controls="menu" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('img/logo.svg') }}">
-                {{ config('app.name') }}
-            </a>
+                @yield('navbar')
+            </div>
 
-            <button class="menu-open btn btn-outline-light float-right d-lg-none" type="button"
-                    aria-controls="menu" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="d-none d-lg-block width-100">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{ asset('img/logo.svg') }}">
+                    {{ config('app.name') }}
+                </a>
 
-            <ul class="navbar-nav float-right d-none d-lg-block">
-                @include('auth.menu')
-            </ul>
+                <ul class="navbar-nav float-right">
+                    @include('auth.menu')
+                </ul>
+            </div>
         </div>
     </nav>
 

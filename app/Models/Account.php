@@ -39,7 +39,7 @@ class Account extends Model
 
     public function workingBalance()
     {
-        return $this->transactions()->sum('amount');
+        return $this->transactions()->where('date','<=', Carbon::now())->sum('amount');
     }
 
 }

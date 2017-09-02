@@ -10,13 +10,13 @@
             <span class="text-muted">{{ Auth::user()->email }}</span>
         </div>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="{{ route('settings') }}">
-            <span class="fa fa-cogs fa-fw"></span>
-            {{ __('Settings') }}
-        </a>
         <a class="dropdown-item" href="{{ route('budgets.index') }}">
-            <span class="fa fa-list fa-fw"></span>
+            <span class="fa fa-th-large fa-fw"></span>
             {{ __('Budgets') }}
+        </a>
+        <a class="dropdown-item" href="{{ route('settings') }}">
+            <span class="fa fa-cog fa-fw"></span>
+            {{ __('Settings') }}
         </a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#"

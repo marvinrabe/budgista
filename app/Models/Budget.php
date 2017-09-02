@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Month;
 use App\Sheet;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Alsofronie\Uuid\UuidModelTrait;
 
@@ -11,6 +12,15 @@ class Budget extends Model
 {
 
     use UuidModelTrait;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('name', function (Builder $builder) {
+            $builder->orderBy('name', 'asc');
+        });
+    }
 
     public function user()
     {
