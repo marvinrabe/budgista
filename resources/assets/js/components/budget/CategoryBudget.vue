@@ -1,21 +1,21 @@
 <template>
-    <div>
-        <a class="link-action"
+    <td v-bind:class="[{ 'py-0': edit }]" class="text-right">
+        <div class="link-action width-100"
            v-show="!edit"
            v-on:click="toggleEdit"
            v-bind:class="[{ 'text-muted': mutableValue == 0 }, 'text-dark']">
             {{ formattedValue }}
-        </a>
+        </div>
 
         <input type="number"
-               class="form-control form-control-sm"
+               class="form-control form-control-sm text-right"
                step="0.01"
                v-model="mutableValue"
                ref="input"
                v-show="edit"
                v-on:keyup.enter="saveEdit"
                v-on:blur="saveEdit">
-    </div>
+    </td>
 </template>
 
 <script>

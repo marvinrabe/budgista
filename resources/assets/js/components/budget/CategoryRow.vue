@@ -5,9 +5,7 @@
                 {{ category.name }}
             </a>
         </td>
-        <td class="text-right">
-            <category-budget :value="category.budgeted" @update:value="val => updateBudget(val)"></category-budget>
-        </td>
+        <category-budget :value="category.budgeted" @update:value="val => updateBudget(val)"></category-budget>
         <td class="text-right"
             v-bind:class="[{ 'text-muted': category.activity == 0 }, 'text-dark']"
             v-html="$formatNumber(category.activity, {style: 'currency', currency: currency})">

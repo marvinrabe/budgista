@@ -40,7 +40,7 @@
                         {{ $t('form.category') }}
                         <category-new :budget="budget" :month="sheet.month" v-on:newCategory="category => sheet.rows.push(category)"></category-new>
                     </th>
-                    <th class="text-right">{{ $t('form.budgeted') }}</th>
+                    <th class="text-right" width="150">{{ $t('form.budgeted') }}</th>
                     <th class="text-right">{{ $t('form.activity') }}</th>
                     <th class="text-right">{{ $t('form.available') }}</th>
                 </tr>

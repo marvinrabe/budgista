@@ -55500,7 +55500,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "newCategory": function (category) { return _vm.sheet.rows.push(category); }
     }
   })], 1), _vm._v(" "), _c('th', {
-    staticClass: "text-right"
+    staticClass: "text-right",
+    attrs: {
+      "width": "150"
+    }
   }, [_vm._v(_vm._s(_vm.$t('form.budgeted')))]), _vm._v(" "), _c('th', {
     staticClass: "text-right"
   }, [_vm._v(_vm._s(_vm.$t('form.activity')))]), _vm._v(" "), _c('th', {
@@ -56879,8 +56882,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['budget', 'category'],
@@ -56923,16 +56924,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "title": _vm.$t('action.edit.category')
     }
-  }, [_vm._v("\n            " + _vm._s(_vm.category.name) + "\n        ")])]), _vm._v(" "), _c('td', {
-    staticClass: "text-right"
-  }, [_c('category-budget', {
+  }, [_vm._v("\n            " + _vm._s(_vm.category.name) + "\n        ")])]), _vm._v(" "), _c('category-budget', {
     attrs: {
       "value": _vm.category.budgeted
     },
     on: {
       "update:value": function (val) { return _vm.updateBudget(val); }
     }
-  })], 1), _vm._v(" "), _c('td', {
+  }), _vm._v(" "), _c('td', {
     staticClass: "text-right",
     class: [{
       'text-muted': _vm.category.activity == 0
@@ -56961,7 +56960,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         currency: _vm.currency
       }))
     }
-  })])])
+  })])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -57095,14 +57094,19 @@ var _this = this;
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('a', {
+  return _c('td', {
+    staticClass: "text-right",
+    class: [{
+      'py-0': _vm.edit
+    }]
+  }, [_c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
       value: (!_vm.edit),
       expression: "!edit"
     }],
-    staticClass: "link-action",
+    staticClass: "link-action width-100",
     class: [{
       'text-muted': _vm.mutableValue == 0
     }, 'text-dark'],
@@ -57122,7 +57126,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "edit"
     }],
     ref: "input",
-    staticClass: "form-control form-control-sm",
+    staticClass: "form-control form-control-sm text-right",
     attrs: {
       "type": "number",
       "step": "0.01"
