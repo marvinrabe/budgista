@@ -24,8 +24,30 @@ window.Vue = require('vue');
 Vue.use(require('vue-intl'));
 Vue.setLocale(window.locale);
 
-Vue.component('budget-monthly-view', require('./components/BudgetMonthlyView.vue'));
-Vue.component('recurrence', require('./components/Recurrence.vue'));
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue')
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue')
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue')
+);
+
+Vue.component(
+    'budget-monthly-view',
+    require('./components/BudgetMonthlyView.vue')
+);
+
+Vue.component(
+    'recurrence',
+    require('./components/Recurrence.vue')
+);
 
 Vue.prototype.trans = (string, args) => {
     let value = _.get(window.i18n, string);

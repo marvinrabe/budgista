@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Alsofronie\Uuid\UuidModelTrait;
 
 class User extends Authenticatable
 {
-    use UuidModelTrait, Notifiable;
+    use HasApiTokens, UuidModelTrait, Notifiable;
 
     /**
      * The attributes that are mass assignable.
