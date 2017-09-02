@@ -9,7 +9,7 @@
                                 :title="$t('action.previousMonth')" @click="showPreviousMonth">
                             <span class="fa fa-chevron-left"></span>
                         </button>
-                        {{ sheet.month }}
+                        <span v-html="$formatDate(new Date(sheet.month), { year: 'numeric', month: 'short' })"></span>
                         <button class="btn btn-secondary rounded-circle"
                                 :title="$t('action.nextMonth')" @click="showNextMonth">
                             <span class="fa fa-chevron-right"></span>
@@ -46,29 +46,7 @@
                     <th class="text-right">{{ $t('form.available') }}</th>
                 </tr>
                 </thead>
-                <tr v-for="row in sheet.rows">
-                    <td>
-                        <a class="text-dark" href="" :title="$t('action.edit.category')">
-                            {{ row.name }}
-                        </a>
-                    </td>
-                    <td class="text-right">
-                        <a href=""
-                           v-bind:class="[{ 'text-muted': row.budgeted == 0 }, 'text-dark']"
-                           v-html="$formatNumber(row.budgeted, {style: 'currency', currency: currency})">
-                        </a>
-                    </td>
-                    <td class="text-right"
-                        v-bind:class="[{ 'text-muted': row.activity == 0 }, 'text-dark']"
-                        v-html="$formatNumber(row.activity, {style: 'currency', currency: currency})">
-                    </td>
-                    <td class="text-right">
-                <span style="font-size: 100%" class="badge"
-                      v-bind:class="[{ 'badge-danger': row.available < 0 }, { 'badge-success': row.available > 0 }, 'badge-secondary']"
-                      v-html="$formatNumber(row.available, {style: 'currency', currency: currency})">
-                </span>
-                    </td>
-                </tr>
+                <category-row v-for="row in sheet.rows" :key="row.id" :category="row"></category-row>
             </table>
 
         </div>
@@ -79,7 +57,8 @@
     export default {
         props: ['budget'],
         components: {
-            'category-new': require('./CategoryNew.vue')
+            'category-new': require('./CategoryNew.vue'),
+            'category-row': require('./CategoryRow.vue')
         },
         computed: {
             currency: function () {

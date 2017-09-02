@@ -55186,33 +55186,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['budget'],
     components: {
-        'category-new': __webpack_require__(55)
+        'category-new': __webpack_require__(55),
+        'category-row': __webpack_require__(77)
     },
     computed: {
         currency: function currency() {
@@ -55453,7 +55432,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('span', {
     staticClass: "fa fa-chevron-left"
-  })]), _vm._v("\n                    " + _vm._s(_vm.sheet.month) + "\n                    "), _c('button', {
+  })]), _vm._v(" "), _c('span', {
+    domProps: {
+      "innerHTML": _vm._s(_vm.$formatDate(new Date(_vm.sheet.month), {
+        year: 'numeric',
+        month: 'short'
+      }))
+    }
+  }), _vm._v(" "), _c('button', {
     staticClass: "btn btn-secondary rounded-circle",
     attrs: {
       "title": _vm.$t('action.nextMonth')
@@ -55519,57 +55505,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.$t('form.activity')))]), _vm._v(" "), _c('th', {
     staticClass: "text-right"
   }, [_vm._v(_vm._s(_vm.$t('form.available')))])])]), _vm._v(" "), _vm._l((_vm.sheet.rows), function(row) {
-    return _c('tr', [_c('td', [_c('a', {
-      staticClass: "text-dark",
+    return _c('category-row', {
+      key: row.id,
       attrs: {
-        "href": "",
-        "title": _vm.$t('action.edit.category')
+        "category": row
       }
-    }, [_vm._v("\n                        " + _vm._s(row.name) + "\n                    ")])]), _vm._v(" "), _c('td', {
-      staticClass: "text-right"
-    }, [_c('a', {
-      class: [{
-        'text-muted': row.budgeted == 0
-      }, 'text-dark'],
-      attrs: {
-        "href": ""
-      },
-      domProps: {
-        "innerHTML": _vm._s(_vm.$formatNumber(row.budgeted, {
-          style: 'currency',
-          currency: _vm.currency
-        }))
-      }
-    })]), _vm._v(" "), _c('td', {
-      staticClass: "text-right",
-      class: [{
-        'text-muted': row.activity == 0
-      }, 'text-dark'],
-      domProps: {
-        "innerHTML": _vm._s(_vm.$formatNumber(row.activity, {
-          style: 'currency',
-          currency: _vm.currency
-        }))
-      }
-    }), _vm._v(" "), _c('td', {
-      staticClass: "text-right"
-    }, [_c('span', {
-      staticClass: "badge",
-      class: [{
-        'badge-danger': row.available < 0
-      }, {
-        'badge-success': row.available > 0
-      }, 'badge-secondary'],
-      staticStyle: {
-        "font-size": "100%"
-      },
-      domProps: {
-        "innerHTML": _vm._s(_vm.$formatNumber(row.available, {
-          style: 'currency',
-          currency: _vm.currency
-        }))
-      }
-    })])])
+    })
   })], 2)]) : _vm._e()])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
@@ -56855,6 +56796,163 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(78),
+  /* template */
+  __webpack_require__(79),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/marvin/Sites/budget/resources/assets/js/components/budget/CategoryRow.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] CategoryRow.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1e0f516a", Component.options)
+  } else {
+    hotAPI.reload("data-v-1e0f516a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 78 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['category'],
+    computed: {
+        currency: function currency() {
+            return window.currency;
+        }
+    }
+});
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('tr', [_c('td', [_c('a', {
+    staticClass: "link-action text-dark",
+    attrs: {
+      "title": _vm.$t('action.edit.category')
+    }
+  }, [_vm._v("\n            " + _vm._s(_vm.category.name) + "\n        ")])]), _vm._v(" "), _c('td', {
+    staticClass: "text-right"
+  }, [_c('a', {
+    staticClass: "link-action",
+    class: [{
+      'text-muted': _vm.category.budgeted == 0
+    }, 'text-dark'],
+    domProps: {
+      "innerHTML": _vm._s(_vm.$formatNumber(_vm.category.budgeted, {
+        style: 'currency',
+        currency: _vm.currency
+      }))
+    }
+  })]), _vm._v(" "), _c('td', {
+    staticClass: "text-right",
+    class: [{
+      'text-muted': _vm.category.activity == 0
+    }, 'text-dark'],
+    domProps: {
+      "innerHTML": _vm._s(_vm.$formatNumber(_vm.category.activity, {
+        style: 'currency',
+        currency: _vm.currency
+      }))
+    }
+  }), _vm._v(" "), _c('td', {
+    staticClass: "text-right"
+  }, [_c('span', {
+    staticClass: "badge",
+    class: [{
+      'badge-danger': _vm.category.available < 0
+    }, {
+      'badge-success': _vm.category.available > 0
+    }, 'badge-secondary'],
+    staticStyle: {
+      "font-size": "100%"
+    },
+    domProps: {
+      "innerHTML": _vm._s(_vm.$formatNumber(_vm.category.available, {
+        style: 'currency',
+        currency: _vm.currency
+      }))
+    }
+  })])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1e0f516a", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
