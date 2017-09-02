@@ -6,12 +6,12 @@
                 <div class="col-12 col-lg-6">
                     <div class="h3 display-4 mb-0 text-center text-lg-left">
                         <button class="btn btn-secondary rounded-circle"
-                                :title="trans('action.previousMonth')" @click="showPreviousMonth">
+                                :title="$t('action.previousMonth')" @click="showPreviousMonth">
                             <span class="fa fa-chevron-left"></span>
                         </button>
                         {{ sheet.month }}
                         <button class="btn btn-secondary rounded-circle"
-                                :title="trans('action.nextMonth')" @click="showNextMonth">
+                                :title="$t('action.nextMonth')" @click="showNextMonth">
                             <span class="fa fa-chevron-right"></span>
                         </button>
                     </div>
@@ -20,15 +20,15 @@
                     <div class="badge" v-bind:class="[{ 'badge-danger': sheet.available < 0 }, 'badge-success']">
                         <strong class="h3"
                                 v-html="$formatNumber(toBeBudgeted, {style: 'currency', currency: currency})"></strong><br>
-                        <span class="small">{{ trans('form.toBeBudgeted') }}</span>
+                        <span class="small">{{ $t('form.toBeBudgeted') }}</span>
                     </div>
                 </div>
                 <div class="col small">
-                    {{ trans('form.previousMonth') }}: <strong
+                    {{ $t('form.previousMonth') }}: <strong
                         v-html="$formatNumber(sheet.previousMonth, {style: 'currency', currency: currency})"></strong><br>
-                    {{ trans('form.funds') }}: <strong
+                    {{ $t('form.funds') }}: <strong
                         v-html="$formatNumber(sheet.funds, {style: 'currency', currency: currency})"></strong><br>
-                    {{ trans('form.budgeted') }}: <strong
+                    {{ $t('form.budgeted') }}: <strong
                         v-html="$formatNumber(budgeted, {style: 'currency', currency: currency})"></strong>
                 </div>
             </div>
@@ -38,17 +38,17 @@
                 <thead>
                 <tr>
                     <th>
-                        {{ trans('form.category') }}
-                        <a class="link-action text-muted" v-b-modal.createCategory title="Create Category"><span class="fa fa-plus"></span></a>
+                        {{ $t('form.category') }}
+                        <category-new :budget="budget" v-on:newCategory="category => sheet.rows.push(category)"></category-new>
                     </th>
-                    <th class="text-right">{{ trans('form.budgeted') }}</th>
-                    <th class="text-right">{{ trans('form.activity') }}</th>
-                    <th class="text-right">{{ trans('form.available') }}</th>
+                    <th class="text-right">{{ $t('form.budgeted') }}</th>
+                    <th class="text-right">{{ $t('form.activity') }}</th>
+                    <th class="text-right">{{ $t('form.available') }}</th>
                 </tr>
                 </thead>
                 <tr v-for="row in sheet.rows">
                     <td>
-                        <a class="text-dark" href="" :title="trans('action.edit.category')">
+                        <a class="text-dark" href="" :title="$t('action.edit.category')">
                             {{ row.name }}
                         </a>
                     </td>
@@ -71,16 +71,6 @@
                 </tr>
             </table>
 
-            <b-modal id="createCategory"
-                     ref="createCategory"
-                     title="Create Category"
-                     @ok="handleOk"
-                     @shown="clearName">
-                <form @submit.stop.prevent="handleSubmit">
-                    <b-form-input type="text" placeholder="Name" v-model="categoryName"></b-form-input>
-                </form>
-            </b-modal>
-
         </div>
     </div>
 </template>
@@ -88,12 +78,15 @@
 <script>
     export default {
         props: ['budget'],
+        components: {
+            'category-new': require('./CategoryNew.vue')
+        },
         computed: {
             currency: function () {
                 return window.currency;
             },
             budgeted: function () {
-                var sum = 0;
+                let sum = 0;
                 this.sheet.rows.forEach(function (row) {
                     sum += row.budgeted;
                 });
@@ -106,52 +99,17 @@
         data: () => ({
             sheet: null,
             previousMonth: null,
-            nextMonth: null,
-            categoryName: ''
+            nextMonth: null
         }),
 
-        // Fetches posts when the component is created.
         created() {
-            axios.get('/api/budgets/' + this.budget + '/month')
-                .then(response => {
-                    // JSON responses are automatically parsed.
-                    this.sheet = response.data.data;
-                    this.previousMonth = response.data.links.prev;
-                    this.nextMonth = response.data.links.next;
-                })
-                .catch(e => {
-                    this.errors.push(e)
-                })
+            this.loadSheet('/api/budgets/'+this.budget+'/month');
         },
 
         methods: {
-            clearName() {
-                this.categoryName = '';
-            },
-            handleOk(e) {
-                e.cancel();
-                if (!this.categoryName) {
-                    alert('Please enter a name');
-                } else {
-                    this.handleSubmit()
-                }
-            },
-            handleSubmit() {
-                axios.post('/api/budgets/' + this.budget + '/categories', {
-                    'name': this.categoryName
-                })
-                    .then(response => {
-                        this.sheet.rows.push(response.data);
-                    })
-                    .catch(e => {
-                        this.errors.push(e)
-                    });
-
-                this.clearName();
-                this.$refs.createCategory.hide()
-            },
-            showPreviousMonth() {
-                axios.get(this.previousMonth)
+            loadSheet(url) {
+                axios
+                    .get(url)
                     .then(response => {
                         // JSON responses are automatically parsed.
                         this.sheet = response.data.data;
@@ -161,19 +119,14 @@
                     .catch(e => {
                         this.errors.push(e)
                     })
+            },
+
+            showPreviousMonth() {
+                this.loadSheet(this.previousMonth);
             },
 
             showNextMonth() {
-                axios.get(this.nextMonth)
-                    .then(response => {
-                        // JSON responses are automatically parsed.
-                        this.sheet = response.data.data;
-                        this.previousMonth = response.data.links.prev;
-                        this.nextMonth = response.data.links.next;
-                    })
-                    .catch(e => {
-                        this.errors.push(e)
-                    })
+                this.loadSheet(this.nextMonth);
             }
         }
     }

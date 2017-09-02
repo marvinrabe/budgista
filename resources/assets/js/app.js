@@ -7,23 +7,45 @@
 require('./bootstrap');
 require('./pace.min');
 
-/**
- * i18n
- */
-
-const _ = require('lodash');
-window.trans = (string) => _.get(window.i18n, string);
+if (process.env.NODE_ENV !== 'production') {
+    console.log('Looks like we are in development mode!');
+}
 
 /**
  * Vue
  */
-
 window.Vue = require('vue');
 
-Vue.use(require('bootstrap-vue'));
+/**
+ * Third Party Vue Components
+ */
 
+// Translations & Dates
+import VueI18n from 'vue-i18n'
+
+Vue.use(VueI18n);
+
+const messages = {
+    en: require('./lang/en.json')
+};
+
+const i18n = new VueI18n({
+    locale: window.locale,
+    fallbackLocale: 'en',
+    messages: messages,
+    silentTranslationWarn: process.env.NODE_ENV === 'production'
+});
+
+// Currencies
 Vue.use(require('vue-intl'));
 Vue.setLocale(window.locale);
+
+// Bootstrap
+Vue.use(require('bootstrap-vue'));
+
+/**
+ * Vue Components
+ */
 
 Vue.component(
     'passport-clients',
@@ -50,19 +72,7 @@ Vue.component(
     require('./components/Recurrence.vue')
 );
 
-Vue.prototype.trans = (string, args) => {
-    let value = _.get(window.i18n, string);
-
-    _.eachRight(args, (paramVal, paramKey) => {
-        value = _.replace(value, `:${paramKey}`, paramVal);
-    });
-
-    return value;
-};
-
-const app = new Vue({
-    el: '#app'
-});
+const app = new Vue({ i18n }).$mount('#app');
 
 /**
  * Menu
@@ -81,9 +91,11 @@ function OnTransitionEnd() {
     myMenu.classList.remove("menu--animatable");
 }
 
-var myMenu = document.querySelector(".menu");
-var openMenu = document.querySelector(".menu-open");
-var closeMenu = document.querySelector(".menu-close");
-myMenu.addEventListener("transitionend", OnTransitionEnd, false);
-openMenu.addEventListener("click", toggleClassMenu, false);
-closeMenu.addEventListener("click", toggleClassMenu, false);
+let myMenu = document.querySelector(".menu");
+if(myMenu) {
+    let openMenu = document.querySelector(".menu-open");
+    let closeMenu = document.querySelector(".menu-close");
+    myMenu.addEventListener("transitionend", OnTransitionEnd, false);
+    openMenu.addEventListener("click", toggleClassMenu, false);
+    closeMenu.addEventListener("click", toggleClassMenu, false);
+}

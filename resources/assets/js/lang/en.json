@@ -1,0 +1,39 @@
+{
+    "action": {
+        "yes": "Yes",
+        "no": "No",
+        "nextMonth": "Next Month",
+        "previousMonth": "Previous Month",
+        "new": {
+            "category": "Create Category"
+        },
+        "edit": {
+            "category": "Edit Category"
+        }
+    },
+    "form": {
+        "name": "Name",
+        "recurring": "Recurring?",
+        "recurringFrequency": "Repeats",
+        "recurringInterval": "Repeat every",
+        "category": "Category",
+        "budgeted": "Budgeted",
+        "activity": "Activity",
+        "available": "Available",
+        "funds": "Funds",
+        "toBeBudgeted": "To be Budgeted",
+        "previousMonth": "Previous Month"
+    },
+    "frequency": {
+        "daily": "Daily",
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "yearly": "Yearly"
+    },
+    "frequencyUnit": {
+        "days": "Days",
+        "weeks": "Weeks",
+        "months": "Months",
+        "years": "Years"
+    }
+}

@@ -46,8 +46,8 @@
     @endif
     window.locale = '{{ config('app.locale') }}';
 </script>
+
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.{{ config('app.locale') }}"></script>
-<script src="{{ route('assets.lang', ['locale' => config('app.locale')]) }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 
 </body>
