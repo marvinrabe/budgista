@@ -6,7 +6,6 @@
 
 require('./bootstrap');
 require('./pace.min');
-require('./jquery.popconfirm');
 
 /**
  * i18n
@@ -20,6 +19,8 @@ window.trans = (string) => _.get(window.i18n, string);
  */
 
 window.Vue = require('vue');
+
+Vue.use(require('bootstrap-vue'));
 
 Vue.use(require('vue-intl'));
 Vue.setLocale(window.locale);
@@ -41,7 +42,7 @@ Vue.component(
 
 Vue.component(
     'budget-monthly-view',
-    require('./components/BudgetMonthlyView.vue')
+    require('./components/budget/MonthlyView.vue')
 );
 
 Vue.component(
@@ -86,17 +87,3 @@ var closeMenu = document.querySelector(".menu-close");
 myMenu.addEventListener("transitionend", OnTransitionEnd, false);
 openMenu.addEventListener("click", toggleClassMenu, false);
 closeMenu.addEventListener("click", toggleClassMenu, false);
-
-/**
- * Document ready
- */
-
-$(document).ready(function() {
-    $(".btn-delete").popConfirm({
-        title: trans('are-you-sure.title'),
-        content: trans('are-you-sure.message'),
-        yesBtn: trans('action.yes'),
-        noBtn: trans('action.no'),
-        placement: "top"
-    });
-});

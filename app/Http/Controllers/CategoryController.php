@@ -18,42 +18,30 @@ class CategoryController extends Controller
         $this->authorizeResource(Category::class);
     }
 
-    public function create(Budget $budget)
-    {
-        return View::make('categories.create')
-            ->with('budget', $budget);
-    }
-
     public function store(Budget $budget)
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
         $rules = array(
             'name' => 'required'
         );
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
-            return redirect()
-                ->route('categories.create', [$budget->id])
-                ->withErrors($validator)
-                ->withInput(Input::all());
+            return response()->json(['errors' => $validator->messages()], 400);
         }
 
         $category = new Category();
         $category->name = Input::get('name');
+        $category->sort = Category::inBudget($budget)->max('sort') + 1;
         $category->budget_id = $budget->id;
         $category->save();
 
-        // redirect
-        Session::flash('message', 'Successfully created category!');
-        return redirect()->route('sheet', [$budget->id]);
-    }
-
-    public function edit(Budget $budget, Category $category)
-    {
-        return View::make('categories.edit')
-            ->with('category', $category)
-            ->with('budget', $budget);
+        return [
+            'id' => $category->id,
+            'name' => $category->name,
+            'previousMonth' => 0,
+            'budgeted' => 0,
+            'activity' => 0,
+            'available' => 0,
+        ];
     }
 
     public function update(Budget $budget, Category $category)
@@ -88,26 +76,13 @@ class CategoryController extends Controller
         return redirect()->route('sheet', [$budget->id]);
     }
 
-    public function budget(Budget $budget, Category $category, $month)
+    public function budget(Budget $budget, Category $category)
     {
         $this->authorize('update', $category);
 
-        $categoryBudget = $category->month($month);
-
-        return View::make('categories.budget')
-            ->with('budget', $budget)
-            ->with('category', $category)
-            ->with('month', $month)
-            ->with('categoryBudget', $categoryBudget);
-    }
-
-    public function storeBudget(Budget $budget, Category $category, $month)
-    {
-        $this->authorize('update', $category);
-
-        $categoryBudget = $category->month($month);
-
-        $rules = [];
+        $rules = [
+            'month' => 'required'
+        ];
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
             return redirect()
@@ -116,11 +91,13 @@ class CategoryController extends Controller
                 ->withInput(Input::all());
         }
 
+        $categoryBudget = $category->month(Input::get('month'));
         $categoryBudget->amount = Input::get('amount');
         $categoryBudget->save();
 
         // redirect
         Session::flash('message', 'Successfully updated budget!');
+
         return redirect()->route('sheet', [$budget->id, $month]);
     }
 

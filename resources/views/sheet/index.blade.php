@@ -2,6 +2,6 @@
 
 @section('content')
 
-    <budget-monthly-view :sheet="{{ json_encode($sheet) }}"></budget-monthly-view>
+    <budget-monthly-view budget="{{ $budget->id }}"></budget-monthly-view>
 
 @endsection

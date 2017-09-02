@@ -9,14 +9,22 @@ use Illuminate\Support\Facades\View;
 class SheetController extends Controller
 {
 
-    public function index(Budget $budget, $month = null)
+    public function index(Budget $budget)
+    {
+        return View::make('sheet.index')->with('budget', $budget);
+    }
+
+    public function api(Budget $budget, $month = null)
     {
         $month = $this->getMonth($month);
 
-        return View::make('sheet.index')
-            ->with('budget', $budget)
-            ->with('month', $month)
-            ->with('sheet', $budget->month($month));
+        return [
+            'data' => $budget->month($month),
+            'links' => [
+                'prev' => route('month', [$budget, 'month' => $month->previous()]),
+                'next' => route('month', [$budget, 'month' => $month->next()])
+            ]
+        ];
     }
 
     private function getMonth($string)

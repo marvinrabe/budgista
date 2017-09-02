@@ -3,25 +3,19 @@
 @section('body')
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
-            <div class="d-lg-none width-100">
-                <button class="menu-open btn btn-outline-light float-left" type="button"
-                        aria-controls="menu" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                @yield('navbar')
-            </div>
+            <a class="navbar-brand logo" href="{{ url('/') }}">
+                {{ config('app.name') }}
+            </a>
 
-            <div class="d-none d-lg-block width-100">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('img/logo.svg') }}">
-                    {{ config('app.name') }}
-                </a>
+            <button class="menu-open btn btn-outline-light float-left d-lg-none" type="button"
+                    aria-controls="menu" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <ul class="navbar-nav float-right">
-                    @include('auth.menu')
-                </ul>
-            </div>
+            <ul class="navbar-nav float-right d-none d-lg-block">
+                @include('auth.menu')
+            </ul>
         </div>
     </nav>
 
@@ -33,8 +27,7 @@
                     <div class="app-menu">
 
                         <nav class="navbar navbar-dark bg-primary mb-3 d-lg-none">
-                            <a class="navbar-brand" href="{{ url('/') }}">
-                                <img src="{{ asset('img/logo_white.svg') }}">
+                            <a class="navbar-brand logo" href="{{ url('/') }}">
                                 {{ config('app.name') }}
                             </a>
                             <div class="navbar-nav mr-auto"></div>
