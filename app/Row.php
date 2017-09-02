@@ -50,7 +50,7 @@ class Row implements JsonSerializable
         return [
             'id' => $this->category->id,
             'name' => $this->category->name,
-            'month' => $this->month,
+            'month' => (string) $this->month,
             'previousMonth' => (double) $this->getPreviousMonth(),
             'budgeted' => (double) $this->getBudgeted(),
             'activity' => (double) $this->getActivity(),

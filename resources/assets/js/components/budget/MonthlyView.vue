@@ -33,20 +33,19 @@
                 </div>
             </div>
 
-
             <table class="table table-sm">
                 <thead>
                 <tr>
                     <th>
                         {{ $t('form.category') }}
-                        <category-new :budget="budget" v-on:newCategory="category => sheet.rows.push(category)"></category-new>
+                        <category-new :budget="budget" :month="sheet.month" v-on:newCategory="category => sheet.rows.push(category)"></category-new>
                     </th>
                     <th class="text-right">{{ $t('form.budgeted') }}</th>
                     <th class="text-right">{{ $t('form.activity') }}</th>
                     <th class="text-right">{{ $t('form.available') }}</th>
                 </tr>
                 </thead>
-                <category-row v-for="row in sheet.rows" :key="row.id" :category="row"></category-row>
+                <category-row v-for="row in sheet.rows" :key="row.id" :category="row" :budget="budget"></category-row>
             </table>
 
         </div>

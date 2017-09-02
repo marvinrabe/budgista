@@ -55185,7 +55185,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['budget'],
@@ -55310,7 +55309,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['budget'],
+    props: ['budget', 'month'],
     data: function data() {
         return {
             name: ''
@@ -55335,7 +55334,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.post('/api/budgets/' + this.budget + '/categories', {
-                'name': this.name
+                'name': this.name,
+                'month': this.month
             }).then(function (response) {
                 _this.$emit('newCategory', response.data);
             }).catch(function (e) {
@@ -55493,7 +55493,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "table table-sm"
   }, [_c('thead', [_c('tr', [_c('th', [_vm._v("\n                    " + _vm._s(_vm.$t('form.category')) + "\n                    "), _c('category-new', {
     attrs: {
-      "budget": _vm.budget
+      "budget": _vm.budget,
+      "month": _vm.sheet.month
     },
     on: {
       "newCategory": function (category) { return _vm.sheet.rows.push(category); }
@@ -55508,7 +55509,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('category-row', {
       key: row.id,
       attrs: {
-        "category": row
+        "category": row,
+        "budget": _vm.budget
       }
     })
   })], 2)]) : _vm._e()])
@@ -56879,15 +56881,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['category'],
+    props: ['budget', 'category'],
+    components: {
+        'category-budget': __webpack_require__(80)
+    },
     computed: {
+        available: function available() {
+            return this.category.previousMonth + this.category.budgeted + this.category.activity;
+        },
         currency: function currency() {
             return window.currency;
+        }
+    },
+    methods: {
+        updateBudget: function updateBudget(value) {
+            var _this = this;
+
+            this.category.budgeted = value;
+
+            axios.put('/api/budgets/' + this.budget + '/categories/' + this.category.id + '/budget', {
+                'month': this.category.month,
+                'amount': value
+            }).then(function (response) {
+                _this.category = response.data;
+            }).catch(function (e) {
+                console.error(e);
+            });
         }
     }
 });
@@ -56904,18 +56925,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("\n            " + _vm._s(_vm.category.name) + "\n        ")])]), _vm._v(" "), _c('td', {
     staticClass: "text-right"
-  }, [_c('a', {
-    staticClass: "link-action",
-    class: [{
-      'text-muted': _vm.category.budgeted == 0
-    }, 'text-dark'],
-    domProps: {
-      "innerHTML": _vm._s(_vm.$formatNumber(_vm.category.budgeted, {
-        style: 'currency',
-        currency: _vm.currency
-      }))
+  }, [_c('category-budget', {
+    attrs: {
+      "value": _vm.category.budgeted
+    },
+    on: {
+      "update:value": function (val) { return _vm.updateBudget(val); }
     }
-  })]), _vm._v(" "), _c('td', {
+  })], 1), _vm._v(" "), _c('td', {
     staticClass: "text-right",
     class: [{
       'text-muted': _vm.category.activity == 0
@@ -56931,15 +56948,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('span', {
     staticClass: "badge",
     class: [{
-      'badge-danger': _vm.category.available < 0
+      'badge-danger': _vm.available < 0
     }, {
-      'badge-success': _vm.category.available > 0
+      'badge-success': _vm.available > 0
     }, 'badge-secondary'],
     staticStyle: {
       "font-size": "100%"
     },
     domProps: {
-      "innerHTML": _vm._s(_vm.$formatNumber(_vm.category.available, {
+      "innerHTML": _vm._s(_vm.$formatNumber(_vm.available, {
         style: 'currency',
         currency: _vm.currency
       }))
@@ -56951,6 +56968,186 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-1e0f516a", module.exports)
+  }
+}
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(81),
+  /* template */
+  __webpack_require__(82),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/marvin/Sites/budget/resources/assets/js/components/budget/CategoryBudget.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] CategoryBudget.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1d1f14e4", Component.options)
+  } else {
+    hotAPI.reload("data-v-1d1f14e4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 81 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _this = this;
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        value: {
+            type: Number,
+            required: true
+        }
+    },
+    computed: {
+        formattedValue: function formattedValue() {
+            return this.$formatNumber(this.mutableValue, { style: 'currency', currency: window.currency });
+        }
+    },
+    data: function data() {
+        return {
+            mutableValue: _this.value,
+            edit: false
+        };
+    },
+    watch: {
+        value: function value() {
+            this.mutableValue = this.value;
+        }
+    },
+    created: function created() {
+        this.mutableValue = this.value;
+    },
+    methods: {
+        toggleEdit: function toggleEdit() {
+            var input = this.$refs.input;
+            this.edit = true;
+
+            // Focus input field
+            if (this.edit) {
+                Vue.nextTick(function () {
+                    input.focus();
+                    input.select();
+                });
+            }
+        },
+
+        saveEdit: function saveEdit() {
+            if (this.edit) {
+                this.$emit('update:value', parseFloat(this.mutableValue));
+                this.edit = false;
+            }
+        }
+    }
+
+});
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('a', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (!_vm.edit),
+      expression: "!edit"
+    }],
+    staticClass: "link-action",
+    class: [{
+      'text-muted': _vm.mutableValue == 0
+    }, 'text-dark'],
+    on: {
+      "click": _vm.toggleEdit
+    }
+  }, [_vm._v("\n        " + _vm._s(_vm.formattedValue) + "\n    ")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.mutableValue),
+      expression: "mutableValue"
+    }, {
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.edit),
+      expression: "edit"
+    }],
+    ref: "input",
+    staticClass: "form-control form-control-sm",
+    attrs: {
+      "type": "number",
+      "step": "0.01"
+    },
+    domProps: {
+      "value": (_vm.mutableValue)
+    },
+    on: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.saveEdit($event)
+      },
+      "blur": _vm.saveEdit,
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.mutableValue = $event.target.value
+      }
+    }
+  })])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1d1f14e4", module.exports)
   }
 }
 

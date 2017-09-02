@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Budget;
 use App\Models\Category;
 use App\Models\CategoryBudget;
+use App\Month;
+use App\Row;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -34,13 +36,14 @@ class CategoryController extends Controller
         $category->budget_id = $budget->id;
         $category->save();
 
+        if(Input::has('month')) {
+            $month = Month::fromString(Input::get('month'));
+
+            return new Row($category, $month);
+        }
+
         return [
-            'id' => $category->id,
-            'name' => $category->name,
-            'previousMonth' => 0,
-            'budgeted' => 0,
-            'activity' => 0,
-            'available' => 0,
+            'id' => $category->id
         ];
     }
 
@@ -85,20 +88,16 @@ class CategoryController extends Controller
         ];
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
-            return redirect()
-                ->route('categories.budget', [$budget->id])
-                ->withErrors($validator)
-                ->withInput(Input::all());
+            return response()->json(['errors' => $validator->messages()], 400);
         }
 
-        $categoryBudget = $category->month(Input::get('month'));
+        $month = Month::fromString(Input::get('month'));
+
+        $categoryBudget = $category->month($month);
         $categoryBudget->amount = Input::get('amount');
         $categoryBudget->save();
 
-        // redirect
-        Session::flash('message', 'Successfully updated budget!');
-
-        return redirect()->route('sheet', [$budget->id, $month]);
+        return new Row($category, $month);
     }
 
 }

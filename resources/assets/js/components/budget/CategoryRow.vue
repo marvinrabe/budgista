@@ -6,10 +6,7 @@
             </a>
         </td>
         <td class="text-right">
-            <a class="link-action"
-               v-bind:class="[{ 'text-muted': category.budgeted == 0 }, 'text-dark']"
-               v-html="$formatNumber(category.budgeted, {style: 'currency', currency: currency})">
-            </a>
+            <category-budget :value="category.budgeted" @update:value="val => updateBudget(val)"></category-budget>
         </td>
         <td class="text-right"
             v-bind:class="[{ 'text-muted': category.activity == 0 }, 'text-dark']"
@@ -17,8 +14,8 @@
         </td>
         <td class="text-right">
                 <span style="font-size: 100%" class="badge"
-                      v-bind:class="[{ 'badge-danger': category.available < 0 }, { 'badge-success': category.available > 0 }, 'badge-secondary']"
-                      v-html="$formatNumber(category.available, {style: 'currency', currency: currency})">
+                      v-bind:class="[{ 'badge-danger': available < 0 }, { 'badge-success': available > 0 }, 'badge-secondary']"
+                      v-html="$formatNumber(available, {style: 'currency', currency: currency})">
                 </span>
         </td>
     </tr>
@@ -26,10 +23,34 @@
 
 <script>
     export default {
-        props: ['category'],
+        props: ['budget', 'category'],
+        components: {
+            'category-budget': require('./CategoryBudget.vue')
+        },
         computed: {
+            available: function () {
+                return this.category.previousMonth + this.category.budgeted + this.category.activity;
+            },
             currency: function () {
                 return window.currency;
+            }
+        },
+        methods: {
+            updateBudget: function (value) {
+                this.category.budgeted = value;
+
+                axios
+                    .put('/api/budgets/' + this.budget + '/categories/' + this.category.id + '/budget', {
+                        'month': this.category.month,
+                        'amount': value
+                    })
+                    .then(response => {
+                        this.category = response.data;
+                    })
+                    .catch(e => {
+                        console.error(e);
+                    });
+
             }
         }
     }

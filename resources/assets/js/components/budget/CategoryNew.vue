@@ -19,7 +19,7 @@
 
 <script>
     export default {
-        props: ['budget'],
+        props: ['budget', 'month'],
         data: () => ({
             name: ''
         }),
@@ -41,7 +41,8 @@
             handleSubmit() {
                 axios
                     .post('/api/budgets/' + this.budget + '/categories', {
-                        'name': this.name
+                        'name': this.name,
+                        'month': this.month
                     })
                     .then(response => {
                         this.$emit('newCategory', response.data);
