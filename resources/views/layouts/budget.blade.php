@@ -1,19 +1,19 @@
 @extends('layouts.base',  ['body_class' => 'layout-budget'])
 
 @section('body')
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
         <div class="container">
 
             <a class="navbar-brand logo" href="{{ url('/') }}">
                 {{ config('app.name') }}
             </a>
 
-            <button class="menu-open btn btn-outline-light float-left d-lg-none" type="button"
+            <button class="menu-open btn btn-outline-light float-left d-md-none" type="button"
                     aria-controls="menu" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <ul class="navbar-nav float-right d-none d-lg-block">
+            <ul class="navbar-nav float-right d-none d-md-block">
                 @include('auth.menu')
             </ul>
         </div>
@@ -21,13 +21,13 @@
 
     <div class="container px-0 px-lg-2 pb-2 py-lg-2">
 
-        <div class="row">
-            <div class="col-lg-3 col-xl-3">
+        <div class="form-row">
+            <div class="col-md-4 col-lg-3">
                 <div class="menu">
                     <div class="app-menu">
 
-                        <nav class="navbar navbar-dark bg-primary mb-3 d-lg-none">
-                            <a class="navbar-brand logo" href="{{ url('/') }}">
+                        <nav class="navbar navbar-dark bg-primary mb-3 d-md-none">
+                            <a class="navbar-brand logo logo-white" href="{{ url('/') }}">
                                 {{ config('app.name') }}
                             </a>
                             <div class="navbar-nav mr-auto"></div>

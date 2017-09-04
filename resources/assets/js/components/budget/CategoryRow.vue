@@ -9,7 +9,7 @@
                 :value="category.budgeted"
                 v-on:update:value="val => updateBudget(val)">
         </category-budget>
-        <td class="d-none d-md-table-cell text-right"
+        <td class="d-none d-lg-table-cell text-right"
             v-bind:class="[{ 'text-muted': category.activity == 0 }, 'text-dark']"
             v-html="$formatNumber(category.activity, {style: 'currency', currency: currency})">
         </td>

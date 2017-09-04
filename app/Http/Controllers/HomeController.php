@@ -20,7 +20,7 @@ class HomeController extends Controller
             return redirect()->route('budgets.index');
         }
 
-        return redirect()->route('sheet', [$budget->id]);
+        return redirect()->route('budgets.show', [$budget->id]);
     }
 
 }

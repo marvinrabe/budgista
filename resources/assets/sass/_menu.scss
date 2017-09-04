@@ -10,7 +10,7 @@
   }
 }
 
-@media (max-width: 991px) {
+@include media-breakpoint-down(sm) {
   .menu {
     position: fixed;
     left: 0;
