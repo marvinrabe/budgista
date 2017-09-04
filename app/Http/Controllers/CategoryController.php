@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\CategoryBudget;
 use App\Month;
 use App\Row;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -22,28 +23,29 @@ class CategoryController extends Controller
 
     public function store(Budget $budget)
     {
+
         $rules = array(
-            'name' => 'required'
+            'name' => 'required',
+            'budget' => 'required'
         );
+
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->messages()], 400);
         }
 
+        $budget = Budget::find(Input::get('budget'));
+        $this->authorize('update', $budget);
+
         $category = new Category();
         $category->name = Input::get('name');
-        $category->sort = Category::inBudget($budget)->max('sort') + 1;
         $category->budget_id = $budget->id;
+        $category->sort = Category::inBudget($budget)->max('sort') + 1;
         $category->save();
 
-        if(Input::has('month')) {
-            $month = Month::fromString(Input::get('month'));
-
-            return new Row($category, $month);
-        }
-
         return [
-            'id' => $category->id
+            'id' => $category->id,
+            'name' => $category->name
         ];
     }
 
@@ -79,17 +81,14 @@ class CategoryController extends Controller
         return redirect()->route('sheet', [$budget->id]);
     }
 
-    public function budget(Budget $budget, Category $category)
+    public function budget(Request $request, Category $category)
     {
         $this->authorize('update', $category);
 
-        $rules = [
-            'month' => 'required'
-        ];
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->messages()], 400);
-        }
+        $this->validate($request, [
+            'month' => 'required',
+            'amount' => 'required'
+        ]);
 
         $month = Month::fromString(Input::get('month'));
 

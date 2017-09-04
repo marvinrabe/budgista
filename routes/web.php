@@ -30,8 +30,6 @@ Route::group(['middleware' => ['auth']], function () {
             'index'
         ]]);
 
-        Route::get('/month', 'SheetController@index')->name('sheet');
-
         Route::put('/transactions/{transaction}/clear', 'TransactionController@clear')->name('transactions.clear');
 
     });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Budget;
+use App\Month;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -62,7 +63,7 @@ class BudgetController extends Controller
         Auth::user()->active_budget_id = $budget->id;
         Auth::user()->save();
 
-        return redirect()->route('sheet', ['budget' => $budget->id]);
+        return View::make('budgets.show')->with('budget', $budget);
     }
 
     public function edit(Budget $budget)
@@ -80,7 +81,7 @@ class BudgetController extends Controller
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
             return redirect()
-                ->route('budgets.edit', [$id])
+                ->route('budgets.edit', [$budget->id])
                 ->withErrors($validator)
                 ->withInput(Input::all());
         }
@@ -105,6 +106,34 @@ class BudgetController extends Controller
 
         Session::flash('message', 'Successfully deleted the budget!');
         return redirect()->route('budgets.index');
+    }
+
+    public function month(Budget $budget, $month = null)
+    {
+        $this->authorize('view', $budget);
+
+        $month = $this->getMonth($month);
+
+        return [
+            'data' => $budget->month($month),
+            'links' => [
+                'prev' => route('budgets.month', [$budget, 'month' => $month->previous()]),
+                'next' => route('budgets.month', [$budget, 'month' => $month->next()])
+            ]
+        ];
+    }
+
+    private function getMonth($string)
+    {
+        try {
+            if ($string !== null) {
+                return Month::fromString($string);
+            }
+
+            return Month::current();
+        } catch (\InvalidArgumentException $exception) {
+            abort(404);
+        }
     }
 
 }

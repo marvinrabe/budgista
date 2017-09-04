@@ -40,9 +40,9 @@
             },
             handleSubmit() {
                 axios
-                    .post('/api/budgets/' + this.budget + '/categories', {
+                    .post('/api/categories', {
                         'name': this.name,
-                        'month': this.month
+                        'budget': this.budget
                     })
                     .then(response => {
                         this.$emit('newCategory', response.data);

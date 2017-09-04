@@ -24,12 +24,14 @@
                     </div>
                 </div>
                 <div class="col small">
-                    {{ $t('form.previousMonth') }}: <strong
-                        v-html="$formatNumber(sheet.previousMonth, {style: 'currency', currency: currency})"></strong><br>
-                    {{ $t('form.funds') }}: <strong
-                        v-html="$formatNumber(sheet.funds, {style: 'currency', currency: currency})"></strong><br>
-                    {{ $t('form.budgeted') }}: <strong
-                        v-html="$formatNumber(budgeted, {style: 'currency', currency: currency})"></strong>
+                    {{ $t('form.previousMonth') }}:
+                    <strong v-html="$formatNumber(sheet.previousMonth, {style: 'currency', currency: currency})"></strong>
+                    <br>
+                    {{ $t('form.funds') }}:
+                    <strong v-html="$formatNumber(sheet.funds, {style: 'currency', currency: currency})"></strong>
+                    <br>
+                    {{ $t('form.budgeted') }}:
+                    <strong v-html="$formatNumber(budgeted, {style: 'currency', currency: currency})"></strong>
                 </div>
             </div>
 
@@ -38,14 +40,20 @@
                 <tr>
                     <th>
                         {{ $t('form.category') }}
-                        <category-new :budget="budget" :month="sheet.month" v-on:newCategory="category => sheet.rows.push(category)"></category-new>
+                        <category-new :budget="budget"
+                                      :month="sheet.month"
+                                      v-on:newCategory="category => addCategory(category)"></category-new>
                     </th>
                     <th class="text-right" width="150">{{ $t('form.budgeted') }}</th>
-                    <th class="text-right">{{ $t('form.activity') }}</th>
+                    <th class="text-right d-none d-md-table-cell ">{{ $t('form.activity') }}</th>
                     <th class="text-right">{{ $t('form.available') }}</th>
                 </tr>
                 </thead>
-                <category-row v-for="row in sheet.rows" :key="row.id" :category="row" :budget="budget"></category-row>
+                <category-row v-for="row in sheet.rows"
+                              :key="row.id"
+                              :category.sync="row"
+                              v-on:deleteCategory="id => removeCategory(id)">
+                </category-row>
             </table>
 
         </div>
@@ -81,7 +89,7 @@
         }),
 
         created() {
-            this.loadSheet('/api/budgets/'+this.budget+'/month');
+            this.loadSheet('/api/budgets/' + this.budget + '/month');
         },
 
         methods: {
@@ -105,7 +113,24 @@
 
             showNextMonth() {
                 this.loadSheet(this.nextMonth);
+            },
+
+            addCategory(category) {
+                category.month = this.sheet.month;
+                category.budgeted = 0;
+                category.available = 0;
+                category.previousMonth = 0;
+                category.activity = 0;
+
+                this.sheet.rows.push(category);
+            },
+
+            removeCategory(id) {
+                this.sheet.rows = ar = this.sheet.rows.filter( function(item) {
+                    return item.id != id;
+                });
             }
+
         }
     }
 </script>

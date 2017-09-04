@@ -2,11 +2,14 @@
     <tr>
         <td>
             <a class="link-action text-dark" :title="$t('action.edit.category')">
-                {{ category.name }}
+            {{ category.name }}
             </a>
         </td>
-        <category-budget :value="category.budgeted" @update:value="val => updateBudget(val)"></category-budget>
-        <td class="text-right"
+        <category-budget
+                :value="category.budgeted"
+                v-on:update:value="val => updateBudget(val)">
+        </category-budget>
+        <td class="d-none d-md-table-cell text-right"
             v-bind:class="[{ 'text-muted': category.activity == 0 }, 'text-dark']"
             v-html="$formatNumber(category.activity, {style: 'currency', currency: currency})">
         </td>
@@ -21,7 +24,7 @@
 
 <script>
     export default {
-        props: ['budget', 'category'],
+        props: ['category'],
         components: {
             'category-budget': require('./CategoryBudget.vue')
         },
@@ -38,12 +41,12 @@
                 this.category.budgeted = value;
 
                 axios
-                    .put('/api/budgets/' + this.budget + '/categories/' + this.category.id + '/budget', {
+                    .put('/api/categories/' + this.category.id + '/budget', {
                         'month': this.category.month,
                         'amount': value
                     })
                     .then(response => {
-                        this.category = response.data;
+                        this.$emit('update:category', response.data);
                     })
                     .catch(e => {
                         console.error(e);

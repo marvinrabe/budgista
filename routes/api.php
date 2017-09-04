@@ -15,15 +15,12 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['auth:api']], function () {
 
-    Route::group(['prefix' => 'budgets/{budget}', 'middleware' => ['can:view,budget']], function () {
+    Route::get('/budgets/{budget}/month/{month?}', 'BudgetController@month')->name('budgets.month');
 
-        Route::get('/month/{month?}', 'SheetController@api')->name('month');
+    Route::resource('categories', 'CategoryController', ['only' => [
+        'store', 'update', 'destroy'
+    ]]);
+    Route::put('/categories/{category}/budget', 'CategoryController@budget')->name('categories.budget');
 
-        Route::resource('categories', 'CategoryController', ['only' => [
-            'store', 'update', 'destroy'
-        ]]);
-        Route::put('/categories/{category}/budget', 'CategoryController@budget')->name('categories.budget');
-
-    });
 
 });

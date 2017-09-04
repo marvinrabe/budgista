@@ -59,7 +59,7 @@
                                     {{ __('Manage Budgets') }}
                                 </a>
                             </div>
-                            <a class="nav-link" href="{{ route('sheet', [$budget->id]) }}">
+                            <a class="nav-link" href="{{ route('budgets.show', [$budget->id]) }}">
                                 <span class="fa fa-envelope-o fa-fw"></span> Budget
                             </a>
                             <h6 class="nav-header">Accounts</h6>
