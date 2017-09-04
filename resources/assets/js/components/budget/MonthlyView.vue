@@ -57,12 +57,10 @@
                                 {{ row.name }}
                             </a>
                         </td>
-                        <td>
-                            <category-budget
-                                    :value="row.budgeted"
-                                    v-on:update:value="val => updateBudget(row, val)">
-                            </category-budget>
-                        </td>
+                        <category-budget
+                                :value="row.budgeted"
+                                v-on:update:value="val => updateBudget(row, val)">
+                        </category-budget>
                         <td class="d-none d-lg-table-cell text-right"
                             v-bind:class="[{ 'text-muted': row.activity == 0 }, 'text-dark']"
                             v-html="$formatNumber(row.activity, {style: 'currency', currency: currency})">
