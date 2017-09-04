@@ -52,7 +52,7 @@
                 <draggable v-model="sheet.rows" :options="{handle:'.handle'}" element="tbody" @end="persistSorting">
                     <tr v-for="row in sheet.rows" :key="row.id">
                         <td>
-                            <span class="handle"></span>
+                            <span class="handle d-none d-sm-inline-block"></span>
                             <a class="link-action text-dark" :title="$t('action.edit.category')">
                                 {{ row.name }}
                             </a>
