@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Budget;
+use App\Models\Category;
 use App\Month;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
@@ -134,6 +136,23 @@ class BudgetController extends Controller
         } catch (\InvalidArgumentException $exception) {
             abort(404);
         }
+    }
+
+    public function sort(Request $request, Budget $budget)
+    {
+        $this->authorize('view', $budget);
+
+        $this->validate($request, [
+            'categories' => 'required'
+        ]);
+
+        foreach(Input::get('categories') as $key => $category_id) {
+            $category = Category::find($category_id);
+            $category->sort = $key;
+            $category->save();
+        }
+
+        return [];
     }
 
 }

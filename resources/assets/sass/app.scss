@@ -78,6 +78,45 @@ a.text-muted:hover {
 }
 
 /*
+ * Grip
+ */
+span.handle {
+  content: '....';
+  width: 12px;
+  height: 20px;
+  display: inline-block;
+  overflow: hidden;
+  line-height: 5px;
+  padding: 3px 4px;
+  vertical-align: middle;
+  margin-top: -.7em;
+  margin-right: .3em;
+  font-size: 12px;
+  font-family: sans-serif;
+  letter-spacing: 2px;
+  color: #cccccc;
+
+  &::after {
+    content: '.. .. .. ..';
+  }
+
+  &,
+  &::after {
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+  }
+
+  &:active,
+  &::after:active {
+    cursor: move;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+  }
+}
+
+
+/*
  * Helper
  */
 .width-100 {

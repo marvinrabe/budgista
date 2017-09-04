@@ -21,9 +21,8 @@
     "vue": "^2.1.10",
     "bootstrap-vue": "^1.0.0-beta.7",
     "vue-intl": "^2.0.0",
+    "vue-i18n": "^7.2.0",
+    "vuedraggable": "^2.14.1",
     "rrule": "^2.2.0"
-  },
-  "dependencies": {
-    "vue-i18n": "^7.2.0"
   }
 }

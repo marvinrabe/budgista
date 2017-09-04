@@ -49,23 +49,46 @@
                     <th class="text-right">{{ $t('form.available') }}</th>
                 </tr>
                 </thead>
-                <category-row v-for="row in sheet.rows"
-                              :key="row.id"
-                              :category.sync="row"
-                              v-on:deleteCategory="id => removeCategory(id)">
-                </category-row>
+                <draggable v-model="sheet.rows" :options="{handle:'.handle'}" element="tbody" @end="persistSorting">
+                    <tr v-for="row in sheet.rows" :key="row.id">
+                        <td>
+                            <span class="handle"></span>
+                            <a class="link-action text-dark" :title="$t('action.edit.category')">
+                                {{ row.name }}
+                            </a>
+                        </td>
+                        <td>
+                            <category-budget
+                                    :value="row.budgeted"
+                                    v-on:update:value="val => updateBudget(row, val)">
+                            </category-budget>
+                        </td>
+                        <td class="d-none d-lg-table-cell text-right"
+                            v-bind:class="[{ 'text-muted': row.activity == 0 }, 'text-dark']"
+                            v-html="$formatNumber(row.activity, {style: 'currency', currency: currency})">
+                        </td>
+                        <td class="text-right">
+                        <span style="font-size: 100%" class="badge"
+                              v-bind:class="[{ 'badge-danger': available(row) < 0 }, { 'badge-success': available(row) > 0 }, 'badge-secondary']"
+                              v-html="$formatNumber(available(row), {style: 'currency', currency: currency})">
+                        </span>
+                        </td>
+                    </tr>
+                </draggable>
             </table>
-
         </div>
     </div>
 </template>
 
 <script>
+    import draggable from 'vuedraggable'
+
     export default {
         props: ['budget'],
         components: {
+            draggable,
             'category-new': require('./CategoryNew.vue'),
-            'category-row': require('./CategoryRow.vue')
+            'category-budget': require('./CategoryBudget.vue')
         },
         computed: {
             currency: function () {
@@ -84,6 +107,7 @@
         },
         data: () => ({
             sheet: null,
+            drag: false,
             previousMonth: null,
             nextMonth: null
         }),
@@ -115,6 +139,43 @@
                 this.loadSheet(this.nextMonth);
             },
 
+            updateBudget: function (category, value) {
+                category.budgeted = value;
+
+                axios
+                    .put('/api/categories/' + category.id + '/budget', {
+                        'month': this.sheet.month,
+                        'amount': value
+                    })
+                    .then(response => {
+                        category = response.data;
+                    })
+                    .catch(e => {
+                        console.error(e);
+                    });
+
+            },
+
+            persistSorting: function (category, value) {
+                let list = this.sheet.rows.reduce(function(prevVal, elem) {
+                    prevVal.push(elem.id);
+                    return prevVal;
+                }, []);
+
+                axios
+                    .put('/api/budgets/' + this.budget + '/sort', {
+                        'categories': list
+                    })
+                    .catch(e => {
+                        console.error(e);
+                    });
+
+            },
+
+            available: function (category) {
+                return category.previousMonth + category.budgeted + category.activity;
+            },
+
             addCategory(category) {
                 category.month = this.sheet.month;
                 category.budgeted = 0;
@@ -126,7 +187,7 @@
             },
 
             removeCategory(id) {
-                this.sheet.rows = ar = this.sheet.rows.filter( function(item) {
+                this.sheet.rows = ar = this.sheet.rows.filter(function (item) {
                     return item.id != id;
                 });
             }

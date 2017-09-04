@@ -16,13 +16,13 @@ if (process.env.NODE_ENV !== 'production') {
  */
 window.Vue = require('vue');
 
+import VueI18n from 'vue-i18n'
+
 /**
  * Third Party Vue Components
  */
 
 // Translations & Dates
-import VueI18n from 'vue-i18n'
-
 Vue.use(VueI18n);
 
 const messages = {

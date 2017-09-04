@@ -17,6 +17,8 @@ Route::group(['middleware' => ['auth:api']], function () {
 
     Route::get('/budgets/{budget}/month/{month?}', 'BudgetController@month')->name('budgets.month');
 
+    Route::put('/budgets/{budget}/sort', 'BudgetController@sort')->name('budgets.sort');
+
     Route::resource('categories', 'CategoryController', ['only' => [
         'store', 'update', 'destroy'
     ]]);

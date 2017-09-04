@@ -1,5 +1,5 @@
 <template>
-    <td v-bind:class="[{ 'py-0': edit }]" class="text-right">
+    <div v-bind:class="[{ 'py-0': edit }]" class="text-right">
         <div class="link-action width-100"
            v-show="!edit"
            v-on:click="toggleEdit"
@@ -15,7 +15,7 @@
                v-show="edit"
                v-on:keyup.enter="saveEdit"
                v-on:blur="saveEdit">
-    </td>
+    </div>
 </template>
 
 <script>
