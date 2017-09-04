@@ -2,9 +2,9 @@
     <div>
         <div v-if="sheet !== null">
 
-            <div class="form-row mb-3" style="align-items: flex-end;">
-                <div class="col-12 col-lg-6">
-                    <div class="h3 display-4 mb-0 text-center text-lg-left">
+            <div class="form-row mb-3 px-1" style="align-items: flex-end;">
+                <div class="col-xs-12 col-sm-8 col-lg-6">
+                    <div class="h3 display-4 mb-0 text-center text-sm-left">
                         <button class="btn btn-secondary rounded-circle"
                                 :title="$t('action.previousMonth')" @click="showPreviousMonth">
                             <span class="fa fa-chevron-left"></span>
@@ -16,14 +16,14 @@
                         </button>
                     </div>
                 </div>
-                <div class="col text-right">
+                <div class="col-sm-4 col-lg-3 text-center text-sm-right">
                     <div class="badge" v-bind:class="[{ 'badge-danger': sheet.available < 0 }, 'badge-success']">
                         <strong class="h3"
                                 v-html="$formatNumber(toBeBudgeted, {style: 'currency', currency: currency})"></strong><br>
                         <span class="small">{{ $t('form.toBeBudgeted') }}</span>
                     </div>
                 </div>
-                <div class="col small">
+                <div class="d-none d-lg-block col-lg-3 small">
                     {{ $t('form.previousMonth') }}:
                     <strong v-html="$formatNumber(sheet.previousMonth, {style: 'currency', currency: currency})"></strong>
                     <br>
