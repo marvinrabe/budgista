@@ -8,11 +8,20 @@
                  ref="createCategory"
                  :title="$t('action.new.category')"
                  :state="nameState"
-                 @ok="handleOk"
+                 @ok="handleSubmit"
                  @shown="clearName">
             <form @submit.stop.prevent="handleSubmit">
                 <b-form-input type="text" :placeholder="$t('form.name')" v-model="name"></b-form-input>
             </form>
+
+            <div slot="modal-footer">
+                <button class="btn btn-light" v-on:click="$refs.createCategory.hide()">
+                    {{ $t('action.cancel') }}
+                </button>
+                <button class="btn btn-primary" v-on:click="handleOk">
+                    {{ $t('action.save') }}
+                </button>
+            </div>
         </b-modal>
     </span>
 </template>
@@ -32,8 +41,13 @@
             clearName() {
                 this.name = '';
             },
-            handleOk(e) {
+            handleSubmit(e) {
                 e.cancel();
+                if (this.name) {
+                    this.handleSubmit()
+                }
+            },
+            handleOk() {
                 if (this.name) {
                     this.handleSubmit()
                 }

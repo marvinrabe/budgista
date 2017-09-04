@@ -1,7 +1,7 @@
 {
     "action": {
-        "yes": "Yes",
-        "no": "No",
+        "save": "Save",
+        "cancel": "Cancel",
         "nextMonth": "Next Month",
         "previousMonth": "Previous Month",
         "new": {
@@ -9,6 +9,9 @@
         },
         "edit": {
             "category": "Edit Category"
+        },
+        "delete": {
+            "category": "Delete Category"
         }
     },
     "form": {

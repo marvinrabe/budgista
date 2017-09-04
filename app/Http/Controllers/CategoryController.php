@@ -49,36 +49,26 @@ class CategoryController extends Controller
         ];
     }
 
-    public function update(Budget $budget, Category $category)
+    public function update(Request $request, Category $category)
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $rules = array(
+        $this->validate($request, [
             'name' => 'required'
-        );
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            return redirect()
-                ->route('categories.edit', [$budget->id, $category->id])
-                ->withErrors($validator)
-                ->withInput(Input::all());
-        }
+        ]);
 
         $category->name = Input::get('name');
         $category->save();
 
-        // redirect
-        Session::flash('message', 'Successfully updated category!');
-        return redirect()->route('sheet', [$budget->id]);
+        return [
+            'id' => $category->id,
+            'name' => $category->name
+        ];
     }
 
-    public function destroy(Budget $budget, Category $category)
+    public function destroy(Category $category)
     {
         $category->delete();
 
-        // redirect
-        Session::flash('message', 'Successfully deleted the category!');
-        return redirect()->route('sheet', [$budget->id]);
+        return [];
     }
 
     public function budget(Request $request, Category $category)
