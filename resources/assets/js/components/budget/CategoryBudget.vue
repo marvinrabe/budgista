@@ -1,11 +1,11 @@
 <template>
     <td v-bind:class="[{ 'py-0': edit}]" class="text-right">
-        <div class="link-action width-100"
+        <a class="dummy-input"
            v-show="!edit"
            v-on:click="toggleEdit"
            v-bind:class="[{ 'text-muted': mutableValue == 0 }, 'text-dark']">
             {{ formattedValue }}
-        </div>
+        </a>
 
         <input type="number"
                class="form-control form-control-sm text-right"

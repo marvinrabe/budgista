@@ -118,6 +118,22 @@ span.handle {
   }
 }
 
+
+.dummy-input {
+
+  @extend .form-control;
+  @extend .py-0;
+  @extend .px-1;
+  border-color: transparent;
+  cursor: text;
+
+  &:hover {
+    @extend .form-control;
+    @extend .py-0;
+    @extend .px-1;
+  }
+}
+
 /*
  * Helper
  */
