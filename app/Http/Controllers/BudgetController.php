@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Budget;
 use App\Models\Category;
 use App\Month;
@@ -66,6 +67,13 @@ class BudgetController extends Controller
         Auth::user()->save();
 
         return View::make('budgets.show')->with('budget', $budget);
+    }
+
+    public function account(Budget $budget, Account $account)
+    {
+        $this->authorize('view', $account);
+
+        return View::make('budgets.account')->with(['budget' => $budget, 'account' => $account]);
     }
 
     public function edit(Budget $budget)

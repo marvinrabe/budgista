@@ -5,10 +5,13 @@
         "nextMonth": "Next Month",
         "previousMonth": "Previous Month",
         "new": {
-            "category": "Create Category"
+            "category": "Create Category",
+            "transaction": "Create Transaction"
         },
         "edit": {
-            "category": "Edit Category"
+            "category": "Edit Category",
+            "account": "Account Settings",
+            "transaction": "Edit Transaction"
         },
         "delete": {
             "category": "Delete Category"
@@ -25,7 +28,17 @@
         "available": "Available",
         "funds": "Funds",
         "toBeBudgeted": "To be Budgeted",
-        "previousMonth": "Previous Month"
+        "previousMonth": "Previous Month",
+        "balance": {
+            "cleared": "Cleared Balance",
+            "uncleared": "Uncleared Balance",
+            "working": "Working Balance"
+        },
+        "date": "Date",
+        "payee": "Payee",
+        "memo": "Memo",
+        "outflow": "Outflow",
+        "inflow": "Inflow"
     },
     "frequency": {
         "daily": "Daily",

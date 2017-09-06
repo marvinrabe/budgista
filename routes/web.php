@@ -23,9 +23,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('budgets', 'BudgetController');
     Route::group(['prefix' => 'budgets/{budget}', 'middleware' => ['can:view,budget']], function () {
 
-        Route::resource('accounts', 'AccountController', ['except' => [
-            'index'
-        ]]);
+        Route::get('/accounts/{account}', 'BudgetController@account')->name('budgets.account');
+
         Route::resource('transactions', 'TransactionController', ['except' => [
             'index'
         ]]);

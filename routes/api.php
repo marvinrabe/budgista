@@ -24,4 +24,8 @@ Route::group(['middleware' => ['auth:api']], function () {
     ]]);
     Route::put('/categories/{category}/budget', 'API\CategoryController@budget')->name('categories.budget');
 
+    Route::resource('accounts', 'API\AccountController', ['only' => [
+        'store', 'show', 'update', 'destroy'
+    ]]);
+
 });

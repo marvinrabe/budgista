@@ -68,6 +68,11 @@ Vue.component(
 );
 
 Vue.component(
+    'budget-account-view',
+    require('./components/budget/AccountView.vue')
+);
+
+Vue.component(
     'recurrence',
     require('./components/Recurrence.vue')
 );

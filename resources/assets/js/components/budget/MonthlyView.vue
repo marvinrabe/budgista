@@ -145,7 +145,6 @@
         },
         data: () => ({
             sheet: null,
-            drag: false,
             previousMonth: null,
             nextMonth: null,
             newCategory: {

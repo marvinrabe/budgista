@@ -64,7 +64,7 @@
                             </a>
                             <h6 class="nav-header">Accounts</h6>
                             @foreach ($budget->accounts as $account)
-                                <a class="nav-link" href="{{ route('accounts.show', [$budget->id, $account->id]) }}">
+                                <a class="nav-link" href="{{ route('budgets.account', [$budget->id, $account->id]) }}">
                             <span class="float-right badge @if($account->workingBalance() < 0) badge-danger @else badge-success @endif">
                                 {{ Currency::format($account->workingBalance(), $budget->currency) }}
                             </span>
@@ -72,7 +72,7 @@
                                 </a>
                             @endforeach
                             <a class="nav-link text-muted small text-right"
-                               href="{{ route('accounts.create', [$budget->id]) }}">
+                               href="">
                                 <span class="fa fa-plus"></span> {{ __('Add Account') }}
                             </a>
                         </nav>
