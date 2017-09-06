@@ -60,8 +60,14 @@
 .transactions-row {
   .transaction-outflow {
     @extend .text-danger;
+    span:before {
+      content: "-";
+    }
   }
   .transaction-inflow {
     @extend .text-success;
+    span:before {
+      content: "+";
+    }
   }
 }

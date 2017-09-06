@@ -47,20 +47,30 @@
                 <div class="transaction-actions">&nbsp;</div>
             </div>
             <virtual-list :size="37" :remain="8" :tobottom="loadMore">
-                <div class="transactions-row" :class="[{ 'text-muted bg-light': new Date(item.date) >= new Date() }]" v-for="(item, index) of transactions" :key="index">
+                <div class="transactions-row" :class="[{ 'text-muted bg-light': new Date(item.date) >= new Date() }]"
+                     v-for="(item, index) of transactions" :key="index">
                     <div class="transaction-clear">
-                        <button class="btn btn-xs" :class="[{ 'btn-success': item.cleared }, {'btn-light': !item.cleared}]">
+                        <button class="btn btn-xs"
+                                :class="[{ 'btn-success': item.cleared }, {'btn-light': !item.cleared}]">
                             <span class="fa fa-check"></span>
                         </button>
                     </div>
                     <div class="transaction-date">
-                        {{ $formatDate(new Date(item.date), { year: 'numeric', month: '2-digit', day: '2-digit' }) }}
+                        {{ $formatDate(new Date(item.date), {year: 'numeric', month: '2-digit', day: '2-digit'}) }}
                     </div>
                     <div class="transaction-payee">{{ item.payee }}</div>
                     <div class="transaction-category">{{ item.category }}</div>
                     <div class="transaction-memo">{{ item.memo }}</div>
-                    <div class="transaction-outflow">- 0</div>
-                    <div class="transaction-inflow">+ 0</div>
+                    <div class="transaction-outflow">
+                        <span v-if="item.amount < 0">
+                            {{ $formatNumber(item.amount * -1, {style: 'currency', currency: currency}) }}
+                        </span>
+                    </div>
+                    <div class="transaction-inflow">
+                        <span v-if="item.amount >= 0">
+                            {{ $formatNumber(item.amount, {style: 'currency', currency: currency}) }}
+                        </span>
+                    </div>
                     <div class="transaction-actions">
                         <a :title="$t('action.edit.transaction')" class="text-muted">
                             <span class="fa fa-pencil"></span>
@@ -101,7 +111,7 @@
             axios
                 .get('/api/accounts/' + this.account_id + '/transactions')
                 .then(response => {
-                    this.transactions= response.data.data;
+                    this.transactions = response.data.data;
                     this.nextPage = response.data.next_page_url;
                 })
                 .catch(e => {
