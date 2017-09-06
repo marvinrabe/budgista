@@ -40,9 +40,11 @@
                 <tr>
                     <th>
                         {{ $t('form.category') }}
-                        <category-new :budget="budget"
-                                      :month="sheet.month"
-                                      v-on:newCategory="category => addRow(category)"></category-new>
+
+                        <a class="link-action text-muted" v-on:click="showNewCategoryModal"
+                           :title="$t('action.new.category')">
+                            <span class="fa fa-plus"></span>
+                        </a>
                     </th>
                     <th class="text-right" width="130">{{ $t('form.budgeted') }}</th>
                     <th class="text-right d-none d-lg-table-cell ">{{ $t('form.activity') }}</th>
@@ -78,10 +80,22 @@
             </table>
         </div>
 
+        <b-modal ref="newCategoryModal" :title="$t('action.new.category')">
+            <form @submit.stop.prevent="createCategory">
+                <b-form-input type="text" :placeholder="$t('form.name')" v-model="newCategory.name"></b-form-input>
+            </form>
 
-        <b-modal ref="editCategoryModal"
-                 :title="$t('action.edit.category')"
-                 @ok="editCategory">
+            <div slot="modal-footer">
+                <button class="btn btn-light" v-on:click="hideNewCategoryModal">
+                    {{ $t('action.cancel') }}
+                </button>
+                <button class="btn btn-primary" v-on:click="createCategory">
+                    {{ $t('action.save') }}
+                </button>
+            </div>
+        </b-modal>
+
+        <b-modal ref="editCategoryModal" :title="$t('action.edit.category')">
             <form @submit.stop.prevent="editCategory">
                 <b-form-input type="text" :placeholder="$t('form.name')" v-model="editCategory.name"></b-form-input>
             </form>
@@ -100,7 +114,6 @@
                 <button class="btn btn-primary" v-on:click="updateCategory">
                     {{ $t('action.save') }}
                 </button>
-
             </div>
         </b-modal>
     </div>
@@ -113,19 +126,18 @@
         props: ['budget'],
         components: {
             draggable,
-            'category-new': require('./CategoryNew.vue'),
             'category-budget': require('./CategoryBudget.vue')
         },
         computed: {
-            currency: function () {
-                return window.currency;
-            },
             budgeted: function () {
                 let sum = 0;
                 this.sheet.rows.forEach(function (row) {
                     sum += row.budgeted;
                 });
                 return sum;
+            },
+            currency: function () {
+                return window.currency;
             },
             toBeBudgeted: function () {
                 return this.sheet.previousMonth + this.sheet.funds - this.budgeted;
@@ -136,6 +148,9 @@
             drag: false,
             previousMonth: null,
             nextMonth: null,
+            newCategory: {
+                'name': ''
+            },
             editCategory: {
                 'id': '',
                 'name': ''
@@ -160,7 +175,6 @@
                         this.errors.push(e)
                     })
             },
-
             showPreviousMonth() {
                 this.loadSheet(this.previousMonth);
             },
@@ -169,6 +183,10 @@
                 this.loadSheet(this.nextMonth);
             },
 
+
+            available: function (category) {
+                return category.previousMonth + category.budgeted + category.activity;
+            },
             updateBudget: function (category, value) {
                 category.budgeted = value;
 
@@ -186,24 +204,27 @@
 
             },
 
-            persistSorting: function (category, value) {
-                let list = this.sheet.rows.reduce(function(prevVal, elem) {
-                    prevVal.push(elem.id);
-                    return prevVal;
-                }, []);
-
+            showNewCategoryModal() {
+                this.newCategory.name = '';
+                this.$refs.newCategoryModal.show();
+            },
+            hideNewCategoryModal() {
+                this.$refs.newCategoryModal.hide();
+            },
+            createCategory() {
                 axios
-                    .put('/api/budgets/' + this.budget + '/sort', {
-                        'categories': list
+                    .post('/api/categories', {
+                        'name': this.newCategory.name,
+                        'budget': this.budget
+                    })
+                    .then(response => {
+                        this.addRow(response.data);
                     })
                     .catch(e => {
                         console.error(e);
                     });
 
-            },
-
-            available: function (category) {
-                return category.previousMonth + category.budgeted + category.activity;
+                this.hideNewCategoryModal();
             },
 
             showEditCategoryModal(row) {
@@ -214,7 +235,6 @@
             hideEditCategoryModal() {
                 this.$refs.editCategoryModal.hide();
             },
-
             updateCategory() {
                 this.sheet.rows.find(x => x.id === this.editCategory.id).name = this.editCategory.name;
 
@@ -228,7 +248,6 @@
 
                 this.hideEditCategoryModal();
             },
-
             deleteCategory() {
                 this.removeRow(this.editCategory.id);
 
@@ -252,6 +271,21 @@
             },
             removeRow(id) {
                 this.sheet.rows = this.sheet.rows.filter(item => item.id !== id);
+            },
+            persistSorting: function (category, value) {
+                let list = this.sheet.rows.reduce(function (prevVal, elem) {
+                    prevVal.push(elem.id);
+                    return prevVal;
+                }, []);
+
+                axios
+                    .put('/api/budgets/' + this.budget + '/sort', {
+                        'categories': list
+                    })
+                    .catch(e => {
+                        console.error(e);
+                    });
+
             }
 
         }

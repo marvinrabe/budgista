@@ -4,14 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Budget;
 use App\Models\Category;
-use App\Models\CategoryBudget;
 use App\Month;
 use App\Row;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
 
 class CategoryController extends Controller
 {
@@ -21,18 +17,12 @@ class CategoryController extends Controller
         $this->authorizeResource(Category::class);
     }
 
-    public function store(Budget $budget)
+    public function store(Request $request)
     {
-
-        $rules = array(
+        $this->validate($request, [
             'name' => 'required',
             'budget' => 'required'
-        );
-
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->messages()], 400);
-        }
+        ]);
 
         $budget = Budget::find(Input::get('budget'));
         $this->authorize('update', $budget);
