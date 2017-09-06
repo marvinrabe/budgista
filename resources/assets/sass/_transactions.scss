@@ -1,0 +1,67 @@
+
+.transactions {
+  box-sizing: border-box;
+
+  &-header,
+  &-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+  }
+
+  &-header > div {
+    font-weight: bold;
+    border-bottom: 2px solid rgb(233, 236, 239);
+    font-size: 80%;
+    text-transform: uppercase;
+    padding: 0.25rem !important;
+  }
+
+  &-row > div {
+    padding: 0.3rem;
+    border-top: 1px solid #e9ecef;
+  }
+}
+
+.transaction-date {
+  width: 100%;
+}
+
+.transaction-payee {
+  width: 100%;
+}
+
+.transaction-category {
+  width: 100%;
+}
+
+.transaction-memo {
+  width: 100%;
+}
+
+.transaction-outflow {
+  width: 100%;
+  text-align: right;
+}
+
+.transaction-inflow {
+  width: 100%;
+  text-align: right;
+}
+
+.transaction-clear,
+.transaction-actions {
+  text-align: center;
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.transactions-row {
+  .transaction-outflow {
+    @extend .text-danger;
+  }
+  .transaction-inflow {
+    @extend .text-success;
+  }
+}

@@ -27,5 +27,6 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::resource('accounts', 'API\AccountController', ['only' => [
         'store', 'show', 'update', 'destroy'
     ]]);
+    Route::get('/accounts/{account}/transactions', 'API\AccountController@transactions')->name('accounts.transactions');
 
 });

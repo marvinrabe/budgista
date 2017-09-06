@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="account !== null">
 
         <div class="float-right my-3 ml-4 btn-group">
             <button class="btn btn-light" :title="$t('action.edit.account')">
@@ -35,48 +35,49 @@
             </div>
         </div>
 
-        <table class="table table-sm">
-            <thead>
-            <tr>
-                <th width="32"></th>
-                <th>{{ $t('form.date') }}</th>
-                <th>{{ $t('form.payee') }}</th>
-                <th>{{ $t('form.category') }}</th>
-                <th>{{ $t('form.memo') }}</th>
-                <th class="text-right">{{ $t('form.outflow') }}</th>
-                <th class="text-right">{{ $t('form.inflow') }}</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tr class="text-muted bg-light">
-                <td>
-                    <button class="btn btn-xs btn-light">
-                        <span class="fa fa-check"></span>
-                    </button>
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="text-danger text-right">
-                    - 0
-                </td>
-                <td class="text-success text-right">
-                    + 0
-                </td>
-                <td>
-                    <a href="" :title="$t('action.edit.transaction')" class="text-muted">
-                        <span class="fa fa-pencil"></span>
-                    </a>
-                </td>
-            </tr>
-        </table>
+        <div class="transactions">
+            <div class="transactions-header">
+                <div class="transaction-clear">&nbsp;</div>
+                <div class="transaction-date">{{ $t('form.date') }}</div>
+                <div class="transaction-payee">{{ $t('form.payee') }}</div>
+                <div class="transaction-category">{{ $t('form.category') }}</div>
+                <div class="transaction-memo">{{ $t('form.memo') }}</div>
+                <div class="transaction-outflow">{{ $t('form.outflow') }}</div>
+                <div class="transaction-inflow">{{ $t('form.inflow') }}</div>
+                <div class="transaction-actions">&nbsp;</div>
+            </div>
+            <virtual-list :size="37" :remain="8" :tobottom="loadMore">
+                <div class="transactions-row" :class="[{ 'text-muted bg-light': new Date(item.date) >= new Date() }]" v-for="(item, index) of transactions" :key="index">
+                    <div class="transaction-clear">
+                        <button class="btn btn-xs" :class="[{ 'btn-success': item.cleared }, {'btn-light': !item.cleared}]">
+                            <span class="fa fa-check"></span>
+                        </button>
+                    </div>
+                    <div class="transaction-date">
+                        {{ $formatDate(new Date(item.date), { year: 'numeric', month: '2-digit', day: '2-digit' }) }}
+                    </div>
+                    <div class="transaction-payee">{{ item.payee }}</div>
+                    <div class="transaction-category">{{ item.category }}</div>
+                    <div class="transaction-memo">{{ item.memo }}</div>
+                    <div class="transaction-outflow">- 0</div>
+                    <div class="transaction-inflow">+ 0</div>
+                    <div class="transaction-actions">
+                        <a :title="$t('action.edit.transaction')" class="text-muted">
+                            <span class="fa fa-pencil"></span>
+                        </a>
+                    </div>
+                </div>
+            </virtual-list>
+        </div>
     </div>
 </template>
 
 <script>
+    import virtualList from 'vue-virtual-scroll-list'
+
     export default {
         props: ['account_id'],
+        components: {virtualList},
         computed: {
             currency: function () {
                 return window.currency;
@@ -84,21 +85,45 @@
         },
         data: () => ({
             account: null,
-            transactions: []
+            transactions: [],
+            nextPage: null
         }),
         created: function () {
             axios
-                .get('/api/accounts/'+this.account_id)
+                .get('/api/accounts/' + this.account_id)
                 .then(response => {
-                    // JSON responses are automatically parsed.
                     this.account = response.data;
                 })
                 .catch(e => {
                     this.errors.push(e)
                 });
+
+            axios
+                .get('/api/accounts/' + this.account_id + '/transactions')
+                .then(response => {
+                    this.transactions= response.data.data;
+                    this.nextPage = response.data.next_page_url;
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                });
+            this.loadMore();
         },
         methods: {
+            loadMore: function () {
+                if (this.nextPage === null) return;
 
+                axios
+                    .get('/api/accounts/' + this.nextPage + '/transactions')
+                    .then(response => {
+                        this.transactions.concat(response.data.data);
+                        this.nextPage = response.data.next_page_url;
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    });
+
+            }
         }
 
     }

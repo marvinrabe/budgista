@@ -43,7 +43,7 @@ class AccountController extends Controller
     {
         $this->authorize('view', $account);
 
-        return $account->transactions()->paginate(25);
+        return $account->transactions()->orderBy('date', 'desc')->paginate(25);
     }
 
     public function update(Request $request, Account $account)

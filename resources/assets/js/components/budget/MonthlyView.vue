@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="col-sm-4 col-lg-3 text-center text-sm-right">
-                    <div class="badge" v-bind:class="[{ 'badge-danger': sheet.available < 0 }, 'badge-success']">
+                    <div class="badge" :class="[{ 'badge-danger': sheet.available < 0 }, 'badge-success']">
                         <strong class="h3"
                                 v-html="$formatNumber(toBeBudgeted, {style: 'currency', currency: currency})"></strong><br>
                         <span class="small">{{ $t('form.toBeBudgeted') }}</span>
