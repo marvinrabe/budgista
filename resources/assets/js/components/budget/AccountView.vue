@@ -41,7 +41,6 @@
                 <div class="transaction-date">{{ $t('form.date') }}</div>
                 <div class="transaction-payee">{{ $t('form.payee') }}</div>
                 <div class="transaction-category">{{ $t('form.category') }}</div>
-                <div class="transaction-memo">{{ $t('form.memo') }}</div>
                 <div class="transaction-outflow">{{ $t('form.outflow') }}</div>
                 <div class="transaction-inflow">{{ $t('form.inflow') }}</div>
                 <div class="transaction-actions">&nbsp;</div>
@@ -60,7 +59,6 @@
                     </div>
                     <div class="transaction-payee">{{ item.payee }}</div>
                     <div class="transaction-category">{{ item.category }}</div>
-                    <div class="transaction-memo">{{ item.memo }}</div>
                     <div class="transaction-outflow">
                         <span v-if="item.amount < 0">
                             {{ $formatNumber(item.amount * -1, {style: 'currency', currency: currency}) }}

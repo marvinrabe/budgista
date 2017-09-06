@@ -10,22 +10,35 @@
 
   }
 
-  &-header > div {
+  &-header {
     font-weight: bold;
+    border-top: 1px solid #e9ecef;
     border-bottom: 2px solid rgb(233, 236, 239);
     font-size: 80%;
     text-transform: uppercase;
-    padding: 0.25rem !important;
+    & > div {
+      padding: 0.25rem !important;
+    }
   }
 
-  &-row > div {
-    padding: 0.3rem;
+  &-row {
     border-top: 1px solid #e9ecef;
+
+    & > div {
+      padding: 0.3rem;
+    }
   }
 }
 
 .transaction-date {
   width: 100%;
+}
+
+.transaction-payee,
+.transaction-category {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .transaction-payee {
@@ -36,8 +49,9 @@
   width: 100%;
 }
 
-.transaction-memo {
-  width: 100%;
+.transaction-inflow,
+.transaction-outflow {
+  white-space: nowrap;
 }
 
 .transaction-outflow {
