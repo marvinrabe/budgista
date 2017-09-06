@@ -15,7 +15,7 @@ class TransactionPolicy
      *
      * @param  \App\Models\User $user
      * @param  \App\Models\Transaction $Transaction
-     * @return mixed
+     * @return boolean
      */
     public function view(User $user, Transaction $transaction)
     {
@@ -26,7 +26,7 @@ class TransactionPolicy
      * Determine whether the user can create Transactions.
      *
      * @param  \App\Models\User $user
-     * @return mixed
+     * @return boolean
      */
     public function create(User $user)
     {
@@ -38,7 +38,7 @@ class TransactionPolicy
      *
      * @param  \App\Models\User $user
      * @param  \App\Models\Transaction $Transaction
-     * @return mixed
+     * @return boolean
      */
     public function update(User $user, Transaction $transaction)
     {
@@ -50,10 +50,10 @@ class TransactionPolicy
      *
      * @param  \App\Models\User $user
      * @param  \App\Models\Transaction $Transaction
-     * @return mixed
+     * @return boolean
      */
     public function delete(User $user, Transaction $transaction)
     {
-        return $user->can('delete', $transaction->budget);
+        return $user->can('update', $transaction->budget);
     }
 }

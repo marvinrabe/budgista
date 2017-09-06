@@ -19,10 +19,9 @@ Route::group(['middleware' => ['auth:api']], function () {
 
     Route::put('/budgets/{budget}/sort', 'BudgetController@sort')->name('budgets.sort');
 
-    Route::resource('categories', 'CategoryController', ['only' => [
+    Route::resource('categories', 'API\CategoryController', ['only' => [
         'store', 'update', 'destroy'
     ]]);
-    Route::put('/categories/{category}/budget', 'CategoryController@budget')->name('categories.budget');
-
+    Route::put('/categories/{category}/budget', 'API\CategoryController@budget')->name('categories.budget');
 
 });

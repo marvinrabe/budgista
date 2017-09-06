@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait HasCompositePrimaryKeyTrait
 {
+
     /**
      * Get the value indicating whether the IDs are incrementing.
      *
@@ -39,8 +40,8 @@ trait HasCompositePrimaryKeyTrait
     /**
      * Execute a query for a single record by ID.
      *
-     * @param  array  $ids Array of keys, like [column => value].
-     * @param  array  $columns
+     * @param  array $ids Array of keys, like [column => value].
+     * @param  array $columns
      * @return mixed|static
      */
     public static function find($ids, $columns = ['*'])

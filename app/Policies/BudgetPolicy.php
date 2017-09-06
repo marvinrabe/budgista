@@ -15,7 +15,7 @@ class BudgetPolicy
      *
      * @param  \App\Models\User $user
      * @param  \App\Models\Budget $Budget
-     * @return mixed
+     * @return boolean
      */
     public function view(User $user, Budget $budget)
     {
@@ -26,7 +26,7 @@ class BudgetPolicy
      * Determine whether the user can create Budgets.
      *
      * @param  \App\Models\User $user
-     * @return mixed
+     * @return boolean
      */
     public function create(User $user)
     {
@@ -38,7 +38,7 @@ class BudgetPolicy
      *
      * @param  \App\Models\User $user
      * @param  \App\Models\Budget $Budget
-     * @return mixed
+     * @return boolean
      */
     public function update(User $user, Budget $budget)
     {
@@ -50,7 +50,7 @@ class BudgetPolicy
      *
      * @param  \App\Models\User $user
      * @param  \App\Models\Budget $Budget
-     * @return mixed
+     * @return boolean
      */
     public function delete(User $user, Budget $budget)
     {

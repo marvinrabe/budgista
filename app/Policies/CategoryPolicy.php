@@ -16,7 +16,7 @@ class CategoryPolicy
      *
      * @param  \App\Models\User $user
      * @param  \App\Models\Category $Category
-     * @return mixed
+     * @return boolean
      */
     public function view(User $user, Category $category)
     {
@@ -27,11 +27,11 @@ class CategoryPolicy
      * Determine whether the user can create Categorys.
      *
      * @param  \App\Models\User $user
-     * @return mixed
+     * @return boolean
      */
     public function create(User $user)
     {
-        return $user->can('create', Budget::class);
+        return true;
     }
 
     /**
@@ -39,7 +39,7 @@ class CategoryPolicy
      *
      * @param  \App\Models\User $user
      * @param  \App\Models\Category $Category
-     * @return mixed
+     * @return boolean
      */
     public function update(User $user, Category $category)
     {
@@ -51,10 +51,10 @@ class CategoryPolicy
      *
      * @param  \App\Models\User $user
      * @param  \App\Models\Category $Category
-     * @return mixed
+     * @return boolean
      */
     public function delete(User $user, Category $category)
     {
-        return $user->can('delete', $category->budget);
+        return $user->can('update', $category->budget);
     }
 }

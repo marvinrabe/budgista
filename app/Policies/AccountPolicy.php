@@ -16,7 +16,7 @@ class AccountPolicy
      *
      * @param  \App\Models\User $user
      * @param Account $account
-     * @return mixed
+     * @return boolean
      */
     public function view(User $user, Account $account)
     {
@@ -27,11 +27,11 @@ class AccountPolicy
      * Determine whether the user can create Accounts.
      *
      * @param  \App\Models\User $user
-     * @return mixed
+     * @return boolean
      */
     public function create(User $user)
     {
-        return $user->can('create', Budget::class);
+        return true;
     }
 
     /**
@@ -39,7 +39,7 @@ class AccountPolicy
      *
      * @param  \App\Models\User $user
      * @param  \App\Models\Account $Account
-     * @return mixed
+     * @return boolean
      */
     public function update(User $user, Account $account)
     {
@@ -51,11 +51,11 @@ class AccountPolicy
      *
      * @param  \App\Models\User $user
      * @param Account $account
-     * @return mixed
+     * @return boolean
      */
     public function delete(User $user, Account $account)
     {
-        return $user->can('delete', $account->budget);
+        return $user->can('update', $account->budget);
     }
 
 }
