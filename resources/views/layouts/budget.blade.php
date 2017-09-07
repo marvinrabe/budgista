@@ -19,7 +19,7 @@
         </div>
     </nav>
 
-    <div class="container px-0 px-md-2 pb-2 py-md-2">
+    <div class="container px-0 px-md-2">
 
         <div class="form-row">
             <div class="col-md-4 col-lg-3">

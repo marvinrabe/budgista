@@ -1,41 +1,49 @@
 <template>
     <div v-if="account !== null">
 
-        <div class="float-right my-3 ml-4 btn-group">
-            <button class="btn btn-light" :title="$t('action.edit.account')">
-                <span class="fa fa-cog"></span>
-            </button>
-            <button class="btn btn-primary">
-                <span class="fa fa-plus"></span> {{ $t('action.new.transaction') }}
-            </button>
-        </div>
-
-        <p class="display-4">
-            {{ account.name }}
-        </p>
-
-        <div class="form-row text-center">
-            <div class="col">
-                <strong class="">
-                    {{ $formatNumber(0, {style: 'currency', currency: currency}) }}
-                </strong>
-                <p class="small">{{ $t('form.balance.cleared') }}</p>
-            </div>
-            <div class="col">
-                <strong class="">
-                    {{ $formatNumber(0, {style: 'currency', currency: currency}) }}
-                </strong>
-                <p class="small">{{ $t('form.balance.uncleared') }}</p>
-            </div>
-            <div class="col">
-                <strong class="">
-                    {{ $formatNumber(0, {style: 'currency', currency: currency}) }}
-                </strong>
-                <p class="small">{{ $t('form.balance.working') }}</p>
+        <div class="toolbar toolbar-primary">
+            <div class="form-row">
+                <div class="h1 col mb-0">
+                    {{ account.name }}
+                </div>
+                <div class="col text-center">
+                    <strong class="">
+                        {{ $formatNumber(0, {style: 'currency', currency: currency}) }}
+                    </strong>
+                    <p class="small">{{ $t('form.balance.cleared') }}</p>
+                </div>
+                <div class="col text-center">
+                    <strong class="">
+                        {{ $formatNumber(0, {style: 'currency', currency: currency}) }}
+                    </strong>
+                    <p class="small">{{ $t('form.balance.uncleared') }}</p>
+                </div>
+                <div class="col text-center">
+                    <strong class="">
+                        {{ $formatNumber(0, {style: 'currency', currency: currency}) }}
+                    </strong>
+                    <p class="small">{{ $t('form.balance.working') }}</p>
+                </div>
             </div>
         </div>
 
-        <div class="transactions">
+        <div class="toolbar toolbar-secondary">
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-link">
+                        <span class="fa fa-plus"></span> {{ $t('action.new.transaction') }}
+                    </button>
+                </div>
+
+                <div class="col text-right">
+                    <button class="btn btn-link" :title="$t('action.edit.account')">
+                        <span class="fa fa-cog"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="transactions content">
             <div class="transactions-header">
                 <div class="transaction-clear">&nbsp;</div>
                 <div class="transaction-date">{{ $t('form.date') }}</div>
@@ -46,11 +54,12 @@
                 <div class="transaction-actions">&nbsp;</div>
             </div>
             <virtual-list :size="37" :remain="8" :tobottom="loadMore">
-                <div class="transactions-row" :class="[{ 'text-muted bg-light': new Date(item.date) >= new Date() }]"
+                <div class="transactions-row" :class="[{ 'text-muted': new Date(item.date) > new Date() }]"
                      v-for="(item, index) of transactions" :key="index">
                     <div class="transaction-clear">
                         <button class="btn btn-xs"
-                                :class="[{ 'btn-success': item.cleared }, {'btn-light': !item.cleared}]">
+                                :class="[{ 'btn-success': item.cleared }, {'btn-light': !item.cleared}]"
+                        v-if="new Date(item.date) <= new Date()">
                             <span class="fa fa-check"></span>
                         </button>
                     </div>

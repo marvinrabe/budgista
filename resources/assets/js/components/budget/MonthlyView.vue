@@ -1,29 +1,27 @@
 <template>
-    <div>
-        <div v-if="sheet !== null">
+    <div v-if="sheet !== null">
 
-            <div class="form-row mb-3 px-1" style="align-items: flex-end;">
-                <div class="col-xs-12 col-sm-8 col-lg-6">
-                    <div class="h3 display-4 mb-0 text-center text-sm-left">
-                        <button class="btn btn-secondary rounded-circle"
-                                :title="$t('action.previousMonth')" @click="showPreviousMonth">
-                            <span class="fa fa-chevron-left"></span>
-                        </button>
-                        <span v-html="$formatDate(new Date(sheet.month), { year: 'numeric', month: 'short' })"></span>
-                        <button class="btn btn-secondary rounded-circle"
-                                :title="$t('action.nextMonth')" @click="showNextMonth">
-                            <span class="fa fa-chevron-right"></span>
-                        </button>
-                    </div>
+        <div class="toolbar toolbar-primary">
+            <div class="form-row">
+                <div class="col col-xs-12 col-sm-8 col-lg-6 h1 mb-sm-0 text-center text-sm-left">
+                    <button class="btn btn-outline-light"
+                            :title="$t('action.previousMonth')" @click="showPreviousMonth">
+                        <span class="fa fa-chevron-left"></span>
+                    </button>
+                    <span v-html="$formatDate(new Date(sheet.month), { year: 'numeric', month: 'short' })"></span>
+                    <button class="btn btn-outline-light"
+                            :title="$t('action.nextMonth')" @click="showNextMonth">
+                        <span class="fa fa-chevron-right"></span>
+                    </button>
                 </div>
-                <div class="col-sm-4 col-lg-3 text-center text-sm-right">
+                <div class="col col-sm-4 col-lg-3 text-center text-sm-right">
                     <div class="badge" :class="[{ 'badge-danger': sheet.available < 0 }, 'badge-success']">
                         <strong class="h3"
                                 v-html="$formatNumber(toBeBudgeted, {style: 'currency', currency: currency})"></strong><br>
                         <span class="small">{{ $t('form.toBeBudgeted') }}</span>
                     </div>
                 </div>
-                <div class="d-none d-lg-block col-lg-3 small">
+                <div class="col d-none d-lg-block col-lg-3 small">
                     {{ $t('form.previousMonth') }}:
                     <strong v-html="$formatNumber(sheet.previousMonth, {style: 'currency', currency: currency})"></strong>
                     <br>
@@ -34,51 +32,57 @@
                     <strong v-html="$formatNumber(budgeted, {style: 'currency', currency: currency})"></strong>
                 </div>
             </div>
+        </div>
 
-            <table class="table table-sm">
-                <thead>
-                <tr>
-                    <th>
-                        {{ $t('form.category') }}
 
-                        <a class="link-action text-muted" v-on:click="showNewCategoryModal"
-                           :title="$t('action.new.category')">
-                            <span class="fa fa-plus"></span>
+        <div class="toolbar toolbar-secondary">
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-link" v-on:click="showNewCategoryModal">
+                        <span class="fa fa-plus"></span> {{ $t('action.new.category') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-sm content">
+            <thead>
+            <tr>
+                <th>
+                    {{ $t('form.category') }}
+                </th>
+                <th class="text-right" width="130">{{ $t('form.budgeted') }}</th>
+                <th class="text-right d-none d-lg-table-cell ">{{ $t('form.activity') }}</th>
+                <th class="text-right">{{ $t('form.available') }}</th>
+            </tr>
+            </thead>
+            <draggable v-model="sheet.rows" :options="{handle:'.handle'}" element="tbody" @end="persistSorting">
+                <tr v-for="row in sheet.rows" :key="row.id">
+                    <td>
+                        <span class="handle d-none d-sm-inline-block"></span>
+                        <a class="link-action text-dark"
+                           :title="$t('action.edit.category')"
+                           v-on:click="showEditCategoryModal(row)">
+                            {{ row.name }}
                         </a>
-                    </th>
-                    <th class="text-right" width="130">{{ $t('form.budgeted') }}</th>
-                    <th class="text-right d-none d-lg-table-cell ">{{ $t('form.activity') }}</th>
-                    <th class="text-right">{{ $t('form.available') }}</th>
-                </tr>
-                </thead>
-                <draggable v-model="sheet.rows" :options="{handle:'.handle'}" element="tbody" @end="persistSorting">
-                    <tr v-for="row in sheet.rows" :key="row.id">
-                        <td>
-                            <span class="handle d-none d-sm-inline-block"></span>
-                            <a class="link-action text-dark"
-                               :title="$t('action.edit.category')"
-                               v-on:click="showEditCategoryModal(row)">
-                                {{ row.name }}
-                            </a>
-                        </td>
-                        <category-budget
-                                :value="row.budgeted"
-                                v-on:update:value="val => updateBudget(row, val)">
-                        </category-budget>
-                        <td class="d-none d-lg-table-cell text-right"
-                            :class="[{ 'text-muted': row.activity == 0 }, 'text-dark']"
-                            v-html="$formatNumber(row.activity, {style: 'currency', currency: currency})">
-                        </td>
-                        <td class="text-right">
+                    </td>
+                    <category-budget
+                            :value="row.budgeted"
+                            v-on:update:value="val => updateBudget(row, val)">
+                    </category-budget>
+                    <td class="d-none d-lg-table-cell text-right"
+                        :class="[{ 'text-muted': row.activity == 0 }, 'text-dark']"
+                        v-html="$formatNumber(row.activity, {style: 'currency', currency: currency})">
+                    </td>
+                    <td class="text-right">
                         <span style="font-size: 100%" class="badge"
                               :class="[{ 'badge-danger': available(row) < 0 }, { 'badge-success': available(row) > 0 }, 'badge-secondary']"
                               v-html="$formatNumber(available(row), {style: 'currency', currency: currency})">
                         </span>
-                        </td>
-                    </tr>
-                </draggable>
-            </table>
-        </div>
+                    </td>
+                </tr>
+            </draggable>
+        </table>
 
         <b-modal ref="newCategoryModal" :title="$t('action.new.category')">
             <form @submit.stop.prevent="createCategory">
@@ -99,7 +103,7 @@
             <form @submit.stop.prevent="editCategory">
                 <b-form-input type="text" :placeholder="$t('form.name')" v-model="editCategory.name"></b-form-input>
             </form>
-            <div slot="modal-footer" class="width-100 text-right">
+            <div slot="modal-footer" class="text-right" style="width: 100%;">
                 <div class="float-left">
                     <button class="btn btn-outline-danger"
                             :title="$t('action.delete.category')"

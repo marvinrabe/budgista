@@ -4,6 +4,14 @@
 // Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
 
+// Own Bootstrap extensions
+.btn-group-xs>.btn, .btn-xs {
+  padding: .125rem .25rem;
+  font-size: 0.875rem;
+  line-height: 1.3;
+  border-radius: .2rem;
+}
+
 @import "pace";
 @import "logo";
 @import "font-awesome";
@@ -50,6 +58,9 @@ a.text-muted:hover {
 
 .link-action {
   cursor: pointer;
+  &:hover {
+    text-decoration: underline !important;
+  }
 }
 
 .card-placeholder {
@@ -64,18 +75,33 @@ a.text-muted:hover {
 
 }
 
-.btn-group-xs>.btn, .btn-xs {
-  padding: .125rem .25rem;
-  font-size: 0.875rem;
-  line-height: 1.3;
-  border-radius: .2rem;
-}
 
 .layout-auth {
 
   background: $gray-100;
   padding-top: 1rem;
 
+}
+
+.layout-budget {
+
+  background: $gray-100;
+
+}
+
+.dummy-input {
+
+  @extend .form-control;
+  @extend .py-0;
+  @extend .px-1;
+  border-color: transparent;
+  cursor: text;
+
+  &:hover {
+    @extend .form-control;
+    @extend .py-0;
+    @extend .px-1;
+  }
 }
 
 /*
@@ -119,25 +145,47 @@ span.handle {
   }
 }
 
+/**
+ * Toolbar
+ */
+.toolbar {
+  @extend .container-fluid;
 
-.dummy-input {
+  position: relative;
 
-  @extend .form-control;
-  @extend .py-0;
-  @extend .px-1;
-  border-color: transparent;
-  cursor: text;
+  &-primary {
+    color: white;
+    border-radius: 2px 2px 0 0;
+    background: $gray-900;
+    @extend .shadow-1;
+    z-index: 20;
+  }
 
-  &:hover {
-    @extend .form-control;
-    @extend .py-0;
-    @extend .px-1;
+  &-secondary {
+    @extend .shadow-1;
+    background: $white;
+    z-index: 10;
+  }
+
+  p, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0;
+  }
+
+  .form-row {
+    align-items: center;
+  }
+
+  .col {
+    padding: $table-cell-padding-sm;
+  }
+
+  .btn {
+    @extend .btn-sm;
   }
 }
 
-/*
- * Helper
- */
-.width-100 {
-  width: 100%;
+.content {
+  border-radius: 0 0 2px 2px;
+  @extend .shadow-1;
+  background: $white;
 }
