@@ -6,19 +6,19 @@
                 <div class="h2 col mb-0">
                     {{ account.name }}
                 </div>
-                <div class="col text-center">
+                <div class="col text-right">
                     <strong :class="[{ 'text-success': account.clearedBalance >= 0}, { 'text-danger': account.clearedBalance < 0}]">
                         {{ $formatNumber(account.clearedBalance, {style: 'currency', currency: currency}) }}
                     </strong>
                     <p class="small">{{ $t('form.balance.cleared') }}</p>
                 </div>
-                <div class="col text-center">
+                <div class="col text-right">
                     <strong :class="[{ 'text-success': account.unclearedBalance >= 0}, { 'text-danger': account.unclearedBalance < 0}]">
                         {{ $formatNumber(account.unclearedBalance, {style: 'currency', currency: currency}) }}
                     </strong>
                     <p class="small">{{ $t('form.balance.uncleared') }}</p>
                 </div>
-                <div class="col text-center">
+                <div class="col text-right">
                     <strong :class="[{ 'text-success': account.workingBalance >= 0}, { 'text-danger': account.workingBalance < 0}]">
                         {{ $formatNumber(account.workingBalance, {style: 'currency', currency: currency}) }}
                     </strong>

@@ -62,16 +62,16 @@
                                     {{ __('Manage Budgets') }}
                                 </a>
                             </div>
-                            <a class="nav-link" href="{{ route('budgets.show', [$budget->id]) }}">
+                            <a class="nav-link-main {{Route::currentRouteName() == 'budgets.show' ? 'active' : '' }}" href="{{ route('budgets.show', [$budget->id]) }}">
                                 <span class="fa fa-envelope-o fa-fw"></span> Budget
                             </a>
                             <h6 class="nav-header">Accounts</h6>
-                            @foreach ($budget->accounts as $account)
-                                <a class="nav-link" href="{{ route('budgets.account', [$budget->id, $account->id]) }}">
-                            <span class="float-right badge @if($account->workingBalance() < 0) badge-danger @else badge-success @endif">
-                                {{ Currency::format($account->workingBalance(), $budget->currency) }}
+                            @foreach ($budget->accounts as $menuAccount)
+                                <a class="nav-link-main {{ (Route::currentRouteName() == 'budgets.account' && $account->id == $menuAccount->id) ? 'active' : '' }}" href="{{ route('budgets.account', [$budget->id, $menuAccount->id]) }}">
+                            <span class="float-right mt-1 badge @if($menuAccount->workingBalance() < 0) badge-danger @else badge-success @endif">
+                                {{ Currency::format($menuAccount->workingBalance(), $budget->currency) }}
                             </span>
-                                    {{ $account->name }}
+                                    {{ $menuAccount->name }}
                                 </a>
                             @endforeach
                             <a class="nav-link text-muted small text-right"

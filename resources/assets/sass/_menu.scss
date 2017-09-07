@@ -3,6 +3,27 @@
   cursor: pointer;
 }
 
+.app-menu {
+  .nav-link-main {
+    @extend .nav-link;
+
+    color: $body-color;
+
+    &:hover {
+      background: rgba(255,255,255,0.5);
+    }
+
+    &.active {
+      background: rgba(255,255,255,0.5);
+
+      font-weight: bold;
+      .fa {
+        color: theme-color('primary');
+      }
+    }
+  }
+}
+
 .menu-open.btn-outline-light {
   border-color: $gray-200;
   &:hover {
@@ -20,10 +41,10 @@
     overflow: hidden;
     pointer-events: none;
     z-index: $zindex-fixed+10;
-  }
 
-  .menu--visible {
-    pointer-events: auto;
+    &--visible {
+      pointer-events: auto;
+    }
   }
 
   .app-menu {
