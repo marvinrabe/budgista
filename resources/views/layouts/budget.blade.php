@@ -13,7 +13,7 @@
                 <ul class="navbar-nav ml-auto">
                     @include('auth.menu')
                     <li class="nav-item d-md-none">
-                        <a href="#" class="menu-close nav-link">
+                        <a href="#" class="menu-toggle nav-link">
                             <span class="fa fa-times"></span>
                         </a>
                     </li>

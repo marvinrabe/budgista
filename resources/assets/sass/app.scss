@@ -5,6 +5,11 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 
 // Own Bootstrap extensions
+.btn-outline-light:hover,
+.btn-outline-light:active {
+  color: theme-color('dark');
+}
+
 .btn-group-xs>.btn, .btn-xs {
   padding: .125rem .25rem;
   font-size: 0.875rem;
@@ -14,6 +19,15 @@
 
 .bg-light {
   background-color: $gray-50;
+}
+
+.col-flex,
+.col-flex-1 {
+  flex: 1;
+}
+
+.col-flex-none {
+  flex: 0;
 }
 
 @import "pace";
@@ -52,10 +66,6 @@ body {
   &:hover {
     background: none;
   }
-}
-
-.dropdown-menu {
-  @extend .shadow-2;
 }
 
 a.nav-header:hover,
@@ -189,6 +199,15 @@ span.handle {
   &-primary {
     color: white;
     background: $gray-800;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 0.5rem;
+
+    & > div {
+      margin: 0 0.5rem;
+    }
 
     .btn {
       @extend .btn-outline-light;

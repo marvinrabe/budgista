@@ -77,7 +77,7 @@ Vue.component(
     require('./components/Recurrence.vue')
 );
 
-const app = new Vue({ i18n }).$mount('#app');
+const app = new Vue({i18n}).$mount('#app');
 
 /**
  * Menu
@@ -85,7 +85,7 @@ const app = new Vue({ i18n }).$mount('#app');
 
 function toggleClassMenu() {
     myMenu.classList.add("menu--animatable");
-    if(!myMenu.classList.contains("menu--visible")) {
+    if (!myMenu.classList.contains("menu--visible")) {
         myMenu.classList.add("menu--visible");
     } else {
         myMenu.classList.remove('menu--visible');
@@ -97,12 +97,10 @@ function OnTransitionEnd() {
 }
 
 let myMenu = document.querySelector(".menu");
-if(myMenu) {
+if (myMenu) {
     let openMenu = document.querySelector(".menu-open");
     let closeMenu = document.querySelector(".menu-close");
     myMenu.addEventListener("transitionend", OnTransitionEnd, false);
-    //openMenu.addEventListener("click", toggleClassMenu, false);
-    //closeMenu.addEventListener("click", toggleClassMenu, false);
 }
 
-$('.menu-open').bind('click', toggleClassMenu);
+$('#app').on('click', '.menu-toggle', toggleClassMenu);

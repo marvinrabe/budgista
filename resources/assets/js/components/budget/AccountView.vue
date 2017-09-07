@@ -1,28 +1,34 @@
 <template>
     <div v-if="account !== null" class="main">
+
         <div class="toolbar toolbar-primary">
-            <div class="form-row">
-                <div class="h2 col mb-0">
-                    {{ account.name }}
-                </div>
-                <div class="col text-right">
-                    <strong :class="[{ 'text-success': account.clearedBalance >= 0}, { 'text-danger': account.clearedBalance < 0}]">
-                        {{ $formatNumber(account.clearedBalance, {style: 'currency', currency: currency}) }}
-                    </strong>
-                    <p class="small">{{ $t('form.balance.cleared') }}</p>
-                </div>
-                <div class="col text-right">
-                    <strong :class="[{ 'text-success': account.unclearedBalance >= 0}, { 'text-danger': account.unclearedBalance < 0}]">
-                        {{ $formatNumber(account.unclearedBalance, {style: 'currency', currency: currency}) }}
-                    </strong>
-                    <p class="small">{{ $t('form.balance.uncleared') }}</p>
-                </div>
-                <div class="col text-right">
-                    <strong :class="[{ 'text-success': account.workingBalance >= 0}, { 'text-danger': account.workingBalance < 0}]">
-                        {{ $formatNumber(account.workingBalance, {style: 'currency', currency: currency}) }}
-                    </strong>
-                    <p class="small">{{ $t('form.balance.working') }}</p>
-                </div>
+            <div class="d-md-none">
+                <button class="menu-toggle btn" type="button"
+                        aria-controls="menu" :aria-label="$t('action.navigation')">
+                    <span class="fa fa-navicon"></span>
+                </button>
+            </div>
+
+            <div class="col-flex h2 mb-0">
+                {{ account.name }}
+            </div>
+            <div class="text-right d-none d-md-block">
+                <strong :class="[{ 'text-success': account.clearedBalance >= 0}, { 'text-danger': account.clearedBalance < 0}]">
+                    {{ $formatNumber(account.clearedBalance, {style: 'currency', currency: currency}) }}
+                </strong>
+                <p class="small">{{ $t('form.balance.cleared') }}</p>
+            </div>
+            <div class="text-right d-none d-md-block">
+                <strong :class="[{ 'text-success': account.unclearedBalance >= 0}, { 'text-danger': account.unclearedBalance < 0}]">
+                    {{ $formatNumber(account.unclearedBalance, {style: 'currency', currency: currency}) }}
+                </strong>
+                <p class="small">{{ $t('form.balance.uncleared') }}</p>
+            </div>
+            <div class="text-right">
+                <strong :class="[{ 'text-success': account.workingBalance >= 0}, { 'text-danger': account.workingBalance < 0}]">
+                    {{ $formatNumber(account.workingBalance, {style: 'currency', currency: currency}) }}
+                </strong>
+                <p class="small">{{ $t('form.balance.working') }}</p>
             </div>
         </div>
 

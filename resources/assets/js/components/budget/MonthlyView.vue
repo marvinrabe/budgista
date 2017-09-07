@@ -2,44 +2,41 @@
     <div v-if="sheet !== null" class="main">
 
         <div class="toolbar toolbar-primary">
+            <div class="d-md-none">
+                <button class="col menu-toggle btn" type="button"
+                        aria-controls="menu" :aria-label="$t('action.navigation')">
+                    <span class="fa fa-navicon"></span>
+                </button>
+            </div>
 
-            <div class="form-row">
-                <div class="col-2 d-md-none">
-                    <button class="menu-open btn btn-outline-dark" type="button"
-                            aria-controls="menu" :aria-label="$t('action.navigation')">
-                        <span class="fa fa-navicon"></span>
-                    </button>
-                </div>
+            <div class="col-flex">
+                <button class="btn btn-outline-dark"
+                        :title="$t('action.previousMonth')" @click="showPreviousMonth">
+                    <span class="fa fa-chevron-left"></span>
+                </button>
+                <span class="h4 mb-sm-0" v-html="$formatDate(new Date(sheet.month), { year: 'numeric', month: 'short' })"></span>
+                <button class="btn btn-outline-dark"
+                        :title="$t('action.nextMonth')" @click="showNextMonth">
+                    <span class="fa fa-chevron-right"></span>
+                </button>
+            </div>
 
-                <div class="col-7 col-lg-6 text-center text-md-left">
-                    <button class="btn btn-outline-dark"
-                            :title="$t('action.previousMonth')" @click="showPreviousMonth">
-                        <span class="fa fa-chevron-left"></span>
-                    </button>
-                    <span class="h4 mb-sm-0" v-html="$formatDate(new Date(sheet.month), { year: 'numeric', month: 'short' })"></span>
-                    <button class="btn btn-outline-dark"
-                            :title="$t('action.nextMonth')" @click="showNextMonth">
-                        <span class="fa fa-chevron-right"></span>
-                    </button>
+            <div class="text-right">
+                <div class="badge" :class="[{ 'badge-danger': sheet.available < 0 }, 'badge-success']">
+                    <strong class="h3"
+                            v-html="$formatNumber(toBeBudgeted, {style: 'currency', currency: currency})"></strong><br>
+                    <span class="small">{{ $t('form.toBeBudgeted') }}</span>
                 </div>
-
-                <div class="col-3 col-md-5 col-lg-3 text-right">
-                    <div class="badge" :class="[{ 'badge-danger': sheet.available < 0 }, 'badge-success']">
-                        <strong class="h3"
-                                v-html="$formatNumber(toBeBudgeted, {style: 'currency', currency: currency})"></strong><br>
-                        <span class="small">{{ $t('form.toBeBudgeted') }}</span>
-                    </div>
-                </div>
-                <div class="col d-none d-lg-block col-lg-3 small">
-                    {{ $t('form.previousMonth') }}:
-                    <strong v-html="$formatNumber(sheet.previousMonth, {style: 'currency', currency: currency})"></strong>
-                    <br>
-                    {{ $t('form.funds') }}:
-                    <strong v-html="$formatNumber(sheet.funds, {style: 'currency', currency: currency})"></strong>
-                    <br>
-                    {{ $t('form.budgeted') }}:
-                    <strong v-html="$formatNumber(budgeted, {style: 'currency', currency: currency})"></strong>
-                </div>
+            </div>
+            <div class="d-none d-lg-block small">
+                {{ $t('form.previousMonth') }}:
+                <strong v-html="$formatNumber(sheet.previousMonth, {style: 'currency', currency: currency})"></strong>
+                <br>
+                {{ $t('form.funds') }}:
+                <strong v-html="$formatNumber(sheet.funds, {style: 'currency', currency: currency})"></strong>
+                <br>
+                {{ $t('form.budgeted') }}:
+                <strong v-html="$formatNumber(budgeted, {style: 'currency', currency: currency})"></strong>
             </div>
         </div>
 
