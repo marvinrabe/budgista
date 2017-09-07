@@ -1,7 +1,7 @@
 @extends('layouts.base',  ['body_class' => 'layout-budget'])
 
 @section('body')
-    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top d-md-none">
         <div class="container">
 
             <a class="navbar-brand logo" href="{{ url('/') }}">
@@ -12,34 +12,37 @@
                     aria-controls="menu" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <ul class="navbar-nav float-right d-none d-md-block">
-                @include('auth.menu')
-            </ul>
         </div>
     </nav>
 
-    <div class="container px-0 px-md-2">
+    <div class="container px-0 px-md-2 pt-5 pt-md-0">
 
         <div class="form-row">
             <div class="col-md-4 col-lg-3">
                 <div class="menu">
                     <div class="app-menu">
 
-                        <nav class="navbar navbar-dark bg-primary mb-3 d-md-none">
-                            <a class="navbar-brand logo logo-white" href="{{ url('/') }}">
+                        <nav class="navbar navbar-expand navbar-light" style="width: 100%;">
+                            <a class="navbar-brand logo" href="{{ url('/') }}">
                                 {{ config('app.name') }}
                             </a>
-                            <div class="navbar-nav mr-auto"></div>
-                            <button class="menu-close btn btn-primary" type="button">
-                                <span class="fa fa-times 2x"></span>
-                            </button>
+
+                            <ul class="navbar-nav ml-auto">
+                                @include('auth.menu')
+                                <li class="nav-item d-md-none">
+                                    <a href="#" class="menu-close nav-link">
+                                        <span class="fa fa-times"></span>
+                                    </a>
+                                </li>
+                            </ul>
                         </nav>
 
                         <nav class="nav flex-column">
                             <a href="#" class="nav-header h6 dropdown-toggle" id="chooseBudgets" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
                                 {{ $budget->name }}
+
+
                             </a>
                             <div class="dropdown-menu" aria-labelledby="chooseBudgets">
                                 <h6 class="dropdown-header">{{ __('Budgets') }}</h6>

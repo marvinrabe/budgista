@@ -3,7 +3,7 @@
 
         <div class="toolbar toolbar-primary">
             <div class="form-row">
-                <div class="col-xs-12 col-sm-8 col-lg-6 h1 mb-sm-0 text-center text-sm-left">
+                <div class="col-xs-12 col-sm-8 col-lg-6 h2 mb-sm-0 text-center text-sm-left">
                     <button class="btn btn-outline-secondary"
                             :title="$t('action.previousMonth')" @click="showPreviousMonth">
                         <span class="fa fa-chevron-left"></span>

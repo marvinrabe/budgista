@@ -3,7 +3,7 @@
 
         <div class="toolbar toolbar-primary">
             <div class="form-row">
-                <div class="h1 col mb-0">
+                <div class="h2 col mb-0">
                     {{ account.name }}
                 </div>
                 <div class="col text-center">

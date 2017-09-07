@@ -1,7 +1,7 @@
 <li class="nav-item dropdown">
-    <a href="#" class="nav-link dropdown-toggle" id="user-menu" data-toggle="dropdown"
-       aria-haspopup="true" aria-expanded="false">
-        {{ Auth::user()->name }}
+    <a href="#" class="nav-link" id="user-menu" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false" title="Settings">
+        <span class="fa fa-cog"></span>
     </a>
 
     <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="user-menu">
