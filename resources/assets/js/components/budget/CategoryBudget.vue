@@ -59,7 +59,11 @@
 
             saveEdit: function () {
                 if(this.edit) {
-                    this.$emit('update:value', parseFloat(this.mutableValue));
+                    let result = parseFloat(this.mutableValue);
+                    if(isNaN(result)) {
+                        result = 0;
+                    }
+                    this.$emit('update:value', result);
                     this.edit = false;
                 }
             }

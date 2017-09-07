@@ -22,7 +22,7 @@
             </div>
 
             <div class="text-right">
-                <div class="badge" :class="[{ 'badge-danger': sheet.available < 0 }, 'badge-success']">
+                <div class="badge px-3" :class="[{ 'badge-danger': sheet.available < 0 }, 'badge-success']">
                     <strong class="h3"
                             v-html="$formatNumber(toBeBudgeted, {style: 'currency', currency: currency})"></strong><br>
                     <span class="small">{{ $t('form.toBeBudgeted') }}</span>
