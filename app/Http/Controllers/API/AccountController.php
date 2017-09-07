@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AccountResource;
 use App\Models\Account;
 use App\Models\Budget;
 use Illuminate\Http\Request;
@@ -31,12 +32,12 @@ class AccountController extends Controller
         $account->budget_id = $budget->id;
         $account->save();
 
-        return $account;
+        return new AccountResource($account);
     }
 
     public function show(Account $account)
     {
-        return $account;
+        return new AccountResource($account);
     }
 
     public function transactions(Account $account)
@@ -55,7 +56,7 @@ class AccountController extends Controller
         $account->name = Input::get('name');
         $account->save();
 
-        return $account;
+        return new AccountResource($account);
     }
 
     public function destroy(Account $account)

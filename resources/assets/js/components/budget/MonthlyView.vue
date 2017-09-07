@@ -3,18 +3,18 @@
 
         <div class="toolbar toolbar-primary">
             <div class="form-row">
-                <div class="col col-xs-12 col-sm-8 col-lg-6 h1 mb-sm-0 text-center text-sm-left">
-                    <button class="btn btn-outline-light"
+                <div class="col-xs-12 col-sm-8 col-lg-6 h1 mb-sm-0 text-center text-sm-left">
+                    <button class="btn btn-outline-secondary"
                             :title="$t('action.previousMonth')" @click="showPreviousMonth">
                         <span class="fa fa-chevron-left"></span>
                     </button>
                     <span v-html="$formatDate(new Date(sheet.month), { year: 'numeric', month: 'short' })"></span>
-                    <button class="btn btn-outline-light"
+                    <button class="btn btn-outline-secondary"
                             :title="$t('action.nextMonth')" @click="showNextMonth">
                         <span class="fa fa-chevron-right"></span>
                     </button>
                 </div>
-                <div class="col col-sm-4 col-lg-3 text-center text-sm-right">
+                <div class="col-sm-4 col-lg-3 text-center text-sm-right">
                     <div class="badge" :class="[{ 'badge-danger': sheet.available < 0 }, 'badge-success']">
                         <strong class="h3"
                                 v-html="$formatNumber(toBeBudgeted, {style: 'currency', currency: currency})"></strong><br>
@@ -48,6 +48,7 @@
         <table class="table table-sm content">
             <thead>
             <tr>
+                <th width="12"></th>
                 <th>
                     {{ $t('form.category') }}
                 </th>
@@ -60,6 +61,8 @@
                 <tr v-for="row in sheet.rows" :key="row.id">
                     <td>
                         <span class="handle d-none d-sm-inline-block"></span>
+                    </td>
+                    <td>
                         <a class="link-action text-dark"
                            :title="$t('action.edit.category')"
                            v-on:click="showEditCategoryModal(row)">

@@ -110,18 +110,18 @@ a.text-muted:hover {
 span.handle {
   content: '....';
   width: 12px;
-  height: 20px;
+  height: 24px;
   display: inline-block;
   overflow: hidden;
   line-height: 5px;
   padding: 3px 4px;
   vertical-align: middle;
-  margin-top: -.8em;
+  margin-top: -.9em;
   margin-right: .3em;
   font-size: 12px;
   font-family: sans-serif;
   letter-spacing: 2px;
-  color: $gray-600;
+  color: $gray-300;
 
   &::after {
     content: '.. .. .. ..';
@@ -151,20 +151,19 @@ span.handle {
 .toolbar {
   @extend .container-fluid;
 
-  position: relative;
-
   &-primary {
-    color: white;
-    border-radius: 2px 2px 0 0;
-    background: $gray-900;
-    @extend .shadow-1;
-    z-index: 20;
+    //color: white;
+    //background: $gray-900;
+    //@extend .shadow-1;
+    padding-bottom: 15px;
+    //z-index: 20;
   }
 
   &-secondary {
-    @extend .shadow-1;
+    border-radius: 2px 2px 0 0;
     background: $white;
-    z-index: 10;
+    @extend .shadow-1;
+    //z-index: 10;
   }
 
   p, h1, h2, h3, h4, h5, h6 {
