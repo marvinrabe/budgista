@@ -12,12 +12,21 @@
   border-radius: .2rem;
 }
 
+.bg-light {
+  background-color: $gray-50;
+}
+
 @import "pace";
 @import "logo";
 @import "font-awesome";
 @import "errors";
-@import "menu";
 @import "transactions";
+
+html,
+body,
+#app {
+  height: 100%;
+}
 
 body {
   padding-top: 3.5rem;
@@ -43,6 +52,10 @@ body {
   &:hover {
     background: none;
   }
+}
+
+.dropdown-menu {
+  @extend .shadow-2;
 }
 
 a.nav-header:hover,
@@ -147,24 +160,48 @@ span.handle {
 }
 
 /**
- * Toolbar
+ * Layout
  */
+
+
+.layout-budget {
+  #app {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
 .toolbar {
   @extend .container-fluid;
 
+  &-primary,
+  &-secondary {
+    padding: 0.5rem 1rem;
+  }
+
   &-primary {
     color: white;
-    background: $gray-900;
-    @extend .shadow-1;
-    padding: 0.5rem 1rem;
-    //z-index: 20;
+    background: $gray-800;
+
+    .btn {
+      @extend .btn-outline-light;
+    }
   }
 
   &-secondary {
-    //border-radius: 2px 2px 0 0;
-    background: $white;
     @extend .shadow-1;
-    //z-index: 10;
+    background: theme-color('primary');
+
+    .btn {
+      @extend .btn-primary
+    }
   }
 
   p, h1, h2, h3, h4, h5, h6 {
@@ -177,6 +214,7 @@ span.handle {
 
   .btn {
     @extend .btn-sm;
+    vertical-align: bottom;
   }
 }
 
@@ -184,4 +222,7 @@ span.handle {
   border-radius: 0 0 2px 2px;
   @extend .shadow-1;
   background: $white;
+  flex: 1;
 }
+
+@import "menu";

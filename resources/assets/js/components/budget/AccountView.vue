@@ -1,6 +1,5 @@
 <template>
-    <div v-if="account !== null">
-
+    <div v-if="account !== null" class="main">
         <div class="toolbar toolbar-primary">
             <div class="form-row">
                 <div class="h2 col mb-0">
@@ -30,20 +29,20 @@
         <div class="toolbar toolbar-secondary">
             <div class="row">
                 <div class="col">
-                    <button class="btn btn-link">
+                    <button class="btn btn-primary">
                         <span class="fa fa-plus"></span> {{ $t('action.new.transaction') }}
                     </button>
                 </div>
 
                 <div class="col text-right">
-                    <button class="btn btn-link" :title="$t('action.edit.account')">
+                    <button class="btn btn-secondary" :title="$t('action.edit.account')">
                         <span class="fa fa-cog"></span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div class="transactions content">
+        <div class="content transactions">
             <div class="transactions-header">
                 <div class="transaction-clear">&nbsp;</div>
                 <div class="transaction-date">{{ $t('form.date') }}</div>
@@ -54,7 +53,7 @@
                 <div class="transaction-actions">&nbsp;</div>
             </div>
             <virtual-list :size="37" :remain="8" :tobottom="loadMore">
-                <div class="transactions-row" :class="[{ 'text-muted': new Date(item.date) > new Date() }]"
+                <div class="transactions-row" :class="[{ 'text-muted bg-light': new Date(item.date) > new Date() }]"
                      v-for="(item, index) of transactions" :key="index">
                     <div class="transaction-clear">
                         <button class="btn btn-xs"

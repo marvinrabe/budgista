@@ -1,20 +1,29 @@
 <template>
-    <div v-if="sheet !== null">
+    <div v-if="sheet !== null" class="main">
 
         <div class="toolbar toolbar-primary">
+
             <div class="form-row">
-                <div class="col-xs-12 col-sm-8 col-lg-6 h2 mb-sm-0 text-center text-sm-left">
-                    <button class="btn btn-outline-secondary"
+                <div class="col-2 d-md-none">
+                    <button class="menu-open btn btn-outline-dark" type="button"
+                            aria-controls="menu" :aria-label="$t('action.navigation')">
+                        <span class="fa fa-navicon"></span>
+                    </button>
+                </div>
+
+                <div class="col-7 col-lg-6 text-center text-md-left">
+                    <button class="btn btn-outline-dark"
                             :title="$t('action.previousMonth')" @click="showPreviousMonth">
                         <span class="fa fa-chevron-left"></span>
                     </button>
-                    <span v-html="$formatDate(new Date(sheet.month), { year: 'numeric', month: 'short' })"></span>
-                    <button class="btn btn-outline-secondary"
+                    <span class="h4 mb-sm-0" v-html="$formatDate(new Date(sheet.month), { year: 'numeric', month: 'short' })"></span>
+                    <button class="btn btn-outline-dark"
                             :title="$t('action.nextMonth')" @click="showNextMonth">
                         <span class="fa fa-chevron-right"></span>
                     </button>
                 </div>
-                <div class="col-sm-4 col-lg-3 text-center text-sm-right">
+
+                <div class="col-3 col-md-5 col-lg-3 text-right">
                     <div class="badge" :class="[{ 'badge-danger': sheet.available < 0 }, 'badge-success']">
                         <strong class="h3"
                                 v-html="$formatNumber(toBeBudgeted, {style: 'currency', currency: currency})"></strong><br>
@@ -34,18 +43,18 @@
             </div>
         </div>
 
-
         <div class="toolbar toolbar-secondary">
             <div class="row">
                 <div class="col">
-                    <button class="btn btn-link" v-on:click="showNewCategoryModal">
+                    <button class="btn" v-on:click="showNewCategoryModal">
                         <span class="fa fa-plus"></span> {{ $t('action.new.category') }}
                     </button>
                 </div>
             </div>
         </div>
 
-        <table class="table table-sm content">
+        <div class="content">
+            <table class="table table-sm">
             <thead>
             <tr>
                 <th width="12"></th>
@@ -86,6 +95,7 @@
                 </tr>
             </draggable>
         </table>
+        </div>
 
         <b-modal ref="newCategoryModal" :title="$t('action.new.category')">
             <form @submit.stop.prevent="createCategory">

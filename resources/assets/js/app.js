@@ -101,6 +101,8 @@ if(myMenu) {
     let openMenu = document.querySelector(".menu-open");
     let closeMenu = document.querySelector(".menu-close");
     myMenu.addEventListener("transitionend", OnTransitionEnd, false);
-    openMenu.addEventListener("click", toggleClassMenu, false);
-    closeMenu.addEventListener("click", toggleClassMenu, false);
+    //openMenu.addEventListener("click", toggleClassMenu, false);
+    //closeMenu.addEventListener("click", toggleClassMenu, false);
 }
+
+$('.menu-open').bind('click', toggleClassMenu);

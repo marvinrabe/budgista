@@ -4,6 +4,7 @@
         "cancel": "Cancel",
         "nextMonth": "Next Month",
         "previousMonth": "Previous Month",
+        "navigation": "Toggle navigation",
         "new": {
             "category": "Create Category",
             "transaction": "Create Transaction"
@@ -36,7 +37,6 @@
         },
         "date": "Date",
         "payee": "Payee",
-        "memo": "Memo",
         "outflow": "Outflow",
         "inflow": "Inflow"
     },

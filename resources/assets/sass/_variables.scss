@@ -1,18 +1,40 @@
-$gray-100: #ECEFF1;
-$gray-200: #CFD8DC;
-$gray-300: #B0BEC5;
-$gray-400: #90A4AE;
-$gray-500: #78909C;
-$gray-600: #607D8B;
-$gray-700: #546E7A;
-$gray-800: #455A64;
-$gray-900: #37474F;
+$gray-50: #FAFAFA;
+$gray-100: #F5F5F5;
+$gray-200: #EEEEEE;
+$gray-300: #E0E0E0;
+$gray-400: #BDBDBD;
+$gray-500: #9E9E9E;
+$gray-600: #757575;
+$gray-700: #616161;
+$gray-800: #424242;
+$gray-900: #212121;
 
+$blue-gray: #607D8B;
 $blue: #2196F3;
+$indigo: #3F51B5;
+$purple: #9C27B0;
+$pink: #E91E63;
+$red: #F44336;
+$orange: #FF9800;
+$yellow: #FFEB3B;
+$green: #4CAF50;
+$teal: #009688;
+$cyan: #00BCD4;
+
+$theme-colors: (
+        primary: $blue,
+        secondary: $blue-gray,
+        success: $green,
+        info: $cyan,
+        warning: $yellow,
+        danger: $red,
+        light: $gray-100,
+        dark: $gray-800
+);
 
 $container-max-widths: (
-  lg: 960px,
-  xl: 1140px
+        lg: 960px,
+        xl: 1140px
 );
 
 body {
@@ -21,21 +43,22 @@ body {
 }
 
 .shadow-1 {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  font-family: inherit;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .shadow-2 {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .shadow-3 {
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .shadow-4 {
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .shadow-5 {
-  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
