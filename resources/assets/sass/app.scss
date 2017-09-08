@@ -194,6 +194,7 @@ span.handle {
   &-primary,
   &-secondary {
     padding: 0.5rem 1rem;
+    flex-shrink: 0;
   }
 
   &-primary {

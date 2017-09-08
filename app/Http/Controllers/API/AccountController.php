@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AccountResource;
+use App\Http\Resources\Account as AccountResource;
+use App\Http\Resources\Transaction as TransactionResource;
 use App\Models\Account;
 use App\Models\Budget;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ class AccountController extends Controller
     {
         $this->authorize('view', $account);
 
-        return $account->transactions()->orderBy('date', 'desc')->paginate(25);
+        return TransactionResource::collection($account->transactions()->orderBy('date', 'desc')->paginate(25));
     }
 
     public function update(Request $request, Account $account)

@@ -70,9 +70,15 @@
                     </div>
                     <div class="transaction-date">
                         {{ $formatDate(new Date(item.date), {year: 'numeric', month: '2-digit', day: '2-digit'}) }}
+                        <span v-if="item.recurring" class="fa fa-refresh" :title="humanRRule(item.rrule)">
+                        </span>
                     </div>
                     <div class="transaction-payee">{{ item.payee }}</div>
-                    <div class="transaction-category">{{ item.category }}</div>
+                    <div class="transaction-category">
+                        <span v-if="item.category">
+                            {{ item.category.name }}
+                        </span>
+                    </div>
                     <div class="transaction-outflow">
                         <span v-if="item.amount < 0">
                             {{ $formatNumber(item.amount * -1, {style: 'currency', currency: currency}) }}
@@ -96,6 +102,8 @@
 
 <script>
     import virtualList from 'vue-virtual-scroll-list'
+
+    var rrulestr = require('rrule').rrulestr;
 
     export default {
         props: ['account_id'],
@@ -124,7 +132,7 @@
                 .get('/api/accounts/' + this.account_id + '/transactions')
                 .then(response => {
                     this.transactions = response.data.data;
-                    this.nextPage = response.data.next_page_url;
+                    this.nextPage = response.data.links.next;
                 })
                 .catch(e => {
                     this.errors.push(e)
@@ -132,6 +140,10 @@
             this.loadMore();
         },
         methods: {
+            humanRRule: function(rrule) {
+                let rule = rrulestr(rrule);
+                return rule.toText();
+            },
             loadMore: function () {
                 if (this.nextPage === null) return;
 
@@ -139,7 +151,7 @@
                     .get('/api/accounts/' + this.nextPage + '/transactions')
                     .then(response => {
                         this.transactions.concat(response.data.data);
-                        this.nextPage = response.data.next_page_url;
+                        this.nextPage = response.data.links.next;
                     })
                     .catch(e => {
                         this.errors.push(e)

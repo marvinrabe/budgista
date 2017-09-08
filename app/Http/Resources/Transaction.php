@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Resources\Json\Resource;
+
+class Transaction extends Resource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request
+     * @return array
+     */
+    public function toArray($request)
+    {
+        return [
+            'id' => $this->id,
+            'payee' => $this->payee,
+            'category' => $this->category !== null?[
+                'id' => $this->category->id,
+                'name' => $this->category->name
+            ]:null,
+            'amount' => (double) $this->amount,
+            'recurring' => (boolean) $this->recurring,
+            'rrule' => $this->when($this->recurring, (string)$this->rrule),
+            'cleared' => (boolean)$this->cleared,
+            'date' => $this->date->toDateString()
+        ];
+    }
+}
