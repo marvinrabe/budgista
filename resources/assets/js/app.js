@@ -5,7 +5,6 @@
  */
 
 require('./bootstrap');
-require('./pace.min');
 
 if (process.env.NODE_ENV !== 'production') {
     console.log('Looks like we are in development mode!');
@@ -16,14 +15,12 @@ if (process.env.NODE_ENV !== 'production') {
  */
 window.Vue = require('vue');
 
-import VueI18n from 'vue-i18n'
-import VueRouter from 'vue-router'
-
 /**
  * Third Party Vue Components
  */
 
 // Translations & Dates
+import VueI18n from 'vue-i18n'
 Vue.use(VueI18n);
 
 const messages = {
@@ -45,11 +42,14 @@ Vue.setLocale(window.locale);
 Vue.use(require('bootstrap-vue'));
 
 // Router
+import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 /**
  * Vue Components
  */
+
+/* Passport Components
 
 Vue.component(
     'passport-clients',
@@ -66,9 +66,11 @@ Vue.component(
     require('./components/passport/PersonalAccessTokens.vue')
 );
 
+*/
+
 Vue.component(
-    'recurrence',
-    require('./components/Recurrence.vue')
+    'budget-layout',
+    require('./components/budget/Layout.vue')
 );
 
 /**
@@ -77,24 +79,34 @@ Vue.component(
 
 const routes = [
     {
-        path: '/budget/:budget',
+        path: '/budgets/:budget_id',
         name: 'budget',
-        component: require('./components/budget/MonthlyView.vue'),
-        props: true
-    },
-    {
-        path: '/account/:account_id',
-        name: 'account',
-        component: require('./components/budget/AccountView.vue'),
-        props: true
+        component: require('./components/budget/Layout.vue'),
+        props: true,
+        children: [
+            {
+                path: '/budgets/:budget_id/',
+                name: 'budget.month',
+                component: require('./components/budget/MonthlyView.vue'),
+                props: true
+            },
+            {
+                path: '/budgets/:budget_id/account/:account_id',
+                name: 'budget.account',
+                component: require('./components/budget/AccountView.vue'),
+                props: true
+            }
+        ]
     }
+
 ];
 
 const router = new VueRouter({
-    routes // short for `routes: routes`
+    mode: 'history',
+    routes: routes // short for `routes: routes`
 });
 
-const app = new Vue({i18n, router}).$mount('#app');
+const app = new Vue({router, i18n}).$mount('#app');
 
 /**
  * Menu

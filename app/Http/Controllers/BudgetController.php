@@ -69,13 +69,6 @@ class BudgetController extends Controller
         return View::make('budgets.show')->with('budget', $budget);
     }
 
-    public function account(Budget $budget, Account $account)
-    {
-        $this->authorize('view', $account);
-
-        return View::make('budgets.account')->with(['budget' => $budget, 'account' => $account]);
-    }
-
     public function edit(Budget $budget)
     {
         return View::make('budgets.edit')
@@ -116,51 +109,6 @@ class BudgetController extends Controller
 
         Session::flash('message', 'Successfully deleted the budget!');
         return redirect()->route('budgets.index');
-    }
-
-    public function month(Budget $budget, $month = null)
-    {
-        $this->authorize('view', $budget);
-
-        $month = $this->getMonth($month);
-
-        return [
-            'data' => $budget->month($month),
-            'links' => [
-                'prev' => route('budgets.month', [$budget, 'month' => $month->previous()]),
-                'next' => route('budgets.month', [$budget, 'month' => $month->next()])
-            ]
-        ];
-    }
-
-    private function getMonth($string)
-    {
-        try {
-            if ($string !== null) {
-                return Month::fromString($string);
-            }
-
-            return Month::current();
-        } catch (\InvalidArgumentException $exception) {
-            abort(404);
-        }
-    }
-
-    public function sort(Request $request, Budget $budget)
-    {
-        $this->authorize('view', $budget);
-
-        $this->validate($request, [
-            'categories' => 'required'
-        ]);
-
-        foreach(Input::get('categories') as $key => $category_id) {
-            $category = Category::find($category_id);
-            $category->sort = $key;
-            $category->save();
-        }
-
-        return [];
     }
 
 }

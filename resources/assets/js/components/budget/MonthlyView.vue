@@ -137,7 +137,7 @@
     import draggable from 'vuedraggable'
 
     export default {
-        props: ['budget'],
+        props: ['budget_id'],
         components: {
             draggable,
             'category-budget': require('./CategoryBudget.vue')
@@ -171,7 +171,7 @@
         }),
 
         created() {
-            this.loadSheet('/api/budgets/' + this.budget + '/month');
+            this.loadSheet('/api/budgets/' + this.budget_id + '/month');
         },
 
         methods: {

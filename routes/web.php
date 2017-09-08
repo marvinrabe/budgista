@@ -21,16 +21,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/settings', 'Auth\SettingsController@put')->name('settings.store');
 
     Route::resource('budgets', 'BudgetController');
+
     Route::group(['prefix' => 'budgets/{budget}', 'middleware' => ['can:view,budget']], function () {
-
-        Route::get('/accounts/{account}', 'BudgetController@account')->name('budgets.account');
-
-        Route::resource('transactions', 'TransactionController', ['except' => [
-            'index'
-        ]]);
-
-        Route::put('/transactions/{transaction}/clear', 'TransactionController@clear')->name('transactions.clear');
-
+        Route::get('{any?}', 'BudgetController@show')->where('any', '.*');
     });
 
 });

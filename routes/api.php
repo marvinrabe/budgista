@@ -15,9 +15,9 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['auth:api']], function () {
 
-    Route::get('/budgets/{budget}/month/{month?}', 'BudgetController@month')->name('budgets.month');
-
-    Route::put('/budgets/{budget}/sort', 'BudgetController@sort')->name('budgets.sort');
+    Route::get('/budgets/{budget}/accounts', 'API\BudgetController@accounts')->name('budgets.accounts');
+    Route::get('/budgets/{budget}/month/{month?}', 'API\BudgetController@month')->name('budgets.month');
+    Route::put('/budgets/{budget}/sort', 'API\BudgetController@sort')->name('budgets.sort');
 
     Route::resource('categories', 'API\CategoryController', ['only' => [
         'store', 'update', 'destroy'

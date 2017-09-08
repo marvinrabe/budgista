@@ -1,4 +1,7 @@
 {
+    "app": {
+        "name": "Budgista"
+    },
     "action": {
         "save": "Save",
         "cancel": "Cancel",
@@ -6,7 +9,7 @@
         "previousMonth": "Previous Month",
         "navigation": "Toggle navigation",
         "new": {
-            "account": "Create Account",
+            "account": "Add Account",
             "category": "Create Category",
             "transaction": "Create Transaction"
         },
