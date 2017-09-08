@@ -118,10 +118,13 @@
             }
         },
         watch: {
-            '$route' (to, from) {
+            account_id () {
+                this.account = null;
+                this.transactions = [];
+                this.nextPage = null;
 
                 axios
-                    .get('/api/accounts/' + to.params.account_id)
+                    .get('/api/accounts/' + this.account_id)
                     .then(response => {
                         this.account = response.data.data;
                     })
@@ -130,7 +133,7 @@
                     });
 
                 axios
-                    .get('/api/accounts/' + to.params.account_id + '/transactions')
+                    .get('/api/accounts/' + this.account_id + '/transactions')
                     .then(response => {
                         this.transactions = response.data.data;
                         this.nextPage = response.data.links.next;
@@ -138,7 +141,6 @@
                     .catch(e => {
                         this.errors.push(e)
                     });
-
             }
         },
         data: () => ({
