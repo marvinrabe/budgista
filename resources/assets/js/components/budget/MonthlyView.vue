@@ -228,7 +228,7 @@
                 axios
                     .post('/api/categories', {
                         'name': this.newCategory.name,
-                        'budget': this.budget
+                        'budget': this.budget_id
                     })
                     .then(response => {
                         this.addRow(response.data);
@@ -292,7 +292,7 @@
                 }, []);
 
                 axios
-                    .put('/api/budgets/' + this.budget + '/sort', {
+                    .put('/api/budgets/' + this.budget_id + '/sort', {
                         'categories': list
                     })
                     .catch(e => {

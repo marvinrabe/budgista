@@ -31,11 +31,11 @@
                         <span
                                 class="float-right mt-1 badge"
                                 :class="[{ 'badge-danger': account.workingBalance < 0 }, { 'badge-success': account.workingBalance >= 0 }]">
-                            {{ account.workingBalance }}
+                            {{ $formatNumber(account.workingBalance, {style: 'currency', currency: currency}) }}
                         </span>
                         {{ account.name }}
                     </router-link>
-                    <a href="" class="nav-link text-muted small text-right">
+                    <a v-on:click="showNewAccountModal" class="nav-link text-muted small text-right">
                         <span class="fa fa-plus"></span> {{ $t('action.new.account') }}
                     </a>
                 </nav>
@@ -48,6 +48,22 @@
                 <router-view></router-view>
             </keep-alive>
         </transition>
+
+
+        <b-modal ref="newAccountModal" :title="$t('action.new.account')">
+            <form @submit.stop.prevent="createAccount">
+                <b-form-input type="text" :placeholder="$t('form.name')" v-model="newAccount.name"></b-form-input>
+            </form>
+
+            <div slot="modal-footer">
+                <button class="btn btn-light" v-on:click="hideNewAccountModal">
+                    {{ $t('action.cancel') }}
+                </button>
+                <button class="btn btn-primary" v-on:click="createAccount">
+                    {{ $t('action.save') }}
+                </button>
+            </div>
+        </b-modal>
     </div>
 </template>
 
@@ -55,8 +71,16 @@
     export default {
         props: ['budget_id'],
         data: () => ({
-            'accounts': []
+            'accounts': [],
+            newAccount: {
+                'name': ''
+            }
         }),
+        computed: {
+            currency: function () {
+                return window.currency;
+            }
+        },
         created: function () {
             axios
                 .get('/api/budgets/' + this.budget_id + '/accounts')
@@ -66,6 +90,31 @@
                 .catch(e => {
                     this.errors.push(e)
                 });
+        },
+        methods: {
+
+            showNewAccountModal() {
+                this.newAccount.name = '';
+                this.$refs.newAccountModal.show();
+            },
+            hideNewAccountModal() {
+                this.$refs.newAccountModal.hide();
+            },
+            createAccount() {
+                axios
+                    .post('/api/accounts', {
+                        'name': this.newAccount.name,
+                        'budget': this.budget_id
+                    })
+                    .then(response => {
+                        this.accounts.push(response.data.data);
+                    })
+                    .catch(e => {
+                        console.error(e);
+                    });
+
+                this.hideNewAccountModal();
+            },
         }
     }
 </script>
