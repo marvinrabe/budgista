@@ -29,6 +29,10 @@
   flex: 0;
 }
 
+.modal-content {
+  border-top: 5px solid theme-color('primary');
+}
+
 @import "pace";
 @import "logo";
 @import "font-awesome";

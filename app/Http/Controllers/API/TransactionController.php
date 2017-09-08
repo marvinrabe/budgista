@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\Budget;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Input;
@@ -16,14 +17,6 @@ class TransactionController extends Controller
     public function __construct()
     {
         $this->authorizeResource(Transaction::class);
-    }
-
-    public function create(Budget $budget)
-    {
-        return View::make('transactions.create')
-            ->with('budget', $budget)
-            ->with('categories', $this->getCategories($budget))
-            ->with('accounts', $this->getAccounts($budget));
     }
 
     public function store(Budget $budget)
@@ -62,15 +55,6 @@ class TransactionController extends Controller
 
         Session::flash('message', 'Successfully created transaction!');
         return redirect()->route('accounts.show', [$budget->id, $transaction->account_id]);
-    }
-
-    public function edit(Budget $budget, Transaction $transaction)
-    {
-        return View::make('transactions.edit')
-            ->with('transaction', $transaction)
-            ->with('categories', $this->getCategories($budget))
-            ->with('budget', $budget)
-            ->with('accounts', $this->getAccounts($budget));
     }
 
     public function update(Budget $budget, Transaction $transaction)
@@ -116,31 +100,16 @@ class TransactionController extends Controller
         return redirect()->route('accounts.show', [$budget->id, $transaction->account_id]);
     }
 
-    public function clear(Budget $budget, Transaction $transaction)
+    public function clear(Transaction $transaction)
     {
         $this->authorize('update', $transaction);
 
         $transaction->cleared = !$transaction->cleared;
         $transaction->save();
 
-        return redirect()->route('accounts.show', [$budget->id, $transaction->account_id]);
+        return [
+            'cleared' => $transaction->cleared
+        ];
     }
 
-    private function getCategories(Budget $budget)
-    {
-        $result = ['' => __('To be Budgeted')];
-        foreach ($budget->categories as $category) {
-            $result[$category->id] = $category->name;
-        }
-        return $result;
-    }
-
-    private function getAccounts(Budget $budget)
-    {
-        $result = [];
-        foreach ($budget->accounts as $account) {
-            $result[$account->id] = $account->name;
-        }
-        return $result;
-    }
 }

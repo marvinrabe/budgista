@@ -67,7 +67,8 @@
                     <div class="transaction-clear">
                         <button class="btn btn-xs"
                                 :class="[{ 'btn-success': item.cleared }, {'btn-light': !item.cleared}]"
-                                v-if="new Date(item.date) <= new Date()">
+                                v-if="new Date(item.date) <= new Date()"
+                                v-on:click="toggleCleared(item)">
                             <span class="fa fa-check"></span>
                         </button>
                     </div>
@@ -215,6 +216,16 @@
                         this.errors.push(e)
                     });
 
+            },
+
+            toggleCleared(transaction) {
+                this.transactions.find(x => x.id === transaction.id).cleared = !transaction.cleared;
+
+                axios
+                    .put('/api/transactions/' + transaction.id + '/clear', {})
+                    .catch(e => {
+                        console.error(e);
+                    });
             },
 
             showEditAccountModal() {
