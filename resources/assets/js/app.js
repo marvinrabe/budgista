@@ -115,7 +115,9 @@ const router = new VueRouter({
     routes: routes // short for `routes: routes`
 });
 
-const app = new Vue({router, i18n}).$mount('#app');
+const bus = new Vue();
+
+const app = new Vue({bus, router, i18n}).$mount('#app');
 
 /**
  * Menu

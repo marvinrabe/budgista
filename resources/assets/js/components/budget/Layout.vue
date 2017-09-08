@@ -66,6 +66,8 @@
 </template>
 
 <script>
+    import { EventBus } from '../../event-bus.js';
+
     export default {
         props: ['budget_id'],
         data: () => ({
@@ -88,6 +90,9 @@
                 .catch(e => {
                     this.errors.push(e)
                 });
+
+            EventBus.$on('account-update', this.updateAccount);
+            EventBus.$on('account-delete', this.deleteAccount);
         },
         methods: {
 
@@ -113,6 +118,12 @@
 
                 this.hideNewAccountModal();
             },
+            updateAccount({id, name}) {
+                this.accounts.find(x => x.id === id).name = name;
+            },
+            deleteAccount(id) {
+                this.accounts = this.accounts.filter(item => item.id !== id);
+            }
         }
     }
 </script>

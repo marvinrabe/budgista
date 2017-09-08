@@ -43,7 +43,8 @@
                 </div>
 
                 <div class="col text-right">
-                    <button class="btn btn-secondary" :title="$t('action.edit.account')">
+                    <button v-on:click="showEditAccountModal" class="btn btn-secondary"
+                            :title="$t('action.edit.account')">
                         <span class="fa fa-cog"></span>
                     </button>
                 </div>
@@ -66,13 +67,14 @@
                     <div class="transaction-clear">
                         <button class="btn btn-xs"
                                 :class="[{ 'btn-success': item.cleared }, {'btn-light': !item.cleared}]"
-                        v-if="new Date(item.date) <= new Date()">
+                                v-if="new Date(item.date) <= new Date()">
                             <span class="fa fa-check"></span>
                         </button>
                     </div>
                     <div class="transaction-date">
                         {{ $formatDate(new Date(item.date), {year: 'numeric', month: '2-digit', day: '2-digit'}) }}
-                        <span v-if="item.recurring" class="fa fa-refresh" :title="humanRRule(item.rrule)">
+                        <span v-if="item.recurring" class="fa fa-refresh" v-b-tooltip.bottom
+                              :title="humanRRule(item.rrule)">
                         </span>
                     </div>
                     <div class="transaction-payee">{{ item.payee }}</div>
@@ -99,11 +101,34 @@
                 </div>
             </virtual-list>
         </div>
+
+        <b-modal ref="editAccountModal" :title="$t('action.edit.account')">
+            <form @submit.stop.prevent="editAccount">
+                <b-form-input type="text" :placeholder="$t('form.name')" v-model="editAccount.name"></b-form-input>
+            </form>
+            <div slot="modal-footer" class="text-right" style="width: 100%;">
+                <div class="float-left">
+                    <button class="btn btn-outline-danger"
+                            :title="$t('action.delete.account')"
+                            v-on:click="deleteAccount">
+                        <span class="fa fa-trash"></span>
+                    </button>
+                </div>
+
+                <button class="btn btn-light" v-on:click="hideEditAccountModal">
+                    {{ $t('action.cancel') }}
+                </button>
+                <button class="btn btn-primary" v-on:click="updateAccount">
+                    {{ $t('action.save') }}
+                </button>
+            </div>
+        </b-modal>
     </div>
 </template>
 
 <script>
     import virtualList from 'vue-virtual-scroll-list';
+    import { EventBus } from '../../event-bus.js';
 
     var rrulestr = require('rrule').rrulestr;
 
@@ -118,7 +143,7 @@
             }
         },
         watch: {
-            account_id () {
+            account_id() {
                 this.account = null;
                 this.transactions = [];
                 this.nextPage = null;
@@ -146,7 +171,11 @@
         data: () => ({
             account: null,
             transactions: [],
-            nextPage: null
+            nextPage: null,
+            editAccount: {
+                id: '',
+                name: ''
+            }
         }),
         created: function () {
             axios
@@ -169,7 +198,7 @@
                 });
         },
         methods: {
-            humanRRule: function(rrule) {
+            humanRRule: function (rrule) {
                 let rule = rrulestr(rrule);
                 return rule.toText();
             },
@@ -186,7 +215,42 @@
                         this.errors.push(e)
                     });
 
-            }
+            },
+
+            showEditAccountModal() {
+                this.editAccount.id = this.account.id;
+                this.editAccount.name = this.account.name;
+                this.$refs.editAccountModal.show();
+            },
+            hideEditAccountModal() {
+                this.$refs.editAccountModal.hide();
+            },
+            updateAccount() {
+                this.account.name = this.editAccount.name;
+                EventBus.$emit('account-update', this.editAccount);
+
+                axios
+                    .put('/api/accounts/' + this.editAccount.id, {
+                        'name': this.editAccount.name
+                    })
+                    .catch(e => {
+                        console.error(e);
+                    });
+
+                this.hideEditAccountModal();
+            },
+            deleteAccount() {
+                EventBus.$emit('account-delete', this.editAccount.id);
+                this.$router.push({name: 'budget.month'});
+
+                axios
+                    .delete('/api/accounts/' + this.editAccount.id)
+                    .catch(e => {
+                        console.error(e);
+                    });
+
+                this.hideEditAccountModal();
+            },
         }
 
     }
