@@ -1,6 +1,8 @@
 <template>
     <div v-if="sheet !== null" class="main">
 
+        <window :title="$formatDate(new Date(sheet.month), { year: 'numeric', month: 'long' })"></window>
+
         <div class="toolbar toolbar-primary">
             <div class="d-md-none">
                 <button class="col menu-toggle btn" type="button"

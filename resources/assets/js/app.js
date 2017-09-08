@@ -45,6 +45,10 @@ Vue.use(require('bootstrap-vue'));
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
+// Vuex
+import Vuex from 'vuex'
+Vue.use(Vuex);
+
 /**
  * Vue Components
  */
@@ -67,6 +71,11 @@ Vue.component(
 );
 
 */
+
+Vue.component(
+    'window',
+    require('./components/Window.vue')
+);
 
 Vue.component(
     'budget-layout',

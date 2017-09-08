@@ -1,6 +1,8 @@
 <template>
     <div v-if="account !== null" class="main">
 
+        <window :title="account.name"></window>
+
         <div class="toolbar toolbar-primary">
             <div class="d-md-none">
                 <button class="menu-toggle btn" type="button"
