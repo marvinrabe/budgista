@@ -43,11 +43,9 @@
             </div>
         </div>
 
-        <transition name="fade" mode="out-in">
-            <keep-alive>
-                <router-view></router-view>
-            </keep-alive>
-        </transition>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
 
 
         <b-modal ref="newAccountModal" :title="$t('action.new.account')">

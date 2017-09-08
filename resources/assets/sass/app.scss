@@ -241,14 +241,3 @@ span.handle {
 }
 
 @import "menu";
-
-/*
- * Vue Transition
- */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .15s ease;
-}
-
-.fade-enter, .fade-leave-active {
-  opacity: 0
-}
