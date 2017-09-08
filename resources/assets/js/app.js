@@ -17,6 +17,7 @@ if (process.env.NODE_ENV !== 'production') {
 window.Vue = require('vue');
 
 import VueI18n from 'vue-i18n'
+import VueRouter from 'vue-router'
 
 /**
  * Third Party Vue Components
@@ -43,6 +44,9 @@ Vue.setLocale(window.locale);
 // Bootstrap
 Vue.use(require('bootstrap-vue'));
 
+// Router
+Vue.use(VueRouter);
+
 /**
  * Vue Components
  */
@@ -63,21 +67,34 @@ Vue.component(
 );
 
 Vue.component(
-    'budget-monthly-view',
-    require('./components/budget/MonthlyView.vue')
-);
-
-Vue.component(
-    'budget-account-view',
-    require('./components/budget/AccountView.vue')
-);
-
-Vue.component(
     'recurrence',
     require('./components/Recurrence.vue')
 );
 
-const app = new Vue({i18n}).$mount('#app');
+/**
+ * Routes
+ */
+
+const routes = [
+    {
+        path: '/budget/:budget',
+        name: 'budget',
+        component: require('./components/budget/MonthlyView.vue'),
+        props: true
+    },
+    {
+        path: '/account/:account_id',
+        name: 'account',
+        component: require('./components/budget/AccountView.vue'),
+        props: true
+    }
+];
+
+const router = new VueRouter({
+    routes // short for `routes: routes`
+});
+
+const app = new Vue({i18n, router}).$mount('#app');
 
 /**
  * Menu

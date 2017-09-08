@@ -1,6 +1,5 @@
 // Variables
 @import "variables";
-
 // Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
 
@@ -10,7 +9,7 @@
   color: theme-color('dark');
 }
 
-.btn-group-xs>.btn, .btn-xs {
+.btn-group-xs > .btn, .btn-xs {
   padding: .125rem .25rem;
   font-size: 0.875rem;
   line-height: 1.3;
@@ -98,7 +97,6 @@ a.text-muted:hover {
 
 }
 
-
 .layout-auth {
 
   background: $gray-100;
@@ -173,7 +171,6 @@ span.handle {
  * Layout
  */
 
-
 .layout-budget {
   #app {
     display: flex;
@@ -246,3 +243,14 @@ span.handle {
 }
 
 @import "menu";
+
+/*
+ * Vue Transition
+ */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .15s ease;
+}
+
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}

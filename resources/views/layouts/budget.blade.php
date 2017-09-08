@@ -21,49 +21,30 @@
             </nav>
 
             <nav class="nav flex-column">
-                <a href="#" class="nav-header h6 dropdown-toggle" id="chooseBudgets" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    {{ $budget->name }}
-
-
-                </a>
-                <div class="dropdown-menu" aria-labelledby="chooseBudgets">
-                    <h6 class="dropdown-header">{{ __('Budgets') }}</h6>
-                    @foreach (Auth::user()->budgets as $otherBudget)
-                        <a class="dropdown-item {{ ($otherBudget->id == $budget->id)?'active':'' }}"
-                           href="{{ route('budgets.show', ['id' => $otherBudget->id])  }}">
-                            {{ $otherBudget->name }}
-                        </a>
-                    @endforeach
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('budgets.index') }}">
-                        <span class="fa fa-th-large"></span>
-                        {{ __('Manage Budgets') }}
-                    </a>
-                </div>
-                <a class="nav-link-main {{Route::currentRouteName() == 'budgets.show' ? 'active' : '' }}"
-                   href="{{ route('budgets.show', [$budget->id]) }}">
-                    <span class="fa fa-envelope-o fa-fw"></span> Budget
-                </a>
+                <router-link :to="{ name: 'budget', params: { budget: '{{ $budget->id }}' }}" active-class="active"
+                             class="nav-link-main">
+                    <span class="fa fa-envelope-o fa-fw"></span> {{ __('Budget') }}
+                </router-link>
                 <h6 class="nav-header">Accounts</h6>
                 @foreach ($budget->accounts as $menuAccount)
-                    <a class="nav-link-main {{ (Route::currentRouteName() == 'budgets.account' && $account->id == $menuAccount->id) ? 'active' : '' }}"
-                       href="{{ route('budgets.account', [$budget->id, $menuAccount->id]) }}">
-                <span class="float-right mt-1 badge @if($menuAccount->workingBalance() < 0) badge-danger @else badge-success @endif">
-                    {{ Currency::format($menuAccount->workingBalance(), $budget->currency) }}
-                </span>
+                    <router-link :to="{ name: 'account', params: { account_id: '{{ $menuAccount->id }}' }}"
+                                 active-class="active" class="nav-link-main">
+                        <span class="float-right mt-1 badge @if($menuAccount->workingBalance() < 0) badge-danger @else badge-success @endif">
+                            {{ Currency::format($menuAccount->workingBalance(), $budget->currency) }}
+                        </span>
                         {{ $menuAccount->name }}
-                    </a>
+                    </router-link>
                 @endforeach
-                <a class="nav-link text-muted small text-right"
-                   href="">
+                <a class="nav-link text-muted small text-right" href="">
                     <span class="fa fa-plus"></span> {{ __('Add Account') }}
                 </a>
             </nav>
 
         </div>
     </div>
-
-    @yield('content')
-
+    <transition name="fade" mode="out-in">
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
+    </transition>
 @endsection

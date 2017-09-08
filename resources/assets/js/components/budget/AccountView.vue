@@ -101,13 +101,15 @@
 </template>
 
 <script>
-    import virtualList from 'vue-virtual-scroll-list'
+    import virtualList from 'vue-virtual-scroll-list';
 
     var rrulestr = require('rrule').rrulestr;
 
     export default {
         props: ['account_id'],
-        components: {virtualList},
+        components: {
+            virtualList
+        },
         computed: {
             currency: function () {
                 return window.currency;

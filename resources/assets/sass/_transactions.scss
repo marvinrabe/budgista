@@ -26,8 +26,12 @@
   }
 }
 
-.transaction-date {
-  width: 100%;
+.transaction-date,
+.transaction-payee,
+.transaction-category,
+.transaction-inflow,
+.transaction-outflow {
+  flex: 1;
 }
 
 .transaction-payee,
@@ -37,26 +41,16 @@
   text-overflow: ellipsis;
 }
 
-.transaction-payee {
-  width: 100%;
-}
-
-.transaction-category {
-  width: 100%;
-}
-
 .transaction-inflow,
 .transaction-outflow {
   white-space: nowrap;
 }
 
 .transaction-outflow {
-  width: 100%;
   text-align: right;
 }
 
 .transaction-inflow {
-  width: 100%;
   text-align: right;
 }
 

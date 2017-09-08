@@ -10,6 +10,13 @@
             <span class="text-muted">{{ Auth::user()->email }}</span>
         </div>
         <div class="dropdown-divider"></div>
+        @foreach (Auth::user()->budgets as $otherBudget)
+            <a class="dropdown-item {{ (isset($budget) && $otherBudget->id == $budget->id)?'active':'' }}"
+               href="{{ route('budgets.show', ['id' => $otherBudget->id])  }}">
+                {{ $otherBudget->name }}
+            </a>
+        @endforeach
+        <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{ route('budgets.index') }}">
             <span class="fa fa-th-large fa-fw"></span>
             {{ __('Budgets') }}

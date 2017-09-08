@@ -6,6 +6,7 @@
         "previousMonth": "Previous Month",
         "navigation": "Toggle navigation",
         "new": {
+            "account": "Create Account",
             "category": "Create Category",
             "transaction": "Create Transaction"
         },
@@ -39,6 +40,9 @@
         "payee": "Payee",
         "outflow": "Outflow",
         "inflow": "Inflow"
+    },
+    "title": {
+        "budget": "Budget"
     },
     "frequency": {
         "daily": "Daily",
