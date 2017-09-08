@@ -22,7 +22,7 @@
             </div>
 
             <div class="text-right">
-                <div class="badge px-3" :class="[{ 'badge-danger': sheet.available < 0 }, 'badge-success']">
+                <div class="badge px-3" :class="[{ 'badge-danger': toBeBudgeted < 0 }, { 'badge-success': toBeBudgeted >= 0 }]">
                     <strong class="h3"
                             v-html="$formatNumber(toBeBudgeted, {style: 'currency', currency: currency})"></strong><br>
                     <span class="small">{{ $t('form.toBeBudgeted') }}</span>
@@ -85,7 +85,7 @@
                     </td>
                     <td class="text-right">
                         <span style="font-size: 100%" class="badge"
-                              :class="[{ 'badge-danger': available(row) < 0 }, { 'badge-success': available(row) > 0 }, 'badge-secondary']"
+                              :class="[{ 'badge-danger': available(row) < 0 }, { 'badge-success': available(row) > 0 }, { 'badge-secondary': available(row) == 0 }]"
                               v-html="$formatNumber(available(row), {style: 'currency', currency: currency})">
                         </span>
                     </td>

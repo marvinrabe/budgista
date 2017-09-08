@@ -35,7 +35,7 @@
                         </span>
                         {{ account.name }}
                     </router-link>
-                    <a v-on:click="showNewAccountModal" class="nav-link text-muted small text-right">
+                    <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small text-right">
                         <span class="fa fa-plus"></span> {{ $t('action.new.account') }}
                     </a>
                 </nav>
