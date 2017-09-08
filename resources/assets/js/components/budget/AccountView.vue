@@ -115,6 +115,30 @@
                 return window.currency;
             }
         },
+        watch: {
+            '$route' (to, from) {
+
+                axios
+                    .get('/api/accounts/' + to.params.account_id)
+                    .then(response => {
+                        this.account = response.data.data;
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    });
+
+                axios
+                    .get('/api/accounts/' + to.params.account_id + '/transactions')
+                    .then(response => {
+                        this.transactions = response.data.data;
+                        this.nextPage = response.data.links.next;
+                    })
+                    .catch(e => {
+                        this.errors.push(e)
+                    });
+
+            }
+        },
         data: () => ({
             account: null,
             transactions: [],
@@ -139,7 +163,6 @@
                 .catch(e => {
                     this.errors.push(e)
                 });
-            this.loadMore();
         },
         methods: {
             humanRRule: function(rrule) {
@@ -150,7 +173,7 @@
                 if (this.nextPage === null) return;
 
                 axios
-                    .get('/api/accounts/' + this.nextPage + '/transactions')
+                    .get(this.nextPage)
                     .then(response => {
                         this.transactions.concat(response.data.data);
                         this.nextPage = response.data.links.next;
