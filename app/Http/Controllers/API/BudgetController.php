@@ -4,12 +4,23 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Account as AccountResource;
+use App\Http\Resources\Budget as BudgetResource;
 use App\Models\Budget;
 use App\Month;
 use Illuminate\Http\Request;
 
 class BudgetController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Budget::class);
+    }
+
+    public function show(Budget $budget)
+    {
+        return new BudgetResource($budget);
+    }
 
     public function accounts(Budget $budget)
     {

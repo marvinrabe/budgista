@@ -23,9 +23,9 @@
                             active-class="active" :exact="true" class="nav-link-main">
                         <span class="fa fa-envelope-o fa-fw"></span> {{ $t('title.budget') }}
                     </router-link>
-                    <h6 class="nav-header">Accounts</h6>
+                    <h6 class="nav-header">{{ $t('title.accounts') }}</h6>
                     <router-link
-                            v-for="account in accounts" :key="account.id"
+                            v-for="account in sortedAccounts" :key="account.id"
                             :to="{ name: 'budget.account', params: { account_id: account.id }}"
                             active-class="active" class="nav-link-main">
                         <span
@@ -66,12 +66,11 @@
 </template>
 
 <script>
-    import { EventBus } from '../../event-bus.js';
+    import { mapGetters } from 'vuex'
 
     export default {
         props: ['budget_id'],
         data: () => ({
-            'accounts': [],
             newAccount: {
                 'name': ''
             }
@@ -79,20 +78,13 @@
         computed: {
             currency: function () {
                 return window.currency;
-            }
+            },
+            ...mapGetters([
+                'sortedAccounts'
+            ])
         },
         created: function () {
-            axios
-                .get('/api/budgets/' + this.budget_id + '/accounts')
-                .then(response => {
-                    this.accounts = response.data.data;
-                })
-                .catch(e => {
-                    this.errors.push(e)
-                });
-
-            EventBus.$on('account-update', this.updateAccount);
-            EventBus.$on('account-delete', this.deleteAccount);
+            this.$store.dispatch('initialize', this.budget_id);
         },
         methods: {
 
@@ -104,25 +96,9 @@
                 this.$refs.newAccountModal.hide();
             },
             createAccount() {
-                axios
-                    .post('/api/accounts', {
-                        'name': this.newAccount.name,
-                        'budget': this.budget_id
-                    })
-                    .then(response => {
-                        this.accounts.push(response.data.data);
-                    })
-                    .catch(e => {
-                        console.error(e);
-                    });
+                this.$store.dispatch('createAccount', this.newAccount);
 
                 this.hideNewAccountModal();
-            },
-            updateAccount({id, name}) {
-                this.accounts.find(x => x.id === id).name = name;
-            },
-            deleteAccount(id) {
-                this.accounts = this.accounts.filter(item => item.id !== id);
             }
         }
     }

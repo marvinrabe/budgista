@@ -6,10 +6,6 @@
 
 require('./bootstrap');
 
-if (process.env.NODE_ENV !== 'production') {
-    console.log('Looks like we are in development mode!');
-}
-
 /**
  * Vue
  */
@@ -115,9 +111,9 @@ const router = new VueRouter({
     routes: routes // short for `routes: routes`
 });
 
-const bus = new Vue();
+import store from './store'
 
-const app = new Vue({bus, router, i18n}).$mount('#app');
+const app = new Vue({router, store, i18n}).$mount('#app');
 
 /**
  * Menu

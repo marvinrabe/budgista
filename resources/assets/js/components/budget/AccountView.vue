@@ -1,5 +1,5 @@
 <template>
-    <div v-if="account !== null" class="main">
+    <div v-if="account" class="main">
 
         <window :title="account.name"></window>
 
@@ -129,7 +129,6 @@
 
 <script>
     import virtualList from 'vue-virtual-scroll-list';
-    import { EventBus } from '../../event-bus.js';
 
     var rrulestr = require('rrule').rrulestr;
 
@@ -141,22 +140,15 @@
         computed: {
             currency: function () {
                 return window.currency;
+            },
+            account () {
+                return this.$store.getters.findAccountById(this.account_id);
             }
         },
         watch: {
             account_id() {
-                this.account = null;
                 this.transactions = [];
                 this.nextPage = null;
-
-                axios
-                    .get('/api/accounts/' + this.account_id)
-                    .then(response => {
-                        this.account = response.data.data;
-                    })
-                    .catch(e => {
-                        this.errors.push(e)
-                    });
 
                 axios
                     .get('/api/accounts/' + this.account_id + '/transactions')
@@ -170,7 +162,6 @@
             }
         },
         data: () => ({
-            account: null,
             transactions: [],
             nextPage: null,
             editAccount: {
@@ -179,15 +170,6 @@
             }
         }),
         created: function () {
-            axios
-                .get('/api/accounts/' + this.account_id)
-                .then(response => {
-                    this.account = response.data.data;
-                })
-                .catch(e => {
-                    this.errors.push(e)
-                });
-
             axios
                 .get('/api/accounts/' + this.account_id + '/transactions')
                 .then(response => {
@@ -237,30 +219,16 @@
                 this.$refs.editAccountModal.hide();
             },
             updateAccount() {
-                this.account.name = this.editAccount.name;
-                EventBus.$emit('account-update', this.editAccount);
-
-                axios
-                    .put('/api/accounts/' + this.editAccount.id, {
-                        'name': this.editAccount.name
-                    })
-                    .catch(e => {
-                        console.error(e);
-                    });
+                this.$store.dispatch('updateAccount', this.editAccount);
 
                 this.hideEditAccountModal();
             },
             deleteAccount() {
-                EventBus.$emit('account-delete', this.editAccount.id);
-                this.$router.push({name: 'budget.month'});
-
-                axios
-                    .delete('/api/accounts/' + this.editAccount.id)
-                    .catch(e => {
-                        console.error(e);
-                    });
+                this.$store.dispatch('deleteAccount', this.editAccount);
 
                 this.hideEditAccountModal();
+
+                this.$router.push({name: 'budget.month'});
             },
         }
 

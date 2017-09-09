@@ -19,7 +19,8 @@
             "transaction": "Edit Transaction"
         },
         "delete": {
-            "category": "Delete Category"
+            "category": "Delete Category",
+            "account": "Delete Account"
         }
     },
     "form": {
@@ -45,6 +46,7 @@
         "inflow": "Inflow"
     },
     "title": {
+        "accounts": "Accounts",
         "budget": "Budget"
     },
     "frequency": {
