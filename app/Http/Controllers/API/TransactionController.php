@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use App\Models\Budget;
+use App\Models\Category;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
+use App\Http\Resources\Transaction as TransactionResource;
 use RRule\RRule;
 
 class TransactionController extends Controller
@@ -19,30 +20,26 @@ class TransactionController extends Controller
         $this->authorizeResource(Transaction::class);
     }
 
-    public function store(Budget $budget)
+    public function store(Request $request, Budget $budget)
     {
-        $rules = array(
+        $this->validate($request, [
             'payee' => 'required',
             'account_id' => 'required'
-        );
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            return redirect()
-                ->route('transactions.create', [$budget->id])
-                ->withErrors($validator)
-                ->withInput(Input::all());
-        }
+        ]);
 
+        $account = Account::find(Input::get('account_id'));
+        $this->authorize('update', $account);
 
-        $category = Input::get('category_id');
+        $category = Category::find(Input::get('category_id'));
+        $this->authorize('update', $category);
 
         $transaction = new Transaction();
         $transaction->date = Input::get('date');
         $transaction->payee = Input::get('payee');
         $transaction->memo = Input::get('memo');
         $transaction->amount = Input::get('amount');
-        $transaction->account_id = Input::get('account_id');
-        $transaction->category_id = empty($category) ? null : $category;
+        $transaction->account_id = $account->id;
+        $transaction->category_id = empty($category->id) ? null : $category->id;
         $transaction->budget_id = $budget->id;
 
         if (!empty(Input::get('rrule'))) {
@@ -53,32 +50,28 @@ class TransactionController extends Controller
 
         $transaction->save();
 
-        Session::flash('message', 'Successfully created transaction!');
-        return redirect()->route('accounts.show', [$budget->id, $transaction->account_id]);
+        return new TransactionResource($transaction);
     }
 
-    public function update(Budget $budget, Transaction $transaction)
+    public function update(Request $request, Transaction $transaction)
     {
-        $rules = array(
+        $this->validate($request, [
             'payee' => 'required',
             'account_id' => 'required'
-        );
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            return redirect()
-                ->route('transactions.edit', [$budget->id, $transaction->id])
-                ->withErrors($validator)
-                ->withInput(Input::all());
-        }
+        ]);
 
-        $category = Input::get('category_id');
+        $account = Account::find(Input::get('account_id'));
+        $this->authorize('update', $account);
+
+        $category = Category::find(Input::get('category_id'));
+        $this->authorize('update', $category);
 
         $transaction->date = Input::get('date');
         $transaction->payee = Input::get('payee');
         $transaction->memo = Input::get('memo');
         $transaction->amount = Input::get('amount');
-        $transaction->account_id = Input::get('account_id');
-        $transaction->category_id = empty($category) ? null : $category;
+        $transaction->account_id = $account->id;
+        $transaction->category_id = empty($category->id) ? null : $category->id;
 
         if (!empty(Input::get('rrule'))) {
             $transaction->rrule = new RRule(Input::get('rrule'));
@@ -88,16 +81,14 @@ class TransactionController extends Controller
 
         $transaction->save();
 
-        Session::flash('message', 'Successfully updated transaction!');
-        return redirect()->route('accounts.show', [$budget->id, $transaction->account_id]);
+        return new TransactionResource($transaction);
     }
 
-    public function destroy(Budget $budget, Transaction $transaction)
+    public function destroy(Transaction $transaction)
     {
         $transaction->delete();
 
-        Session::flash('message', 'Successfully deleted the transaction!');
-        return redirect()->route('accounts.show', [$budget->id, $transaction->account_id]);
+        return [];
     }
 
     public function clear(Transaction $transaction)
@@ -107,9 +98,7 @@ class TransactionController extends Controller
         $transaction->cleared = !$transaction->cleared;
         $transaction->save();
 
-        return [
-            'cleared' => $transaction->cleared
-        ];
+        return new TransactionResource($transaction);
     }
 
 }
