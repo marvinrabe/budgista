@@ -26,7 +26,7 @@ export default {
 
     update(account, onSuccess, onError) {
         _sendRequest({
-            method: 'post',
+            method: 'put',
             url: '/api/accounts/' + account.id,
             data: account
         }, onSuccess, onError);
@@ -34,7 +34,7 @@ export default {
 
     delete({id}, onSuccess, onError) {
         _sendRequest({
-            method: 'post',
+            method: 'delete',
             url: '/api/accounts/' + id,
         }, onSuccess, onError);
     }

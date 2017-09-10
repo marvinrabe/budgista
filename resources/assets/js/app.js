@@ -128,6 +128,12 @@ function toggleClassMenu() {
     }
 }
 
+
+function hideMenu() {
+    myMenu.classList.add("menu--animatable");
+    myMenu.classList.remove('menu--visible');
+}
+
 function OnTransitionEnd() {
     myMenu.classList.remove("menu--animatable");
 }
@@ -140,3 +146,4 @@ if (myMenu) {
 }
 
 $('#app').on('click', '.menu-toggle', toggleClassMenu);
+$('#app').on('click', '.nav-link-main', hideMenu);
