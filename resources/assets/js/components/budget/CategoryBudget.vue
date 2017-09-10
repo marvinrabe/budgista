@@ -32,7 +32,7 @@
             }
         },
         data: () => ({
-            mutableValue: this.value,
+            mutableValue: 0,
             edit: false
         }),
         watch: {
@@ -67,7 +67,7 @@
                     this.edit = false;
                 }
             }
-        },
+        }
 
     }
 </script>
