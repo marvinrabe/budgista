@@ -100,6 +100,18 @@ const routes = [
                 name: 'budget.account',
                 component: require('./components/budget/AccountView.vue'),
                 props: true
+            },
+            {
+                path: '/budgets/:budget_id/account/:account_id/newTransaction',
+                name: 'budget.newTransaction',
+                component: require('./components/budget/TransactionView.vue'),
+                props: true
+            },
+            {
+                path: '/budgets/:budget_id/transaction/:transaction_id',
+                name: 'budget.transaction',
+                component: require('./components/budget/TransactionView.vue'),
+                props: true
             }
         ]
     }

@@ -37,9 +37,11 @@
         <div class="toolbar toolbar-secondary">
             <div class="row">
                 <div class="col">
-                    <button class="btn btn-primary">
+                    <router-link
+                            :to="{ name: 'budget.newTransaction'}"
+                            class="btn btn-primary">
                         <span class="fa fa-plus"></span> {{ $t('action.new.transaction') }}
-                    </button>
+                    </router-link>
                 </div>
 
                 <div class="col text-right">
