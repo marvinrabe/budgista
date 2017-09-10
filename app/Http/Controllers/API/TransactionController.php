@@ -24,7 +24,8 @@ class TransactionController extends Controller
     {
         $this->validate($request, [
             'payee' => 'required',
-            'account_id' => 'required'
+            'account_id' => 'required',
+            'amount' => 'required'
         ]);
 
         $account = Account::find(Input::get('account_id'));
@@ -57,11 +58,8 @@ class TransactionController extends Controller
     {
         $this->validate($request, [
             'payee' => 'required',
-            'account_id' => 'required'
+            'amount' => 'required'
         ]);
-
-        $account = Account::find(Input::get('account_id'));
-        $this->authorize('update', $account);
 
         $category = Category::find(Input::get('category_id'));
         $this->authorize('update', $category);
@@ -70,7 +68,6 @@ class TransactionController extends Controller
         $transaction->payee = Input::get('payee');
         $transaction->memo = Input::get('memo');
         $transaction->amount = Input::get('amount');
-        $transaction->account_id = $account->id;
         $transaction->category_id = empty($category->id) ? null : $category->id;
 
         if (!empty(Input::get('rrule'))) {

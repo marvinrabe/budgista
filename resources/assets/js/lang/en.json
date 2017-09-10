@@ -4,6 +4,7 @@
     },
     "action": {
         "save": "Save",
+        "back": "Back",
         "cancel": "Cancel",
         "nextMonth": "Next Month",
         "previousMonth": "Previous Month",
@@ -32,6 +33,7 @@
         "category": "Category",
         "budgeted": "Budgeted",
         "activity": "Activity",
+        "nullCategory": "To be Budgeted",
         "available": "Available",
         "funds": "Funds",
         "toBeBudgeted": "To be Budgeted",

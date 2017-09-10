@@ -10,6 +10,7 @@
 
   .nav-link-main {
     @extend .nav-link;
+    @extend .hide-text-overflow;
 
     color: $body-color;
 

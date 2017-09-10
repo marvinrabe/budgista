@@ -36,9 +36,7 @@
 
 .transaction-payee,
 .transaction-category {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @extend .hide-text-overflow;
 }
 
 .transaction-inflow,

@@ -11,7 +11,7 @@
                 </button>
             </div>
 
-            <div class="col-flex h2 mb-0">
+            <div class="col-flex h2 mb-0 hide-text-overflow">
                 {{ account.name }}
             </div>
             <div class="text-right d-none d-md-block">

@@ -61,7 +61,6 @@
         },
         data() {
             try{
-                console.log(this.rule);
                 let rule = rrulestr(this.rule);
                 return {
                     'recurring': true,
@@ -69,7 +68,6 @@
                     'interval': rule.options.interval
                 }
             } catch(exception) {
-                console.log(exception);
                 return {
                     'recurring': false,
                     'freq': RRule.MONTHLY,
