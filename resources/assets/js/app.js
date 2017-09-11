@@ -104,13 +104,13 @@ const routes = [
             {
                 path: '/budgets/:budget_id/account/:account_id/newTransaction',
                 name: 'budget.newTransaction',
-                component: require('./components/budget/TransactionView.vue'),
+                component: require('./components/budget/NewTransaction.vue'),
                 props: true
             },
             {
                 path: '/budgets/:budget_id/transaction/:transaction_id',
                 name: 'budget.transaction',
-                component: require('./components/budget/TransactionView.vue'),
+                component: require('./components/budget/EditTransaction.vue'),
                 props: true
             }
         ]
@@ -142,6 +142,7 @@ function toggleClassMenu() {
 
 
 function hideMenu() {
+    let myMenu = document.querySelector(".menu");
     myMenu.classList.add("menu--animatable");
     myMenu.classList.remove('menu--visible');
 }

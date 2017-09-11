@@ -1,7 +1,7 @@
 <template>
     <div class="main">
 
-        <window :title="title"></window>
+        <window :title="$t('action.edit.transaction')"></window>
 
         <div class="toolbar toolbar-primary">
             <div class="d-md-none">
@@ -11,7 +11,7 @@
             </div>
 
             <div class="col-flex h2 mb-0">
-                {{ title }}
+                {{ $t('action.edit.transaction') }}
             </div>
         </div>
 
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="text-right">
-                    <div class="float-left" v-if="edit">
+                    <div class="float-left">
                         <button class="btn btn-outline-danger"
                                 :title="$t('action.delete.transaction')"
                                 v-on:click="deleteTransaction">
@@ -68,67 +68,42 @@
     import store from '../../store'
 
     export default {
-        props: {
-            account_id: {
-                type: String,
-                default: null
-            },
-            transaction_id: {
-                type: String,
-                default: null
-            }
-        },
+        props: ['transaction_id'],
         components: {
             'recurrence': require('./Recurrence.vue')
-        },
-        computed: {
-            title() {
-                if (this.account_id !== null) {
-                    return this.$t('action.new.transaction');
-                } else if (this.transaction_id !== null) {
-                    return this.$t('action.edit.transaction');
-                }
-            }
         },
         data: () => ({
             'amount': '',
             'date': new Date().toISOString().slice(0,10),
             'payee': '',
             'category': '',
-            'rrule': '',
-            edit: false
+            'rrule': ''
         }),
 
         beforeRouteEnter (to, from, next) {
-            if(!to.params.transaction_id) {
-                next();
+            if(store.getters.isTransactionLoaded(to.params.transaction_id)) {
+                next(vm => vm.initialize());
                 return;
             }
 
             store.dispatch('getTransaction', to.params.transaction_id).then(() => {
-                next(vm => vm.initializeEdit())
+                next(vm => vm.initialize())
             });
         },
         beforeRouteUpdate (to, from, next) {
-            this.amount = '';
-            this.date = new Date().toISOString().slice(0,10);
-            this.payee = '';
-            this.category = '';
-            this.rrule = '';
-            this.edit = false;
-
-            if(!to.params.transaction_id) {
+            if(this.$store.getters.isTransactionLoaded(to.params.transaction_id)) {
+                this.initialize();
                 next();
                 return;
             }
             this.$store.dispatch('getTransaction', to.params.transaction_id).then(() => {
-                this.initializeEdit();
+                this.initialize();
                 next();
             });
         },
 
         methods: {
-            initializeEdit() {
+            initialize() {
                 let transaction = this.$store.getters.findTransactionById(this.transaction_id);
 
                 this.amount = transaction.amount;
@@ -154,18 +129,11 @@
                     'date': this.date,
                     'payee': this.payee,
                     'category_id': this.category,
-                    'rrule': this.rrule
+                    'rrule': this.rrule,
+                    'id': this.transaction_id
                 };
 
-                if (this.account_id !== null) {
-                    result.account_id = this.account_id;
-
-                    this.$store.dispatch('createTransaction', result);
-                } else if (this.transaction_id !== null) {
-                    result.id = this.transaction_id;
-
-                    this.$store.dispatch('updateTransaction', result);
-                }
+                this.$store.dispatch('updateTransaction', result);
 
                 this.$router.go(-1);
             },
