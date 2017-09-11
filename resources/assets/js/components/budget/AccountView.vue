@@ -42,6 +42,9 @@
                             class="btn btn-primary">
                         <span class="fa fa-plus"></span> {{ $t('action.new.transaction') }}
                     </router-link>
+                    <button v-on:click="loadMore" class="btn btn-secondary">
+                        <span class="fa fa-refresh"></span>
+                    </button>
                 </div>
 
                 <div class="col text-right">
@@ -143,78 +146,36 @@
             currency: function () {
                 return window.currency;
             },
-            account () {
+            account() {
                 return this.$store.getters.findAccountById(this.account_id);
-            }
-        },
-        watch: {
-            account_id() {
-                this.transactions = [];
-                this.nextPage = null;
-
-                axios
-                    .get('/api/accounts/' + this.account_id + '/transactions')
-                    .then(response => {
-                        this.transactions = response.data.data;
-                        this.nextPage = response.data.links.next;
-                    })
-                    .catch(e => {
-                        this.errors.push(e)
-                    });
+            },
+            transactions() {
+                return this.$store.getters.findTransactionsByAccountId(this.account_id);
             }
         },
         data: () => ({
-            transactions: [],
-            nextPage: null,
             editAccount: {
                 id: '',
                 name: ''
             }
         }),
-        created: function () {
-            axios
-                .get('/api/accounts/' + this.account_id + '/transactions')
-                .then(response => {
-                    this.transactions = response.data.data;
-                    this.nextPage = response.data.links.next;
-                })
-                .catch(e => {
-                    this.errors.push(e)
-                });
-        },
         methods: {
             humanRRule: function (rrule) {
                 let rule = rrulestr(rrule);
                 return rule.toText();
             },
+
             loadMore: function () {
-                if (this.nextPage === null) return;
-
-                axios
-                    .get(this.nextPage)
-                    .then(response => {
-                        this.transactions.concat(response.data.data);
-                        this.nextPage = response.data.links.next;
-                    })
-                    .catch(e => {
-                        this.errors.push(e)
-                    });
-
+                this.$store.dispatch('loadMoreTransactions', this.account.id);
             },
-
             toggleCleared(transaction) {
-                this.transactions.find(x => x.id === transaction.id).cleared = !transaction.cleared;
-
-                axios
-                    .put('/api/transactions/' + transaction.id + '/clear', {})
-                    .catch(e => {
-                        console.error(e);
-                    });
+                this.$store.dispatch('clearTransaction', transaction);
             },
 
             showEditAccountModal() {
                 this.editAccount.id = this.account.id;
                 this.editAccount.name = this.account.name;
+
                 this.$refs.editAccountModal.show();
             },
             hideEditAccountModal() {

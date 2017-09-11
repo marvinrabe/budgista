@@ -4,6 +4,7 @@ import {state, mutations} from './mutations'
 import * as actions from './actions'
 import * as getters from './getters'
 import accounts from './modules/accounts'
+import transactions from './modules/transactions'
 
 Vue.use(Vuex);
 
@@ -15,7 +16,8 @@ export default new Vuex.Store({
     actions,
     //getters,
     modules: {
-        accounts
+        accounts,
+        transactions
     },
     strict: debug
 })

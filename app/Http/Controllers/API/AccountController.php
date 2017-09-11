@@ -22,10 +22,10 @@ class AccountController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'budget' => 'required'
+            'budget_id' => 'required'
         ]);
 
-        $budget = Budget::find(Input::get('budget'));
+        $budget = Budget::find(Input::get('budget_id'));
         $this->authorize('update', $budget);
 
         $account = new Account();

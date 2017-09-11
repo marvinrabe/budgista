@@ -30,7 +30,7 @@ const actions = {
     },
 
     createAccount({commit, rootState}, account) {
-        account.budget = rootState.budget.id;
+        account.budget_id = rootState.budget.id;
 
         accounts.create(
             account,
@@ -41,29 +41,47 @@ const actions = {
     updateAccount({commit}, account) {
         accounts.update(
             account,
-            ({data}) => commit(types.UPDATE_ACCOUNT, data)
+            ({data}) => commit(types.ADD_ACCOUNT, data)
         )
     },
 
     deleteAccount({commit}, account) {
         accounts.delete(
             account,
-            () => commit(types.REMOVE_ACCOUNT, account.id)
+            () => commit(types.REMOVE_ACCOUNT, account)
         )
-    }
+    },
+
+    clearTransaction({commit}, transaction) {
+        console.log(transaction);
+        if(transaction.cleared) {
+            commit(types.CLEAR_ACCOUNT_BALANCE, {
+                account_id: transaction.account_id,
+                value: -transaction.amount
+            });
+        } else {
+            commit(types.CLEAR_ACCOUNT_BALANCE, {
+                account_id: transaction.account_id,
+                value: transaction.amount
+            });
+        }
+    },
 
 };
 
 // mutations
 const mutations = {
     [types.ADD_ACCOUNT](state, account) {
+        state.accounts = state.accounts.filter(x => x.id !== account.id);
         state.accounts.push(account);
     },
-    [types.UPDATE_ACCOUNT](state, account) {
-        state.accounts.find(x => x.id === account.id).name = account.name;
+    [types.REMOVE_ACCOUNT](state, {id}) {
+        state.accounts = state.accounts.filter(x => x.id !== id);
     },
-    [types.REMOVE_ACCOUNT](state, account_id) {
-        state.accounts = state.accounts.filter(x => x.id !== account_id);
+    [types.CLEAR_ACCOUNT_BALANCE](state, {account_id, value}) {
+        let account = state.accounts.find(x => x.id === account_id);
+        account.clearedBalance += value;
+        account.unclearedBalance -= value;
     }
 };
 

@@ -20,7 +20,7 @@ class TransactionController extends Controller
         $this->authorizeResource(Transaction::class);
     }
 
-    public function store(Request $request, Budget $budget)
+    public function store(Request $request)
     {
         $this->validate($request, [
             'payee' => 'required',
@@ -31,17 +31,21 @@ class TransactionController extends Controller
         $account = Account::find(Input::get('account_id'));
         $this->authorize('update', $account);
 
-        $category = Category::find(Input::get('category_id'));
-        $this->authorize('update', $category);
-
         $transaction = new Transaction();
+        $transaction->account_id = $account->id;
+        $transaction->budget_id = $account->budget->id;
+
+        $transaction->category_id = null;
+        $category_id = Input::get('category_id');
+        if(!empty($category_id)) {
+            $category = Category::find($category_id);
+            $this->authorize('update', $category);
+            $transaction->category_id = $category->id;
+        }
+
         $transaction->date = Input::get('date');
         $transaction->payee = Input::get('payee');
-        $transaction->memo = Input::get('memo');
         $transaction->amount = Input::get('amount');
-        $transaction->account_id = $account->id;
-        $transaction->category_id = empty($category->id) ? null : $category->id;
-        $transaction->budget_id = $budget->id;
 
         if (!empty(Input::get('rrule'))) {
             $transaction->rrule = new RRule(Input::get('rrule'));
@@ -61,14 +65,17 @@ class TransactionController extends Controller
             'amount' => 'required'
         ]);
 
-        $category = Category::find(Input::get('category_id'));
-        $this->authorize('update', $category);
+        $transaction->category_id = null;
+        $category_id = Input::get('category_id');
+        if(!empty($category_id)) {
+            $category = Category::find($category_id);
+            $this->authorize('update', $category);
+            $transaction->category_id = $category->id;
+        }
 
         $transaction->date = Input::get('date');
         $transaction->payee = Input::get('payee');
-        $transaction->memo = Input::get('memo');
         $transaction->amount = Input::get('amount');
-        $transaction->category_id = empty($category->id) ? null : $category->id;
 
         if (!empty(Input::get('rrule'))) {
             $transaction->rrule = new RRule(Input::get('rrule'));

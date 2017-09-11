@@ -53,7 +53,7 @@
                     <button class="btn btn-light" v-on:click="cancel">
                         {{ $t('action.cancel') }}
                     </button>
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" v-on:click="save">
                         {{ $t('action.save') }}
                     </button>
                 </div>
@@ -105,6 +105,28 @@
         },
         methods: {
             cancel() {
+                this.$router.go(-1);
+            },
+            save() {
+
+                let result = {
+                    'amount': this.amount,
+                    'date': this.date,
+                    'payee': this.payee,
+                    'category_id': this.category,
+                    'rrule': this.rrule
+                };
+
+                if (this.account_id !== null) {
+                    result.account_id = this.account_id;
+
+                    this.$store.dispatch('createTransaction', result);
+                } else if (this.transaction_id !== null) {
+                    result.id = this.transaction_id;
+
+                    this.$store.dispatch('updateTransaction', result);
+                }
+
                 this.$router.go(-1);
             }
         }

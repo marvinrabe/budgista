@@ -17,6 +17,7 @@ class Transaction extends Resource
         return [
             'id' => $this->id,
             'payee' => $this->payee,
+            'account_id' => $this->account->id,
             'category' => $this->category !== null?[
                 'id' => $this->category->id,
                 'name' => $this->category->name
