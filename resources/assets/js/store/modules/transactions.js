@@ -2,20 +2,47 @@ import transactions from '../../api/transactions'
 import * as types from '../mutation-types'
 
 // initial state
-// transactions: [{ id, payee, amount, cleared, rrule, recurring, category: {id, name}, account_id }]
+// transactions: [{ id, payee, amount, cleared, rrule, recurring, category: {id, name}, account_id }],
+// loaded: []
 const state = {
-    transactions: []
+    transactions: [],
+    loaded: [],
 };
 
 // getters
 const getters = {
+    findTransactionById: (state) => (id) => {
+        return state.transactions.find(x => x.id === id)
+    },
     findTransactionsByAccountId: (state) => (id) => {
-        return state.transactions.filter(x => x.account_id === id)
+        return state.transactions.filter(x => x.account_id === id).slice().sort(function (a, b) {
+            return new Date(b.date) - new Date(a.date);
+        });
     }
 };
 
 // actions
 const actions = {
+
+    getTransaction({commit}, transaction_id) {
+        return new Promise((resolve, reject) => {
+            transactions.get(
+                transaction_id,
+                ({data}) => {
+                    commit(types.ADD_TRANSACTION, data);
+                    resolve(data)
+                },
+                () => reject()
+            );
+        })
+    },
+
+    loadTransactions({state, commit, dispatch}, account_id) {
+        if (state.loaded.indexOf(account_id) === -1) {
+            dispatch('loadMoreTransactions', account_id);
+            commit(types.MARK_LOADED, account_id)
+        }
+    },
 
     loadMoreTransactions({commit}, account_id) {
         transactions.getMoreTransactions(
@@ -59,6 +86,9 @@ const mutations = {
     [types.ADD_TRANSACTION](state, transaction) {
         state.transactions = state.transactions.filter(x => x.id !== transaction.id);
         state.transactions.push(transaction);
+    },
+    [types.MARK_LOADED](state, account_id) {
+        state.loaded.push(account_id);
     },
     [types.REMOVE_TRANSACTION](state, {id}) {
         state.transactions = state.transactions.filter(x => x.id !== id);

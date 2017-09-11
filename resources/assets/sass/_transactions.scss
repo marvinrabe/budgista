@@ -39,16 +39,10 @@
   @extend .hide-text-overflow;
 }
 
+.transaction-outflow,
 .transaction-inflow,
-.transaction-outflow {
+.transaction-amount {
   white-space: nowrap;
-}
-
-.transaction-outflow {
-  text-align: right;
-}
-
-.transaction-inflow {
   text-align: right;
 }
 
@@ -71,5 +65,22 @@
     span:before {
       content: "+";
     }
+  }
+  .transaction-amount {
+    .text-success:before {
+      content: "+";
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .transaction-outflow,
+  .transaction-inflow {
+    display: none;
+  }
+}
+@include media-breakpoint-up(lg) {
+  .transaction-amount {
+    display: none;
   }
 }

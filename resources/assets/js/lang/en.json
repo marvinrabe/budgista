@@ -21,7 +21,8 @@
         },
         "delete": {
             "category": "Delete Category",
-            "account": "Delete Account"
+            "account": "Delete Account",
+            "transaction": "Delete Transaction"
         }
     },
     "form": {

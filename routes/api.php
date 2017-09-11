@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/accounts/{account}/transactions', 'API\AccountController@transactions')->name('accounts.transactions');
 
     Route::resource('transactions', 'API\TransactionController', ['only' => [
-        'store', 'update', 'destroy'
+        'store', 'show', 'update', 'destroy'
     ]]);
     Route::put('/transactions/{transaction}/clear', 'API\TransactionController@clear')->name('transactions.clear');
 

@@ -42,9 +42,6 @@
                             class="btn btn-primary">
                         <span class="fa fa-plus"></span> {{ $t('action.new.transaction') }}
                     </router-link>
-                    <button v-on:click="loadMore" class="btn btn-secondary">
-                        <span class="fa fa-refresh"></span>
-                    </button>
                 </div>
 
                 <div class="col text-right">
@@ -64,6 +61,7 @@
                 <div class="transaction-category">{{ $t('form.category') }}</div>
                 <div class="transaction-outflow">{{ $t('form.outflow') }}</div>
                 <div class="transaction-inflow">{{ $t('form.inflow') }}</div>
+                <div class="transaction-amount">{{ $t('form.amount') }}</div>
                 <div class="transaction-actions">&nbsp;</div>
             </div>
             <virtual-list :size="37" :remain="8" :tobottom="loadMore">
@@ -99,10 +97,16 @@
                             {{ $formatNumber(item.amount, {style: 'currency', currency: currency}) }}
                         </span>
                     </div>
+                    <div class="transaction-amount">
+                        <span :class="[{ 'text-danger': item.amount < 0 }, { 'text-success': item.amount >= 0 }]"
+                              v-html="$formatNumber(item.amount, {style: 'currency', currency: currency})"></span>
+                    </div>
                     <div class="transaction-actions">
-                        <a :title="$t('action.edit.transaction')" class="text-muted">
+                        <router-link
+                                :to="{ name: 'budget.transaction', params: { transaction_id: item.id }}"
+                                :title="$t('action.edit.transaction')" class="text-muted">
                             <span class="fa fa-pencil"></span>
-                        </a>
+                        </router-link>
                     </div>
                 </div>
             </virtual-list>
@@ -152,6 +156,14 @@
             transactions() {
                 return this.$store.getters.findTransactionsByAccountId(this.account_id);
             }
+        },
+        watch: {
+            account_id() {
+                this.$store.dispatch('loadTransactions', this.account_id);
+            }
+        },
+        created() {
+            this.$store.dispatch('loadTransactions', this.account_id);
         },
         data: () => ({
             editAccount: {

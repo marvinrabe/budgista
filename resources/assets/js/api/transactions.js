@@ -24,6 +24,13 @@ export default {
         }, onSuccess, onError);
     },
 
+    get(transaction_id, onSuccess, onError) {
+        _sendRequest({
+            method: 'get',
+            url: '/api/transactions/' + transaction_id
+        }, onSuccess, onError);
+    },
+
     update(transaction, onSuccess, onError) {
         _sendRequest({
             method: 'put',

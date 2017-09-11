@@ -58,6 +58,11 @@ class TransactionController extends Controller
         return new TransactionResource($transaction);
     }
 
+    public function show(Transaction $transaction)
+    {
+        return new TransactionResource($transaction);
+    }
+
     public function update(Request $request, Transaction $transaction)
     {
         $this->validate($request, [

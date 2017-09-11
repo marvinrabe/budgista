@@ -45,7 +45,8 @@
                 <div class="text-right">
                     <div class="float-left" v-if="edit">
                         <button class="btn btn-outline-danger"
-                                :title="$t('action.delete.transaction')">
+                                :title="$t('action.delete.transaction')"
+                                v-on:click="deleteTransaction">
                             <span class="fa fa-trash"></span>
                         </button>
                     </div>
@@ -64,6 +65,8 @@
 </template>
 
 <script>
+    import store from '../../store'
+
     export default {
         props: {
             account_id: {
@@ -95,15 +98,52 @@
             'rrule': '',
             edit: false
         }),
-        watch: {
-            account_id() {
 
-            },
-            transaction_id() {
-
+        beforeRouteEnter (to, from, next) {
+            if(!to.params.transaction_id) {
+                next();
+                return;
             }
+
+            store.dispatch('getTransaction', to.params.transaction_id).then(() => {
+                next(vm => vm.initializeEdit())
+            });
         },
+        beforeRouteUpdate (to, from, next) {
+            this.amount = '';
+            this.date = new Date().toISOString().slice(0,10);
+            this.payee = '';
+            this.category = '';
+            this.rrule = '';
+            this.edit = false;
+
+            if(!to.params.transaction_id) {
+                next();
+                return;
+            }
+            this.$store.dispatch('getTransaction', to.params.transaction_id).then(() => {
+                this.initializeEdit();
+                next();
+            });
+        },
+
         methods: {
+            initializeEdit() {
+                let transaction = this.$store.getters.findTransactionById(this.transaction_id);
+
+                this.amount = transaction.amount;
+                this.date = transaction.date;
+                this.payee = transaction.payee;
+                this.category = '';
+                if(transaction.category) {
+                    this.category = transaction.category.id;
+                }
+                this.rrule = '';
+                if(transaction.recurring) {
+                    this.rrule = transaction.rrule;
+                }
+                this.edit = true;
+            },
             cancel() {
                 this.$router.go(-1);
             },
@@ -126,6 +166,16 @@
 
                     this.$store.dispatch('updateTransaction', result);
                 }
+
+                this.$router.go(-1);
+            },
+            deleteTransaction() {
+
+                let transaction = {
+                    'id': this.transaction_id
+                };
+
+                this.$store.dispatch('deleteTransaction', transaction);
 
                 this.$router.go(-1);
             }
