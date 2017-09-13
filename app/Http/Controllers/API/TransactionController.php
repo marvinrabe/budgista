@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
-use App\Models\Budget;
 use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Http\Request;

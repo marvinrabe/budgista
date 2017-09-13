@@ -1,7 +1,7 @@
 <template>
     <div class="main">
 
-        <window :title="title"></window>
+        <window :title="$t('action.new.transaction')"></window>
 
         <div class="toolbar toolbar-primary">
             <div class="d-md-none">
@@ -11,17 +11,38 @@
             </div>
 
             <div class="col-flex h2 mb-0">
-                {{ title }}
+                {{ $t('action.new.transaction') }}
             </div>
         </div>
 
         <div class="content content-decorated">
-            <div class="container pt-2">
+            <form @submit.stop.prevent="save" class="container pt-2">
                 <div class="form-group">
                     <label for="amount">{{ $t('form.amount')}}</label>
-                    <input id="amount" type="number" v-model="amount" class="form-control" step="0.01" autofocus
-                           autocomplete="off"
-                           required>
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <a href="#" class="btn btn-success dropdown-toggle"
+                               :class="[{'btn-success': type === 1},{'btn-danger': type === -1}]"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                {{ (type === 1) ? $t('form.income') : $t('form.expense') }}
+                            </a>
+
+                            <div class="dropdown-menu" role="menu" aria-labelledby="user-menu">
+                                <a class="link-action dropdown-item" v-on:click="setToExpense">
+                                    {{ $t('form.expense') }}
+                                </a>
+                                <a class="link-action dropdown-item" v-on:click="setToIncome">
+                                    {{ $t('form.income') }}
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <input id="amount" type="number" v-model="amount" class="form-control" step="0.01" autofocus
+                               autocomplete="off"
+                               required>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -29,7 +50,44 @@
                     <input id="date" type="date" v-model="date" class="form-control" required>
                 </div>
 
-                <recurrence :rule.sync="rrule"></recurrence>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" v-model="recurring">
+                        {{ $t('form.recurring') }}
+                    </label>
+                </div>
+
+                <div class="form-row" v-if="recurring">
+                    <div class="col">
+                        <label for="freq">{{ $t('form.recurringFrequency') }}</label>
+                        <select id="freq" class="form-control" v-model="freq">
+                            <option value="3">{{ $t('frequency.daily') }}</option>
+                            <option value="2">{{ $t('frequency.weekly') }}</option>
+                            <option value="1">{{ $t('frequency.monthly') }}</option>
+                            <option value="0">{{ $t('frequency.yearly') }}</option>
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        <label for="interval">{{ $t('form.recurringInterval') }}</label>
+                        <div class="input-group mb-2 mb-sm-0">
+                            <input type="number" min="1" max="50" step="1" id="interval"
+                                   class="form-control" v-model="interval"/>
+                            <div class="input-group-addon" v-if="freq == 3">
+                                {{ $t('frequencyUnit.days') }}
+                            </div>
+                            <div class="input-group-addon" v-if="freq == 2">
+                                {{ $t('frequencyUnit.weeks') }}
+                            </div>
+                            <div class="input-group-addon" v-if="freq == 1">
+                                {{ $t('frequencyUnit.months') }}
+                            </div>
+                            <div class="input-group-addon" v-if="freq == 0">
+                                {{ $t('frequencyUnit.years') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="payee">{{ $t('form.payee')}}</label>
@@ -40,65 +98,81 @@
                     <label for="category">{{ $t('form.category')}}</label>
                     <select id="category" class="form-control" v-model="category">
                         <option value="">{{ $t('form.nullCategory') }}</option>
+                        <option v-for="category in sortedCategories" :key="category.id" :value="category.id">
+                            {{ category.name }}
+                        </option>
                     </select>
                 </div>
+            </form>
 
-                <div class="text-right">
-                    <button class="btn btn-light" v-on:click="cancel">
-                        {{ $t('action.cancel') }}
-                    </button>
-                    <button class="btn btn-primary" v-on:click="save">
-                        {{ $t('action.save') }}
-                    </button>
-                </div>
+            <div class="container text-right">
+                <button class="btn btn-light" v-on:click="cancel">
+                    {{ $t('action.cancel') }}
+                </button>
+                <button class="btn btn-primary" v-on:click="save">
+                    {{ $t('action.save') }}
+                </button>
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
-    import store from '../../store'
+    import { mapGetters } from 'vuex'
+    import RRule from 'rrule'
+
+    const EXPENSE = -1;
+    const INCOME = 1;
 
     export default {
-        props: {
-            account_id: {
-                type: String,
-                default: null
-            },
-            transaction_id: {
-                type: String,
-                default: null
-            }
-        },
+        props: ['account_id'],
         components: {
             'recurrence': require('./Recurrence.vue')
         },
         computed: {
-            title() {
-                if (this.account_id !== null) {
-                    return this.$t('action.new.transaction');
-                } else if (this.transaction_id !== null) {
-                    return this.$t('action.edit.transaction');
+            rrule() {
+                if (!this.recurring) {
+                    return '';
                 }
-            }
+                return new RRule({
+                    freq: this.freq,
+                    interval: this.interval
+                }).toString();
+            },
+            ...mapGetters([
+                'sortedCategories'
+            ])
         },
         data: () => ({
+            'type': EXPENSE,
             'amount': '',
             'date': new Date().toISOString().slice(0, 10),
             'payee': '',
             'category': '',
-            'rrule': '',
+            'recurring': false,
+            'freq': RRule.MONTHLY,
+            'interval': 1
         }),
 
         methods: {
 
             reset() {
+                this.type = EXPENSE;
                 this.amount = '';
                 this.date = new Date().toISOString().slice(0, 10);
                 this.payee = '';
                 this.category = '';
-                this.rrule = '';
+                this.recurring = false;
+                this.freq = RRule.MONTHLY;
+                this.interval = 1;
+            },
+
+            setToExpense() {
+                this.type = EXPENSE;
+            },
+
+            setToIncome() {
+                this.type = INCOME;
             },
 
             cancel() {
@@ -108,7 +182,7 @@
             save() {
 
                 let result = {
-                    'amount': this.amount,
+                    'amount': this.type*this.amount,
                     'date': this.date,
                     'payee': this.payee,
                     'category_id': this.category,

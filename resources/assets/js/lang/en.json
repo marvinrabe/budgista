@@ -47,7 +47,9 @@
         "date": "Date",
         "payee": "Payee",
         "outflow": "Outflow",
-        "inflow": "Inflow"
+        "inflow": "Inflow",
+        "expense": "Expense",
+        "income": "Income"
     },
     "title": {
         "accounts": "Accounts",

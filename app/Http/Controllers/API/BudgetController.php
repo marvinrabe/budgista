@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Account as AccountResource;
 use App\Http\Resources\Budget as BudgetResource;
+use App\Http\Resources\Category as CategoryResource;
 use App\Models\Budget;
 use App\Month;
 use Illuminate\Http\Request;
@@ -27,6 +28,13 @@ class BudgetController extends Controller
         $this->authorize('view', $budget);
 
         return AccountResource::collection($budget->accounts()->get());
+    }
+
+    public function categories(Budget $budget)
+    {
+        $this->authorize('view', $budget);
+
+        return CategoryResource::collection($budget->categories()->get());
     }
 
     public function month(Budget $budget, $month = null)

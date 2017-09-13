@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
+use App\Http\Resources\Category as CategoryResource;
 
 class Transaction extends Resource
 {
@@ -18,10 +19,7 @@ class Transaction extends Resource
             'id' => $this->id,
             'payee' => $this->payee,
             'account_id' => $this->account->id,
-            'category' => $this->category !== null?[
-                'id' => $this->category->id,
-                'name' => $this->category->name
-            ]:null,
+            'category' => $this->category !== null?new Category($this->category):null,
             'amount' => (double) $this->amount,
             'recurring' => (boolean) $this->recurring,
             'rrule' => $this->when($this->recurring, (string)$this->rrule),

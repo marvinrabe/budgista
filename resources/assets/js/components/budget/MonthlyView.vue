@@ -233,6 +233,7 @@
                         'budget': this.budget_id
                     })
                     .then(response => {
+                        this.$store.commit('ADD_CATEGORY', response.data);
                         this.addRow(response.data);
                     })
                     .catch(e => {
@@ -257,6 +258,9 @@
                     .put('/api/categories/' + this.editCategory.id, {
                         'name': this.editCategory.name
                     })
+                    .then(response => {
+                        this.$store.commit('ADD_CATEGORY', response.data);
+                    })
                     .catch(e => {
                         console.error(e);
                     });
@@ -268,6 +272,9 @@
 
                 axios
                     .delete('/api/categories/' + this.editCategory.id)
+                    (response => {
+                        this.$store.commit('REMOVE_CATEGORY', response.data);
+                    })
                     .catch(e => {
                         console.error(e);
                     });

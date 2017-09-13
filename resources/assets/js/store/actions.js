@@ -4,6 +4,7 @@ import budget from '../api/budget'
 export const initialize = ({ dispatch, commit }, budget_id) => {
     dispatch('loadBudget', budget_id).then(() => {
         dispatch('loadAccounts');
+        dispatch('loadCategories');
     });
     
 };

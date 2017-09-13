@@ -32,6 +32,7 @@ const actions = {
             transactions.get(
                 transaction_id,
                 ({data}) => {
+                    commit(types.ADD_CATEGORY, data.category);
                     commit(types.ADD_TRANSACTION, data);
                     resolve(data)
                 },
@@ -88,6 +89,7 @@ const actions = {
 const mutations = {
     [types.ADD_TRANSACTION](state, transaction) {
         state.transactions = state.transactions.filter(x => x.id !== transaction.id);
+        // TODO unset category attribute if exists and set category_id
         state.transactions.push(transaction);
     },
     [types.MARK_LOADED](state, account_id) {
