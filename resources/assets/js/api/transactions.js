@@ -8,12 +8,27 @@ function _sendRequest(request, onSuccess, onError) {
         });
 }
 
+let nextUrls = [];
+
 export default {
     getMoreTransactions(account_id, onSuccess, onError) {
+        let url = '/api/accounts/' + account_id + '/transactions';
+        if(account_id in nextUrls) {
+            if(nextUrls[account_id]) {
+                url = nextUrls[account_id];
+            } else {
+                onSuccess({data:null});
+                return;
+            }
+        }
+
         _sendRequest({
             method: 'get',
-            url: '/api/accounts/' + account_id + '/transactions'
-        }, onSuccess, onError);
+            url: url
+        }, response => {
+            nextUrls[account_id] = response.links.next;
+            onSuccess(response);
+        }, onError);
     },
 
     create(transaction, onSuccess, onError) {

@@ -12,6 +12,10 @@ class Transaction extends Model
 
     use UuidModelTrait, BudgetTrait;
 
+    protected $fillable = [
+        'date', 'budget_id', 'account_id', 'payee', 'amount'
+    ];
+
     protected $dates = ['date'];
 
     public function getRruleAttribute($value)

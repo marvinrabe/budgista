@@ -51,6 +51,9 @@
         "expense": "Expense",
         "income": "Income"
     },
+    "message": {
+        "noMoreData": "No more data :)"
+    },
     "title": {
         "accounts": "Accounts",
         "budget": "Budget"

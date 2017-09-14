@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div class="content transactions">
+        <div class="content transactions" style="overflow: auto;">
             <div class="transactions-header">
                 <div class="transaction-clear">&nbsp;</div>
                 <div class="transaction-date">{{ $t('form.date') }}</div>
@@ -64,52 +64,56 @@
                 <div class="transaction-amount">{{ $t('form.amount') }}</div>
                 <div class="transaction-actions">&nbsp;</div>
             </div>
-            <virtual-list :size="37" :remain="8" :tobottom="loadMore">
-                <div class="transactions-row" :class="[{ 'text-muted bg-light': new Date(item.date) > new Date() }]"
-                     v-for="(item, index) of transactions" :key="index">
-                    <div class="transaction-clear">
-                        <button class="btn btn-xs"
-                                :class="[{ 'btn-success': item.cleared }, {'btn-light': !item.cleared}]"
-                                v-if="new Date(item.date) <= new Date()"
-                                v-on:click="toggleCleared(item)">
-                            <span class="fa fa-check"></span>
-                        </button>
-                    </div>
-                    <div class="transaction-date">
-                        {{ $formatDate(new Date(item.date), {year: 'numeric', month: '2-digit', day: '2-digit'}) }}
-                        <span v-if="item.recurring" class="fa fa-refresh" v-b-tooltip.bottom
-                              :title="humanRRule(item.rrule)">
+
+            <div class="transactions-row" :class="[{ 'text-muted bg-light': new Date(item.date) > new Date() }]"
+                 v-for="(item, index) of transactions" :key="index">
+                <div class="transaction-clear">
+                    <button class="btn btn-xs"
+                            :class="[{ 'btn-success': item.cleared }, {'btn-light': !item.cleared}]"
+                            v-if="new Date(item.date) <= new Date()"
+                            v-on:click="toggleCleared(item)">
+                        <span class="fa fa-check"></span>
+                    </button>
+                </div>
+                <div class="transaction-date">
+                    {{ $formatDate(new Date(item.date), {year: 'numeric', month: '2-digit', day: '2-digit'}) }}
+                    <span v-if="item.recurring" class="fa fa-refresh" v-b-tooltip.bottom
+                          :title="humanRRule(item.rrule)">
                         </span>
-                    </div>
-                    <div class="transaction-payee">{{ item.payee }}</div>
-                    <div class="transaction-category">
+                </div>
+                <div class="transaction-payee">{{ item.payee }}</div>
+                <div class="transaction-category">
                         <span v-if="item.category">
                             {{ item.category.name }}
                         </span>
-                    </div>
-                    <div class="transaction-outflow">
+                </div>
+                <div class="transaction-outflow">
                         <span v-if="item.amount < 0">
                             {{ $formatNumber(item.amount * -1, {style: 'currency', currency: currency}) }}
                         </span>
-                    </div>
-                    <div class="transaction-inflow">
+                </div>
+                <div class="transaction-inflow">
                         <span v-if="item.amount >= 0">
                             {{ $formatNumber(item.amount, {style: 'currency', currency: currency}) }}
                         </span>
-                    </div>
-                    <div class="transaction-amount">
+                </div>
+                <div class="transaction-amount">
                         <span :class="[{ 'text-danger': item.amount < 0 }, { 'text-success': item.amount >= 0 }]"
                               v-html="$formatNumber(item.amount, {style: 'currency', currency: currency})"></span>
-                    </div>
-                    <div class="transaction-actions">
-                        <router-link
-                                :to="{ name: 'budget.transaction', params: { transaction_id: item.id }}"
-                                :title="$t('action.edit.transaction')" class="text-muted">
-                            <span class="fa fa-pencil"></span>
-                        </router-link>
-                    </div>
                 </div>
-            </virtual-list>
+                <div class="transaction-actions">
+                    <router-link
+                            :to="{ name: 'budget.transaction', params: { transaction_id: item.id }}"
+                            :title="$t('action.edit.transaction')" class="text-muted">
+                        <span class="fa fa-pencil"></span>
+                    </router-link>
+                </div>
+            </div>
+            <infinite-loading :on-infinite="loadMore" spinner="waveDots" ref="infiniteLoading">
+                <span slot="no-more">
+                  {{ $t('message.noMoreData') }}
+                </span>
+            </infinite-loading>
         </div>
 
         <b-modal ref="editAccountModal" :title="$t('action.edit.account')">
@@ -137,14 +141,14 @@
 </template>
 
 <script>
-    import virtualList from 'vue-virtual-scroll-list';
+    import InfiniteLoading from 'vue-infinite-loading';
 
     var rrulestr = require('rrule').rrulestr;
 
     export default {
         props: ['account_id'],
         components: {
-            virtualList
+            InfiniteLoading,
         },
         computed: {
             currency: function () {
@@ -178,7 +182,13 @@
             },
 
             loadMore: function () {
-                this.$store.dispatch('loadMoreTransactions', this.account.id);
+                this.$store.dispatch('loadMoreTransactions', this.account.id)
+                    .then(() => {
+                        this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+                    })
+                    .catch(() => {
+                        this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+                    });
             },
             toggleCleared(transaction) {
                 this.$store.dispatch('clearTransaction', transaction);

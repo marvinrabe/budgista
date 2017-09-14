@@ -49,10 +49,18 @@ const actions = {
     },
 
     loadMoreTransactions({commit}, account_id) {
-        transactions.getMoreTransactions(
-            account_id,
-            ({data}) => data.forEach(transaction => commit(types.ADD_TRANSACTION, transaction))
-        )
+        return new Promise((resolve, reject) => {
+            transactions.getMoreTransactions(
+                account_id,
+                ({data}) => {
+                    if(data) {
+                        data.forEach(transaction => commit(types.ADD_TRANSACTION, transaction));
+                        resolve();
+                    } else {
+                        reject();
+                    }
+                })
+        });
     },
 
     createTransaction({commit, rootState}, transaction) {
