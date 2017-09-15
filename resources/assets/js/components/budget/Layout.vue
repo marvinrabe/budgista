@@ -43,10 +43,7 @@
             </div>
         </div>
 
-        <keep-alive>
-            <router-view></router-view>
-        </keep-alive>
-
+        <router-view></router-view>
 
         <b-modal ref="newAccountModal" :title="$t('action.new.account')">
             <form @submit.stop.prevent="createAccount">
