@@ -18,9 +18,8 @@ const getters = {
         return state.transactions.find(x => x.id === id) !== undefined;
     },
     findTransactionsByAccountId: (state) => (id) => {
-        return state.transactions.filter(x => x.account_id === id).slice().sort(function (a, b) {
-            return new Date(b.date) - new Date(a.date);
-        });
+        let transactions = state.transactions.filter(x => x.account_id === id).slice();
+        return _.sortBy(transactions, ['date', 'created_at', 'payee']).reverse();
     }
 };
 

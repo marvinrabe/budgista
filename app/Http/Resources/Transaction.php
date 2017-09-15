@@ -24,7 +24,8 @@ class Transaction extends Resource
             'recurring' => (boolean) $this->recurring,
             'rrule' => $this->when($this->recurring, (string)$this->rrule),
             'cleared' => (boolean)$this->cleared,
-            'date' => $this->date->toDateString()
+            'date' => $this->date->toDateString(),
+            'created_at' => $this->created_at
         ];
     }
 }
