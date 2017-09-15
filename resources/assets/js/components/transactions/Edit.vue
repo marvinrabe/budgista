@@ -2,16 +2,6 @@
     import Form from './Form'
     import store from '../../store/index'
 
-    /*
-    <div class="float-left">
-                        <button class="btn btn-outline-danger"
-                                :title="$t('action.delete.transaction')"
-                                v-on:click="deleteTransaction">
-                            <span class="fa fa-trash"></span>
-                        </button>
-                    </div>
-     */
-
     export default {
         extends: Form,
         props: ['transaction_id'],
@@ -19,6 +9,9 @@
         computed: {
             title() {
                 return this.$t('action.edit.transaction');
+            },
+            hasDelete() {
+                return true;
             }
         },
 
@@ -70,14 +63,14 @@
                 this.edit = true;
             },
 
-            save() {
+            saveTransaction() {
 
                 let transaction = this.getResult();
                 transaction.id = this.transaction_id;
 
                 this.$store.dispatch('updateTransaction', transaction);
 
-                this.$router.go(-1);
+                this.cancel();
             },
 
             deleteTransaction() {
@@ -88,7 +81,7 @@
 
                 this.$store.dispatch('deleteTransaction', transaction);
 
-                this.$router.go(-1);
+                this.cancel();
             }
         }
     }

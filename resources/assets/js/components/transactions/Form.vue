@@ -106,10 +106,18 @@
             </form>
 
             <div class="container text-right">
+                <div class="float-left" v-if="hasDelete">
+                    <button class="btn btn-outline-danger"
+                            :title="$t('action.delete.transaction')"
+                            v-on:click="deleteTransaction">
+                        <span class="fa fa-trash"></span>
+                    </button>
+                </div>
+
                 <button class="btn btn-light" v-on:click="cancel">
                     {{ $t('action.cancel') }}
                 </button>
-                <button class="btn btn-primary" v-on:click="save">
+                <button class="btn btn-primary" v-on:click="saveTransaction">
                     {{ $t('action.save') }}
                 </button>
             </div>
@@ -118,7 +126,7 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
+    import {mapGetters} from 'vuex'
     import RRule from 'rrule'
 
     const EXPENSE = -1;
@@ -137,6 +145,9 @@
             },
             title() {
                 return '';
+            },
+            hasDelete() {
+                return false
             },
             ...mapGetters([
                 'sortedCategories'
@@ -157,7 +168,7 @@
 
             getResult() {
                 return {
-                    'amount': this.type*this.amount,
+                    'amount': this.type * this.amount,
                     'date': this.date,
                     'payee': this.payee,
                     'category_id': this.category,
@@ -190,7 +201,11 @@
                 this.interval = 1;
             },
 
-            save() {
+            saveTransaction() {
+                // To be implemented by child forms.
+            },
+
+            deleteTransaction() {
                 // To be implemented by child forms.
             }
 

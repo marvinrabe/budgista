@@ -10,14 +10,13 @@
             }
         },
         methods: {
-            save() {
+            saveTransaction() {
                 let transaction = this.getResult();
                 transaction.account_id = this.account_id;
 
                 this.$store.dispatch('createTransaction', transaction);
-                this.reset();
 
-                this.$router.go(-1);
+                this.cancel();
             }
         }
     }
