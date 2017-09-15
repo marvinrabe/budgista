@@ -82,6 +82,34 @@ const mutations = {
         let account = state.accounts.find(x => x.id === account_id);
         account.clearedBalance += value;
         account.unclearedBalance -= value;
+    },
+    [types.ADD_BALANCE](state, transaction) {
+        let account = state.accounts.find(x => x.id === transaction.account_id);
+
+        if(new Date(transaction.date) > new Date()) {
+            return;
+        }
+
+        if(transaction.cleared) {
+            account.clearedBalance += transaction.amount;
+        } else {
+            account.unclearedBalance += transaction.amount;
+        }
+        account.workingBalance += transaction.amount;
+    },
+    [types.REMOVE_BALANCE](state, transaction) {
+        let account = state.accounts.find(x => x.id === transaction.account_id);
+
+        if(new Date(transaction.date) > new Date()) {
+            return;
+        }
+
+        if(transaction.cleared) {
+            account.clearedBalance -= transaction.amount;
+        } else {
+            account.unclearedBalance -= transaction.amount;
+        }
+        account.workingBalance -= transaction.amount;
     }
 };
 

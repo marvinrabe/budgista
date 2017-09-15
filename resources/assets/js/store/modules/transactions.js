@@ -67,14 +67,22 @@ const actions = {
     createTransaction({commit, rootState}, transaction) {
         transactions.create(
             transaction,
-            ({data}) => commit(types.ADD_TRANSACTION, data)
+            ({data}) => {
+                commit(types.ADD_TRANSACTION, data);
+                commit(types.ADD_BALANCE, data);
+            }
         )
     },
 
-    updateTransaction({commit}, transaction) {
+    updateTransaction({commit, getters}, transaction) {
         transactions.update(
             transaction,
-            ({data}) => commit(types.ADD_TRANSACTION, data)
+            ({data}) => {
+                let oldTransaction = getters.findTransactionById(transaction.id);
+                commit(types.REMOVE_BALANCE, oldTransaction);
+                commit(types.ADD_TRANSACTION, data);
+                commit(types.ADD_BALANCE, data);
+            }
         )
     },
 
@@ -85,10 +93,14 @@ const actions = {
         )
     },
 
-    deleteTransaction({commit}, transaction) {
+    deleteTransaction({commit, getters}, transaction) {
         transactions.delete(
             transaction,
-            ({data}) => commit(types.REMOVE_TRANSACTION, transaction)
+            ({data}) => {
+                let oldTransaction = getters.findTransactionById(transaction.id);
+                commit(types.REMOVE_BALANCE, oldTransaction);
+                commit(types.REMOVE_TRANSACTION, transaction);
+            }
         )
     }
 
