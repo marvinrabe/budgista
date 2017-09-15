@@ -43,7 +43,9 @@
             </div>
         </div>
 
-        <router-view></router-view>
+        <keep-alive>
+            <router-view :key="$router.fullPath"></router-view>
+        </keep-alive>
 
         <b-modal ref="newAccountModal" :title="$t('action.new.account')">
             <form @submit.stop.prevent="createAccount">

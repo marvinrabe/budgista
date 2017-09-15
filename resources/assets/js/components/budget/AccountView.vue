@@ -109,7 +109,7 @@
                     </router-link>
                 </div>
             </div>
-            <infinite-loading :on-infinite="loadMore" spinner="waveDots" ref="infiniteLoading">
+            <infinite-loading :key="account_id" :on-infinite="loadMore" spinner="waveDots" ref="infiniteLoading">
                 <span slot="no-more">
                   {{ $t('message.noMoreData') }}
                 </span>
