@@ -4,10 +4,14 @@
 
 Setup local environment with Valet: https://laravel.com/docs/5.4/valet
 
-See here how to configure PhpStorm: https://blog.jetbrains.com/phpstorm/2015/01/laravel-development-using-phpstorm/
+### PhpStorm
 
-### Localisation
+### The Laravel IDE Helper
 
-Find missing translations with:
+After running `php artisan ide-helper:generate`, PhpStorm will have code completion support and syntax highlighting for many of Laravel’s facades.
 
-    php artisan langman:sync
+### The Laravel Plugin for PhpStorm
+
+To further enhance the Laravel experience, we can also install the Laravel Plugin. Under **Settings (Preferences) | Plugins**, click the Browse repositories… button and search for Laravel. The Install plugin button will download and install the plugin into our IDE.
+
+Restart the IDE and enable the plugin under **Settings (Preferences) | Other Settings | Laravel Plugin | Enable Plugin for this Project**. All of a sudden, PhpStorm will know what all Laravel facades do, and provide code completion for controllers, views, routes, configuration, translations and many other things!
