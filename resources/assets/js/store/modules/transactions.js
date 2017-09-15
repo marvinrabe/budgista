@@ -32,7 +32,9 @@ const actions = {
             transactions.get(
                 transaction_id,
                 ({data}) => {
-                    commit(types.ADD_CATEGORY, data.category);
+                    if(data.category) {
+                        commit(types.ADD_CATEGORY, data.category);
+                    }
                     commit(types.ADD_TRANSACTION, data);
                     resolve(data)
                 },

@@ -1,7 +1,7 @@
 <template>
     <div class="main">
 
-        <window :title="$t('action.new.transaction')"></window>
+        <window :title="title"></window>
 
         <div class="toolbar toolbar-primary">
             <div class="d-md-none">
@@ -11,7 +11,7 @@
             </div>
 
             <div class="col-flex h2 mb-0">
-                {{ $t('action.new.transaction') }}
+                {{ title }}
             </div>
         </div>
 
@@ -125,10 +125,6 @@
     const INCOME = 1;
 
     export default {
-        props: ['account_id'],
-        components: {
-            'recurrence': require('./Recurrence.vue')
-        },
         computed: {
             rrule() {
                 if (!this.recurring) {
@@ -139,6 +135,9 @@
                     interval: this.interval
                 }).toString();
             },
+            title() {
+                return '';
+            },
             ...mapGetters([
                 'sortedCategories'
             ])
@@ -147,24 +146,24 @@
             'type': EXPENSE,
             'amount': '',
             'date': new Date().toISOString().slice(0, 10),
-            'payee': '',
-            'category': '',
             'recurring': false,
             'freq': RRule.MONTHLY,
-            'interval': 1
+            'interval': 1,
+            'payee': '',
+            'category': ''
         }),
 
         methods: {
 
-            reset() {
-                this.type = EXPENSE;
-                this.amount = '';
-                this.date = new Date().toISOString().slice(0, 10);
-                this.payee = '';
-                this.category = '';
-                this.recurring = false;
-                this.freq = RRule.MONTHLY;
-                this.interval = 1;
+            getResult() {
+                return {
+                    'amount': this.type*this.amount,
+                    'date': this.date,
+                    'payee': this.payee,
+                    'category_id': this.category,
+                    'rrule': this.rrule,
+                    'account_id': this.account_id
+                };
             },
 
             setToExpense() {
@@ -179,22 +178,22 @@
                 this.reset();
                 this.$router.go(-1);
             },
+
+            reset() {
+                this.type = EXPENSE;
+                this.amount = '';
+                this.date = new Date().toISOString().slice(0, 10);
+                this.payee = '';
+                this.category = '';
+                this.recurring = false;
+                this.freq = RRule.MONTHLY;
+                this.interval = 1;
+            },
+
             save() {
-
-                let result = {
-                    'amount': this.type*this.amount,
-                    'date': this.date,
-                    'payee': this.payee,
-                    'category_id': this.category,
-                    'rrule': this.rrule,
-                    'account_id': this.account_id
-                };
-
-                this.$store.dispatch('createTransaction', result);
-                this.reset();
-
-                this.$router.go(-1);
+                // To be implemented by child forms.
             }
+
         }
     }
 </script>

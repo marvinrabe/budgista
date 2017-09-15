@@ -104,13 +104,13 @@ const routes = [
             {
                 path: '/budgets/:budget_id/account/:account_id/newTransaction',
                 name: 'budget.newTransaction',
-                component: require('./components/budget/NewTransaction.vue'),
+                component: require('./components/transactions/New.vue'),
                 props: true
             },
             {
                 path: '/budgets/:budget_id/transaction/:transaction_id',
                 name: 'budget.transaction',
-                component: require('./components/budget/EditTransaction.vue'),
+                component: require('./components/transactions/Edit.vue'),
                 props: true
             }
         ]
