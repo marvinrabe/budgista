@@ -39,17 +39,18 @@
 
                         </div>
 
-                        <input id="amount" name="amount" type="number" v-model="amount" class="form-control" step="0.01" autofocus
-                               v-validate.initial="'required'" autocomplete="off"
-                               required>
+                        <input id="amount" name="amount" type="number" class="form-control" step="0.01" autofocus autocomplete="off"
+                               v-model="amount"
+                               v-validate.initial="'required'">
                     </div>
-                    <span class="invalid-feedback" v-show="errors.has('amount') && validated">{{ errors.first('amount') }}</span>
+                    <span class="invalid-feedback" v-show="errors.has('amount')">{{ errors.first('amount') }}</span>
                 </div>
 
                 <div class="form-group">
                     <label for="payee">{{ $t('form.payee')}}</label>
-                    <input id="payee" name="payee" type="text" v-model="payee" class="form-control" autocomplete="off"
-                           v-validate.initial="'required'" required>
+                    <input id="payee" name="payee" type="text" class="form-control" autocomplete="off"
+                           v-model="payee"
+                           v-validate.initial="'required'">
                     <span class="invalid-feedback" v-show="errors.has('payee')">{{ errors.first('payee') }}</span>
                 </div>
 
@@ -76,7 +77,7 @@
                     </label>
                 </div>
 
-                <div class="form-row" v-if="recurring">
+                <div class="form-row mb-3" v-if="recurring">
                     <div class="col">
                         <label for="freq">{{ $t('form.recurringFrequency') }}</label>
                         <select id="freq" class="form-control" v-model="freq">

@@ -2,6 +2,8 @@
     import Form from './Form'
     import store from '../../store/index'
 
+    var rrulestr = require('rrule').rrulestr;
+
     export default {
         extends: Form,
         props: ['transaction_id'],
@@ -56,11 +58,12 @@
                 if (transaction.category) {
                     this.category = transaction.category.id;
                 }
-                this.rrule = '';
                 if (transaction.recurring) {
-                    this.rrule = transaction.rrule;
+                    let rule = rrulestr(transaction.rrule+";COUNT=1");
+                    this.recurring = true;
+                    this.freq = rule.options.freq;
+                    this.interval = rule.options.interval;
                 }
-                this.edit = true;
             },
 
             saveTransaction() {
