@@ -16,10 +16,10 @@
         </div>
 
         <div class="content content-decorated">
-            <form @submit.stop.prevent="save" class="container pt-2">
+            <form @submit.stop.prevent="save" class="container pt-2" :class="[{'was-validated': validated}]">
                 <div class="form-group">
                     <label for="amount">{{ $t('form.amount')}}</label>
-                    <div class="input-group">
+                    <div class="input-group" :class="[{'is-invalid': errors.has('amount')}]">
                         <div class="input-group-btn">
                             <a href="#" class="btn btn-success dropdown-toggle"
                                :class="[{'btn-success': type === 1},{'btn-danger': type === -1}]"
@@ -39,11 +39,30 @@
 
                         </div>
 
-                        <input id="amount" type="number" v-model="amount" class="form-control" step="0.01" autofocus
-                               autocomplete="off"
+                        <input id="amount" name="amount" type="number" v-model="amount" class="form-control" step="0.01" autofocus
+                               v-validate.initial="'required'" autocomplete="off"
                                required>
                     </div>
+                    <span class="invalid-feedback" v-show="errors.has('amount') && validated">{{ errors.first('amount') }}</span>
                 </div>
+
+                <div class="form-group">
+                    <label for="payee">{{ $t('form.payee')}}</label>
+                    <input id="payee" name="payee" type="text" v-model="payee" class="form-control" autocomplete="off"
+                           v-validate.initial="'required'" required>
+                    <span class="invalid-feedback" v-show="errors.has('payee')">{{ errors.first('payee') }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">{{ $t('form.category')}}</label>
+                    <select id="category" class="form-control" v-model="category">
+                        <option value="">{{ $t('form.nullCategory') }}</option>
+                        <option v-for="category in sortedCategories" :key="category.id" :value="category.id">
+                            {{ category.name }}
+                        </option>
+                    </select>
+                </div>
+
 
                 <div class="form-group">
                     <label for="date">{{ $t('form.date')}}</label>
@@ -87,21 +106,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="payee">{{ $t('form.payee')}}</label>
-                    <input id="payee" type="text" v-model="payee" class="form-control" autocomplete="off" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="category">{{ $t('form.category')}}</label>
-                    <select id="category" class="form-control" v-model="category">
-                        <option value="">{{ $t('form.nullCategory') }}</option>
-                        <option v-for="category in sortedCategories" :key="category.id" :value="category.id">
-                            {{ category.name }}
-                        </option>
-                    </select>
                 </div>
             </form>
 
@@ -161,7 +165,8 @@
             'freq': RRule.MONTHLY,
             'interval': 1,
             'payee': '',
-            'category': ''
+            'category': '',
+            'validated': false
         }),
 
         methods: {
@@ -199,6 +204,7 @@
                 this.recurring = false;
                 this.freq = RRule.MONTHLY;
                 this.interval = 1;
+                this.validated = false;
             },
 
             saveTransaction() {

@@ -45,6 +45,10 @@ Vue.use(VueRouter);
 import Vuex from 'vuex'
 Vue.use(Vuex);
 
+// Validations
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate);
+
 /**
  * Vue Components
  */

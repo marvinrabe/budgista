@@ -45,7 +45,7 @@
                 this.type = 1;
                 this.amount = transaction.amount;
 
-                if(transaction.amount < 0) {
+                if (transaction.amount < 0) {
                     this.type = -1;
                     this.amount *= -1;
                 }
@@ -64,6 +64,11 @@
             },
 
             saveTransaction() {
+
+                if (this.errors.any()) {
+                    this.validated = true;
+                    return;
+                }
 
                 let transaction = this.getResult();
                 transaction.id = this.transaction_id;

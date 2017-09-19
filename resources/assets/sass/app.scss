@@ -33,6 +33,11 @@
   border-top: 5px solid theme-color('primary');
 }
 
+// Invalid Feedback is always displayed as block, because we use vue to hide message if there is no error.
+.was-validated .invalid-feedback {
+  display: block;
+}
+
 @import "pace";
 @import "logo";
 @import "font-awesome";
