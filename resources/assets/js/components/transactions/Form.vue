@@ -206,7 +206,6 @@
             },
 
             cancel() {
-                this.reset();
                 this.$router.go(-1);
             },
 
