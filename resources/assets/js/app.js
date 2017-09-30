@@ -96,25 +96,25 @@ const routes = [
         props: true,
         children: [
             {
-                path: '/budgets/:budget_id/',
+                path: '',
                 name: 'budget.month',
                 component: require('./components/budget/MonthlyView.vue'),
                 props: true
             },
             {
-                path: '/budgets/:budget_id/account/:account_id',
+                path: 'account/:account_id',
                 name: 'budget.account',
                 component: require('./components/budget/AccountView.vue'),
                 props: true
             },
             {
-                path: '/budgets/:budget_id/account/:account_id/newTransaction',
+                path: 'account/:account_id/newTransaction',
                 name: 'budget.newTransaction',
                 component: require('./components/transactions/New.vue'),
                 props: true
             },
             {
-                path: '/budgets/:budget_id/transaction/:transaction_id',
+                path: 'transaction/:transaction_id',
                 name: 'budget.transaction',
                 component: require('./components/transactions/Edit.vue'),
                 props: true
@@ -126,7 +126,7 @@ const routes = [
 
 const router = new VueRouter({
     mode: 'history',
-    routes: routes // short for `routes: routes`
+    routes: routes
 });
 
 import store from './store'
