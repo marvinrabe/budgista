@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div class="content transactions" style="overflow: auto;">
+        <div class="content transactions">
             <div class="transactions-header">
                 <div class="transaction-clear">&nbsp;</div>
                 <div class="transaction-date">{{ $t('form.date') }}</div>
