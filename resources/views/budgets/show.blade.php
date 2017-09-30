@@ -2,6 +2,8 @@
 
 @section('body')
 
-    <router-view></router-view>
+    <router-view>
+        @include('auth.menu')
+    </router-view>
 
 @endsection

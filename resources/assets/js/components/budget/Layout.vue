@@ -9,6 +9,9 @@
                     </a>
 
                     <ul class="navbar-nav ml-auto">
+
+                        <slot></slot>
+
                         <li class="nav-item d-md-none">
                             <a href="#" class="menu-toggle nav-link">
                                 <span class="fa fa-times"></span>
