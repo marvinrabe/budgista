@@ -9,15 +9,15 @@
   }
 
   .fa-lock {
-    color: #ffcc00;
+    color: theme-color('warning');
   }
 
   .fa-exclamation-triangle {
-    color: #990000;
+    color: theme-color('danger');
   }
 
   .fa-question-circle {
-    color: #00b3ee;
+    color: theme-color('info');
   }
 }
 

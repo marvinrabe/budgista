@@ -1,7 +1,11 @@
 // Variables
 @import "variables";
+
 // Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
+
+// Font Awesome
+@import "font-awesome";
 
 // Own Bootstrap extensions
 .btn-outline-light:hover,
@@ -38,9 +42,8 @@
   display: block;
 }
 
-@import "pace";
 @import "logo";
-@import "font-awesome";
+@import "pace";
 @import "errors";
 @import "transactions";
 

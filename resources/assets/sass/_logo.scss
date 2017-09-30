@@ -28,7 +28,7 @@
     -moz-osx-font-smoothing: grayscale;
     vertical-align: bottom;
     content:'\0041';
-    color: $blue;
+    color: theme-color('primary');
   }
 
   font-weight: 200;
