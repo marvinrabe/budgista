@@ -35,7 +35,7 @@
                         </span>
                         {{ account.name }}
                     </router-link>
-                    <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small text-right">
+                    <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small">
                         <span class="fa fa-plus"></span> {{ $t('action.new.account') }}
                     </a>
                 </nav>
@@ -48,8 +48,20 @@
         </keep-alive>
 
         <b-modal ref="newAccountModal" :title="$t('action.new.account')">
-            <form @submit.stop.prevent="createAccount">
-                <b-form-input type="text" :placeholder="$t('form.name')" v-model="newAccount.name"></b-form-input>
+            <form @submit.stop.prevent="createAccount"
+                  :class="[{'was-validated': newAccount.validated}]"
+                  data-vv-scope="newAccount"
+                  novalidate>
+                <div class="form-group">
+                    <label for="name" class="sr-only">{{$t('form.name')}}</label>
+                    <input id="name" type="text" class="form-control"
+                           :placeholder="$t('form.name')"
+                           v-model="newAccount.name"
+                           v-validate="'required'"
+                           data-vv-name="name"
+                           :data-vv-as="$t('form.name')">
+                    <span class="invalid-feedback">{{ errors.first('newAccount.name') }}</span>
+                </div>
             </form>
 
             <div slot="modal-footer">
@@ -65,13 +77,14 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
+    import {mapGetters} from 'vuex'
 
     export default {
         props: ['budget_id'],
         data: () => ({
             newAccount: {
-                'name': ''
+                name: '',
+                validated: false
             }
         }),
         computed: {
@@ -88,16 +101,29 @@
         methods: {
 
             showNewAccountModal() {
+                // Reset Validation
+                this.newAccount.validated = false;
+                this.errors.clear('newAccount');
+
+                // Reset Data
                 this.newAccount.name = '';
+
+                // Show Modal
                 this.$refs.newAccountModal.show();
             },
             hideNewAccountModal() {
+                // Hide Modal
                 this.$refs.newAccountModal.hide();
             },
             createAccount() {
-                this.$store.dispatch('createAccount', this.newAccount);
+                this.$validator.validateAll('newAccount').then(isValid => {
+                    this.newAccount.validated = true;
 
-                this.hideNewAccountModal();
+                    if (isValid) {
+                        this.$store.dispatch('createAccount', this.newAccount);
+                        this.hideNewAccountModal();
+                    }
+                });
             }
         }
     }

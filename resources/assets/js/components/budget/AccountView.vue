@@ -109,7 +109,7 @@
                     </router-link>
                 </div>
             </div>
-            <infinite-loading :key="account_id" :on-infinite="loadMore" spinner="waveDots" ref="infiniteLoading">
+            <infinite-loading :key="account_id" @infinite="loadMore" spinner="waveDots" ref="infiniteLoading">
                 <span slot="no-more">
                   {{ $t('message.noMoreData') }}
                 </span>
@@ -117,8 +117,20 @@
         </div>
 
         <b-modal ref="editAccountModal" :title="$t('action.edit.account')">
-            <form @submit.stop.prevent="editAccount">
-                <b-form-input type="text" :placeholder="$t('form.name')" v-model="editAccount.name"></b-form-input>
+            <form @submit.stop.prevent="updateAccount"
+                  :class="[{'was-validated': editAccount.validated}]"
+                  data-vv-scope="editAccount"
+                  novalidate>
+                <div class="form-group">
+                    <label for="name" class="sr-only">{{$t('form.name')}}</label>
+                    <input id="name" type="text" class="form-control"
+                           :placeholder="$t('form.name')"
+                           v-model="editAccount.name"
+                           v-validate="'required'"
+                           data-vv-name="name"
+                           :data-vv-as="$t('form.name')">
+                    <span class="invalid-feedback" v-show="errors.has('editAccount.name')">{{ errors.first('editAccount.name') }}</span>
+                </div>
             </form>
             <div slot="modal-footer" class="text-right" style="width: 100%;">
                 <div class="float-left">
@@ -172,7 +184,8 @@
         data: () => ({
             editAccount: {
                 id: '',
-                name: ''
+                name: '',
+                validated: false
             }
         }),
         methods: {
@@ -181,13 +194,13 @@
                 return rule.toText();
             },
 
-            loadMore: function () {
+            loadMore: function ($state) {
                 this.$store.dispatch('loadMoreTransactions', this.account.id)
                     .then(() => {
-                        this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+                        $state.loaded();
                     })
                     .catch(() => {
-                        this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+                        $state.complete();
                     });
             },
             toggleCleared(transaction) {
@@ -195,6 +208,11 @@
             },
 
             showEditAccountModal() {
+                // Reset Validation
+                this.editAccount.validated = false;
+                this.errors.clear('editAccount');
+
+                // Reset Data
                 this.editAccount.id = this.account.id;
                 this.editAccount.name = this.account.name;
 
@@ -204,9 +222,14 @@
                 this.$refs.editAccountModal.hide();
             },
             updateAccount() {
-                this.$store.dispatch('updateAccount', this.editAccount);
+                this.$validator.validateAll('editAccount').then(isValid => {
+                    this.editAccount.validated = true;
 
-                this.hideEditAccountModal();
+                    if (isValid) {
+                        this.$store.dispatch('updateAccount', this.editAccount);
+                        this.hideEditAccountModal();
+                    }
+                });
             },
             deleteAccount() {
                 this.$store.dispatch('deleteAccount', this.editAccount);

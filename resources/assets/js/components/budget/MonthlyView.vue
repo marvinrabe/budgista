@@ -97,8 +97,16 @@
         </div>
 
         <b-modal ref="newCategoryModal" :title="$t('action.new.category')">
-            <form @submit.stop.prevent="createCategory">
-                <b-form-input type="text" :placeholder="$t('form.name')" v-model="newCategory.name"></b-form-input>
+            <form @submit.stop.prevent="createCategory"
+                  :class="[{'was-validated': newCategory.validated}]">
+                <div class="form-group">
+                    <input name="createCategory-name" type="text"
+                           class="form-control"
+                           :placeholder="$t('form.name')"
+                           v-model="newCategory.name"
+                           v-validate.initial="'required'">
+                    <span class="invalid-feedback" v-show="errors.has('createCategory-name')">{{ errors.first('createCategory-name') }}</span>
+                </div>
             </form>
 
             <div slot="modal-footer">
@@ -112,8 +120,16 @@
         </b-modal>
 
         <b-modal ref="editCategoryModal" :title="$t('action.edit.category')">
-            <form @submit.stop.prevent="editCategory">
-                <b-form-input type="text" :placeholder="$t('form.name')" v-model="editCategory.name"></b-form-input>
+            <form @submit.stop.prevent="editCategory"
+                  :class="[{'was-validated': editCategory.validated}]">
+                <div class="form-group">
+                    <input name="editCategory-name" type="text"
+                           class="form-control"
+                           :placeholder="$t('form.name')"
+                           v-model="editCategory.name"
+                           v-validate.initial="'required'">
+                    <span class="invalid-feedback" v-show="errors.has('editCategory-name')">{{ errors.first('editCategory-name') }}</span>
+                </div>
             </form>
             <div slot="modal-footer" class="text-right" style="width: 100%;">
                 <div class="float-left">
@@ -164,11 +180,13 @@
             previousMonth: null,
             nextMonth: null,
             newCategory: {
-                'name': ''
+                'name': '',
+                'validated': false
             },
             editCategory: {
                 'id': '',
-                'name': ''
+                'name': '',
+                'validated': false
             }
         }),
 
@@ -221,12 +239,19 @@
 
             showNewCategoryModal() {
                 this.newCategory.name = '';
+                this.newCategory.validated = false;
                 this.$refs.newCategoryModal.show();
             },
             hideNewCategoryModal() {
                 this.$refs.newCategoryModal.hide();
             },
             createCategory() {
+
+                if (this.errors.any()) {
+                    this.newCategory.validated = true;
+                    return;
+                }
+
                 axios
                     .post('/api/categories', {
                         'name': this.newCategory.name,
@@ -246,12 +271,19 @@
             showEditCategoryModal(row) {
                 this.editCategory.id = row.id;
                 this.editCategory.name = row.name;
+                this.newCategory.validated = false;
                 this.$refs.editCategoryModal.show();
             },
             hideEditCategoryModal() {
                 this.$refs.editCategoryModal.hide();
             },
             updateCategory() {
+
+                if (this.errors.any()) {
+                    this.editCategory.validated = true;
+                    return;
+                }
+
                 this.sheet.rows.find(x => x.id === this.editCategory.id).name = this.editCategory.name;
 
                 axios
