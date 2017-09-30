@@ -1,531 +1,532 @@
 @import "node_modules/font-awesome/scss/font-awesome";
 
+// Replace Glyphicons with Font Awesome
 .glyphicon {
   @extend .fa;
-  &.glyphicon-chevron-up {
+  &-chevron-up {
     @extend .fa-chevron-up;
   }
-  &.glyphicon-chevron-right {
+  &-chevron-right {
     @extend .fa-chevron-right;
   }
-  &.glyphicon-chevron-left {
+  &-chevron-left {
     @extend .fa-chevron-left;
   }
-  &.glyphicon-asterisk {
+  &-asterisk {
     @extend .fa-asterisk;
   }
-  &.glyphicon-plus {
+  &-plus {
     @extend .fa-plus;
   }
-  &.glyphicon-euro,
-  &.glyphicon-eur {
+  &-euro,
+  &-eur {
     @extend .fa-eur;
   }
-  &.glyphicon-minus {
+  &-minus {
     @extend .fa-minus;
   }
-  &.glyphicon-cloud {
+  &-cloud {
     @extend .fa-cloud
   }
-  &.glyphicon-envelope {
+  &-envelope {
     @extend .fa-envelope
   }
-  &.glyphicon-pencil {
+  &-pencil {
     @extend .fa-pencil
   }
-  &.glyphicon-glass {
+  &-glass {
     @extend .fa-glass
   }
-  &.glyphicon-music {
+  &-music {
     @extend .fa-music
   }
-  &.glyphicon-search {
+  &-search {
     @extend .fa-search
   }
-  &.glyphicon-heart {
+  &-heart {
     @extend .fa-heart
   }
-  &.glyphicon-star {
+  &-star {
     @extend .fa-star
   }
-  &.glyphicon-star-empty {
+  &-star-empty {
     @extend .fa-star-o
   }
-  &.glyphicon-user {
+  &-user {
     @extend .fa-user
   }
-  &.glyphicon-film {
+  &-film {
     @extend .fa-film
   }
-  &.glyphicon-th-large {
+  &-th-large {
     @extend .fa-th-large
   }
-  &.glyphicon-th {
+  &-th {
     @extend .fa-th
   }
-  &.glyphicon-th-list {
+  &-th-list {
     @extend .fa-th-list
   }
-  &.glyphicon-ok {
+  &-ok {
     @extend .fa-check
   }
-  &.glyphicon-remove {
+  &-remove {
     @extend .fa-remove
   }
-  &.glyphicon-zoom-in {
+  &-zoom-in {
     @extend .fa-search-plus
   }
-  &.glyphicon-zoom-out {
+  &-zoom-out {
     @extend .fa-search-minus
   }
-  &.glyphicon-off {
+  &-off {
     @extend .fa-power-off
   }
-  &.glyphicon-signal {
+  &-signal {
     @extend .fa-signal
   }
-  &.glyphicon-cog {
+  &-cog {
     @extend .fa-cog
   }
-  &.glyphicon-trash {
+  &-trash {
     @extend .fa-trash
   }
-  &.glyphicon-home {
+  &-home {
     @extend .fa-home
   }
-  &.glyphicon-file {
+  &-file {
     @extend .fa-file
   }
-  &.glyphicon-time {
+  &-time {
     @extend .fa-clock-o
   }
-  &.glyphicon-road {
+  &-road {
     @extend .fa-road
   }
-  &.glyphicon-download-alt {
+  &-download-alt {
     @extend .fa-cloud-download
   }
-  &.glyphicon-download {
+  &-download {
     @extend .fa-download
   }
-  &.glyphicon-upload {
+  &-upload {
     @extend .fa-upload
   }
-  &.glyphicon-inbox {
+  &-inbox {
     @extend .fa-inbox
   }
-  &.glyphicon-play-circle {
+  &-play-circle {
     @extend .fa-play-circle
   }
-  &.glyphicon-repeat {
+  &-repeat {
     @extend .fa-repeat
   }
-  &.glyphicon-refresh {
+  &-refresh {
     @extend .fa-refresh
   }
-  &.glyphicon-list-alt {
+  &-list-alt {
     @extend .fa-list-alt
   }
-  &.glyphicon-lock {
+  &-lock {
     @extend .fa-lock
   }
-  &.glyphicon-flag {
+  &-flag {
     @extend .fa-flag
   }
-  &.glyphicon-headphones {
+  &-headphones {
     @extend .fa-headphones
   }
-  &.glyphicon-volume-off {
+  &-volume-off {
     @extend .fa-volume-off
   }
-  &.glyphicon-volume-down {
+  &-volume-down {
     @extend .fa-volume-down
   }
-  &.glyphicon-volume-up {
+  &-volume-up {
     @extend .fa-volume-up
   }
-  &.glyphicon-qrcode {
+  &-qrcode {
     @extend .fa-qrcode
   }
-  &.glyphicon-barcode {
+  &-barcode {
     @extend .fa-barcode
   }
-  &.glyphicon-tag {
+  &-tag {
     @extend .fa-tag
   }
-  &.glyphicon-tags {
+  &-tags {
     @extend .fa-tags
   }
-  &.glyphicon-book {
+  &-book {
     @extend .fa-book
   }
-  &.glyphicon-bookmark {
+  &-bookmark {
     @extend .fa-bookmark
   }
-  &.glyphicon-print {
+  &-print {
     @extend .fa-print
   }
-  &.glyphicon-camera {
+  &-camera {
     @extend .fa-camera
   }
-  &.glyphicon-font {
+  &-font {
     @extend .fa-font
   }
-  &.glyphicon-bold {
+  &-bold {
     @extend .fa-bold
   }
-  &.glyphicon-italic {
+  &-italic {
     @extend .fa-italic
   }
-  &.glyphicon-text-height {
+  &-text-height {
     @extend .fa-text-height
   }
-  &.glyphicon-text-width {
+  &-text-width {
     @extend .fa-text-width
   }
-  &.glyphicon-align-left {
+  &-align-left {
     @extend .fa-align-left
   }
-  &.glyphicon-align-center {
+  &-align-center {
     @extend .fa-align-center
   }
-  &.glyphicon-align-right {
+  &-align-right {
     @extend .fa-align-right
   }
-  &.glyphicon-align-justify {
+  &-align-justify {
     @extend .fa-align-justify
   }
-  &.glyphicon-list {
+  &-list {
     @extend .fa-list
   }
-  &.glyphicon-indent-left {
+  &-indent-left {
     @extend .fa-indent
   }
-  &.glyphicon-indent-right {
+  &-indent-right {
     @extend .fa-outdent
   }
-  &.glyphicon-facetime-video {
+  &-facetime-video {
     @extend .fa-video-camera
   }
-  &.glyphicon-picture {
+  &-picture {
     @extend .fa-picture-o
   }
-  &.glyphicon-map-marker {
+  &-map-marker {
     @extend .fa-map-marker
   }
-  &.glyphicon-adjust {
+  &-adjust {
     @extend .fa-adjust
   }
-  &.glyphicon-tint {
+  &-tint {
     @extend .fa-tint
   }
-  &.glyphicon-edit {
+  &-edit {
     @extend .fa-edit
   }
-  &.glyphicon-share {
+  &-share {
     @extend .fa-share
   }
-  &.glyphicon-check {
+  &-check {
     @extend .fa-check
   }
-  &.glyphicon-move {
+  &-move {
     @extend .fa-arrows
   }
-  &.glyphicon-step-backward {
+  &-step-backward {
     @extend .fa-step-backward
   }
-  &.glyphicon-fast-backward {
+  &-fast-backward {
     @extend .fa-fast-backward
   }
-  &.glyphicon-backward {
+  &-backward {
     @extend .fa-backward
   }
-  &.glyphicon-play {
+  &-play {
     @extend .fa-play
   }
-  &.glyphicon-pause {
+  &-pause {
     @extend .fa-pause
   }
-  &.glyphicon-stop {
+  &-stop {
     @extend .fa-stop
   }
-  &.glyphicon-forward {
+  &-forward {
     @extend .fa-forward
   }
-  &.glyphicon-fast-forward {
+  &-fast-forward {
     @extend .fa-fast-forward
   }
-  &.glyphicon-step-forward {
+  &-step-forward {
     @extend .fa-step-forward
   }
-  &.glyphicon-eject {
+  &-eject {
     @extend .fa-eject
   }
-  &.glyphicon-chevron-left {
+  &-chevron-left {
     @extend .fa-chevron-left
   }
-  &.glyphicon-chevron-right {
+  &-chevron-right {
     @extend .fa-chevron-right
   }
-  &.glyphicon-plus-sign {
+  &-plus-sign {
     @extend .fa-plus-circle
   }
-  &.glyphicon-minus-sign {
+  &-minus-sign {
     @extend .fa-minus-circle
   }
-  &.glyphicon-remove-sign {
+  &-remove-sign {
     @extend .fa-times-circle
   }
-  &.glyphicon-ok-sign {
+  &-ok-sign {
     @extend .fa-check-circle
   }
-  &.glyphicon-question-sign {
+  &-question-sign {
     @extend .fa-question-circle
   }
-  &.glyphicon-info-sign {
+  &-info-sign {
     @extend .fa-info-circle
   }
-  &.glyphicon-screenshot {
+  &-screenshot {
     @extend .fa-crosshairs
   }
-  &.glyphicon-remove-circle {
+  &-remove-circle {
     @extend .fa-times-circle
   }
-  &.glyphicon-ok-circle {
+  &-ok-circle {
     @extend .fa-check-circle
   }
-  &.glyphicon-ban-circle {
+  &-ban-circle {
     @extend .fa-ban
   }
-  &.glyphicon-arrow-left {
+  &-arrow-left {
     @extend .fa-arrow-left
   }
-  &.glyphicon-arrow-right {
+  &-arrow-right {
     @extend .fa-arrow-right
   }
-  &.glyphicon-arrow-up {
+  &-arrow-up {
     @extend .fa-arrow-up
   }
-  &.glyphicon-arrow-down {
+  &-arrow-down {
     @extend .fa-arrow-down
   }
-  &.glyphicon-share-alt {
+  &-share-alt {
     @extend .fa-share-alt
   }
-  &.glyphicon-resize-full {
+  &-resize-full {
     @extend .fa-expand
   }
-  &.glyphicon-resize-small {
+  &-resize-small {
     @extend .fa-compress
   }
-  &.glyphicon-exclamation-sign {
+  &-exclamation-sign {
     @extend .fa-exclamation-circle
   }
-  &.glyphicon-gift {
+  &-gift {
     @extend .fa-gift
   }
-  &.glyphicon-leaf {
+  &-leaf {
     @extend .fa-leaf
   }
-  &.glyphicon-fire {
+  &-fire {
     @extend .fa-fire
   }
-  &.glyphicon-eye-open {
+  &-eye-open {
     @extend .fa-eye
   }
-  &.glyphicon-eye-close {
+  &-eye-close {
     @extend .fa-eye-slash
   }
-  &.glyphicon-warning-sign {
+  &-warning-sign {
     @extend .fa-exclamation-triangle
   }
-  &.glyphicon-plane {
+  &-plane {
     @extend .fa-plane
   }
-  &.glyphicon-calendar {
+  &-calendar {
     @extend .fa-calendar
   }
-  &.glyphicon-random {
+  &-random {
     @extend .fa-random
   }
-  &.glyphicon-comment {
+  &-comment {
     @extend .fa-comment
   }
-  &.glyphicon-magnet {
+  &-magnet {
     @extend .fa-magnet
   }
-  &.glyphicon-chevron-up {
+  &-chevron-up {
     @extend .fa-chevron-up
   }
-  &.glyphicon-chevron-down {
+  &-chevron-down {
     @extend .fa-chevron-down
   }
-  &.glyphicon-retweet {
+  &-retweet {
     @extend .fa-retweet
   }
-  &.glyphicon-shopping-cart {
+  &-shopping-cart {
     @extend .fa-shopping-cart
   }
-  &.glyphicon-folder-close {
+  &-folder-close {
     @extend .fa-folder
   }
-  &.glyphicon-folder-open {
+  &-folder-open {
     @extend .fa-folder-open
   }
-  &.glyphicon-resize-vertical {
+  &-resize-vertical {
     @extend .fa-arrows-v
   }
-  &.glyphicon-resize-horizontal {
+  &-resize-horizontal {
     @extend .fa-arrows-h
   }
-  &.glyphicon-hdd {
+  &-hdd {
     @extend .fa-hdd-o
   }
-  &.glyphicon-bullhorn {
+  &-bullhorn {
     @extend .fa-bullhorn
   }
-  &.glyphicon-bell {
+  &-bell {
     @extend .fa-bell
   }
-  &.glyphicon-certificate {
+  &-certificate {
     @extend .fa-certificate
   }
-  &.glyphicon-thumbs-up {
+  &-thumbs-up {
     @extend .fa-thumbs-up
   }
-  &.glyphicon-thumbs-down {
+  &-thumbs-down {
     @extend .fa-thumbs-down
   }
-  &.glyphicon-hand-right {
+  &-hand-right {
     @extend .fa-hand-o-right
   }
-  &.glyphicon-hand-left {
+  &-hand-left {
     @extend .fa-hand-o-left
   }
-  &.glyphicon-hand-up {
+  &-hand-up {
     @extend .fa-hand-o-up
   }
-  &.glyphicon-hand-down {
+  &-hand-down {
     @extend .fa-hand-o-down
   }
-  &.glyphicon-circle-arrow-right {
+  &-circle-arrow-right {
     @extend .fa-arrow-circle-right
   }
-  &.glyphicon-circle-arrow-left {
+  &-circle-arrow-left {
     @extend .fa-arrow-circle-left
   }
-  &.glyphicon-circle-arrow-up {
+  &-circle-arrow-up {
     @extend .fa-arrow-circle-up
   }
-  &.glyphicon-circle-arrow-down {
+  &-circle-arrow-down {
     @extend .fa-arrow-circle-down
   }
-  &.glyphicon-globe {
+  &-globe {
     @extend .fa-globe
   }
-  &.glyphicon-wrench {
+  &-wrench {
     @extend .fa-wrench
   }
-  &.glyphicon-tasks {
+  &-tasks {
     @extend .fa-tasks
   }
-  &.glyphicon-filter {
+  &-filter {
     @extend .fa-filter
   }
-  &.glyphicon-briefcase {
+  &-briefcase {
     @extend .fa-briefcase
   }
-  &.glyphicon-fullscreen {
+  &-fullscreen {
     @extend .fa-expand
   }
-  &.glyphicon-dashboard {
+  &-dashboard {
     @extend .fa-dashboard
   }
-  &.glyphicon-paperclip {
+  &-paperclip {
     @extend .fa-paperclip
   }
-  &.glyphicon-heart-empty {
+  &-heart-empty {
     @extend .fa-heart-o
   }
-  &.glyphicon-link {
+  &-link {
     @extend .fa-link
   }
-  &.glyphicon-phone {
+  &-phone {
     @extend .fa-phone
   }
-  &.glyphicon-pushpin {
+  &-pushpin {
     @extend .fa-thumb-tack
   }
-  &.glyphicon-usd {
+  &-usd {
     @extend .fa-usd
   }
-  &.glyphicon-gbp {
+  &-gbp {
     @extend .fa-gbp
   }
-  &.glyphicon-sort {
+  &-sort {
     @extend .fa-sort
   }
-  &.glyphicon-sort-by-alphabet {
+  &-sort-by-alphabet {
     @extend .fa-sort-alpha-asc
   }
-  &.glyphicon-sort-by-alphabet-alt {
+  &-sort-by-alphabet-alt {
     @extend .fa-sort-alpha-desc
   }
-  &.glyphicon-sort-by-order {
+  &-sort-by-order {
     @extend .fa-sort-numeric-asc
   }
-  &.glyphicon-sort-by-order-alt {
+  &-sort-by-order-alt {
     @extend .fa-sort-numeric-desc
   }
-  &.glyphicon-sort-by-attributes {
+  &-sort-by-attributes {
     @extend .fa-sort-amount-asc
   }
-  &.glyphicon-sort-by-attributes-alt {
+  &-sort-by-attributes-alt {
     @extend .fa-sort-amount-desc
   }
-  &.glyphicon-unchecked {
+  &-unchecked {
     @extend .fa-square-o
   }
-  &.glyphicon-expand {
+  &-expand {
     @extend .fa-caret-square-o-right
   }
-  &.glyphicon-collapse-down {
+  &-collapse-down {
     @extend .fa-caret-square-o-down
   }
-  &.glyphicon-collapse-up {
+  &-collapse-up {
     @extend .fa-caret-square-o-up
   }
-  &.glyphicon-log-in {
+  &-log-in {
     @extend .fa-sign-in
   }
-  &.glyphicon-flash {
+  &-flash {
     @extend .fa-flash
   }
-  &.glyphicon-log-out {
+  &-log-out {
     @extend .fa-sign-out
   }
-  &.glyphicon-new-window {
+  &-new-window {
     @extend .fa-external-link
   }
-  &.glyphicon-record {
+  &-record {
     @extend .fa-dot-circle-o
   }
-  &.glyphicon-save {
+  &-save {
     @extend .fa-save
   }
-  &.glyphicon-open {
+  &-open {
     @extend .fa-upload
   }
-  &.glyphicon-saved {
+  &-saved {
     @extend .fa-check
   }
-  &.glyphicon-import {
+  &-import {
     @extend .fa-upload
   }
-  &.glyphicon-export {
+  &-export {
     @extend .fa-download
   }
-  &.glyphicon-send {
+  &-send {
     @extend .fa-paper-plane-o
   }
 }

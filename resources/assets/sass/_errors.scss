@@ -6,18 +6,18 @@
   .fa {
     -webkit-animation: pulsate 1s ease-out;
     -webkit-animation-iteration-count: infinite;
-  }
 
-  .fa-lock {
-    color: theme-color('warning');
-  }
+    &-lock {
+      color: theme-color('warning');
+    }
 
-  .fa-exclamation-triangle {
-    color: theme-color('danger');
-  }
+    &-exclamation-triangle {
+      color: theme-color('danger');
+    }
 
-  .fa-question-circle {
-    color: theme-color('info');
+    &-question-circle {
+      color: theme-color('info');
+    }
   }
 }
 
