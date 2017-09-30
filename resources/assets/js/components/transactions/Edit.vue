@@ -42,6 +42,8 @@
 
         methods: {
             initialize() {
+                this.reset();
+
                 let transaction = this.$store.getters.findTransactionById(this.transaction_id);
 
                 this.type = 1;
@@ -67,12 +69,6 @@
             },
 
             saveTransaction() {
-
-                if (this.errors.any()) {
-                    this.validated = true;
-                    return;
-                }
-
                 let transaction = this.getResult();
                 transaction.id = this.transaction_id;
 
@@ -82,7 +78,6 @@
             },
 
             deleteTransaction() {
-
                 let transaction = {
                     'id': this.transaction_id
                 };

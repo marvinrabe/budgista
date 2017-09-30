@@ -9,13 +9,18 @@
                 return this.$t('action.new.transaction');
             }
         },
+
+        beforeRouteEnter(to, from, next) {
+            next(vm => vm.reset())
+        },
+
+        beforeRouteUpdate(to, from, next) {
+            this.reset();
+        },
+
+
         methods: {
             saveTransaction() {
-                if(this.errors.any()) {
-                    this.validated = true;
-                    return;
-                }
-
                 let transaction = this.getResult();
                 transaction.account_id = this.account_id;
 

@@ -16,10 +16,15 @@
         </div>
 
         <div class="content content-decorated">
-            <form @submit.stop.prevent="save" class="container pt-2" :class="[{'was-validated': validated}]">
+            <form id="transaction" class="container pt-2"
+                  v-on:submit.stop.prevent="submitForm"
+                  v-bind:class="[{'was-validated': validated}]"
+                  data-vv-scope="transaction"
+                  novalidate>
+
                 <div class="form-group">
                     <label for="amount">{{ $t('form.amount')}}</label>
-                    <div class="input-group" :class="[{'is-invalid': errors.has('amount')}]">
+                    <div class="input-group" :class="[{'is-invalid': errors.has('transaction.amount')}]">
                         <div class="input-group-btn">
                             <a href="#" class="btn btn-success dropdown-toggle"
                                :class="[{'btn-success': type === 1},{'btn-danger': type === -1}]"
@@ -39,19 +44,24 @@
 
                         </div>
 
-                        <input id="amount" name="amount" type="number" class="form-control" step="0.01" autofocus autocomplete="off"
+                        <input id="amount" type="number" class="form-control" step="0.01" autofocus
+                               autocomplete="off"
                                v-model="amount"
-                               v-validate.initial="'required'">
+                               v-validate.initial="'required'"
+                               data-vv-name="amount"
+                               :data-vv-as="$t('form.amount')">
                     </div>
-                    <span class="invalid-feedback" v-show="errors.has('amount')">{{ errors.first('amount') }}</span>
+                    <span class="invalid-feedback">{{ errors.first('transaction.amount') }}</span>
                 </div>
 
                 <div class="form-group">
                     <label for="payee">{{ $t('form.payee')}}</label>
-                    <input id="payee" name="payee" type="text" class="form-control" autocomplete="off"
+                    <input id="payee" type="text" class="form-control" autocomplete="off"
                            v-model="payee"
-                           v-validate.initial="'required'">
-                    <span class="invalid-feedback" v-show="errors.has('payee')">{{ errors.first('payee') }}</span>
+                           v-validate.initial="'required'"
+                           data-vv-name="payee"
+                           :data-vv-as="$t('form.payee')">
+                    <span class="invalid-feedback">{{ errors.first('transaction.payee') }}</span>
                 </div>
 
                 <div class="form-group">
@@ -64,10 +74,14 @@
                     </select>
                 </div>
 
-
                 <div class="form-group">
                     <label for="date">{{ $t('form.date')}}</label>
-                    <input id="date" type="date" v-model="date" class="form-control" required>
+                    <input id="date" type="date" class="form-control"
+                           v-model="date"
+                           v-validate.initial="'required'"
+                           data-vv-name="payee"
+                           :data-vv-as="$t('form.payee')">
+                    <span class="invalid-feedback">{{ errors.first('transaction.date') }}</span>
                 </div>
 
                 <div class="form-check">
@@ -122,7 +136,7 @@
                 <button class="btn btn-light" v-on:click="cancel">
                     {{ $t('action.cancel') }}
                 </button>
-                <button class="btn btn-primary" v-on:click="saveTransaction">
+                <button form="transaction" class="btn btn-primary">
                     {{ $t('action.save') }}
                 </button>
             </div>
@@ -197,6 +211,11 @@
             },
 
             reset() {
+                // Reset Validation
+                this.validated = false;
+                this.errors.clear('transaction');
+
+                // Reset Data
                 this.type = EXPENSE;
                 this.amount = '';
                 this.date = new Date().toISOString().slice(0, 10);
@@ -205,7 +224,16 @@
                 this.recurring = false;
                 this.freq = RRule.MONTHLY;
                 this.interval = 1;
-                this.validated = false;
+            },
+
+            submitForm() {
+                this.$validator.validateAll('transaction').then(isValid => {
+                    this.validated = true;
+
+                    if (isValid) {
+                        this.saveTransaction();
+                    }
+                });
             },
 
             saveTransaction() {

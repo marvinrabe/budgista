@@ -129,7 +129,7 @@
                            v-validate="'required'"
                            data-vv-name="name"
                            :data-vv-as="$t('form.name')">
-                    <span class="invalid-feedback" v-show="errors.has('editAccount.name')">{{ errors.first('editAccount.name') }}</span>
+                    <span class="invalid-feedback">{{ errors.first('editAccount.name') }}</span>
                 </div>
             </form>
             <div slot="modal-footer" class="text-right" style="width: 100%;">
