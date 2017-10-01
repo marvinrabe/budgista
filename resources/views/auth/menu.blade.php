@@ -4,7 +4,7 @@
         <span class="fa fa-ellipsis-v"></span>
     </a>
 
-    <div class="dropdown-menu" role="menu" aria-labelledby="user-menu">
+    <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="user-menu">
         <div class="dropdown-static">
             <strong>{{ Auth::user()->name }}</strong><br>
             <span class="text-muted">{{ Auth::user()->email }}</span>
