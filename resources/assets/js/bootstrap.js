@@ -10,7 +10,8 @@ try {
     window.$ = window.jQuery = require('jquery');
     window.Popper = require('popper.js').default;
     require('bootstrap');
-} catch (e) {}
+} catch (e) {
+}
 
 require('./pace.min');
 
@@ -23,6 +24,32 @@ require('./pace.min');
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+/**
+ * Add interceptors to axios for pace indicator.
+ */
+
+// Add a request interceptor
+window.axios.interceptors.request.use(function (config) {
+// Do something before request is sent
+    $('.pace').show();
+    return config;
+}, function (error) {
+    $('.pace').show();
+// Do something with request error
+    return Promise.reject(error);
+});
+
+// Add a response interceptor
+window.axios.interceptors.response.use(function (response) {
+// Do something with response data
+    $('.pace').hide();
+    return response;
+}, function (error) {
+// Do something with response error
+    $('.pace').hide();
+    return Promise.reject(error);
+});
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
