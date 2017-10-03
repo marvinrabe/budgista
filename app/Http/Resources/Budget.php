@@ -20,4 +20,17 @@ class Budget extends Resource
             'currency' => $this->currency
         ];
     }
+
+    /**
+     * Get additional data that should be returned with the resource array.
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function with($request)
+    {
+        return [
+            'categories' => Category::collection($this->categories()->get()),
+        ];
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Forecast;
 use Illuminate\Http\Resources\Json\Resource;
 
 class Category extends Resource
@@ -16,7 +17,8 @@ class Category extends Resource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name
+            'name' => $this->name,
+            'forecast' => Forecast::forCategory($this->id)
         ];
     }
 }
