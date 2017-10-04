@@ -1,6 +1,7 @@
 
 .transactions {
   box-sizing: border-box;
+  position: relative;
 
   &-header,
   &-row {
@@ -19,6 +20,9 @@
     border-bottom: 1px solid $gray-200;
     font-size: 80%;
     text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    background: #fff;
   }
 
   &-row {
