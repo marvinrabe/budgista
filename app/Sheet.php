@@ -39,14 +39,21 @@ class Sheet implements JsonSerializable
 
     public function getPreviousMonthAvailable()
     {
-        $budgeted = CategoryBudget::inBudget($this->budget)->where('month', '<', (string) $this->month)->sum('amount');
-        $funds = $this->budget->transactions()->where('date', '<=', $this->month->previous()->lastDay())->whereNull('category_id')->sum('amount');
+        $budgeted = CategoryBudget::inBudget($this->budget)->where('month', '<', (string)$this->month)->sum('amount');
+        $funds = 0;
+        foreach ($this->budget->accounts as $account) {
+            $funds += $account->transactions()->where('date', '<=', $this->month->previous()->lastDay())->whereNull('category_id')->sum('amount');
+        }
         return $funds - $budgeted;
     }
 
     public function getFunds()
     {
-        return $this->budget->transactions()->whereBetween('date', [$this->month->previous()->lastDay(), $this->month->lastDay()])->whereNull('category_id')->sum('amount');
+        $sum = 0;
+        foreach ($this->budget->accounts as $account) {
+            $sum += $account->transactions()->whereBetween('date', [$this->month->previous()->lastDay(), $this->month->lastDay()])->whereNull('category_id')->sum('amount');
+        }
+        return $sum;
     }
 
     public function getBudgeted()
@@ -73,11 +80,11 @@ class Sheet implements JsonSerializable
     function jsonSerialize()
     {
         return [
-            'month' => (string) $this->month,
-            'previousMonth' => (double) $this->getPreviousMonthAvailable(),
-            'budgeted' => (double) $this->getBudgeted(),
-            'funds' => (double) $this->getFunds(),
-            'available' => (double) $this->getAvailable(),
+            'month' => (string)$this->month,
+            'previousMonth' => (double)$this->getPreviousMonthAvailable(),
+            'budgeted' => (double)$this->getBudgeted(),
+            'funds' => (double)$this->getFunds(),
+            'available' => (double)$this->getAvailable(),
             'rows' => $this->rows
         ];
     }

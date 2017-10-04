@@ -32,7 +32,6 @@ class TransactionController extends Controller
 
         $transaction = new Transaction();
         $transaction->account_id = $account->id;
-        $transaction->budget_id = $account->budget->id;
 
         $transaction->category_id = null;
         $category_id = Input::get('category_id');

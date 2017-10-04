@@ -72,7 +72,11 @@ class Forecast
 
     protected function calculateFunds()
     {
-        return $this->budget->transactions()->whereBetween('date', [Carbon::now()->firstOfMonth(), Carbon::now()->lastOfMonth()])->whereNull('category_id')->sum('amount');
+        $sum = 0;
+        foreach($this->budget->accounts as $account) {
+            $sum += $account->transactions()->whereBetween('date', [Carbon::now()->firstOfMonth(), Carbon::now()->lastOfMonth()])->whereNull('category_id')->sum('amount');
+        }
+        return $sum;
     }
 
     public function getFunds()

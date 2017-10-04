@@ -19,7 +19,7 @@ class TransactionPolicy
      */
     public function view(User $user, Transaction $transaction)
     {
-        return $user->can('view', $transaction->budget);
+        return $user->can('view', $transaction->account);
     }
 
     /**
@@ -42,7 +42,7 @@ class TransactionPolicy
      */
     public function update(User $user, Transaction $transaction)
     {
-        return $user->can('update', $transaction->budget);
+        return $user->can('update', $transaction->account);
     }
 
     /**
@@ -54,6 +54,6 @@ class TransactionPolicy
      */
     public function delete(User $user, Transaction $transaction)
     {
-        return $user->can('update', $transaction->budget);
+        return $user->can('update', $transaction->account);
     }
 }

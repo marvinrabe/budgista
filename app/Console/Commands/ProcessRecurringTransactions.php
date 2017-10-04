@@ -61,12 +61,12 @@ class ProcessRecurringTransactions extends Command
 
             $transaction->rrule = null;
 
-            DB::transaction(function() use ($transaction, $newTransaction) {
+            DB::transaction(function () use ($transaction, $newTransaction) {
                 $newTransaction->save();
                 $transaction->save();
             });
 
-            $this->info('Transaction: '. $transaction->id);
+            $this->info('Transaction: ' . $transaction->id);
         }
 
         $this->info('Done');

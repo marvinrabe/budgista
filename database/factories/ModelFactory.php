@@ -39,19 +39,6 @@ $factory->define(\App\Models\Transaction::class, function (Faker\Generator $fake
         'amount' => $faker->randomFloat(2, -100, 100),
         'date' => $faker->dateTimeThisMonth(),
         'account_id' => null,
-        'category_id' => null,
-        'budget_id' => null
-    ];
-});
-
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(\App\Models\Transaction::class, function (Faker\Generator $faker) {
-    return [
-        'payee' => $faker->company,
-        'amount' => $faker->randomFloat(2, -100, 100),
-        'date' => $faker->dateTimeThisYear(),
-        'account_id' => null,
-        'category_id' => null,
-        'budget_id' => null
+        'category_id' => null
     ];
 });

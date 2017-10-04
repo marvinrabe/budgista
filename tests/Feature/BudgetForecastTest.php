@@ -45,15 +45,13 @@ class BudgetForecastTest extends TestCase
             'amount' => -10,
             'date' => Carbon::now()->subMonths(1),
             'category_id' => $firstCategory->id,
-            'account_id' => $account->id,
-            'budget_id' => $budget->id
+            'account_id' => $account->id
         ]);
 
         factory(Transaction::class)->create([
             'amount' => 100,
             'date' => Carbon::now(),
-            'account_id' => $account->id,
-            'budget_id' => $budget->id
+            'account_id' => $account->id
         ]);
 
         // Authentication for API
@@ -80,8 +78,7 @@ class BudgetForecastTest extends TestCase
             'amount' => -10,
             'date' => Carbon::now()->subMonths(1),
             'category_id' => $secondCategory->id,
-            'account_id' => $account->id,
-            'budget_id' => $budget->id
+            'account_id' => $account->id
         ]);
 
         // 100€ is split between categories
@@ -107,8 +104,7 @@ class BudgetForecastTest extends TestCase
             'amount' => -10,
             'date' => Carbon::now()->subMonths(1),
             'category_id' => $secondCategory->id,
-            'account_id' => $account->id,
-            'budget_id' => $budget->id
+            'account_id' => $account->id
         ]);
 
         // 100€ is split between categories and most will go to second category
@@ -134,8 +130,7 @@ class BudgetForecastTest extends TestCase
             'amount' => -10,
             'date' => Carbon::now()->subMonths(2),
             'category_id' => $secondCategory->id,
-            'account_id' => $account->id,
-            'budget_id' => $budget->id
+            'account_id' => $account->id
         ]);
 
         // Check splitting

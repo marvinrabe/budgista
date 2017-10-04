@@ -3,17 +3,16 @@
 namespace App\Models;
 
 use Alsofronie\Uuid\UuidModelTrait;
-use App\Models\Traits\BudgetTrait;
 use Illuminate\Database\Eloquent\Model;
 use RRule\RRule;
 
 class Transaction extends Model
 {
 
-    use UuidModelTrait, BudgetTrait;
+    use UuidModelTrait;
 
     protected $fillable = [
-        'date', 'budget_id', 'account_id', 'payee', 'amount'
+        'date', 'category_id', 'account_id', 'payee', 'amount'
     ];
 
     protected $dates = ['date'];

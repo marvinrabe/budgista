@@ -37,11 +37,6 @@ class Budget extends Model
         return $this->hasMany('App\Models\Category');
     }
 
-    public function transactions()
-    {
-        return $this->hasMany('App\Models\Transaction');
-    }
-
     public function month(Month $month)
     {
         return new Sheet($this, $month);
