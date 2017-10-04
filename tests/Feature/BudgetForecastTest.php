@@ -9,7 +9,6 @@ use App\Models\Transaction;
 use App\Models\User;
 use App\UserOnboarding;
 use Carbon\Carbon;
-use Laravel\Passport\Passport;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -19,16 +18,8 @@ class BudgetForecastTest extends TestCase
 
     public function testApplication()
     {
-        /** Create User
-         * @var User $user
-         */
-        $user = factory(User::class)->create();
-
-        // Authentication for API
-        Passport::actingAs($user);
-
-        // Create Basic Structure
-        UserOnboarding::for ($user);
+        // Sign in User
+        $user = $this->signIn();
 
         /** @var Budget $budget */
         $budget = $user->budgets()->first();
