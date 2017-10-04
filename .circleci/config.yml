@@ -6,10 +6,6 @@ jobs:
 
     docker:
       - image: circleci/php:7.1-cli
-        environment:
-          APP_ENV=testing
-          DB_DATABASE=circle_test
-          DB_USERNAME=root
 
       - image: circleci/mysql:5.7
 
@@ -24,6 +20,8 @@ jobs:
       - run:
           name: Install PHP Extensions
           command: sudo docker-php-ext-install bcmath calendar intl pdo_mysql
+
+      - run: cp ./.env.testing ./.env
 
       # Download and cache dependencies
       - restore_cache:
