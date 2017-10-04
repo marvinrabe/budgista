@@ -1,10 +1,14 @@
-# Budget
+<div style="float: right;">
+[![CircleCI](https://circleci.com/bb/marvinrabe/budgista/tree/develop.svg?style=svg&circle-token=fe9198d5d2b9a92602ea1ea275d2b1dfe5397d4f)](https://circleci.com/bb/marvinrabe/budgista/tree/develop)
+</div>
 
-## Local Development Environment
+# Budgista
 
-Setup local environment with Valet: https://laravel.com/docs/5.4/valet
+## Local Development
 
-### PhpStorm
+Setup local environment with Valet: https://laravel.com/docs/5.5/valet
+
+## PhpStorm
 
 ### The Laravel IDE Helper
 
