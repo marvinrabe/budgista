@@ -97,17 +97,12 @@ class BudgetController extends Controller
         return redirect()->route('budgets.index');
     }
 
-    public function delete(Budget $budget)
+    public function destroy(Budget $budget)
     {
-        // Remove as active budget.
-        if (Auth::user()->active_budget_id == $budget->id) {
-            Auth::user()->active_budget_id = null;
-            Auth::user()->save();
-        }
-
         $budget->delete();
 
         Session::flash('message', 'Successfully deleted the budget!');
+
         return redirect()->route('budgets.index');
     }
 

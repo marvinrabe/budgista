@@ -34,4 +34,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Budget');
     }
 
+    public function activeBudget()
+    {
+        return $this->belongsTo('App\Models\Budget');
+    }
+
 }
