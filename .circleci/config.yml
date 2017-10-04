@@ -11,7 +11,7 @@ jobs:
           DB_DATABASE=circle_test
           DB_USERNAME=root
 
-      - image: circleci/mysql:9.4
+      - image: circleci/mysql:5.7
 
     steps:
 
