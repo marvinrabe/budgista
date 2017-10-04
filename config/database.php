@@ -1,9 +1,9 @@
 <?php
 
-$herokuDatabaseURL = ['host' => null, 'database' => null, 'user' => null, 'pass' => null];
-$databaseUrl = parse_url(getenv("DATABASE_URL"));
-if($databaseUrl !== false) {
-    $herokuDatabaseURL = array_merge ($herokuDatabaseURL, $databaseUrl);
+$databaseURL = ['host' => null, 'database' => null, 'user' => null, 'pass' => null];
+$rawDatabaseUrl = parse_url(getenv("DATABASE_URL"));
+if($rawDatabaseUrl !== false) {
+    $databaseURL = array_merge ($databaseURL, $rawDatabaseUrl);
 }
 
 return [
@@ -60,48 +60,13 @@ return [
             'engine' => null,
         ],
 
-        'pgsql' => [
-            'driver' => 'pgsql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'schema' => 'public',
-            'sslmode' => 'prefer',
-        ],
-
-        'sqlsrv' => [
-            'driver' => 'sqlsrv',
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-        ],
-
-        'heroku-pgsql' => [
-            'driver'   => 'pgsql',
-            'host'     => $herokuDatabaseURL['host'],
-            'database' => substr($herokuDatabaseURL['path'], 1),
-            'username' => $herokuDatabaseURL['user'],
-            'password' => $herokuDatabaseURL['pass'],
-            'charset'  => 'utf8',
-            'prefix'   => '',
-            'schema'   => 'public',
-        ],
-
         'dokku-mysql' => [
             'driver' => 'mysql',
-            'host' => $herokuDatabaseURL['host'],
+            'host' => $databaseURL['host'],
             'port' => '3306',
-            'database' => substr($herokuDatabaseURL['path'], 1),
-            'username' => $herokuDatabaseURL['user'],
-            'password' => $herokuDatabaseURL['pass'],
+            'database' => substr($databaseURL['path'], 1),
+            'username' => $databaseURL['user'],
+            'password' => $databaseURL['pass'],
             'unix_socket' => '',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

@@ -1,0 +1,41 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/repo
+
+    docker:
+      - image: circleci/php:7.1.5-browsers
+        environment:
+          APP_ENV=testing
+          DB_DATABASE=circle_test
+          DB_USERNAME=root
+
+      - image: circleci/mysql:9.4
+
+    steps:
+
+      - checkout
+
+      - run:
+          name: Setup Environment
+          command: |
+            php artisan key:generate
+            php artisan passport:keys
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "composer.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: composer install -n --prefer-dist
+
+      - save_cache:
+          paths:
+            - ./vendor
+          key: v1-dependencies-{{ checksum "composer.json" }}
+
+      # run tests!
+      - run: phpunit
