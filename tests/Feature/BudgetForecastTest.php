@@ -20,27 +20,28 @@ class BudgetForecastTest extends TestCase
     public function testApplication()
     {
         /** Create User
-         * @var User $adam
+         * @var User $user
          */
-        $adam = factory(User::class)->create();
-        $eve = factory(User::class)->create();
+        $user = factory(User::class)->create();
+
+        // Authentication for API
+        Passport::actingAs($user);
 
         // Create Basic Structure
-        UserOnboarding::for ($adam);
-
-        // Create Transactions
+        UserOnboarding::for ($user);
 
         /** @var Budget $budget */
-        $budget = $adam->budgets()->first();
+        $budget = $user->budgets()->first();
 
         /** @var Account $account */
         $account = $budget->accounts()->first();
 
         /** @var Category[] $categories */
         $categories = $budget->categories;
-
         $firstCategory = $categories[0];
+        $secondCategory = $categories[1];
 
+        // Create transactions
         factory(Transaction::class, 5)->create([
             'amount' => -10,
             'date' => Carbon::now()->subMonths(1),
@@ -53,9 +54,6 @@ class BudgetForecastTest extends TestCase
             'date' => Carbon::now(),
             'account_id' => $account->id
         ]);
-
-        // Authentication for API
-        Passport::actingAs($adam);
 
         // Everything goes to first Category.
         $response = $this->json('GET', '/api/budgets/' . $budget->id);
@@ -72,8 +70,6 @@ class BudgetForecastTest extends TestCase
             ]);
 
         // Add Transactions to second category
-        $secondCategory = $categories[1];
-
         factory(Transaction::class, 5)->create([
             'amount' => -10,
             'date' => Carbon::now()->subMonths(1),
@@ -142,15 +138,14 @@ class BudgetForecastTest extends TestCase
                 'categories' => [
                     [
                         'id' => $firstCategory->id,
-                        'forecast' => round(5*(100/15), 2)
+                        'forecast' => round(5 * (100 / 15), 2)
                     ],
                     [
                         'id' => $secondCategory->id,
-                        'forecast' => round(10*(100/15), 2)
+                        'forecast' => round(10 * (100 / 15), 2)
                     ]
                 ]
             ]);
 
-        $this->assertTrue(true);
     }
 }
