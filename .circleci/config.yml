@@ -17,12 +17,6 @@ jobs:
 
       - checkout
 
-      - run:
-          name: Setup Environment
-          command: |
-            php artisan key:generate
-            php artisan passport:keys
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -36,6 +30,12 @@ jobs:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
+
+      - run:
+          name: Setup Environment
+          command: |
+            php artisan key:generate
+            php artisan passport:keys
 
       # run tests!
       - run: phpunit
