@@ -17,6 +17,10 @@ jobs:
 
       - checkout
 
+      - run:
+          name: Install PHP Extensions
+          command: sudo docker-php-ext-install bcmath calendar intl
+
       # Download and cache dependencies
       - restore_cache:
           keys:
