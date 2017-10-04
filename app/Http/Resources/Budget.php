@@ -31,6 +31,7 @@ class Budget extends Resource
     {
         return [
             'categories' => Category::collection($this->categories()->get()),
+            'accounts' => Account::collection($this->accounts()->get())
         ];
     }
 }
