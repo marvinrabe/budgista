@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
 use App\Models\Budget;
-use App\Models\Category;
-use App\Month;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
@@ -35,10 +31,11 @@ class BudgetController extends Controller
 
     public function store()
     {
-        $rules = array(
+        $rules = [
             'name' => 'required',
             'currency' => 'required'
-        );
+        ];
+
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
             return redirect()
@@ -47,11 +44,11 @@ class BudgetController extends Controller
                 ->withInput(Input::all());
         }
 
-        $budget = new Budget;
-        $budget->name = Input::get('name');
-        $budget->currency = Input::get('currency');
-        $budget->user_id = Auth::user()->id;
-        $budget->save();
+        $budget = Budget::make(request([
+            'name', 'currency'
+        ]));
+
+        Auth::user()->budgets()->save($budget);
 
         // redirect
         Session::flash('message', 'Successfully created budget!');
@@ -63,16 +60,14 @@ class BudgetController extends Controller
         $budget->updated_at = Carbon::now();
         $budget->save(['timestamps' => FALSE]);
 
-        Auth::user()->active_budget_id = $budget->id;
-        Auth::user()->save();
+        Auth::user()->activeBudget()->associate($budget)->save();
 
-        return View::make('budgets.show')->with('budget', $budget);
+        return view('budgets.show')->with(compact('budget'));
     }
 
     public function edit(Budget $budget)
     {
-        return View::make('budgets.edit')
-            ->with('budget', $budget);
+        return view('budgets.edit')->with(compact('budget'));
     }
 
     public function update(Budget $budget)
@@ -89,12 +84,13 @@ class BudgetController extends Controller
                 ->withInput(Input::all());
         }
 
-        $budget->name = Input::get('name');
-        $budget->currency = Input::get('currency');
+        $budget->name = request('name');
+        $budget->currency = request('currency');
         $budget->save();
 
         Session::flash('message', 'Successfully updated budget!');
-        return redirect()->route('budgets.index');
+
+        return back();
     }
 
     public function destroy(Budget $budget)
