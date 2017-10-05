@@ -13,6 +13,10 @@ class Budget extends Model
 
     use UuidModelTrait;
 
+    protected $fillable = [
+        'name', 'currency'
+    ];
+
     protected static function boot()
     {
         parent::boot();

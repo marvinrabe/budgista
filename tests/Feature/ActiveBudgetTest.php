@@ -2,9 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\Budget;
-use App\Models\User;
-use App\UserOnboarding;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

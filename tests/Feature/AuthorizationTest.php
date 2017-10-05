@@ -8,7 +8,6 @@ use Laravel\Passport\Passport;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-
 class AuthorizationTest extends TestCase
 {
     use RefreshDatabase;
