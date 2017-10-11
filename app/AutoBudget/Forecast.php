@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\AutoBudget;
 
 use App\Models\Budget;
 use App\Models\Category;

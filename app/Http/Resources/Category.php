@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Forecast;
+use App\AutoBudget\Forecast;
 use Illuminate\Http\Resources\Json\Resource;
 
 class Category extends Resource
