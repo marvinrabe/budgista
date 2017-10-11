@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Alsofronie\Uuid\UuidModelTrait;
-use App\Forecast;
+use App\AutoBudget\Forecast;
 use App\Models\Traits\BudgetTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

@@ -1,7 +1,6 @@
 <?php
 
-namespace App;
-
+namespace App\AutoBudget;
 
 use App\Models\Transaction;
 use Carbon;
