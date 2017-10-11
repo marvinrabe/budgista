@@ -6,7 +6,7 @@ use App\Models\Budget;
 use App\Models\Category;
 use Carbon\Carbon;
 
-class Forecast
+class AutoBudget
 {
 
     /**

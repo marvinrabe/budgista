@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\AutoBudget\Forecast;
+use App\AutoBudget\AutoBudget;
 use Illuminate\Http\Resources\Json\Resource;
 
 class Category extends Resource
@@ -18,7 +18,7 @@ class Category extends Resource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'forecast' => Forecast::forCategory($this->id)
+            'forecast' => AutoBudget::forCategory($this->id)
         ];
     }
 }
