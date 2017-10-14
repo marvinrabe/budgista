@@ -45,7 +45,7 @@ class AccountController extends Controller
     {
         $this->authorize('view', $account);
 
-        return TransactionResource::collection($account->transactions()->orderBy('date', 'desc')->paginate(25));
+        return TransactionResource::collection($account->transactions()->with(['category', 'account'])->orderBy('date', 'desc')->paginate(25));
     }
 
     public function update(Request $request, Account $account)
