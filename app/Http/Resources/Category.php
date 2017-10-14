@@ -17,8 +17,7 @@ class Category extends Resource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'forecast' => AutoBudget::forCategory($this->id)
+            'name' => $this->name
         ];
     }
 }
