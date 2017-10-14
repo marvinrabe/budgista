@@ -14,7 +14,7 @@ class UserOnboarding
     {
         $budget = new Budget();
         $budget->name = 'My Budget';
-        $budget->user_id = $user->id;
+        $budget->user()->associate($user);
         $budget->save();
 
         $accounts = [
@@ -24,20 +24,25 @@ class UserOnboarding
         foreach($accounts as $accountName) {
             $account = new Account();
             $account->name = $accountName;
-            $account->budget_id = $budget->id;
+            $account->budget()->associate($budget);
             $account->save();
         }
 
         $categories = [
-            'Groceries', 'Restaurants', 'Utilities', 'Rent', 'Hobbies'
+            'Rent',  'Water & Electricity', 'Internet, Cable & Telephone', 'Car & Public Transport', 'Groceries', 'Restaurants', 'Education', 'Entertainment', 'Subscriptions', 'Emergency Fund', 'Retirement Savings'
         ];
+
+        $i = 0;
 
         foreach($categories as $categoryName) {
             $category = new Category();
             $category->name = $categoryName;
-            $category->budget_id = $budget->id;
+            $category->budget()->associate($budget);
+            $category->sort = $i++;
             $category->save();
         }
+
+        $user->activeBudget()->associate($budget)->save();
     }
 
 }
