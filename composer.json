@@ -15,7 +15,6 @@
         "laravel/framework": "5.5.*",
         "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.5.0",
         "propaganistas/laravel-intl": "^1.2",
         "rlanvin/php-rrule": "1.*",
         "sentry/sentry": "^1.7",
