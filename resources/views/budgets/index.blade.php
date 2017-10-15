@@ -18,10 +18,6 @@
                             <a class="btn btn-primary" href="{{ route('budgets.show', ['id' => $budget->id])  }}">
                                 {{ __('Open Budget') }}
                             </a>
-                            <a class="btn btn-light" href="{{  route('budgets.edit', ['id' => $budget->id]) }}"
-                               title="{{ __('Budget Settings') }}">
-                                <span class="fa fa-cog"></span>
-                            </a>
                         </div>
                     </div>
                 </div>
