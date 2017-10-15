@@ -9,7 +9,7 @@ use Alsofronie\Uuid\UuidModelTrait;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, UuidModelTrait, Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
