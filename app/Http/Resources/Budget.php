@@ -16,8 +16,7 @@ class Budget extends Resource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'currency' => $this->currency
+            'name' => $this->name
         ];
     }
 

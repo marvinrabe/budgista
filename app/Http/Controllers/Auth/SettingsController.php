@@ -23,9 +23,10 @@ class SettingsController
 
         $rules = array(
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
+            'email' => 'required|string|email|max:191|unique:users,email,' . $user->id,
             'password' => 'nullable|string|confirmed|min:6',
-            'locale' => 'required'
+            'locale' => 'required',
+            'currency' => 'required'
         );
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
@@ -43,6 +44,7 @@ class SettingsController
         }
 
         $user->locale = Input::get('locale');
+        $user->currency = Input::get('currency');
         $user->save();
 
         Session::flash('success', trans('Account settings saved.'));

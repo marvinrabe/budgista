@@ -34,41 +34,4 @@ class BudgetController extends Controller
         return view('budgets.show')->with(compact('budget'));
     }
 
-    public function edit(Budget $budget)
-    {
-        return view('budgets.edit')->with(compact('budget'));
-    }
-
-    public function update(Budget $budget)
-    {
-        $rules = array(
-            'name' => 'required',
-            'currency' => 'required'
-        );
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            return redirect()
-                ->route('budgets.edit', [$budget->id])
-                ->withErrors($validator)
-                ->withInput(Input::all());
-        }
-
-        $budget->name = request('name');
-        $budget->currency = request('currency');
-        $budget->save();
-
-        Session::flash('message', 'Successfully updated budget!');
-
-        return back();
-    }
-
-    public function destroy(Budget $budget)
-    {
-        $budget->delete();
-
-        Session::flash('message', 'Successfully deleted the budget!');
-
-        return redirect()->route('budgets.index');
-    }
-
 }

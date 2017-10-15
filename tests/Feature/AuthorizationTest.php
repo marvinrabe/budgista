@@ -14,7 +14,6 @@ class AuthorizationTest extends TestCase
 
     private function getRoutes() {
         return [
-            '/budgets/%s/edit',
             '/api/budgets/%s/month/',
             '/api/budgets/%s/month/2017-09',
             '/api/budgets/%s/accounts',
