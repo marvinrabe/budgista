@@ -24,37 +24,6 @@ class BudgetController extends Controller
             ->with('budgets', Auth::user()->budgets);
     }
 
-    public function create()
-    {
-        return View::make('budgets.create');
-    }
-
-    public function store()
-    {
-        $rules = [
-            'name' => 'required',
-            'currency' => 'required'
-        ];
-
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            return redirect()
-                ->route('budgets.create')
-                ->withErrors($validator)
-                ->withInput(Input::all());
-        }
-
-        $budget = Budget::make(request([
-            'name', 'currency'
-        ]));
-
-        Auth::user()->budgets()->save($budget);
-
-        // redirect
-        Session::flash('message', 'Successfully created budget!');
-        return redirect()->route('budgets.index');
-    }
-
     public function show(Budget $budget)
     {
         $budget->updated_at = Carbon::now();

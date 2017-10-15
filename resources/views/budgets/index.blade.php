@@ -27,14 +27,6 @@
                 </div>
             </div>
         @endforeach
-        <div class="col-sm-6 col-lg-4 mb-4">
-            <a class="card card-placeholder text-center" href="{{ route('budgets.create') }}">
-                <div class="card-body">
-                    <span class="fa fa-5x fa-plus-circle mb-2"></span>
-                    <h4 class="card-title mb-0">{{ __('Create New Budget') }}</h4>
-                </div>
-            </a>
-        </div>
     </div>
 
 @endsection
