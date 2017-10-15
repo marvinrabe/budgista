@@ -41,8 +41,8 @@
 </div>
 
 <script>
-    @if(isset($budget))
-    window.currency = '{{ $budget->currency }}';
+    @if(Auth::check())
+    window.currency = '{{ Auth::user()->currency }}';
     @endif
     window.locale = '{{ config('app.locale') }}';
 </script>

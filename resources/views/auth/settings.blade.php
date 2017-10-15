@@ -40,6 +40,15 @@
             </select>
         </div>
 
+        <div class="form-group">
+            <label for="locale">{{ trans('Currency') }}</label>
+            <select id="currency" name="currency" class="form-control">
+                @foreach(Currency::all() as $key => $name)
+                    <option value="{{ $key }}" {{ ($key == $user->currency)?'selected':'' }}>{{ $name }}</option>
+                @endforeach
+            </select>
+        </div>
+
         <button class="btn btn-primary">{{ __('Save') }}</button>
 
     </form>
