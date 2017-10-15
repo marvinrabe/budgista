@@ -24,6 +24,13 @@
   background-color: $gray-50;
 }
 
+.card-body-secondary {
+  background: $gray-100;
+  border-top: 1px solid $gray-300;
+  color: $gray-500;
+}
+
+
 .col-flex,
 .col-flex-1 {
   flex: 1;
@@ -113,8 +120,24 @@ a.text-muted:hover {
 
 .layout-auth {
 
-  background: $gray-100;
-  padding-top: 1rem;
+  background: theme-color('primary');
+  padding-top: 0;
+
+  .card-title {
+    font-size: 2em;
+    color: theme-color('primary');
+    text-align: center;
+    font-weight: 200;
+  }
+
+  .cover {
+    padding-top: 25px;
+    padding-bottom: 20px;
+  }
+
+  .card{
+    @extend .shadow-1;
+  }
 
 }
 

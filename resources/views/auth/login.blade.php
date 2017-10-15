@@ -1,61 +1,73 @@
 @extends('layouts.auth')
 
-@section('content')
+@section('card')
+    <div class="card border-light">
+        <div class="card-body">
 
-    <h4 class="card-title">{{ __('Login') }}</h4>
+            <h1 class="card-title">{{ __('Login') }}</h1>
 
-    <form method="POST" action="{{ route('login') }}">
-        {{ csrf_field() }}
+            <form method="POST" action="{{ route('login') }}">
+                {{ csrf_field() }}
 
-        <div class="form-group">
-            <label for="email" class="control-label">{{ __('E-Mail Address') }}</label>
+                <div class="form-group">
+                    <label for="email" class="control-label">{{ __('E-Mail Address') }}</label>
 
-            <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'border-danger' : '' }}" name="email" value="{{ old('email') }}" required
-                   autofocus>
+                    <input id="email" type="email"
+                           class="form-control {{ $errors->has('email') ? 'border-danger' : '' }}" name="email"
+                           value="{{ old('email') }}" required
+                           autofocus>
 
-            @if ($errors->has('email'))
-                <div class="form-text text-danger">
-                    {{ $errors->first('email') }}
+                    @if ($errors->has('email'))
+                        <div class="form-text text-danger">
+                            {{ $errors->first('email') }}
+                        </div>
+                    @endif
                 </div>
-            @endif
-        </div>
 
-        <div class="form-group">
-            <label for="password" class="control-label">{{ __('Password') }}</label>
+                <div class="form-group">
+                    <label for="password" class="control-label">{{ __('Password') }}</label>
 
-            <input id="password" type="password" class="form-control {{ $errors->has('password') ? 'border-danger' : '' }}" name="password" required>
+                    <input id="password" type="password"
+                           class="form-control {{ $errors->has('password') ? 'border-danger' : '' }}" name="password"
+                           required>
 
-            @if ($errors->has('password'))
-                <div class="form-text text-danger">
-                    {{ $errors->first('password') }}
+                    @if ($errors->has('password'))
+                        <div class="form-text text-danger">
+                            {{ $errors->first('password') }}
+                        </div>
+                    @endif
                 </div>
-            @endif
+
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                            {{ __('Remember Me') }}
+                        </label>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-block">
+                    {{ __('Login') }}
+                </button>
+            </form>
+
         </div>
 
-        <div class="form-group">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                    {{ __('Remember Me') }}
-                </label>
-            </div>
-        </div>
+        <div class="card-body card-body-secondary text-center">
 
-        <div class="form-group">
-            <button class="btn btn-primary">
-                {{ __('Login') }}
-            </button>
-
-            <a class="btn btn-link" href="{{ route('password.request') }}">
-                {{ __('Forgot Your Password?') }}
+            {{ __('Don\'t have an account?') }}
+            <a href="{{ route('register') }}">
+                {{ __('Sign up now.') }}
             </a>
+
         </div>
-    </form>
+    </div>
 
-    <hr>
+    <p class="text-center mt-3">
+        <a class="text-white" href="{{ route('password.request') }}">
+            {{ __('Forgot Your Password?') }}
+        </a>
+    </p>
 
-    {{ __('Don\'t have an account?') }}
-    <a href="{{ route('register') }}">
-        {{ __('Sign up now.') }}
-    </a>
 @endsection

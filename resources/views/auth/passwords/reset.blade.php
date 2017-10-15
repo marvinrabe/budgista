@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h4 class="card-title">{{ __('Reset Password') }}</h4>
+    <h1 class="card-title">{{ __('Reset Password') }}</h1>
 
     @if (session('status'))
         <div class="alert alert-success">
@@ -18,7 +18,8 @@
         <div class="form-group">
             <label for="email" class="control-label">{{ __('E-Mail Address') }}</label>
 
-            <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'border-danger' : '' }}" name="email"
+            <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'border-danger' : '' }}"
+                   name="email"
                    value="{{ $email or old('email') }}" required autofocus>
 
             @if ($errors->has('email'))
@@ -31,7 +32,8 @@
         <div class="form-group">
             <label for="password" class="control-label">{{ __('Password') }}</label>
 
-            <input id="password" type="password" class="form-control {{ $errors->has('password') ? 'border-danger' : '' }}" name="password" required>
+            <input id="password" type="password"
+                   class="form-control {{ $errors->has('password') ? 'border-danger' : '' }}" name="password" required>
 
             @if ($errors->has('password'))
                 <div class="form-text text-danger">
@@ -43,7 +45,8 @@
         <div class="form-group">
             <label for="password-confirm" class="control-label">{{ __('Confirm Password') }}</label>
 
-            <input id="password-confirm" type="password" class="form-control {{ $errors->has('password_confirmation') ? 'border-danger' : '' }}"
+            <input id="password-confirm" type="password"
+                   class="form-control {{ $errors->has('password_confirmation') ? 'border-danger' : '' }}"
                    name="password_confirmation" required>
 
             @if ($errors->has('password_confirmation'))
@@ -53,11 +56,10 @@
             @endif
         </div>
 
-        <div class="form-group">
-            <button class="btn btn-primary">
-                {{ __('Reset Password') }}
-            </button>
-        </div>
+        <button class="btn btn-primary btn-block">
+            {{ __('Reset Password') }}
+        </button>
+
     </form>
 
 @endsection
