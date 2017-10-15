@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h4 class="card-title">{{ __('Register') }}</h4>
+    <h1 class="card-title">{{ __('Sign up') }}</h1>
 
     <form method="POST" action="{{ route('register') }}" class="{{ $errors->any()?'was-validated':'' }}">
         {{ csrf_field() }}
@@ -49,11 +49,9 @@
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
         </div>
 
-        <div class="form-group">
-            <button class="btn btn-primary">
-                {{ __('Register') }}
-            </button>
-        </div>
+        <button class="btn btn-primary btn-block">
+            {{ __('Sign up') }}
+        </button>
     </form>
 
 @endsection

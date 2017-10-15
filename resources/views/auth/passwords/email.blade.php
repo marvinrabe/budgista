@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h4 class="card-title">{{ __('Reset Password') }}</h4>
+    <h1 class="card-title">{{ __('Reset Password') }}</h1>
 
     @if (session('status'))
         <div class="alert alert-success">
@@ -26,10 +26,9 @@
             @endif
         </div>
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">
-                {{ __('Send Password Reset Link') }}
-            </button>
-        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+            {{ __('Send Password Reset Link') }}
+        </button>
+
     </form>
 @endsection
