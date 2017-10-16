@@ -10,11 +10,10 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
+                    <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">{{ __('Sign up') }}</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
                 @else
-                    @include('auth.menu')
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">{{ __('Go back to App') }}</a></li>
                 @endif
             </ul>
         </div>

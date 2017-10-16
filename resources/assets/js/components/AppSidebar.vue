@@ -17,11 +17,11 @@
 
                         <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="user-menu">
                             <div class="dropdown-static">
-                                <strong>NAME</strong><br>
-                                <span class="text-muted">E-MAIL</span>
+                                <strong>{{ user.name }}</strong><br>
+                                <span class="text-muted">{{ user.email }}</span>
                             </div>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/SETTINGS">
+                            <a class="dropdown-item" href="/settings">
                                 {{ $t('title.settings') }}
                             </a>
                             <a class="dropdown-item" href="#"
@@ -110,7 +110,11 @@
             currency: function () {
                 return window.currency;
             },
+            user () {
+                return this.$store.state.user;
+            },
             ...mapGetters([
+                'sortedAccounts',
                 'sortedAccounts'
             ])
         },
