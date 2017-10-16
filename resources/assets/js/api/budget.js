@@ -1,5 +1,5 @@
 export default {
-    get (budget_id, onSuccess, onError) {
+    get (onSuccess, onError) {
         axios
             .get('/api/budget')
             .then(response => {

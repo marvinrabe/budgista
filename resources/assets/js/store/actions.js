@@ -1,14 +1,13 @@
 import * as types from './mutation-types'
 import budget from '../api/budget'
 
-export const initialize = ({ dispatch, commit }, budget_id) => {
-    dispatch('loadBudget', budget_id);
+export const initialize = ({ dispatch, commit }) => {
+    dispatch('loadBudget');
 };
 
-export const loadBudget = ({ commit }, budget_id) => {
+export const loadBudget = ({ commit }) => {
     return new Promise((resolve, reject) => {
         budget.get(
-            budget_id,
             ({data, accounts, categories}) => {
                 commit(types.LOAD_BUDGET, data);
                 accounts.forEach(account => commit(types.ADD_ACCOUNT, account));
