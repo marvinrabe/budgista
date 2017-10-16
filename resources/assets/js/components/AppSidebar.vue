@@ -24,13 +24,7 @@
                             <a class="dropdown-item" href="/settings">
                                 {{ $t('title.settings') }}
                             </a>
-                            <a class="dropdown-item" href="#"
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                {{ $t('action.logout') }}
-                            </a>
-                            <form id="logout-form" action="/logout" method="POST" class="hidden">
-                                <!-- CSRF -->
-                            </form>
+                            <app-logout></app-logout>
                         </div>
                     </li>
 
@@ -98,8 +92,12 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import AppLogout from './AppLogout.vue'
 
     export default {
+        components: {
+            AppLogout
+        },
         data: () => ({
             newAccount: {
                 name: '',
