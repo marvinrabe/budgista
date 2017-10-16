@@ -8,9 +8,8 @@
 
 <script>
     export default {
-        props: ['budgetId'],
         created: function () {
-            this.$store.dispatch('initialize', this.budgetId);
+            this.$store.dispatch('initialize');
         }
     }
 </script>

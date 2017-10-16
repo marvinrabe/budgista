@@ -2,6 +2,6 @@
 
 @section('body')
 
-    <app-layout :budget-id="{{ $budget->id }}"></app-layout>
+    <app-layout></app-layout>
 
 @endsection
