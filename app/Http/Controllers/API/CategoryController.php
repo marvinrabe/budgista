@@ -18,14 +18,23 @@ class CategoryController extends Controller
         $this->authorizeResource(Category::class);
     }
 
+    public function index()
+    {
+        $budget = Auth::user()->activeBudget;
+
+        $this->authorize('view', $budget);
+
+        return CategoryResource::collection($budget->categories()->get());
+    }
+
     public function store(Request $request)
     {
+        $budget = Auth::user()->activeBudget;
+
         $this->validate($request, [
-            'name' => 'required',
-            'budget' => 'required'
+            'name' => 'required'
         ]);
 
-        $budget = Budget::find(Input::get('budget'));
         $this->authorize('update', $budget);
 
         $category = new Category();
@@ -78,6 +87,25 @@ class CategoryController extends Controller
         $categoryBudget->save();
 
         return new Row($category, $month);
+    }
+
+    public function sort(Request $request)
+    {
+        $budget = Auth::user()->activeBudget;
+
+        $this->authorize('update', $budget);
+
+        $this->validate($request, [
+            'categories' => 'required'
+        ]);
+
+        foreach (Input::get('categories') as $key => $category_id) {
+            $category = Category::find($category_id);
+            $category->sort = $key;
+            $category->save();
+        }
+
+        return [];
     }
 
 }

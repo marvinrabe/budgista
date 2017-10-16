@@ -9,10 +9,10 @@ function _sendRequest(request, onSuccess, onError) {
 }
 
 export default {
-    getAll(budget_id, onSuccess, onError) {
+    getAll(onSuccess, onError) {
         _sendRequest({
             method: 'get',
-            url: '/api/budgets/' + budget_id + '/accounts'
+            url: '/api/accounts'
         }, onSuccess, onError);
     },
 

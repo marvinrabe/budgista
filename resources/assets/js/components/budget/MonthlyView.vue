@@ -1,15 +1,10 @@
 <template>
     <div v-if="sheet !== null" class="main">
 
-        <window :title="$formatDate(new Date(sheet.month), { year: 'numeric', month: 'long' })"></window>
+        <app-window :title="$formatDate(new Date(sheet.month), { year: 'numeric', month: 'long' })"></app-window>
 
         <div class="toolbar toolbar-primary">
-            <div class="d-md-none">
-                <button class="col menu-toggle btn" type="button"
-                        aria-controls="menu" :aria-label="$t('action.navigation')">
-                    <span class="fa fa-navicon"></span>
-                </button>
-            </div>
+            <app-sidebar-toggle></app-sidebar-toggle>
 
             <div class="col-flex">
                 <button class="btn btn-outline-dark"
@@ -165,7 +160,6 @@
     import draggable from 'vuedraggable'
 
     export default {
-        props: ['budget_id'],
         components: {
             draggable,
             'category-budget': require('./CategoryBudget.vue')
@@ -201,7 +195,7 @@
         }),
 
         created() {
-            this.loadSheet('/api/budgets/' + this.budget_id + '/month');
+            this.loadSheet('/api/month');
         },
 
         methods: {
@@ -267,8 +261,7 @@
                     if (isValid) {
                         axios
                             .post('/api/categories', {
-                                'name': this.newCategory.name,
-                                'budget': this.budget_id
+                                'name': this.newCategory.name
                             })
                             .then(response => {
                                 this.$store.commit('ADD_CATEGORY', response.data);
@@ -354,7 +347,7 @@
                 }, []);
 
                 axios
-                    .put('/api/budgets/' + this.budget_id + '/sort', {
+                    .put('/api/categories/sort', {
                         'categories': list
                     })
                     .catch(e => {

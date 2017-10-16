@@ -15,21 +15,18 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['auth:api']], function () {
 
-    Route::resource('budgets', 'API\BudgetController', ['only' => [
-        'show'
-    ]]);
-    Route::get('/budgets/{budget}/accounts', 'API\BudgetController@accounts')->name('budgets.accounts');
-    Route::get('/budgets/{budget}/categories', 'API\BudgetController@categories')->name('budgets.categories');
-    Route::get('/budgets/{budget}/month/{month?}', 'API\BudgetController@month')->name('budgets.month');
-    Route::put('/budgets/{budget}/sort', 'API\BudgetController@sort')->name('budgets.sort');
+    Route::get('/budget', 'API\BudgetController@show')->name('budgets.show');
+
+    Route::get('/month/{month?}', 'API\BudgetController@month')->name('budgets.month');
 
     Route::resource('categories', 'API\CategoryController', ['only' => [
-        'store', 'update', 'destroy'
+        'index', 'store', 'update', 'destroy'
     ]]);
+    Route::put('/categories/sort', 'API\CategoryController@sort')->name('categories.sort');
     Route::put('/categories/{category}/budget', 'API\CategoryController@budget')->name('categories.budget');
 
     Route::resource('accounts', 'API\AccountController', ['only' => [
-        'store', 'show', 'update', 'destroy'
+        'index', 'store', 'show', 'update', 'destroy'
     ]]);
     Route::get('/accounts/{account}/transactions', 'API\AccountController@transactions')->name('accounts.transactions');
 

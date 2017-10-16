@@ -20,11 +20,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/settings', 'Auth\SettingsController@get')->name('settings');
     Route::put('/settings', 'Auth\SettingsController@put')->name('settings.store');
 
-    Route::resource('budgets', 'BudgetController');
-
-    Route::group(['prefix' => 'budgets/{budget}', 'middleware' => ['can:view,budget']], function () {
-        Route::get('{any?}', 'BudgetController@show')->where('any', '.*');
-    });
+    Route::get('budget/{any?}', 'BudgetController@show')->where('any', '.*')->name('budget');
 
 });
 

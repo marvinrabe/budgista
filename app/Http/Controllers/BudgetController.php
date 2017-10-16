@@ -13,25 +13,11 @@ use Illuminate\Support\Facades\View;
 class BudgetController extends Controller
 {
 
-    public function __construct()
+    public function show()
     {
-        $this->authorizeResource(Budget::class);
-    }
+        $budget = Auth::user()->activeBudget;
 
-    public function index()
-    {
-        return View::make('budgets.index')
-            ->with('budgets', Auth::user()->budgets);
-    }
-
-    public function show(Budget $budget)
-    {
-        $budget->updated_at = Carbon::now();
-        $budget->save(['timestamps' => FALSE]);
-
-        Auth::user()->activeBudget()->associate($budget)->save();
-
-        return view('budgets.show')->with(compact('budget'));
+        return view('budget')->with(compact('budget'));
     }
 
 }

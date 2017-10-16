@@ -1,14 +1,10 @@
 <template>
     <div class="main">
 
-        <window :title="title"></window>
+        <app-window :title="title"></app-window>
 
         <div class="toolbar toolbar-primary">
-            <div class="d-md-none">
-                <button class="btn" type="button" :aria-label="$t('action.back')" v-on:click="cancel">
-                    <span class="fa fa-arrow-left"></span>
-                </button>
-            </div>
+            <app-sidebar-toggle></app-sidebar-toggle>
 
             <div class="col-flex h2 mb-0">
                 {{ title }}

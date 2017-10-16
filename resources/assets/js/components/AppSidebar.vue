@@ -1,52 +1,71 @@
 <template>
-    <div id="layout">
-        <div class="menu">
-            <div class="app-menu">
+    <div class="menu">
+        <div class="app-menu">
 
-                <nav class="navbar navbar-expand navbar-light">
-                    <a class="navbar-brand logo" href="/">
-                        {{ $t('app.name') }}
-                    </a>
+            <nav class="navbar navbar-expand navbar-light">
+                <a class="navbar-brand logo" href="/">
+                    {{ $t('app.name') }}
+                </a>
 
-                    <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto">
 
-                        <slot></slot>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link" id="user-menu" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false" title="Settings">
+                            <span class="fa fa-ellipsis-v"></span>
+                        </a>
 
-                        <li class="nav-item d-md-none">
-                            <a href="#" class="menu-toggle nav-link">
-                                <span class="fa fa-times"></span>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="user-menu">
+                            <div class="dropdown-static">
+                                <strong>NAME</strong><br>
+                                <span class="text-muted">E-MAIL</span>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/SETTINGS">
+                                {{ $t('title.settings') }}
                             </a>
-                        </li>
-                    </ul>
-                </nav>
+                            <a class="dropdown-item" href="#"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ $t('action.logout') }}
+                            </a>
+                            <form id="logout-form" action="/logout" method="POST" class="hidden">
+                                <!-- CSRF -->
+                            </form>
+                        </div>
+                    </li>
 
-                <nav class="nav flex-column">
-                    <router-link
-                            :to="{ name: 'budget.month', params: { budget: budget_id }}"
-                            active-class="active" :exact="true" class="nav-link-main">
-                        <span class="fa fa-envelope-o fa-fw"></span> {{ $t('title.budget') }}
-                    </router-link>
-                    <h6 class="nav-header">{{ $t('title.accounts') }}</h6>
-                    <router-link
-                            v-for="account in sortedAccounts" :key="account.id"
-                            :to="{ name: 'budget.account', params: { account_id: account.id }}"
-                            active-class="active" class="nav-link-main">
+                    <li class="nav-item d-md-none">
+                        <a href="#" class="menu-toggle nav-link">
+                            <span class="fa fa-times"></span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav class="nav flex-column">
+                <router-link
+                        :to="{ name: 'budget.month' }"
+                        active-class="active" :exact="true" class="nav-link-main">
+                    <span class="fa fa-envelope-o fa-fw"></span> {{ $t('title.budget') }}
+                </router-link>
+                <h6 class="nav-header">{{ $t('title.accounts') }}</h6>
+                <router-link
+                        v-for="account in sortedAccounts" :key="account.id"
+                        :to="{ name: 'budget.account', params: { account_id: account.id }}"
+                        active-class="active" class="nav-link-main">
                         <span
                                 class="float-right mt-1 badge"
                                 :class="[{ 'badge-danger': account.workingBalance < 0 }, { 'badge-success': account.workingBalance >= 0 }]">
                             {{ $formatNumber(account.workingBalance, {style: 'currency', currency: currency}) }}
                         </span>
-                        {{ account.name }}
-                    </router-link>
-                    <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small">
-                        <span class="fa fa-plus"></span> {{ $t('action.new.account') }}
-                    </a>
-                </nav>
+                    {{ account.name }}
+                </router-link>
+                <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small">
+                    <span class="fa fa-plus"></span> {{ $t('action.new.account') }}
+                </a>
+            </nav>
 
-            </div>
         </div>
-
-        <router-view :key="$router.fullPath"></router-view>
 
         <b-modal ref="newAccountModal" :title="$t('action.new.account')">
             <form @submit.stop.prevent="createAccount"
@@ -81,7 +100,6 @@
     import {mapGetters} from 'vuex'
 
     export default {
-        props: ['budget_id'],
         data: () => ({
             newAccount: {
                 name: '',
@@ -95,9 +113,6 @@
             ...mapGetters([
                 'sortedAccounts'
             ])
-        },
-        created: function () {
-            this.$store.dispatch('initialize', this.budget_id);
         },
         methods: {
 

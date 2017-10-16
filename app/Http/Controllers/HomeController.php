@@ -10,13 +10,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $budget = Auth::user()->activeBudget;
-
-        if ($budget === null || Auth::user()->cant('view', $budget)) {
-            return redirect()->route('budgets.index');
-        }
-
-        return redirect()->route('budgets.show', $budget);
+        return redirect()->route('budget');
     }
 
 }

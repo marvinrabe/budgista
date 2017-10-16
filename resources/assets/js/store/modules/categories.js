@@ -24,14 +24,11 @@ const actions = {
 
     loadCategories({commit, rootState}) {
         categories.getAll(
-            rootState.budget.id,
             ({data}) => data.forEach(category => commit(types.ADD_CATEGORY, category))
         )
     },
 
     createCategory({commit, rootState}, category) {
-        category.budget_id = rootState.budget.id;
-
         categories.create(
             category,
             ({data}) => commit(types.ADD_CATEGORY, data)
