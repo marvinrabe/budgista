@@ -1,4 +1,4 @@
-export const LOAD_BUDGET = 'LOAD_BUDGET';
+export const LOAD_USER = 'LOAD_USER';
 export const ADD_ACCOUNT = 'ADD_ACCOUNT';
 export const REMOVE_ACCOUNT = 'REMOVE_ACCOUNT';
 export const ADD_CATEGORY = 'ADD_CATEGORY';

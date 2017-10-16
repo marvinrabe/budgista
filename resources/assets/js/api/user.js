@@ -1,7 +1,7 @@
 export default {
     get (onSuccess, onError) {
         axios
-            .get('/api/')
+            .get('/api/user')
             .then(response => {
                 onSuccess(response.data)
             })

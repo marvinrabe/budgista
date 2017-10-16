@@ -1,15 +1,15 @@
 import * as types from './mutation-types'
-import budget from '../api/budget'
+import user from '../api/user'
 
 export const initialize = ({ dispatch, commit }) => {
-    dispatch('loadBudget');
+    dispatch('loadUser');
 };
 
-export const loadBudget = ({ commit }) => {
+export const loadUser = ({ commit }) => {
     return new Promise((resolve, reject) => {
-        budget.get(
+        user.get(
             ({data, accounts, categories}) => {
-                commit(types.LOAD_BUDGET, data);
+                commit(types.LOAD_USER, data);
                 accounts.forEach(account => commit(types.ADD_ACCOUNT, account));
                 categories.forEach(category => commit(types.ADD_CATEGORY, category));
                 resolve()
