@@ -8,6 +8,7 @@ use App\Http\Resources\Transaction as TransactionResource;
 use App\Models\Account;
 use App\Models\Budget;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
 class AccountController extends Controller
