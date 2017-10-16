@@ -2,14 +2,15 @@
 
 namespace App;
 
-use App\Models\Budget;
+use App\Models\User;
 use App\Models\CategoryBudget;
+use Illuminate\Support\Facades\DB;
 use JsonSerializable;
 
 class Sheet implements JsonSerializable
 {
 
-    protected $budget;
+    protected $user;
     protected $month;
 
     /**
@@ -17,12 +18,12 @@ class Sheet implements JsonSerializable
      */
     protected $rows = [];
 
-    public function __construct(Budget $budget, Month $month)
+    public function __construct(User $user, Month $month)
     {
-        $this->budget = $budget;
+        $this->user = $user;
         $this->month = $month;
 
-        foreach ($budget->categories as $category) {
+        foreach ($user->categories as $category) {
             $this->rows[] = new Row($category, $month);
         }
     }
@@ -39,18 +40,28 @@ class Sheet implements JsonSerializable
 
     public function getPreviousMonthAvailable()
     {
-        $budgeted = CategoryBudget::inBudget($this->budget)->where('month', '<', (string)$this->month)->sum('amount');
+        $budgeted = $this->getCategoryBudgetSum();
         $funds = 0;
-        foreach ($this->budget->accounts as $account) {
+        foreach ($this->user->accounts as $account) {
             $funds += $account->transactions()->where('date', '<=', $this->month->previous()->lastDay())->whereNull('category_id')->sum('amount');
         }
         return $funds - $budgeted;
     }
 
+    private function getCategoryBudgetSum() {
+        return DB::table('category_budgets')
+            ->join('categories', 'categories.id', '=', 'category_budgets.category_id')
+            ->where([
+                ['month', '<', (string)$this->month],
+                ['user_id', '=', $this->user->id]
+            ])
+            ->sum('amount');
+    }
+
     public function getFunds()
     {
         $sum = 0;
-        foreach ($this->budget->accounts as $account) {
+        foreach ($this->user->accounts as $account) {
             $sum += $account->transactions()->whereBetween('date', [$this->month->previous()->lastDay(), $this->month->lastDay()])->whereNull('category_id')->sum('amount');
         }
         return $sum;

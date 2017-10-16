@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Alsofronie\Uuid\UuidModelTrait;
 use App\AutoBudget\AutoBudget;
-use App\Models\Traits\BudgetTrait;
+use App\Models\Traits\UserTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
 
-    use UuidModelTrait, BudgetTrait;
+    use UuidModelTrait, UserTrait;
 
     protected static function boot()
     {
@@ -35,7 +35,6 @@ class Category extends Model
     public function month($month)
     {
         return CategoryBudget::firstOrNew([
-            'budget_id' => $this->budget->id,
             'category_id' => $this->id,
             'month' => $month
         ]);

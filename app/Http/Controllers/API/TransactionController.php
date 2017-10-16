@@ -31,10 +31,9 @@ class TransactionController extends Controller
         $this->authorize('update', $account);
 
         $transaction = new Transaction();
-        $transaction->account_id = $account->id;
 
         $transaction->category_id = null;
-        $category_id = Input::get('category_id');
+        $category_id = request('category_id');
         if(!empty($category_id)) {
             $category = Category::find($category_id);
             $this->authorize('update', $category);
@@ -51,7 +50,7 @@ class TransactionController extends Controller
             $transaction->rrule = null;
         }
 
-        $transaction->save();
+        $account->transactions()->save($transaction);
 
         return new TransactionResource($transaction);
     }

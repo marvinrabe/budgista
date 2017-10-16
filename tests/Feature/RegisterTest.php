@@ -40,13 +40,9 @@ class RegisterTest extends TestCase
 
         $user = User::where('email', 'john.doe@example.com')->first();
 
-        $this->assertNotNull($user);
+        $this->assertGreaterThan(0, $user->categories()->count());
 
-        $this->assertNotNull($user->activeBudget);
-
-        $this->assertGreaterThan(0, $user->activeBudget->categories()->count());
-
-        $this->assertGreaterThan(0, $user->activeBudget->accounts()->count());
+        $this->assertGreaterThan(0, $user->accounts()->count());
 
 
     }

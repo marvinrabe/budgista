@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Month;
+use App\Sheet;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -29,14 +31,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function budgets()
+    public function accounts()
     {
-        return $this->hasMany('App\Models\Budget');
+        return $this->hasMany('App\Models\Account');
     }
 
-    public function activeBudget()
+    public function categories()
     {
-        return $this->belongsTo('App\Models\Budget');
+        return $this->hasMany('App\Models\Category');
+    }
+
+    public function month(Month $month)
+    {
+        return new Sheet($this, $month);
     }
 
 }
