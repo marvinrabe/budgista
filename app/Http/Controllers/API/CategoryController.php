@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Month;
 use App\Row;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
