@@ -18,14 +18,23 @@ class AccountController extends Controller
         $this->authorizeResource(Account::class);
     }
 
+    public function index()
+    {
+        $budget = Auth::user()->activeBudget;
+
+        $this->authorize('view', $budget);
+
+        return AccountResource::collection($budget->accounts()->get());
+    }
+
     public function store(Request $request)
     {
+        $budget = Auth::user()->activeBudget;
+
         $this->validate($request, [
-            'name' => 'required',
-            'budget_id' => 'required'
+            'name' => 'required'
         ]);
 
-        $budget = Budget::find(Input::get('budget_id'));
         $this->authorize('update', $budget);
 
         $account = new Account();

@@ -1,7 +1,7 @@
 export default {
     get (budget_id, onSuccess, onError) {
         axios
-            .get('/api/budgets/' + budget_id)
+            .get('/api/budget')
             .then(response => {
                 onSuccess(response.data)
             })

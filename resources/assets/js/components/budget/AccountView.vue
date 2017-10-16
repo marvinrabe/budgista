@@ -1,15 +1,10 @@
 <template>
     <div v-if="account" class="main">
 
-        <window :title="account.name"></window>
+        <app-window :title="account.name"></app-window>
 
         <div class="toolbar toolbar-primary">
-            <div class="d-md-none">
-                <button class="menu-toggle btn" type="button"
-                        aria-controls="menu" :aria-label="$t('action.navigation')">
-                    <span class="fa fa-navicon"></span>
-                </button>
-            </div>
+            <app-sidebar-toggle></app-sidebar-toggle>
 
             <div class="col-flex h2 mb-0 hide-text-overflow">
                 {{ account.name }}

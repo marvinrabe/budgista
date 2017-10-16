@@ -8,37 +8,23 @@ use App\Http\Resources\Budget as BudgetResource;
 use App\Http\Resources\Category as CategoryResource;
 use App\Models\Budget;
 use App\Month;
+use Auth;
 use Illuminate\Http\Request;
 
 class BudgetController extends Controller
 {
 
-    public function __construct()
+    public function show()
     {
-        $this->authorizeResource(Budget::class);
-    }
+        $budget = Auth::user()->activeBudget;
 
-    public function show(Budget $budget)
-    {
         return new BudgetResource($budget);
     }
 
-    public function accounts(Budget $budget)
+    public function month($month = null)
     {
-        $this->authorize('view', $budget);
+        $budget = Auth::user()->activeBudget;
 
-        return AccountResource::collection($budget->accounts()->get());
-    }
-
-    public function categories(Budget $budget)
-    {
-        $this->authorize('view', $budget);
-
-        return CategoryResource::collection($budget->categories()->get());
-    }
-
-    public function month(Budget $budget, $month = null)
-    {
         $this->authorize('view', $budget);
 
         $month = $this->getMonth($month);
@@ -63,23 +49,6 @@ class BudgetController extends Controller
         } catch (\InvalidArgumentException $exception) {
             abort(404);
         }
-    }
-
-    public function sort(Request $request, Budget $budget)
-    {
-        $this->authorize('update', $budget);
-
-        $this->validate($request, [
-            'categories' => 'required'
-        ]);
-
-        foreach(Input::get('categories') as $key => $category_id) {
-            $category = Category::find($category_id);
-            $category->sort = $key;
-            $category->save();
-        }
-
-        return [];
     }
 
 }

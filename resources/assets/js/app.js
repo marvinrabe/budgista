@@ -17,6 +17,7 @@ window.Vue = require('vue');
 
 // Translations & Dates
 import VueI18n from 'vue-i18n'
+
 Vue.use(VueI18n);
 
 const messages = {
@@ -39,14 +40,17 @@ Vue.use(require('bootstrap-vue'));
 
 // Router
 import VueRouter from 'vue-router'
+
 Vue.use(VueRouter);
 
 // Vuex
 import Vuex from 'vuex'
+
 Vue.use(Vuex);
 
 // Validations
 import VeeValidate from 'vee-validate';
+
 Vue.use(VeeValidate, {
     validity: true
 });
@@ -75,13 +79,23 @@ Vue.component(
 */
 
 Vue.component(
-    'window',
-    require('./components/Window.vue')
+    'app-layout',
+    require('./components/AppLayout.vue')
 );
 
 Vue.component(
-    'budget-layout',
-    require('./components/budget/Layout.vue')
+    'app-sidebar',
+    require('./components/AppSidebar.vue')
+);
+
+Vue.component(
+    'app-sidebar-toggle',
+    require('./components/AppSidebarToggle.vue')
+);
+
+Vue.component(
+    'app-window',
+    require('./components/AppWindow.vue')
 );
 
 /**
@@ -90,38 +104,29 @@ Vue.component(
 
 const routes = [
     {
-        path: '/budgets/:budget_id',
-        name: 'budget',
-        component: require('./components/budget/Layout.vue'),
-        props: true,
-        children: [
-            {
-                path: '',
-                name: 'budget.month',
-                component: require('./components/budget/MonthlyView.vue'),
-                props: true
-            },
-            {
-                path: 'account/:account_id',
-                name: 'budget.account',
-                component: require('./components/budget/AccountView.vue'),
-                props: true
-            },
-            {
-                path: 'account/:account_id/newTransaction',
-                name: 'budget.newTransaction',
-                component: require('./components/transactions/New.vue'),
-                props: true
-            },
-            {
-                path: 'transaction/:transaction_id',
-                name: 'budget.transaction',
-                component: require('./components/transactions/Edit.vue'),
-                props: true
-            }
-        ]
+        path: '/budget/',
+        name: 'budget.month',
+        component: require('./components/budget/MonthlyView.vue'),
+        props: true
+    },
+    {
+        path: '/budget/account/:account_id',
+        name: 'budget.account',
+        component: require('./components/budget/AccountView.vue'),
+        props: true
+    },
+    {
+        path: '/budget/account/:account_id/newTransaction',
+        name: 'budget.newTransaction',
+        component: require('./components/transactions/New.vue'),
+        props: true
+    },
+    {
+        path: '/budget/transaction/:transaction_id',
+        name: 'budget.transaction',
+        component: require('./components/transactions/Edit.vue'),
+        props: true
     }
-
 ];
 
 const router = new VueRouter({

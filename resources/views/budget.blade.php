@@ -2,8 +2,6 @@
 
 @section('body')
 
-    <router-view>
-        @include('auth.menu')
-    </router-view>
+    <app-layout :budget-id="{{ $budget->id }}"></app-layout>
 
 @endsection

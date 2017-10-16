@@ -2,20 +2,20 @@
     export default {
         name: 'window',
         props: ['title'],
-        created () {
+        created() {
             this.updateTitle(this.title);
         },
         watch: {
-            title () {
+            title() {
                 this.updateTitle(this.title);
             }
         },
-        render () {
+        render() {
             // Has to be defined.
         },
         methods: {
-            updateTitle: function(title) {
-                if(title.length) {
+            updateTitle: function (title) {
+                if (title.length) {
                     document.title = title + ' - ' + this.$t('app.name');
                 } else {
                     document.title = this.$t('app.name');

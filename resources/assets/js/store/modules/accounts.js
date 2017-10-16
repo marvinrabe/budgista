@@ -24,14 +24,11 @@ const actions = {
 
     loadAccounts({commit, rootState}) {
         accounts.getAll(
-            rootState.budget.id,
             ({data}) => data.forEach(account => commit(types.ADD_ACCOUNT, account))
         )
     },
 
     createAccount({commit, rootState}, account) {
-        account.budget_id = rootState.budget.id;
-
         accounts.create(
             account,
             ({data}) => commit(types.ADD_ACCOUNT, data)
