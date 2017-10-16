@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Traits\BudgetTrait;
+use App\Models\Traits\UserTrait;
 use App\Models\Traits\HasCompositePrimaryKeyTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class CategoryBudget extends Model
 {
 
-    use BudgetTrait, HasCompositePrimaryKeyTrait;
+    use UserTrait, HasCompositePrimaryKeyTrait;
 
     public $timestamps = false;
 

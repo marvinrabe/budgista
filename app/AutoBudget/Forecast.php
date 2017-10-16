@@ -2,16 +2,16 @@
 
 namespace App\AutoBudget;
 
-use App\Models\Budget;
 use App\Models\Category;
+use App\Models\User;
 use Carbon\Carbon;
 
 class Forecast
 {
     /**
-     * @var Budget $budget
+     * @var User $user
      */
-    protected $budget;
+    protected $user;
 
     protected $weights = [];
 
@@ -19,9 +19,9 @@ class Forecast
 
     protected $funds = 0;
 
-    public function __construct(Budget $budget)
+    public function __construct(User $user)
     {
-        $this->budget = $budget;
+        $this->user = $user;
 
         $this->funds = $this->calculateFunds();
         $this->weights = $this->calculateWeights();
@@ -37,7 +37,7 @@ class Forecast
     protected function calculateFunds()
     {
         $sum = 0;
-        foreach($this->budget->accounts as $account) {
+        foreach($this->user->accounts as $account) {
             $sum += $account->transactions()->whereBetween('date', [Carbon::now()->firstOfMonth(), Carbon::now()->lastOfMonth()])->whereNull('category_id')->sum('amount');
         }
         return $sum;
@@ -46,7 +46,7 @@ class Forecast
     protected function calculateWeights()
     {
         $weights = [];
-        foreach ($this->budget->categories as $category) {
+        foreach ($this->user->categories as $category) {
             $weights[$category->id] = $this->calculateWeight($category);
         }
         return $weights;

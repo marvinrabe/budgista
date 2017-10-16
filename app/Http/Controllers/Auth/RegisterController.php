@@ -82,7 +82,7 @@ class RegisterController extends Controller
     {
         UserOnboarding::for($user);
 
-        return redirect()->route('budgets.show', $user->activeBudget->id);
+        return redirect()->route('budget');
     }
 
 }

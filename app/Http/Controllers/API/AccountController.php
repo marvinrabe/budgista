@@ -6,10 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Account as AccountResource;
 use App\Http\Resources\Transaction as TransactionResource;
 use App\Models\Account;
-use App\Models\Budget;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
 
 class AccountController extends Controller
 {
@@ -21,27 +19,19 @@ class AccountController extends Controller
 
     public function index()
     {
-        $budget = Auth::user()->activeBudget;
-
-        $this->authorize('view', $budget);
-
-        return AccountResource::collection($budget->accounts()->get());
+        return AccountResource::collection(Auth::user()->accounts()->get());
     }
 
     public function store(Request $request)
     {
-        $budget = Auth::user()->activeBudget;
-
         $this->validate($request, [
             'name' => 'required'
         ]);
 
-        $this->authorize('update', $budget);
-
         $account = new Account();
-        $account->name = Input::get('name');
-        $account->budget_id = $budget->id;
-        $account->save();
+        $account->name = request('name');
+
+        Auth::user()->accounts()->save($account);
 
         return new AccountResource($account);
     }
@@ -64,7 +54,7 @@ class AccountController extends Controller
             'name' => 'required'
         ]);
 
-        $account->name = Input::get('name');
+        $account->name = request('name');
         $account->save();
 
         return new AccountResource($account);

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Traits\BudgetTrait;
+use App\Models\Traits\UserTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +11,7 @@ use Alsofronie\Uuid\UuidModelTrait;
 class Account extends Model
 {
 
-    use UuidModelTrait, BudgetTrait;
+    use UuidModelTrait, UserTrait;
 
     protected static function boot()
     {

@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Category;
 use App\Models\CategoryBudget;
+use Illuminate\Support\Facades\DB;
 use JsonSerializable;
 
 class Row implements JsonSerializable
@@ -25,14 +26,25 @@ class Row implements JsonSerializable
 
     public function getPreviousMonth()
     {
-        $budgeted = CategoryBudget::where('month', '<', (string) $this->month)->where('category_id', '=', $this->category->id)->sum('amount');
+        $budgeted = $this->getCategoryBudgetSum();
         $activity = $this->category->transactions()->where('date', '<=', $this->month->previous()->lastDay())->sum('amount');
         return $budgeted + $activity;
     }
 
+    private function getCategoryBudgetSum()
+    {
+        return DB::table('category_budgets')
+            ->join('categories', 'categories.id', '=', 'category_budgets.category_id')
+            ->where([
+                    ['month', '<', (string)$this->month],
+                    ['category_id', '=', $this->category->id]
+                ])
+            ->sum('amount');
+    }
+
     public function getBudgeted()
     {
-        return $this->category->month($this->month)->amount+0;
+        return $this->category->month($this->month)->amount + 0;
     }
 
     public function getActivity()
@@ -50,11 +62,11 @@ class Row implements JsonSerializable
         return [
             'id' => $this->category->id,
             'name' => $this->category->name,
-            'month' => (string) $this->month,
-            'previousMonth' => (double) $this->getPreviousMonth(),
-            'budgeted' => (double) $this->getBudgeted(),
-            'activity' => (double) $this->getActivity(),
-            'available' => (double) $this->getAvailable(),
+            'month' => (string)$this->month,
+            'previousMonth' => (double)$this->getPreviousMonth(),
+            'budgeted' => (double)$this->getBudgeted(),
+            'activity' => (double)$this->getActivity(),
+            'available' => (double)$this->getAvailable(),
         ];
     }
 }

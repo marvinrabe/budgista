@@ -24,15 +24,6 @@ $factory->define(\App\Models\User::class, function (Faker\Generator $faker) {
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(\App\Models\Budget::class, function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->word,
-        'user_id' => null
-    ];
-});
-
-
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(\App\Models\Transaction::class, function (Faker\Generator $faker) {
     return [
         'payee' => $faker->company,

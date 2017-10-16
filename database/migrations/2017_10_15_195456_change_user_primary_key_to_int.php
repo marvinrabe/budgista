@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Budget;
-use App\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -33,12 +31,6 @@ class ChangeUserPrimaryKeyToInt extends Migration
             $table->increments('id');
             //$table->primary('id');
         });
-
-        foreach (Budget::all() as $budget) {
-            $user = User::where('old_id', $budget->old_user_id)->first();
-            $budget->user_id = $user->id;
-            $budget->save();
-        }
 
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('old_id');

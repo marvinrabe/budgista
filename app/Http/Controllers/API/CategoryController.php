@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Budget;
 use App\Models\Category;
 use App\Month;
 use App\Row;
@@ -21,28 +20,20 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $budget = Auth::user()->activeBudget;
-
-        $this->authorize('view', $budget);
-
-        return CategoryResource::collection($budget->categories()->get());
+        return CategoryResource::collection(Auth::user()->categories()->get());
     }
 
     public function store(Request $request)
     {
-        $budget = Auth::user()->activeBudget;
-
         $this->validate($request, [
             'name' => 'required'
         ]);
 
-        $this->authorize('update', $budget);
-
         $category = new Category();
         $category->name = Input::get('name');
-        $category->budget_id = $budget->id;
-        $category->sort = Category::inBudget($budget)->max('sort') + 1;
-        $category->save();
+        $category->sort = Auth::user()->categories()->max('sort') + 1;
+
+        Auth::user()->categories()->save($category);
 
         return [
             'id' => $category->id,
@@ -92,17 +83,14 @@ class CategoryController extends Controller
 
     public function sort(Request $request)
     {
-        $budget = Auth::user()->activeBudget;
-
-        $this->authorize('update', $budget);
-
         $this->validate($request, [
             'categories' => 'required'
         ]);
 
-        foreach (Input::get('categories') as $key => $category_id) {
-            $category = Category::find($category_id);
-            $category->sort = $key;
+        $sorting = array_flip(request('categories'));
+
+        foreach (Auth::user()->categories as $category) {
+            $category->sort = $sorting[$category->id];
             $category->save();
         }
 
