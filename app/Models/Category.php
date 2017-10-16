@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Alsofronie\Uuid\UuidModelTrait;
 use App\AutoBudget\AutoBudget;
-use App\Models\Traits\UserTrait;
+use App\Models\Traits\BelongsToUserTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
 
-    use UuidModelTrait, UserTrait;
+    use UuidModelTrait, BelongsToUserTrait;
 
     protected static function boot()
     {
