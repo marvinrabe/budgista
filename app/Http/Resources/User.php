@@ -16,7 +16,9 @@ class User extends Resource
     {
         return [
             'name' => $this->name,
-            'email' => $this->email
+            'email' => $this->email,
+            'currency' => $this->currency,
+            'locale' => $this->locale
         ];
     }
 
