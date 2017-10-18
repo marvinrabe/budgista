@@ -21,7 +21,7 @@ jobs:
           name: Install PHP Extensions
           command: sudo docker-php-ext-install bcmath calendar intl pdo_mysql
 
-      - run: cp ./.env.testing ./.env
+      - run: cp ./.circleci/.env.testing ./.env
 
       # Download and cache dependencies
       - restore_cache:
