@@ -1,5 +1,5 @@
 <template>
-    <td v-bind:class="[{ 'py-0': edit}]" class="text-right">
+    <div class="budget-column-budget" v-bind:class="[{ 'py-0': edit}]">
         <a class="dummy-input"
            v-show="!edit"
            v-on:click="toggleEdit"
@@ -15,7 +15,7 @@
                v-show="edit"
                v-on:keyup.enter="saveEdit"
                v-on:blur="saveEdit">
-    </td>
+    </div>
 </template>
 
 <script>
@@ -58,9 +58,9 @@
             },
 
             saveEdit: function () {
-                if(this.edit) {
+                if (this.edit) {
                     let result = parseFloat(this.mutableValue);
-                    if(isNaN(result)) {
+                    if (isNaN(result)) {
                         result = 0;
                     }
                     this.$emit('update:value', result);
