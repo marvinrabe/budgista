@@ -7,16 +7,15 @@
             <app-sidebar-toggle></app-sidebar-toggle>
 
             <div class="col-flex">
-                <button class="btn btn-outline-dark"
-                        :title="$t('action.previousMonth')" @click="showPreviousMonth">
+                <a href="#" class="text-light" :title="$t('action.previousMonth')" @click.prevent.stop="showPreviousMonth">
                     <span class="fa fa-chevron-left"></span>
-                </button>
-                <span class="h4 mb-sm-0"
-                      v-html="$formatDate(new Date(sheet.month), { year: 'numeric', month: 'short' })"></span>
-                <button class="btn btn-outline-dark"
-                        :title="$t('action.nextMonth')" @click="showNextMonth">
+                </a>
+                <span class="h4 mb-sm-0">
+                    {{ $formatDate(new Date(sheet.month), { year: 'numeric', month: 'short' }) }}
+                </span>
+                <a href="#" class="text-light" :title="$t('action.nextMonth')" @click.prevent.stop="showNextMonth">
                     <span class="fa fa-chevron-right"></span>
-                </button>
+                </a>
             </div>
 
             <div class="text-right">
