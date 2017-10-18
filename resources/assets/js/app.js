@@ -165,3 +165,5 @@ function OnTransitionEnd() {
 
 $('#app').on('click', '.menu-toggle', toggleClassMenu);
 $('#app').on('click', '.nav-link-main', hideMenu);
+
+Console.log('Generated on Server!');
