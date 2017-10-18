@@ -7,9 +7,12 @@
     "watch-poll": "npm run watch -- --watch-poll",
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "postinstall": "npm run production"
   },
   "devDependencies": {
+  },
+  "dependencies": {
     "axios": "^0.16.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-3": "^6.24.1",
@@ -30,6 +33,5 @@
     "vue-router": "^2.7.0",
     "vuedraggable": "^2.14.1",
     "vuex": "^2.4.0"
-  },
-  "dependencies": {}
+  }
 }
