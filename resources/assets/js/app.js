@@ -143,6 +143,7 @@ const app = new Vue({router, store, i18n}).$mount('#app');
  */
 
 function toggleClassMenu() {
+    let myMenu = document.querySelector(".menu");
     myMenu.classList.add("menu--animatable");
     if (!myMenu.classList.contains("menu--visible")) {
         myMenu.classList.add("menu--visible");
@@ -151,7 +152,6 @@ function toggleClassMenu() {
     }
 }
 
-
 function hideMenu() {
     let myMenu = document.querySelector(".menu");
     myMenu.classList.add("menu--animatable");
@@ -159,14 +159,8 @@ function hideMenu() {
 }
 
 function OnTransitionEnd() {
+    let myMenu = document.querySelector(".menu");
     myMenu.classList.remove("menu--animatable");
-}
-
-let myMenu = document.querySelector(".menu");
-if (myMenu) {
-    let openMenu = document.querySelector(".menu-open");
-    let closeMenu = document.querySelector(".menu-close");
-    myMenu.addEventListener("transitionend", OnTransitionEnd, false);
 }
 
 $('#app').on('click', '.menu-toggle', toggleClassMenu);

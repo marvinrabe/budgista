@@ -1,5 +1,5 @@
 <template>
-    <div class="menu">
+    <div class="menu" ref="menu">
         <div class="app-menu">
 
             <nav class="navbar navbar-expand navbar-light">
@@ -108,13 +108,16 @@
             currency: function () {
                 return window.currency;
             },
-            user () {
+            user() {
                 return this.$store.state.user;
             },
             ...mapGetters([
                 'sortedAccounts',
                 'sortedAccounts'
             ])
+        },
+        created: function () {
+            this.$refs['menu'].addEventListener("transitionend", OnTransitionEnd, false);
         },
         methods: {
 
