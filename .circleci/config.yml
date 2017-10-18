@@ -45,3 +45,10 @@ jobs:
 
       # run tests!
       - run: vendor/bin/phpunit
+
+  deployment:
+    production:
+      branch: master
+      commands:
+        - git remote add dokku dokku@172.104.149.190:app
+        - git push dokku master
