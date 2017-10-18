@@ -15,7 +15,6 @@
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ asset('img/apple-touch-icon-152x152.png') }}"/>
 
     <link rel='mask-icon' href='{{ asset('img/icon.svg') }}' color='#007BFF'>
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
 
     {{--
     Enables web app support. Only useful when Navigation between pages not via links
