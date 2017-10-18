@@ -50,6 +50,7 @@ jobs:
           name: Deploy Master to Dokku
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              echo "172.104.149.190 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCfOgLiIHX0TBftsLLGWDGJKBsWUJ1GzBYR1447ktBMnqtxGszGOf9DqHSzPMTPl54OwowahK4vvxM0UQGkXZbI=" >> ~/.ssh/known_hosts
               git remote add dokku dokku@172.104.149.190:app
               git push dokku master
             fi
