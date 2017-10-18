@@ -1,0 +1,62 @@
+.budget {
+  box-sizing: border-box;
+  position: relative;
+
+  &-header,
+  &-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    & > div {
+      padding: $table-cell-padding-sm;
+    }
+  }
+
+  &-header {
+    font-weight: bold;
+    border-top: 1px solid $gray-200;
+    border-bottom: 1px solid $gray-200;
+    font-size: 80%;
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    background: #fff;
+  }
+
+  &-row {
+    border-top: 1px solid $gray-200;
+  }
+
+  &-column {
+
+    &-drag {
+      text-align: center;
+      width: 24px;
+      flex-shrink: 0;
+
+    }
+
+    &-name {
+      flex: 2;
+      @extend .hide-text-overflow;
+    }
+
+    &-budget,
+    &-activity,
+    &-available {
+      flex: 1;
+      white-space: nowrap;
+      text-align: right;
+    }
+
+
+    &-available {
+      .badge-light {
+        color: $gray-600;
+      }
+    }
+
+
+  }
+}

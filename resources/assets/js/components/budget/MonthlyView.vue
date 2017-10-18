@@ -49,48 +49,53 @@
             </div>
         </div>
 
-        <div class="content">
-            <table class="table table-sm">
-                <thead>
-                <tr>
-                    <th width="12"></th>
-                    <th>
-                        {{ $t('form.category') }}
-                    </th>
-                    <th class="text-right" width="130">{{ $t('form.budgeted') }}</th>
-                    <th class="text-right d-none d-lg-table-cell ">{{ $t('form.activity') }}</th>
-                    <th class="text-right">{{ $t('form.available') }}</th>
-                </tr>
-                </thead>
-                <draggable v-model="sheet.rows" :options="{handle:'.handle'}" element="tbody" @end="persistSorting">
-                    <tr v-for="row in sheet.rows" :key="row.id">
-                        <td>
-                            <span class="handle d-none d-sm-inline-block"></span>
-                        </td>
-                        <td>
-                            <a class="link-action text-dark"
-                               :title="$t('action.edit.category')"
-                               v-on:click="showEditCategoryModal(row)">
-                                {{ row.name }}
-                            </a>
-                        </td>
-                        <category-budget
-                                :value="row.budgeted"
-                                v-on:update:value="val => updateBudget(row, val)">
-                        </category-budget>
-                        <td class="d-none d-lg-table-cell text-right"
-                            :class="[{ 'text-muted': row.activity == 0 }, 'text-dark']"
-                            v-html="$formatNumber(row.activity, {style: 'currency', currency: currency})">
-                        </td>
-                        <td class="text-right">
+        <div class="content budget">
+            <div class="budget-header">
+                <div class="budget-column-drag">
+                    &nbsp;
+                </div>
+                <div class="budget-column-name">
+                    {{ $t('form.category') }}
+                </div>
+                <div class="budget-column-budget">
+                    {{ $t('form.budgeted') }}
+                </div>
+                <div class="budget-column-activity d-none d-lg-block">
+                    {{ $t('form.activity') }}
+                </div>
+                <div class="budget-column-available">
+                    {{ $t('form.available') }}
+                </div>
+            </div>
+
+            <draggable v-model="sheet.rows" :options="{handle:'.handle'}" @end="persistSorting">
+                <div class="budget-row" v-for="row in sheet.rows" :key="row.id">
+                    <div class="budget-column-drag">
+                        <span class="handle"></span>
+                    </div>
+                    <div class="budget-column-name">
+                        <a class="link-action text-dark"
+                           :title="$t('action.edit.category')"
+                           v-on:click="showEditCategoryModal(row)">
+                            {{ row.name }}
+                        </a>
+                    </div>
+                    <category-budget
+                            :value="row.budgeted"
+                            v-on:update:value="val => updateBudget(row, val)">
+                    </category-budget>
+                    <div class="budget-column-activity d-none d-lg-block"
+                         :class="[{ 'text-muted': row.activity == 0 }, 'text-dark']"
+                         v-html="$formatNumber(row.activity, {style: 'currency', currency: currency})">
+                    </div>
+                    <div class="budget-column-available">
                         <span style="font-size: 100%" class="badge"
-                              :class="[{ 'badge-danger': available(row) < 0 }, { 'badge-success': available(row) > 0 }, { 'badge-secondary': available(row) == 0 }]"
+                              :class="[{ 'badge-danger': available(row) < 0 }, { 'badge-success': available(row) > 0 }, { 'badge-light': available(row) == 0 }]"
                               v-html="$formatNumber(available(row), {style: 'currency', currency: currency})">
                         </span>
-                        </td>
-                    </tr>
-                </draggable>
-            </table>
+                    </div>
+                </div>
+            </draggable>
         </div>
 
         <b-modal ref="newCategoryModal" :title="$t('action.new.category')">
