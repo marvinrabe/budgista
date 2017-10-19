@@ -8,7 +8,6 @@ use App\Month;
 use App\Row;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
 {
@@ -25,12 +24,12 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required'
         ]);
 
         $category = new Category();
-        $category->name = Input::get('name');
+        $category->name = request('name');
         $category->sort = Auth::user()->categories()->max('sort') + 1;
 
         Auth::user()->categories()->save($category);
@@ -43,11 +42,11 @@ class CategoryController extends Controller
 
     public function update(Request $request, Category $category)
     {
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required'
         ]);
 
-        $category->name = Input::get('name');
+        $category->name = request('name');
         $category->save();
 
         return [
@@ -67,15 +66,15 @@ class CategoryController extends Controller
     {
         $this->authorize('update', $category);
 
-        $this->validate($request, [
+        $request->validate([
             'month' => 'required',
             'amount' => 'required'
         ]);
 
-        $month = Month::fromString(Input::get('month'));
+        $month = Month::fromString(request('month'));
 
         $categoryBudget = $category->month($month);
-        $categoryBudget->amount = Input::get('amount');
+        $categoryBudget->amount = request('amount');
         $categoryBudget->save();
 
         return new Row($category, $month);
@@ -83,7 +82,7 @@ class CategoryController extends Controller
 
     public function sort(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'categories' => 'required'
         ]);
 

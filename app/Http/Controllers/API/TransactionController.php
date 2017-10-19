@@ -7,7 +7,6 @@ use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 use App\Http\Resources\Transaction as TransactionResource;
 use RRule\RRule;
 
@@ -21,13 +20,13 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'payee' => 'required',
             'account_id' => 'required',
             'amount' => 'required'
         ]);
 
-        $account = Account::find(Input::get('account_id'));
+        $account = Account::find(request('account_id'));
         $this->authorize('update', $account);
 
         $transaction = new Transaction();
@@ -40,12 +39,12 @@ class TransactionController extends Controller
             $transaction->category_id = $category->id;
         }
 
-        $transaction->date = Input::get('date');
-        $transaction->payee = Input::get('payee');
-        $transaction->amount = Input::get('amount');
+        $transaction->date = request('date');
+        $transaction->payee = request('payee');
+        $transaction->amount = request('amount');
 
-        if (!empty(Input::get('rrule'))) {
-            $transaction->rrule = new RRule(Input::get('rrule'));
+        if (!empty(request('rrule'))) {
+            $transaction->rrule = new RRule(request('rrule'));
         } else {
             $transaction->rrule = null;
         }
@@ -62,25 +61,25 @@ class TransactionController extends Controller
 
     public function update(Request $request, Transaction $transaction)
     {
-        $this->validate($request, [
+        $request->validate([
             'payee' => 'required',
             'amount' => 'required'
         ]);
 
         $transaction->category_id = null;
-        $category_id = Input::get('category_id');
+        $category_id = request('category_id');
         if(!empty($category_id)) {
             $category = Category::find($category_id);
             $this->authorize('update', $category);
             $transaction->category_id = $category->id;
         }
 
-        $transaction->date = Input::get('date');
-        $transaction->payee = Input::get('payee');
-        $transaction->amount = Input::get('amount');
+        $transaction->date = request('date');
+        $transaction->payee = request('payee');
+        $transaction->amount = request('amount');
 
-        if (!empty(Input::get('rrule'))) {
-            $transaction->rrule = new RRule(Input::get('rrule'));
+        if (!empty(request('rrule'))) {
+            $transaction->rrule = new RRule(request('rrule'));
         } else {
             $transaction->rrule = null;
         }

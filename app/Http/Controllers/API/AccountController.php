@@ -24,7 +24,7 @@ class AccountController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required'
         ]);
 
@@ -50,7 +50,7 @@ class AccountController extends Controller
 
     public function update(Request $request, Account $account)
     {
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required'
         ]);
 
