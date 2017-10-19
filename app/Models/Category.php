@@ -29,12 +29,12 @@ class Category extends Model
 
     public function budgets()
     {
-        return $this->hasMany('App\Models\CategoryBudget');
+        return $this->hasMany('App\Models\Budget');
     }
 
     public function month($month)
     {
-        return CategoryBudget::firstOrNew([
+        return Budget::firstOrNew([
             'category_id' => $this->id,
             'month' => $month
         ]);

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Month;
-use App\Sheet;
+use App\MonthlyBudget;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -43,7 +43,7 @@ class User extends Authenticatable
 
     public function month(Month $month)
     {
-        return new Sheet($this, $month);
+        return new MonthlyBudget($this, $month);
     }
 
 }
