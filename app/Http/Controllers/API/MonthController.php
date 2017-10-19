@@ -25,7 +25,7 @@ class MonthController extends Controller
     private function getMonth($string)
     {
         try {
-            if ($string !== null) {
+            if (!empty($string)) {
                 return Month::fromString($string);
             }
 
