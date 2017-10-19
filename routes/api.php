@@ -17,7 +17,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 
     Route::get('/user', 'API\UserController@show')->name('user');
 
-    Route::get('/month/{month?}', 'API\MonthController@show')->name('month');
+    Route::get('/month/{month?}', 'API\MonthlyBudgetController@show')->name('month');
 
     Route::resource('categories', 'API\CategoryController', ['only' => [
         'index', 'store', 'update', 'destroy'
