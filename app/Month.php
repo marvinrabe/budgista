@@ -30,9 +30,10 @@ class Month
         $this->year = $year;
     }
 
-    public function __toString()
+    public static function current()
     {
-        return $this->year . '-' . str_pad($this->month, 2, "0", STR_PAD_LEFT);
+        $today = new \DateTime('now');
+        return new Month($today->format('Y'), $today->format('m'));
     }
 
     public static function fromString($string)
@@ -42,15 +43,14 @@ class Month
         return new Month($year, $month);
     }
 
+    public function __toString()
+    {
+        return $this->year . '-' . str_pad($this->month, 2, "0", STR_PAD_LEFT);
+    }
+
     public function forHumans()
     {
         return $this->firstDay()->format('M. Y');
-    }
-
-    public static function current()
-    {
-        $today = new \DateTime('now');
-        return new Month($today->format('Y'), $today->format('m'));
     }
 
     public function getMonth()
@@ -89,4 +89,5 @@ class Month
         $day = cal_days_in_month(CAL_GREGORIAN, $this->month, $this->year);
         return Carbon::createFromDate($this->year, $this->month, $day);
     }
+
 }
