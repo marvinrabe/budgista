@@ -2,53 +2,47 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
 
 class SettingsController
 {
 
     public function get()
     {
-        return View::make('auth.settings')
-            ->with('user', Auth::user());
+        return view('auth.settings')->with('user', Auth::user());
     }
 
-    public function put()
+    public function put(Request $request)
     {
         $user = Auth::user();
 
-        $rules = array(
+        $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:191|unique:users,email,' . $user->id,
             'password' => 'nullable|string|confirmed|min:6',
             'locale' => 'required',
             'currency' => 'required'
+        ]);
+
+        $user->update(
+            request([
+                'name',
+                'email',
+                'locale',
+                'currency'
+            ])
         );
-        $validator = Validator::make(Input::all(), $rules);
-        if ($validator->fails()) {
-            return redirect()
-                ->route('settings')
-                ->withErrors($validator)
-                ->withInput(Input::all());
+
+        if (!empty(request('password'))) {
+            $user->password = bcrypt(request('password'));
+            $user->save();
         }
-
-        $user->name = Input::get('name');
-        $user->email = Input::get('email');
-
-        if (!empty(Input::get('password'))) {
-            $user->password = bcrypt('password');
-        }
-
-        $user->locale = Input::get('locale');
-        $user->currency = Input::get('currency');
-        $user->save();
 
         Session::flash('success', trans('Account settings saved.'));
-        return redirect()->route('settings');
+
+        return back();
     }
 
 }
