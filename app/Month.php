@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Propaganistas\LaravelIntl\Facades\Carbon;
+use Carbon\Carbon;
 
 class Month
 {
@@ -36,11 +36,6 @@ class Month
     public function __toString()
     {
         return $this->date->format('Y-m');
-    }
-
-    public function forHumans()
-    {
-        return $this->date->format('M. Y');
     }
 
     public function getMonth()
