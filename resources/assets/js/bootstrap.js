@@ -26,32 +26,6 @@ window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
- * Add interceptors to axios for pace indicator.
- */
-
-// Add a request interceptor
-window.axios.interceptors.request.use(function (config) {
-// Do something before request is sent
-    $('.pace').show();
-    return config;
-}, function (error) {
-    $('.pace').show();
-// Do something with request error
-    return Promise.reject(error);
-});
-
-// Add a response interceptor
-window.axios.interceptors.response.use(function (response) {
-// Do something with response data
-    $('.pace').hide();
-    return response;
-}, function (error) {
-// Do something with response error
-    $('.pace').hide();
-    return Promise.reject(error);
-});
-
-/**
  * Next we will register the CSRF Token as a common header with Axios so that
  * all outgoing HTTP requests automatically have it attached. This is just
  * a simple convenience so we don't have to attach every token manually.
@@ -79,3 +53,15 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+/**
+ * Initialize Raven for error logging with sentry, but only on production builds.
+ */
+
+if(process.env.NODE_ENV === 'production') {
+    let Raven = require('raven-js') ;
+
+    Raven
+        .config('https://f4cdc8808ff548dc8c94ebcd548305a9@sentry.io/230247')
+        .install();
+}
