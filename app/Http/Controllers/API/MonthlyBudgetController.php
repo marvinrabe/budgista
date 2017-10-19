@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Month;
 use Auth;
 
-class MonthController extends Controller
+class MonthlyBudgetController extends Controller
 {
 
     public function show($month = null)

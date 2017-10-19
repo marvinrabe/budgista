@@ -104,25 +104,25 @@ Vue.component(
 
 const routes = [
     {
-        path: '/budget/',
+        path: '/',
         name: 'budget.month',
         component: require('./components/budget/MonthlyView.vue'),
         props: true
     },
     {
-        path: '/budget/account/:account_id',
+        path: '/account/:account_id',
         name: 'budget.account',
         component: require('./components/budget/AccountView.vue'),
         props: true
     },
     {
-        path: '/budget/account/:account_id/newTransaction',
+        path: '/account/:account_id/newTransaction',
         name: 'budget.newTransaction',
         component: require('./components/transactions/New.vue'),
         props: true
     },
     {
-        path: '/budget/transaction/:transaction_id',
+        path: '/transaction/:transaction_id',
         name: 'budget.transaction',
         component: require('./components/transactions/Edit.vue'),
         props: true
