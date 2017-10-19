@@ -29,8 +29,9 @@ class ChangeUserPrimaryKeyToInt extends Migration
 
         Schema::table('users', function (Blueprint $table) {
             $table->increments('id');
-            //$table->primary('id');
         });
+
+        // Migrate Data
 
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('old_id');

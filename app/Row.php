@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Models\Category;
-use App\Models\CategoryBudget;
+use App\Models\Budget;
 use Illuminate\Support\Facades\DB;
 use JsonSerializable;
 
@@ -33,8 +33,8 @@ class Row implements JsonSerializable
 
     private function getCategoryBudgetSum()
     {
-        return DB::table('category_budgets')
-            ->join('categories', 'categories.id', '=', 'category_budgets.category_id')
+        return DB::table('budgets')
+            ->join('categories', 'categories.id', '=', 'budgets.category_id')
             ->where([
                     ['month', '<', (string)$this->month],
                     ['category_id', '=', $this->category->id]

@@ -3,11 +3,11 @@
 namespace App;
 
 use App\Models\User;
-use App\Models\CategoryBudget;
+use App\Models\Budget;
 use Illuminate\Support\Facades\DB;
 use JsonSerializable;
 
-class Sheet implements JsonSerializable
+class MonthlyBudget implements JsonSerializable
 {
 
     protected $user;
@@ -49,8 +49,8 @@ class Sheet implements JsonSerializable
     }
 
     private function getCategoryBudgetSum() {
-        return DB::table('category_budgets')
-            ->join('categories', 'categories.id', '=', 'category_budgets.category_id')
+        return DB::table('budgets')
+            ->join('categories', 'categories.id', '=', 'budgets.category_id')
             ->where([
                 ['month', '<', (string)$this->month],
                 ['user_id', '=', $this->user->id]

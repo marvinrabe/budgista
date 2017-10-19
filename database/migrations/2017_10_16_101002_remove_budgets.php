@@ -2,7 +2,6 @@
 
 use App\Models\Account;
 use App\Models\Category;
-use App\Models\CategoryBudget;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -36,13 +35,7 @@ class RemoveBudgets extends Migration
             $table->dropColumn('budget_id');
         });
 
-        foreach(Account::all() as $account) {
-            $account->user_id = $account->budget->user_id;
-        }
-
-        foreach(Category::all() as $category) {
-            $category->user_id = $category->budget->user_id;
-        }
+        // Migrate Data
 
         Schema::table('accounts', function (Blueprint $table) {
             $table->dropColumn('budget_id');

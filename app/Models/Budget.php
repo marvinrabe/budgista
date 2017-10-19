@@ -6,14 +6,14 @@ use App\Models\Traits\BelongsToUserTrait;
 use App\Models\Traits\HasCompositePrimaryKeyTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class CategoryBudget extends Model
+class Budget extends Model
 {
 
     use BelongsToUserTrait, HasCompositePrimaryKeyTrait;
 
     public $timestamps = false;
 
-    protected $fillable = ['budget_id', 'category_id', 'month'];
+    protected $fillable = ['category_id', 'month', 'amount'];
 
     protected $primaryKey = ['category_id', 'month'];
 
