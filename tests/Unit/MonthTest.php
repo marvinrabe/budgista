@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Month;
+use Carbon\Carbon;
 use Tests\TestCase;
 
 class MonthTest extends TestCase
@@ -53,15 +54,17 @@ class MonthTest extends TestCase
     }
 
     /** @test */
-    public function converts_to_proper_string() {
+    public function converts_to_proper_string()
+    {
         $month = new Month(2017, 6);
 
-        $this->assertEquals('2017-06', (string) $month);
+        $this->assertEquals('2017-06', (string)$month);
 
     }
 
     /** @test */
-    public function can_be_created_from_string() {
+    public function can_be_created_from_string()
+    {
         $month = Month::fromString('2017-06');
 
         $this->assertEquals(2017, $month->getYear());
@@ -69,13 +72,43 @@ class MonthTest extends TestCase
 
     }
 
-    /** @test */
-    public function previous_and_next_return_correct_month() {
-        $month = new Month(2017, 6);
 
-        $this->assertEquals('2017-05', $month->previous());
-        $this->assertEquals('2017-07', $month->next());
+    public function nextAndPreviousData()
+    {
+        return [
+            [2017, 1, '2016-12', '2017-02'],
+            [2017, 6, '2017-05', '2017-07'],
+            [2017, 12, '2017-11', '2018-01']
+        ];
     }
 
+    /**
+     * @test
+     * @dataProvider nextAndPreviousData
+     */
+    public function previous_and_next_return_correct_month($year, $month, $prev, $next)
+    {
+        $monthObject = new Month($year, $month);
+
+        $this->assertEquals($prev, (string) $monthObject->previous());
+        $this->assertEquals($next, (string) $monthObject->next());
+
+        // Check if month object doesnt mutate
+        $this->assertEquals($year, $monthObject->getYear());
+        $this->assertEquals($month, $monthObject->getMonth());
+    }
+
+
+    /** @test */
+    public function create_month_that_equals_current_month()
+    {
+        $knownDate = Carbon::create(2001, 5, 21);
+        Carbon::setTestNow($knownDate);
+
+        $month = Month::current();
+
+        $this->assertEquals(2001, $month->getYear());
+        $this->assertEquals(5, $month->getMonth());
+    }
 
 }

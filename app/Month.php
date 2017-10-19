@@ -7,15 +7,7 @@ use Propaganistas\LaravelIntl\Facades\Carbon;
 class Month
 {
 
-    /**
-     * @var int
-     */
-    protected $month;
-
-    /**
-     * @var int
-     */
-    protected $year;
+    protected $date;
 
     public function __construct($year, $month)
     {
@@ -26,68 +18,61 @@ class Month
             throw new \InvalidArgumentException('Value ' . $year . ' for year is invalid.');
         }
 
-        $this->month = $month;
-        $this->year = $year;
+        $this->date = Carbon::createFromDate($year, $month, 1);
     }
 
     public static function current()
     {
-        $today = new \DateTime('now');
-        return new Month($today->format('Y'), $today->format('m'));
+        return self::fromString(Carbon::now()->format('Y-m'));
     }
 
     public static function fromString($string)
     {
-        $year = substr($string, 0, 4);
-        $month = substr($string, -2);
-        return new Month($year, $month);
+        list($year, $month) = explode('-', $string, 2);
+
+        return new self($year, $month);
     }
 
     public function __toString()
     {
-        return $this->year . '-' . str_pad($this->month, 2, "0", STR_PAD_LEFT);
+        return $this->date->format('Y-m');
     }
 
     public function forHumans()
     {
-        return $this->firstDay()->format('M. Y');
+        return $this->date->format('M. Y');
     }
 
     public function getMonth()
     {
-        return $this->month;
+        return $this->date->month;
     }
 
     public function getYear()
     {
-        return $this->year;
+        return $this->date->year;
     }
 
     public function previous()
     {
-        if ($this->month == 1) {
-            return new Month($this->year - 1, 12);
-        }
-        return new Month($this->year, $this->month - 1);
+        $previousMonth = (clone $this->date)->subMonth();
+        return new self($previousMonth->year, $previousMonth->month);
     }
 
     public function next()
     {
-        if ($this->month == 12) {
-            return new Month($this->year + 1, 1);
-        }
-        return new Month($this->year, $this->month + 1);
+        $nextMonth = (clone $this->date)->addMonth();
+        return new self($nextMonth->year, $nextMonth->month);
     }
 
     public function firstDay()
     {
-        return Carbon::createFromDate($this->year, $this->month, 1);
+        return $this->date;
     }
 
     public function lastDay()
     {
-        $day = cal_days_in_month(CAL_GREGORIAN, $this->month, $this->year);
-        return Carbon::createFromDate($this->year, $this->month, $day);
+        return $this->date->lastOfMonth();
     }
 
 }
