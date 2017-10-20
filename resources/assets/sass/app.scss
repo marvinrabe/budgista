@@ -8,11 +8,6 @@
 @import "font-awesome";
 
 // Own Bootstrap extensions
-.btn-outline-light:hover,
-.btn-outline-light:active {
-  color: theme-color('dark');
-}
-
 .btn-group-xs > .btn, .btn-xs {
   padding: .125rem .25rem;
   font-size: 0.875rem;
@@ -25,13 +20,12 @@
 }
 
 .card-body-secondary {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  @extend .text-muted;
   background: $gray-100;
   border-top: 1px solid $gray-300;
-  @extend .text-muted;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
-
 
 .col-flex,
 .col-flex-1 {
