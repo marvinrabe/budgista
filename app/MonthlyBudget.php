@@ -62,7 +62,11 @@ class MonthlyBudget implements JsonSerializable
     {
         $sum = 0;
         foreach ($this->user->accounts as $account) {
-            $sum += $account->transactions()->whereBetween('date', [$this->month->previous()->lastDay(), $this->month->lastDay()])->whereNull('category_id')->sum('amount');
+            $sum += $account
+                ->transactions()
+                ->whereNull('category_id')
+                ->whereBetween('date', [$this->month->firstDay(), $this->month->lastDay()])
+                ->sum('amount');
         }
         return $sum;
     }

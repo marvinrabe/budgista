@@ -62,12 +62,12 @@ class Month
 
     public function firstDay()
     {
-        return $this->date;
+        return (clone $this->date)->firstOfMonth();
     }
 
     public function lastDay()
     {
-        return $this->date->lastOfMonth();
+        return (clone $this->date)->lastOfMonth();
     }
 
 }

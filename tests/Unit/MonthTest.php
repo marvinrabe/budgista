@@ -111,4 +111,20 @@ class MonthTest extends TestCase
         $this->assertEquals(5, $month->getMonth());
     }
 
+
+    /** @test */
+    public function test_first_and_last_day()
+    {
+        $month = new Month(2017, 10);
+
+        $this->assertEquals('20170930', $month->previous()->lastDay()->format('Ymd'));
+        $this->assertEquals('20170901', $month->previous()->firstDay()->format('Ymd'));
+
+        $this->assertEquals('20171031', $month->lastDay()->format('Ymd'));
+        $this->assertEquals('20171001', $month->firstDay()->format('Ymd'));
+
+        $this->assertEquals('20171130', $month->next()->lastDay()->format('Ymd'));
+        $this->assertEquals('20171101', $month->next()->firstDay()->format('Ymd'));
+    }
+
 }
