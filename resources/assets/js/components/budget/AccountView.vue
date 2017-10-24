@@ -10,21 +10,27 @@
                 {{ account.name }}
             </div>
             <div class="text-right d-none d-md-block">
-                <strong :class="[{ 'text-success': account.clearedBalance >= 0}, { 'text-danger': account.clearedBalance < 0}]">
-                    {{ $formatNumber(account.clearedBalance, {style: 'currency', currency: currency}) }}
-                </strong>
+                <money-string
+                        class="font-weight-bold"
+                        :class="[{ 'text-success': account.clearedBalance >= 0}, { 'text-danger': account.clearedBalance < 0}]"
+                        :value="account.clearedBalance">
+                </money-string>
                 <p class="small">{{ $t('form.balance.cleared') }}</p>
             </div>
             <div class="text-right d-none d-md-block">
-                <strong :class="[{ 'text-success': account.unclearedBalance >= 0}, { 'text-danger': account.unclearedBalance < 0}]">
-                    {{ $formatNumber(account.unclearedBalance, {style: 'currency', currency: currency}) }}
-                </strong>
+                <money-string
+                        class="font-weight-bold"
+                        :class="[{ 'text-success': account.unclearedBalance >= 0}, { 'text-danger': account.unclearedBalance < 0}]"
+                        :value="account.unclearedBalance">
+                </money-string>
                 <p class="small">{{ $t('form.balance.uncleared') }}</p>
             </div>
             <div class="text-right">
-                <strong :class="[{ 'text-success': account.workingBalance >= 0}, { 'text-danger': account.workingBalance < 0}]">
-                    {{ $formatNumber(account.workingBalance, {style: 'currency', currency: currency}) }}
-                </strong>
+                <money-string
+                        class="font-weight-bold"
+                        :class="[{ 'text-success': account.workingBalance >= 0}, { 'text-danger': account.workingBalance < 0}]"
+                        :value="account.workingBalance">
+                </money-string>
                 <p class="small">{{ $t('form.balance.working') }}</p>
             </div>
         </div>
@@ -74,27 +80,31 @@
                     {{ $formatDate(new Date(item.date), {year: 'numeric', month: '2-digit', day: '2-digit'}) }}
                     <span v-if="item.recurring" class="fa fa-refresh" v-b-tooltip.bottom
                           :title="humanRRule(item.rrule)">
-                        </span>
+                    </span>
                 </div>
                 <div class="transaction-payee">{{ item.payee }}</div>
                 <div class="transaction-category">
-                        <span v-if="item.category">
-                            {{ item.category.name }}
-                        </span>
+                    <span v-if="item.category">
+                        {{ item.category.name }}
+                    </span>
                 </div>
                 <div class="transaction-outflow">
-                        <span v-if="item.amount < 0">
-                            {{ $formatNumber(item.amount * -1, {style: 'currency', currency: currency}) }}
-                        </span>
+                    <money-string
+                            v-if="item.amount < 0"
+                            :value="-1*item.amount">
+                    </money-string>
                 </div>
                 <div class="transaction-inflow">
-                        <span v-if="item.amount >= 0">
-                            {{ $formatNumber(item.amount, {style: 'currency', currency: currency}) }}
-                        </span>
+                    <money-string
+                            v-if="item.amount >= 0"
+                            :value="item.amount">
+                    </money-string>
                 </div>
                 <div class="transaction-amount">
-                        <span :class="[{ 'text-danger': item.amount < 0 }, { 'text-success': item.amount >= 0 }]"
-                              v-html="$formatNumber(item.amount, {style: 'currency', currency: currency})"></span>
+                    <money-string
+                            :class="[{ 'text-danger': item.amount < 0 }, { 'text-success': item.amount >= 0 }]"
+                            :value="item.amount">
+                    </money-string>
                 </div>
                 <div class="transaction-actions">
                     <router-link
@@ -158,9 +168,6 @@
             InfiniteLoading,
         },
         computed: {
-            currency: function () {
-                return window.currency;
-            },
             account() {
                 return this.$store.getters.findAccountById(this.account_id);
             },

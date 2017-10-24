@@ -40,9 +40,6 @@
 </div>
 
 <script>
-    @if(Auth::check())
-    window.currency = '{{ Auth::user()->currency }}';
-    @endif
     window.locale = '{{ config('app.locale') }}';
 </script>
 

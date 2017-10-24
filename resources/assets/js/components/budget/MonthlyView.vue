@@ -7,11 +7,12 @@
             <app-sidebar-toggle></app-sidebar-toggle>
 
             <div class="col-flex">
-                <a href="#" class="text-light" :title="$t('action.previousMonth')" @click.prevent.stop="showPreviousMonth">
+                <a href="#" class="text-light" :title="$t('action.previousMonth')"
+                   @click.prevent.stop="showPreviousMonth">
                     <span class="fa fa-chevron-left"></span>
                 </a>
                 <span class="h4 mb-sm-0">
-                    {{ $formatDate(new Date(sheet.month), { year: 'numeric', month: 'short' }) }}
+                    {{ $formatDate(new Date(sheet.month), {year: 'numeric', month: 'short'}) }}
                 </span>
                 <a href="#" class="text-light" :title="$t('action.nextMonth')" @click.prevent.stop="showNextMonth">
                     <span class="fa fa-chevron-right"></span>
@@ -21,20 +22,32 @@
             <div class="text-right">
                 <div class="badge px-3"
                      :class="[{ 'badge-danger': toBeBudgeted < 0 }, { 'badge-success': toBeBudgeted >= 0 }]">
-                    <strong class="h3"
-                            v-html="$formatNumber(toBeBudgeted, {style: 'currency', currency: currency})"></strong><br>
+                    <money-string
+                            class="h3"
+                            :value="toBeBudgeted">
+                    </money-string>
+                    <br>
                     <span class="small">{{ $t('form.toBeBudgeted') }}</span>
                 </div>
             </div>
             <div class="d-none d-lg-block small">
                 {{ $t('form.previousMonth') }}:
-                <strong v-html="$formatNumber(sheet.previousMonth, {style: 'currency', currency: currency})"></strong>
+                <money-string
+                        class="font-weight-bold"
+                        :value="sheet.previousMonth">
+                </money-string>
                 <br>
                 {{ $t('form.funds') }}:
-                <strong v-html="$formatNumber(sheet.funds, {style: 'currency', currency: currency})"></strong>
+                <money-string
+                        class="font-weight-bold"
+                        :value="sheet.funds">
+                </money-string>
                 <br>
                 {{ $t('form.budgeted') }}:
-                <strong v-html="$formatNumber(budgeted, {style: 'currency', currency: currency})"></strong>
+                <money-string
+                        class="font-weight-bold"
+                        :value="sheet.budgeted">
+                </money-string>
             </div>
         </div>
 
@@ -83,15 +96,20 @@
                             :value="row.budgeted"
                             v-on:update:value="val => updateBudget(row, val)">
                     </category-budget>
-                    <div class="budget-column-activity d-none d-lg-block"
-                         :class="[{ 'text-muted': row.activity == 0 }, 'text-dark']"
-                         v-html="$formatNumber(row.activity, {style: 'currency', currency: currency})">
+                    <div class="budget-column-activity d-none d-lg-block">
+                        <money-string
+                                class="font-weight-bold"
+                                :class="[{ 'text-muted': row.activity == 0 }, { 'text-dark': row.activity != 0 }]"
+                                :value="row.activity">
+                        </money-string>
                     </div>
                     <div class="budget-column-available">
-                        <span style="font-size: 100%" class="badge"
-                              :class="[{ 'badge-danger': available(row) < 0 }, { 'badge-success': available(row) > 0 }, { 'badge-light': available(row) == 0 }]"
-                              v-html="$formatNumber(available(row), {style: 'currency', currency: currency})">
-                        </span>
+                        <money-string
+                                style="font-size: 100%"
+                                class="badge"
+                                :class="[{ 'badge-danger': available(row) < 0 }, { 'badge-success': available(row) > 0 }, { 'badge-light': available(row) == 0 }]"
+                                :value="available(row)">
+                        </money-string>
                     </div>
                 </div>
             </draggable>
@@ -175,9 +193,6 @@
                     sum += row.budgeted;
                 });
                 return sum;
-            },
-            currency: function () {
-                return window.currency;
             },
             toBeBudgeted: function () {
                 return this.sheet.previousMonth + this.sheet.funds - this.budgeted;
