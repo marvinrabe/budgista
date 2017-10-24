@@ -99,8 +99,8 @@ Vue.component(
  */
 
 Vue.component(
-    'money-string',
-    require('./components/intl/MoneyString.vue')
+    'money-format',
+    require('./components/intl/MoneyFormat.vue')
 );
 
 Vue.component(

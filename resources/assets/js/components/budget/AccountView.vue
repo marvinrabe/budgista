@@ -10,27 +10,27 @@
                 {{ account.name }}
             </div>
             <div class="text-right d-none d-md-block">
-                <money-string
+                <money-format
                         class="font-weight-bold"
                         :class="[{ 'text-success': account.clearedBalance >= 0}, { 'text-danger': account.clearedBalance < 0}]"
                         :value="account.clearedBalance">
-                </money-string>
+                </money-format>
                 <p class="small">{{ $t('form.balance.cleared') }}</p>
             </div>
             <div class="text-right d-none d-md-block">
-                <money-string
+                <money-format
                         class="font-weight-bold"
                         :class="[{ 'text-success': account.unclearedBalance >= 0}, { 'text-danger': account.unclearedBalance < 0}]"
                         :value="account.unclearedBalance">
-                </money-string>
+                </money-format>
                 <p class="small">{{ $t('form.balance.uncleared') }}</p>
             </div>
             <div class="text-right">
-                <money-string
+                <money-format
                         class="font-weight-bold"
                         :class="[{ 'text-success': account.workingBalance >= 0}, { 'text-danger': account.workingBalance < 0}]"
                         :value="account.workingBalance">
-                </money-string>
+                </money-format>
                 <p class="small">{{ $t('form.balance.working') }}</p>
             </div>
         </div>
@@ -94,22 +94,22 @@
                     </span>
                 </div>
                 <div class="transaction-outflow">
-                    <money-string
+                    <money-format
                             v-if="item.amount < 0"
                             :value="-1*item.amount">
-                    </money-string>
+                    </money-format>
                 </div>
                 <div class="transaction-inflow">
-                    <money-string
+                    <money-format
                             v-if="item.amount >= 0"
                             :value="item.amount">
-                    </money-string>
+                    </money-format>
                 </div>
                 <div class="transaction-amount">
-                    <money-string
+                    <money-format
                             :class="[{ 'text-danger': item.amount < 0 }, { 'text-success': item.amount >= 0 }]"
                             :value="item.amount">
-                    </money-string>
+                    </money-format>
                 </div>
                 <div class="transaction-actions">
                     <router-link
