@@ -4,7 +4,7 @@
            v-show="!edit"
            v-on:click="toggleEdit"
            v-bind:class="[{ 'text-muted': mutableValue == 0 }, 'text-dark']">
-            <money-string :value="this.mutableValue"></money-string>
+            <money-format :value="this.mutableValue"></money-format>
         </a>
 
         <input type="number"

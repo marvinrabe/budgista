@@ -24,32 +24,32 @@
             <div class="text-right">
                 <div class="badge px-3"
                      :class="[{ 'badge-danger': toBeBudgeted < 0 }, { 'badge-success': toBeBudgeted >= 0 }]">
-                    <money-string
+                    <money-format
                             class="h3"
                             :value="toBeBudgeted">
-                    </money-string>
+                    </money-format>
                     <br>
                     <span class="small">{{ $t('form.toBeBudgeted') }}</span>
                 </div>
             </div>
             <div class="d-none d-lg-block small">
                 {{ $t('form.previousMonth') }}:
-                <money-string
+                <money-format
                         class="font-weight-bold"
                         :value="sheet.previousMonth">
-                </money-string>
+                </money-format>
                 <br>
                 {{ $t('form.funds') }}:
-                <money-string
+                <money-format
                         class="font-weight-bold"
                         :value="sheet.funds">
-                </money-string>
+                </money-format>
                 <br>
                 {{ $t('form.budgeted') }}:
-                <money-string
+                <money-format
                         class="font-weight-bold"
                         :value="sheet.budgeted">
-                </money-string>
+                </money-format>
             </div>
         </div>
 
@@ -99,19 +99,19 @@
                             v-on:update:value="val => updateBudget(row, val)">
                     </category-budget>
                     <div class="budget-column-activity d-none d-lg-block">
-                        <money-string
+                        <money-format
                                 class="font-weight-bold"
                                 :class="[{ 'text-muted': row.activity == 0 }, { 'text-dark': row.activity != 0 }]"
                                 :value="row.activity">
-                        </money-string>
+                        </money-format>
                     </div>
                     <div class="budget-column-available">
-                        <money-string
+                        <money-format
                                 style="font-size: 100%"
                                 class="badge"
                                 :class="[{ 'badge-danger': available(row) < 0 }, { 'badge-success': available(row) > 0 }, { 'badge-light': available(row) == 0 }]"
                                 :value="available(row)">
-                        </money-string>
+                        </money-format>
                     </div>
                 </div>
             </draggable>
