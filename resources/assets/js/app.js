@@ -32,7 +32,9 @@ const i18n = new VueI18n({
 });
 
 // Bootstrap
-Vue.use(require('bootstrap-vue'));
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue);
 
 // Router
 import VueRouter from 'vue-router'
