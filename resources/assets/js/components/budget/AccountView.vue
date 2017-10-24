@@ -170,7 +170,7 @@
     export default {
         props: ['account_id'],
         components: {
-            InfiniteLoading,
+            'infinite-loading': InfiniteLoading
         },
         computed: {
             account() {
