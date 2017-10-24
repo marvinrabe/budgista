@@ -47,11 +47,11 @@
                         v-for="account in sortedAccounts" :key="account.id"
                         :to="{ name: 'budget.account', params: { account_id: account.id }}"
                         active-class="active" class="nav-link-main">
-                        <span
+                        <money-string
                                 class="float-right mt-1 badge"
-                                :class="[{ 'badge-danger': account.workingBalance < 0 }, { 'badge-success': account.workingBalance >= 0 }]">
-                            {{ $formatNumber(account.workingBalance, {style: 'currency', currency: currency}) }}
-                        </span>
+                                :class="[{ 'badge-danger': account.workingBalance < 0 }, { 'badge-success': account.workingBalance >= 0 }]"
+                                :value="account.workingBalance">
+                        </money-string>
                     {{ account.name }}
                 </router-link>
                 <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small">
@@ -105,9 +105,6 @@
             }
         }),
         computed: {
-            currency: function () {
-                return window.currency;
-            },
             user() {
                 return this.$store.state.user;
             },

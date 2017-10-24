@@ -4,7 +4,7 @@
            v-show="!edit"
            v-on:click="toggleEdit"
            v-bind:class="[{ 'text-muted': mutableValue == 0 }, 'text-dark']">
-            {{ formattedValue }}
+            <money-string :value="this.mutableValue"></money-string>
         </a>
 
         <input type="number"
@@ -24,11 +24,6 @@
             value: {
                 type: Number,
                 required: true
-            }
-        },
-        computed: {
-            formattedValue: function () {
-                return this.$formatNumber(this.mutableValue, {style: 'currency', currency: window.currency});
             }
         },
         data: () => ({

@@ -99,6 +99,15 @@ Vue.component(
 );
 
 /**
+ * Intl
+ */
+
+Vue.component(
+    'money-string',
+    require('./components/intl/MoneyString.vue')
+);
+
+/**
  * Routes
  */
 
