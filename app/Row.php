@@ -36,9 +36,9 @@ class Row implements JsonSerializable
         return DB::table('budgets')
             ->join('categories', 'categories.id', '=', 'budgets.category_id')
             ->where([
-                    ['month', '<', (string)$this->month],
-                    ['category_id', '=', $this->category->id]
-                ])
+                ['month', '<', (string)$this->month],
+                ['category_id', '=', $this->category->id]
+            ])
             ->sum('amount');
     }
 
@@ -63,10 +63,10 @@ class Row implements JsonSerializable
             'id' => $this->category->id,
             'name' => $this->category->name,
             'month' => (string)$this->month,
-            'previousMonth' => (double)$this->getPreviousMonth(),
-            'budgeted' => (double)$this->getBudgeted(),
-            'activity' => (double)$this->getActivity(),
-            'available' => (double)$this->getAvailable(),
+            'previousMonth' => $this->getPreviousMonth(),
+            'budgeted' => $this->getBudgeted(),
+            'activity' => $this->getActivity(),
+            'available' => $this->getAvailable(),
         ];
     }
 }
