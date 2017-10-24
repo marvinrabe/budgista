@@ -77,8 +77,13 @@
                     </button>
                 </div>
                 <div class="transaction-date">
-                    {{ $formatDate(new Date(item.date), {year: 'numeric', month: '2-digit', day: '2-digit'}) }}
-                    <span v-if="item.recurring" class="fa fa-refresh" v-b-tooltip.bottom
+                    <date-format
+                            :value="item.date"
+                            :options="{year: 'numeric', month: '2-digit', day: '2-digit'}">
+                    </date-format>
+                    <span class="fa fa-refresh"
+                          v-if="item.recurring"
+                          v-b-tooltip.bottom
                           :title="humanRRule(item.rrule)">
                     </span>
                 </div>

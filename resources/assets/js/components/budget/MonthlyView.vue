@@ -1,7 +1,7 @@
 <template>
     <div v-if="sheet !== null" class="main">
 
-        <app-window :title="$formatDate(new Date(sheet.month), { year: 'numeric', month: 'long' })"></app-window>
+        <app-window :title="$t('title.budget')"></app-window>
 
         <div class="toolbar toolbar-primary">
             <app-sidebar-toggle></app-sidebar-toggle>
@@ -11,9 +11,11 @@
                    @click.prevent.stop="showPreviousMonth">
                     <span class="fa fa-chevron-left"></span>
                 </a>
-                <span class="h4 mb-sm-0">
-                    {{ $formatDate(new Date(sheet.month), {year: 'numeric', month: 'short'}) }}
-                </span>
+                <date-format
+                        class="h4 mb-sm-0"
+                        :value="sheet.month"
+                        :options="{year: 'numeric', month: 'short'}">
+                </date-format>
                 <a href="#" class="text-light" :title="$t('action.nextMonth')" @click.prevent.stop="showNextMonth">
                     <span class="fa fa-chevron-right"></span>
                 </a>

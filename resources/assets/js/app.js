@@ -31,10 +31,6 @@ const i18n = new VueI18n({
     silentTranslationWarn: process.env.NODE_ENV === 'production'
 });
 
-// Currencies
-Vue.use(require('vue-intl'));
-Vue.setLocale(window.locale);
-
 // Bootstrap
 Vue.use(require('bootstrap-vue'));
 
@@ -105,6 +101,11 @@ Vue.component(
 Vue.component(
     'money-string',
     require('./components/intl/MoneyString.vue')
+);
+
+Vue.component(
+    'date-format',
+    require('./components/intl/DateFormat.vue')
 );
 
 /**
