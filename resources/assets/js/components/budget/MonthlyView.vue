@@ -182,11 +182,12 @@
 
 <script>
     import draggable from 'vuedraggable'
+    import CategoryBudget from './CategoryBudget.vue'
 
     export default {
         components: {
-            draggable,
-            'category-budget': require('./CategoryBudget.vue')
+            'draggable': draggable,
+            'category-budget': CategoryBudget
         },
         computed: {
             budgeted: function () {

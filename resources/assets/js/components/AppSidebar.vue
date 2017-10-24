@@ -96,7 +96,7 @@
 
     export default {
         components: {
-            AppLogout
+            'app-logout': AppLogout
         },
         data: () => ({
             newAccount: {
@@ -114,7 +114,7 @@
             ])
         },
         created: function () {
-            this.$refs['menu'].addEventListener("transitionend", OnTransitionEnd, false);
+            //this.$refs['menu'].addEventListener("transitionend", OnTransitionEnd, false);
         },
         methods: {
 
