@@ -48,7 +48,8 @@ class MonthlyBudget implements JsonSerializable
         return $funds - $budgeted;
     }
 
-    private function getCategoryBudgetSum() {
+    private function getCategoryBudgetSum()
+    {
         return DB::table('budgets')
             ->join('categories', 'categories.id', '=', 'budgets.category_id')
             ->where([
@@ -96,10 +97,10 @@ class MonthlyBudget implements JsonSerializable
     {
         return [
             'month' => (string)$this->month,
-            'previousMonth' => (double)$this->getPreviousMonthAvailable(),
-            'budgeted' => (double)$this->getBudgeted(),
-            'funds' => (double)$this->getFunds(),
-            'available' => (double)$this->getAvailable(),
+            'previousMonth' => $this->getPreviousMonthAvailable(),
+            'budgeted' => $this->getBudgeted(),
+            'funds' => $this->getFunds(),
+            'available' => $this->getAvailable(),
             'rows' => $this->rows
         ];
     }

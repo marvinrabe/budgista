@@ -17,9 +17,9 @@ class Account extends Resource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'clearedBalance' => (double) $this->clearedBalance(),
-            'unclearedBalance' => (double) $this->unclearedBalance(),
-            'workingBalance' => (double) $this->workingBalance(),
+            'clearedBalance' => $this->clearedBalance(),
+            'unclearedBalance' => $this->unclearedBalance(),
+            'workingBalance' => $this->workingBalance(),
         ];
     }
 }
