@@ -1,11 +1,11 @@
 <template>
     <input class="form-control"
            type="tel"
-           :step="step"
            ref="input"
+           v-bind:step="step"
            v-on:focus="selectAll"
-           v-on:enter="updateValue($event.target.value)"
-           v-on:blur="updateValue($event.target.value)"/>
+           v-on:keyup.enter="updateValue"
+           v-on:blur="updateValue" />
 </template>
 
 <script>
@@ -65,7 +65,8 @@
                 // return real number
                 return result;
             },
-            updateValue: function (value) {
+            updateValue: function () {
+                let value = this.$refs.input.value;
                 let result = this.unformat(value);
                 this.$emit('update:value', Math.round(result / this.step));
             },
