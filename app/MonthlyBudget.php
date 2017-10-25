@@ -97,10 +97,10 @@ class MonthlyBudget implements JsonSerializable
     {
         return [
             'month' => (string)$this->month,
-            'previousMonth' => $this->getPreviousMonthAvailable(),
-            'budgeted' => $this->getBudgeted(),
-            'funds' => $this->getFunds(),
-            'available' => $this->getAvailable(),
+            'previousMonth' => (int)$this->getPreviousMonthAvailable(),
+            'budgeted' => (int)$this->getBudgeted(),
+            'funds' => (int)$this->getFunds(),
+            'available' => (int)$this->getAvailable(),
             'rows' => $this->rows
         ];
     }

@@ -63,10 +63,10 @@ class Row implements JsonSerializable
             'id' => $this->category->id,
             'name' => $this->category->name,
             'month' => (string)$this->month,
-            'previousMonth' => $this->getPreviousMonth(),
-            'budgeted' => $this->getBudgeted(),
-            'activity' => $this->getActivity(),
-            'available' => $this->getAvailable(),
+            'previousMonth' => (int)$this->getPreviousMonth(),
+            'budgeted' => (int)$this->getBudgeted(),
+            'activity' => (int)$this->getActivity(),
+            'available' => (int)$this->getAvailable(),
         ];
     }
 }
