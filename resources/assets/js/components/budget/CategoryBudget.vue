@@ -9,10 +9,10 @@
 
         <money-input
                 class="text-right py-0 px-1"
-                :value="mutableValue"
-                @update:value="val => saveEdit(val)"
+                ref="input"
                 v-show="edit"
-                ref="input">
+                v-bind:value="mutableValue"
+                v-on:update:value="val => saveEdit(val)">
         </money-input>
     </div>
 </template>
