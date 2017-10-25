@@ -68,6 +68,7 @@
             updateValue: function (value) {
                 let result = this.unformat(value);
                 this.$emit('update:value', Math.round(result / this.step));
+                this.formatValue(result);
             },
             formatValue: function (value) {
                 this.$refs.input.value = this.format(value);
