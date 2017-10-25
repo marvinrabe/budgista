@@ -1,5 +1,5 @@
 <template>
-    <div class="budget-column-budget" v-bind:class="[{ 'py-0': edit}]">
+    <div class="budget-column-budget">
         <a class="dummy-input"
            v-show="!edit"
            v-on:click="toggleEdit"
@@ -7,14 +7,13 @@
             <money-format :value="this.mutableValue"></money-format>
         </a>
 
-        <input type="number"
-               class="form-control form-control-sm text-right"
-               step="0.01"
-               v-model="mutableValue"
-               ref="input"
-               v-show="edit"
-               v-on:keyup.enter="saveEdit"
-               v-on:blur="saveEdit">
+        <money-input
+                class="text-right py-0 px-1"
+                :value="mutableValue"
+                @update:value="val => saveEdit(val)"
+                v-show="edit"
+                ref="input">
+        </money-input>
     </div>
 </template>
 
@@ -40,24 +39,24 @@
         },
         methods: {
             toggleEdit: function () {
-                let input = this.$refs.input;
+                let input = this.$refs.input.$el;
                 this.edit = true;
 
                 // Focus input field
                 if (this.edit) {
                     Vue.nextTick(function () {
                         input.focus();
-                        input.select();
                     });
                 }
             },
 
-            saveEdit: function () {
+            saveEdit: function (value) {
                 if (this.edit) {
-                    let result = parseFloat(this.mutableValue);
+                    let result = parseInt(value);
                     if (isNaN(result)) {
                         result = 0;
                     }
+                    this.mutableValue = result;
                     this.$emit('update:value', result);
                     this.edit = false;
                 }

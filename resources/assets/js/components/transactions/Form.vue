@@ -40,12 +40,13 @@
 
                         </div>
 
-                        <input id="amount" type="number" class="form-control" step="0.01" autofocus
-                               autocomplete="off"
-                               v-model="amount"
-                               v-validate.initial="'required'"
-                               data-vv-name="amount"
-                               :data-vv-as="$t('form.amount')">
+                        <money-input
+                            id="amount"
+                            :value.sync="amount"
+                            v-validate.initial="'required'"
+                            data-vv-name="amount"
+                            :data-vv-as="$t('form.amount')">
+                        </money-input>
                     </div>
                     <span class="invalid-feedback">{{ errors.first('transaction.amount') }}</span>
                 </div>
@@ -170,7 +171,7 @@
         },
         data: () => ({
             'type': EXPENSE,
-            'amount': '',
+            'amount': 0,
             'date': new Date().toISOString().slice(0, 10),
             'recurring': false,
             'freq': RRule.MONTHLY,
@@ -212,7 +213,7 @@
 
                 // Reset Data
                 this.type = EXPENSE;
-                this.amount = '';
+                this.amount = 0;
                 this.date = new Date().toISOString().slice(0, 10);
                 this.payee = '';
                 this.category = '';

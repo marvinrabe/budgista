@@ -106,6 +106,11 @@ Vue.component(
 );
 
 Vue.component(
+    'money-input',
+    require('./components/intl/MoneyInput.vue')
+);
+
+Vue.component(
     'date-format',
     require('./components/intl/DateFormat.vue')
 );
