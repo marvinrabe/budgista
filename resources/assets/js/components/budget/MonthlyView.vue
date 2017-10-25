@@ -94,13 +94,17 @@
                             {{ row.name }}
                         </a>
                     </div>
-                    <category-budget
-                            :value="row.budgeted"
-                            v-on:update:value="val => updateBudget(row, val)">
-                    </category-budget>
+                    <div class="budget-column-budget">
+                        <money-input
+                                class="text-right py-0 px-1 border-0"
+                                ref="input"
+                                v-bind:class="[{ 'text-muted': row.budgeted == 0 }, { 'text-dark': row.budgeted != 0 }]"
+                                v-bind:value="row.budgeted"
+                                v-on:update:value="val => updateBudget(row, val)">
+                        </money-input>
+                    </div>
                     <div class="budget-column-activity d-none d-lg-block">
                         <money-format
-                                class="font-weight-bold"
                                 :class="[{ 'text-muted': row.activity == 0 }, { 'text-dark': row.activity != 0 }]"
                                 :value="row.activity">
                         </money-format>
@@ -182,12 +186,10 @@
 
 <script>
     import draggable from 'vuedraggable'
-    import CategoryBudget from './CategoryBudget.vue'
 
     export default {
         components: {
-            'draggable': draggable,
-            'category-budget': CategoryBudget
+            'draggable': draggable
         },
         computed: {
             budgeted: function () {

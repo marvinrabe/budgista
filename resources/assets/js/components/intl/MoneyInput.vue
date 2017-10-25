@@ -4,8 +4,8 @@
            ref="input"
            v-bind:step="step"
            v-on:focus="selectAll"
-           v-on:keyup.enter="updateValue"
-           v-on:blur="updateValue" />
+           v-on:keyup.enter="updateValue($event.target.value); $event.target.blur()"
+           v-on:blur="updateValue($event.target.value)" />
 </template>
 
 <script>
@@ -65,8 +65,7 @@
                 // return real number
                 return result;
             },
-            updateValue: function () {
-                let value = this.$refs.input.value;
+            updateValue: function (value) {
                 let result = this.unformat(value);
                 this.$emit('update:value', Math.round(result / this.step));
             },
