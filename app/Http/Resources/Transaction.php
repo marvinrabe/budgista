@@ -20,7 +20,7 @@ class Transaction extends Resource
             'payee' => $this->payee,
             'account_id' => $this->account->id,
             'category' => $this->category !== null?new Category($this->category):null,
-            'amount' => $this->amount,
+            'amount' => (int)$this->amount,
             'recurring' => (boolean) $this->recurring,
             'rrule' => $this->recurring?$this->rrule->rfcString():null,
             'cleared' => (boolean)$this->cleared,
