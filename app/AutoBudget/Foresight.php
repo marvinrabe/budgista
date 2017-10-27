@@ -10,30 +10,45 @@ use RRule\RRule;
 class Foresight
 {
 
-    private $transactions;
+    private $upcomingTransactions;
 
-    public function __construct(Collection $transactions)
+    private $previouslySavedMoney;
+
+    public function __construct(Collection $upcomingTransactions, $previouslySavedMoney = 0)
     {
-        $this->transactions = $transactions;
+        $this->upcomingTransactions = $upcomingTransactions;
+        $this->previouslySavedMoney = $previouslySavedMoney;
     }
 
-    public function minimumMonthlyBudget() {
+    public function split()
+    {
+        if (count($this->upcomingTransactions) == 0) {
+            return 0;
+        }
+
+        return $this->previouslySavedMoney / count($this->upcomingTransactions);
+    }
+
+    public function minimumMonthlyBudget()
+    {
         $sum = 0;
-        foreach($this->transactions as $transaction) {
+        foreach ($this->upcomingTransactions as $transaction) {
             $sum += $this->calculateForTransaction($transaction);
         }
-        return $sum;
+        return $sum >= 0? $sum : 0;
     }
 
-    private function calculateForTransaction(Transaction $transaction) {
-        if($transaction->recurring) {
+    private function calculateForTransaction(Transaction $transaction)
+    {
+        if ($transaction->recurring) {
             return $this->calculateRecurringTransaction($transaction);
         }
 
         return $this->calculateNonrecurringTransaction($transaction);
     }
 
-    private function calculateRecurringTransaction(Transaction $transaction) {
+    private function calculateRecurringTransaction(Transaction $transaction)
+    {
         /**
          * @var RRule $rrule
          */
@@ -42,25 +57,25 @@ class Foresight
         $lastPossibleDate = Carbon::now()->addYear(1)->lastOfMonth();
 
         $sum = 0;
-        foreach ( $rrule as $occurrence ) {
-            if($occurrence > $lastPossibleDate) {
+        foreach ($rrule as $occurrence) {
+            if ($occurrence > $lastPossibleDate) {
                 break;
             }
             $sum += $transaction->amount;
         }
 
-        return $sum / 12;
+        return round(($sum - $this->split()) / 12);
     }
 
     private function calculateNonrecurringTransaction(Transaction $transaction)
     {
-        $diffInMonths = Carbon::now()->diffInMonths($transaction->date);
+        $diffInMonths = Carbon::now()->diffInMonths($transaction->date->lastOfMonth());
 
-        if($diffInMonths === 0) {
-            return $transaction->amount;
+        if ($diffInMonths === 0) {
+            return $transaction->amount - $this->split();
         }
 
-        return round($transaction->amount / ($diffInMonths+1));
+        return round(($transaction->amount - $this->split()) / ($diffInMonths + 1));
     }
 
 }

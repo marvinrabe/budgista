@@ -27,6 +27,21 @@ class ForesightTest extends TestCase
     }
 
     /** @test */
+    public function test_previously_saved_money_affects_value() {
+        $transaction = new Transaction();
+        $transaction->date = Carbon::now()->addMonth()->firstOfMonth();
+        $transaction->amount = 30;
+
+        $transactions = collect([$transaction]);
+
+        $foresight = new Foresight($transactions, 10);
+
+        $budget = $foresight->minimumMonthlyBudget();
+
+        $this->assertEquals(10, $budget);
+    }
+
+    /** @test */
     public function split_future_recurring_transactions_by_month() {
         $transaction = new Transaction();
         $transaction->date = Carbon::now()->addMonth(1);

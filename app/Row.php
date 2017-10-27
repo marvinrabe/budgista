@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\AutoBudget\Foresight;
 use App\Models\Category;
 use App\Models\Budget;
 use Illuminate\Support\Facades\DB;
@@ -42,19 +43,27 @@ class Row implements JsonSerializable
             ->sum('amount');
     }
 
-    public function getBudgeted()
+    public function budget()
     {
-        return $this->category->month($this->month)->amount + 0;
+        return $this->category->budgetedIn($this->month)->amount + 0;
     }
 
-    public function getActivity()
+    public function activity()
     {
         return $this->category->transactions()->whereBetween('date', [$this->month->previous()->lastDay(), $this->month->lastDay()])->sum('amount');
     }
 
-    public function getAvailable()
+    public function available()
     {
-        return $this->getPreviousMonth() + $this->getBudgeted() + $this->getActivity();
+        return $this->getPreviousMonth() + $this->budget() + $this->activity();
+    }
+
+    public function recommendedBudget()
+    {
+        $upcomingTransactions = $this->category->transactions()->where('date', '>=', $this->month->firstDay())->get();
+        $previouslySavedMoney = $this->getPreviousMonth();
+
+        return (new Foresight($upcomingTransactions, $previouslySavedMoney))->minimumMonthlyBudget();
     }
 
     function jsonSerialize()
@@ -64,9 +73,11 @@ class Row implements JsonSerializable
             'name' => $this->category->name,
             'month' => (string)$this->month,
             'previousMonth' => (int)$this->getPreviousMonth(),
-            'budgeted' => (int)$this->getBudgeted(),
-            'activity' => (int)$this->getActivity(),
-            'available' => (int)$this->getAvailable(),
+            'budgeted' => (int)$this->budget(),
+            'activity' => (int)$this->activity(),
+            'available' => (int)$this->available(),
+            'recommendedBudget' => (int)$this->recommendedBudget()
         ];
     }
+
 }

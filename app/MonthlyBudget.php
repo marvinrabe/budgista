@@ -76,7 +76,7 @@ class MonthlyBudget implements JsonSerializable
     {
         $sum = 0;
         foreach ($this->rows as $row) {
-            $sum += $row->getBudgeted();
+            $sum += $row->budget();
         }
         return $sum;
     }
