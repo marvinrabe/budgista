@@ -73,7 +73,7 @@ class CategoryController extends Controller
 
         $month = Month::fromString(request('month'));
 
-        $categoryBudget = $category->month($month);
+        $categoryBudget = $category->budgetedIn($month);
         $categoryBudget->amount = request('amount');
         $categoryBudget->save();
 

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category;
 use App\Month;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -24,7 +25,7 @@ class MonthlyBudget extends TestCase
             $month->previous()->lastDay()
         ];
 
-        foreach($dates as $date) {
+        foreach ($dates as $date) {
             factory(\App\Models\Transaction::class)->create([
                 'amount' => 10,
                 'date' => $date,
@@ -40,6 +41,45 @@ class MonthlyBudget extends TestCase
         $response->assertJson([
             'data' => [
                 'funds' => 20
+            ]
+        ]);
+    }
+
+    /** @test */
+    public function calculate_minimum_budgeted()
+    {
+
+        $user = $this->signIn();
+
+        $month = Month::current();
+
+        /**
+         * @var Category $category
+         */
+        $category = $user->categories()->first();
+        $budgetLastMonth = $category->budgetedIn($month->previous());
+
+        $budgetLastMonth->amount = 10;
+        $budgetLastMonth->save();
+
+        factory(\App\Models\Transaction::class)->create([
+            'amount' => 30,
+            'date' => $month->next()->firstDay(),
+            'account_id' => $user->accounts()->first()->id,
+            'category_id' => $category->id
+        ]);
+
+        $response = $this->get('/api/month/' . $month);
+
+        $response->assertStatus(200);
+
+        $response->assertJson([
+            'data' => [
+                'rows' => [[
+                    'id' => $category->id,
+                    'previousMonth' => 10,
+                    'recommendedBudget' => 10
+                ]]
             ]
         ]);
     }

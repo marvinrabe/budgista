@@ -5,6 +5,7 @@ namespace App\Models;
 use Alsofronie\Uuid\UuidModelTrait;
 use App\AutoBudget\AutoBudget;
 use App\Models\Traits\BelongsToUserTrait;
+use App\Month;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,11 +33,11 @@ class Category extends Model
         return $this->hasMany('App\Models\Budget');
     }
 
-    public function month($month)
+    public function budgetedIn(Month $month)
     {
         return Budget::firstOrNew([
             'category_id' => $this->id,
-            'month' => $month
+            'month' => (string)$month
         ]);
     }
 
