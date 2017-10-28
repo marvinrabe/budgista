@@ -15,24 +15,35 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => ['auth:api']], function () {
 
-    Route::get('/user', 'API\UserController@show')->name('user');
+    /*
+     * User
+     */
+    Route::get('user', 'API\UserController@show')->name('user');
 
-    Route::get('/month/{month?}', 'API\MonthlyBudgetController@show')->name('month');
+    /*
+     * Budget
+     */
+    Route::get('month/{month?}', 'API\MonthlyBudgetController@show')->name('month');
 
-    Route::resource('categories', 'API\CategoryController', ['only' => [
-        'index', 'store', 'update', 'destroy'
+    /*
+     * Categories
+     */
+    Route::put('categories/sort', 'API\CategoryController@sort')->name('categories.sort');
+    Route::put('categories/{category}/budget', 'API\CategoryController@budget')->name('categories.budget');
+    Route::apiResource('categories', 'API\CategoryController');
+
+    /*
+     * Accounts
+     */
+    Route::get('accounts/{account}/transactions', 'API\AccountController@transactions')->name('accounts.transactions');
+    Route::apiResource('accounts', 'API\AccountController');
+
+    /*
+     * Transactions
+     */
+    Route::put('transactions/{transaction}/clear', 'API\TransactionController@clear')->name('transactions.clear');
+    Route::apiResource('transactions', 'API\TransactionController', ['except' => [
+        'index'
     ]]);
-    Route::put('/categories/sort', 'API\CategoryController@sort')->name('categories.sort');
-    Route::put('/categories/{category}/budget', 'API\CategoryController@budget')->name('categories.budget');
-
-    Route::resource('accounts', 'API\AccountController', ['only' => [
-        'index', 'store', 'show', 'update', 'destroy'
-    ]]);
-    Route::get('/accounts/{account}/transactions', 'API\AccountController@transactions')->name('accounts.transactions');
-
-    Route::resource('transactions', 'API\TransactionController', ['only' => [
-        'store', 'show', 'update', 'destroy'
-    ]]);
-    Route::put('/transactions/{transaction}/clear', 'API\TransactionController@clear')->name('transactions.clear');
 
 });

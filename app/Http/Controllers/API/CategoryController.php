@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Category as CategoryResource;
 use App\Models\Category;
 use App\Month;
 use App\Row;
@@ -19,7 +20,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        return CategoryResource::collection(Auth::user()->categories()->get());
+        return CategoryResource::collection(Auth::user()->categories);
     }
 
     public function store(Request $request)
@@ -38,6 +39,11 @@ class CategoryController extends Controller
             'id' => $category->id,
             'name' => $category->name
         ];
+    }
+
+    public function show(Category $category)
+    {
+        return new CategoryResource($category);
     }
 
     public function update(Request $request, Category $category)
