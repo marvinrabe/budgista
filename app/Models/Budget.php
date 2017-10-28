@@ -6,10 +6,14 @@ use App\Models\Traits\BelongsToUserTrait;
 use App\Models\Traits\HasCompositePrimaryKeyTrait;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property Category $category
+ */
 class Budget extends Model
 {
 
-    use BelongsToUserTrait, HasCompositePrimaryKeyTrait;
+    use BelongsToUserTrait,
+        HasCompositePrimaryKeyTrait;
 
     public $timestamps = false;
 

@@ -8,8 +8,13 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @property Account[] $accounts
+ * @property Category[] $categories
+ */
 class User extends Authenticatable
 {
+
     use HasApiTokens, Notifiable;
 
     /**
@@ -40,7 +45,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Category');
     }
 
-    public function month(Month $month)
+    public function budget(Month $month)
     {
         return new MonthlyBudget($this, $month);
     }

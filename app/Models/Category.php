@@ -9,10 +9,15 @@ use App\Month;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property Budget[] $budgets
+ * @property Transaction[] $transactions
+ */
 class Category extends Model
 {
 
-    use UuidModelTrait, BelongsToUserTrait;
+    use UuidModelTrait,
+        BelongsToUserTrait;
 
     protected static function boot()
     {
@@ -33,7 +38,13 @@ class Category extends Model
         return $this->hasMany('App\Models\Budget');
     }
 
-    public function budgetedIn(Month $month)
+    /**
+     * Returns the budget of this category for a specific month.
+     *
+     * @param Month $month
+     * @return Budget
+     */
+    public function budgetIn(Month $month)
     {
         return Budget::firstOrNew([
             'category_id' => $this->id,
