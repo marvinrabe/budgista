@@ -45,7 +45,7 @@ class Row implements JsonSerializable
 
     public function budget()
     {
-        return $this->category->budgetedIn($this->month)->amount + 0;
+        return $this->category->budgetIn($this->month)->amount + 0;
     }
 
     public function activity()

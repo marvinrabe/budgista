@@ -6,6 +6,10 @@ use Alsofronie\Uuid\UuidModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use RRule\RRule;
 
+/**
+ * @property Account $account
+ * @property Category $category
+ */
 class Transaction extends Model
 {
 

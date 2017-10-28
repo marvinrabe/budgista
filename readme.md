@@ -1,8 +1,6 @@
-<div style="float: right;">
-[![CircleCI](https://circleci.com/bb/marvinrabe/budgista/tree/develop.svg?style=svg&circle-token=fe9198d5d2b9a92602ea1ea275d2b1dfe5397d4f)](https://circleci.com/bb/marvinrabe/budgista/tree/develop)
-</div>
-
 # Budgista
+
+[![CircleCI](https://circleci.com/bb/marvinrabe/budgista/tree/develop.svg?style=svg&circle-token=fe9198d5d2b9a92602ea1ea275d2b1dfe5397d4f)](https://circleci.com/bb/marvinrabe/budgista/tree/develop)
 
 ## Local Development
 

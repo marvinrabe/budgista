@@ -14,7 +14,7 @@ class MonthlyBudgetController extends Controller
         $month = $this->getMonth($month);
 
         return [
-            'data' => Auth::user()->month($month),
+            'data' => Auth::user()->budget($month),
             'links' => [
                 'prev' => route('month', ['month' => $month->previous()]),
                 'next' => route('month', ['month' => $month->next()])

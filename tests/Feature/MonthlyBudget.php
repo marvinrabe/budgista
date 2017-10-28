@@ -57,7 +57,7 @@ class MonthlyBudget extends TestCase
          * @var Category $category
          */
         $category = $user->categories()->first();
-        $budgetLastMonth = $category->budgetedIn($month->previous());
+        $budgetLastMonth = $category->budgetIn($month->previous());
 
         $budgetLastMonth->amount = 10;
         $budgetLastMonth->save();
