@@ -36,7 +36,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'secret'
         ]);
 
-        $response->assertRedirect();
+        $response->assertRedirect(route('app'));
 
         $user = User::where('email', 'john.doe@example.com')->first();
 
