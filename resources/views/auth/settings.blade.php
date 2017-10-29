@@ -32,6 +32,15 @@
         </div>
 
         <div class="form-group">
+            <label for="language">{{ trans('Language') }}</label>
+            <select id="language" name="language" class="form-control">
+                @foreach(array_intersect_key(Language::all(), array_flip(config('app.available_locales'))) as $key => $name)
+                    <option value="{{ $key }}" {{ ($key == $user->language)?'selected':'' }}>{{ $name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
             <label for="locale">{{ trans('Locale') }}</label>
             <select id="locale" name="locale" class="form-control">
                 @foreach(Language::all() as $key => $name)

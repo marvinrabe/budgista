@@ -5,6 +5,7 @@ export const state = {
         name: '',
         email: ''
     },
+    language: 'en',
     locale: 'en',
     currency: 'EUR',
     loading: true
@@ -15,8 +16,9 @@ export const mutations = {
         state.user.name = user.name;
         state.user.email = user.email;
 
-        state.locale = user.locale;
-        state.currency = user.currency;
+        state.language = user.localization.language;
+        state.locale = user.localization.locale;
+        state.currency = user.localization.currency;
 
         state.loading = false;
     }
