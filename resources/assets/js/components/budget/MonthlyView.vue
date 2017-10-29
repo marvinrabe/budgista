@@ -122,8 +122,8 @@
                                 class="badge badge-warning"
                                 v-if="row.recommendedBudget > 0 && row.recommendedBudget > row.budgeted"
                                 v-bind:value="available(row)"
-                                v-b-tooltip.bottom
-                                v-bind:title="$t('form.recommendedBudget')+': '+(row.recommendedBudget/100)">
+                                v-b-tooltip.left
+                                v-bind:title="$t('form.recommendedBudget')+': '+$formatMoney(row.recommendedBudget)">
                         </money-format>
                     </div>
                 </div>

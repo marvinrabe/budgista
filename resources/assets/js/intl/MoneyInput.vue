@@ -17,11 +17,11 @@
             }
         },
         mounted: function () {
-            this.formatValue(this.value * this.step)
+            this.formatValue(this.value)
         },
         watch: {
             value: function (newValue) {
-                this.formatValue(newValue * this.step)
+                this.formatValue(newValue)
             }
         },
         computed: {
@@ -66,12 +66,12 @@
                 return result;
             },
             updateValue: function (value) {
-                let result = this.unformat(value);
-                this.$emit('update:value', Math.round(result / this.step));
+                let result = Math.round(this.unformat(value) / this.step);
+                this.$emit('update:value', result);
                 this.formatValue(result);
             },
             formatValue: function (value) {
-                this.$refs.input.value = this.format(value);
+                this.$refs.input.value = this.$formatMoney(value);
             },
             selectAll: function (event) {
                 setTimeout(function () {
