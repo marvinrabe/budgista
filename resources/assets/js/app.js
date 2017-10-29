@@ -100,20 +100,9 @@ Vue.component(
  * Intl
  */
 
-Vue.component(
-    'money-format',
-    require('./components/intl/MoneyFormat.vue')
-);
+import AppIntl from './intl'
 
-Vue.component(
-    'money-input',
-    require('./components/intl/MoneyInput.vue')
-);
-
-Vue.component(
-    'date-format',
-    require('./components/intl/DateFormat.vue')
-);
+Vue.use(AppIntl);
 
 /**
  * Routes
