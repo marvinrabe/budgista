@@ -13,11 +13,11 @@
 
 Auth::routes();
 
+Route::get('/', 'HomeController@index')->name('home');
+
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/account/{any?}', 'HomeController@index');
-    Route::get('/transaction/{any?}', 'HomeController@index');
+    Route::get('/app', 'AppController@index')->name('app');
 
     Route::get('/settings', 'Auth\SettingsController@get')->name('settings');
     Route::put('/settings', 'Auth\SettingsController@put')->name('settings.store');
