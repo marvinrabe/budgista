@@ -14,31 +14,46 @@ class ForesightTest extends TestCase
     /** @test */
     public function split_future_nonrecurring_transactions_by_month() {
         $transaction = new Transaction();
-        $transaction->date = Carbon::now()->addMonth(2);
-        $transaction->amount = 30;
+        $transaction->date = Carbon::now()->addMonth();
+        $transaction->amount = -12000;
 
         $transactions = collect([$transaction]);
 
-        $foresight = new Foresight($transactions);
+        $foresight = new Foresight(Carbon::now()->firstOfMonth(), $transactions);
 
-        $budget = $foresight->minimumMonthlyBudget();
+        $budget = $foresight->recommendedBudget();
 
-        $this->assertEquals(10, $budget);
+        $this->assertEquals(6000, $budget);
     }
 
     /** @test */
     public function test_previously_saved_money_affects_value() {
         $transaction = new Transaction();
         $transaction->date = Carbon::now()->addMonth()->firstOfMonth();
-        $transaction->amount = 30;
+        $transaction->amount = -30;
 
         $transactions = collect([$transaction]);
 
-        $foresight = new Foresight($transactions, 10);
+        $foresight = new Foresight(Carbon::now(), $transactions, 10);
 
-        $budget = $foresight->minimumMonthlyBudget();
+        $budget = $foresight->recommendedBudget();
 
         $this->assertEquals(10, $budget);
+    }
+
+    /** @test */
+    public function test_previously_saved_money_reduces_this_month_required() {
+        $transaction = new Transaction();
+        $transaction->date = Carbon::now();
+        $transaction->amount = -120;
+
+        $transactions = collect([$transaction]);
+
+        $foresight = new Foresight(Carbon::now(), $transactions, 60);
+
+        $budget = $foresight->recommendedBudget();
+
+        $this->assertEquals(60, $budget);
     }
 
     /** @test */
@@ -49,13 +64,13 @@ class ForesightTest extends TestCase
             'FREQ' => 'MONTHLY',
             'INTERVAL' => 2
         ]);
-        $transaction->amount = 20;
+        $transaction->amount = -20;
 
         $transactions = collect([$transaction]);
 
-        $foresight = new Foresight($transactions);
+        $foresight = new Foresight(Carbon::now(), $transactions);
 
-        $budget = $foresight->minimumMonthlyBudget();
+        $budget = $foresight->recommendedBudget();
 
         $this->assertEquals(10, $budget);
     }

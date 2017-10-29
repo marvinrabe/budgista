@@ -37,6 +37,7 @@
         "activity": "Activity",
         "nullCategory": "To be Budgeted",
         "available": "Available",
+        "recommendedBudget": "Recommended Budget",
         "funds": "Funds",
         "toBeBudgeted": "To be Budgeted",
         "previousMonth": "Previous Month",

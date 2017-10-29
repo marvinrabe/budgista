@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Category;
 use Carbon\Carbon;
 
 class Month
@@ -60,11 +61,17 @@ class Month
         return new self($nextMonth->year, $nextMonth->month);
     }
 
+    /**
+     * @return Carbon
+     */
     public function firstDay()
     {
         return (clone $this->date)->firstOfMonth();
     }
 
+    /**
+     * @return Carbon
+     */
     public function lastDay()
     {
         return (clone $this->date)->lastOfMonth();

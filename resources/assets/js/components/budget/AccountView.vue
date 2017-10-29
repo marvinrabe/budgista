@@ -70,8 +70,8 @@
                  v-for="(item, index) of transactions" :key="index">
                 <div class="transaction-clear">
                     <button class="btn btn-xs"
-                            :class="[{ 'btn-success': item.cleared }, {'btn-light': !item.cleared}]"
                             v-if="new Date(item.date) <= new Date()"
+                            v-bind:class="[{ 'btn-success': item.cleared }, {'btn-light': !item.cleared}]"
                             v-on:click="toggleCleared(item)">
                         <span class="fa fa-check"></span>
                     </button>
@@ -84,7 +84,7 @@
                     <span class="fa fa-refresh"
                           v-if="item.recurring"
                           v-b-tooltip.bottom
-                          :title="humanRRule(item.rrule)">
+                          v-bind:title="humanRRule(item.rrule)">
                     </span>
                 </div>
                 <div class="transaction-payee">{{ item.payee }}</div>
