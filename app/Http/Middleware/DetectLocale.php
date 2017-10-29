@@ -28,7 +28,7 @@ class DetectLocale
                 $language = Cookie::get('language');
             }
         } else {
-            $language = Auth::user()->locale;
+            $language = Auth::user()->language;
         }
 
         if (!in_array($language, $languages)) {

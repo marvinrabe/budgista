@@ -22,6 +22,7 @@ class SettingsController
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:191|unique:users,email,' . $user->id,
             'password' => 'nullable|string|confirmed|min:6',
+            'language' => 'required',
             'locale' => 'required',
             'currency' => 'required'
         ]);
@@ -30,6 +31,7 @@ class SettingsController
             request([
                 'name',
                 'email',
+                'language',
                 'locale',
                 'currency'
             ])

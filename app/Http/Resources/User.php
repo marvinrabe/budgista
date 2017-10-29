@@ -17,22 +17,25 @@ class User extends Resource
         return [
             'name' => $this->name,
             'email' => $this->email,
-            'currency' => $this->currency,
-            'locale' => $this->locale
+            'localization' => [
+                'language' => $this->language,
+                'locale' => $this->locale,
+                'currency' => $this->currency
+            ]
         ];
     }
 
     /**
      * Get additional data that should be returned with the resource array.
      *
-     * @param \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function with($request)
     {
         return [
-            'categories' => Category::collection($this->categories()->get()),
-            'accounts' => Account::collection($this->accounts()->get())
+            'categories' => Category::collection($this->categories),
+            'accounts' => Account::collection($this->accounts)
         ];
     }
 }
