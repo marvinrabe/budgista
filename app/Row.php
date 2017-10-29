@@ -63,7 +63,7 @@ class Row implements JsonSerializable
         $upcomingTransactions = $this->category->transactions()->where('date', '>=', $this->month->firstDay())->get();
         $previouslySavedMoney = $this->getPreviousMonth();
 
-        return (new Foresight($upcomingTransactions, $previouslySavedMoney))->minimumMonthlyBudget();
+        return (new Foresight($this->month->firstDay(), $upcomingTransactions, $previouslySavedMoney))->recommendedBudget();
     }
 
     function jsonSerialize()

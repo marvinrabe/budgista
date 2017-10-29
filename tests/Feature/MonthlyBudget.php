@@ -63,7 +63,7 @@ class MonthlyBudget extends TestCase
         $budgetLastMonth->save();
 
         factory(\App\Models\Transaction::class)->create([
-            'amount' => 30,
+            'amount' => -30,
             'date' => $month->next()->firstDay(),
             'account_id' => $user->accounts()->first()->id,
             'category_id' => $category->id

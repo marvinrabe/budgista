@@ -89,7 +89,7 @@
                     </div>
                     <div class="budget-column-name">
                         <a class="link-action text-dark"
-                           :title="$t('action.edit.category')"
+                           v-bind:title="$t('action.edit.category')"
                            v-on:click="showEditCategoryModal(row)">
                             {{ row.name }}
                         </a>
@@ -105,16 +105,25 @@
                     </div>
                     <div class="budget-column-activity d-none d-lg-block">
                         <money-format
-                                :class="[{ 'text-muted': row.activity == 0 }, { 'text-dark': row.activity != 0 }]"
-                                :value="row.activity">
+                                v-bind:class="[{ 'text-muted': row.activity == 0 }, { 'text-dark': row.activity != 0 }]"
+                                v-bind:value="row.activity">
                         </money-format>
                     </div>
                     <div class="budget-column-available">
                         <money-format
                                 style="font-size: 100%"
                                 class="badge"
-                                :class="[{ 'badge-danger': available(row) < 0 }, { 'badge-success': available(row) > 0 }, { 'badge-light': available(row) == 0 }]"
-                                :value="available(row)">
+                                v-if="(row.recommendedBudget > 0 && row.recommendedBudget <= row.budgeted) || row.recommendedBudget <= 0"
+                                v-bind:class="[{ 'badge-danger': available(row) < 0 }, { 'badge-success': available(row) > 0 }, { 'badge-light': available(row) == 0 }]"
+                                v-bind:value="available(row)">
+                        </money-format>
+                        <money-format
+                                style="font-size: 100%"
+                                class="badge badge-warning"
+                                v-if="row.recommendedBudget > 0 && row.recommendedBudget > row.budgeted"
+                                v-bind:value="available(row)"
+                                v-b-tooltip.bottom
+                                v-bind:title="$t('form.recommendedBudget')+': '+(row.recommendedBudget/100)">
                         </money-format>
                     </div>
                 </div>
