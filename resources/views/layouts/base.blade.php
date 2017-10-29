@@ -39,7 +39,10 @@
 
 </div>
 
-<!--<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.{{ config('app.locale') }}"></script>-->
+@if(config('app.env') == 'production')
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Intl.~locale.{{ app()->getLocale() }}"></script>
+@endif
+
 <script src="{{ asset('js/app.js') }}"></script>
 
 </body>
