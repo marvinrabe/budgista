@@ -113,7 +113,7 @@
                         <money-format
                                 style="font-size: 100%"
                                 class="badge"
-                                v-bind:class="[{ 'badge-danger': row.recommendedBudget > row.budgeted || available(row) < 0 }, { 'badge-success': row.recommendedBudget < row.budgeted || available(row) > 0 }, { 'badge-light': available(row) == 0 && row.recommendedBudget == row.budgeted }]"
+                                v-bind:class="[{ 'badge-danger': available(row) < 0 }, { 'badge-success': available(row) > 0 }, { 'badge-light': available(row) == 0 }]"
                                 v-bind:value="available(row)"
                                 v-b-tooltip.left
                                 v-bind:title="$t('form.recommendedBudget')+': '+$formatMoney(row.recommendedBudget)">
