@@ -17,6 +17,11 @@ const AppIntl = {
             require('./DateFormat.vue')
         );
 
+        Vue.component(
+            'date-input',
+            require('./DateInput.vue')
+        );
+
         Vue.prototype.$formatMoney = function (amount) {
             let currency = this.$store.state.currency;
             let locale = this.$store.state.locale;
