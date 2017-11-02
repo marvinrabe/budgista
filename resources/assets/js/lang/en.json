@@ -13,7 +13,7 @@
         "new": {
             "account": "Add Account",
             "category": "Create Category",
-            "transaction": "Create Transaction"
+            "transaction": "Add Transaction"
         },
         "edit": {
             "category": "Edit Category",
@@ -33,13 +33,13 @@
         "recurringFrequency": "Repeats",
         "recurringInterval": "Repeat every",
         "category": "Category",
-        "budgeted": "Budgeted",
+        "budget": "Budget",
         "activity": "Activity",
-        "nullCategory": "To be Budgeted",
+        "uncategorized": "Uncategorized",
         "available": "Available",
         "recommendedBudget": "Recommended Budget",
         "funds": "Funds",
-        "toBeBudgeted": "To be Budgeted",
+        "unallocated": "Unallocated",
         "previousMonth": "Previous Month",
         "balance": {
             "cleared": "Cleared Balance",

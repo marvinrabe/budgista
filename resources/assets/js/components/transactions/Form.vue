@@ -64,7 +64,7 @@
                 <div class="form-group">
                     <label for="category">{{ $t('form.category')}}</label>
                     <select id="category" class="form-control" v-model="category">
-                        <option value="">{{ $t('form.nullCategory') }}</option>
+                        <option value="">{{ $t('form.uncategorized') }}</option>
                         <option v-for="category in sortedCategories" :key="category.id" :value="category.id">
                             {{ category.name }}
                         </option>

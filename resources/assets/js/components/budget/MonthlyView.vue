@@ -29,7 +29,7 @@
                             :value="toBeBudgeted">
                     </money-format>
                     <br>
-                    <span class="small">{{ $t('form.toBeBudgeted') }}</span>
+                    <span class="small">{{ $t('form.unallocated') }}</span>
                 </div>
             </div>
             <div class="d-none d-lg-block small">
@@ -45,7 +45,7 @@
                         :value="sheet.funds">
                 </money-format>
                 <br>
-                {{ $t('form.budgeted') }}:
+                {{ $t('form.budget') }}:
                 <money-format
                         class="font-weight-bold"
                         :value="sheet.budgeted">
@@ -72,7 +72,7 @@
                     {{ $t('form.category') }}
                 </div>
                 <div class="budget-column-budget">
-                    {{ $t('form.budgeted') }}
+                    {{ $t('form.budget') }}
                 </div>
                 <div class="budget-column-activity d-none d-lg-block">
                     {{ $t('form.activity') }}
