@@ -1,7 +1,73 @@
 {
+    "app": {
+        "name": "Budgista"
+    },
+    "action": {
+        "save": "Speichern",
+        "back": "Zurück",
+        "cancel": "Abbrechen",
+        "nextMonth": "Nächster Monat",
+        "previousMonth": "Vorheriger Monat",
+        "navigation": "Navigation hin- und herschalten",
+        "logout": "Abmelden",
+        "new": {
+            "account": "Bankkonto hinzufügen",
+            "category": "Kategorie erstellen",
+            "transaction": "Kontobewegung hinzufügen"
+        },
+        "edit": {
+            "category": "Kategorie bearbeiten",
+            "account": "Bankkonto Einstellungen",
+            "transaction": "Kontobewegung bearbeiten"
+        },
+        "delete": {
+            "category": "Kategorie löschen",
+            "account": "Bankkonto löschen",
+            "transaction": "Kontobewegung löschen"
+        }
+    },
+    "form": {
+        "name": "Name",
+        "amount": "Betrag",
+        "recurring": "Wiederholend?",
+        "recurringFrequency": "Wiederholung",
+        "recurringInterval": "Wiederholt sich alle",
+        "category": "Kategorie",
+        "budget": "Budget",
+        "activity": "Aktivität",
+        "nullCategory": "Ohne Kategorie",
+        "available": "Verfügbar",
+        "recommendedBudget": "Empfohlenes Budget",
+        "funds": "Geldmittel",
+        "unallocated": "Nicht zugewiesen",
+        "previousMonth": "Vorheriger Monat",
+        "balance": {
+            "cleared": "Abgerechnete Beträge",
+            "uncleared": "Offene Beträge",
+            "working": "Kontostand"
+        },
+        "date": "Datum",
+        "payee": "Empfänger",
+        "outflow": "Abfluss",
+        "inflow": "Zufluss",
+        "expense": "Ausgabe",
+        "income": "Einnahme"
+    },
     "title": {
         "accounts": "Bankkonten",
         "budget": "Budget",
         "settings": "Einstellungen"
+    },
+    "frequency": {
+        "daily": "Täglich",
+        "weekly": "Wöchentlich",
+        "monthly": "Monatlich",
+        "yearly": "Jährlich"
+    },
+    "frequencyUnit": {
+        "days": "Tage",
+        "weeks": "Wochen",
+        "months": "Monate",
+        "years": "Jahre"
     }
 }
