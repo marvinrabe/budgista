@@ -29,7 +29,8 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    public function check_if_user_has_sample_content() {
+    public function user_has_sample_content()
+    {
         $response = $this->post('/register', [
             'name' => 'John Doe',
             'email' => 'john.doe@example.com',
@@ -49,7 +50,8 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    public function check_if_user_has_localized_sample_content() {
+    public function user_is_localized()
+    {
         app()->setLocale('de');
 
         $this->withoutMiddleware(DetectLocale::class);
@@ -63,9 +65,9 @@ class RegisterTest extends TestCase
 
         $response->assertRedirect(route('app'));
 
-        $this->assertEquals('de', app()->getLocale());
-
         $user = User::where('email', 'john.doe@example.com')->first();
+
+        $this->assertEquals('de', $user->language);
 
         $this->assertGreaterThan(0, $user->categories()->count());
         $this->assertEquals('Miete', $user->categories()->first()->name);
