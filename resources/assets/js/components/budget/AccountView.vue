@@ -120,9 +120,7 @@
                 </div>
             </div>
             <infinite-loading :key="account_id" @infinite="loadMore" spinner="waveDots" ref="infiniteLoading">
-                <span slot="no-more">
-                  {{ $t('message.noMoreData') }}
-                </span>
+                <span slot="no-more"></span>
             </infinite-loading>
         </div>
 
@@ -207,6 +205,7 @@
                         $state.loaded();
                     })
                     .catch(() => {
+                        $state.loaded();
                         $state.complete();
                     });
             },
