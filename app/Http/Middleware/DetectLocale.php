@@ -22,10 +22,10 @@ class DetectLocale
 
         $language = $request->getPreferredLanguage($validLanguages);
 
-        if (Cookie::has('language')) {
-            $language = Cookie::get('language');
-        } elseif (Auth::check()) {
+        if (Auth::check()) {
             $language = Auth::user()->language;
+        } elseif (Cookie::has('language')) {
+            $language = Cookie::get('language');
         }
 
         if (!in_array($language, $validLanguages)) {
