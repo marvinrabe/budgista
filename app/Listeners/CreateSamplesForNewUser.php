@@ -2,10 +2,10 @@
 
 namespace App\Listeners;
 
-use App\UserOnboarding;
+use App\Services\CreateSamples;
 use Illuminate\Auth\Events\Registered;
 
-class CreateSampleContent
+class CreateSamplesForNewUser
 {
 
     /**
@@ -16,7 +16,7 @@ class CreateSampleContent
      */
     public function handle($event)
     {
-        UserOnboarding::for($event->user);
+        CreateSamples::for ($event->user);
     }
 
 }
