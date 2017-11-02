@@ -73,12 +73,7 @@
 
                 <div class="form-group">
                     <label for="date">{{ $t('form.date')}}</label>
-                    <input id="date" type="date" class="form-control"
-                           v-model="date"
-                           v-validate.initial="'required'"
-                           data-vv-name="payee"
-                           :data-vv-as="$t('form.payee')">
-                    <span class="invalid-feedback">{{ errors.first('transaction.date') }}</span>
+                    <date-input id="date" v-model="date"></date-input>
                 </div>
 
                 <div class="form-check">
