@@ -344,7 +344,7 @@
 
                 axios
                     .delete('/api/categories/' + this.editCategory.id)
-                    (response => {
+                    .then(response => {
                         this.$store.commit('REMOVE_CATEGORY', response.data);
                     })
                     .catch(e => {
