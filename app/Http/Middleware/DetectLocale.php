@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
-use Propaganistas\LaravelIntl\Facades\Language;
 
 class DetectLocale
 {
@@ -19,19 +18,17 @@ class DetectLocale
      */
     public function handle($request, Closure $next)
     {
-        $languages = array_keys(Language::all());
+        $validLanguages = config('app.available_locales');
 
-        if (Auth::guest()) {
-            $language = $request->getPreferredLanguage($languages);
+        $language = $request->getPreferredLanguage($validLanguages);
 
-            if (Cookie::has('language')) {
-                $language = Cookie::get('language');
-            }
-        } else {
+        if (Cookie::has('language')) {
+            $language = Cookie::get('language');
+        } elseif (Auth::check()) {
             $language = Auth::user()->language;
         }
 
-        if (!in_array($language, $languages)) {
+        if (!in_array($language, $validLanguages)) {
             $language = config('app.fallback_locale');
         }
 

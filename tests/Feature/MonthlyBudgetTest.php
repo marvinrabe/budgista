@@ -7,7 +7,7 @@ use App\Month;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class MonthlyBudget extends TestCase
+class MonthlyBudgetTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -48,7 +48,6 @@ class MonthlyBudget extends TestCase
     /** @test */
     public function calculate_minimum_budgeted()
     {
-
         $user = $this->signIn();
 
         $month = Month::current();
@@ -57,8 +56,8 @@ class MonthlyBudget extends TestCase
          * @var Category $category
          */
         $category = $user->categories()->first();
-        $budgetLastMonth = $category->budgetIn($month->previous());
 
+        $budgetLastMonth = $category->budgetIn($month->previous());
         $budgetLastMonth->amount = 10;
         $budgetLastMonth->save();
 
@@ -72,7 +71,6 @@ class MonthlyBudget extends TestCase
         $response = $this->get('/api/month/' . $month);
 
         $response->assertStatus(200);
-
         $response->assertJson([
             'data' => [
                 'rows' => [[

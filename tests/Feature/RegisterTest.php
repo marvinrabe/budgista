@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Middleware\DetectLocale;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -28,7 +29,7 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    public function check_if_user_has_onboarding_content() {
+    public function check_if_user_has_sample_content() {
         $response = $this->post('/register', [
             'name' => 'John Doe',
             'email' => 'john.doe@example.com',
@@ -41,10 +42,36 @@ class RegisterTest extends TestCase
         $user = User::where('email', 'john.doe@example.com')->first();
 
         $this->assertGreaterThan(0, $user->categories()->count());
+        $this->assertEquals('Rent', $user->categories()->first()->name);
 
         $this->assertGreaterThan(0, $user->accounts()->count());
+        $this->assertEquals('Cash', $user->accounts()->first()->name);
+    }
 
+    /** @test */
+    public function check_if_user_has_localized_sample_content() {
+        app()->setLocale('de');
 
+        $this->withoutMiddleware(DetectLocale::class);
+
+        $response = $this->post('/register', [
+            'name' => 'John Doe',
+            'email' => 'john.doe@example.com',
+            'password' => 'secret',
+            'password_confirmation' => 'secret'
+        ]);
+
+        $response->assertRedirect(route('app'));
+
+        $this->assertEquals('de', app()->getLocale());
+
+        $user = User::where('email', 'john.doe@example.com')->first();
+
+        $this->assertGreaterThan(0, $user->categories()->count());
+        $this->assertEquals('Miete', $user->categories()->first()->name);
+
+        $this->assertGreaterThan(0, $user->accounts()->count());
+        $this->assertEquals('Bargeld', $user->accounts()->first()->name);
     }
 
 }
