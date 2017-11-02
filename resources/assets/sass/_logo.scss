@@ -11,10 +11,7 @@
 
 .logo {
 
-  &.logo-white {
-    color: white !important;
-  }
-
+  &.logo-white,
   &.logo-white:before {
     color: white !important;
   }
