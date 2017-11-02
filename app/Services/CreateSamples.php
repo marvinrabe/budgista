@@ -11,9 +11,7 @@ class CreateSamples
 
     public static function for(User $user)
     {
-        $accounts = [
-            'Cash', 'Debit Card', 'Credit Card'
-        ];
+        $accounts = trans('samples.accounts');
 
         foreach ($accounts as $accountName) {
             $account = new Account();
@@ -21,9 +19,7 @@ class CreateSamples
             $user->accounts()->save($account);
         }
 
-        $categories = [
-            'Rent', 'Water & Electricity', 'Internet, Cable & Telephone', 'Car & Public Transport', 'Groceries', 'Restaurants', 'Education', 'Entertainment', 'Subscriptions', 'Emergency Fund', 'Retirement Savings'
-        ];
+        $categories = trans('samples.categories');
 
         foreach ($categories as $i => $categoryName) {
             $category = new Category();
