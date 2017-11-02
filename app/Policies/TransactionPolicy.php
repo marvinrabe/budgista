@@ -13,9 +13,9 @@ class TransactionPolicy
     /**
      * Determine whether the user can view the Transaction.
      *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\Transaction $Transaction
-     * @return boolean
+     * @param User $user
+     * @param Transaction $transaction
+     * @return bool
      */
     public function view(User $user, Transaction $transaction)
     {
@@ -25,7 +25,7 @@ class TransactionPolicy
     /**
      * Determine whether the user can create Transactions.
      *
-     * @param  \App\Models\User $user
+     * @param  User $user
      * @return boolean
      */
     public function create(User $user)
@@ -36,8 +36,8 @@ class TransactionPolicy
     /**
      * Determine whether the user can update the Transaction.
      *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\Transaction $Transaction
+     * @param  User $user
+     * @param  Transaction $transaction
      * @return boolean
      */
     public function update(User $user, Transaction $transaction)
@@ -48,8 +48,8 @@ class TransactionPolicy
     /**
      * Determine whether the user can delete the Transaction.
      *
-     * @param  \App\Models\User $user
-     * @param  \App\Models\Transaction $Transaction
+     * @param  User $user
+     * @param  Transaction $transaction
      * @return boolean
      */
     public function delete(User $user, Transaction $transaction)
