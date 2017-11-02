@@ -9,6 +9,6 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class CategoryPolicy
 {
 
-    use HandlesAuthorization, UserPolicy;
+    use HandlesAuthorization, UserPolicyTrait;
 
 }

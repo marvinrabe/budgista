@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 
-trait UserPolicy
+trait UserPolicyTrait
 {
 
     public function view(User $user, $model)
