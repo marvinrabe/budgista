@@ -33,17 +33,7 @@
 </head>
 <body class="{{$body_class}}">
 
-<div id="app">
-
-    @yield('body')
-
-</div>
-
-@if(config('app.env') == 'production')
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Intl.~locale.{{ app()->getLocale() }}"></script>
-@endif
-
-<script src="{{ asset('js/app.js') }}"></script>
+@yield('body')
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 @extends('layouts.base', ['body_class' => 'layout-general'])
 
 @section('body')
+
     <nav class="navbar navbar-expand navbar-light bg-light fixed-top">
         <div class="container">
             <a class="navbar-brand logo" href="{{ url('/') }}">
