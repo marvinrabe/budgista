@@ -35,16 +35,16 @@ const actions = {
         )
     },
 
-    updateCategory({commit}, account) {
+    updateCategory({commit}, category) {
         categories.update(
-            account,
+            category,
             ({data}) => commit(types.ADD_CATEGORY, data)
         )
     },
 
-    deleteCategory({commit}, account) {
+    deleteCategory({commit}, category) {
         categories.delete(
-            account,
+            category,
             () => commit(types.REMOVE_CATEGORY, category)
         )
     },
