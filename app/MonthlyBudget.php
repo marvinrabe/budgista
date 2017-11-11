@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Models\User;
-use App\Models\Budget;
 use Illuminate\Support\Facades\DB;
 use JsonSerializable;
 
@@ -98,9 +97,9 @@ class MonthlyBudget implements JsonSerializable
         return [
             'month' => (string)$this->month,
             'previousMonth' => (int)$this->getPreviousMonthAvailable(),
-            'budgeted' => (int)$this->getBudgeted(),
-            'funds' => (int)$this->getFunds(),
-            'available' => (int)$this->getAvailable(),
+            'allocated' => (int)$this->getBudgeted(),
+            'income' => (int)$this->getFunds(),
+            'unallocated' => (int)$this->getAvailable(),
             'rows' => $this->rows
         ];
     }

@@ -38,13 +38,13 @@
         "uncategorized": "Uncategorized",
         "available": "Available",
         "recommendedBudget": "Recommended Budget",
-        "funds": "Funds",
+        "allocated": "Allocated",
         "unallocated": "Unallocated",
         "previousMonth": "Previous Month",
         "balance": {
-            "cleared": "Cleared Balance",
-            "uncleared": "Uncleared Balance",
-            "working": "Working Balance"
+            "current": "Current Balance",
+            "upcoming": "Upcoming Transactions",
+            "future": "Future Balance"
         },
         "date": "Date",
         "payee": "Payee",

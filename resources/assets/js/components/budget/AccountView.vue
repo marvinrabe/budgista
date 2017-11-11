@@ -15,7 +15,7 @@
                         :class="[{ 'text-success': account.clearedBalance >= 0}, { 'text-danger': account.clearedBalance < 0}]"
                         :value="account.clearedBalance">
                 </money-format>
-                <p class="small">{{ $t('form.balance.cleared') }}</p>
+                <p class="small">{{ $t('form.balance.current') }}</p>
             </div>
             <div class="text-right d-none d-md-block">
                 <money-format
@@ -23,7 +23,7 @@
                         :class="[{ 'text-success': account.unclearedBalance >= 0}, { 'text-danger': account.unclearedBalance < 0}]"
                         :value="account.unclearedBalance">
                 </money-format>
-                <p class="small">{{ $t('form.balance.uncleared') }}</p>
+                <p class="small">{{ $t('form.balance.upcoming') }}</p>
             </div>
             <div class="text-right">
                 <money-format
@@ -31,7 +31,7 @@
                         :class="[{ 'text-success': account.workingBalance >= 0}, { 'text-danger': account.workingBalance < 0}]"
                         :value="account.workingBalance">
                 </money-format>
-                <p class="small">{{ $t('form.balance.working') }}</p>
+                <p class="small">{{ $t('form.balance.future') }}</p>
             </div>
         </div>
 

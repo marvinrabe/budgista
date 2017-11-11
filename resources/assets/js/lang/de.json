@@ -38,13 +38,13 @@
         "uncategorized": "Ohne Kategorie",
         "available": "Verfügbar",
         "recommendedBudget": "Empfohlenes Budget",
-        "funds": "Geldmittel",
-        "unallocated": "Nicht zugewiesen",
+        "allocated": "Zugewiesen",
+        "unallocated": "Nicht Zugewiesen",
         "previousMonth": "Vorheriger Monat",
         "balance": {
-            "cleared": "Abgerechnete Beträge",
-            "uncleared": "Offene Beträge",
-            "working": "Kontostand"
+            "current": "Aktueller Kontostand",
+            "upcoming": "Anstehende Kontobewegungen",
+            "future": "Zukünftiger Kontostand"
         },
         "date": "Datum",
         "payee": "Empfänger",

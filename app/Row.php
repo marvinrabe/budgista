@@ -4,7 +4,6 @@ namespace App;
 
 use App\AutoBudget\Foresight;
 use App\Models\Category;
-use App\Models\Budget;
 use Illuminate\Support\Facades\DB;
 use JsonSerializable;
 
@@ -73,7 +72,7 @@ class Row implements JsonSerializable
             'name' => $this->category->name,
             'month' => (string)$this->month,
             'previousMonth' => (int)$this->getPreviousMonth(),
-            'budgeted' => (int)$this->budget(),
+            'budget' => (int)$this->budget(),
             'activity' => (int)$this->activity(),
             'available' => (int)$this->available(),
             'recommendedBudget' => (int)$this->recommendedBudget()
