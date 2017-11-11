@@ -100,7 +100,9 @@
                                 ref="input"
                                 v-bind:class="[{ 'text-muted': row.budgeted == 0 }, { 'text-dark': row.budgeted != 0 }]"
                                 v-bind:value="row.budgeted"
-                                v-on:update:value="val => updateBudget(row, val)">
+                                v-on:update:value="val => updateBudget(row, val)"
+                                v-b-tooltip.left
+                                v-bind:title="$t('form.recommendedBudget')+': '+$formatMoney(row.recommendedBudget)">
                         </money-input>
                     </div>
                     <div class="budget-column-activity d-none d-lg-block">
@@ -114,9 +116,7 @@
                                 style="font-size: 100%"
                                 class="badge"
                                 v-bind:class="[{ 'badge-danger': available(row) < 0 }, { 'badge-success': available(row) > 0 }, { 'badge-light': available(row) == 0 }]"
-                                v-bind:value="available(row)"
-                                v-b-tooltip.left
-                                v-bind:title="$t('form.recommendedBudget')+': '+$formatMoney(row.recommendedBudget)">
+                                v-bind:value="available(row)">
                         </money-format>
                     </div>
                 </div>
