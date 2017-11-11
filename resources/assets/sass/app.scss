@@ -190,6 +190,7 @@ span.handle {
 
   .content {
     @extend .shadow-1;
+    @extend .pb-5;
     background: $white;
     flex: 1;
     overflow: auto;
@@ -200,6 +201,7 @@ span.handle {
   }
 
   @import "menu";
+
   @import "budget";
   @import "transactions";
 
