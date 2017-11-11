@@ -6,6 +6,7 @@ use Illuminate\Http\Resources\Json\Resource;
 
 class Account extends Resource
 {
+
     /**
      * Transform the resource into an array.
      *
@@ -22,4 +23,20 @@ class Account extends Resource
             'workingBalance' => (int)$this->workingBalance(),
         ];
     }
+
+    /**
+     * Get additional data that should be returned with the resource array.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return array
+     */
+    public function with($request)
+    {
+        return [
+            'links' => [
+                'transactions' => route('accounts.transactions', ['id' => $this->id])
+            ]
+        ];
+    }
+
 }
