@@ -7,7 +7,11 @@ class HomeController extends Controller
 
     public function index()
     {
-        return redirect()->route('app');
+        if (\Auth::check()) {
+            return redirect()->route('app');
+        }
+
+        return view('welcome');
     }
 
 }

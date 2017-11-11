@@ -1,0 +1,27 @@
+.layout-general {
+  nav {
+    color: #f8f8f8;
+
+    .nav-link {
+      color: rgba($white, .8) !important;
+
+      &:hover {
+        color: $white !important;
+      }
+    }
+  }
+
+  footer {
+    color: $text-muted;
+
+    a {
+      color: $text-muted;
+
+      &:hover {
+        color: $body-color;
+        text-decoration: none;
+      }
+    }
+
+  }
+}

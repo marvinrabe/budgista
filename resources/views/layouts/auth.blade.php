@@ -1,4 +1,4 @@
-@extends('layouts.base', ['body_class' => 'layout-auth'])
+@extends('layouts.base', ['body_class' => 'layout-auth', 'style' => 'css/app.css'])
 
 @section('card')
     <div class="card border-light">
