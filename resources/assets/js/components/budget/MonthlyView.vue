@@ -23,10 +23,10 @@
 
             <div class="text-right">
                 <div class="badge px-3"
-                     :class="[{ 'badge-danger': toBeBudgeted < 0 }, { 'badge-success': toBeBudgeted >= 0 }]">
+                     :class="[{ 'badge-danger': unallocated < 0 }, { 'badge-success': unallocated >= 0 }]">
                     <money-format
                             class="h3"
-                            :value="toBeBudgeted">
+                            :value="unallocated">
                     </money-format>
                     <br>
                     <span class="small">{{ $t('form.unallocated') }}</span>
@@ -39,16 +39,16 @@
                         :value="sheet.previousMonth">
                 </money-format>
                 <br>
-                {{ $t('form.funds') }}:
+                {{ $t('form.income') }}:
                 <money-format
                         class="font-weight-bold"
-                        :value="sheet.funds">
+                        :value="sheet.income">
                 </money-format>
                 <br>
-                {{ $t('form.budget') }}:
+                {{ $t('form.allocated') }}:
                 <money-format
                         class="font-weight-bold"
-                        :value="sheet.budgeted">
+                        :value="sheet.allocated">
                 </money-format>
             </div>
         </div>
@@ -98,8 +98,8 @@
                         <money-input
                                 class="text-right py-0 px-1 border-0"
                                 ref="input"
-                                v-bind:class="[{ 'text-muted': row.budgeted == 0 }, { 'text-dark': row.budgeted != 0 }]"
-                                v-bind:value="row.budgeted"
+                                v-bind:class="[{ 'text-muted': row.budget == 0 }, { 'text-dark': row.budget != 0 }]"
+                                v-bind:value="row.budget"
                                 v-on:update:value="val => updateBudget(row, val)"
                                 v-b-tooltip.left
                                 v-bind:title="$t('form.recommendedBudget')+': '+$formatMoney(row.recommendedBudget)">
@@ -194,15 +194,15 @@
             'draggable': draggable
         },
         computed: {
-            budgeted: function () {
+            allocated: function () {
                 let sum = 0;
                 this.sheet.rows.forEach(function (row) {
-                    sum += row.budgeted;
+                    sum += row.budget;
                 });
                 return sum;
             },
-            toBeBudgeted: function () {
-                return this.sheet.previousMonth + this.sheet.funds - this.budgeted;
+            unallocated: function () {
+                return this.sheet.previousMonth + this.sheet.income - this.allocated;
             }
         },
         data: () => ({
@@ -248,10 +248,10 @@
 
 
             available: function (category) {
-                return category.previousMonth + category.budgeted + category.activity;
+                return category.previousMonth + category.budget + category.activity;
             },
             updateBudget: function (category, value) {
-                category.budgeted = value;
+                category.budget = value;
 
                 axios
                     .put('/api/categories/' + category.id + '/budget', {
@@ -356,7 +356,7 @@
 
             addRow(category) {
                 category.month = this.sheet.month;
-                category.budgeted = 0;
+                category.budget = 0;
                 category.available = 0;
                 category.previousMonth = 0;
                 category.activity = 0;

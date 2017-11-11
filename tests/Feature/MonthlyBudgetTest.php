@@ -40,7 +40,7 @@ class MonthlyBudgetTest extends TestCase
 
         $response->assertJson([
             'data' => [
-                'funds' => 20
+                'income' => 20
             ]
         ]);
     }
