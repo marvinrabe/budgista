@@ -2,8 +2,6 @@
 @import "bootstrap";
 
 @import "errors";
-@import "budget";
-@import "transactions";
 
 html,
 body,
@@ -17,15 +15,6 @@ html {
 
 body {
   overflow: auto;
-  padding-top: 3.5rem;
-}
-
-.table {
-  th {
-    @extend .p-1;
-    font-size: $small-font-size;
-    text-transform: uppercase;
-  }
 }
 
 .nav-header {
@@ -48,53 +37,8 @@ a.text-muted:hover {
   text-decoration: none;
 }
 
-
-
 .link-action {
   cursor: pointer;
-}
-
-.card-placeholder {
-
-  &:hover {
-    text-decoration: none;
-    color: rgba($black, .35);
-  }
-
-  text-decoration: none;
-  color: rgba($black, .25);
-
-}
-
-.layout-auth {
-
-  background: theme-color('primary');
-  padding-top: 0;
-
-  .card-title {
-    font-size: 2em;
-    color: theme-color('primary');
-    text-align: center;
-    font-weight: 200;
-    margin-bottom: 1.25rem;
-  }
-
-  .cover {
-    padding-top: 25px;
-    padding-bottom: 20px;
-  }
-
-  .card{
-    @extend .shadow-1;
-  }
-
-}
-
-.layout-budget {
-
-  background: $gray-100;
-  padding-top: 0rem;
-
 }
 
 .dummy-input {
@@ -111,6 +55,7 @@ a.text-muted:hover {
     @extend .px-1;
   }
 }
+
 
 /*
  * Grip
@@ -153,82 +98,109 @@ span.handle {
   }
 }
 
-/**
- * Layout
- */
+.layout-auth {
 
-#layout {
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-}
+  background: theme-color('primary');
 
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-}
-
-.toolbar {
-  @extend .container-fluid;
-
-  &-primary,
-  &-secondary {
-    padding: 0.5rem 1rem;
-    flex-shrink: 0;
+  .card-title {
+    font-size: 2em;
+    color: theme-color('primary');
+    text-align: center;
+    font-weight: 200;
+    margin-bottom: 1.25rem;
   }
 
-  &-primary {
-    color: white;
-    background: $gray-800;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    padding: 0.5rem;
-
-    & > div {
-      margin: 0 0.5rem;
-    }
-
-    .btn {
-      @extend .btn-outline-light;
-    }
+  .cover {
+    padding-top: 25px;
+    padding-bottom: 20px;
   }
 
-  &-secondary {
+  .card {
     @extend .shadow-1;
-    background: theme-color('primary');
+  }
+
+}
+
+.layout-budget {
+
+  background: $gray-100;
+
+  #layout {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .toolbar {
+    @extend .container-fluid;
+
+    &-primary,
+    &-secondary {
+      padding: 0.5rem 1rem;
+      flex-shrink: 0;
+    }
+
+    &-primary {
+      color: white;
+      background: $gray-800;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      padding: 0.5rem;
+
+      & > div {
+        margin: 0 0.5rem;
+      }
+
+      .btn {
+        @extend .btn-outline-light;
+      }
+    }
+
+    &-secondary {
+      @extend .shadow-1;
+      background: theme-color('primary');
+
+      .btn {
+        @extend .btn-primary
+      }
+    }
+
+    p, h1, h2, h3, h4, h5, h6 {
+      margin-bottom: 0;
+    }
+
+    .form-row {
+      align-items: center;
+    }
 
     .btn {
-      @extend .btn-primary
+      @extend .btn-sm;
+      vertical-align: bottom;
     }
   }
 
-  p, h1, h2, h3, h4, h5, h6 {
-    margin-bottom: 0;
+  .content {
+    @extend .shadow-1;
+    background: $white;
+    flex: 1;
+    overflow: auto;
+
+    &-decorated {
+      border-top: 5px solid theme-color('primary');
+    }
   }
 
-  .form-row {
-    align-items: center;
-  }
+  @import "menu";
+  @import "budget";
+  @import "transactions";
 
-  .btn {
-    @extend .btn-sm;
-    vertical-align: bottom;
-  }
 }
-
-.content {
-  @extend .shadow-1;
-  background: $white;
-  flex: 1;
-  overflow: auto;
-
-  &-decorated {
-    border-top: 5px solid theme-color('primary');
-  }
-}
-
-@import "menu";

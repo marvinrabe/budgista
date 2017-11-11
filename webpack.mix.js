@@ -14,6 +14,7 @@ let mix = require('laravel-mix');
 mix
     .js('resources/assets/js/app.js', 'public/js').sourceMaps()
     .sass('resources/assets/sass/app.scss', 'public/css')
+    .sass('resources/assets/sass/website.scss', 'public/css')
     .options({
             postCss: [
                 require('postcss-discard-comments')({

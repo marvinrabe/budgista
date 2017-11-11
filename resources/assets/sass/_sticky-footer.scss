@@ -1,0 +1,44 @@
+$footer-size: 60px;
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: $footer-size;
+}
+
+footer {
+  @extend .small;
+
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: $footer-size;
+  line-height: $footer-size;
+
+  @include media-breakpoint-down(sm) {
+    line-height: $footer-size / 2;
+  }
+
+  .list-inline {
+    margin: 0;
+
+    &-item {
+      @extend .mr-2;
+
+      &:last-child {
+        @extend .mr-0;
+      }
+
+      .icon:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .copyright {
+    margin: 0;
+  }
+}

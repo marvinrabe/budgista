@@ -1,7 +1,6 @@
 // Variables
 @import "variables";
-
-// Bootstrap
+// Bootstrap 4
 @import "node_modules/bootstrap/scss/bootstrap";
 
 // Font Awesome
@@ -46,7 +45,7 @@
  * Modal
  */
 
-// Make modal display as block instead of inline style, and because Vue's v-show deletes inline "display" style
+// Make modal display as block instead of inline style because Vue's v-show deletes inline "display" style
 .modal {
   display: block;
 
@@ -72,4 +71,17 @@
 // Invalid Feedback is always displayed as block, because we use vue to hide message if there is no error.
 .was-validated .invalid-feedback {
   display: block;
+}
+
+/*
+ * Table
+ */
+
+// Make table headings uppercase and small.
+.table {
+  th {
+    @extend .p-1;
+    font-size: $small-font-size;
+    text-transform: uppercase;
+  }
 }
