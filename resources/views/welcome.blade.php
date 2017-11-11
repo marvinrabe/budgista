@@ -24,7 +24,7 @@
 
     <div class="container">
         <div class="intro-message">
-            <h1>Keeping a Budget was never easier!</h1>
+            <h1>Keeping a Budget is easy!</h1>
             <p class="lead">Get out of dept and save money.</p>
 
             <a href="{{ route('register') }}" class="btn btn-lg btn-outline-light m-2">
