@@ -1,7 +1,7 @@
 @extends('layouts.base', ['body_class' => 'layout-home', 'style' => 'css/website.css'])
 
 @section('title')
-    Personal Budget App - {{ config('app.name') }}
+    {{ trans('static.home.title') }} - {{ config('app.name') }}
 @overwrite
 
 @section('body')
@@ -24,14 +24,14 @@
 
     <div class="container">
         <div class="intro-message">
-            <h1>Keeping a Budget is easy!</h1>
-            <p class="lead">Get out of dept and save money.</p>
+            <h1>{{ trans('static.home.heading') }}</h1>
+            <p class="lead">{{ trans('static.home.lead') }}</p>
 
             <a href="{{ route('register') }}" class="btn btn-lg btn-outline-light m-2">
-                Start your Budget now
+                {{ trans('static.home.cta') }}
             </a>
 
-            <p class="m-0"><em class="small">It's completely free!</em></p>
+            <p class="m-0"><em class="small">{{ trans('static.home.free') }}</em></p>
         </div>
     </div>
 
