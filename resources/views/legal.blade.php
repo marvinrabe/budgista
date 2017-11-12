@@ -1,8 +1,8 @@
 @extends('layouts.general')
 
 @section('title')
-    {{ config('app.name') }} - {{ trans('title.legal') }}
-@endsection('title')
+    {{ trans('title.legal') }} - {{ config('app.name') }}
+@overwrite
 
 @section('content')
 

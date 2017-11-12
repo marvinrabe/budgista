@@ -1,5 +1,9 @@
 @extends('layouts.general')
 
+@section('title')
+    {{ trans('title.settings') }} - {{ config('app.name') }}
+@overwrite
+
 @section('content')
 
     <p class="display-4">{{ trans('title.settings') }}</p>

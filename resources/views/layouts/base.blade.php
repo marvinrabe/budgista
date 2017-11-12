@@ -40,7 +40,11 @@
     <meta name="msapplication-TileColor" content="#007BFF"/>
     <meta name="msapplication-TileImage" content="{{ asset('images/mstile-144x144.png') }}"/>
 
-    <title>{{ config('app.name') }}</title>
+    <title>
+        @section('title')
+            {{ config('app.name') }}
+        @show
+    </title>
 
     <link href="{{ asset($style) }}" rel="stylesheet">
 </head>
