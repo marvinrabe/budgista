@@ -4,9 +4,10 @@ namespace App\Models;
 
 use App\Month;
 use App\MonthlyBudget;
-use Laravel\Passport\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
+use App\Services\ResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 /**
  * @property Account[] $accounts
@@ -34,6 +35,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
 
     public function accounts()
     {
