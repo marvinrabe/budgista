@@ -15,7 +15,7 @@
                         :class="[{ 'text-success': account.clearedBalance >= 0}, { 'text-danger': account.clearedBalance < 0}]"
                         :value="account.clearedBalance">
                 </money-format>
-                <p class="small">{{ $t('form.balance.current') }}</p>
+                <p class="small">{{ $t('form.balance.cu') }}</p>
             </div>
             <div class="text-right d-none d-md-block">
                 <money-format
@@ -23,7 +23,7 @@
                         :class="[{ 'text-success': account.unclearedBalance >= 0}, { 'text-danger': account.unclearedBalance < 0}]"
                         :value="account.unclearedBalance">
                 </money-format>
-                <p class="small">{{ $t('form.balance.upcoming') }}</p>
+                <p class="small">{{ $t('form.balance.uncleared') }}</p>
             </div>
             <div class="text-right">
                 <money-format
@@ -31,7 +31,7 @@
                         :class="[{ 'text-success': account.workingBalance >= 0}, { 'text-danger': account.workingBalance < 0}]"
                         :value="account.workingBalance">
                 </money-format>
-                <p class="small">{{ $t('form.balance.future') }}</p>
+                <p class="small">{{ $t('form.balance.working') }}</p>
             </div>
         </div>
 
@@ -124,7 +124,7 @@
             </infinite-loading>
         </div>
 
-        <b-modal ref="editAccountModal" :title="$t('action.edit.account')">
+        <b-modal ref="editAccountModal" @shown="focusEditAccountInput" :title="$t('action.edit.account')">
             <form @submit.stop.prevent="updateAccount"
                   :class="[{'was-validated': editAccount.validated}]"
                   data-vv-scope="editAccount"
@@ -134,6 +134,7 @@
                     <input id="name" type="text" class="form-control"
                            :placeholder="$t('form.name')"
                            v-model="editAccount.name"
+                           ref="editAccountInput"
                            v-validate="'required'"
                            data-vv-name="name"
                            :data-vv-as="$t('form.name')">
@@ -190,7 +191,8 @@
             editAccount: {
                 id: '',
                 name: '',
-                validated: false
+                validated: false,
+                active: false
             }
         }),
         methods: {
@@ -223,6 +225,9 @@
                 this.editAccount.name = this.account.name;
 
                 this.$refs.editAccountModal.show();
+            },
+            focusEditAccountInput() {
+                this.$refs.editAccountInput.focus();
             },
             hideEditAccountModal() {
                 this.$refs.editAccountModal.hide();

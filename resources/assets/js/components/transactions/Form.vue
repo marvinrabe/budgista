@@ -41,11 +41,12 @@
                         </div>
 
                         <money-input
-                            id="amount"
-                            :value.sync="amount"
-                            v-validate.initial="'required'"
-                            data-vv-name="amount"
-                            :data-vv-as="$t('form.amount')">
+                                id="amount"
+                                :value.sync="amount"
+                                v-validate.initial="'required'"
+                                data-vv-name="amount"
+                                :data-vv-as="$t('form.amount')"
+                                v-focus>
                         </money-input>
                     </div>
                     <span class="invalid-feedback">{{ errors.first('transaction.amount') }}</span>
