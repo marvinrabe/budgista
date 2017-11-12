@@ -10,13 +10,22 @@ require('./bootstrap');
  * Vue
  */
 window.Vue = require('vue');
-
 /**
  * Third Party Vue Components
  */
-
 // Translations & Dates
 import VueI18n from 'vue-i18n'
+// Bootstrap
+import BootstrapVue from 'bootstrap-vue'
+// Router
+import VueRouter from 'vue-router'
+// Vuex
+import Vuex from 'vuex'
+// Validations
+import VeeValidate from 'vee-validate';
+import AppIntl from './intl'
+import store from './store'
+
 
 Vue.use(VueI18n);
 
@@ -32,26 +41,27 @@ const i18n = new VueI18n({
     silentTranslationWarn: process.env.NODE_ENV === 'production'
 });
 
-// Bootstrap
-import BootstrapVue from 'bootstrap-vue'
 
 Vue.use(BootstrapVue);
 
-// Router
-import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
-// Vuex
-import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
-// Validations
-import VeeValidate from 'vee-validate';
 
 Vue.use(VeeValidate, {
     validity: true
+});
+
+// Focus
+Vue.directive('focus', {
+    // When the bound element is inserted into the DOM...
+    inserted: function (el) {
+        // Focus the element
+        el.focus()
+    }
 });
 
 /**
@@ -101,8 +111,6 @@ Vue.component(
  * Intl
  */
 
-import AppIntl from './intl'
-
 Vue.use(AppIntl);
 
 /**
@@ -137,8 +145,6 @@ const routes = [
 ];
 
 const router = new VueRouter({routes});
-
-import store from './store'
 
 const app = new Vue({router, store, i18n}).$mount('#app');
 
