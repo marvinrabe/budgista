@@ -1,5 +1,9 @@
 @extends('layouts.auth')
 
+@section('title')
+    {{ trans('title.login') }} - {{ config('app.name') }}
+@overwrite
+
 @section('card')
     <div class="card border-light">
         <div class="card-body">

@@ -1,5 +1,9 @@
 @extends('layouts.auth')
 
+@section('title')
+    {{ trans('title.reset') }} - {{ config('app.name') }}
+@overwrite
+
 @section('content')
 
     <h1 class="card-title">{{ trans('title.reset') }}</h1>

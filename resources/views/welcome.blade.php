@@ -1,8 +1,8 @@
 @extends('layouts.base', ['body_class' => 'layout-home', 'style' => 'css/website.css'])
 
 @section('title')
-    {{ config('app.name') }} - Personal Budget App
-@endsection('title')
+    Personal Budget App - {{ config('app.name') }}
+@overwrite
 
 @section('body')
 
