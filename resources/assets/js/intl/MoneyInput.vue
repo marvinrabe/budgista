@@ -1,8 +1,7 @@
 <template>
     <input class="form-control"
-           type="tel"
+           type="text"
            ref="input"
-           v-bind:step="step"
            v-on:focus="selectAll"
            v-on:keyup.enter="updateValue($event.target.value); $event.target.blur()"
            v-on:blur="updateValue($event.target.value)" />
