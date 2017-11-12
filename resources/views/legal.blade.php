@@ -1,13 +1,13 @@
 @extends('layouts.general')
 
 @section('title')
-    {{ config('app.name') }} - Legal Disclosure
+    {{ config('app.name') }} - {{ trans('title.legal') }}
 @endsection('title')
 
 @section('content')
 
     <div class="text-center">
-        <h1>{{ __('Legal Disclosure') }}</h1>
+        <h1>{{ trans('title.legal') }}</h1>
 
         <p>{{ __('Information in accordance with section 5 TMG:') }}</p>
 

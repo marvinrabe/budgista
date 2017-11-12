@@ -3,18 +3,18 @@
         <ul class="list-inline float-md-right">
             @if (Auth::guest())
                 <li class="list-inline-item">
-                    <a href="{{ route('register') }}">Sign up</a>
+                    <a href="{{ route('register') }}">{{ trans('title.register') }}</a>
                 </li>
                 <li class="list-inline-item">
-                    <a href="{{ route('login') }}">Login</a>
+                    <a href="{{ route('login') }}">{{ trans('title.login') }}</a>
                 </li>
             @else
                 <li class="list-inline-item">
-                    <a href="{{ route('app') }}">{{ __('Go back to App') }}</a>
+                    <a href="{{ route('app') }}">{{ trans('message.return_to_app') }}</a>
                 </li>
             @endif
             <li class="list-inline-item">
-                <a href="{{ url('/legal') }}">Legal Disclosure</a>
+                <a href="{{ url('/legal') }}">{{ trans('title.legal') }}</a>
             </li>
             <li class="list-inline-item">
                 <a class="icon" href="{{ config('app.social.facebook') }}" target="_blank" rel="publisher">
@@ -29,7 +29,7 @@
         </ul>
 
         <p class="copyright">
-            Copyright &copy; {{ date('Y') }} Budgista.com - All Rights Reserved.
+            &copy; {{ date('Y') }} Budgista.com
         </p>
     </div>
 </footer>

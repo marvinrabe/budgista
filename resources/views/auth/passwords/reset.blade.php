@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 class="card-title">{{ __('Reset Password') }}</h1>
+    <h1 class="card-title">{{ trans('title.reset') }}</h1>
 
     @if (session('status'))
         <div class="alert alert-success">
@@ -16,7 +16,7 @@
         <input type="hidden" name="token" value="{{ $token }}">
 
         <div class="form-group">
-            <label for="email" class="control-label">{{ __('E-Mail Address') }}</label>
+            <label for="email" class="control-label">{{ trans('form.email') }}</label>
 
             <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'border-danger' : '' }}"
                    name="email"
@@ -30,7 +30,7 @@
         </div>
 
         <div class="form-group">
-            <label for="password" class="control-label">{{ __('Password') }}</label>
+            <label for="password" class="control-label">{{ trans('form.password_new') }}</label>
 
             <input id="password" type="password"
                    class="form-control {{ $errors->has('password') ? 'border-danger' : '' }}" name="password" required>
@@ -43,7 +43,7 @@
         </div>
 
         <div class="form-group">
-            <label for="password-confirm" class="control-label">{{ __('Confirm Password') }}</label>
+            <label for="password-confirm" class="control-label">{{ trans('form.password_new_confirm') }}</label>
 
             <input id="password-confirm" type="password"
                    class="form-control {{ $errors->has('password_confirmation') ? 'border-danger' : '' }}"
@@ -57,7 +57,7 @@
         </div>
 
         <button class="btn btn-primary btn-block">
-            {{ __('Reset Password') }}
+            {{ trans('action.reset') }}
         </button>
 
     </form>

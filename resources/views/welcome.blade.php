@@ -1,7 +1,7 @@
 @extends('layouts.base', ['body_class' => 'layout-home', 'style' => 'css/website.css'])
 
 @section('title')
-    {{ config('app.name') }} - Keeping a Budget was never easier!
+    {{ config('app.name') }} - Personal Budget App
 @endsection('title')
 
 @section('body')
@@ -15,7 +15,7 @@
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        <a class="nav-link" href="{{ route('login') }}">{{ trans('title.login') }}</a>
                     </li>
                 </ul>
             </div>
