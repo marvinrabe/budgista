@@ -61,7 +61,7 @@
 
         </div>
 
-        <b-modal ref="newAccountModal" :title="$t('action.new.account')">
+        <b-modal ref="newAccountModal" @shown="focusNewAccountInput" :title="$t('action.new.account')">
             <form @submit.stop.prevent="createAccount"
                   :class="[{'was-validated': newAccount.validated}]"
                   data-vv-scope="newAccount"
@@ -72,6 +72,7 @@
                            :placeholder="$t('form.name')"
                            v-model="newAccount.name"
                            v-validate="'required'"
+                           ref="newAccountInput"
                            data-vv-name="name"
                            :data-vv-as="$t('form.name')">
                     <span class="invalid-feedback">{{ errors.first('newAccount.name') }}</span>
@@ -132,6 +133,9 @@
             hideNewAccountModal() {
                 // Hide Modal
                 this.$refs.newAccountModal.hide();
+            },
+            focusNewAccountInput() {
+                this.$refs.newAccountInput.focus();
             },
             createAccount() {
                 this.$validator.validateAll('newAccount').then(isValid => {

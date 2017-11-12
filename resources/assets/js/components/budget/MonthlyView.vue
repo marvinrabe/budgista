@@ -123,7 +123,7 @@
             </draggable>
         </div>
 
-        <b-modal ref="newCategoryModal" :title="$t('action.new.category')">
+        <b-modal ref="newCategoryModal" @shown="focusNewCategoryInput" :title="$t('action.new.category')">
             <form v-on:submit.stop.prevent="createCategory"
                   v-bind:class="[{'was-validated': newCategory.validated}]"
                   data-vv-scope="newCategory"
@@ -134,6 +134,7 @@
                            :placeholder="$t('form.name')"
                            v-model="newCategory.name"
                            v-validate="'required'"
+                           ref="newCategoryInput"
                            data-vv-name="name"
                            :data-vv-as="$t('form.name')">
                     <span class="invalid-feedback">{{ errors.first('newCategory.name') }}</span>
@@ -150,7 +151,7 @@
             </div>
         </b-modal>
 
-        <b-modal ref="editCategoryModal" :title="$t('action.edit.category')">
+        <b-modal ref="editCategoryModal" @shown="focusEditCategoryInput" :title="$t('action.edit.category')">
             <form v-on:submit.stop.prevent="updateCategory"
                   v-bind:class="[{'was-validated': editCategory.validated}]"
                   data-vv-scope="editCategory"
@@ -161,6 +162,7 @@
                            :placeholder="$t('form.name')"
                            v-model="editCategory.name"
                            v-validate="'required'"
+                           ref="editCategoryInput"
                            data-vv-name="name"
                            :data-vv-as="$t('form.name')">
                     <span class="invalid-feedback">{{ errors.first('editCategory.name') }}</span>
@@ -251,7 +253,7 @@
                 return category.previousMonth + category.budget + category.activity;
             },
             updateBudget: function (category, value) {
-                category.budget = value;
+                category.budgeted = value;
 
                 axios
                     .put('/api/categories/' + category.id + '/budget', {
@@ -278,6 +280,9 @@
             },
             hideNewCategoryModal() {
                 this.$refs.newCategoryModal.hide();
+            },
+            focusNewCategoryInput() {
+                this.$refs.newCategoryInput.focus();
             },
             createCategory() {
 
@@ -316,6 +321,9 @@
             },
             hideEditCategoryModal() {
                 this.$refs.editCategoryModal.hide();
+            },
+            focusEditCategoryInput() {
+                this.$refs.editCategoryInput.focus();
             },
             updateCategory() {
                 this.$validator.validateAll('editCategory').then(isValid => {
@@ -356,7 +364,7 @@
 
             addRow(category) {
                 category.month = this.sheet.month;
-                category.budget = 0;
+                category.budgeted = 0;
                 category.available = 0;
                 category.previousMonth = 0;
                 category.activity = 0;
