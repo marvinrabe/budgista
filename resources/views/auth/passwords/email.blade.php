@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 class="card-title">{{ __('Reset Password') }}</h1>
+    <h1 class="card-title">{{ trans('title.reset') }}</h1>
 
     @if (session('status'))
         <div class="alert alert-success">
@@ -14,7 +14,7 @@
         {{ csrf_field() }}
 
         <div class="form-group">
-            <label for="email" class="control-label">{{ __('E-Mail Address') }}</label>
+            <label for="email" class="control-label">{{ trans('form.email') }}</label>
 
             <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'border-danger' : '' }}" name="email" value="{{ old('email') }}"
                    required>
@@ -27,7 +27,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary btn-block">
-            {{ __('Send Password Reset Link') }}
+            {{ trans('action.send_reset') }}
         </button>
 
     </form>

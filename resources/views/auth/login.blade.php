@@ -4,13 +4,13 @@
     <div class="card border-light">
         <div class="card-body">
 
-            <h1 class="card-title">{{ __('Login') }}</h1>
+            <h1 class="card-title">{{ trans('title.login') }}</h1>
 
             <form method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
 
                 <div class="form-group">
-                    <label for="email" class="control-label">{{ __('E-Mail Address') }}</label>
+                    <label for="email" class="control-label">{{ trans('form.email') }}</label>
 
                     <input id="email" type="email"
                            class="form-control {{ $errors->has('email') ? 'border-danger' : '' }}" name="email"
@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="password" class="control-label">{{ __('Password') }}</label>
+                    <label for="password" class="control-label">{{ trans('form.password') }}</label>
 
                     <input id="password" type="password"
                            class="form-control {{ $errors->has('password') ? 'border-danger' : '' }}" name="password"
@@ -42,13 +42,13 @@
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                            {{ __('Remember Me') }}
+                            {{ trans('form.remember') }}
                         </label>
                     </div>
                 </div>
 
                 <button class="btn btn-primary btn-block">
-                    {{ __('Login') }}
+                    {{ trans('action.login') }}
                 </button>
             </form>
 
@@ -56,9 +56,9 @@
 
         <div class="card-body card-body-secondary text-center">
 
-            {{ __('Don\'t have an account?') }}
+            {{ trans('message.no_account') }}
             <a href="{{ route('register') }}">
-                {{ __('Sign up now.') }}
+                {{ trans('message.no_account_sign_up') }}
             </a>
 
         </div>
@@ -66,7 +66,7 @@
 
     <p class="text-center mt-3">
         <a class="text-white" href="{{ route('password.request') }}">
-            {{ __('Forgot Your Password?') }}
+            {{ trans('message.forgot_password') }}
         </a>
     </p>
 

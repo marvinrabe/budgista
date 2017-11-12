@@ -9,11 +9,15 @@
 
             <ul class="navbar-nav ml-auto">
                 @if (Auth::guest())
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">{{ __('Sign up') }}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">{{ trans('title.home') }}</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link"
+                                            href="{{ route('register') }}">{{ trans('title.register') }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">{{ trans('title.login') }}</a>
+                    </li>
                 @else
-                    <li class="nav-item"><a class="nav-link" href="{{ route('app') }}">{{ __('Go back to App') }}</a>
+                    <li class="nav-item"><a class="nav-link"
+                                            href="{{ route('app') }}">{{ trans('message.return_to_app') }}</a>
                     </li>
                 @endif
             </ul>
