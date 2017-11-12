@@ -11,11 +11,15 @@
         },
 
         beforeRouteEnter(to, from, next) {
-            next(vm => vm.reset())
+            next(vm => {
+                vm.reset();
+                vm.isNew = true;
+            })
         },
 
         beforeRouteUpdate(to, from, next) {
             this.reset();
+            this.isNew = true;
         },
 
 
@@ -27,7 +31,18 @@
                 this.$store.dispatch('createTransaction', transaction);
 
                 this.cancel();
-            }
+            },
+            saveAndNew() {
+                let transaction = this.getResult();
+                transaction.account_id = this.account_id;
+
+                this.$store.dispatch('createTransaction', transaction);
+
+                this.reset();
+                this.$nextTick(() => {
+                    this.$refs.amount.$el.focus();
+                });
+            },
         }
     }
 </script>

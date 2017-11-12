@@ -4,6 +4,7 @@
     },
     "action": {
         "save": "Speichern",
+        "saveAndNew": "Speichern & Neu",
         "back": "Zurück",
         "cancel": "Abbrechen",
         "nextMonth": "Nächster Monat",
