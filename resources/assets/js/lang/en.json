@@ -4,6 +4,7 @@
     },
     "action": {
         "save": "Save",
+        "saveAndNew": "Save & New",
         "back": "Back",
         "cancel": "Cancel",
         "nextMonth": "Next Month",

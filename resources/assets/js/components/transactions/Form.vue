@@ -46,7 +46,8 @@
                                 v-validate.initial="'required'"
                                 data-vv-name="amount"
                                 :data-vv-as="$t('form.amount')"
-                                v-focus>
+                                v-focus
+                                ref="amount">
                         </money-input>
                     </div>
                     <span class="invalid-feedback">{{ errors.first('transaction.amount') }}</span>
@@ -129,8 +130,14 @@
                 <button class="btn btn-light" v-on:click="cancel">
                     {{ $t('action.cancel') }}
                 </button>
-                <button form="transaction" class="btn btn-primary">
+
+                <button form="transaction" class="btn btn-primary"
+                        v-bind:class="[{'btn-primary': !isNew}, {'btn-light': isNew}]">
                     {{ $t('action.save') }}
+                </button>
+
+                <button v-if="isNew" v-on:click="saveAndNew" class="btn btn-primary">
+                    {{ $t('action.saveAndNew') }}
                 </button>
             </div>
         </div>
@@ -166,15 +173,16 @@
             ])
         },
         data: () => ({
-            'type': EXPENSE,
-            'amount': 0,
-            'date': new Date().toISOString().slice(0, 10),
-            'recurring': false,
-            'freq': RRule.MONTHLY,
-            'interval': 1,
-            'payee': '',
-            'category': '',
-            'validated': false
+            type: EXPENSE,
+            amount: 0,
+            date: new Date().toISOString().slice(0, 10),
+            recurring: false,
+            freq: RRule.MONTHLY,
+            interval: 1,
+            payee: '',
+            category: '',
+            validated: false,
+            isNew: false
         }),
 
         methods: {
