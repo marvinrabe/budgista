@@ -19,12 +19,18 @@ class Category extends Model
     use UuidModelTrait,
         BelongsToUserTrait;
 
+    protected $fillable = ['name', 'sort'];
+
     protected static function boot()
     {
         parent::boot();
 
         static::addGlobalScope('sort', function (Builder $builder) {
             $builder->orderBy('sort', 'asc');
+        });
+
+        static::creating(function (Category $model) {
+            $model->determineSort();
         });
     }
 
@@ -52,4 +58,11 @@ class Category extends Model
         ]);
     }
 
+    /**
+     * Sets sort to highest available + 1
+     */
+    public function determineSort()
+    {
+        $this->sort = $this->where('user_id', '=', $this->user_id)->max('sort') + 1;
+    }
 }
