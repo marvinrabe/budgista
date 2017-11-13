@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Mail;
 
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
