@@ -11,16 +11,24 @@ class RegisterTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function register_user() {
-        $response = $this->post('/register', [
-            'name' => 'John Doe',
-            'email' => 'john.doe@example.com',
-            'password' => 'secret',
-            'password_confirmation' => 'secret'
-        ]);
+    protected function registerUser()
+    {
+        $this
+            ->post('/register', [
+                'name' => 'John Doe',
+                'email' => 'john.doe@example.com',
+                'password' => 'secret',
+                'password_confirmation' => 'secret'
+            ])
+            ->assertRedirect(route('app'));
 
-        $response->assertRedirect();
+        return User::where('email', 'john.doe@example.com')->first();
+    }
+
+    /** @test */
+    public function user_is_stored_in_database()
+    {
+        $this->registerUser();
 
         $this->assertDatabaseHas('users', [
             'name' => 'John Doe',
@@ -31,16 +39,7 @@ class RegisterTest extends TestCase
     /** @test */
     public function user_has_sample_content()
     {
-        $response = $this->post('/register', [
-            'name' => 'John Doe',
-            'email' => 'john.doe@example.com',
-            'password' => 'secret',
-            'password_confirmation' => 'secret'
-        ]);
-
-        $response->assertRedirect(route('app'));
-
-        $user = User::where('email', 'john.doe@example.com')->first();
+        $user = $this->registerUser();
 
         $this->assertGreaterThan(0, $user->categories()->count());
         $this->assertEquals('Rent', $user->categories()->first()->name);
@@ -50,22 +49,13 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    public function user_is_localized()
+    public function user_has_localized_sample_content()
     {
         app()->setLocale('de');
 
         $this->withoutMiddleware(DetectLocale::class);
 
-        $response = $this->post('/register', [
-            'name' => 'John Doe',
-            'email' => 'john.doe@example.com',
-            'password' => 'secret',
-            'password_confirmation' => 'secret'
-        ]);
-
-        $response->assertRedirect(route('app'));
-
-        $user = User::where('email', 'john.doe@example.com')->first();
+        $user = $this->registerUser();
 
         $this->assertEquals('de', $user->language);
 

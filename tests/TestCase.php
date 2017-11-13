@@ -15,15 +15,12 @@ abstract class TestCase extends BaseTestCase
     {
         $user = factory(User::class)->create();
 
-        // Create some sample data
-        CreateSamples::for ($user);
-
         // Authenticate with Web
         $this->actingAs($user);
 
         // Authenticate with API
         Passport::actingAs($user);
 
-        return $user;
+        return $this;
     }
 }

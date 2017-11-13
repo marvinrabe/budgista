@@ -12,7 +12,8 @@ class ForesightTest extends TestCase
 {
 
     /** @test */
-    public function split_future_nonrecurring_transactions_by_month() {
+    public function split_future_nonrecurring_transactions_by_month()
+    {
         $transaction = new Transaction();
         $transaction->date = Carbon::now()->addMonth();
         $transaction->amount = -12000;
@@ -21,13 +22,12 @@ class ForesightTest extends TestCase
 
         $foresight = new Foresight(Carbon::now()->firstOfMonth(), $transactions);
 
-        $budget = $foresight->recommendedBudget();
-
-        $this->assertEquals(6000, $budget);
+        $this->assertEquals(6000, $foresight->recommendedBudget());
     }
 
     /** @test */
-    public function test_previously_saved_money_affects_value() {
+    public function previously_saved_money_affects_recommended_budget()
+    {
         $transaction = new Transaction();
         $transaction->date = Carbon::now()->addMonth()->firstOfMonth();
         $transaction->amount = -30;
@@ -36,13 +36,12 @@ class ForesightTest extends TestCase
 
         $foresight = new Foresight(Carbon::now(), $transactions, 10);
 
-        $budget = $foresight->recommendedBudget();
-
-        $this->assertEquals(10, $budget);
+        $this->assertEquals(10, $foresight->recommendedBudget());
     }
 
     /** @test */
-    public function test_previously_saved_money_reduces_this_month_required() {
+    public function previously_saved_money_reduces_this_month_required()
+    {
         $transaction = new Transaction();
         $transaction->date = Carbon::now();
         $transaction->amount = -120;
@@ -51,13 +50,12 @@ class ForesightTest extends TestCase
 
         $foresight = new Foresight(Carbon::now(), $transactions, 60);
 
-        $budget = $foresight->recommendedBudget();
-
-        $this->assertEquals(60, $budget);
+        $this->assertEquals(60, $foresight->recommendedBudget());
     }
 
     /** @test */
-    public function split_future_recurring_transactions_by_month() {
+    public function split_future_recurring_transactions_by_month()
+    {
         $transaction = new Transaction();
         $transaction->date = Carbon::now()->addMonth(1);
         $transaction->rrule = new RRule([
@@ -70,13 +68,12 @@ class ForesightTest extends TestCase
 
         $foresight = new Foresight(Carbon::now(), $transactions);
 
-        $budget = $foresight->recommendedBudget();
-
-        $this->assertEquals(10, $budget);
+        $this->assertEquals(10, $foresight->recommendedBudget());
     }
 
     /* TODO solve this problem */
-    public function already_occured_recurring_transaction_wont_be_covered() {
+    public function already_occured_recurring_transaction_wont_be_covered()
+    {
         $transaction1 = new Transaction();
         $transaction1->date = Carbon::now();
         $transaction1->amount = -20;
@@ -93,9 +90,7 @@ class ForesightTest extends TestCase
 
         $foresight = new Foresight(Carbon::now(), $transactions);
 
-        $budget = $foresight->recommendedBudget();
-
-        $this->assertEquals(20, $budget);
+        $this->assertEquals(20, $foresight->recommendedBudget());
     }
 
 }

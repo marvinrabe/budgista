@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Account;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -12,19 +13,19 @@ class AccountTest extends TestCase
     /** @test */
     public function accounts_have_transaction_links()
     {
-        $user = $this->signIn();
+        $this->signIn();
 
-        $accountId = $user->accounts()->first()->id;
+        $account = factory(Account::class)->create([
+            'user_id' => Auth()->id()
+        ]);
 
-        $response = $this->get('/api/accounts/' . $accountId);
+        $response = $this->getJson('/api/accounts/' . $account->id);
         $response->assertSuccessful();
 
         $result = json_decode($response->getContent());
 
         $transactionsUrl = $result->links->transactions;
-        $this->assertNotEmpty($transactionsUrl);
 
-        $secondResponse = $this->get($transactionsUrl);
-        $secondResponse->assertSuccessful();
+        $this->get($transactionsUrl)->assertSuccessful();
     }
 }
