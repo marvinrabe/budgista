@@ -68,7 +68,9 @@ jobs:
 
       - run:
          name: Commit assets
-         command: git status
+         command: |
+          git add public/.
+          git commit --author="Circle CI <support@budgista.com>" -m "Assets"
 
       - deploy:
           name: Deploy
