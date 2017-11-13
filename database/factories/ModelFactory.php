@@ -24,12 +24,34 @@ $factory->define(\App\Models\User::class, function (Faker\Generator $faker) {
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(\App\Models\Account::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->creditCardType,
+        'user_id' => function () {
+            return factory(\App\Models\User::class)->create()->id;
+        }
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(\App\Models\Category::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'user_id' => function () {
+            return factory(\App\Models\User::class)->create()->id;
+        }
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(\App\Models\Transaction::class, function (Faker\Generator $faker) {
     return [
         'payee' => $faker->company,
         'amount' => $faker->randomFloat(2, -100, 100),
         'date' => $faker->dateTimeThisMonth(),
-        'account_id' => null,
+        'account_id' => function () {
+            return factory(\App\Models\Account::class)->create()->id;
+        },
         'category_id' => null
     ];
 });
