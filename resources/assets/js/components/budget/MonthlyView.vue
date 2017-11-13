@@ -253,7 +253,7 @@
                 return category.previousMonth + category.budget + category.activity;
             },
             updateBudget: function (category, value) {
-                category.budgeted = value;
+                category.budget = value;
 
                 axios
                     .put('/api/categories/' + category.id + '/budget', {
