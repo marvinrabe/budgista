@@ -15,7 +15,9 @@ jobs:
 
       - run:
           name: Install system packages
-          command: sudo apt-get update && sudo apt-get -y install icu-devtools libicu-dev
+          command: |
+            curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+            sudo apt-get update && sudo apt-get -y install nodejs icu-devtools libicu-dev
 
       - run:
           name: Install PHP extensions
@@ -25,31 +27,48 @@ jobs:
           name: Setup configuration
           command: cp ./.circleci/.env.testing ./.env
 
-      # Download and cache dependencies
+      # Composer
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "composer.json" }}
+          - v1-dependencies-{{ checksum "composer.lock" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-
       - run:
           name: Install Composer dependencies
           command: composer install -n --prefer-dist
-
       - save_cache:
+          key: v1-dependencies-{{ checksum "composer.lock" }}
           paths:
             - ./vendor
-          key: v1-dependencies-{{ checksum "composer.json" }}
+
+      # NPM
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install NodeJS Packages
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
 
       - run:
-          name: Setup environment
+          name: Setup keys
           command: |
             php artisan key:generate
             php artisan passport:keys
 
       - run:
+         name: Compile assets
+         command: npm run production
+
+      - run:
           name: Test
           command: vendor/bin/phpunit
+
+      - run:
+         name: Commit assets
+         command: git status
 
       - deploy:
           name: Deploy
