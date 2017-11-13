@@ -69,8 +69,10 @@ jobs:
       - run:
          name: Commit assets
          command: |
+          git config --global user.name "Circle CI"
+          git config --global user.email "support@budgista.com"
           git add public/.
-          git commit --author="Circle CI <support@budgista.com>" -m "Assets"
+          git commit -m "Assets"
 
       - deploy:
           name: Deploy
