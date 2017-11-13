@@ -7,7 +7,6 @@ use App\Http\Resources\Category as CategoryResource;
 use App\Models\Category;
 use App\Month;
 use App\Row;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
@@ -23,22 +22,17 @@ class CategoryController extends Controller
         return CategoryResource::collection(Auth::user()->categories);
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
-
-        $category = new Category();
-        $category->name = request('name');
-        $category->sort = Auth::user()->categories()->max('sort') + 1;
+        $category = new Category(
+            request()->validate([
+                'name' => 'required'
+            ])
+        );
 
         Auth::user()->categories()->save($category);
 
-        return [
-            'id' => $category->id,
-            'name' => $category->name
-        ];
+        return new CategoryResource($category);
     }
 
     public function show(Category $category)
@@ -46,19 +40,15 @@ class CategoryController extends Controller
         return new CategoryResource($category);
     }
 
-    public function update(Request $request, Category $category)
+    public function update(Category $category)
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
+        $category->update(
+            request()->validate([
+                'name' => 'required'
+            ])
+        );
 
-        $category->name = request('name');
-        $category->save();
-
-        return [
-            'id' => $category->id,
-            'name' => $category->name
-        ];
+        return new CategoryResource($category);
     }
 
     public function destroy(Category $category)
@@ -68,11 +58,11 @@ class CategoryController extends Controller
         return [];
     }
 
-    public function budget(Request $request, Category $category)
+    public function budget(Category $category)
     {
         $this->authorize('update', $category);
 
-        $request->validate([
+        request()->validate([
             'month' => 'required',
             'amount' => 'required'
         ]);
@@ -86,9 +76,9 @@ class CategoryController extends Controller
         return new Row($category, $month);
     }
 
-    public function sort(Request $request)
+    public function sort()
     {
-        $request->validate([
+        request()->validate([
             'categories' => 'required'
         ]);
 

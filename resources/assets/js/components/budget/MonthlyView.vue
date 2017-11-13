@@ -261,7 +261,7 @@
                         'amount': value
                     })
                     .then(response => {
-                        category = response.data;
+                        category = response.data.data;
                     })
                     .catch(e => {
                         console.error(e);
@@ -295,8 +295,8 @@
                                 'name': this.newCategory.name
                             })
                             .then(response => {
-                                this.$store.commit('ADD_CATEGORY', response.data);
-                                this.addRow(response.data);
+                                this.$store.commit('ADD_CATEGORY', response.data.data);
+                                this.addRow(response.data.data);
                             })
                             .catch(e => {
                                 console.error(e);
@@ -330,14 +330,13 @@
                     this.editCategory.validated = true;
 
                     if (isValid) {
-                        this.sheet.rows.find(x => x.id === this.editCategory.id).name = this.editCategory.name;
-
                         axios
                             .put('/api/categories/' + this.editCategory.id, {
                                 'name': this.editCategory.name
                             })
                             .then(response => {
-                                this.$store.commit('ADD_CATEGORY', response.data);
+                                this.sheet.rows.find(x => x.id === this.editCategory.id).name = response.data.data.name;
+                                this.$store.commit('ADD_CATEGORY', response.data.data);
                             })
                             .catch(e => {
                                 console.error(e);
@@ -364,7 +363,7 @@
 
             addRow(category) {
                 category.month = this.sheet.month;
-                category.budgeted = 0;
+                category.budget = 0;
                 category.available = 0;
                 category.previousMonth = 0;
                 category.activity = 0;

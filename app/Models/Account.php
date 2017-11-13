@@ -17,6 +17,8 @@ class Account extends Model
     use UuidModelTrait,
         BelongsToUserTrait;
 
+    protected $fillable = ['name'];
+
     protected static function boot()
     {
         parent::boot();
