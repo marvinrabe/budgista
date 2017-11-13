@@ -18,10 +18,12 @@ jobs:
           command: sudo apt-get update && sudo apt-get -y install icu-devtools libicu-dev
 
       - run:
-          name: Install PHP Extensions
+          name: Install PHP extensions
           command: sudo docker-php-ext-install bcmath calendar intl pdo_mysql
 
-      - run: cp ./.circleci/.env.testing ./.env
+      - run:
+          name: Setup configuration
+          command: cp ./.circleci/.env.testing ./.env
 
       # Download and cache dependencies
       - restore_cache:
@@ -30,7 +32,9 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: composer install -n --prefer-dist
+      - run:
+          name: Install Composer dependencies
+          command: composer install -n --prefer-dist
 
       - save_cache:
           paths:
@@ -38,16 +42,17 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
 
       - run:
-          name: Setup Environment
+          name: Setup environment
           command: |
             php artisan key:generate
             php artisan passport:keys
 
-      # run tests!
-      - run: vendor/bin/phpunit
+      - run:
+          name: Test
+          command: vendor/bin/phpunit
 
       - deploy:
-          name: Deploy Master to Dokku
+          name: Deploy
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               echo "172.104.149.190 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCfOgLiIHX0TBftsLLGWDGJKBsWUJ1GzBYR1447ktBMnqtxGszGOf9DqHSzPMTPl54OwowahK4vvxM0UQGkXZbI=" >> ~/.ssh/known_hosts
