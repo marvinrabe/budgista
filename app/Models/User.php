@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Month;
 use App\MonthlyBudget;
-use App\Services\ResetPasswordNotification;
+use App\Mail\ResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
