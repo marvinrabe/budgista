@@ -22,14 +22,13 @@ class AccountController extends Controller
         return AccountResource::collection(Auth::user()->accounts()->get());
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
-
-        $account = new Account();
-        $account->name = request('name');
+        $account = new Account(
+            request()->validate([
+                'name' => 'required'
+            ])
+        );
 
         Auth::user()->accounts()->save($account);
 
@@ -45,17 +44,17 @@ class AccountController extends Controller
     {
         $this->authorize('view', $account);
 
-        return TransactionResource::collection($account->transactions()->with(['category', 'account'])->orderBy('date', 'desc')->paginate(25));
+        return TransactionResource::collection($account->transactions()->with(['category', 'account'])->orderBy('date',
+            'desc')->paginate(25));
     }
 
-    public function update(Request $request, Account $account)
+    public function update(Account $account)
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
-
-        $account->name = request('name');
-        $account->save();
+        $account->update(
+            request()->validate([
+                'name' => 'required'
+            ])
+        );
 
         return new AccountResource($account);
     }
