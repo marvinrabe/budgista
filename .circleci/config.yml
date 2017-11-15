@@ -21,7 +21,7 @@ jobs:
 
       - run:
           name: Install PHP extensions
-          command: sudo docker-php-ext-install bcmath calendar intl pdo_mysql
+          command: sudo docker-php-ext-install bcmath intl pdo_mysql
 
       - run:
           name: Setup configuration
