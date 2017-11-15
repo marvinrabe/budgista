@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Auth;
 class CategoryController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->authorizeResource(Category::class);
-    }
-
     public function index()
     {
         return CategoryResource::collection(Auth::user()->categories);
@@ -24,6 +19,8 @@ class CategoryController extends Controller
 
     public function store()
     {
+        $this->authorize('create', Category::class);
+
         $category = new Category(
             request()->validate([
                 'name' => 'required'
@@ -37,11 +34,15 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
+        $this->authorize('view', $category);
+
         return new CategoryResource($category);
     }
 
     public function update(Category $category)
     {
+        $this->authorize('update', $category);
+
         $category->update(
             request()->validate([
                 'name' => 'required'
@@ -53,6 +54,8 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        $this->authorize('delete', $category);
+
         $category->delete();
 
         return [];
