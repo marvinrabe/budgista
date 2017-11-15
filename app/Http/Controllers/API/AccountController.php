@@ -4,18 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Account as AccountResource;
-use App\Http\Resources\Transaction as TransactionResource;
 use App\Models\Account;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->authorizeResource(Account::class);
-    }
 
     public function index()
     {
@@ -24,6 +17,8 @@ class AccountController extends Controller
 
     public function store()
     {
+        $this->authorize('create', Account::class);
+
         $account = new Account(
             request()->validate([
                 'name' => 'required'
@@ -37,19 +32,15 @@ class AccountController extends Controller
 
     public function show(Account $account)
     {
-        return new AccountResource($account);
-    }
-
-    public function transactions(Account $account)
-    {
         $this->authorize('view', $account);
 
-        return TransactionResource::collection($account->transactions()->with(['category', 'account'])->orderBy('date',
-            'desc')->paginate(25));
+        return new AccountResource($account);
     }
 
     public function update(Account $account)
     {
+        $this->authorize('update', $account);
+
         $account->update(
             request()->validate([
                 'name' => 'required'
@@ -61,6 +52,8 @@ class AccountController extends Controller
 
     public function destroy(Account $account)
     {
+        $this->authorize('delete', $account);
+
         $account->delete();
 
         return [];

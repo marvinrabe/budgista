@@ -13,13 +13,19 @@ use RRule\RRule;
 class TransactionController extends Controller
 {
 
-    public function __construct()
+    public function index(Account $account)
     {
-        $this->authorizeResource(Transaction::class);
+        $this->authorize('view', $account);
+
+        return TransactionResource::collection(
+            $account->transactions()->with(['category', 'account'])->orderBy('date', 'desc')->paginate(25)
+        );
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create', Transaction::class);
+
         $request->validate([
             'payee' => 'required',
             'account_id' => 'required',
@@ -33,7 +39,7 @@ class TransactionController extends Controller
 
         $transaction->category_id = null;
         $category_id = request('category_id');
-        if(!empty($category_id)) {
+        if (!empty($category_id)) {
             $category = Category::find($category_id);
             $this->authorize('update', $category);
             $transaction->category_id = $category->id;
@@ -56,11 +62,15 @@ class TransactionController extends Controller
 
     public function show(Transaction $transaction)
     {
+        $this->authorize('view', $transaction);
+
         return new TransactionResource($transaction);
     }
 
     public function update(Request $request, Transaction $transaction)
     {
+        $this->authorize('update', $transaction);
+
         $request->validate([
             'payee' => 'required',
             'amount' => 'required'
@@ -68,7 +78,7 @@ class TransactionController extends Controller
 
         $transaction->category_id = null;
         $category_id = request('category_id');
-        if(!empty($category_id)) {
+        if (!empty($category_id)) {
             $category = Category::find($category_id);
             $this->authorize('update', $category);
             $transaction->category_id = $category->id;
@@ -91,6 +101,8 @@ class TransactionController extends Controller
 
     public function destroy(Transaction $transaction)
     {
+        $this->authorize('delete', $transaction);
+
         $transaction->delete();
 
         return [];

@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     /*
      * Accounts
      */
-    Route::get('accounts/{account}/transactions', 'API\AccountController@transactions')->name('accounts.transactions');
+    Route::get('accounts/{account}/transactions', 'API\TransactionController@index')->name('accounts.transactions');
     Route::apiResource('accounts', 'API\AccountController');
 
     /*
