@@ -18,31 +18,31 @@ Route::group(['middleware' => ['auth:api']], function () {
     /*
      * User
      */
-    Route::get('user', 'API\UserController@show')->name('user');
+    Route::get('user', 'UserController@show')->name('user');
 
     /*
      * Budget
      */
-    Route::get('month/{month?}', 'API\MonthlyBudgetController@show')->name('month');
+    Route::get('month/{month?}', 'MonthlyBudgetController@show')->name('month');
 
     /*
      * Categories
      */
-    Route::put('categories/sort', 'API\CategoryController@sort')->name('categories.sort');
-    Route::put('categories/{category}/budget', 'API\CategoryController@budget')->name('categories.budget');
-    Route::apiResource('categories', 'API\CategoryController');
+    Route::put('categories/sort', 'CategoryController@sort')->name('categories.sort');
+    Route::put('categories/{category}/budget', 'CategoryController@budget')->name('categories.budget');
+    Route::apiResource('categories', 'CategoryController');
 
     /*
      * Accounts
      */
-    Route::get('accounts/{account}/transactions', 'API\TransactionController@index')->name('accounts.transactions');
-    Route::apiResource('accounts', 'API\AccountController');
+    Route::get('accounts/{account}/transactions', 'TransactionController@index')->name('accounts.transactions');
+    Route::apiResource('accounts', 'AccountController');
 
     /*
      * Transactions
      */
-    Route::put('transactions/{transaction}/clear', 'API\TransactionController@clear')->name('transactions.clear');
-    Route::apiResource('transactions', 'API\TransactionController', ['except' => [
+    Route::put('transactions/{transaction}/clear', 'TransactionController@clear')->name('transactions.clear');
+    Route::apiResource('transactions', 'TransactionController', ['except' => [
         'index'
     ]]);
 
