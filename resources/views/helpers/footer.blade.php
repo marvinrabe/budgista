@@ -16,16 +16,6 @@
             <li class="list-inline-item">
                 <a href="{{ url('/legal') }}">{{ trans('title.legal') }}</a>
             </li>
-            <li class="list-inline-item">
-                <a class="icon" href="{{ config('app.social.facebook') }}" target="_blank" rel="publisher">
-                    <span class="fa fa-fw fa-facebook"></span>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a class="icon" href="{{ config('app.social.twitter') }}" target="_blank" rel="publisher">
-                    <span class="fa fa-fw fa-twitter"></span>
-                </a>
-            </li>
         </ul>
 
         <p class="copyright">
