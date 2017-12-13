@@ -121,6 +121,9 @@
             </div>
             <infinite-loading :key="account_id" @infinite="loadMore" spinner="waveDots" ref="infiniteLoading">
                 <span slot="no-more"></span>
+                <span slot="spinner">
+                    <app-spinner></app-spinner>
+                </span>
             </infinite-loading>
         </div>
 
@@ -169,7 +172,7 @@
     export default {
         props: ['account_id'],
         components: {
-            'infinite-loading': InfiniteLoading
+            InfiniteLoading
         },
         computed: {
             account() {

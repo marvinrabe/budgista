@@ -3,7 +3,7 @@ import * as types from '../mutation-types'
 
 // initial state
 // transactions: [{ id, payee, amount, cleared, rrule, recurring, category: {id, name}, account_id }],
-// loaded: []
+// loaded: [account_id]
 const state = {
     transactions: [],
     loaded: [],
@@ -15,7 +15,7 @@ const getters = {
         return state.transactions.find(x => x.id === id)
     },
     isTransactionLoaded: (state) => (id) => {
-        return state.transactions.find(x => x.id === id) !== undefined;
+        return this.findTransactionById(id) !== undefined;
     },
     findTransactionsByAccountId: (state) => (id) => {
         let transactions = state.transactions.filter(x => x.account_id === id).slice();

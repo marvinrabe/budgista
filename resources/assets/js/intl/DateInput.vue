@@ -1,9 +1,9 @@
 <template>
     <datepicker input-class="form-control"
-                v-bind:value="date"
-                v-on:input="date => updateDate(date)"
-                v-bind:language="locale"
-                v-bind:format="customFormatter">
+                :format="customFormatter"
+                :language="locale"
+                :value="date"
+                @input="date => updateDate(date)">
     </datepicker>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="sheet !== null" class="main">
+    <div class="main">
 
         <app-window :title="$t('title.budget')"></app-window>
 
@@ -13,7 +13,7 @@
                 </a>
                 <date-format
                         class="h4 mb-sm-0"
-                        :value="sheet.month"
+                        :value="month"
                         :options="{year: 'numeric', month: 'short'}">
                 </date-format>
                 <a href="#" class="text-light" :title="$t('action.nextMonth')" @click.prevent.stop="showNextMonth">
@@ -65,9 +65,7 @@
 
         <div class="content budget">
             <div class="budget-header">
-                <div class="budget-column-drag">
-                    &nbsp;
-                </div>
+                <div class="budget-column-drag"></div>
                 <div class="budget-column-name">
                     {{ $t('form.category') }}
                 </div>
@@ -82,44 +80,8 @@
                 </div>
             </div>
 
-            <draggable v-model="sheet.rows" :options="{handle:'.handle'}" @end="persistSorting">
-                <div class="budget-row" v-for="row in sheet.rows" :key="row.id">
-                    <div class="budget-column-drag">
-                        <span class="handle"></span>
-                    </div>
-                    <div class="budget-column-name">
-                        <a class="link-action text-dark"
-                           v-bind:title="$t('action.edit.category')"
-                           v-on:click="showEditCategoryModal(row)">
-                            {{ row.name }}
-                        </a>
-                    </div>
-                    <div class="budget-column-budget">
-                        <money-input
-                                class="text-right py-0 px-1 border-0"
-                                ref="input"
-                                v-bind:class="[{ 'text-muted': row.budget == 0 }, { 'text-dark': row.budget != 0 }]"
-                                v-bind:value="row.budget"
-                                v-on:update:value="val => updateBudget(row, val)"
-                                v-b-tooltip.left
-                                v-bind:title="$t('form.recommendedBudget')+': '+$formatMoney(row.recommendedBudget)">
-                        </money-input>
-                    </div>
-                    <div class="budget-column-activity d-none d-lg-block">
-                        <money-format
-                                v-bind:class="[{ 'text-muted': row.activity == 0 }, { 'text-dark': row.activity != 0 }]"
-                                v-bind:value="row.activity">
-                        </money-format>
-                    </div>
-                    <div class="budget-column-available">
-                        <money-format
-                                style="font-size: 100%"
-                                class="badge"
-                                v-bind:class="[{ 'badge-danger': available(row) < 0 }, { 'badge-success': available(row) > 0 }, { 'badge-light': available(row) == 0 }]"
-                                v-bind:value="available(row)">
-                        </money-format>
-                    </div>
-                </div>
+            <draggable v-model="rows" :options="{handle:'.handle'}" @end="persistSorting">
+                <category-row v-for="(row, index) in rows" :key="month+'#'+row.id" :month="month" :value="row" @update:value="val => rows.splice(index, 1, val)"></category-row>
             </draggable>
         </div>
 
@@ -190,15 +152,17 @@
 
 <script>
     import draggable from 'vuedraggable'
+    import row from './Row.vue'
 
     export default {
         components: {
-            'draggable': draggable
+            draggable,
+            'category-row': row
         },
         computed: {
             allocated: function () {
                 let sum = 0;
-                this.sheet.rows.forEach(function (row) {
+                this.rows.forEach(function (row) {
                     sum += row.budget;
                 });
                 return sum;
@@ -208,7 +172,13 @@
             }
         },
         data: () => ({
-            sheet: null,
+            sheet: {
+                income: 0,
+                allocated: 0,
+                previousMonth: 0
+            },
+            month: new Date().getFullYear() + '-' + (new Date().getMonth() + 1),
+            rows: [],
             previousMonth: null,
             nextMonth: null,
             newCategory: {
@@ -222,7 +192,7 @@
             }
         }),
 
-        created() {
+        mounted() {
             this.loadSheet('/api/month');
         },
 
@@ -233,6 +203,8 @@
                     .then(response => {
                         // JSON responses are automatically parsed.
                         this.sheet = response.data.data;
+                        this.month = this.sheet.month;
+                        this.rows = this.sheet.rows;
                         this.previousMonth = response.data.links.prev;
                         this.nextMonth = response.data.links.next;
                     })
@@ -246,27 +218,6 @@
 
             showNextMonth() {
                 this.loadSheet(this.nextMonth);
-            },
-
-
-            available: function (category) {
-                return category.previousMonth + category.budget + category.activity;
-            },
-            updateBudget: function (category, value) {
-                category.budget = value;
-
-                axios
-                    .put('/api/categories/' + category.id + '/budget', {
-                        'month': this.sheet.month,
-                        'amount': value
-                    })
-                    .then(response => {
-                        category = response.data.data;
-                    })
-                    .catch(e => {
-                        console.error(e);
-                    });
-
             },
 
             showNewCategoryModal() {
@@ -307,7 +258,6 @@
                 });
 
             },
-
             showEditCategoryModal(row) {
                 // Reset Validation
                 this.editCategory.validated = false;
@@ -335,7 +285,7 @@
                                 'name': this.editCategory.name
                             })
                             .then(response => {
-                                this.sheet.rows.find(x => x.id === this.editCategory.id).name = response.data.data.name;
+                                this.rows.find(x => x.id === this.editCategory.id).name = response.data.data.name;
                                 this.$store.commit('ADD_CATEGORY', response.data.data);
                             })
                             .catch(e => {
@@ -362,19 +312,19 @@
             },
 
             addRow(category) {
-                category.month = this.sheet.month;
+                category.month = this.month;
                 category.budget = 0;
                 category.available = 0;
                 category.previousMonth = 0;
                 category.activity = 0;
 
-                this.sheet.rows.push(category);
+                this.rows.push(category);
             },
             removeRow(id) {
-                this.sheet.rows = this.sheet.rows.filter(item => item.id !== id);
+                this.rows = this.rows.filter(item => item.id !== id);
             },
-            persistSorting: function (category, value) {
-                let list = this.sheet.rows.reduce(function (prevVal, elem) {
+            persistSorting() {
+                let list = this.rows.reduce(function (prevVal, elem) {
                     prevVal.push(elem.id);
                     return prevVal;
                 }, []);

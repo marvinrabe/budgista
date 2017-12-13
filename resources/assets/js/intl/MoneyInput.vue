@@ -1,10 +1,9 @@
 <template>
     <input class="form-control"
            type="text"
-           ref="input"
-           v-on:focus="selectAll"
-           v-on:keyup.enter="updateValue($event.target.value); $event.target.blur()"
-           v-on:blur="updateValue($event.target.value)" />
+           @focus="selectAll"
+           @keyup.enter="updateValue($event.target.value)"
+           @blur="updateValue($event.target.value)"/>
 </template>
 
 <script>
@@ -70,7 +69,7 @@
                 this.formatValue(result);
             },
             formatValue: function (value) {
-                this.$refs.input.value = this.$formatMoney(value);
+                this.$el.value = this.$formatMoney(value);
             },
             selectAll: function (event) {
                 setTimeout(function () {

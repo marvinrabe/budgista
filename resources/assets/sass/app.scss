@@ -166,7 +166,6 @@ span.handle {
     }
 
     &-secondary {
-      @extend .shadow-1;
       background: theme-color('primary');
 
       .btn {
@@ -189,7 +188,6 @@ span.handle {
   }
 
   .content {
-    @extend .shadow-1;
     @extend .pb-5;
     background: $white;
     flex: 1;
