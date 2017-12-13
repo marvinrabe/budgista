@@ -35,17 +35,17 @@ class Account extends Model
 
     public function clearedBalance()
     {
-        return $this->transactions()->where('cleared', '=', true)->sum('amount');
+        return (int) $this->transactions()->where('cleared', '=', true)->sum('amount');
     }
 
     public function unclearedBalance()
     {
-        return $this->transactions()->where([['cleared', '=', false], ['date', '<=', Carbon::now()]])->sum('amount');
+        return (int) $this->transactions()->where([['cleared', '=', false], ['date', '<=', Carbon::now()]])->sum('amount');
     }
 
     public function workingBalance()
     {
-        return $this->transactions()->where('date', '<=', Carbon::now())->sum('amount');
+        return (int) $this->transactions()->where('date', '<=', Carbon::now())->sum('amount');
     }
 
 }

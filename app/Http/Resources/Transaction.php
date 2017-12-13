@@ -19,11 +19,11 @@ class Transaction extends Resource
             'id' => $this->id,
             'payee' => $this->payee,
             'account_id' => $this->account->id,
-            'category' => $this->category !== null?new Category($this->category):null,
-            'amount' => (int)$this->amount,
-            'recurring' => (boolean) $this->recurring,
-            'rrule' => $this->recurring?$this->rrule->rfcString():null,
-            'cleared' => (boolean)$this->cleared,
+            'category' => $this->category !== null ? new Category($this->category) : null,
+            'amount' => $this->amount,
+            'recurring' => $this->recurring,
+            'rrule' => $this->recurring ? $this->rrule->rfcString() : null,
+            'cleared' => $this->cleared,
             'date' => $this->date->toDateString(),
             'created_at' => $this->created_at
         ];
