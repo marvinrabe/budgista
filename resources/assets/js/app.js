@@ -10,22 +10,17 @@ require('./bootstrap');
  * Vue
  */
 window.Vue = require('vue');
+
 /**
  * Third Party Vue Components
  */
 // Translations & Dates
 import VueI18n from 'vue-i18n'
-// Bootstrap
 import BootstrapVue from 'bootstrap-vue'
-// Router
 import VueRouter from 'vue-router'
-// Vuex
-import Vuex from 'vuex'
-// Validations
 import VeeValidate from 'vee-validate';
-import AppIntl from './intl'
 import store from './store'
-
+import AppIntl from './intl'
 
 Vue.use(VueI18n);
 
@@ -41,15 +36,9 @@ const i18n = new VueI18n({
     silentTranslationWarn: process.env.NODE_ENV === 'production'
 });
 
-
 Vue.use(BootstrapVue);
 
-
 Vue.use(VueRouter);
-
-
-Vue.use(Vuex);
-
 
 Vue.use(VeeValidate, {
     validity: true
@@ -88,6 +77,11 @@ Vue.component(
 */
 
 Vue.component(
+    'app-spinner',
+    require('./components/AppSpinner.vue')
+);
+
+Vue.component(
     'app-layout',
     require('./components/AppLayout.vue')
 );
@@ -121,13 +115,13 @@ const routes = [
     {
         path: '/',
         name: 'budget.month',
-        component: require('./components/budget/MonthlyView.vue'),
+        component: require('./components/budget/Index.vue'),
         props: true
     },
     {
         path: '/account/:account_id',
         name: 'budget.account',
-        component: require('./components/budget/AccountView.vue'),
+        component: require('./components/accounts/Index.vue'),
         props: true
     },
     {
