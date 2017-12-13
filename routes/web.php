@@ -23,5 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/settings', 'Auth\SettingsController@get')->name('settings');
     Route::put('/settings', 'Auth\SettingsController@put')->name('settings.store');
 
+    Route::get('/admin', 'AdminController@index')->name('admin');
+
 });
 

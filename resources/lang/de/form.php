@@ -9,6 +9,7 @@ return [
     'password_new' => 'Neues Passwort',
     'password_new_confirm' => 'Neues Passwort wiederholen',
     'remember' => 'Angemeldet bleiben',
+    'created_at' => 'Erstellt um',
 
     // Used in Settings
     'language' => 'Sprache',

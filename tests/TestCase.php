@@ -11,9 +11,9 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    public function signIn()
+    public function signIn($user = null)
     {
-        $user = factory(User::class)->create();
+        $user = $user ?: factory(User::class)->create();
 
         // Authenticate with Web
         $this->actingAs($user);

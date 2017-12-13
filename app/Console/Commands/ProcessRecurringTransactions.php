@@ -15,7 +15,7 @@ class ProcessRecurringTransactions extends Command
      *
      * @var string
      */
-    protected $signature = 'recurring:process';
+    protected $signature = 'app:process-recurring';
 
     /**
      * The console command description.
