@@ -11,7 +11,7 @@ class AdminController extends Controller
     public function index()
     {
         if (Gate::denies('is-admin')) {
-            return abort(403);
+            return abort(404);
         }
 
         $users = User::paginate(15);

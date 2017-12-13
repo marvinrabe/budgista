@@ -16,7 +16,7 @@ class AdminPanelTest extends TestCase
     /** @test */
     public function it_can_not_be_accessed_by_normal_users()
     {
-        $this->signIn()->get('/admin')->assertStatus(403);
+        $this->signIn()->get('/admin')->assertStatus(404);
     }
 
     /** @test */
