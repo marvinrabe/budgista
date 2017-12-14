@@ -156,16 +156,9 @@ function toggleClassMenu() {
     }
 }
 
-function hideMenu() {
-    let myMenu = document.querySelector(".menu");
-    myMenu.classList.add("menu--animatable");
-    myMenu.classList.remove('menu--visible');
-}
-
 function OnTransitionEnd() {
     let myMenu = document.querySelector(".menu");
     myMenu.classList.remove("menu--animatable");
 }
 
 $('#app').on('click', '.menu-toggle', toggleClassMenu);
-$('#app').on('click', '.nav-link-main', hideMenu);

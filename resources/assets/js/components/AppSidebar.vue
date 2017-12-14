@@ -1,35 +1,15 @@
 <template>
-    <div class="menu" ref="menu">
-        <div class="app-menu">
+    <div class="menu" @click="hideMenu" ref="menu">
+        <div class="app-menu" @click.stop>
 
             <nav class="navbar navbar-expand navbar-light">
                 <a class="navbar-brand logo" href="/">
                     {{ $t('app.name') }}
                 </a>
 
-                <ul class="navbar-nav ml-auto">
-
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link" id="user-menu" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false" title="Settings">
-                            <span class="fa fa-ellipsis-v"></span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="user-menu">
-                            <div class="dropdown-static">
-                                <strong>{{ user.name }}</strong><br>
-                                <span class="text-muted">{{ user.email }}</span>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/settings">
-                                {{ $t('title.settings') }}
-                            </a>
-                            <app-logout></app-logout>
-                        </div>
-                    </li>
-
-                    <li class="nav-item d-md-none">
-                        <a href="#" class="menu-toggle nav-link">
+                <ul class="navbar-nav ml-auto d-md-none">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" @click="hideMenu">
                             <span class="fa fa-times"></span>
                         </a>
                     </li>
@@ -39,6 +19,7 @@
             <nav class="nav flex-column">
                 <router-link
                         :to="{ name: 'budget.month' }"
+                        @click.native="hideMenu"
                         active-class="active" :exact="true" class="nav-link-main">
                     <span class="fa fa-envelope-o fa-fw"></span> {{ $t('title.budget') }}
                 </router-link>
@@ -46,18 +27,27 @@
                 <router-link
                         v-for="account in sortedAccounts" :key="account.id"
                         :to="{ name: 'budget.account', params: { account_id: account.id }}"
+                        @click.native="hideMenu"
                         active-class="active" class="nav-link-main">
-                        <money-format
-                                class="float-right mt-1 badge"
-                                :class="[{ 'badge-danger': account.workingBalance < 0 }, { 'badge-success': account.workingBalance >= 0 }]"
-                                :value="account.workingBalance">
-                        </money-format>
+                    <money-format
+                            class="float-right mt-1 badge"
+                            :class="[{ 'badge-danger': account.workingBalance < 0 }, { 'badge-success': account.workingBalance >= 0 }]"
+                            :value="account.workingBalance">
+                    </money-format>
                     {{ account.name }}
                 </router-link>
                 <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small">
                     <span class="fa fa-plus"></span> {{ $t('action.new.account') }}
                 </a>
             </nav>
+
+            <div class="text-center text-muted small mt-2">
+                <a class="text-muted small" href="/settings">
+                    {{ $t('title.settings') }}
+                </a>
+                &middot;
+                <app-logout></app-logout>
+            </div>
 
         </div>
 
@@ -120,6 +110,9 @@
         methods: {
 
             showNewAccountModal() {
+                // Hide menu
+                this.hideMenu();
+
                 // Reset Validation
                 this.newAccount.validated = false;
                 this.errors.clear('newAccount');
@@ -146,6 +139,11 @@
                         this.hideNewAccountModal();
                     }
                 });
+            },
+            hideMenu() {
+                let myMenu = document.querySelector(".menu");
+                myMenu.classList.add("menu--animatable");
+                myMenu.classList.remove('menu--visible');
             }
         }
     }

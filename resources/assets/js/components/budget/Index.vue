@@ -21,36 +21,40 @@
                 </a>
             </div>
 
-            <div v-if="!loading" class="text-right">
-                <div class="badge px-3"
-                     :class="[{ 'badge-danger': unallocated < 0 }, { 'badge-success': unallocated >= 0 }]">
+            <transition name="fade">
+                <div v-if="!loading" class="text-right">
+                    <div class="badge px-3"
+                         :class="[{ 'badge-danger': unallocated < 0 }, { 'badge-success': unallocated >= 0 }]">
+                        <money-format
+                                class="h3"
+                                :value="unallocated">
+                        </money-format>
+                        <br>
+                        <span class="small">{{ $t('form.unallocated') }}</span>
+                    </div>
+                </div>
+            </transition>
+            <transition name="fade">
+                <div v-if="!loading" class="d-none d-lg-block small">
+                    {{ $t('form.previousMonth') }}:
                     <money-format
-                            class="h3"
-                            :value="unallocated">
+                            class="font-weight-bold"
+                            :value="sheet.previousMonth">
                     </money-format>
                     <br>
-                    <span class="small">{{ $t('form.unallocated') }}</span>
+                    {{ $t('form.income') }}:
+                    <money-format
+                            class="font-weight-bold"
+                            :value="sheet.income">
+                    </money-format>
+                    <br>
+                    {{ $t('form.allocated') }}:
+                    <money-format
+                            class="font-weight-bold"
+                            :value="sheet.allocated">
+                    </money-format>
                 </div>
-            </div>
-            <div v-if="!loading" class="d-none d-lg-block small">
-                {{ $t('form.previousMonth') }}:
-                <money-format
-                        class="font-weight-bold"
-                        :value="sheet.previousMonth">
-                </money-format>
-                <br>
-                {{ $t('form.income') }}:
-                <money-format
-                        class="font-weight-bold"
-                        :value="sheet.income">
-                </money-format>
-                <br>
-                {{ $t('form.allocated') }}:
-                <money-format
-                        class="font-weight-bold"
-                        :value="sheet.allocated">
-                </money-format>
-            </div>
+            </transition>
         </div>
 
         <div class="toolbar toolbar-secondary">
@@ -213,6 +217,9 @@
 
         methods: {
             loadSheet(url) {
+                this.loading = true;
+                this.rows = [];
+
                 axios
                     .get(url)
                     .then(response => {
@@ -229,10 +236,18 @@
                     })
             },
             showPreviousMonth() {
+                let currentDate = new Date(this.month);
+                let newDate = new Date(currentDate.setMonth(currentDate.getMonth() - 1));
+                this.month = newDate.getFullYear() + '-' + (newDate.getMonth() + 1);
+
                 this.loadSheet(this.previousMonth);
             },
 
             showNextMonth() {
+                let currentDate = new Date(this.month);
+                let newDate = new Date(currentDate.setMonth(currentDate.getMonth() + 1));
+                this.month = newDate.getFullYear() + '-' + (newDate.getMonth() + 1);
+
                 this.loadSheet(this.nextMonth);
             },
 
