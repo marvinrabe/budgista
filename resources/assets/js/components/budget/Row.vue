@@ -4,11 +4,7 @@
             <span class="handle"></span>
         </div>
         <div class="budget-column-name">
-            <a class="link-action text-dark"
-               :title="$t('action.edit.category')"
-               @click="showEditCategoryModal">
-                {{ name }}
-            </a>
+            {{ category.name }}
         </div>
         <div class="budget-column-budget">
             <money-input
@@ -35,6 +31,9 @@
                     :value="available">
             </money-format>
         </div>
+        <div class="budget-column-actions">
+            <slot name="actions"></slot>
+        </div>
     </div>
 </template>
 
@@ -44,8 +43,7 @@
         props: ['value', 'month'],
         data() {
             return {
-                id: this.value.id,
-                name: this.value.name,
+                category_id: this.value.id,
                 previousMonth: this.value.previousMonth,
                 budget: this.value.budget,
                 recommendedBudget: this.value.recommendedBudget,
@@ -53,6 +51,9 @@
             };
         },
         computed: {
+            category() {
+                return this.$store.getters.findCategoryById(this.category_id);
+            },
             available() {
                 return this.previousMonth + this.budget + this.activity;
             }
@@ -60,7 +61,7 @@
         methods: {
             updateBudget: function (value) {
                 axios
-                    .put('/api/categories/' + this.id + '/budget', {
+                    .put('/api/categories/' + this.category_id + '/budget', {
                         'month': this.month,
                         'amount': value
                     })
@@ -72,9 +73,6 @@
                         console.error(e);
                     });
 
-            },
-            showEditCategoryModal: function() {
-                // TODO: how?
             }
         }
     }

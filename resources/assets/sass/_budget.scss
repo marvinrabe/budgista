@@ -34,7 +34,6 @@
       text-align: center;
       width: 24px;
       flex-shrink: 0;
-
     }
 
     &-name {
@@ -50,6 +49,11 @@
       text-align: right;
     }
 
+    &-actions {
+      text-align: center;
+      width: 32px;
+      flex-shrink: 0;
+    }
 
     &-budget {
       input {

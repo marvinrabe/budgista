@@ -78,10 +78,22 @@
                 <div class="budget-column-available">
                     {{ $t('form.available') }}
                 </div>
+                <div class="budget-column-actions"></div>
             </div>
 
             <draggable v-model="rows" :options="{handle:'.handle'}" @end="persistSorting">
-                <category-row v-for="(row, index) in rows" :key="month+'#'+row.id" :month="month" :value="row" @update:value="val => rows.splice(index, 1, val)"></category-row>
+                <category-row
+                        v-for="(row, index) in rows"
+                        :key="month+'#'+row.id"
+                        :month="month"
+                        :value="row"
+                        @update:value="val => rows.splice(index, 1, val)">
+                    <div slot="actions">
+                        <a href="#" @click.prevent="showEditCategoryModal(row)" class="text-muted">
+                            <span class="fa fa-pencil"></span>
+                        </a>
+                    </div>
+                </category-row>
             </draggable>
         </div>
 
