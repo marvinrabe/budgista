@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Resources\Category as CategoryResource;
 use App\Models\Category;
 use App\Month;
 use App\Row;
+use App\Rules\Own;
 use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
@@ -55,6 +55,19 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $this->authorize('delete', $category);
+
+        request()->validate([
+            'category_id' => [
+                'sometimes',
+                new Own('categories')
+            ]
+        ]);
+
+        if (request()->has('category_id')) {
+            $category->transactions()->update([
+                'category_id' => request('category_id')
+            ]);
+        }
 
         $category->delete();
 
