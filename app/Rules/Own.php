@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class Own implements Rule
 {
+
     protected $table;
 
     /**
@@ -27,10 +28,12 @@ class Own implements Rule
      */
     public function passes($attribute, $value)
     {
-        return DB::table($this->table)->where([
+        return DB::table($this->table)
+            ->where([
                 ['id', '=', $value],
                 ['user_id', '=', Auth()->id()]
-            ])->count() > 0;
+            ])
+            ->exists();
     }
 
     /**
@@ -42,4 +45,5 @@ class Own implements Rule
     {
         return trans('validation.exists');
     }
+    
 }
