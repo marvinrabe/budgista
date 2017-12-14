@@ -16,9 +16,10 @@
     }
 
     .spinner > div {
-        width: 18px;
-        height: 18px;
-        background-color: #333;
+        width: 13px;
+        height: 13px;
+        background-color: #000;
+        opacity: .8;
 
         border-radius: 100%;
         display: inline-block;
