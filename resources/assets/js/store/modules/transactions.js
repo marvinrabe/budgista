@@ -15,7 +15,7 @@ const getters = {
         return state.transactions.find(x => x.id === id)
     },
     isTransactionLoaded: (state) => (id) => {
-        return this.findTransactionById(id) !== undefined;
+        return state.transactions.find(x => x.id === id) !== undefined;
     },
     findTransactionsByAccountId: (state) => (id) => {
         let transactions = state.transactions.filter(x => x.account_id === id).slice();
