@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Category as CategoryResource;
+use App\Models\Budget;
 use App\Models\Category;
 use App\Month;
 use App\Row;
@@ -64,9 +65,20 @@ class CategoryController extends Controller
         ]);
 
         if (request()->has('category_id')) {
+            /**
+             * @var Category $newCategory
+             */
+            $newCategory = Category::find(request('category_id'));
+
             $category->transactions()->update([
-                'category_id' => request('category_id')
+                'category_id' => $newCategory->id
             ]);
+
+            $category->budgets()->get()->each(function(Budget $budget) use ($newCategory) {
+                $newBudget = $newCategory->budgetIn($budget->month);
+                $newBudget->amount += $budget->amount;
+                $newBudget->save();
+            });
         }
 
         $category->delete();
