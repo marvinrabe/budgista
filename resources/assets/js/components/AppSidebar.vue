@@ -145,9 +145,11 @@
                 });
             },
             hideMenu() {
-                let myMenu = document.querySelector(".menu");
-                myMenu.classList.add("menu--animatable");
-                myMenu.classList.remove('menu--visible');
+                let menu = this.$el;
+                if (menu.classList.contains("menu--visible")) {
+                    menu.classList.add("menu--animatable");
+                    menu.classList.remove('menu--visible');
+                }
             }
         }
     }
