@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Transaction;
 use App\Rules\Own;
-use Illuminate\Http\Request;
 use App\Http\Resources\Transaction as TransactionResource;
 use RRule\RRule;
 
@@ -57,7 +56,7 @@ class TransactionController extends Controller
         return new TransactionResource($transaction);
     }
 
-    public function update(Request $request, Transaction $transaction)
+    public function update(Transaction $transaction)
     {
         $this->authorize('update', $transaction);
 
@@ -87,16 +86,15 @@ class TransactionController extends Controller
         $this->authorize('delete', $transaction);
 
         $transaction->delete();
-
-        return [];
     }
 
     public function clear(Transaction $transaction)
     {
         $this->authorize('update', $transaction);
 
-        $transaction->cleared = !$transaction->cleared;
-        $transaction->save();
+        $transaction->update([
+            'cleared' => !$transaction->cleared
+        ]);
 
         return new TransactionResource($transaction);
     }
