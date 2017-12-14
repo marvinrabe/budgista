@@ -141,24 +141,3 @@ const routes = [
 const router = new VueRouter({routes});
 
 const app = new Vue({router, store, i18n}).$mount('#app');
-
-/**
- * Menu
- */
-
-function toggleClassMenu() {
-    let myMenu = document.querySelector(".menu");
-    myMenu.classList.add("menu--animatable");
-    if (!myMenu.classList.contains("menu--visible")) {
-        myMenu.classList.add("menu--visible");
-    } else {
-        myMenu.classList.remove('menu--visible');
-    }
-}
-
-function OnTransitionEnd() {
-    let myMenu = document.querySelector(".menu");
-    myMenu.classList.remove("menu--animatable");
-}
-
-$('#app').on('click', '.menu-toggle', toggleClassMenu);

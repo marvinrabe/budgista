@@ -1,5 +1,5 @@
 <template>
-    <div class="menu" @click="hideMenu" ref="menu">
+    <div class="menu" @click="hideMenu">
         <div class="app-menu" @click.stop>
 
             <nav class="navbar navbar-expand navbar-light">
@@ -104,8 +104,12 @@
                 'sortedAccounts'
             ])
         },
-        created: function () {
-            //this.$refs['menu'].addEventListener("transitionend", OnTransitionEnd, false);
+        mounted() {
+            let menu = this.$el;
+
+            menu.addEventListener("transitionend", function () {
+                menu.classList.remove("menu--animatable");
+            }, false);
         },
         methods: {
 
