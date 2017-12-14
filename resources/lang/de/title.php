@@ -7,6 +7,7 @@ return [
     'reset' => 'Passwort zurücksetzen',
     'legal' => 'Impressum',
     'home' => 'Startseite',
+    'users' => 'Benutzer',
 
     // Used in Settings
     'settings' => 'Einstellungen'
