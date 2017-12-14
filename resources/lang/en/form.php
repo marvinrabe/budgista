@@ -9,6 +9,7 @@ return [
     'password_new' => 'New Password',
     'password_new_confirm' => 'Confirm New Password',
     'remember' => 'Remember Me',
+    'created_at' => 'Created at',
 
     // Used in Settings
     'language' => 'Language',
