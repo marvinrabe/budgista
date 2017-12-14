@@ -329,6 +329,7 @@
                 category.available = 0;
                 category.previousMonth = 0;
                 category.activity = 0;
+                category.recommendedBudget = 0;
 
                 this.rows.push(category);
             },
