@@ -20,6 +20,9 @@
             <th>{{ trans('form.email') }}</th>
             <th>{{ trans('form.name') }}</th>
             <th>{{ trans('form.created_at') }}</th>
+            <th>{{ trans('form.language') }}</th>
+            <th>{{ trans('form.locale') }}</th>
+            <th>{{ trans('form.currency') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -28,6 +31,9 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->created_at }}</td>
+                <td>{{ $user->language }}</td>
+                <td>{{ $user->locale }}</td>
+                <td>{{ $user->currency }}</td>
             </tr>
         @endforeach
         </tbody>
