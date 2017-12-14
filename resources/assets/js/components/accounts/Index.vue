@@ -66,7 +66,7 @@
                 <div class="transaction-actions">&nbsp;</div>
             </div>
 
-            <div class="transactions-row" :class="[{ 'text-muted bg-light': new Date(item.date) > new Date() }]"
+            <div class="transactions-row" :class="[{ 'transactions-row-future': new Date(item.date) > new Date() }]"
                  v-for="(item, index) of transactions" :key="index">
                 <div class="transaction-clear">
                     <button class="btn btn-xs"
