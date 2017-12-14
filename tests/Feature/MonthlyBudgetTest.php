@@ -49,6 +49,46 @@ class MonthlyBudgetTest extends TestCase
     }
 
     /** @test */
+    public function check_activity()
+    {
+        $this->signIn();
+
+        $month = Month::current();
+
+        $category = factory(Category::class)->create([
+            'user_id' => Auth()->id()
+        ]);
+
+        $dates = [
+            $month->firstDay(),
+            $month->lastDay(),
+            $month->next()->firstDay(),
+            $month->previous()->lastDay()
+        ];
+
+        foreach ($dates as $date) {
+            factory(Transaction::class)->create([
+                'amount' => -10,
+                'date' => $date,
+                'category_id' => $category->id
+            ]);
+        }
+
+        $this->get('/api/month/' . $month)
+            ->assertSuccessful()
+            ->assertJson([
+                'data' => [
+                    'rows' => [
+                        [
+                            'id' => $category->id,
+                            'activity' => -20
+                        ]
+                    ]
+                ]
+            ]);
+    }
+
+    /** @test */
     public function calculate_minimum_budgeted()
     {
         $this->signIn();
