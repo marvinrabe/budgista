@@ -35,20 +35,42 @@ class Account extends Model
 
     public function clearedBalance()
     {
-        return (int)$this->transactions()->where('cleared', '=', true)->sum('amount');
+        return (int)$this
+            ->transactions()
+            ->where('cleared', '=', true)
+            ->sum('amount');
     }
 
     public function unclearedBalance()
     {
-        return (int)$this->transactions()->where([
-            ['cleared', '=', false],
-            ['date', '<=', Carbon::now()]
-        ])->sum('amount');
+        return (int)$this
+            ->transactions()
+            ->where([
+                ['cleared', '=', false],
+                ['date', '<=', Carbon::now()]
+            ])
+            ->sum('amount');
     }
 
     public function workingBalance()
     {
-        return (int)$this->transactions()->where('date', '<=', Carbon::now())->sum('amount');
+        return (int)$this
+            ->transactions()
+            ->where('date', '<=', Carbon::now())
+            ->sum('amount');
+    }
+
+    public function reconcile($newBalance)
+    {
+        $difference = $newBalance - $this->workingBalance();
+
+        $this->transactions()->create([
+            'date' => Carbon::now(),
+            'payee' => trans('action.reconciliation'),
+            'amount' => $difference
+        ]);
+
+        $this->transactions()->update(['cleared' => true]);
     }
 
 }
