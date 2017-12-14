@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
+use App\Month;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -95,6 +96,28 @@ class ManageCategoriesTest extends TestCase
                 'category_id' => factory(Category::class)->create()->id
             ])
             ->assertSessionHasErrors('category_id');
+    }
+
+    /** @test */
+    public function it_should_transfer_budgets_to_new_category()
+    {
+        $this->signIn();
+
+        $categories = factory(Category::class, 2)->create([
+            'user_id' => Auth()->id()
+        ]);
+
+        $budget = $categories->first()->budgetIn(Month::current());
+        $budget->amount = 12345;
+        $budget->save();
+
+        $response = $this
+            ->delete("/api/categories/{$categories->first()->id}", [
+                'category_id' => $categories->last()->id
+            ])
+            ->assertSuccessful();
+
+        $this->assertEquals(12345, $categories->last()->budgetIn(Month::current())->amount);
     }
 
 }
