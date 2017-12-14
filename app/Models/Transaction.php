@@ -20,7 +20,8 @@ class Transaction extends Model
         'category_id',
         'account_id',
         'payee',
-        'amount'
+        'amount',
+        'cleared'
     ];
 
     protected $dates = ['date'];
