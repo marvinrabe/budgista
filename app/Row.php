@@ -49,7 +49,7 @@ class Row implements JsonSerializable
 
     public function activity()
     {
-        return $this->category->transactions()->whereBetween('date', [$this->month->previous()->lastDay(), $this->month->lastDay()])->sum('amount');
+        return $this->category->transactions()->whereBetween('date', [$this->month->firstDay(), $this->month->lastDay()])->sum('amount');
     }
 
     public function available()
