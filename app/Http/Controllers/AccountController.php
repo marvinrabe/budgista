@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Resources\Account as AccountResource;
 use App\Models\Account;
-use App\Models\Transaction;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
@@ -14,20 +11,18 @@ class AccountController extends Controller
 
     public function index()
     {
-        return AccountResource::collection(Auth::user()->accounts()->get());
+        return AccountResource::collection(Auth::user()->accounts);
     }
 
     public function store()
     {
         $this->authorize('create', Account::class);
 
-        $account = new Account(
+        $account = Auth::user()->accounts()->create(
             request()->validate([
                 'name' => 'required'
             ])
         );
-
-        Auth::user()->accounts()->save($account);
 
         return new AccountResource($account);
     }
@@ -70,8 +65,6 @@ class AccountController extends Controller
         $this->authorize('delete', $account);
 
         $account->delete();
-
-        return [];
     }
 
 }
