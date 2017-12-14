@@ -30,22 +30,25 @@ class Account extends Model
 
     public function transactions()
     {
-        return $this->hasMany('App\Models\Transaction');
+        return $this->hasMany(Transaction::class);
     }
 
     public function clearedBalance()
     {
-        return (int) $this->transactions()->where('cleared', '=', true)->sum('amount');
+        return (int)$this->transactions()->where('cleared', '=', true)->sum('amount');
     }
 
     public function unclearedBalance()
     {
-        return (int) $this->transactions()->where([['cleared', '=', false], ['date', '<=', Carbon::now()]])->sum('amount');
+        return (int)$this->transactions()->where([
+            ['cleared', '=', false],
+            ['date', '<=', Carbon::now()]
+        ])->sum('amount');
     }
 
     public function workingBalance()
     {
-        return (int) $this->transactions()->where('date', '<=', Carbon::now())->sum('amount');
+        return (int)$this->transactions()->where('date', '<=', Carbon::now())->sum('amount');
     }
 
 }
