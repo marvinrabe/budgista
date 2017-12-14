@@ -6,7 +6,7 @@
         <div class="toolbar toolbar-primary">
             <app-sidebar-toggle></app-sidebar-toggle>
 
-            <div class="col-flex">
+            <div style="line-height: 58px;" class="col-flex">
                 <a href="#" class="text-light" :title="$t('action.previousMonth')"
                    @click.prevent.stop="showPreviousMonth">
                     <span class="fa fa-chevron-left"></span>
@@ -21,7 +21,7 @@
                 </a>
             </div>
 
-            <div class="text-right">
+            <div v-if="!loading" class="text-right">
                 <div class="badge px-3"
                      :class="[{ 'badge-danger': unallocated < 0 }, { 'badge-success': unallocated >= 0 }]">
                     <money-format
@@ -32,7 +32,7 @@
                     <span class="small">{{ $t('form.unallocated') }}</span>
                 </div>
             </div>
-            <div class="d-none d-lg-block small">
+            <div v-if="!loading" class="d-none d-lg-block small">
                 {{ $t('form.previousMonth') }}:
                 <money-format
                         class="font-weight-bold"
@@ -95,6 +95,8 @@
                     </div>
                 </category-row>
             </draggable>
+
+            <app-spinner v-if="loading"></app-spinner>
         </div>
 
         <b-modal ref="newCategoryModal" @shown="focusNewCategoryInput" :title="$t('action.new.category')">
@@ -189,6 +191,7 @@
                 allocated: 0,
                 previousMonth: 0
             },
+            loading: true,
             month: new Date().getFullYear() + '-' + (new Date().getMonth() + 1),
             rows: [],
             previousMonth: null,
@@ -214,6 +217,7 @@
                     .get(url)
                     .then(response => {
                         // JSON responses are automatically parsed.
+                        this.loading = false;
                         this.sheet = response.data.data;
                         this.month = this.sheet.month;
                         this.rows = this.sheet.rows;
