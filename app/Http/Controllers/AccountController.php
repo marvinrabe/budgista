@@ -60,17 +60,7 @@ class AccountController extends Controller
             'amount' => 'required|integer'
         ]);
 
-        $currentBalance = $account->workingBalance();
-        $newBalance = request('amount');
-        $difference = $newBalance - $currentBalance;
-
-        $account->transactions()->create([
-            'date' => Carbon::now(),
-            'payee' => trans('action.reconciliation'),
-            'amount' => $difference
-        ]);
-
-        $account->transactions()->update(['cleared' => true]);
+        $account->reconcile(request('amount'));
 
         return new AccountResource($account);
     }
