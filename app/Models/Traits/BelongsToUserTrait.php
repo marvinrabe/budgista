@@ -2,12 +2,14 @@
 
 namespace App\Models\Traits;
 
+use App\Models\User;
+
 trait BelongsToUserTrait
 {
 
     public function user()
     {
-        return $this->belongsTo('App\Models\Budget');
+        return $this->belongsTo(User::class);
     }
 
 }

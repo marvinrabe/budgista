@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth:api']], function () {
      * Accounts
      */
     Route::get('accounts/{account}/transactions', 'TransactionController@index')->name('accounts.transactions');
+    Route::post('accounts/{account}/reconcile', 'AccountController@reconcile')->name('accounts.reconcile');
     Route::apiResource('accounts', 'AccountController');
 
     /*
