@@ -11,9 +11,6 @@
         computed: {
             title() {
                 return this.$t('action.edit.transaction');
-            },
-            hasDelete() {
-                return true;
             }
         },
 

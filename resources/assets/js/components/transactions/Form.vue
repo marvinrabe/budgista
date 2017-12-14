@@ -119,7 +119,7 @@
             </form>
 
             <div class="container text-right">
-                <div class="float-left" v-if="hasDelete">
+                <div class="float-left" v-if="!isNew">
                     <button class="btn btn-outline-danger"
                             :title="$t('action.delete.transaction')"
                             v-on:click="deleteTransaction">
@@ -131,13 +131,12 @@
                     {{ $t('action.cancel') }}
                 </button>
 
-                <button form="transaction" class="btn btn-primary"
-                        v-bind:class="[{'btn-primary': !isNew}, {'btn-light': isNew}]">
-                    {{ $t('action.save') }}
+                <button v-if="isNew" v-on:click="saveAndNew" class="btn btn-light">
+                    {{ $t('action.saveAndNew') }}
                 </button>
 
-                <button v-if="isNew" v-on:click="saveAndNew" class="btn btn-primary">
-                    {{ $t('action.saveAndNew') }}
+                <button form="transaction" class="btn btn-primary">
+                    {{ $t('action.save') }}
                 </button>
             </div>
         </div>
@@ -165,7 +164,7 @@
             title() {
                 return '';
             },
-            hasDelete() {
+            isNew() {
                 return false
             },
             ...mapGetters([
@@ -181,8 +180,7 @@
             interval: 1,
             payee: '',
             category: '',
-            validated: false,
-            isNew: false
+            validated: false
         }),
 
         methods: {
