@@ -50,7 +50,6 @@ const actions = {
     },
 
     clearTransaction({commit}, transaction) {
-        console.log(transaction);
         if(transaction.cleared) {
             commit(types.CLEAR_ACCOUNT_BALANCE, {
                 account_id: transaction.account_id,
