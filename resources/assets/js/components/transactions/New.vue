@@ -7,19 +7,20 @@
         computed: {
             title() {
                 return this.$t('action.new.transaction');
+            },
+            isNew() {
+                return true;
             }
         },
 
         beforeRouteEnter(to, from, next) {
             next(vm => {
                 vm.reset();
-                vm.isNew = true;
             })
         },
 
         beforeRouteUpdate(to, from, next) {
             this.reset();
-            this.isNew = true;
         },
 
 
@@ -39,6 +40,8 @@
                 this.$store.dispatch('createTransaction', transaction);
 
                 this.reset();
+                this.date = transaction.date; // Keep old date
+
                 this.$nextTick(() => {
                     this.$refs.amount.$el.focus();
                 });
