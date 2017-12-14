@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Account;
-use App\Models\Category;
 use App\Models\Transaction;
+use App\Rules\Own;
 use Illuminate\Http\Request;
 use App\Http\Resources\Transaction as TransactionResource;
 use RRule\RRule;
@@ -22,40 +21,31 @@ class TransactionController extends Controller
         );
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        $this->authorize('create', Transaction::class);
+        $this->authorize('create', Transaction::class);;
 
-        $request->validate([
-            'payee' => 'required',
-            'account_id' => 'required',
-            'amount' => 'required'
-        ]);
-
-        $account = Account::find(request('account_id'));
-        $this->authorize('update', $account);
-
-        $transaction = new Transaction();
-
-        $transaction->category_id = null;
-        $category_id = request('category_id');
-        if (!empty($category_id)) {
-            $category = Category::find($category_id);
-            $this->authorize('update', $category);
-            $transaction->category_id = $category->id;
-        }
-
-        $transaction->date = request('date');
-        $transaction->payee = request('payee');
-        $transaction->amount = request('amount');
+        $transaction = Transaction::make(
+            request()->validate([
+                'payee' => 'required',
+                'account_id' => [
+                    'required',
+                    new Own('accounts')
+                ],
+                'category_id' => [
+                    'nullable',
+                    new Own('categories')
+                ],
+                'amount' => 'required|integer',
+                'date' => 'required'
+            ])
+        );
 
         if (!empty(request('rrule'))) {
             $transaction->rrule = new RRule(request('rrule'));
-        } else {
-            $transaction->rrule = null;
         }
 
-        $account->transactions()->save($transaction);
+        $transaction->save();
 
         return new TransactionResource($transaction);
     }
@@ -71,30 +61,23 @@ class TransactionController extends Controller
     {
         $this->authorize('update', $transaction);
 
-        $request->validate([
-            'payee' => 'required',
-            'amount' => 'required'
-        ]);
-
-        $transaction->category_id = null;
-        $category_id = request('category_id');
-        if (!empty($category_id)) {
-            $category = Category::find($category_id);
-            $this->authorize('update', $category);
-            $transaction->category_id = $category->id;
-        }
-
-        $transaction->date = request('date');
-        $transaction->payee = request('payee');
-        $transaction->amount = request('amount');
-
         if (!empty(request('rrule'))) {
             $transaction->rrule = new RRule(request('rrule'));
         } else {
             $transaction->rrule = null;
         }
 
-        $transaction->save();
+        $transaction->update(
+            request()->validate([
+                'payee' => 'required',
+                'amount' => 'required|integer',
+                'date' => 'required|date',
+                'category_id' => [
+                    'nullable',
+                    new Own('categories')
+                ]
+            ])
+        );
 
         return new TransactionResource($transaction);
     }
