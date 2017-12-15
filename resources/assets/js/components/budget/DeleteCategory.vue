@@ -56,6 +56,7 @@
                     newCategory: newCategory
                 }).then(response => {
                     this.hideModal();
+                    this.$emit('delete:category', oldCategory)
                 });
             }
         }
