@@ -102,13 +102,19 @@
     flex-direction: column;
   }
 
-  .transaction-category {
-    text-align: right;
+  .transaction-category,
+  .transaction-date {
+    font-size: 80%;
+    order: 2;
+    opacity: .5;
   }
 
-  .transaction-date {
-    color: $gray-600;
-    order: 2;
+  .transaction-category {
+    text-align: right !important;
+
+    div {
+      text-align: right !important;
+    }
   }
 
   .transactions-header {

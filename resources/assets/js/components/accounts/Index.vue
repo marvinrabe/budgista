@@ -67,7 +67,14 @@
                     <div class="transaction-payee">{{ item.payee }}</div>
                 </div>
                 <div class="transaction-column-2">
-                    <div class="transaction-category" v-html="item.category?item.category.name:''"></div>
+                    <div class="transaction-category">
+                        <span v-if="item.category">
+                            {{ item.category.name }}
+                        </span>
+                        <div v-else class="text-light text-center">
+                            &mdash;
+                        </div>
+                    </div>
                     <div class="transaction-amount">
                         <money-format
                                 :class="[{ 'text-danger': item.amount < 0 }, { 'text-success': item.amount >= 0 }]"
