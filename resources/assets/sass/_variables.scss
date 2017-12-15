@@ -2,7 +2,7 @@ $enable-transitions: false;
 
 @function match-hue($color, $root) {
   $root-hue: hue($root);
-  $color-saturation: 13%;
+  $color-saturation: 8%;
   $color-lightness: lightness($color);
   @return hsl($root-hue, $color-saturation, $color-lightness);
 }
