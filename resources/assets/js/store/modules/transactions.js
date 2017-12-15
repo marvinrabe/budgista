@@ -1,5 +1,4 @@
 import transactions from '../../api/transactions'
-import * as types from '../mutation-types'
 
 // initial state
 // transactions: [{ id, payee, amount, cleared, rrule, recurring, category: {id, name}, account_id }],
@@ -31,10 +30,10 @@ const actions = {
             transactions.get(
                 transaction_id,
                 ({data}) => {
-                    if(data.category) {
-                        commit(types.ADD_CATEGORY, data.category);
+                    if (data.category) {
+                        commit('ADD_CATEGORY', data.category);
                     }
-                    commit(types.ADD_TRANSACTION, data);
+                    commit('ADD_TRANSACTION', data);
                     resolve(data)
                 },
                 () => reject()
@@ -45,7 +44,7 @@ const actions = {
     loadTransactions({state, commit, dispatch}, account_id) {
         if (state.loaded.indexOf(account_id) === -1) {
             dispatch('loadMoreTransactions', account_id);
-            commit(types.MARK_LOADED, account_id)
+            commit('MARK_LOADED', account_id)
         }
     },
 
@@ -54,8 +53,8 @@ const actions = {
             transactions.getMoreTransactions(
                 account_id,
                 ({data}) => {
-                    if(data) {
-                        data.forEach(transaction => commit(types.ADD_TRANSACTION, transaction));
+                    if (data) {
+                        data.forEach(transaction => commit('ADD_TRANSACTION', transaction));
                         resolve();
                     } else {
                         reject();
@@ -68,8 +67,8 @@ const actions = {
         transactions.create(
             transaction,
             ({data}) => {
-                commit(types.ADD_TRANSACTION, data);
-                commit(types.ADD_BALANCE, data);
+                commit('ADD_TRANSACTION', data);
+                commit('ADD_BALANCE', data);
             }
         )
     },
@@ -79,9 +78,9 @@ const actions = {
             transaction,
             ({data}) => {
                 let oldTransaction = getters.findTransactionById(transaction.id);
-                commit(types.REMOVE_BALANCE, oldTransaction);
-                commit(types.ADD_TRANSACTION, data);
-                commit(types.ADD_BALANCE, data);
+                commit('REMOVE_BALANCE', oldTransaction);
+                commit('ADD_TRANSACTION', data);
+                commit('ADD_BALANCE', data);
             }
         )
     },
@@ -89,7 +88,7 @@ const actions = {
     clearTransaction({commit}, transaction) {
         transactions.clear(
             transaction,
-            ({data}) => commit(types.ADD_TRANSACTION, data)
+            ({data}) => commit('ADD_TRANSACTION', data)
         )
     },
 
@@ -98,8 +97,8 @@ const actions = {
             transaction,
             ({data}) => {
                 let oldTransaction = getters.findTransactionById(transaction.id);
-                commit(types.REMOVE_BALANCE, oldTransaction);
-                commit(types.REMOVE_TRANSACTION, transaction);
+                commit('REMOVE_BALANCE', oldTransaction);
+                commit('REMOVE_TRANSACTION', transaction);
             }
         )
     }
@@ -108,16 +107,21 @@ const actions = {
 
 // mutations
 const mutations = {
-    [types.ADD_TRANSACTION](state, transaction) {
+    ADD_TRANSACTION(state, transaction) {
         state.transactions = state.transactions.filter(x => x.id !== transaction.id);
         // TODO unset category attribute if exists and set category_id
         state.transactions.push(transaction);
     },
-    [types.MARK_LOADED](state, account_id) {
+    MARK_LOADED(state, account_id) {
         state.loaded.push(account_id);
     },
-    [types.REMOVE_TRANSACTION](state, {id}) {
+    REMOVE_TRANSACTION(state, {id}) {
         state.transactions = state.transactions.filter(x => x.id !== id);
+    },
+    TRANSFER_CATEGORY(state, {from, to}) {
+        state.transactions
+            .filter(x => _.get(x, 'category.id') === from.id)
+            .forEach(transaction => transaction.category = to);
     }
 };
 

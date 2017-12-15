@@ -1,5 +1,4 @@
 import categories from '../../api/categories'
-import * as types from '../mutation-types'
 
 // initial state
 // accounts: [{ id, name, sort }]
@@ -24,40 +23,52 @@ const actions = {
 
     loadCategories({commit, rootState}) {
         categories.getAll(
-            ({data}) => data.forEach(category => commit(types.ADD_CATEGORY, category))
+            ({data}) => data.forEach(category => commit('ADD_CATEGORY', category))
         )
     },
 
     createCategory({commit, rootState}, category) {
         categories.create(
             category,
-            ({data}) => commit(types.ADD_CATEGORY, data)
+            ({data}) => commit('ADD_CATEGORY', data)
         )
     },
 
     updateCategory({commit}, category) {
         categories.update(
             category,
-            ({data}) => commit(types.ADD_CATEGORY, data)
+            ({data}) => commit('ADD_CATEGORY', data)
         )
     },
 
-    deleteCategory({commit}, category) {
-        categories.delete(
-            category,
-            () => commit(types.REMOVE_CATEGORY, category)
-        )
+    deleteCategory({commit}, {oldCategory, newCategory}) {
+        return axios
+            .delete('/api/categories/' + oldCategory.id, {
+                data: {
+                    category_id: _.get(newCategory, 'id', null)
+                }
+            })
+            .then(response => {
+                commit('REMOVE_CATEGORY', oldCategory);
+                commit('TRANSFER_CATEGORY', {
+                    from: oldCategory,
+                    to: newCategory
+                });
+            })
+            .catch(e => {
+                console.error(e);
+            });
     },
 
 };
 
 // mutations
 const mutations = {
-    [types.ADD_CATEGORY](state, category) {
+    ADD_CATEGORY(state, category) {
         state.categories = state.categories.filter(x => x.id !== category.id);
         state.categories.push(category);
     },
-    [types.REMOVE_CATEGORY](state, {id}) {
+    REMOVE_CATEGORY(state, {id}) {
         state.categories = state.categories.filter(x => x.id !== id);
     }
 };
