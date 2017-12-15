@@ -112,7 +112,6 @@
                 <div class="form-group">
                     <label for="name" v-html="$t('form.name')"></label>
                     <input id="name" type="text" class="form-control"
-                           :placeholder="$t('form.name')"
                            v-model="editAccount.name"
                            v-focus
                            v-validate="'required'"
