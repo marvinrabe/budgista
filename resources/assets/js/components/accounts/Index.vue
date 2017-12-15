@@ -103,24 +103,25 @@
             </infinite-loading>
         </div>
 
-        <b-modal ref="editAccountModal" @shown="focusEditAccountInput" :title="$t('action.edit.account')">
-            <form @submit.stop.prevent="updateAccount"
+        <modal v-if="editAccount.modalVisible" @close="hideEditAccountModal" :title="$t('action.edit.account')">
+            <form slot="body"
+                  @submit.stop.prevent="updateAccount"
                   :class="[{'was-validated': editAccount.validated}]"
                   data-vv-scope="editAccount"
                   novalidate>
                 <div class="form-group">
-                    <label for="name" class="sr-only">{{$t('form.name')}}</label>
+                    <label for="name" v-html="$t('form.name')"></label>
                     <input id="name" type="text" class="form-control"
                            :placeholder="$t('form.name')"
                            v-model="editAccount.name"
-                           ref="editAccountInput"
+                           v-focus
                            v-validate="'required'"
                            data-vv-name="name"
                            :data-vv-as="$t('form.name')">
                     <span class="invalid-feedback">{{ errors.first('editAccount.name') }}</span>
                 </div>
             </form>
-            <div slot="modal-footer" class="text-right" style="width: 100%;">
+            <div slot="footer">
                 <div class="float-left">
                     <button class="btn btn-outline-danger"
                             :title="$t('action.delete.account')"
@@ -136,7 +137,7 @@
                     {{ $t('action.save') }}
                 </button>
             </div>
-        </b-modal>
+        </modal>
     </div>
 </template>
 
@@ -173,7 +174,8 @@
                 id: '',
                 name: '',
                 validated: false,
-                active: false
+                active: false,
+                modalVisible: false
             }
         }),
         methods: {
@@ -205,13 +207,10 @@
                 this.editAccount.id = this.account.id;
                 this.editAccount.name = this.account.name;
 
-                this.$refs.editAccountModal.show();
-            },
-            focusEditAccountInput() {
-                this.$refs.editAccountInput.focus();
+                this.editAccount.modalVisible = true;
             },
             hideEditAccountModal() {
-                this.$refs.editAccountModal.hide();
+                this.editAccount.modalVisible = false;
             },
             updateAccount() {
                 this.$validator.validateAll('editAccount').then(isValid => {
