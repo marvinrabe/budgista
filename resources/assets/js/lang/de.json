@@ -53,7 +53,8 @@
         "outflow": "Abfluss",
         "inflow": "Zufluss",
         "expense": "Ausgabe",
-        "income": "Einnahme"
+        "income": "Einnahme",
+        "transferTransactions": "Kontobewegungen übertragen nach"
     },
     "title": {
         "accounts": "Bankkonten",
