@@ -1,6 +1,9 @@
 .balance {
   display: flex;
   margin: 0 !important;
+  width: 300px;
+  flex-shrink: 2;
+  flex-grow: 0;
 
   &-minor {
     display: flex;
@@ -10,74 +13,69 @@
   &-upcoming,
   &-minor,
   &-future {
-    @extend .px-2;
-    flex: 1;
-    flex-shrink: 0;
     text-align: right;
   }
 
-  &-value {
-    @extend .font-weight-bold;
-    @extend .small;
+  &-minor,
+  &-future {
+    flex: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: .3em;
   }
 
-  &-label {
+  &-minor {
+    background-color: $gray-750;
+
+    > div {
+      display: flex;
+    }
+
+    > div:first-child {
+      border-bottom: 1px solid $gray-650;
+    }
+
+    .balance-label {
+      color: $gray-400;
+      text-align: left;
+    }
+
+  }
+
+  &-future {
+    background-color: $gray-700;
+
+    .balance-label {
+      font-weight: bold;
+      border-bottom: 1px solid $gray-600;
+    }
+  }
+
+  &-label,
+  &-value {
     @extend .small;
+    flex: 1;
+    padding: 0.2em;
+  }
+  &-label {
+    order: 1;
+  }
+  &-value {
+    @extend .font-weight-bold;
+    order: 2;
+    text-shadow: rgba($black, .5) 0 1px 2px;
   }
 
   @include media-breakpoint-down(sm) {
-    flex: 100%;
-    flex-wrap: wrap;
-
-    &-minor,
-    &-future {
-      flex: 50%;
-      display: flex;
-      flex-direction: column;
-      padding: .3em;
-    }
+    flex-basis: 100%;
 
     &-minor {
-      background-color: $gray-750;
       order: 2;
-
-      > div {
-        display: flex;
-      }
-
-      > div:first-child {
-        border-bottom: 1px solid $gray-650;
-      }
-
-      .balance-label {
-        color: $gray-400;
-        text-align: left;
-      }
-
     }
-
     &-future {
-      background-color: $gray-700;
       order: 1;
       text-align: left;
-
-      .balance-label {
-        border-bottom: 1px solid $gray-600;
-      }
     }
-
-    &-label,
-    &-value {
-      flex: 1;
-      padding: 0.2em;
-    }
-    &-label {
-      order: 1;
-    }
-    &-value {
-      order: 2;
-    }
-
   }
 
 }

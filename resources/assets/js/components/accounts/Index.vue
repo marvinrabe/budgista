@@ -4,6 +4,7 @@
         <app-window :title="account.name"></app-window>
 
         <div class="toolbar toolbar-primary">
+
             <app-sidebar-toggle></app-sidebar-toggle>
 
             <a class="col-flex h2 mb-0 hide-text-overflow" href="#"
@@ -28,12 +29,16 @@
         <div class="content transactions">
             <div class="transactions-header">
                 <div class="transaction-clear">&nbsp;</div>
-                <div class="transaction-date">{{ $t('form.date') }}</div>
-                <div class="transaction-payee">{{ $t('form.payee') }}</div>
-                <div class="transaction-category">{{ $t('form.category') }}</div>
+                <div class="transaction-column">
+                    <div class="transaction-date">{{ $t('form.date') }}</div>
+                    <div class="transaction-payee">{{ $t('form.payee') }}</div>
+                </div>
+                <div class="transaction-column-2">
+                    <div class="transaction-amount">{{ $t('form.amount') }}</div>
+                    <div class="transaction-category">{{ $t('form.category') }}</div>
+                </div>
                 <div class="transaction-outflow">{{ $t('form.outflow') }}</div>
                 <div class="transaction-inflow">{{ $t('form.inflow') }}</div>
-                <div class="transaction-amount">{{ $t('form.amount') }}</div>
                 <div class="transaction-actions">&nbsp;</div>
             </div>
 
@@ -47,22 +52,28 @@
                         <span class="fa fa-check"></span>
                     </button>
                 </div>
-                <div class="transaction-date">
-                    <date-format
-                            :value="item.date"
-                            :options="{year: 'numeric', month: '2-digit', day: '2-digit'}">
-                    </date-format>
-                    <span class="fa fa-refresh"
-                          v-if="item.recurring"
-                          v-b-tooltip.bottom
-                          v-bind:title="humanRRule(item.rrule)">
+                <div class="transaction-column">
+                    <div class="transaction-date">
+                        <date-format
+                                :value="item.date"
+                                :options="{year: 'numeric', month: '2-digit', day: '2-digit'}">
+                        </date-format>
+                        <span class="fa fa-refresh"
+                              v-if="item.recurring"
+                              v-b-tooltip.bottom
+                              v-bind:title="humanRRule(item.rrule)">
                     </span>
+                    </div>
+                    <div class="transaction-payee">{{ item.payee }}</div>
                 </div>
-                <div class="transaction-payee">{{ item.payee }}</div>
-                <div class="transaction-category">
-                    <span v-if="item.category">
-                        {{ item.category.name }}
-                    </span>
+                <div class="transaction-column-2">
+                    <div class="transaction-amount">
+                        <money-format
+                                :class="[{ 'text-danger': item.amount < 0 }, { 'text-success': item.amount >= 0 }]"
+                                :value="item.amount">
+                        </money-format>
+                    </div>
+                    <div class="transaction-category" v-html="item.category?item.category.name:''"></div>
                 </div>
                 <div class="transaction-outflow">
                     <money-format
@@ -73,12 +84,6 @@
                 <div class="transaction-inflow">
                     <money-format
                             v-if="item.amount >= 0"
-                            :value="item.amount">
-                    </money-format>
-                </div>
-                <div class="transaction-amount">
-                    <money-format
-                            :class="[{ 'text-danger': item.amount < 0 }, { 'text-success': item.amount >= 0 }]"
                             :value="item.amount">
                     </money-format>
                 </div>

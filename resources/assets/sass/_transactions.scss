@@ -34,12 +34,23 @@
   }
 }
 
+.transaction-column,
+.transaction-column-2 {
+  display: flex;
+  flex-wrap: nowrap;
+  flex: 2;
+  min-width: 0;
+}
+
 .transaction-date,
 .transaction-payee,
 .transaction-category,
-.transaction-inflow,
-.transaction-outflow,
 .transaction-amount {
+  flex: 2;
+}
+
+.transaction-inflow,
+.transaction-outflow {
   flex: 1;
 }
 
@@ -58,8 +69,9 @@
 .transaction-clear,
 .transaction-actions {
   text-align: center;
-  width: 32px;
+  flex-basis: 32px;
   flex-shrink: 0;
+  flex-grow: 0;
 }
 
 .transactions-row {
@@ -83,11 +95,31 @@
 }
 
 @include media-breakpoint-down(md) {
+  .transaction-column,
+  .transaction-column-2 {
+    flex-direction: column;
+  }
+
+  .transaction-amount,
+  .transaction-date {
+    order: 2;
+  }
+
+  .transaction-category {
+    text-align: right;
+  }
+
+  .transaction-date {
+    color: $gray-600;
+  }
+
+  .transactions-header,
   .transaction-outflow,
   .transaction-inflow {
     display: none;
   }
 }
+
 @include media-breakpoint-up(lg) {
   .transaction-amount {
     display: none;
