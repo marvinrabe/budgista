@@ -34,8 +34,8 @@
                     <div class="transaction-payee">{{ $t('form.payee') }}</div>
                 </div>
                 <div class="transaction-column-2">
-                    <div class="transaction-amount">{{ $t('form.amount') }}</div>
                     <div class="transaction-category">{{ $t('form.category') }}</div>
+                    <div class="transaction-amount">{{ $t('form.amount') }}</div>
                 </div>
                 <div class="transaction-outflow">{{ $t('form.outflow') }}</div>
                 <div class="transaction-inflow">{{ $t('form.inflow') }}</div>
@@ -67,13 +67,13 @@
                     <div class="transaction-payee">{{ item.payee }}</div>
                 </div>
                 <div class="transaction-column-2">
+                    <div class="transaction-category" v-html="item.category?item.category.name:''"></div>
                     <div class="transaction-amount">
                         <money-format
                                 :class="[{ 'text-danger': item.amount < 0 }, { 'text-success': item.amount >= 0 }]"
                                 :value="item.amount">
                         </money-format>
                     </div>
-                    <div class="transaction-category" v-html="item.category?item.category.name:''"></div>
                 </div>
                 <div class="transaction-outflow">
                     <money-format

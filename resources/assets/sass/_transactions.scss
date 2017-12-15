@@ -42,11 +42,13 @@
   min-width: 0;
 }
 
+
+.transaction-column-2,
 .transaction-date,
 .transaction-payee,
 .transaction-category,
 .transaction-amount {
-  flex: 2;
+  flex: 1;
 }
 
 .transaction-inflow,
@@ -94,15 +96,10 @@
   }
 }
 
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(sm) {
   .transaction-column,
   .transaction-column-2 {
     flex-direction: column;
-  }
-
-  .transaction-amount,
-  .transaction-date {
-    order: 2;
   }
 
   .transaction-category {
@@ -111,12 +108,22 @@
 
   .transaction-date {
     color: $gray-600;
+    order: 2;
   }
 
-  .transactions-header,
+  .transactions-header {
+    display: none;
+  }
+}
+
+@include media-breakpoint-down(md) {
   .transaction-outflow,
   .transaction-inflow {
     display: none;
+  }
+
+  .transaction-column-2 {
+    flex: 2;
   }
 }
 
