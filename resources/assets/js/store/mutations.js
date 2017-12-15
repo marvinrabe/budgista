@@ -1,4 +1,3 @@
-import * as types from './mutation-types'
 
 export const state = {
     user: {
@@ -12,7 +11,7 @@ export const state = {
 };
 
 export const mutations = {
-    [types.LOAD_USER](state, user) {
+    LOAD_USER(state, user) {
         state.user.name = user.name;
         state.user.email = user.email;
 

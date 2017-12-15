@@ -48,19 +48,15 @@
                 this.visible = false;
             },
             deleteCategory() {
-                axios
-                    .delete('/api/categories/' + this.old_category_id, {
-                        params: {
-                            category_id: this.new_category_id
-                        }
-                    })
-                    .then(response => {
-                        this.$store.commit('REMOVE_CATEGORY', response.data);
-                        this.hideModal();
-                    })
-                    .catch(e => {
-                        console.error(e);
-                    });
+                let oldCategory = this.$store.getters.findCategoryById(this.old_category_id);
+                let newCategory = this.$store.getters.findCategoryById(this.new_category_id);
+
+                this.$store.dispatch('deleteCategory', {
+                    oldCategory: oldCategory,
+                    newCategory: newCategory
+                }).then(response => {
+                    this.hideModal();
+                });
             }
         }
     }
