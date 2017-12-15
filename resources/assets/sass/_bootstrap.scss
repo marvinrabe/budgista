@@ -24,6 +24,11 @@
   background-color: $gray-50;
 }
 
+a.h2:hover {
+  color: rgba($white, 0.8);
+  text-decoration: none;
+}
+
 .card-body-secondary {
   @extend .text-muted;
   background: $gray-50;

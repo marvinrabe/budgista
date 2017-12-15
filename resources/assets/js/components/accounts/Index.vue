@@ -6,51 +6,22 @@
         <div class="toolbar toolbar-primary">
             <app-sidebar-toggle></app-sidebar-toggle>
 
-            <div class="col-flex h2 mb-0 hide-text-overflow">
+            <a class="col-flex h2 mb-0 hide-text-overflow" href="#"
+               @click.stop="showEditAccountModal"
+               :title="$t('action.edit.account')">
                 {{ account.name }}
-            </div>
-            <div class="text-right d-none d-md-block">
-                <money-format
-                        class="font-weight-bold"
-                        :class="[{ 'text-success': account.clearedBalance >= 0}, { 'text-danger': account.clearedBalance < 0}]"
-                        :value="account.clearedBalance">
-                </money-format>
-                <p class="small">{{ $t('form.balance.current') }}</p>
-            </div>
-            <div class="text-right d-none d-md-block">
-                <money-format
-                        class="font-weight-bold"
-                        :class="[{ 'text-success': account.unclearedBalance >= 0}, { 'text-danger': account.unclearedBalance < 0}]"
-                        :value="account.unclearedBalance">
-                </money-format>
-                <p class="small">{{ $t('form.balance.upcoming') }}</p>
-            </div>
-            <div class="text-right">
-                <money-format
-                        class="font-weight-bold"
-                        :class="[{ 'text-success': account.workingBalance >= 0}, { 'text-danger': account.workingBalance < 0}]"
-                        :value="account.workingBalance">
-                </money-format>
-                <p class="small">{{ $t('form.balance.future') }}</p>
-            </div>
+            </a>
+
+            <balance :account="account"></balance>
         </div>
 
         <div class="toolbar toolbar-secondary">
-            <div class="row">
-                <div class="col">
-                    <router-link
-                            :to="{ name: 'budget.newTransaction'}"
-                            class="btn btn-primary">
-                        <span class="fa fa-plus"></span> {{ $t('action.new.transaction') }}
-                    </router-link>
-                </div>
-
-                <div class="col text-right">
-                    <button v-on:click="showEditAccountModal" class="btn btn-secondary"
-                            :title="$t('action.edit.account')">
-                        <span class="fa fa-cog"></span>
-                    </button>
-                </div>
+            <div class="col-flex">
+                <router-link
+                        :to="{ name: 'budget.newTransaction'}"
+                        class="btn btn-primary">
+                    <span class="fa fa-plus"></span> {{ $t('action.new.transaction') }}
+                </router-link>
             </div>
         </div>
 
@@ -166,12 +137,14 @@
 
 <script>
     import InfiniteLoading from 'vue-infinite-loading';
+    import Balance from './Balance.vue';
 
     var rrulestr = require('rrule').rrulestr;
 
     export default {
         props: ['account_id'],
         components: {
+            Balance,
             InfiniteLoading
         },
         computed: {

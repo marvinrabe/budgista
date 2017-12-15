@@ -44,9 +44,9 @@
         "unallocated": "Nicht Zugewiesen",
         "previousMonth": "Vorheriger Monat",
         "balance": {
-            "current": "Aktueller Kontostand",
-            "upcoming": "Anstehende Kontobewegungen",
-            "future": "Zukünftiger Kontostand"
+            "current": "Aktuell",
+            "upcoming": "Anstehend",
+            "future": "Verfügbar"
         },
         "date": "Datum",
         "payee": "Empfänger",
