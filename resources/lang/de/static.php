@@ -2,10 +2,10 @@
 
 return [
     'home' => [
-        'title' => 'Persönliche Budget App',
+        'title' => 'Kostenlose Haushaltsbuch App',
         'heading' => 'Ein Budget haben ist einfach!',
         'lead' => 'Werde schuldenfrei und spare Geld.',
-        'cta' => 'Erstelle jetzt ein Budget',
+        'cta' => 'Jetzt Registrieren',
         'free' => 'Komplett kostenlos!'
     ],
 

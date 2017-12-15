@@ -10,6 +10,8 @@ body {
 }
 
 footer {
+
+  color: $text-muted;
   @extend .small;
 
   position: absolute;
@@ -41,4 +43,14 @@ footer {
   .copyright {
     margin: 0;
   }
+
+  a {
+    color: $text-muted;
+
+    &:hover {
+      color: $body-color;
+      text-decoration: none;
+    }
+  }
+
 }

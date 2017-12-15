@@ -1,21 +1,7 @@
 .layout-general {
 
   .navbar {
-    border-top: 3px solid theme-color('primary');
-  }
-
-  footer {
-    color: $text-muted;
-
-    a {
-      color: $text-muted;
-
-      &:hover {
-        color: $body-color;
-        text-decoration: none;
-      }
-    }
-
+    border-top: 5px solid theme-color('primary');
   }
 
   .pagination {

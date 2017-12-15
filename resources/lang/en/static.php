@@ -2,10 +2,10 @@
 
 return [
     'home' => [
-        'title' => 'Personal Budget App',
+        'title' => 'Free Budget App',
         'heading' => 'Keeping a Budget is easy!',
         'lead' => 'Get out of dept and save money.',
-        'cta' => 'Start your Budget now',
+        'cta' => 'Sign up now',
         'free' => 'It\'s completely free!'
     ],
 

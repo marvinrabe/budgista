@@ -7,9 +7,9 @@
 @section('body')
 
     <header>
-        <nav class="navbar navbar-expand navbar-dark">
+        <nav class="navbar navbar-expand navbar-light">
             <div class="container">
-                <a class="navbar-brand logo logo-white" href="/">
+                <a class="navbar-brand logo" href="/">
                     {{ config('app.name') }}
                 </a>
 
@@ -20,20 +20,20 @@
                 </ul>
             </div>
         </nav>
-    </header>
 
-    <div class="container">
-        <div class="intro-message">
-            <h1>{{ trans('static.home.heading') }}</h1>
-            <p class="lead">{{ trans('static.home.lead') }}</p>
+        <div class="container">
+            <div class="intro-message">
+                <h1>{{ trans('static.home.heading') }}</h1>
+                <p class="lead">{{ trans('static.home.lead') }}</p>
 
-            <a href="{{ route('register') }}" class="btn btn-lg btn-outline-light m-2">
-                {{ trans('static.home.cta') }}
-            </a>
+                <a href="{{ route('register') }}" class="btn btn-lg btn-primary m-2">
+                    {{ trans('static.home.cta') }}
+                </a>
 
-            <p class="m-0"><em class="small">{{ trans('static.home.free') }}</em></p>
+                <p class="m-0"><em class="small">{{ trans('static.home.free') }}</em></p>
+            </div>
         </div>
-    </div>
+    </header>
 
     @include('helpers.footer')
 
