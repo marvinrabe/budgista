@@ -100,7 +100,7 @@ span.handle {
 
 .layout-auth {
 
-  background: theme-color('primary');
+  background: $gray-100;
 
   .card-title {
     font-size: 2em;
@@ -113,10 +113,6 @@ span.handle {
   .cover {
     padding-top: 25px;
     padding-bottom: 20px;
-  }
-
-  .card {
-    @extend .shadow-1;
   }
 
 }

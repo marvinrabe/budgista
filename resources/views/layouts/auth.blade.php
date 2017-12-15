@@ -1,7 +1,7 @@
 @extends('layouts.base', ['body_class' => 'layout-auth', 'style' => 'css/app.css'])
 
 @section('card')
-    <div class="card border-light">
+    <div class="card">
         <div class="card-body">
             @yield('content')
         </div>
@@ -12,7 +12,7 @@
 
     <div class="cover">
         <div class="container text-center">
-            <a href="{{ url('/') }}" class="h1 logo logo-white">
+            <a href="{{ url('/') }}" class="h1 logo">
                 {{ config('app.name') }}
             </a>
         </div>

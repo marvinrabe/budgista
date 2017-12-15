@@ -5,7 +5,7 @@
 @overwrite
 
 @section('card')
-    <div class="card border-light">
+    <div class="card">
         <div class="card-body">
 
             <h1 class="card-title">{{ trans('title.login') }}</h1>
@@ -69,7 +69,7 @@
     </div>
 
     <p class="text-center mt-3">
-        <a class="text-white" href="{{ route('password.request') }}">
+        <a class="text-muted" href="{{ route('password.request') }}">
             {{ trans('message.forgot_password') }}
         </a>
     </p>
