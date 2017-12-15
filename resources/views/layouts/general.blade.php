@@ -1,9 +1,9 @@
 @extends('layouts.base', ['body_class' => 'layout-general', 'style' => 'css/website.css'])
 
 @section('body')
-    <nav class="navbar navbar-expand navbar-dark bg-primary">
+    <nav class="navbar navbar-expand navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand logo logo-white" href="{{ url('/') }}">
+            <a class="navbar-brand logo" href="{{ url('/') }}">
                 {{ config('app.name') }}
             </a>
 

@@ -1,14 +1,7 @@
 .layout-general {
-  nav {
-    color: #f8f8f8;
 
-    .nav-link {
-      color: rgba($white, .8) !important;
-
-      &:hover {
-        color: $white !important;
-      }
-    }
+  .navbar {
+    border-top: 3px solid theme-color('primary');
   }
 
   footer {
