@@ -44,9 +44,9 @@
         "unallocated": "Unallocated",
         "previousMonth": "Previous Month",
         "balance": {
-            "current": "Current Balance",
-            "upcoming": "Upcoming Transactions",
-            "future": "Future Balance"
+            "current": "Present",
+            "upcoming": "Upcoming",
+            "future": "Available"
         },
         "date": "Date",
         "payee": "Payee",

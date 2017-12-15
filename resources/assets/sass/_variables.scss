@@ -2,7 +2,7 @@ $enable-transitions: false;
 
 @function match-hue($color, $root) {
   $root-hue: hue($root);
-  $color-saturation: 8%;
+  $color-saturation: 21%;
   $color-lightness: lightness($color);
   @return hsl($root-hue, $color-saturation, $color-lightness);
 }
@@ -26,8 +26,11 @@ $gray-300: match-hue(#E0E0E0, $blue);
 $gray-400: match-hue(#BDBDBD, $blue);
 $gray-500: match-hue(#9E9E9E, $blue);
 $gray-600: match-hue(#757575, $blue);
+$gray-650: match-hue(#6b6b6b, $blue);
 $gray-700: match-hue(#616161, $blue);
+$gray-750: match-hue(#575757, $blue);
 $gray-800: match-hue(#424242, $blue);
+$gray-850: match-hue(#383838, $blue);
 $gray-900: match-hue(#212121, $blue);
 
 $theme-colors: (
