@@ -154,7 +154,7 @@
                 <div class="float-left">
                     <button class="btn btn-outline-danger"
                             :title="$t('action.delete.category')"
-                            v-on:click="deleteCategory">
+                            @click="deleteCategory(editCategory.id)">
                         <span class="fa fa-trash"></span>
                     </button>
                 </div>
@@ -167,16 +167,20 @@
                 </button>
             </div>
         </modal>
+
+        <delete-category ref="deleteCategory"></delete-category>
     </div>
 </template>
 
 <script>
     import draggable from 'vuedraggable'
     import row from './Row.vue'
+    import DeleteCategory from './DeleteCategory.vue'
 
     export default {
         components: {
             draggable,
+            DeleteCategory,
             'category-row': row
         },
         computed: {
@@ -324,19 +328,9 @@
                     }
                 });
             },
-            deleteCategory() {
-                this.removeRow(this.editCategory.id);
-
-                axios
-                    .delete('/api/categories/' + this.editCategory.id)
-                    .then(response => {
-                        this.$store.commit('REMOVE_CATEGORY', response.data);
-                    })
-                    .catch(e => {
-                        console.error(e);
-                    });
-
+            deleteCategory(category_id) {
                 this.hideEditCategoryModal();
+                this.$refs.deleteCategory.showModal(category_id);
             },
 
             addRow(category) {

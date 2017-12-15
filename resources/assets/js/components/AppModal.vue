@@ -27,6 +27,12 @@
         transition: opacity .3s ease;
     }
 
+    .modal-footer {
+        display: block;
+        text-align: right;
+        width: 100%;
+    }
+
     .modal-dialog {
         transition: all .3s ease;
     }

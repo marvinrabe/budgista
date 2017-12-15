@@ -53,7 +53,8 @@
         "outflow": "Outflow",
         "inflow": "Inflow",
         "expense": "Expense",
-        "income": "Income"
+        "income": "Income",
+        "transferTransactions": "Transfer Transactions to"
     },
     "title": {
         "accounts": "Accounts",

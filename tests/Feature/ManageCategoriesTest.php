@@ -21,7 +21,9 @@ class ManageCategoriesTest extends TestCase
 
         $this
             ->signIn($category->user)
-            ->delete("/api/categories/{$category->id}", [])
+            ->delete("/api/categories/{$category->id}", [
+                'category_id' => ''
+            ])
             ->assertSuccessful();
 
         $this->assertDatabaseMissing('categories', [

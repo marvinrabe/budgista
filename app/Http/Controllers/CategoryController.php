@@ -59,12 +59,12 @@ class CategoryController extends Controller
 
         request()->validate([
             'category_id' => [
-                'sometimes',
+                'nullable',
                 new Own('categories')
             ]
         ]);
 
-        if (request()->has('category_id')) {
+        if (!empty(request('category_id'))) {
             /**
              * @var Category $newCategory
              */
