@@ -112,7 +112,6 @@
                 <div class="form-group">
                     <label for="name" v-html="$t('form.name')"></label>
                     <input id="name" type="text" class="form-control"
-                           :placeholder="$t('form.name')"
                            v-model="newCategory.name"
                            v-validate="'required'"
                            v-focus
@@ -141,7 +140,6 @@
                 <div class="form-group">
                     <label for="name" v-html="$t('form.name')"></label>
                     <input id="name" type="text" class="form-control"
-                           :placeholder="$t('form.name')"
                            v-model="editCategory.name"
                            v-validate="'required'"
                            v-focus
