@@ -77,13 +77,26 @@ Vue.component(
 */
 
 Vue.component(
-    'app-spinner',
-    require('./components/AppSpinner.vue')
-);
-
-Vue.component(
     'app-layout',
     require('./components/AppLayout.vue')
+);
+
+Vue.directive('focus', {
+    inserted(el) {
+        // if set, tabindex makes any kind of element focusable
+        // if set to -1 it remains unreachable with tab
+        const tabIndexAttr = jQuery(el).attr('tabindex');
+        const hasTabIndex = _.isNumber(tabIndexAttr);
+        if (!hasTabIndex) {
+            jQuery(el).attr('tabindex', -1);
+        }
+        el.focus();
+    },
+});
+
+Vue.component(
+    'modal',
+    require('./components/AppModal.vue')
 );
 
 Vue.component(
@@ -94,6 +107,11 @@ Vue.component(
 Vue.component(
     'app-sidebar-toggle',
     require('./components/AppSidebarToggle.vue')
+);
+
+Vue.component(
+    'app-spinner',
+    require('./components/AppSpinner.vue')
 );
 
 Vue.component(

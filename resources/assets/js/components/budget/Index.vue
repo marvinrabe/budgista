@@ -103,25 +103,26 @@
             <app-spinner v-if="loading"></app-spinner>
         </div>
 
-        <b-modal ref="newCategoryModal" @shown="focusNewCategoryInput" :title="$t('action.new.category')">
-            <form v-on:submit.stop.prevent="createCategory"
+        <modal v-if="newCategory.modalVisible" @close="hideNewCategoryModal" :title="$t('action.new.category')">
+            <form slot="body"
+                  v-on:submit.stop.prevent="createCategory"
                   v-bind:class="[{'was-validated': newCategory.validated}]"
                   data-vv-scope="newCategory"
                   novalidate>
                 <div class="form-group">
-                    <label for="name" class="sr-only">{{$t('form.name')}}</label>
+                    <label for="name" v-html="$t('form.name')"></label>
                     <input id="name" type="text" class="form-control"
                            :placeholder="$t('form.name')"
                            v-model="newCategory.name"
                            v-validate="'required'"
-                           ref="newCategoryInput"
+                           v-focus
                            data-vv-name="name"
                            :data-vv-as="$t('form.name')">
                     <span class="invalid-feedback">{{ errors.first('newCategory.name') }}</span>
                 </div>
             </form>
 
-            <div slot="modal-footer">
+            <div slot="footer">
                 <button class="btn btn-light" v-on:click="hideNewCategoryModal">
                     {{ $t('action.cancel') }}
                 </button>
@@ -129,26 +130,27 @@
                     {{ $t('action.save') }}
                 </button>
             </div>
-        </b-modal>
+        </modal>
 
-        <b-modal ref="editCategoryModal" @shown="focusEditCategoryInput" :title="$t('action.edit.category')">
-            <form v-on:submit.stop.prevent="updateCategory"
+        <modal v-if="editCategory.modalVisible" @close="hideEditCategoryModal" :title="$t('action.edit.category')">
+            <form slot="body"
+                  v-on:submit.stop.prevent="updateCategory"
                   v-bind:class="[{'was-validated': editCategory.validated}]"
                   data-vv-scope="editCategory"
                   novalidate>
                 <div class="form-group">
-                    <label for="name" class="sr-only">{{$t('form.name')}}</label>
+                    <label for="name" v-html="$t('form.name')"></label>
                     <input id="name" type="text" class="form-control"
                            :placeholder="$t('form.name')"
                            v-model="editCategory.name"
                            v-validate="'required'"
-                           ref="editCategoryInput"
+                           v-focus
                            data-vv-name="name"
                            :data-vv-as="$t('form.name')">
                     <span class="invalid-feedback">{{ errors.first('editCategory.name') }}</span>
                 </div>
             </form>
-            <div slot="modal-footer" class="text-right" style="width: 100%;">
+            <div slot="footer">
                 <div class="float-left">
                     <button class="btn btn-outline-danger"
                             :title="$t('action.delete.category')"
@@ -164,7 +166,7 @@
                     {{ $t('action.save') }}
                 </button>
             </div>
-        </b-modal>
+        </modal>
     </div>
 </template>
 
@@ -202,12 +204,14 @@
             nextMonth: null,
             newCategory: {
                 name: '',
-                validated: false
+                validated: false,
+                modalVisible: false
             },
             editCategory: {
                 id: '',
                 name: '',
-                validated: false
+                validated: false,
+                modalVisible: false
             }
         }),
 
@@ -258,13 +262,10 @@
 
                 // Reset Data
                 this.newCategory.name = '';
-                this.$refs.newCategoryModal.show();
+                this.newCategory.modalVisible = true;
             },
             hideNewCategoryModal() {
-                this.$refs.newCategoryModal.hide();
-            },
-            focusNewCategoryInput() {
-                this.$refs.newCategoryInput.focus();
+                this.newCategory.modalVisible = false;
             },
             createCategory() {
 
@@ -297,14 +298,10 @@
                 // Reset Data
                 this.editCategory.id = row.id;
                 this.editCategory.name = row.name;
-
-                this.$refs.editCategoryModal.show();
+                this.editCategory.modalVisible = true;
             },
             hideEditCategoryModal() {
-                this.$refs.editCategoryModal.hide();
-            },
-            focusEditCategoryInput() {
-                this.$refs.editCategoryInput.focus();
+                this.editCategory.modalVisible = false;
             },
             updateCategory() {
                 this.$validator.validateAll('editCategory').then(isValid => {

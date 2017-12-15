@@ -51,16 +51,17 @@
 
         </div>
 
-        <b-modal ref="newAccountModal" @shown="focusNewAccountInput" :title="$t('action.new.account')">
-            <form @submit.stop.prevent="createAccount"
+        <modal v-if="newAccount.modalVisible" @close="hideNewAccountModal" :title="$t('action.new.account')">
+            <form slot="body"
+                  @submit.stop.prevent="createAccount"
                   :class="[{'was-validated': newAccount.validated}]"
                   data-vv-scope="newAccount"
                   novalidate>
                 <div class="form-group">
-                    <label for="name" class="sr-only">{{$t('form.name')}}</label>
+                    <label for="name" v-html="$t('form.name')"></label>
                     <input id="name" type="text" class="form-control"
-                           :placeholder="$t('form.name')"
                            v-model="newAccount.name"
+                           v-focus
                            v-validate="'required'"
                            ref="newAccountInput"
                            data-vv-name="name"
@@ -68,8 +69,7 @@
                     <span class="invalid-feedback">{{ errors.first('newAccount.name') }}</span>
                 </div>
             </form>
-
-            <div slot="modal-footer">
+            <div slot="footer">
                 <button class="btn btn-light" v-on:click="hideNewAccountModal">
                     {{ $t('action.cancel') }}
                 </button>
@@ -77,7 +77,7 @@
                     {{ $t('action.save') }}
                 </button>
             </div>
-        </b-modal>
+        </modal>
     </div>
 </template>
 
@@ -92,7 +92,8 @@
         data: () => ({
             newAccount: {
                 name: '',
-                validated: false
+                validated: false,
+                modalVisible: false
             }
         }),
         computed: {
@@ -124,15 +125,12 @@
                 // Reset Data
                 this.newAccount.name = '';
 
-                // Show Modal
-                this.$refs.newAccountModal.show();
+                // Show modal
+                this.newAccount.modalVisible = true;
             },
             hideNewAccountModal() {
                 // Hide Modal
-                this.$refs.newAccountModal.hide();
-            },
-            focusNewAccountInput() {
-                this.$refs.newAccountInput.focus();
+                this.newAccount.modalVisible = false;
             },
             createAccount() {
                 this.$validator.validateAll('newAccount').then(isValid => {
