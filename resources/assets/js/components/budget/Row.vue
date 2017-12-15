@@ -52,7 +52,13 @@
         },
         computed: {
             category() {
-                return this.$store.getters.findCategoryById(this.category_id);
+                let category = this.$store.getters.findCategoryById(this.category_id);
+                if(_.isEmpty(category)) { // TODO remove when category row list is managed by vuex
+                    return {
+                        name: ''
+                    };
+                }
+                return category;
             },
             available() {
                 return this.previousMonth + this.budget + this.activity;

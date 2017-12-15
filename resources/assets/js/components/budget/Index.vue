@@ -168,7 +168,7 @@
             </div>
         </modal>
 
-        <delete-category ref="deleteCategory"></delete-category>
+        <delete-category ref="deleteCategory" @delete:category="refresh"></delete-category>
     </div>
 </template>
 
@@ -224,6 +224,9 @@
         },
 
         methods: {
+            refresh() {
+                this.loadSheet('/api/month/' + this.month);
+            },
             loadSheet(url) {
                 this.loading = true;
                 this.rows = [];
@@ -343,7 +346,7 @@
 
                 this.rows.push(category);
             },
-            removeRow(id) {
+            removeRow({id}) {
                 this.rows = this.rows.filter(item => item.id !== id);
             },
             persistSorting() {
