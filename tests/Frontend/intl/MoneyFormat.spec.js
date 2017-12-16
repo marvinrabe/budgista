@@ -1,4 +1,4 @@
-import {shallow, createLocalVue} from 'vue-test-utils';
+import {shallow} from 'vue-test-utils';
 import expect from 'expect';
 import MoneyFormat from '../../../resources/assets/js/intl/MoneyFormat.vue';
 import IntegerMoneyFormatter from '../../../resources/assets/js/intl/IntegerMoneyFormatter';
