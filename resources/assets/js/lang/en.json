@@ -19,7 +19,7 @@
         },
         "edit": {
             "category": "Edit Category",
-            "account": "Account Settings",
+            "account": "Edit Account",
             "transaction": "Edit Transaction"
         },
         "delete": {

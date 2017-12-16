@@ -151,12 +151,15 @@ span.handle {
       flex-wrap: wrap;
       padding: 0;
 
-      .col-flex {
-        padding: 0.5rem;
+      @include media-breakpoint-down(sm) {
+        text-align: center;
       }
 
-      > div {
-        margin: 0 0.5rem;
+      .title {
+        @extend .h2;
+        @extend .mb-0;
+        @extend .col-flex;
+        padding: .3em .5em;
       }
 
       .btn {
