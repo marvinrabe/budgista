@@ -2,8 +2,18 @@ export default class MoneyFormatter {
     constructor(locale, currency) {
         this.intlFormatter = Intl.NumberFormat(locale, {style: 'currency', currency: currency});
         this.decimalPlaces = this.intlFormatter.resolvedOptions().minimumFractionDigits;
-        this.thousandSeparator = this.intlFormatter.format(12345.6).match(/12(.*)345/)[1];
-        this.decimalSeperator = this.intlFormatter.format(12345.6).match(/345(.*)6/)[1];
+
+        let findCharacter = function (string, regex) {
+            let results = string.match(regex);
+            if(results && results.length) {
+                return results[1];
+            }
+            return null;
+        };
+
+        let testString = this.intlFormatter.format(12345.6);
+        this.thousandSeparator = findCharacter(testString, /12(.*)345/);
+        this.decimalSeperator = findCharacter(testString, /345(.*)6/);
     }
 
     format(value) {

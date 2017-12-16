@@ -29,4 +29,9 @@ describe('MoneyFormatter', () => {
         expect(formatter.unformat('1.234,56\xa0€')).toBe(1234.56);
     });
 
+    it.only('can be used even if no decimal point is present', () => {
+        let yenFormatter = new MoneyFormatter('de', 'JPY');
+        expect(yenFormatter.format(1234)).toBe('1.234\xa0¥');
+    });
+
 });
