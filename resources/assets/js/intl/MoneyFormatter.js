@@ -1,11 +1,12 @@
 export default class MoneyFormatter {
+
     constructor(locale, currency) {
         this.intlFormatter = Intl.NumberFormat(locale, {style: 'currency', currency: currency});
         this.decimalPlaces = this.intlFormatter.resolvedOptions().minimumFractionDigits;
 
         let findCharacter = function (string, regex) {
             let results = string.match(regex);
-            if(results && results.length) {
+            if (results && results.length) {
                 return results[1];
             }
             return null;

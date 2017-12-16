@@ -13,7 +13,6 @@
                     :class="[{ 'text-muted': budget == 0 }, { 'text-dark': budget != 0 }]"
                     :value="budget"
                     @update:value="val => updateBudget(val)"
-                    v-b-tooltip.left
                     :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)">
             </money-input>
         </div>

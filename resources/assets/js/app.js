@@ -16,7 +16,6 @@ window.Vue = require('vue');
  */
 // Translations & Dates
 import VueI18n from 'vue-i18n'
-import BootstrapVue from 'bootstrap-vue'
 import VueRouter from 'vue-router'
 import VeeValidate from 'vee-validate';
 import store from './store'
@@ -35,8 +34,6 @@ const i18n = new VueI18n({
     messages: messages,
     silentTranslationWarn: process.env.NODE_ENV === 'production'
 });
-
-Vue.use(BootstrapVue);
 
 Vue.use(VueRouter);
 
@@ -80,19 +77,6 @@ Vue.component(
     'app-layout',
     require('./components/AppLayout.vue')
 );
-
-Vue.directive('focus', {
-    inserted(el) {
-        // if set, tabindex makes any kind of element focusable
-        // if set to -1 it remains unreachable with tab
-        const tabIndexAttr = jQuery(el).attr('tabindex');
-        const hasTabIndex = _.isNumber(tabIndexAttr);
-        if (!hasTabIndex) {
-            jQuery(el).attr('tabindex', -1);
-        }
-        el.focus();
-    },
-});
 
 Vue.component(
     'modal',

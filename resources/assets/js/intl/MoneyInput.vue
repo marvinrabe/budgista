@@ -23,6 +23,9 @@
             }
         },
         methods: {
+            formatValue: function (value) {
+                this.$el.value = this.$moneyFormatter().format(value);
+            },
             unformatValue: function (value) {
                 return this.$moneyFormatter().unformat(value);
             },
@@ -30,9 +33,6 @@
                 let result = this.unformatValue(value);
                 this.$emit('update:value', result);
                 this.formatValue(result);
-            },
-            formatValue: function (value) {
-                this.$el.value = this.$moneyFormatter().format(value);
             },
             selectAll: function (event) {
                 setTimeout(function () {

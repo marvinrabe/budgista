@@ -1,6 +1,7 @@
 import MoneyFormatter from './MoneyFormatter'
 
 export default class IntegerMoneyFormatter extends MoneyFormatter {
+
     constructor(locale, currency) {
         super(locale, currency);
         this.formatCorrection = Math.pow(10, -1 * this.decimalPlaces);
