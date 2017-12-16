@@ -7,8 +7,6 @@
 </template>
 
 <script>
-    import IntegerMoneyFormatter from './IntegerMoneyFormatter';
-
     export default {
         props: {
             value: {
@@ -24,14 +22,9 @@
                 this.formatValue(newValue)
             }
         },
-        computed: {
-            formatter() {
-                return new IntegerMoneyFormatter(this.$store.state.locale, this.$store.state.currency);
-            }
-        },
         methods: {
             unformatValue: function (value) {
-                return this.formatter.unformat(value);
+                return this.$moneyFormatter().unformat(value);
             },
             updateValue: function (value) {
                 let result = this.unformatValue(value);
@@ -39,7 +32,7 @@
                 this.formatValue(result);
             },
             formatValue: function (value) {
-                this.$el.value = this.formatter.format(value);
+                this.$el.value = this.$moneyFormatter().format(value);
             },
             selectAll: function (event) {
                 setTimeout(function () {

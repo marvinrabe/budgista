@@ -14,7 +14,7 @@
                     :value="budget"
                     @update:value="val => updateBudget(val)"
                     v-b-tooltip.left
-                    :title="$t('form.recommendedBudget')+': '+$formatMoney(recommendedBudget)">
+                    :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)">
             </money-input>
         </div>
         <div class="budget-column-activity d-none d-lg-block">
