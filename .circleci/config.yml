@@ -60,7 +60,7 @@ jobs:
 
       - run:
          name: Compile assets
-         command: npm run production
+         command: npm run deployment
 
       - run:
           name: Test PHPUnit
