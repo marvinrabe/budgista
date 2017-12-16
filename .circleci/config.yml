@@ -46,7 +46,9 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Install NodeJS Packages
-          command: npm install
+          command: |
+            npm install
+            npm install full-icu
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
@@ -59,24 +61,25 @@ jobs:
             php artisan passport:keys
 
       - run:
-         name: Compile assets
-         command: npm run deployment
-
-      - run:
           name: Test PHPUnit
           command: vendor/bin/phpunit
 
       - run:
           name: Test Mocha
-          command: npm run test
+          command: |
+            export NODE_ICU_DATA=node_modules/full-icu
+            npm run test
 
       - run:
-         name: Commit assets
+         name: Compile assets
          command: |
-          git config --global user.name "Circle CI"
-          git config --global user.email "support@budgista.com"
-          git add public/.
-          git commit -m "Assets"
+           if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              npm run deployment
+              git config --global user.name "Circle CI"
+              git config --global user.email "support@budgista.com"
+              git add public/.
+              git commit -m "Assets"
+           fi
 
       - deploy:
           name: Deploy
