@@ -96,7 +96,7 @@
   }
 }
 
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(xs) {
   .transaction-column,
   .transaction-column-2 {
     flex-direction: column;
