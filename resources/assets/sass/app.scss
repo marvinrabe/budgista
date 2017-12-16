@@ -152,7 +152,12 @@ span.handle {
       padding: 0;
 
       @include media-breakpoint-down(sm) {
+        padding-left: 43px;
+      }
+
+      @include media-breakpoint-down(xs) {
         text-align: center;
+        padding: 0;
       }
 
       .title {

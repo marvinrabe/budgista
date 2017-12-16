@@ -66,7 +66,7 @@
     text-shadow: rgba($black, .5) 0 1px 2px;
   }
 
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(xs) {
     flex-basis: 100%;
 
     &-minor {
