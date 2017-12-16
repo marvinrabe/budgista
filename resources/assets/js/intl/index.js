@@ -1,3 +1,4 @@
+import IntegerMoneyFormatter from './IntegerMoneyFormatter';
 
 const AppIntl = {
     install(Vue, options = {}) {
@@ -26,10 +27,8 @@ const AppIntl = {
             let currency = this.$store.state.currency;
             let locale = this.$store.state.locale;
 
-            let formatter = Intl.NumberFormat(locale, {style: 'currency', currency: currency});
-            let decimalPlacesCorrection = Math.pow(10, -1 * formatter.resolvedOptions().minimumFractionDigits);
-
-            return formatter.format(amount * decimalPlacesCorrection);
+            let formatter = new IntegerMoneyFormatter(locale, currency);
+            return formatter.format(amount);
         }
     }
 };

@@ -7,6 +7,8 @@
 </template>
 
 <script>
+    import IntegerMoneyFormatter from './IntegerMoneyFormatter';
+
     export default {
         props: {
             value: {
@@ -23,53 +25,21 @@
             }
         },
         computed: {
-            step: function () {
-                let currency = this.$store.state.currency;
-                let locale = this.$store.state.locale;
-
-                let formatter = Intl.NumberFormat(locale, {style: 'currency', currency: currency});
-                return Math.pow(10, -1 * formatter.resolvedOptions().minimumFractionDigits);
+            formatter() {
+                return new IntegerMoneyFormatter(this.$store.state.locale, this.$store.state.currency);
             }
         },
         methods: {
-            format: function (number) {
-                let currency = this.$store.state.currency;
-                let locale = this.$store.state.locale;
-
-                let formatter = Intl.NumberFormat(locale, {style: 'currency', currency: currency});
-
-                return formatter.format(number);
-            },
-            unformat: function (number) {
-                let result = number;
-
-                // remove thousand seperator
-                let thousandSeparatorResults = this.format(12345.6).match(/12(.*)345/);
-                if (thousandSeparatorResults.length) {
-                    let thousandSeparator = thousandSeparatorResults[1];
-                    result = result.replace(thousandSeparator, '')
-                }
-
-                // remove non-numeric signs except -> , .
-                result = result.replace(/[^\d.,-]/g, '');
-
-                // remove decimal seperator
-                let decimalSeparatorResults = this.format(12345.6).match(/345(.*)6/);
-                if (decimalSeparatorResults.length) {
-                    let decimalSeparator = decimalSeparatorResults[1];
-                    result = result.replace(decimalSeparator, '.');
-                }
-
-                // return real number
-                return result;
+            unformatValue: function (value) {
+                return this.formatter.unformat(value);
             },
             updateValue: function (value) {
-                let result = Math.round(this.unformat(value) / this.step);
+                let result = this.unformatValue(value);
                 this.$emit('update:value', result);
                 this.formatValue(result);
             },
             formatValue: function (value) {
-                this.$el.value = this.$formatMoney(value);
+                this.$el.value = this.formatter.format(value);
             },
             selectAll: function (event) {
                 setTimeout(function () {
