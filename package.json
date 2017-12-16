@@ -23,6 +23,7 @@
     "cross-env": "^5.1.1",
     "expect": "^21.2.1",
     "font-awesome": "^4.7.0",
+    "full-icu": "^1.2.0",
     "jquery": "^3.1.1",
     "jsdom": "^11.5.1",
     "jsdom-global": "^3.0.2",
