@@ -23,13 +23,12 @@ const AppIntl = {
             require('./DateInput.vue')
         );
 
-        Vue.prototype.$formatMoney = function (amount) {
+        Vue.prototype.$moneyFormatter = function() {
             let currency = this.$store.state.currency;
             let locale = this.$store.state.locale;
 
-            let formatter = new IntegerMoneyFormatter(locale, currency);
-            return formatter.format(amount);
-        }
+            return new IntegerMoneyFormatter(locale, currency);
+        };
     }
 };
 

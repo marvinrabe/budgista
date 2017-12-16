@@ -1,15 +1,13 @@
 <template>
-    <span>{{ formattedValue }}</span>
+    <span v-text="formattedValue"></span>
 </template>
 
 <script>
-    import IntegerMoneyFormatter from './IntegerMoneyFormatter';
-
     export default {
         props: ['value'],
         computed: {
             formattedValue: function () {
-                return this.$formatMoney(this.value);
+                return this.$moneyFormatter().format(this.value);
             }
         }
     }
