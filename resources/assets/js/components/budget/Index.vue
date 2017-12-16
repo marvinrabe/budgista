@@ -58,20 +58,20 @@
                     <span class="small">{{ $t('form.unallocated') }}</span>
                 </div>
             </transition>
-            <transition name="fade">
-                <div style="flex: 100%; display: flex; align-items: center;" class="d-sm-none p-2"
-                     :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated >= 0 }]">
-                    <div class="col-flex text-left">
-                        <span class="small">{{ $t('form.unallocated') }}</span>
-                    </div>
-                    <div class="col-flex text-right">
+            <div style="flex: 100%; display: flex; align-items: center;" class="d-sm-none p-2"
+                 :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated >= 0 }]">
+                <div class="col-flex text-left">
+                    <span class="small">{{ $t('form.unallocated') }}</span>
+                </div>
+                <transition name="fade">
+                    <div class="col-flex text-right" v-if="!loading">
                         <money-format
                                 class="h5 mb-0"
                                 :value="unallocated">
                         </money-format>
                     </div>
-                </div>
-            </transition>
+                </transition>
+            </div>
         </div>
 
         <div class="toolbar toolbar-secondary">
