@@ -3,6 +3,8 @@
 </template>
 
 <script>
+    import IntegerMoneyFormatter from './IntegerMoneyFormatter';
+
     export default {
         props: ['value'],
         computed: {
