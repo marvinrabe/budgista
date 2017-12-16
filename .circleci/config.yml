@@ -41,6 +41,16 @@ jobs:
           paths:
             - ./vendor
 
+      - run:
+          name: Setup keys
+          command: |
+            php artisan key:generate
+            php artisan passport:keys
+
+      - run:
+          name: Test PHPUnit
+          command: vendor/bin/phpunit
+
       # NPM
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
@@ -53,16 +63,6 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-
-      - run:
-          name: Setup keys
-          command: |
-            php artisan key:generate
-            php artisan passport:keys
-
-      - run:
-          name: Test PHPUnit
-          command: vendor/bin/phpunit
 
       - run:
           name: Test Mocha
