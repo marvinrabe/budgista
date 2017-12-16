@@ -19,7 +19,7 @@
         },
         "edit": {
             "category": "Kategorie bearbeiten",
-            "account": "Bankkonto Einstellungen",
+            "account": "Bankkonto bearbeiten",
             "transaction": "Kontobewegung bearbeiten"
         },
         "delete": {

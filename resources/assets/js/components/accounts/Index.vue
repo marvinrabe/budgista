@@ -4,14 +4,11 @@
         <app-window :title="account.name"></app-window>
 
         <div class="toolbar toolbar-primary">
-
             <app-sidebar-toggle></app-sidebar-toggle>
 
-            <a class="col-flex h2 mb-0 hide-text-overflow" href="#"
-               @click.stop="showEditAccountModal"
-               :title="$t('action.edit.account')">
+            <span class="title hide-text-overflow">
                 {{ account.name }}
-            </a>
+            </span>
 
             <balance :account="account"></balance>
         </div>
@@ -24,6 +21,12 @@
                     <span class="fa fa-plus"></span> {{ $t('action.new.transaction') }}
                 </router-link>
             </div>
+
+            <a class="btn btn-primary ml-auto" href="#"
+               @click.stop="showEditAccountModal"
+               :title="$t('action.edit.account')">
+                <span class="fa fa-pencil"></span>
+            </a>
         </div>
 
         <div class="content transactions">
@@ -71,9 +74,6 @@
                         <span v-if="item.category">
                             {{ item.category.name }}
                         </span>
-                        <div v-else class="text-light text-center">
-                            &mdash;
-                        </div>
                     </div>
                     <div class="transaction-amount">
                         <money-format

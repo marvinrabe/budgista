@@ -6,7 +6,7 @@
         <div class="toolbar toolbar-primary">
             <app-sidebar-toggle></app-sidebar-toggle>
 
-            <div class="col-flex h2 mb-0">
+            <div class="title">
                 {{ title }}
             </div>
         </div>
@@ -131,7 +131,7 @@
                     {{ $t('action.cancel') }}
                 </button>
 
-                <button v-if="isNew" v-on:click="saveAndNew" class="btn btn-light">
+                <button v-if="isNew" v-on:click="saveAndNew" class="btn btn-light d-sm-inline-block d-none">
                     {{ $t('action.saveAndNew') }}
                 </button>
 

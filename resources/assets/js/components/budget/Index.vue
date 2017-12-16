@@ -6,53 +6,70 @@
         <div class="toolbar toolbar-primary">
             <app-sidebar-toggle></app-sidebar-toggle>
 
-            <div style="line-height: 58px;" class="col-flex">
-                <a href="#" class="text-light" :title="$t('action.previousMonth')"
+            <div class="title" style="white-space: nowrap;">
+                <a href="#" class="text-light small"
+                   :title="$t('action.previousMonth')"
                    @click.prevent.stop="showPreviousMonth">
                     <span class="fa fa-chevron-left"></span>
                 </a>
                 <date-format
-                        class="h4 mb-sm-0"
                         :value="month"
                         :options="{year: 'numeric', month: 'short'}">
                 </date-format>
-                <a href="#" class="text-light" :title="$t('action.nextMonth')" @click.prevent.stop="showNextMonth">
+                <a href="#" class="text-light small"
+                   :title="$t('action.nextMonth')"
+                   @click.prevent.stop="showNextMonth">
                     <span class="fa fa-chevron-right"></span>
                 </a>
             </div>
 
             <transition name="fade">
-                <div v-if="!loading" class="text-right">
-                    <div class="badge px-3"
-                         :class="[{ 'badge-danger': unallocated < 0 }, { 'badge-success': unallocated >= 0 }]">
+                <div v-if="!loading" class="d-none d-lg-block text-right mr-2">
+                    <div style="font-size: 64%;">
+                        {{ $t('form.previousMonth') }}:
                         <money-format
-                                class="h3"
-                                :value="unallocated">
+                                class="font-weight-bold"
+                                :value="sheet.previousMonth">
                         </money-format>
                         <br>
-                        <span class="small">{{ $t('form.unallocated') }}</span>
+                        {{ $t('form.income') }}:
+                        <money-format
+                                class="font-weight-bold"
+                                :value="sheet.income">
+                        </money-format>
+                        <br>
+                        {{ $t('form.allocated') }}:
+                        <money-format
+                                class="font-weight-bold"
+                                :value="sheet.allocated">
+                        </money-format>
                     </div>
                 </div>
             </transition>
             <transition name="fade">
-                <div v-if="!loading" class="d-none d-lg-block small">
-                    {{ $t('form.previousMonth') }}:
+                <div class="badge mr-1 d-none d-sm-block"
+                     v-if="!loading"
+                     :class="[{ 'badge-danger': unallocated < 0 }, { 'badge-success': unallocated >= 0 }]">
                     <money-format
-                            class="font-weight-bold"
-                            :value="sheet.previousMonth">
+                            class="h4 p-2"
+                            :value="unallocated">
                     </money-format>
                     <br>
-                    {{ $t('form.income') }}:
-                    <money-format
-                            class="font-weight-bold"
-                            :value="sheet.income">
-                    </money-format>
-                    <br>
-                    {{ $t('form.allocated') }}:
-                    <money-format
-                            class="font-weight-bold"
-                            :value="sheet.allocated">
-                    </money-format>
+                    <span class="small">{{ $t('form.unallocated') }}</span>
+                </div>
+            </transition>
+            <transition name="fade">
+                <div style="flex: 100%; display: flex; align-items: center;" class="d-sm-none p-2"
+                     :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated >= 0 }]">
+                    <div class="col-flex text-left">
+                        <span class="small">{{ $t('form.unallocated') }}</span>
+                    </div>
+                    <div class="col-flex text-right">
+                        <money-format
+                                class="h5 mb-0"
+                                :value="unallocated">
+                        </money-format>
+                    </div>
                 </div>
             </transition>
         </div>
