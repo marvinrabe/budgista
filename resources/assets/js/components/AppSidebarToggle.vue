@@ -1,5 +1,5 @@
 <template>
-    <div class="menu-toggle-container d-md-none ml-3">
+    <div class="menu-toggle-container d-md-none">
         <button class="menu-toggle btn" type="button" aria-controls="menu"
                 :aria-label="$t('action.navigation')"
                 @click.prevent="showMenu">
@@ -11,7 +11,8 @@
 <style>
     .menu-toggle-container {
         position: absolute;
-        top: 0.8em;
+        top: 13px;
+        left: 13px;
     }
 </style>
 
