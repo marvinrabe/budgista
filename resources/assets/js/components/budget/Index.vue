@@ -111,7 +111,7 @@
                         @update:value="val => rows.splice(index, 1, val)">
                     <div slot="actions">
                         <a href="#" @click.prevent="showEditCategoryModal(row)" class="text-muted">
-                            <font-awesome-icon icon="pencil-alt" />
+                            <font-awesome-icon icon="pencil-alt" symbol />
                         </a>
                     </div>
                 </category-row>

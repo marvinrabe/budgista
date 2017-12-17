@@ -11,15 +11,6 @@ require('./bootstrap');
  */
 window.Vue = require('vue');
 
-import fontawesome from '@fortawesome/fontawesome';
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-import { faEnvelope, faTrashAlt } from '@fortawesome/fontawesome-free-regular';
-import { faTimes, faPlus, faPencilAlt, faSync, faCheck, faChevronLeft, faChevronRight, faBars } from '@fortawesome/fontawesome-free-solid'
-
-fontawesome.library.add(faEnvelope, faTimes, faPlus, faTrashAlt, faPencilAlt, faSync, faCheck, faChevronLeft, faChevronRight, faBars);
-
-Vue.component(FontAwesomeIcon.name, FontAwesomeIcon);
-
 /**
  * Third Party Vue Components
  */
@@ -27,10 +18,12 @@ Vue.component(FontAwesomeIcon.name, FontAwesomeIcon);
 import VueI18n from 'vue-i18n'
 import VueRouter from 'vue-router'
 import VeeValidate from 'vee-validate';
-import store from './store'
+import FontAwesome from './fontawesome'
 import AppIntl from './intl'
+import store from './store'
 
 Vue.use(VueI18n);
+Vue.use(FontAwesome);
 
 const messages = {
     en: require('./lang/en.json'),
