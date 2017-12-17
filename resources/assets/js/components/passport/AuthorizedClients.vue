@@ -34,7 +34,7 @@
                 <!-- Revoke Button -->
                 <td style="vertical-align: middle;">
                     <button title="revoke" class="btn btn-danger" @click="revoke(token)">
-                        <span class="fa fa-times"></span>
+                        <font-awesome-icon icon="times" />
                     </button>
                 </td>
             </tr>

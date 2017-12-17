@@ -11,6 +11,15 @@ require('./bootstrap');
  */
 window.Vue = require('vue');
 
+import fontawesome from '@fortawesome/fontawesome';
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
+import { faEnvelope, faTrashAlt } from '@fortawesome/fontawesome-free-regular';
+import { faTimes, faPlus, faPencilAlt, faSync, faCheck, faChevronLeft, faChevronRight, faBars } from '@fortawesome/fontawesome-free-solid'
+
+fontawesome.library.add(faEnvelope, faTimes, faPlus, faTrashAlt, faPencilAlt, faSync, faCheck, faChevronLeft, faChevronRight, faBars);
+
+Vue.component(FontAwesomeIcon.name, FontAwesomeIcon);
+
 /**
  * Third Party Vue Components
  */

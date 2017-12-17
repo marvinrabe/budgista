@@ -3,7 +3,7 @@
         <button class="menu-toggle btn" type="button" aria-controls="menu"
                 :aria-label="$t('action.navigation')"
                 @click.prevent="showMenu">
-            <span class="fa fa-navicon"></span>
+            <font-awesome-icon icon="bars" />
         </button>
     </div>
 </template>

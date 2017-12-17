@@ -6,7 +6,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" v-html="title"></h5>
                         <button type="button" class="close" @click="$emit('close')" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <font-awesome-icon icon="times" />
                         </button>
                     </div>
                     <div class="modal-body">

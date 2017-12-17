@@ -3,10 +3,13 @@
   margin-bottom: 128px;
   text-align: center;
 
-  .fa {
-    -webkit-animation: pulsate 1s ease-out;
+  svg {
+    -webkit-animation: pulsate 2s ease-out;
     -webkit-animation-iteration-count: infinite;
+    margin-bottom: .2em;
+  }
 
+  .fa {
     &-lock {
       color: theme-color('warning');
     }
