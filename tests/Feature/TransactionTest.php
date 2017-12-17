@@ -25,7 +25,7 @@ class TransactionTest extends TestCase
     }
 
     /** @test */
-    public function it_can_only_create_transactions_in_own_category()
+    public function it_cant_create_transactions_in_someone_elses_category()
     {
         $transaction = factory(Transaction::class)->make();
 
@@ -39,7 +39,7 @@ class TransactionTest extends TestCase
     }
 
     /** @test */
-    public function it_can_only_update_transactions_with_own_category()
+    public function it_cant_update_transactions_to_someone_elses_category()
     {
         $transaction = factory(Transaction::class)->create();
 
@@ -53,7 +53,7 @@ class TransactionTest extends TestCase
     }
 
     /** @test */
-    public function it_can_only_create_transactions_in_own_account()
+    public function it_cant_create_transactions_in_someone_elses_account()
     {
         $transaction = factory(Transaction::class)->make();
 
