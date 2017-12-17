@@ -53,7 +53,7 @@
                             v-if="new Date(item.date) <= new Date()"
                             v-bind:class="[{ 'btn-success': item.cleared }, {'btn-light': !item.cleared}]"
                             v-on:click="toggleCleared(item)">
-                        <font-awesome-icon icon="check"/>
+                        <font-awesome-icon icon="check" symbol/>
                     </button>
                 </div>
                 <div class="transaction-column">
@@ -64,7 +64,7 @@
                         </date-format>
                         <span v-if="item.recurring"
                               :title="humanRRule(item.rrule)">
-                            <font-awesome-icon icon="sync"/>
+                            <font-awesome-icon icon="sync" symbol/>
                         </span>
                     </div>
                     <div class="transaction-payee">{{ item.payee }}</div>
@@ -98,7 +98,7 @@
                     <router-link
                             :to="{ name: 'budget.transaction', params: { transaction_id: item.id }}"
                             :title="$t('action.edit.transaction')" class="text-muted">
-                        <font-awesome-icon icon="pencil-alt"/>
+                        <font-awesome-icon icon="pencil-alt" symbol/>
                     </router-link>
                 </div>
             </div>
