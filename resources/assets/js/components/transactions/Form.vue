@@ -123,7 +123,7 @@
                     <button class="btn btn-outline-danger"
                             :title="$t('action.delete.transaction')"
                             v-on:click="deleteTransaction">
-                        <span class="fa fa-trash"></span>
+                        <font-awesome-icon :icon="['far', 'trash-alt']" />
                     </button>
                 </div>
 

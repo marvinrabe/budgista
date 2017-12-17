@@ -18,14 +18,15 @@
                 <router-link
                         :to="{ name: 'budget.newTransaction'}"
                         class="btn btn-primary">
-                    <span class="fa fa-plus"></span> {{ $t('action.new.transaction') }}
+                    <font-awesome-icon icon="plus"/>
+                    {{ $t('action.new.transaction') }}
                 </router-link>
             </div>
 
             <a class="btn btn-primary ml-auto" href="#"
                @click.stop="showEditAccountModal"
                :title="$t('action.edit.account')">
-                <span class="fa fa-pencil"></span>
+                <font-awesome-icon icon="pencil-alt"/>
             </a>
         </div>
 
@@ -52,7 +53,7 @@
                             v-if="new Date(item.date) <= new Date()"
                             v-bind:class="[{ 'btn-success': item.cleared }, {'btn-light': !item.cleared}]"
                             v-on:click="toggleCleared(item)">
-                        <span class="fa fa-check"></span>
+                        <font-awesome-icon icon="check"/>
                     </button>
                 </div>
                 <div class="transaction-column">
@@ -61,11 +62,10 @@
                                 :value="item.date"
                                 :options="{year: 'numeric', month: '2-digit', day: '2-digit'}">
                         </date-format>
-                        <span class="fa fa-refresh"
-                              v-if="item.recurring"
-                              v-b-tooltip.bottom
-                              v-bind:title="humanRRule(item.rrule)">
-                    </span>
+                        <span v-if="item.recurring"
+                              :title="humanRRule(item.rrule)">
+                            <font-awesome-icon icon="sync"/>
+                        </span>
                     </div>
                     <div class="transaction-payee">{{ item.payee }}</div>
                 </div>
@@ -98,7 +98,7 @@
                     <router-link
                             :to="{ name: 'budget.transaction', params: { transaction_id: item.id }}"
                             :title="$t('action.edit.transaction')" class="text-muted">
-                        <span class="fa fa-pencil"></span>
+                        <font-awesome-icon icon="pencil-alt"/>
                     </router-link>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                     <button class="btn btn-outline-danger"
                             :title="$t('action.delete.account')"
                             v-on:click="deleteAccount">
-                        <span class="fa fa-trash"></span>
+                        <font-awesome-icon :icon="['far', 'trash-alt']" />
                     </button>
                 </div>
 

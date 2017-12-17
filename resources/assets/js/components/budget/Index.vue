@@ -10,7 +10,7 @@
                 <a href="#" class="text-light small"
                    :title="$t('action.previousMonth')"
                    @click.prevent.stop="showPreviousMonth">
-                    <span class="fa fa-chevron-left"></span>
+                    <font-awesome-icon icon="chevron-left" />
                 </a>
                 <date-format
                         :value="month"
@@ -19,7 +19,7 @@
                 <a href="#" class="text-light small"
                    :title="$t('action.nextMonth')"
                    @click.prevent.stop="showNextMonth">
-                    <span class="fa fa-chevron-right"></span>
+                    <font-awesome-icon icon="chevron-right" />
                 </a>
             </div>
 
@@ -78,7 +78,7 @@
             <div class="row">
                 <div class="col">
                     <button class="btn" v-on:click="showNewCategoryModal">
-                        <span class="fa fa-plus"></span> {{ $t('action.new.category') }}
+                        <font-awesome-icon icon="plus" /> {{ $t('action.new.category') }}
                     </button>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                         @update:value="val => rows.splice(index, 1, val)">
                     <div slot="actions">
                         <a href="#" @click.prevent="showEditCategoryModal(row)" class="text-muted">
-                            <span class="fa fa-pencil"></span>
+                            <font-awesome-icon icon="pencil-alt" />
                         </a>
                     </div>
                 </category-row>
@@ -170,7 +170,7 @@
                     <button class="btn btn-outline-danger"
                             :title="$t('action.delete.category')"
                             @click="deleteCategory(editCategory.id)">
-                        <span class="fa fa-trash"></span>
+                        <font-awesome-icon :icon="['far', 'trash-alt']" />
                     </button>
                 </div>
 

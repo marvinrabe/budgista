@@ -10,7 +10,7 @@
                 <ul class="navbar-nav ml-auto d-md-none">
                     <li class="nav-item">
                         <a href="#" class="nav-link" @click="hideMenu">
-                            <span class="fa fa-times"></span>
+                            <font-awesome-icon icon="times" />
                         </a>
                     </li>
                 </ul>
@@ -21,7 +21,7 @@
                         :to="{ name: 'budget.month' }"
                         @click.native="hideMenu"
                         active-class="active" :exact="true" class="nav-link-main">
-                    <span class="fa fa-envelope-o fa-fw"></span> {{ $t('title.budget') }}
+                    <font-awesome-icon :icon="['far', 'envelope']" fixed-width /> {{ $t('title.budget') }}
                 </router-link>
                 <h6 class="nav-header">{{ $t('title.accounts') }}</h6>
                 <router-link
@@ -37,7 +37,7 @@
                     {{ account.name }}
                 </router-link>
                 <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small">
-                    <span class="fa fa-plus"></span> {{ $t('action.new.account') }}
+                    <font-awesome-icon icon="plus" /> {{ $t('action.new.account') }}
                 </a>
             </nav>
 
@@ -87,7 +87,7 @@
 
     export default {
         components: {
-            'app-logout': AppLogout
+            AppLogout
         },
         data: () => ({
             newAccount: {

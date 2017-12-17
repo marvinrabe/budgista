@@ -47,6 +47,8 @@
     </title>
 
     <link href="{{ asset($style) }}" rel="stylesheet">
+    @yield('stylesheets')
+    
 </head>
 <body class="{{ $body_class }}">
 

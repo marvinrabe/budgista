@@ -2,7 +2,7 @@
     <div>
 
         <button class="btn btn-primary float-right" @click="showCreateClientForm">
-            <span class="fa fa-plus"></span>
+            <font-awesome-icon icon="plus" />
             Create New Client
         </button>
 
@@ -52,7 +52,7 @@
                 <!-- Delete Button -->
                 <td style="vertical-align: middle;">
                     <button class="btn btn-danger" title="Delete" @click="destroy(client)">
-                        <span class="fa fa-trash"></span>
+                        <font-awesome-icon :icon="['far', 'trash-alt']" />
                     </button>
                 </td>
             </tr>
