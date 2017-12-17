@@ -33,6 +33,7 @@
     Enables web app support. Only useful when Navigation between pages not via links
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    + android manifest
     --}}
 
     <meta name="application-name" content="{{ config('app.name') }}"/>

@@ -20,7 +20,7 @@ class AdminPanelTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_accessed_by_normal_users()
+    public function it_can_be_accessed_by_admins()
     {
         $this->signIn();
 
