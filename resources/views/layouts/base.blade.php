@@ -46,7 +46,7 @@
         @show
     </title>
 
-    <link href="{{ asset($style) }}" rel="stylesheet">
+    <link href="{{ mix($style) }}" rel="stylesheet">
     @yield('stylesheets')
     
 </head>
