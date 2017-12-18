@@ -15,7 +15,7 @@
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ trans('title.login') }}</a>
+                        <a class="btn btn-light" href="{{ route('login') }}">{{ trans('title.login') }}</a>
                     </li>
                 </ul>
             </div>
