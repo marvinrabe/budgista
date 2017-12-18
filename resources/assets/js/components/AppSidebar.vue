@@ -46,6 +46,10 @@
                     {{ $t('title.settings') }}
                 </a>
                 &middot;
+                <a href="#" @click.prevent="showZenDesk" class="text-muted small">
+                    {{ $t('title.help') }}
+                </a>
+                &middot;
                 <app-logout></app-logout>
             </div>
 
@@ -148,6 +152,10 @@
                     menu.classList.add("menu--animatable");
                     menu.classList.remove('menu--visible');
                 }
+            },
+            showZenDesk() {
+                this.hideMenu();
+                window.zE.activate({hideOnClose: true});
             }
         }
     }

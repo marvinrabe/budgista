@@ -59,7 +59,8 @@
     "title": {
         "accounts": "Bankkonten",
         "budget": "Budget",
-        "settings": "Einstellungen"
+        "settings": "Einstellungen",
+        "help": "Hilfe"
     },
     "frequency": {
         "daily": "Täglich",

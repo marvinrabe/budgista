@@ -59,7 +59,8 @@
     "title": {
         "accounts": "Accounts",
         "budget": "Budget",
-        "settings": "Settings"
+        "settings": "Settings",
+        "help": "Help"
     },
     "frequency": {
         "daily": "Daily",
