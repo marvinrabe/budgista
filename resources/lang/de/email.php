@@ -3,7 +3,7 @@
 return [
 
     'regards' => 'Mit besten Grüßen,',
-    'trouble' => 'Wenn Sie Probleme haben den ":action" Button anzuklicken, dann kopieren Sie folgende URL manuell in Ihren Browser',
+    'trouble' => 'Wenn du Probleme hast den ":action" Button anzuklicken, dann kopiere folgende URL manuell in deinen Browser',
     'greeting' => [
         'error' => 'Hoppla!',
         'default' => 'Hallo!'
@@ -11,9 +11,9 @@ return [
 
     // Reset Password E-Mail
     'reset' => [
-        'intro' => 'Sie erhalten diese E-Mail, weil jemand das Zurücksetzen Ihres Passworts angefordert hat.',
+        'intro' => 'Du erhältst diese E-Mail, weil jemand das Zurücksetzen deines Passworts angefordert hat.',
         'action' => 'Passwort zurücksetzen',
-        'outro' => 'Falls Sie diese E-Mail nicht angefordert haben, dann können Sie diese getrost ignorieren.'
+        'outro' => 'Falls du diese E-Mail nicht angefordert hast, dann kann diese getrost ignoriert werden.'
     ]
 
 ];
