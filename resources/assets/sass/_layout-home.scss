@@ -57,6 +57,11 @@
 
   }
 
+  .second-cta {
+    border-top: 2px solid theme-color('light');
+    border-bottom: 2px solid theme-color('light');
+  }
+
   .help {
     display: flex;
     align-items: center;
