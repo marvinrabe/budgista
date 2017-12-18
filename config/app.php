@@ -14,6 +14,11 @@ return [
 
     'name' => env('APP_NAME', 'Budgista'),
 
+    'social' => [
+        'twitter' => env('SOCIAL_TWITTER', 'https://twitter.com/budgista'),
+        'facebook' => env('SOCIAL_FACEBOOK', 'https://www.facebook.com/budgista/'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

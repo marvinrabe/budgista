@@ -8,6 +8,7 @@ return [
     'legal' => 'Impressum',
     'home' => 'Startseite',
     'users' => 'Benutzer',
+    'help' => 'Hilfe',
 
     // Used in Settings
     'settings' => 'Einstellungen'
