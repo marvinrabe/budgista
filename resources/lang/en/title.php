@@ -8,6 +8,7 @@ return [
     'legal' => 'Legal Disclosure',
     'home' => 'Home',
     'users' => 'Users',
+    'help' => 'Help',
 
     // Used in Settings
     'settings' => 'Settings'
