@@ -18,29 +18,11 @@ class DetectLocale
      */
     public function handle($request, Closure $next)
     {
-        $validLanguages = config('app.available_locales');
-
-        $language = $request->getPreferredLanguage($validLanguages);
-
         if (Auth::check()) {
-            $language = Auth::user()->language;
-        } elseif (Cookie::has('language')) {
-            $language = Cookie::get('language');
+            app()->setLocale(Auth::user()->language);
         }
 
-        if (!in_array($language, $validLanguages)) {
-            $language = config('app.fallback_locale');
-        }
-
-        app()->setLocale($language);
-
-        $response = $next($request);
-
-        if (Cookie::get('language', null) != $language) {
-            $response->withCookie(Cookie::forever('language', $language));
-        }
-
-        return $response;
+        return $next($request);
     }
 
 }

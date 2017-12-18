@@ -1,4 +1,4 @@
-@extends('layouts.general')
+@extends('layouts.general', ['no_translations' => true])
 
 @section('title')
     {{ trans('title.settings') }} - {{ config('app.name') }}

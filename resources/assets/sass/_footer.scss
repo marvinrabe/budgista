@@ -1,27 +1,15 @@
-$footer-size: 60px;
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: $footer-size;
-}
-
 footer {
 
-  color: $text-muted;
+  color: $gray-500;
   @extend .small;
 
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: $footer-size;
-  line-height: $footer-size;
+  .container {
+    @extend .py-3;
+  }
 
-  @include media-breakpoint-down(sm) {
-    line-height: $footer-size / 2;
+  .copyright,
+  .list-inline {
+    padding: .3em;
   }
 
   .list-inline {
@@ -45,10 +33,10 @@ footer {
   }
 
   a {
-    color: $text-muted;
+    color: $gray-500;
 
     &:hover {
-      color: $body-color;
+      color: $gray-700;
       text-decoration: none;
     }
   }

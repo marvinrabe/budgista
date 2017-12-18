@@ -9,7 +9,7 @@
     <header>
         <nav class="navbar navbar-expand navbar-light">
             <div class="container">
-                <a class="navbar-brand logo" href="/">
+                <a class="navbar-brand logo" href="{{ route('home') }}">
                     {{ config('app.name') }}
                 </a>
 
@@ -30,7 +30,7 @@
                     {{ trans('static.home.cta') }}
                 </a>
 
-                <p class="m-0"><em class="small">{!! trans('static.home.free') !!}</em></p>
+                <p class="m-0 small">{!! trans('static.home.free') !!}</p>
             </div>
         </div>
     </header>
@@ -64,7 +64,7 @@
                 {{ trans('static.home.cta') }}
             </a>
 
-            <p class="m-0"><em class="small">{!! trans('static.home.free') !!}</em></p>
+            <p class="m-0 small">{!! trans('static.home.free') !!}</p>
         </div>
     </div>
 
