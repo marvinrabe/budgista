@@ -24,7 +24,7 @@ class AdminPanelTest extends TestCase
     {
         $this->signIn();
 
-        $user = Auth::user();
+        $user = Auth()->user();
         $user->is_admin = true;
         $user->save();
 

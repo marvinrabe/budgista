@@ -27,6 +27,25 @@ jobs:
           name: Setup configuration
           command: cp ./.circleci/.env.testing ./.env
 
+      # NPM
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install NodeJS Packages
+          command: |
+            npm install
+            npm install full-icu
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+
+      - run:
+          name: Test Mocha
+          command: |
+            export NODE_ICU_DATA=node_modules/full-icu
+            npm run test
+
       # Composer
       - restore_cache:
           keys:
@@ -48,38 +67,19 @@ jobs:
             php artisan passport:keys
 
       - run:
-          name: Test PHPUnit
-          command: vendor/bin/phpunit
-
-      # NPM
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Install NodeJS Packages
-          command: |
-            npm install
-            npm install full-icu
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
-
-      - run:
-          name: Test Mocha
-          command: |
-            export NODE_ICU_DATA=node_modules/full-icu
-            npm run test
-
-      - run:
          name: Compile assets
          command: |
+           npm run deployment
            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              npm run deployment
               git config --global user.name "Circle CI"
               git config --global user.email "support@budgista.com"
               git add public/.
               git commit -m "Assets"
            fi
+
+      - run:
+          name: Test PHPUnit
+          command: vendor/bin/phpunit
 
       - deploy:
           name: Deploy

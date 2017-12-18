@@ -3,7 +3,6 @@
 namespace Tests;
 
 use App\Models\User;
-use App\Services\CreateSamples;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Laravel\Passport\Passport;
 
