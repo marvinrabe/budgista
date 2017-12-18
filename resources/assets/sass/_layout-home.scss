@@ -8,7 +8,7 @@
 
   .intro-message {
     padding-top: 14rem;
-    @extend .pb-4;
+    @extend .pb-5;
     text-align: center;
 
     h1, .lead {
@@ -23,12 +23,55 @@
       font-size: 1.5em;
     }
 
-    .btn {
-      text-transform: uppercase;
-      letter-spacing: 1.4px;
-      font-weight: bold;
+  }
+
+  .btn-primary {
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    font-weight: bold;
+  }
+
+  .info-bullet {
+    display: flex;
+    padding: 0 2em 1em;
+
+    &-icon {
+      @extend .h2;
+      color: theme-color('primary');
+      flex: 0;
+      margin-right: .5em;
     }
 
+    &-body {
+      flex: 1;
+    }
+
+    h2 {
+      margin-bottom: .5em;
+    }
+
+    p {
+      opacity: .5;
+      line-height: 1.75em;
+    }
+
+  }
+
+  .help {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .btn {
+      margin-left: 1em;
+      color: $text-muted !important;
+      border-color: $text-muted !important;
+
+      &:hover {
+        color: $white !important;
+        background-color: $text-muted !important;
+      }
+    }
   }
 
   @include media-breakpoint-down(sm) {
@@ -55,6 +98,15 @@
         font-size: 1em;
       }
     }
+
+    h2, .h2 {
+      font-size: 1.5em;
+    }
+
+    .h4 {
+      font-size: 1em;
+    }
+
   }
 
 }
