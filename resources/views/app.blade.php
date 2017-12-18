@@ -1,4 +1,4 @@
-@extends('layouts.base',  ['body_class' => 'layout-budget', 'style' => 'css/app.css'])
+@extends('layouts.base',  ['body_class' => 'layout-budget', 'style' => 'css/app.css', 'no_translations' => true])
 
 @section('body')
 

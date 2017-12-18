@@ -1,6 +1,20 @@
 <footer>
-    <div class="container text-md-left text-center">
-        <ul class="list-inline float-md-right">
+
+    <div class="container text-center">
+
+        @if(!isset($no_translations))
+        <ul class="list-inline">
+            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                <li class="list-inline-item">
+                    <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                        {{ $properties['native'] }}
+                    </a>
+                </li>
+            @endforeach
+        </ul>
+        @endif
+
+        <ul class="list-inline">
             @if (Auth::guest())
                 <li class="list-inline-item">
                     <a href="{{ route('register') }}">{{ trans('title.register') }}</a>

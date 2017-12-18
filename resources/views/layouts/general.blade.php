@@ -3,7 +3,7 @@
 @section('body')
     <nav class="navbar navbar-expand navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand logo" href="{{ url('/') }}">
+            <a class="navbar-brand logo" href="{{ route('home') }}">
                 {{ config('app.name') }}
             </a>
 

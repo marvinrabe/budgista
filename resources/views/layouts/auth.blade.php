@@ -12,7 +12,7 @@
 
     <div class="cover">
         <div class="container text-center">
-            <a href="{{ url('/') }}" class="h1 logo">
+            <a href="{{ route('home') }}" class="h1 logo">
                 {{ config('app.name') }}
             </a>
         </div>

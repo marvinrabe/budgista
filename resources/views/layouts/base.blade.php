@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ LaravelLocalization::getCurrentLocale() }}">
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.analytics') }}"></script>
     <script>
@@ -18,6 +18,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getNonLocalizedURL() }}" />
+    @if(!isset($no_translations))
+        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+            <link rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" />
+        @endforeach
+    @endif
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ asset('images/apple-touch-icon-57x57.png') }}"/>
@@ -28,14 +35,12 @@
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ asset('images/apple-touch-icon-152x152.png') }}"/>
 
     <link rel='mask-icon' href='{{ asset('images/icon.svg') }}' color='#007BFF'>
-
     {{--
     Enables web app support. Only useful when Navigation between pages not via links
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     + android manifest
     --}}
-
     <meta name="application-name" content="{{ config('app.name') }}"/>
 
     <meta name="msapplication-TileColor" content="#007BFF"/>
@@ -69,7 +74,7 @@
             @json(['name' => auth()->user()->name, 'email' => auth()->user()->email])
         );
         @else
-        zE.setLocale('{{ config('app.locale') }}');
+        zE.setLocale('{{ LaravelLocalization::getCurrentLocale() }}');
         @endif
     });
 </script>
