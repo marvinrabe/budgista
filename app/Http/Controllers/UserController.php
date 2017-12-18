@@ -23,15 +23,31 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        if(!Hash::check(request('password'), $user->password)) {
+        if (!Hash::check(request('password'), $user->password)) {
             abort(403);
         }
 
         $user->update([
             'email' => request('email')
         ]);
+    }
 
-        return new UserResource($user);
+    public function password()
+    {
+        $user = Auth()->user();
+
+        request()->validate([
+            'password' => 'required|string',
+            'new_password' => 'required|string|min:6'
+        ]);
+
+        if (!Hash::check(request('password'), $user->password)) {
+            abort(403);
+        }
+
+        $user->update([
+            'password' => bcrypt(request('new_password'))
+        ]);
     }
 
 }
