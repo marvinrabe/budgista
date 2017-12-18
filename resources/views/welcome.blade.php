@@ -56,8 +56,8 @@
         --}}
     </div>
 
-    <div class="bg-light">
-        <div class="container text-center py-5">
+    <div class="container text-center">
+        <div class="py-5 second-cta">
             <p class="h2 m-0">{{ trans('static.home.lead2') }}</p>
 
             <a href="{{ route('register') }}" class="btn btn-lg btn-primary m-3">
