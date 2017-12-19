@@ -24,7 +24,6 @@ export const getters = {
     getPayees(state) {
         return _.uniq(
             state.transactions
-                .filter(transaction => !_.isEmpty(transaction.payee))
                 .map(transaction => transaction.payee)
         );
     }
