@@ -8,7 +8,7 @@
 
     <h1 class="card-title">{{ trans('title.register') }}</h1>
 
-    <form method="POST" action="{{ route('register') }}" class="{{ $errors->any()?'was-validated':'' }}">
+    <form method="POST" action="{{ route('register') }}" class="{{ $errors->any()?'was-validated':'' }}" onsubmit="gtag_report_conversion()">
         {{ csrf_field() }}
 
         <div class="form-group">
@@ -57,5 +57,20 @@
             {{ trans('action.register') }}
         </button>
     </form>
+
+   <script>
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof(url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-1036513577/9wnvCMyGu3oQqeKf7gM',
+                'event_callback': callback
+            });
+            return false;
+        }
+    </script>
 
 @endsection
