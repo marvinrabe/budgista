@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth:api']], function () {
      * User
      */
     Route::get('user', 'UserController@show')->name('user');
+    Route::put('user', 'UserController@update')->name('user.update');
     Route::post('user/email', 'UserController@email')->name('user.email');
     Route::post('user/password', 'UserController@password')->name('user.password');
 

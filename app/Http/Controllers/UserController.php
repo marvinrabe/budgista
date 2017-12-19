@@ -5,12 +5,39 @@ namespace App\Http\Controllers;
 use App\Http\Resources\User as UserResource;
 use Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Propaganistas\LaravelIntl\Facades\Currency;
+use Propaganistas\LaravelIntl\Facades\Language;
 
 class UserController extends Controller
 {
 
     public function show()
     {
+        return new UserResource(Auth::user());
+    }
+
+
+    public function update()
+    {
+        Auth::user()->update(
+            request()->validate([
+                'name' => 'required',
+                'language' => [
+                    'required',
+                    Rule::in(config('app.available_locales'))
+                ],
+                'locale' => [
+                    'required',
+                    Rule::in(array_keys(Language::all()))
+                ],
+                'currency' => [
+                    'required',
+                    Rule::in(array_keys(Currency::all()))
+                ],
+            ])
+        );
+
         return new UserResource(Auth::user());
     }
 
