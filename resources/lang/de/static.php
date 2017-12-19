@@ -39,7 +39,7 @@ return [
             [
                 'icon' => 'fa fa-lock',
                 'title' => 'Sicher und Vertraulich',
-                'body' => 'Wir nehmen Sicherheit ernst. Niemand hat jemals auf deine Daten Zugriff und wir analysieren diese auch nicht. Versprochen.'
+                'body' => 'Wir nehmen Sicherheit ernst. Niemand hat Zugriff auf deine Daten und wir analysieren diese auch nicht. Versprochen.'
             ]
         ]
     ],
