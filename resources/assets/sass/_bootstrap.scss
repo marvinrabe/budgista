@@ -76,19 +76,18 @@ a.h2:hover {
  * Tabs
  */
 .nav-tabs {
+  border-bottom-color: $gray-300;
+
   .nav-link {
-    color: $body-color;
+    color: $gray-500;
     border-top: 0;
     border-left: 0;
     border-right: 0;
-
-    svg {
-      opacity: .75;
-    }
+    transition: background-color .2s ease-in, border-color .2s ease-in, color .2s ease-in, font-weight .2s;
 
     &:hover,&:active {
-      color: black;
-      border-bottom-color: $gray-400;
+      color: $body-color;
+      border-bottom-color: $gray-500;
     }
 
     &.active {
@@ -97,7 +96,6 @@ a.h2:hover {
       color: $body-color;
 
       svg {
-        opacity: 1;
         color: theme-color('primary');
       }
     }
@@ -121,8 +119,17 @@ a.h2:hover {
 // Make table headings uppercase and small.
 .table {
   th {
-    @extend .p-1;
+    color: $text-muted;
+    font-family: $headings-font-family;
     font-size: $small-font-size;
-    text-transform: uppercase;
+    font-weight: 200;
   }
+}
+
+/*
+ * Buttons
+ */
+
+.btn {
+  cursor: pointer;
 }

@@ -15,16 +15,17 @@
   }
 
   &-header {
-    font-family: $headings-font-family;
-    z-index: 10;
-    font-weight: bold;
-    border-top: 1px solid $gray-200;
+    background: #fff;
     border-bottom: 1px solid $gray-200;
-    font-size: 80%;
-    text-transform: uppercase;
+
+    color: $text-muted;
+    font-family: $headings-font-family;
+    font-size: $small-font-size;
+    font-weight: 200;
+
     position: sticky;
     top: 0;
-    background: #fff;
+    z-index: 10;
   }
 
   &-row {
