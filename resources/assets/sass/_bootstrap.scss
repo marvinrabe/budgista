@@ -13,6 +13,10 @@
  * Misc. utilites
  */
 
+.text-number {
+  font-family: $font-family-sans-serif !important;
+}
+
 .btn-group-xs > .btn, .btn-xs {
   padding: .125rem .25rem;
   font-size: 0.875rem;
@@ -92,7 +96,7 @@ a.h2:hover {
 
     &.active {
       border-bottom-color: theme-color('primary');
-      font-weight: bold;
+      font-weight: 500;
       color: $body-color;
 
       svg {
