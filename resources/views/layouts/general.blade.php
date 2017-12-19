@@ -28,5 +28,5 @@
         @yield('content')
     </div>
 
-    @include('helpers.footer')
+    @include('snippets.footer')
 @endsection('body')
