@@ -72,6 +72,38 @@ a.h2:hover {
   border-radius: 0;
 }
 
+/*
+ * Tabs
+ */
+.nav-tabs {
+  .nav-link {
+    color: $body-color;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+
+    svg {
+      opacity: .75;
+    }
+
+    &:hover,&:active {
+      color: black;
+      border-bottom-color: $gray-400;
+    }
+
+    &.active {
+      border-bottom-color: theme-color('primary');
+      font-weight: bold;
+      color: $body-color;
+
+      svg {
+        opacity: 1;
+        color: theme-color('primary');
+      }
+    }
+  }
+}
+
 
 /*
  * Form

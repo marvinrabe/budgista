@@ -141,6 +141,7 @@ span.handle {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+  background: $white;
 }
 
 .toolbar {
@@ -211,10 +212,6 @@ span.handle {
 
   > div:last-child {
     margin-bottom: 10%;
-  }
-
-  &-decorated {
-    border-top: 5px solid theme-color('primary');
   }
 }
 

@@ -8,7 +8,7 @@
         <div class="toolbar toolbar-secondary">
             <div class="col-flex">
                 <router-link
-                        :to="{ name: 'budget.newTransaction'}"
+                        :to="{ name: 'transaction.new'}"
                         class="btn btn-primary">
                     <font-awesome-icon icon="plus"/>
                     {{ $t('action.new.transaction') }}
@@ -88,7 +88,7 @@
                 </div>
                 <div class="transaction-actions">
                     <router-link
-                            :to="{ name: 'budget.transaction', params: { transaction_id: item.id }}"
+                            :to="{ name: 'transaction.edit', params: { transaction_id: item.id }}"
                             :title="$t('action.edit.transaction')" class="text-muted">
                         <font-awesome-icon icon="pencil-alt" symbol/>
                     </router-link>
@@ -225,7 +225,7 @@
 
                 this.hideEditAccountModal();
 
-                this.$router.push({name: 'budget.month'});
+                this.$router.push({name: 'budget'});
             },
         }
 
