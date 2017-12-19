@@ -86,6 +86,11 @@ Vue.component(
 );
 
 Vue.component(
+    'app-toolbar',
+    require('./components/AppToolbar.vue')
+);
+
+Vue.component(
     'app-sidebar',
     require('./components/AppSidebar.vue')
 );

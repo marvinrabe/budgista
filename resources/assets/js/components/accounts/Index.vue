@@ -1,17 +1,9 @@
 <template>
     <div v-if="account" class="main">
 
-        <app-window :title="account.name"></app-window>
-
-        <div class="toolbar toolbar-primary">
-            <app-sidebar-toggle></app-sidebar-toggle>
-
-            <span class="title hide-text-overflow">
-                {{ account.name }}
-            </span>
-
+        <app-toolbar :title="account.name">
             <balance :account="account"></balance>
-        </div>
+        </app-toolbar>
 
         <div class="toolbar toolbar-secondary">
             <div class="col-flex">
