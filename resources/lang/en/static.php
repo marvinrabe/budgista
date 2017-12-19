@@ -8,8 +8,8 @@ return [
         'cta' => 'Sign up now',
         'lead2' => 'Create your Budget now',
         'free' => 'It\'s completely <strong>free</strong>!',
-        'help' => 'Still Have Questions?',
-        'contact' => 'Contact Us',
+        'help' => 'Still have Questions?',
+        'contact' => 'Contact us',
         'bullets' => [
             [
                 'icon' => 'far fa-envelope',
@@ -18,7 +18,7 @@ return [
             ],
             [
                 'icon' => 'fa fa-university',
-                'title' => 'Have an Eye on your Accounts',
+                'title' => 'Account Overview',
                 'body' => 'Keep all your accounts in one place. Even track expenses that haven\'t shown up on your bank statement yet.'
             ],
             [
