@@ -10,7 +10,7 @@
                 <ul class="navbar-nav ml-auto d-md-none">
                     <li class="nav-item">
                         <a href="#" class="nav-link" @click="hideMenu">
-                            <font-awesome-icon icon="times" />
+                            <font-awesome-icon icon="times"/>
                         </a>
                     </li>
                 </ul>
@@ -21,7 +21,8 @@
                         :to="{ name: 'budget.month' }"
                         @click.native="hideMenu"
                         active-class="active" :exact="true" class="nav-link-main">
-                    <font-awesome-icon :icon="['far', 'envelope']" fixed-width /> {{ $t('title.budget') }}
+                    <font-awesome-icon :icon="['far', 'envelope']" fixed-width/>
+                    {{ $t('title.budget') }}
                 </router-link>
                 <h6 class="nav-header">{{ $t('title.accounts') }}</h6>
                 <router-link
@@ -37,21 +38,26 @@
                     {{ account.name }}
                 </router-link>
                 <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small">
-                    <font-awesome-icon icon="plus" /> {{ $t('action.new.account') }}
+                    <font-awesome-icon icon="plus"/>
+                    {{ $t('action.new.account') }}
                 </a>
             </nav>
 
-            <div class="text-center text-muted small mt-2">
-                <a class="text-muted small" href="/settings">
-                    {{ $t('title.settings') }}
-                </a>
-                &middot;
-                <a href="#" @click.prevent="showZenDesk" class="text-muted small">
-                    {{ $t('title.help') }}
-                </a>
-                &middot;
-                <app-logout></app-logout>
-            </div>
+            <ul class="nav-small">
+                <li>
+                    <a class="text-muted small" href="/settings">
+                        {{ $t('title.settings') }}
+                    </a>
+                </li>
+                <li class="d-none d-md-inline-block">
+                    <a href="#" @click.prevent="showZenDesk" class="text-muted small">
+                        {{ $t('title.help') }}
+                    </a>
+                </li>
+                <li>
+                    <app-logout></app-logout>
+                </li>
+            </ul>
 
         </div>
 
