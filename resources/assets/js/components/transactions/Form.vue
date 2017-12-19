@@ -1,15 +1,7 @@
 <template>
     <div class="main">
 
-        <app-window :title="title"></app-window>
-
-        <div class="toolbar toolbar-primary">
-            <app-sidebar-toggle></app-sidebar-toggle>
-
-            <div class="title">
-                {{ title }}
-            </div>
-        </div>
+        <app-toolbar :title="title" />
 
         <div class="content content-decorated">
             <form id="transaction" class="container pt-2"

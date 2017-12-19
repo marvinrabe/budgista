@@ -1,18 +1,26 @@
 <template>
-    <div class="menu-toggle-container d-md-none">
-        <button class="menu-toggle btn" type="button" aria-controls="menu"
-                :aria-label="$t('action.navigation')"
-                @click.prevent="showMenu">
-            <font-awesome-icon icon="bars" />
-        </button>
-    </div>
+    <button class="menu-toggle d-md-none float-sm-none" type="button" aria-controls="menu"
+            :aria-label="$t('action.navigation')"
+            @click.prevent="showMenu">
+        <font-awesome-icon icon="bars" fixed-width transform="shrink-3" />
+    </button>
 </template>
 
-<style>
-    .menu-toggle-container {
-        position: absolute;
-        top: 13px;
-        left: 13px;
+<style scoped>
+    .menu-toggle {
+        flex: 0;
+        border: 0;
+        background: transparent;
+        font-size: 2rem;
+        margin: 0 0 0 8px;
+        color: white;
+        padding: 0;
+        opacity: 1;
+    }
+
+    .menu-toggle:hover {
+        opacity: .8;
+        cursor: pointer;
     }
 </style>
 

@@ -1,64 +1,64 @@
 <template>
     <div class="main">
 
-        <app-window :title="$t('title.budget')"></app-window>
-
-        <div class="toolbar toolbar-primary">
-            <app-sidebar-toggle></app-sidebar-toggle>
-
-            <div class="title" style="white-space: nowrap;">
+        <app-toolbar :title="$t('title.budget')">
+            <div slot="title" class="d-flex">
                 <a href="#" class="text-light small"
                    :title="$t('action.previousMonth')"
                    @click.prevent.stop="showPreviousMonth">
-                    <font-awesome-icon icon="chevron-left" />
+                    <font-awesome-icon icon="chevron-left"/>
                 </a>
                 <date-format
                         :value="month"
+                        class="mx-1"
                         :options="{year: 'numeric', month: 'short'}">
                 </date-format>
                 <a href="#" class="text-light small"
                    :title="$t('action.nextMonth')"
                    @click.prevent.stop="showNextMonth">
-                    <font-awesome-icon icon="chevron-right" />
+                    <font-awesome-icon icon="chevron-right"/>
                 </a>
             </div>
 
-            <transition name="fade">
-                <div v-if="!loading" class="d-none d-lg-block text-right mr-2">
-                    <div style="font-size: 64%;">
-                        {{ $t('form.previousMonth') }}:
-                        <money-format
-                                class="font-weight-bold"
-                                :value="sheet.previousMonth">
-                        </money-format>
-                        <br>
-                        {{ $t('form.income') }}:
-                        <money-format
-                                class="font-weight-bold"
-                                :value="sheet.income">
-                        </money-format>
-                        <br>
-                        {{ $t('form.allocated') }}:
-                        <money-format
-                                class="font-weight-bold"
-                                :value="sheet.allocated">
-                        </money-format>
+            <div class="d-none d-sm-block ml-auto">
+                <transition name="fade">
+                    <div class="d-flex" v-if="!loading">
+                        <div class="d-none d-lg-block text-right mr-2">
+                            <div style="font-size: 64%;">
+                                {{ $t('form.previousMonth') }}:
+                                <money-format
+                                        class="font-weight-bold"
+                                        :value="sheet.previousMonth">
+                                </money-format>
+                                <br>
+                                {{ $t('form.income') }}:
+                                <money-format
+                                        class="font-weight-bold"
+                                        :value="sheet.income">
+                                </money-format>
+                                <br>
+                                {{ $t('form.allocated') }}:
+                                <money-format
+                                        class="font-weight-bold"
+                                        :value="sheet.allocated">
+                                </money-format>
+                            </div>
+                        </div>
+
+                        <div class="badge mr-2"
+                             :class="[{ 'badge-danger': unallocated < 0 }, { 'badge-success': unallocated >= 0 }]">
+                            <money-format
+                                    class="h4 p-2"
+                                    :value="unallocated">
+                            </money-format>
+                            <br>
+                            <span class="small">{{ $t('form.unallocated') }}</span>
+                        </div>
                     </div>
-                </div>
-            </transition>
-            <transition name="fade">
-                <div class="badge mr-1 d-none d-sm-block"
-                     v-if="!loading"
-                     :class="[{ 'badge-danger': unallocated < 0 }, { 'badge-success': unallocated >= 0 }]">
-                    <money-format
-                            class="h4 p-2"
-                            :value="unallocated">
-                    </money-format>
-                    <br>
-                    <span class="small">{{ $t('form.unallocated') }}</span>
-                </div>
-            </transition>
-            <div style="flex: 100%; display: flex; align-items: center;" class="d-sm-none p-2"
+                </transition>
+            </div>
+
+            <div style="flex: 100%; align-items: center;" class="d-flex d-sm-none p-2"
                  :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated >= 0 }]">
                 <div class="col-flex text-left">
                     <span class="small">{{ $t('form.unallocated') }}</span>
@@ -72,13 +72,15 @@
                     </div>
                 </transition>
             </div>
-        </div>
+
+        </app-toolbar>
 
         <div class="toolbar toolbar-secondary">
             <div class="row">
                 <div class="col">
                     <button class="btn" v-on:click="showNewCategoryModal">
-                        <font-awesome-icon icon="plus" /> {{ $t('action.new.category') }}
+                        <font-awesome-icon icon="plus"/>
+                        {{ $t('action.new.category') }}
                     </button>
                 </div>
             </div>
@@ -111,7 +113,7 @@
                         @update:value="val => rows.splice(index, 1, val)">
                     <div slot="actions">
                         <a href="#" @click.prevent="showEditCategoryModal(row)" class="text-muted">
-                            <font-awesome-icon icon="pencil-alt" symbol />
+                            <font-awesome-icon icon="pencil-alt" symbol/>
                         </a>
                     </div>
                 </category-row>
@@ -170,7 +172,7 @@
                     <button class="btn btn-outline-danger"
                             :title="$t('action.delete.category')"
                             @click="deleteCategory(editCategory.id)">
-                        <font-awesome-icon :icon="['far', 'trash-alt']" />
+                        <font-awesome-icon :icon="['far', 'trash-alt']"/>
                     </button>
                 </div>
 

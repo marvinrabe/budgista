@@ -1,5 +1,5 @@
 <template>
-    <span>{{ formattedValue }}</span>
+    <span style="white-space: nowrap;">{{ formattedValue }}</span>
 </template>
 
 <script>
