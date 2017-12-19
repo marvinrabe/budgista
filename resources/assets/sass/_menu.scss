@@ -26,6 +26,10 @@ $menu-width: 280px;
     align-items: center;
     color: $body-color;
 
+    svg {
+      opacity: .75;
+    }
+
     &:hover {
       background: rgba(255, 255, 255, 0.5);
     }
@@ -34,7 +38,9 @@ $menu-width: 280px;
       background: rgba(255, 255, 255, 0.5);
 
       font-weight: bold;
+
       svg {
+        opacity: 1;
         color: theme-color('primary');
       }
     }

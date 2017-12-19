@@ -4,6 +4,7 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 fontawesome.library.add([
     require('@fortawesome/fontawesome-free-regular/faEnvelope'),
     require('@fortawesome/fontawesome-free-regular/faTrashAlt'),
+    require('@fortawesome/fontawesome-free-regular/faUserCircle'),
     require('@fortawesome/fontawesome-free-solid/faTimes'),
     require('@fortawesome/fontawesome-free-solid/faPlus'),
     require('@fortawesome/fontawesome-free-solid/faPencilAlt'),
@@ -11,7 +12,8 @@ fontawesome.library.add([
     require('@fortawesome/fontawesome-free-solid/faCheck'),
     require('@fortawesome/fontawesome-free-solid/faChevronLeft'),
     require('@fortawesome/fontawesome-free-solid/faChevronRight'),
-    require('@fortawesome/fontawesome-free-solid/faBars')
+    require('@fortawesome/fontawesome-free-solid/faBars'),
+    require('@fortawesome/fontawesome-free-solid/faShieldAlt')
 ]);
 
 const FontAwesome = {

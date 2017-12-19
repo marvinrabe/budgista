@@ -60,7 +60,9 @@
         "accounts": "Bankkonten",
         "budget": "Budget",
         "settings": "Einstellungen",
-        "help": "Hilfe"
+        "help": "Hilfe",
+        "account": "Benutzerkonto",
+        "security": "Sicherheit"
     },
     "frequency": {
         "daily": "Täglich",

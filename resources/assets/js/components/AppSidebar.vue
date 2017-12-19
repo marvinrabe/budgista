@@ -18,7 +18,7 @@
 
             <nav class="nav flex-column mt-2">
                 <router-link
-                        :to="{ name: 'budget.month' }"
+                        :to="{ name: 'budget' }"
                         @click.native="hideMenu"
                         active-class="active" :exact="true" class="nav-link-main">
                     <font-awesome-icon :icon="['far', 'envelope']" fixed-width class="mr-1"/>
@@ -28,7 +28,7 @@
                     <p class="nav-header">{{ $t('title.accounts') }}</p>
                     <router-link
                             v-for="account in sortedAccounts" :key="account.id"
-                            :to="{ name: 'budget.account', params: { account_id: account.id }}"
+                            :to="{ name: 'account', params: { account_id: account.id }}"
                             @click.native="hideMenu"
                             active-class="active" class="nav-link-main">
                         <ellipsis style="flex: 1;">{{ account.name }}</ellipsis>
@@ -45,9 +45,12 @@
                 </div>
                 <ul class="nav-small">
                     <li>
-                        <a class="text-muted small" href="/settings">
+                        <router-link
+                                :to="{ name: 'settings.account' }"
+                                @click.native="hideMenu"
+                                class="text-muted small">
                             {{ $t('title.settings') }}
-                        </a>
+                        </router-link>
                     </li>
                     <li class="d-none d-sm-inline-block">
                         <a href="#" @click.prevent="showZenDesk" class="text-muted small">
