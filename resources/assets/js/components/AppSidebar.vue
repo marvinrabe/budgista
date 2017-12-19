@@ -49,7 +49,7 @@
                         {{ $t('title.settings') }}
                     </a>
                 </li>
-                <li class="d-none d-md-inline-block">
+                <li class="d-none d-sm-inline-block">
                     <a href="#" @click.prevent="showZenDesk" class="text-muted small">
                         {{ $t('title.help') }}
                     </a>
