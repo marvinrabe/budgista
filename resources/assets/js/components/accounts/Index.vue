@@ -59,13 +59,13 @@
                             <font-awesome-icon icon="sync" symbol/>
                         </span>
                     </div>
-                    <div class="transaction-payee">{{ item.payee }}</div>
+                    <div class="transaction-payee">
+                        <ellipsis>{{ item.payee }}</ellipsis>
+                    </div>
                 </div>
                 <div class="transaction-column-2">
                     <div class="transaction-category">
-                        <span v-if="item.category">
-                            {{ item.category.name }}
-                        </span>
+                        <ellipsis v-if="item.category">{{ item.category.name }}</ellipsis>
                     </div>
                     <div class="transaction-amount">
                         <money-format

@@ -4,7 +4,7 @@
             <span class="handle"></span>
         </div>
         <div class="budget-column-name">
-            {{ category.name }}
+            <ellipsis>{{ category.name }}</ellipsis>
         </div>
         <div class="budget-column-budget">
             <money-input
@@ -52,7 +52,7 @@
         computed: {
             category() {
                 let category = this.$store.getters.findCategoryById(this.category_id);
-                if(_.isEmpty(category)) { // TODO remove when category row list is managed by vuex
+                if (_.isEmpty(category)) { // TODO remove when category row list is managed by vuex
                     return {
                         name: ''
                     };

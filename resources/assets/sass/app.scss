@@ -170,10 +170,10 @@ span.handle {
     .title {
       @extend .h2;
       @extend .mb-0;
-      @extend .hide-text-overflow;
       flex: 1;
       padding: .3em .5em;
       line-height: 1.3em;
+      position: relative;
 
       @include media-breakpoint-down(xs) {
         text-align: center;
