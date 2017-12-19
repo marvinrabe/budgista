@@ -8,7 +8,4 @@ return [
     'send_reset' => 'E-Mail senden',
     'reconciliation' => 'Abgleich',
 
-    // Used in Settings
-    'save' => 'Speichern'
-
 ];

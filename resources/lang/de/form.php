@@ -11,9 +11,4 @@ return [
     'remember' => 'Angemeldet bleiben',
     'created_at' => 'Erstellt um',
 
-    // Used in Settings
-    'language' => 'Sprache',
-    'locale' => 'Gebietsschema',
-    'currency' => 'Währung',
-
 ];
