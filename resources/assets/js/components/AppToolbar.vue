@@ -5,7 +5,7 @@
         <app-window :title="title"></app-window>
         <div class="title">
             <slot name="title">
-                {{ title }}
+                <ellipsis>{{ title }}</ellipsis>
             </slot>
         </div>
 

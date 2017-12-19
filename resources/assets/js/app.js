@@ -91,6 +91,11 @@ Vue.component(
 );
 
 Vue.component(
+    'ellipsis',
+    require('./components/AppEllipsis.vue')
+);
+
+Vue.component(
     'app-sidebar',
     require('./components/AppSidebar.vue')
 );

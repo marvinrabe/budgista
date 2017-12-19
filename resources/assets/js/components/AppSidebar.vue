@@ -30,12 +30,12 @@
                         :to="{ name: 'budget.account', params: { account_id: account.id }}"
                         @click.native="hideMenu"
                         active-class="active" class="nav-link-main">
+                    <ellipsis style="flex: 1;">{{ account.name }}</ellipsis>
                     <money-format
-                            class="float-right mt-1 badge"
+                            class="ml-auto badge"
                             :class="[{ 'badge-danger': account.workingBalance < 0 }, { 'badge-success': account.workingBalance >= 0 }]"
                             :value="account.workingBalance">
                     </money-format>
-                    {{ account.name }}
                 </router-link>
                 <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small">
                     <font-awesome-icon icon="plus"/>

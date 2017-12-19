@@ -12,8 +12,8 @@ $menu-width: 280px;
 
   .nav-link-main {
     @extend .nav-link;
-    @extend .hide-text-overflow;
-
+    display: flex;
+    align-items: center;
     color: $body-color;
 
     &:hover {
