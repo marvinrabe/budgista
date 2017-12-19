@@ -14,10 +14,10 @@ $menu-width: 280px;
     @extend .nav-link;
     @extend .small;
     margin-bottom: 0;
-    font-weight: bold;
+    color: $text-muted;
     font-family: $headings-font-family;
-    text-transform: uppercase;
-    color: $text-muted !important;
+    font-size: $small-font-size;
+    font-weight: 200;
   }
 
   .nav-link-main {
@@ -25,6 +25,7 @@ $menu-width: 280px;
     display: flex;
     align-items: center;
     color: $body-color;
+    transition: background-color .2s ease-in, color .2s ease-in, font-weight .2s;
 
     svg {
       opacity: .75;
