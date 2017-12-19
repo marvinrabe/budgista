@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\User as UserResource;
+use App\Models\Account;
+use App\Models\Category;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -37,6 +39,26 @@ class UserController extends Controller
                 ],
             ])
         );
+
+        return new UserResource(Auth::user());
+    }
+
+    public function reset()
+    {
+        request()->validate([
+            'password' => 'required'
+        ]);
+
+        if (!Hash::check(request('password'), Auth()->user()->password)) {
+            abort(403);
+        }
+
+        Auth()->user()->accounts->each(function(Account $account) {
+            $account->transactions()->delete();
+        });
+        Auth()->user()->categories->each(function(Category $category) {
+            $category->budgets()->delete();
+        });
 
         return new UserResource(Auth::user());
     }
