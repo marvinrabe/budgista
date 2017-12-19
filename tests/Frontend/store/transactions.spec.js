@@ -8,7 +8,7 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('DateFormat', () => {
-    it.only('returns a payee list', () => {
+    it('returns a payee list', () => {
         const state = {
             transactions: [
                 {
