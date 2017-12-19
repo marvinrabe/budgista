@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::put('user', 'UserController@update')->name('user.update');
     Route::post('user/email', 'UserController@email')->name('user.email');
     Route::post('user/password', 'UserController@password')->name('user.password');
+    Route::post('user/reset', 'UserController@reset')->name('user.reset');
 
     /*
      * Budget
