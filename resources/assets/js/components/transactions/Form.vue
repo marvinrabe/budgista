@@ -80,7 +80,18 @@
 
                 <div class="form-group">
                     <label for="date">{{ $t('form.date')}}</label>
-                    <date-input id="date" v-model="date"></date-input>
+                    <div v-if="hasHTML5DateInput">
+                        <input type="date"
+                               id="date"
+                               class="form-control"
+                               v-model="date"
+                               v-validate.initial="'required'"
+                               data-vv-name="date"
+                               :data-vv-as="$t('form.date')">
+                        <span class="invalid-feedback">{{ errors.first('transaction.date') }}</span>
+                    </div>
+
+                    <date-input v-else id="date" v-model="date"></date-input>
                 </div>
 
                 <div class="form-check">
@@ -149,6 +160,7 @@
 </template>
 
 <script>
+    import Modernizr from 'modernizr';
     import {mapGetters} from 'vuex'
     import RRule from 'rrule'
 
@@ -171,6 +183,9 @@
             },
             isNew() {
                 return false
+            },
+            hasHTML5DateInput() {
+                return Modernizr.inputtypes.date;
             },
             ...mapGetters([
                 'sortedCategories',
