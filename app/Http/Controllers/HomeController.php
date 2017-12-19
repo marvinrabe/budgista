@@ -11,7 +11,7 @@ class HomeController extends Controller
             return redirect()->route('app');
         }
 
-        return view('static.welcome');
+        return view('static.home');
     }
 
 }
