@@ -30,7 +30,3 @@
 
     @include('helpers.footer')
 @endsection('body')
-
-@section('stylesheets')
-    <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
-@endsection
