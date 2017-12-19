@@ -64,18 +64,17 @@ span.handle {
   height: 24px;
   display: inline-block;
   overflow: hidden;
-  line-height: 5px;
-  padding: 3px 4px;
+  line-height: 6px;
+  padding: 0 2px;
   vertical-align: middle;
-  margin-top: -.9em;
-  margin-right: .3em;
-  font-size: 12px;
+  margin-top: -2px;
+  font-size: 16px;
   font-family: sans-serif;
   letter-spacing: 2px;
   color: $gray-800;
 
   &::after {
-    content: '.. .. .. ..';
+    content: '.. .. ..';
   }
 
   &,
