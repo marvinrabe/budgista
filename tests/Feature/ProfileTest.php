@@ -9,6 +9,18 @@ class ProfileTest extends TestCase
 {
     use RefreshDatabase;
 
+    private function updateProfile($data = [])
+    {
+        return $this
+            ->signIn()
+            ->put('/api/user', array_merge([
+                'name' => 'New Name',
+                'language' => 'de',
+                'locale' => 'de',
+                'currency' => 'USD',
+            ], $data));
+    }
+
     /** @test */
     public function it_returns_profile()
     {
@@ -30,13 +42,8 @@ class ProfileTest extends TestCase
     /** @test */
     public function it_can_update_user_data()
     {
-        $this->signIn()
-            ->put('/api/user', [
-                'name' => 'New Name',
-                'language' => 'de',
-                'locale' => 'de',
-                'currency' => 'USD',
-            ])
+        $this
+            ->updateProfile()
             ->assertJson([
                 'data' => [
                     'name' => 'New Name',
@@ -52,12 +59,9 @@ class ProfileTest extends TestCase
     /** @test */
     public function it_requires_a_valid_language()
     {
-        $this->signIn()
-            ->put('/api/user', [
-                'name' => 'New Name',
-                'language' => 'xx',
-                'locale' => 'de',
-                'currency' => 'USD',
+        $this
+            ->updateProfile([
+                'language' => 'xx'
             ])
             ->assertSessionHasErrors('language');
     }
@@ -65,12 +69,9 @@ class ProfileTest extends TestCase
     /** @test */
     public function it_requires_a_valid_locale()
     {
-        $this->signIn()
-            ->put('/api/user', [
-                'name' => 'New Name',
-                'language' => 'de',
-                'locale' => 'xx',
-                'currency' => 'USD',
+        $this
+            ->updateProfile([
+                'locale' => 'xx'
             ])
             ->assertSessionHasErrors('locale');
     }
@@ -78,12 +79,9 @@ class ProfileTest extends TestCase
     /** @test */
     public function it_requires_a_valid_currency()
     {
-        $this->signIn()
-            ->put('/api/user', [
-                'name' => 'New Name',
-                'language' => 'de',
-                'locale' => 'de',
-                'currency' => 'XXX',
+        $this
+            ->updateProfile([
+                'currency' => 'XXX'
             ])
             ->assertSessionHasErrors('currency');
     }
