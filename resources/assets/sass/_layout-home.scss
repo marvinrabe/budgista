@@ -6,6 +6,10 @@
     border-top: 5px solid theme-color('primary');
   }
 
+  .lead {
+    font-family: $headings-font-family;
+  }
+
   .intro-message {
     padding-top: 15rem;
     @extend .pb-5;
@@ -13,6 +17,7 @@
   }
 
   .btn-primary {
+    font-family: $headings-font-family;
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: .1em;
@@ -25,6 +30,7 @@
 
     &-icon {
       @extend .h2;
+      font-size: 1.5em;
       color: theme-color('primary');
       flex: 0;
       margin-right: .5em;
@@ -34,8 +40,9 @@
       flex: 1;
     }
 
-    h2 {
+    h2, .h2 {
       margin-bottom: .5em;
+      font-size: 1.5em;
     }
 
     p {
@@ -94,10 +101,6 @@
 
     .info-bullet {
       padding: 0 0 1em;
-    }
-
-    h2, .h2 {
-      font-size: 1.5em;
     }
 
     .h4 {

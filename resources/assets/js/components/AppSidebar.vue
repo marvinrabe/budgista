@@ -16,48 +16,49 @@
                 </ul>
             </nav>
 
-            <nav class="nav flex-column">
+            <nav class="nav flex-column mt-2">
                 <router-link
                         :to="{ name: 'budget.month' }"
                         @click.native="hideMenu"
                         active-class="active" :exact="true" class="nav-link-main">
-                    <font-awesome-icon :icon="['far', 'envelope']" fixed-width/>
+                    <font-awesome-icon :icon="['far', 'envelope']" fixed-width class="mr-1"/>
                     {{ $t('title.budget') }}
                 </router-link>
-                <h6 class="nav-header">{{ $t('title.accounts') }}</h6>
-                <router-link
-                        v-for="account in sortedAccounts" :key="account.id"
-                        :to="{ name: 'budget.account', params: { account_id: account.id }}"
-                        @click.native="hideMenu"
-                        active-class="active" class="nav-link-main">
-                    <ellipsis style="flex: 1;">{{ account.name }}</ellipsis>
-                    <money-format
-                            class="ml-auto badge"
-                            :class="[{ 'badge-danger': account.workingBalance < 0 }, { 'badge-success': account.workingBalance >= 0 }]"
-                            :value="account.workingBalance">
-                    </money-format>
-                </router-link>
-                <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small">
-                    <font-awesome-icon icon="plus"/>
-                    {{ $t('action.new.account') }}
-                </a>
+                <div class="mt-3">
+                    <p class="nav-header">{{ $t('title.accounts') }}</p>
+                    <router-link
+                            v-for="account in sortedAccounts" :key="account.id"
+                            :to="{ name: 'budget.account', params: { account_id: account.id }}"
+                            @click.native="hideMenu"
+                            active-class="active" class="nav-link-main">
+                        <ellipsis style="flex: 1;">{{ account.name }}</ellipsis>
+                        <money-format
+                                class="ml-auto badge"
+                                :class="[{ 'badge-danger': account.workingBalance < 0 }, { 'badge-success': account.workingBalance >= 0 }]"
+                                :value="account.workingBalance">
+                        </money-format>
+                    </router-link>
+                    <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small">
+                        <font-awesome-icon icon="plus"/>
+                        {{ $t('action.new.account') }}
+                    </a>
+                </div>
+                <ul class="nav-small">
+                    <li>
+                        <a class="text-muted small" href="/settings">
+                            {{ $t('title.settings') }}
+                        </a>
+                    </li>
+                    <li class="d-none d-sm-inline-block">
+                        <a href="#" @click.prevent="showZenDesk" class="text-muted small">
+                            {{ $t('title.help') }}
+                        </a>
+                    </li>
+                    <li>
+                        <app-logout></app-logout>
+                    </li>
+                </ul>
             </nav>
-
-            <ul class="nav-small">
-                <li>
-                    <a class="text-muted small" href="/settings">
-                        {{ $t('title.settings') }}
-                    </a>
-                </li>
-                <li class="d-none d-sm-inline-block">
-                    <a href="#" @click.prevent="showZenDesk" class="text-muted small">
-                        {{ $t('title.help') }}
-                    </a>
-                </li>
-                <li>
-                    <app-logout></app-logout>
-                </li>
-            </ul>
 
         </div>
 
