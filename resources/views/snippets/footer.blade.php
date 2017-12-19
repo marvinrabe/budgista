@@ -27,7 +27,7 @@
                     <a href="{{ route('app') }}">{{ trans('message.return_to_app') }}</a>
                 </li>
             @endif
-            <li class="list-inline-item d-none d-md-inline-block">
+            <li class="list-inline-item d-none d-sm-inline-block">
                 <a href="javascript: window.zE.activate({hideOnClose: true});">{{ trans('title.help') }}</a>
             </li>
             <li class="list-inline-item">
