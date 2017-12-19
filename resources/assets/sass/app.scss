@@ -56,6 +56,30 @@ a.text-muted:hover {
 }
 
 /*
+ * Small nav for sidebar
+ */
+.nav-small {
+  text-align: center;
+  padding: 0;
+  margin: 1em 0 0;
+  list-style: none;
+
+  li {
+    display: inline-block;
+    @extend .text-muted;
+
+    &:after {
+      content: "\00b7";
+    }
+
+    &:last-child:after {
+      content: "";
+    }
+  }
+
+}
+
+/*
  * Grip
  */
 span.handle {
