@@ -15,7 +15,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Auth::routes();
 
     Route::get('/', 'HomeController@index')->name('home');
-    Route::view('/legal', 'legal')->name('legal');
+    Route::view('/legal', 'static.legal')->name('legal');
 });
 
 Route::group(['middleware' => ['auth']], function () {

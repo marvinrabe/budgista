@@ -37,19 +37,7 @@
 
     <div class="container py-5">
         <div class="row">
-            @foreach(trans('static.home.bullets') as $bullet)
-                <div class="col-md-6">
-                    <div class="info-bullet">
-                        <div class="info-bullet-icon">
-                            <span class="fa-fw {{ $bullet['icon'] }}"></span>
-                        </div>
-                        <div class="info-bullet-body">
-                            <h2>{{ $bullet['title'] }}</h2>
-                            <p>{{ $bullet['body'] }}</p>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+            @each('static._bullet', trans('static.home.bullets'), 'bullet')
         </div>
         {{--
         <img src="{{ asset('images/product/desktop_'.config('app.locale').'.png') }}" class="img-fluid px-5 mt-3">
