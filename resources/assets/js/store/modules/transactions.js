@@ -1,4 +1,5 @@
 import transactions from '../../api/transactions'
+import _ from 'lodash';
 
 // initial state
 // transactions: [{ id, payee, amount, cleared, rrule, recurring, category: {id, name}, account_id }],
@@ -9,7 +10,7 @@ const state = {
 };
 
 // getters
-const getters = {
+export const getters = {
     findTransactionById: (state) => (id) => {
         return state.transactions.find(x => x.id === id)
     },
@@ -19,6 +20,13 @@ const getters = {
     findTransactionsByAccountId: (state) => (id) => {
         let transactions = state.transactions.filter(x => x.account_id === id).slice();
         return _.sortBy(transactions, ['date', 'created_at', 'payee']).reverse();
+    },
+    getPayees(state) {
+        return _.uniq(
+            state.transactions
+                .filter(transaction => !_.isEmpty(transaction.payee))
+                .map(transaction => transaction.payee)
+        );
     }
 };
 

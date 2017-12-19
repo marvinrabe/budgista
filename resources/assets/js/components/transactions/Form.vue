@@ -15,6 +15,7 @@
             <form id="transaction" class="container pt-2"
                   v-on:submit.stop.prevent="submitForm"
                   v-bind:class="[{'was-validated': validated}]"
+                  autocomplete="off"
                   data-vv-scope="transaction"
                   novalidate>
 
@@ -55,11 +56,15 @@
 
                 <div class="form-group">
                     <label for="payee">{{ $t('form.payee')}}</label>
-                    <input id="payee" type="text" class="form-control" autocomplete="off"
+                    <input id="payee" type="text" class="form-control" list="payees"
                            v-model="payee"
                            v-validate.initial="'required'"
                            data-vv-name="payee"
                            :data-vv-as="$t('form.payee')">
+                    <datalist id="payees">
+                        <option v-for="payee in getPayees" :key="payee" :value="payee" />
+                    </datalist>
+
                     <span class="invalid-feedback">{{ errors.first('transaction.payee') }}</span>
                 </div>
 
@@ -168,7 +173,8 @@
                 return false
             },
             ...mapGetters([
-                'sortedCategories'
+                'sortedCategories',
+                'getPayees'
             ])
         },
         data: () => ({
