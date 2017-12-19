@@ -1,4 +1,5 @@
 import IntegerMoneyFormatter from './IntegerMoneyFormatter';
+import _ from 'lodash';
 
 const AppIntl = {
     install(Vue, options = {}) {
@@ -23,12 +24,12 @@ const AppIntl = {
             require('./DateInput.vue')
         );
 
-        Vue.prototype.$moneyFormatter = function() {
+        Vue.prototype.$moneyFormatter = _.memoize(function() {
             let currency = this.$store.state.currency;
             let locale = this.$store.state.locale;
 
             return new IntegerMoneyFormatter(locale, currency);
-        };
+        });
     }
 };
 
