@@ -10,6 +10,16 @@ $menu-width: 280px;
     width: 100%;
   }
 
+  .nav-header {
+    @extend .nav-link;
+    @extend .small;
+    margin-bottom: 0;
+    font-weight: bold;
+    font-family: $headings-font-family;
+    text-transform: uppercase;
+    color: $text-muted !important;
+  }
+
   .nav-link-main {
     @extend .nav-link;
     display: flex;
