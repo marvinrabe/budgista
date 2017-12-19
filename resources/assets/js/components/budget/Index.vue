@@ -48,7 +48,7 @@
                         <div class="badge mr-2"
                              :class="[{ 'badge-danger': unallocated < 0 }, { 'badge-success': unallocated >= 0 }]">
                             <money-format
-                                    class="h4 p-2"
+                                    class="h4 p-2 text-number"
                                     :value="unallocated">
                             </money-format>
                             <br>
@@ -60,13 +60,13 @@
 
             <div style="flex: 100%; align-items: center;" class="d-flex d-sm-none p-2"
                  :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated >= 0 }]">
-                <div class="col-flex text-left">
-                    <span class="small">{{ $t('form.unallocated') }}</span>
+                <div class="col-flex text-left small">
+                    {{ $t('form.unallocated') }}
                 </div>
                 <transition name="fade">
                     <div class="col-flex text-right" v-if="!loading">
                         <money-format
-                                class="h5 mb-0"
+                                class="h5 mb-0 text-number"
                                 :value="unallocated">
                         </money-format>
                     </div>
