@@ -135,7 +135,7 @@
                     </button>
                 </div>
 
-                <button class="btn btn-light" v-on:click="cancel">
+                <button class="btn btn-text-light" v-on:click="cancel">
                     {{ $t('action.cancel') }}
                 </button>
 

@@ -135,7 +135,7 @@
             </form>
 
             <div slot="footer">
-                <button class="btn btn-light" v-on:click="hideNewCategoryModal">
+                <button class="btn btn-text-light" v-on:click="hideNewCategoryModal">
                     {{ $t('action.cancel') }}
                 </button>
                 <button class="btn btn-primary" v-on:click="createCategory">
@@ -170,7 +170,7 @@
                     </button>
                 </div>
 
-                <button class="btn btn-light" v-on:click="hideEditCategoryModal">
+                <button class="btn btn-text-light" v-on:click="hideEditCategoryModal">
                     {{ $t('action.cancel') }}
                 </button>
                 <button class="btn btn-primary" v-on:click="updateCategory">
