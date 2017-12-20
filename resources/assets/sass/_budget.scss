@@ -58,8 +58,13 @@
       input {
         text-align: right;
 
+        &.opacity-50 {
+          background-color: transparent;
+        }
+
         &:hover,
         &:focus {
+          background-color: $input-bg;
           opacity: 1;
         }
       }
