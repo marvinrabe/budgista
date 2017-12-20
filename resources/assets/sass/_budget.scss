@@ -21,7 +21,6 @@
     color: $text-muted;
     font-family: $headings-font-family;
     font-size: $small-font-size;
-    font-weight: 200;
 
     position: sticky;
     top: 0;
@@ -60,13 +59,11 @@
 
     &-budget {
       input {
-        @extend .border-light;
         @extend .text-right;
 
         &:hover,
         &:focus {
-          color: $gray-700 !important;          
-          border-color: $gray-400 !important;
+          color: $body-color !important;
         }
       }
     }

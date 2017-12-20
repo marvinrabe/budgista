@@ -1,13 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
-
+@import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,700');
 // Variables
 @import "variables";
-
 // Bootstrap 4
 @import "node_modules/bootstrap/scss/bootstrap";
-
 // Logo
 @import "logo";
+
+/*
+ * Titles
+ */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-weight: 400;
+}
 
 /*
  * Misc. utilites
@@ -63,8 +67,13 @@ a.h2:hover {
     border: 0;
   }
 
-  &-body .form-group:last-child {
-    margin-bottom: 0;
+  &-body {
+    padding-bottom: 0;
+    padding-top: 0;
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
   }
 
 }
@@ -89,7 +98,7 @@ a.h2:hover {
     border-right: 0;
     transition: background-color .2s ease-in, border-color .2s ease-in, color .2s ease-in, font-weight .2s;
 
-    &:hover,&:active {
+    &:hover, &:active {
       color: $body-color;
       border-bottom-color: $gray-500;
     }
@@ -106,10 +115,28 @@ a.h2:hover {
   }
 }
 
-
 /*
  * Form
  */
+
+label {
+  @extend .small;
+  color: $text-muted;
+}
+
+.was-validated .form-control:valid {
+  border-color: $input-border-color;
+}
+
+.form-control:focus, .was-validated .form-control:valid:focus {
+  box-shadow: 0 0 2px 0.1rem rgba(theme-color('primary'), 0.1);
+  border-color: $input-focus-border-color;
+}
+
+.was-validated .form-control:invalid:focus {
+  box-shadow: 0 0 2px 0.1rem rgba(theme-color('danger'), 0.1);
+  border-color: theme-color('danger');
+}
 
 // Invalid Feedback is always displayed as block, because we use vue to hide message if there is no error.
 .was-validated .invalid-feedback {
@@ -126,7 +153,6 @@ a.h2:hover {
     color: $text-muted;
     font-family: $headings-font-family;
     font-size: $small-font-size;
-    font-weight: 200;
   }
 }
 
