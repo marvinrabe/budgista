@@ -31,6 +31,12 @@
     &:hover {
       background: $gray-50;
     }
+
+    @media (hover: none) {
+      &:hover {
+        background: transparent;
+      }
+    }
   }
 }
 
