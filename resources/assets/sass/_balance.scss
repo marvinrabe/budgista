@@ -4,6 +4,7 @@
   width: 300px;
   flex-shrink: 2;
   flex-grow: 0;
+  align-self: stretch;
 
   &-minor {
     display: flex;
