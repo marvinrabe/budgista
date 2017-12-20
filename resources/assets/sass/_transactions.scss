@@ -1,7 +1,5 @@
 
 .transactions {
-  box-sizing: border-box;
-  position: relative;
 
   &-header,
   &-row {
@@ -18,14 +16,9 @@
   &-header {
     background: #fff;
     border-bottom: 1px solid $gray-200;
-
     color: $text-muted;
     font-family: $headings-font-family;
     font-size: $small-font-size;
-
-    position: sticky;
-    top: 0;
-    z-index: 10;
   }
 
   &-row {
@@ -47,6 +40,12 @@
   align-items: center;
   padding: 0 !important;
 
+  & > span, & > div {
+    padding: $table-cell-padding;
+  }
+}
+
+.content .transaction-item {
   color: $body-color;
   opacity: .8;
   transition: opacity .2ms ease-in;
@@ -55,10 +54,6 @@
     color: $body-color;
     text-decoration: none;
     opacity: 1;
-  }
-
-  & > span, & > div {
-    padding: $table-cell-padding;
   }
 }
 
@@ -91,8 +86,7 @@
   text-align: right;
 }
 
-.transaction-clear,
-.transaction-actions {
+.transaction-clear {
   text-align: center;
   flex-basis: 48px;
   flex-shrink: 0;

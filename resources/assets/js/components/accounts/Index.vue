@@ -22,7 +22,7 @@
             </a>
         </div>
 
-        <div class="content transactions">
+        <div class="container-fluid">
             <div class="transactions-header">
                 <div class="transaction-item">&nbsp;
                     <div class="transaction-column">
@@ -38,7 +38,9 @@
                 </div>
                 <div class="transaction-clear">&nbsp;</div>
             </div>
+        </div>
 
+        <div class="content container-fluid">
             <div class="transactions-row" :class="[{ 'transactions-row-future': new Date(item.date) > new Date() }]"
                  v-for="(item, index) of transactions" :key="index">
                 <router-link
@@ -85,9 +87,9 @@
                 </router-link>
                 <div class="transaction-clear">
                     <a href="#"
-                            v-if="new Date(item.date) <= new Date()"
-                            v-bind:class="[{ 'text-success': item.cleared }, {'text-darker-light': !item.cleared}]"
-                            v-on:click="toggleCleared(item)">
+                       v-if="new Date(item.date) <= new Date()"
+                       v-bind:class="[{ 'text-success': item.cleared }, {'text-darker-light': !item.cleared}]"
+                       v-on:click="toggleCleared(item)">
                         <font-awesome-icon icon="check-circle" symbol/>
                     </a>
                 </div>
