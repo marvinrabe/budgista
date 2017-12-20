@@ -3,35 +3,34 @@
         <div class="budget-column-drag">
             <span class="handle"></span>
         </div>
-        <div class="budget-column-name">
+        <a href="#" @click="$emit('edit:category', value)" class="budget-column-name">
             <ellipsis>{{ category.name }}</ellipsis>
-        </div>
-        <div class="budget-column-budget">
-            <money-input
-                    class="text-right py-0 px-1"
-                    ref="input"
-                    :class="[{ 'text-muted': budget == 0 }, { 'text-dark': budget != 0 }]"
-                    :value="budget"
-                    @update:value="val => updateBudget(val)"
-                    :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)">
-            </money-input>
-        </div>
-        <div class="budget-column-activity d-none d-lg-block">
-            <money-format
-                    :class="[{ 'text-muted': activity == 0 }, { 'text-dark': activity != 0 }]"
-                    :value="activity">
-            </money-format>
-        </div>
-        <div class="budget-column-available">
-            <money-format
-                    style="font-size: 100%"
-                    class="badge"
-                    :class="[{ 'badge-danger': available < 0 }, { 'badge-success': available > 0 }, { 'badge-light': available == 0 }]"
-                    :value="available">
-            </money-format>
-        </div>
-        <div class="budget-column-actions">
-            <slot name="actions"></slot>
+        </a>
+        <div class="budget-column-values">
+            <div class="budget-column-budget">
+                <money-input
+                        class="text-right py-0 px-1"
+                        ref="input"
+                        :class="[{ 'text-muted': budget == 0 }, { 'text-dark': budget != 0 }]"
+                        :value="budget"
+                        @update:value="val => updateBudget(val)"
+                        :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)">
+                </money-input>
+            </div>
+            <div class="budget-column-activity">
+                <money-format
+                        :class="[{ 'text-muted': activity == 0 }, { 'text-dark': activity != 0 }]"
+                        :value="activity">
+                </money-format>
+            </div>
+            <div class="budget-column-available">
+                <money-format
+                        style="font-size: 100%"
+                        class="badge"
+                        :class="[{ 'badge-danger': available < 0 }, { 'badge-success': available > 0 }, { 'badge-light': available == 0 }]"
+                        :value="available">
+                </money-format>
+            </div>
         </div>
     </div>
 </template>
