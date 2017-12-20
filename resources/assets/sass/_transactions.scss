@@ -65,23 +65,27 @@
   min-width: 0;
 }
 
-
-.transaction-column-2,
 .transaction-date,
+.transaction-column-2,
 .transaction-payee,
 .transaction-category,
 .transaction-amount {
   flex: 1;
 }
 
-.transaction-inflow,
-.transaction-outflow {
-  flex: 1;
+.transaction-date {
+  max-width: 130px;
+}
+
+.transaction-outflow,
+.transaction-inflow {
+  flex: 0.8;
 }
 
 .transaction-outflow,
 .transaction-inflow,
 .transaction-amount {
+  font-weight: 500;
   white-space: nowrap;
   text-align: right;
 }
