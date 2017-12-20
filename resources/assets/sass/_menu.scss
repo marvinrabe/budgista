@@ -12,12 +12,10 @@ $menu-width: 280px;
 
   .nav-header {
     @extend .nav-link;
-    @extend .small;
     margin-bottom: 0;
     color: $text-muted;
     font-family: $headings-font-family;
     font-size: $small-font-size;
-    font-weight: 200;
   }
 
   .nav-link-main {
