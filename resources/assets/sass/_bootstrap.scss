@@ -45,6 +45,11 @@ a.h2:hover {
   text-decoration: none;
 }
 
+.card-title {
+  font-weight: 200;
+  color: theme-color('primary');
+}
+
 .card-body-secondary {
   @extend .text-muted;
   background: $gray-50;

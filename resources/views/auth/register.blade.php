@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <h1 class="card-title">{{ trans('title.register') }}</h1>
+    <h1 class="card-title h4">{{ trans('title.register') }}</h1>
 
     <form method="POST" action="{{ route('register') }}" class="{{ $errors->any()?'was-validated':'' }}" onsubmit="gtag_report_conversion()">
         {{ csrf_field() }}

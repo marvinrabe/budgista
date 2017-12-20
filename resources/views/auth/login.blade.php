@@ -8,7 +8,7 @@
     <div class="card">
         <div class="card-body">
 
-            <h1 class="card-title">{{ trans('title.login') }}</h1>
+            <h1 class="card-title h4">{{ trans('title.login') }}</h1>
 
             <form method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}

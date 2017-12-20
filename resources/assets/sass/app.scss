@@ -120,6 +120,8 @@ span.handle {
 }
 
 .layout-auth {
+  overflow-y: scroll; /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;
 
   .card-title {
     text-align: center;
@@ -128,6 +130,16 @@ span.handle {
   .cover {
     padding-top: 25px;
     padding-bottom: 20px;
+  }
+
+  .overlap {
+    padding-bottom: 40px;
+  }
+
+  .btn-primary {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1em;
   }
 
 }

@@ -4,10 +4,9 @@ return [
     'home' => [
         'title' => 'Free Budget App',
         'heading' => 'Keeping a Budget is easy!',
-        'lead' => 'Get out of dept and save money.',
-        'cta' => 'Sign up now',
+        'lead' => 'Get out of debt and save money.',
+        'cta' => 'Sign up for free',
         'lead2' => 'Create your Budget now',
-        'free' => 'It\'s completely <strong>free</strong>!',
         'help' => 'Still have Questions?',
         'contact' => 'Contact us',
         'bullets' => [
