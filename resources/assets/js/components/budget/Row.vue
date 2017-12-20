@@ -9,16 +9,16 @@
         <div class="budget-column-values">
             <div class="budget-column-budget">
                 <money-input
-                        class="text-right py-0 px-1"
+                        class="py-0 px-1"
                         ref="input"
                         :class="[{ 'opacity-50': budget == 0 }]"
                         :value="budget"
                         @update:value="val => updateBudget(val)"
                         :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)" />
             </div>
-            <div class="budget-column-activity text-muted">
+            <div class="budget-column-activity">
                 <money-format
-                        :class="[{ 'opacity-50': activity == 0 }]"
+                        :class="[{ 'opacity-50': activity == 0 }, { 'opacity-80': activity != 0 }]"
                         :value="activity" />
             </div>
             <div class="budget-column-available">
