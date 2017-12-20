@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <h1 class="card-title">{{ trans('title.reset') }}</h1>
+    <h1 class="card-title h4">{{ trans('title.reset') }}</h1>
 
     @if (session('status'))
         <div class="alert alert-success">

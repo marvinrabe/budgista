@@ -11,9 +11,4 @@ return [
     'remember' => 'Remember Me',
     'created_at' => 'Created at',
 
-    // Used in Settings
-    'language' => 'Language',
-    'locale' => 'Locale',
-    'currency' => 'Currency',
-
 ];

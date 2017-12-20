@@ -26,11 +26,9 @@
                 <h1>{{ trans('static.home.heading') }}</h1>
                 <p class="lead">{{ trans('static.home.lead') }}</p>
 
-                <a href="{{ route('register') }}" class="btn btn-lg btn-primary m-2">
+                <a href="{{ route('register') }}" class="btn btn-lg btn-primary mt-2">
                     {{ trans('static.home.cta') }}
                 </a>
-
-                <p class="m-0 small">{!! trans('static.home.free') !!}</p>
             </div>
         </div>
     </header>
@@ -48,11 +46,9 @@
         <div class="py-5 second-cta">
             <p class="h2 m-0">{{ trans('static.home.lead2') }}</p>
 
-            <a href="{{ route('register') }}" class="btn btn-lg btn-primary m-3">
+            <a href="{{ route('register') }}" class="btn btn-lg btn-primary mt-3">
                 {{ trans('static.home.cta') }}
             </a>
-
-            <p class="m-0 small">{!! trans('static.home.free') !!}</p>
         </div>
     </div>
 
