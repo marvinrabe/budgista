@@ -103,24 +103,26 @@ a.h2:hover {
  * Tabs
  */
 .nav-tabs {
-  border-bottom-color: $gray-300;
+  border-bottom-color: $gray-200;
 
   .nav-link {
-    color: $gray-500;
+    color: $body-color;
     border-top: 0;
     border-left: 0;
     border-right: 0;
-    transition: background-color .2s ease-in, border-color .2s ease-in, color .2s ease-in, font-weight .2s;
+    transition: border-color .2s ease-in, opacity .2s ease-in, color .2s ease-in, font-weight .2s;
+    opacity: .5;
 
     &:hover, &:active {
-      color: $body-color;
-      border-bottom-color: $gray-500;
+      border-bottom-color: $gray-600;
+      opacity: .8;
     }
 
     &.active {
+      color: $body-color;
       border-bottom-color: theme-color('primary');
       font-weight: 500;
-      color: $body-color;
+      opacity: 1;
 
       svg {
         color: theme-color('primary');
