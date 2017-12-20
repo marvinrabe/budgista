@@ -6,6 +6,11 @@ $menu-width: 280px;
 }
 
 .app-menu {
+  height: 100%;
+
+  overflow-y: scroll; /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;
+
   .navbar {
     width: 100%;
   }

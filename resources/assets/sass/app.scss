@@ -1,17 +1,24 @@
 @import "bootstrap";
 
+// Block iOS and Chrome Overscrolling
 html,
-body,
+body {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  overflow: hidden;
+}
+
 #app {
   height: 100%;
 }
 
-html {
-  overflow: hidden;
-}
 
 body {
-  overflow: auto;
   background: $gray-100;
 }
 
@@ -194,7 +201,9 @@ span.handle {
 .content {
   background: $white;
   flex: 1;
-  overflow: auto;
+
+  overflow-y: scroll; /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;
 
   > div:last-child {
     margin-bottom: 10%;
