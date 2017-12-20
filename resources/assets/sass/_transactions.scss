@@ -34,6 +34,30 @@
     &-future, &-future span {
       color: $gray-600 !important;
     }
+
+    &:hover {
+      background: $gray-50;
+    }
+  }
+}
+
+.transaction-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+
+  color: $body-color;
+  opacity: .8;
+  transition: opacity .2ms ease-in;
+
+  &:hover {
+    color: $body-color;
+    text-decoration: none;
+    opacity: 1;
+  }
+
+  & > span {
+    padding: $table-cell-padding;
   }
 }
 

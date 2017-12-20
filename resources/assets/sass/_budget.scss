@@ -28,6 +28,10 @@
   &-row {
     border-bottom: 1px solid $gray-200;
     flex-wrap: wrap;
+
+    &:hover {
+      background: $gray-50;
+    }
   }
 
   &-column {
