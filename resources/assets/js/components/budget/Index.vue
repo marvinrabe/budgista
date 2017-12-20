@@ -76,17 +76,13 @@
         </app-toolbar>
 
         <div class="toolbar toolbar-secondary">
-            <div class="row">
-                <div class="col">
-                    <button class="btn btn-primary" v-on:click="showNewCategoryModal">
-                        <font-awesome-icon icon="plus"/>
-                        {{ $t('action.new.category') }}
-                    </button>
-                </div>
-            </div>
+            <button class="btn btn-primary" v-on:click="showNewCategoryModal">
+                <font-awesome-icon icon="plus"/>
+                {{ $t('action.new.category') }}
+            </button>
         </div>
 
-        <div class="content budget">
+        <div class=" container-fluid">
             <div class="budget-header">
                 <div class="budget-column-drag"></div>
                 <div class="budget-column-name">
@@ -104,7 +100,9 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="content container-fluid">
             <draggable v-model="rows" :options="{handle:'.handle'}" @end="persistSorting">
                 <category-row
                         v-for="(row, index) in rows"
@@ -112,7 +110,7 @@
                         :month="month"
                         :value="row"
                         @update:value="val => rows.splice(index, 1, val)"
-                        @edit:category="row => showEditCategoryModal(row)" />
+                        @edit:category="row => showEditCategoryModal(row)"/>
             </draggable>
 
             <app-spinner v-if="loading"></app-spinner>

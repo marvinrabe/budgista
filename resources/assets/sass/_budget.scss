@@ -1,6 +1,4 @@
 .budget {
-  box-sizing: border-box;
-  position: relative;
 
   &-header,
   &-row {
@@ -13,16 +11,12 @@
   }
 
   &-header {
-    background: #fff;
     border-bottom: 1px solid $gray-200;
 
     color: $text-muted;
     font-family: $headings-font-family;
     font-size: $small-font-size;
-
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    cursor: default;
   }
 
   &-row {
@@ -45,14 +39,6 @@
     &-name {
       flex: 2;
       padding: .5em;
-      color: $body-color;
-      opacity: .8;
-      transition: opacity .2ms ease-in;
-
-      &:hover {
-        color: $body-color;
-        opacity: 1;
-      }
     }
 
     &-values {
@@ -70,19 +56,17 @@
 
     &-budget {
       input {
-        @extend .text-right;
+        text-align: right;
 
         &:hover,
         &:focus {
-          color: $body-color !important;
+          opacity: 1;
         }
       }
     }
 
     &-available {
-      .badge-light {
-        color: $gray-600;
-      }
+      font-weight: 500;
     }
 
   }
@@ -112,12 +96,7 @@
         text-align: center;
       }
       &-budget input {
-        text-align: center !important;
-      }
-      &-available {
-        .badge {
-          display: block;
-        }
+        text-align: center;
       }
     }
 
@@ -125,4 +104,13 @@
 
 }
 
+.content .budget-column-name {
+  color: $body-color;
+  opacity: .8;
+  transition: opacity .2ms ease-in;
 
+  &:hover {
+    color: $body-color;
+    opacity: 1;
+  }
+}

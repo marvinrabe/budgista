@@ -33,7 +33,7 @@
 
 @include('snippets.zendesk')
 
-@if(config('app.env') == 'production' or true)
+@if(config('app.env') == 'production')
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Intl,Intl.~locale.{{ auth()->user()->language }}"></script>
 @endif
 

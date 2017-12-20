@@ -11,25 +11,20 @@
                 <money-input
                         class="text-right py-0 px-1"
                         ref="input"
-                        :class="[{ 'text-muted': budget == 0 }, { 'text-dark': budget != 0 }]"
+                        :class="[{ 'opacity-50': budget == 0 }]"
                         :value="budget"
                         @update:value="val => updateBudget(val)"
-                        :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)">
-                </money-input>
+                        :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)" />
             </div>
-            <div class="budget-column-activity">
+            <div class="budget-column-activity text-muted">
                 <money-format
-                        :class="[{ 'text-muted': activity == 0 }, { 'text-dark': activity != 0 }]"
-                        :value="activity">
-                </money-format>
+                        :class="[{ 'opacity-50': activity == 0 }]"
+                        :value="activity" />
             </div>
             <div class="budget-column-available">
                 <money-format
-                        style="font-size: 100%"
-                        class="badge"
-                        :class="[{ 'badge-danger': available < 0 }, { 'badge-success': available > 0 }, { 'badge-light': available == 0 }]"
-                        :value="available">
-                </money-format>
+                        :class="[{ 'text-danger': available < 0 }, { 'text-success': available > 0 }, { 'opacity-50': available == 0 }]"
+                        :value="available" />
             </div>
         </div>
     </div>
