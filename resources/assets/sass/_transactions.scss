@@ -14,11 +14,11 @@
   }
 
   &-header {
-    background: #fff;
     border-bottom: 1px solid $gray-200;
     color: $text-muted;
     font-family: $headings-font-family;
     font-size: $small-font-size;
+    cursor: default;
   }
 
   &-row {

@@ -81,3 +81,18 @@ $font-size-xs: ($font-size-base * .765);
 .fade-enter, .fade-leave-to {
   opacity: 0
 }
+
+.opacity-30 {
+  opacity: .3;
+}
+.opacity-50 {
+  opacity: .5;
+}
+
+.opacity-80 {
+  opacity: .8;
+}
+
+.opacity-100 {
+  opacity: 1;
+}

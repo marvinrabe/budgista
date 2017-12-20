@@ -86,6 +86,12 @@ a.h2:hover {
 
 }
 
+.modal-header .close {
+  cursor: pointer;
+  line-height: 1.5em;
+  font-size: 1.25em;
+}
+
 .modal-content, .card {
   @extend .shadow-1;
   border: 0;

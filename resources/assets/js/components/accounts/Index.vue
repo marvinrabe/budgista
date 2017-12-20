@@ -6,14 +6,12 @@
         </app-toolbar>
 
         <div class="toolbar toolbar-secondary">
-            <div class="col-flex">
-                <router-link
-                        :to="{ name: 'transaction.new'}"
-                        class="btn btn-primary">
-                    <font-awesome-icon icon="plus"/>
-                    {{ $t('action.new.transaction') }}
-                </router-link>
-            </div>
+            <router-link
+                    :to="{ name: 'transaction.new'}"
+                    class="btn btn-primary">
+                <font-awesome-icon icon="plus"/>
+                {{ $t('action.new.transaction') }}
+            </router-link>
 
             <a class="btn btn-primary ml-auto" href="#"
                @click.stop="showEditAccountModal"
