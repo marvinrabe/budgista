@@ -5,8 +5,6 @@
   &-header,
   &-row {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
     align-items: center;
 
     & > div {
@@ -29,6 +27,7 @@
 
   &-row {
     border-bottom: 1px solid $gray-200;
+    flex-wrap: wrap;
   }
 
   &-column {
@@ -41,6 +40,20 @@
 
     &-name {
       flex: 2;
+      padding: .5em;
+      color: $body-color;
+      opacity: .8;
+      transition: opacity .2ms ease-in;
+
+      &:hover {
+        color: $body-color;
+        opacity: 1;
+      }
+    }
+
+    &-values {
+      flex: 3;
+      display: flex;
     }
 
     &-budget,
@@ -49,12 +62,6 @@
       flex: 1;
       white-space: nowrap;
       text-align: right;
-    }
-
-    &-actions {
-      text-align: center;
-      width: 48px;
-      flex-shrink: 0;
     }
 
     &-budget {
@@ -74,6 +81,44 @@
       }
     }
 
+  }
+
+  @include media-breakpoint-down(sm) {
+    &-header {
+      .budget-column-name, .budget-column-drag {
+        display: none;
+      }
+    }
+
+    &-row {
+      .budget-column-values {
+        padding-top: 0 !important;
+      }
+    }
+
+    &-column {
+      &-values {
+        margin-left: 24px;
+        flex: 100%;
+      }
+
+      &-budget,
+      &-activity,
+      &-available {
+        text-align: center;
+      }
+      &-budget input {
+        text-align: center !important;
+      }
+      &-available {
+        .badge {
+          display: block;
+        }
+      }
+    }
 
   }
+
 }
+
+

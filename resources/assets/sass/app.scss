@@ -180,23 +180,14 @@ span.handle {
   &-secondary {
     background: theme-color('primary');
     padding: 0.5rem;
-
-    .btn {
-      @extend .btn-primary
-    }
   }
 
   p, h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0;
   }
 
-  .form-row {
-    align-items: center;
-  }
-
   .btn {
     @extend .btn-sm;
-    vertical-align: bottom;
   }
 }
 

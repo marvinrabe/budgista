@@ -78,7 +78,7 @@
         <div class="toolbar toolbar-secondary">
             <div class="row">
                 <div class="col">
-                    <button class="btn" v-on:click="showNewCategoryModal">
+                    <button class="btn btn-primary" v-on:click="showNewCategoryModal">
                         <font-awesome-icon icon="plus"/>
                         {{ $t('action.new.category') }}
                     </button>
@@ -92,16 +92,17 @@
                 <div class="budget-column-name">
                     {{ $t('form.category') }}
                 </div>
-                <div class="budget-column-budget">
-                    {{ $t('form.budget') }}
+                <div class="budget-column-values">
+                    <div class="budget-column-budget">
+                        {{ $t('form.budget') }}
+                    </div>
+                    <div class="budget-column-activity">
+                        {{ $t('form.activity') }}
+                    </div>
+                    <div class="budget-column-available">
+                        {{ $t('form.available') }}
+                    </div>
                 </div>
-                <div class="budget-column-activity d-none d-lg-block">
-                    {{ $t('form.activity') }}
-                </div>
-                <div class="budget-column-available">
-                    {{ $t('form.available') }}
-                </div>
-                <div class="budget-column-actions"></div>
             </div>
 
             <draggable v-model="rows" :options="{handle:'.handle'}" @end="persistSorting">
@@ -110,13 +111,8 @@
                         :key="month+'#'+row.id"
                         :month="month"
                         :value="row"
-                        @update:value="val => rows.splice(index, 1, val)">
-                    <div slot="actions">
-                        <a href="#" @click.prevent="showEditCategoryModal(row)" class="text-muted">
-                            <font-awesome-icon icon="pencil-alt" symbol/>
-                        </a>
-                    </div>
-                </category-row>
+                        @update:value="val => rows.splice(index, 1, val)"
+                        @edit:category="row => showEditCategoryModal(row)" />
             </draggable>
 
             <app-spinner v-if="loading"></app-spinner>
