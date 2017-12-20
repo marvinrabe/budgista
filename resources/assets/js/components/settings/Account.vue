@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="text-right">
-                        <button class="btn btn-light" type="reset">
+                        <button class="btn btn-text-light" type="reset">
                             {{ $t('action.cancel') }}
                         </button>
 
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="text-right">
-                        <button class="btn btn-light" type="reset">
+                        <button class="btn btn-text-light" type="reset">
                             {{ $t('action.cancel') }}
                         </button>
 

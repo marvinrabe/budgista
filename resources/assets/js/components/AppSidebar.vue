@@ -84,7 +84,7 @@
                 </div>
             </form>
             <div slot="footer">
-                <button class="btn btn-light" v-on:click="hideNewAccountModal">
+                <button class="btn btn-text-light" v-on:click="hideNewAccountModal">
                     {{ $t('action.cancel') }}
                 </button>
                 <button class="btn btn-primary" v-on:click="createAccount">

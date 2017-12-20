@@ -127,7 +127,7 @@
                     </button>
                 </div>
 
-                <button class="btn btn-light" v-on:click="hideEditAccountModal">
+                <button class="btn btn-text-light" v-on:click="hideEditAccountModal">
                     {{ $t('action.cancel') }}
                 </button>
                 <button class="btn btn-primary" v-on:click="updateAccount">

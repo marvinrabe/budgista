@@ -13,7 +13,7 @@
             </div>
         </form>
         <div slot="footer">
-            <button class="btn btn-light" @click="hideModal">
+            <button class="btn btn-text-light" @click="hideModal">
                 {{ $t('action.cancel') }}
             </button>
             <button class="btn btn-danger" @click="deleteCategory">
