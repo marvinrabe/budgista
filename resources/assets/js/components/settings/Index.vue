@@ -2,7 +2,7 @@
     <div class="main">
         <app-toolbar :title="$t('title.settings')" />
 
-        <div class="container my-2">
+        <div class="container-fluid mt-2">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <router-link
