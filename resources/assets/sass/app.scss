@@ -177,7 +177,7 @@ span.handle {
     padding: 0;
 
     .title {
-      @extend .h2;
+      @extend .h4;
       @extend .mb-0;
       flex: 1;
       padding: .3em .5em;

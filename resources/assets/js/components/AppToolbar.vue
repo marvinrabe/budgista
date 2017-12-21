@@ -23,8 +23,8 @@
 
 <style scoped>
     .sub-menu-placeholder {
-        width: 48px;
-        flex: 48px;
+        width: 38px;
+        flex: 38px;
         flex-grow: 0;
     }
 </style>
