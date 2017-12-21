@@ -52,7 +52,7 @@
                             {{ $t('title.settings') }}
                         </router-link>
                     </li>
-                    <li class="d-none d-sm-inline-block">
+                    <li>
                         <a href="#" @click.prevent="showZenDesk" class="text-muted small">
                             {{ $t('title.help') }}
                         </a>
