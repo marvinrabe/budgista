@@ -2,7 +2,7 @@
     <button class="menu-toggle d-md-none float-sm-none" type="button" aria-controls="menu"
             :aria-label="$t('action.navigation')"
             @click.prevent="showMenu">
-        <font-awesome-icon icon="bars" fixed-width transform="shrink-3" />
+        <font-awesome-icon icon="bars" fixed-width />
     </button>
 </template>
 
@@ -11,8 +11,8 @@
         flex: 0;
         border: 0;
         background: transparent;
-        font-size: 1.5rem;
-        margin: 0 0 0 8px;
+        font-size: 1rem;
+        margin: 0 0 0 15px;
         color: white;
         padding: 0;
         opacity: 1;
