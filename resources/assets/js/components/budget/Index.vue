@@ -20,9 +20,9 @@
                 </a>
             </div>
 
-            <div class="d-none d-sm-block ml-auto py-2">
+            <div class="d-none d-sm-block ml-auto">
                 <transition name="fade">
-                    <div class="d-flex" v-if="!loading">
+                    <div class="container d-flex" v-if="!loading">
                         <div class="d-none d-lg-block text-right mr-2">
                             <div style="font-size: 64%;">
                                 {{ $t('form.previousMonth') }}:
@@ -45,7 +45,7 @@
                             </div>
                         </div>
 
-                        <div class="badge mr-2"
+                        <div class="badge"
                              :class="[{ 'badge-danger': unallocated < 0 }, { 'badge-success': unallocated >= 0 }]">
                             <money-format
                                     class="h4 p-2 text-number"
