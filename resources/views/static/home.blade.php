@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <div class="container text-center text-muted py-5 help d-none d-sm-flex">
+    <div class="container text-muted py-5 help">
         <p class="h4 m-0">
             {{ trans('static.home.help') }}
         </p>
