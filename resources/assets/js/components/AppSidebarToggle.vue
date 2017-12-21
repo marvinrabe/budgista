@@ -11,7 +11,7 @@
         flex: 0;
         border: 0;
         background: transparent;
-        font-size: 2rem;
+        font-size: 1.5rem;
         margin: 0 0 0 8px;
         color: white;
         padding: 0;

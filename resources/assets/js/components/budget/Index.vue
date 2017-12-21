@@ -20,7 +20,7 @@
                 </a>
             </div>
 
-            <div class="d-none d-sm-block ml-auto">
+            <div class="d-none d-sm-block ml-auto py-2">
                 <transition name="fade">
                     <div class="d-flex" v-if="!loading">
                         <div class="d-none d-lg-block text-right mr-2">
