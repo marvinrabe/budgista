@@ -32,6 +32,10 @@
         background: transparent;
       }
     }
+
+    .budget-column-available {
+      font-weight: 500;
+    }
   }
 
   &-column {
@@ -74,10 +78,6 @@
           opacity: 1;
         }
       }
-    }
-
-    &-available {
-      font-weight: 500;
     }
 
   }

@@ -37,6 +37,12 @@
         background: transparent;
       }
     }
+
+    .transaction-outflow,
+    .transaction-inflow,
+    .transaction-amount {
+      font-weight: 500;
+    }
   }
 }
 
@@ -91,7 +97,6 @@
 .transaction-outflow,
 .transaction-inflow,
 .transaction-amount {
-  font-weight: 500;
   white-space: nowrap;
   text-align: right;
 }
