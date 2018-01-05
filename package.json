@@ -47,6 +47,7 @@
     "vue-test-utils": "^1.0.0-beta.8",
     "vuedraggable": "^2.15.0",
     "vuejs-datepicker": "^0.9.21",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "zxcvbn": "^4.4.2"
   }
 }

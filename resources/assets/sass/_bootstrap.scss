@@ -19,10 +19,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .text-darker-light {
   color: $gray-300 !important;
+}
 
-  &:hover {
-    color: $gray-500 !important;
-  }
+a.text-darker-light:hover {
+  color: $gray-500 !important;
 }
 
 .text-number {

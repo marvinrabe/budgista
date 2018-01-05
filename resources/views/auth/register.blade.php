@@ -8,25 +8,15 @@
 
     <h1 class="card-title h4">{{ trans('title.register') }}</h1>
 
-    <form method="POST" action="{{ route('register') }}" class="{{ $errors->any()?'was-validated':'' }}" onsubmit="gtag_report_conversion()">
+    <form method="POST" action="{{ route('register') }}" class="{{ $errors->any()?'was-validated':'' }}"
+          onsubmit="gtag_report_conversion()" novalidate>
         {{ csrf_field() }}
-
-        <div class="form-group">
-            <label for="name" class="control-label">{{ trans('form.name') }}</label>
-
-            <input id="name" class="form-control {{ $errors->has('name') ? 'border-danger' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
-            @if ($errors->has('name'))
-                <div class="form-text text-danger">
-                    {{ $errors->first('name') }}
-                </div>
-            @endif
-        </div>
 
         <div class="form-group">
             <label for="email" class="control-label">{{ trans('form.email') }}</label>
 
-            <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'border-danger' : '' }}" name="email" value="{{ old('email') }}" required>
+            <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'border-danger' : '' }}"
+                   name="email" value="{{ old('email') }}" required>
 
             @if ($errors->has('email'))
                 <div class="form-text text-danger">
@@ -38,7 +28,7 @@
         <div class="form-group">
             <label for="password" class="control-label">{{ trans('form.password') }}</label>
 
-            <input id="password" type="password" class="form-control {{ $errors->has('password') ? 'border-danger' : '' }}" name="password" required>
+            <vue-password></vue-password>
 
             @if ($errors->has('password'))
                 <div class="form-text text-danger">
@@ -47,30 +37,9 @@
             @endif
         </div>
 
-        <div class="form-group">
-            <label for="password-confirm" class="control-label">{{ trans('form.password_confirm') }}</label>
-
-            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-        </div>
-
         <button class="btn btn-primary btn-block">
             {{ trans('action.register') }}
         </button>
     </form>
-
-   <script>
-        function gtag_report_conversion(url) {
-            var callback = function () {
-                if (typeof(url) != 'undefined') {
-                    window.location = url;
-                }
-            };
-            gtag('event', 'conversion', {
-                'send_to': 'AW-1036513577/9wnvCMyGu3oQqeKf7gM',
-                'event_callback': callback
-            });
-            return false;
-        }
-    </script>
 
 @endsection
