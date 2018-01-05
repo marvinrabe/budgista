@@ -10,6 +10,7 @@
 
 @section('body')
 
+    <div id="app">
         <div class="cover">
             <div class="container text-center">
                 <a href="{{ route('home') }}" class="h2 logo">
@@ -25,5 +26,8 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <script src="{{ mix('js/website.js') }}"></script>
 
 @endsection

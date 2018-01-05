@@ -15,10 +15,8 @@ class RegisterTest extends TestCase
     {
         $this
             ->post('/register', [
-                'name' => 'John Doe',
                 'email' => 'john.doe@example.com',
                 'password' => 'secret',
-                'password_confirmation' => 'secret'
             ])
             ->assertRedirect(route('app'));
 
@@ -31,7 +29,6 @@ class RegisterTest extends TestCase
         $this->registerUser();
 
         $this->assertDatabaseHas('users', [
-            'name' => 'John Doe',
             'email' => 'john.doe@example.com'
         ]);
     }
