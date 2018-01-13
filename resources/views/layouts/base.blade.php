@@ -31,7 +31,5 @@
 
 @yield('body')
 
-@include('snippets.zendesk')
-
 </body>
 </html>
