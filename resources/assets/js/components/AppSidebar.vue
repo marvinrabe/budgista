@@ -53,7 +53,7 @@
                         </router-link>
                     </li>
                     <li>
-                        <a href="#" @click.prevent="showZenDesk" class="text-muted small">
+                        <a href="mailto:support@budgista.com" class="text-muted small">
                             {{ $t('title.help') }}
                         </a>
                     </li>
@@ -162,10 +162,6 @@
                     menu.classList.add("menu--animatable");
                     menu.classList.remove('menu--visible');
                 }
-            },
-            showZenDesk() {
-                this.hideMenu();
-                window.zE.activate({hideOnClose: true});
             }
         }
     }

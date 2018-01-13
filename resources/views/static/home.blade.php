@@ -56,7 +56,7 @@
         <p class="h4 m-0">
             {{ trans('static.home.help') }}
         </p>
-        <a href="javascript: window.zE.activate({hideOnClose: true});" class="btn btn-outline-secondary">
+        <a href="mailto:support@budgista.com" class="btn btn-outline-secondary">
             {{ trans('static.home.contact') }}
         </a>
     </div>

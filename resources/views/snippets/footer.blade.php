@@ -28,7 +28,7 @@
                 </li>
             @endif
             <li class="list-inline-item">
-                <a href="javascript: window.zE.activate({hideOnClose: true});">{{ trans('title.help') }}</a>
+                <a href="mailto:support@budgista.com">{{ trans('title.help') }}</a>
             </li>
             <li class="list-inline-item">
                 <a href="{{ url('/legal') }}">{{ trans('title.legal') }}</a>
