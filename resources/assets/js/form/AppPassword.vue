@@ -1,23 +1,14 @@
 <template>
     <div class="VuePassword">
         <div class="VuePassword__Input">
-            <slot :model="password" :type="type" :blur="emitBlur" :focus="emitFocus" :input="emitInput">
-                <input class="form-control"
-                       id="password"
-                       name="password"
-                       v-model="password"
-                       :type="type"
-                       @blur="emitBlur"
-                       @focus="emitFocus"
-                       @input="emitInput">
-            </slot>
+            <slot :bindings="bindings" :handlers="handlers"></slot>
 
             <a href="#" class="VuePassword__Toggle text-darker-light" role="button" @click.prevent="togglePassword">
                 <span v-show="type === 'password'">
-                    <span class="fas fa-eye fa-fw"></span>
+                    <font-awesome-icon icon="eye" />
                 </span>
                 <span v-show="type === 'text'">
-                    <span class="fas fa-eye-slash fa-fw"></span>
+                    <font-awesome-icon icon="eye-slash" />
                 </span>
             </a>
         </div>
@@ -86,30 +77,7 @@
 
     export default {
         inheritAttrs: false,
-        data() {
-            return {
-                type: 'password',
-                strength: {},
-                password: this.value
-            }
-        },
-        computed: {
-            /**
-             * Get the current password strength class.
-             *
-             * @return {string}
-             */
-            strengthClass() {
-                if (this.strengthClasses[this.strength.score]) {
-                    return this.strengthClasses[this.strength.score]
-                }
-                return this.strengthClasses[0];
-            }
-        },
         props: {
-            /**
-             * Classes to apply for the various strength levels from zxcvbn.
-             */
             strengthClasses: {
                 type: Array,
                 default() {
@@ -122,58 +90,47 @@
                     ]
                 }
             },
-            value: {
-                type: String,
-                default: ''
-            },
-            /**
-             * Disable the password strength.
-             */
             disableStrength: {
                 type: Boolean,
                 default: false
             }
         },
-        mounted() {
-            // If a password exists on mount, get the strength from zxcvbn.
-            if (this.value) {
-                this.strength = passwordStrength(this.value);
+        data() {
+            return {
+                type: 'password',
+                strength: {}
+            }
+        },
+        computed: {
+            strengthClass() {
+                if (this.strengthClasses[this.strength.score]) {
+                    return this.strengthClasses[this.strength.score]
+                }
+                return this.strengthClasses[0];
+            },
+            bindings() {
+                return {
+                    type: this.type
+                }
+            },
+            handlers() {
+                return {
+                    input: this.emitInput
+                }
             }
         },
         methods: {
-            /**
-             * Update the password input.
-             *
-             * @param  {String} password
-             */
-            emitInput() {
-                this.$emit('input', this.password);
-                this.strength = passwordStrength(this.password);
+            emitInput(event) {
+                this.strength = passwordStrength(event.target.value);
             },
-            /**
-             * Toggle the visibilty of the password.
-             */
             togglePassword() {
                 this.type = this.type === 'password' ? 'text' : 'password';
             },
-            /**
-             * Get the current strength class based on the strength calculated
-             * by zxcvbn.
-             *
-             * @param  {Number} strength
-             * @return {String}
-             */
             getStrengthClass(strength) {
                 if (this.strength.score > strength) {
                     return this.strengthClass
                 }
                 return this.strengthClasses[0];
-            },
-            emitBlur(event) {
-                this.$emit('focus', event.target.value)
-            },
-            emitFocus(event) {
-                this.$emit('focus', event.target.value)
             }
         }
     }

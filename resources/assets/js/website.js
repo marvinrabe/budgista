@@ -11,6 +11,9 @@ require('./bootstrap');
  */
 window.Vue = require('vue');
 
-Vue.component('vue-password', require('./components/AppPassword.vue'));
+import FontAwesome from './fontawesome';
+Vue.use(FontAwesome);
+
+Vue.component('app-password', require('./form/AppPassword.vue'));
 
 const app = new Vue().$mount('#app');
