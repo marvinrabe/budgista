@@ -2,7 +2,7 @@
 // Variables
 @import "variables";
 // Bootstrap 4
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";
 // Logo
 @import "logo";
 
@@ -201,3 +201,60 @@ label {
     box-shadow: none !important;
   }
 }
+
+/*
+ * Toast
+ */
+@import "~vue-snotify/styles/material.css";
+
+.snotify-success, .snotify-error {
+  background-color: theme-color('secondary');
+}
+
+.snotify-success .snotifyToast__progressBar {
+  background-color: darken(theme-color('success'), 10%);
+}
+
+.snotify-success .snotifyToast__progressBar__percentage {
+  background-color: theme-color('success');
+}
+
+.snotify-error .snotifyToast__progressBar {
+  background-color: darken(theme-color('danger'), 15%);
+}
+
+.snotify-error .snotifyToast__progressBar__percentage {
+  background-color: theme-color('danger');
+}
+
+.snotifyToast {
+  border-radius: 0;
+  padding: 0;
+}
+
+.snotify-icon {
+  display: none;
+}
+
+.snotifyToast__inner {
+  padding: 15px;
+}
+
+.snotifyToast__title {
+  font-size: 1rem;
+  padding: 0;
+  color: white !important;
+  opacity: .8;
+}
+
+.snotifyToast__body {
+  font-size: 1rem;
+  padding: 0;
+  color: white !important;
+}
+
+.snotifyToast__progressBar, .snotifyToast__progressBar__percentage {
+  height: 5px;
+}
+
+//<div class="snotifyToast__inner"><div class="snotifyToast__title">Error Title</div> <div class="snotifyToast__body">Error Body</div> <!----> <div class="snotify-icon snotify-icon--error"></div></div>

@@ -34,7 +34,7 @@ class ChangePasswordTest extends TestCase
                 'password' => 'wrongpassword',
                 'new_password' => 'newpassword123'
             ])
-            ->assertStatus(403);
+            ->assertSessionHasErrors('password');
     }
 
     /** @test */

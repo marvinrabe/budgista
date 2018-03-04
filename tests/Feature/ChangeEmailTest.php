@@ -34,7 +34,7 @@ class ChangeEmailTest extends TestCase
                 'password' => 'NOTAPASSWORD',
                 'email' => 'something_new@example.com'
             ])
-            ->assertStatus(403);
+            ->assertSessionHasErrors('password');
     }
 
     /** @test */
