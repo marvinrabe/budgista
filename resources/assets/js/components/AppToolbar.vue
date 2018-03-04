@@ -9,7 +9,9 @@
             </slot>
         </div>
 
-        <div class="sub-menu-placeholder d-md-none">&nbsp;</div>
+        <div class="sub-menu-placeholder">
+            <slot name="submenu">&nbsp;</slot>
+        </div>
 
         <slot></slot>
     </div>

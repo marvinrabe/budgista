@@ -156,6 +156,7 @@ span.handle {
   flex-direction: column;
   flex-wrap: nowrap;
   background: $white;
+  border-top: 3px solid theme-color('primary');
 }
 
 .toolbar {
