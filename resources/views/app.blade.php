@@ -27,9 +27,7 @@
 </head>
 <body>
 
-<div id="app">
-    <app-layout></app-layout>
-</div>
+<div id="app"></div>
 
 @if(config('app.env') == 'production')
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Intl,Intl.~locale.{{ auth()->user()->language }}"></script>
