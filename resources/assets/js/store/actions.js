@@ -25,3 +25,7 @@ export const updateEmail = ({commit}, data) => {
             commit('LOAD_USER', data.data);
         });
 };
+
+export const updatePassword = ({commit}, data) => {
+    return axios.post('/api/user/password', data);
+};

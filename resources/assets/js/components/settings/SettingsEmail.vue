@@ -1,6 +1,6 @@
 <template>
     <app-form @submit="save">
-        <h5>E-Mail Adresse ändern</h5>
+        <h5>{{ $t('title.updateEmail') }}</h5>
 
         <form-group name="email">
             <input type="email"
@@ -12,10 +12,10 @@
         </form-group>
 
         <form-group name="password">
-            <app-password :disable-strength="true" slot-scope="{groupBindings}">
+            <app-password :disable-strength="true" slot-scope="group">
                 <input class="form-control"
                        slot-scope="{bindings, handlers}"
-                       v-bind="Object.assign(bindings, groupBindings)"
+                       v-bind="Object.assign(bindings, group.bindings)"
                        v-on="handlers"
                        v-validate.initial="'required'"
                        v-model="form.password">
@@ -27,7 +27,8 @@
                 {{ $t('action.cancel') }}
             </button>
 
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" type="submit" :disabled="saving">
+                <font-awesome-icon icon="spinner" spin v-show="saving"/>
                 {{ $t('action.settings.email') }}
             </button>
         </div>
@@ -57,21 +58,20 @@
             },
             save() {
                 this.saving = true;
-                this.$store.dispatch('updateEmail', {
-                    email: this.form.email,
-                    password: this.form.password
-                }).then(response => {
-                    this.reset();
-                    this.$snotify.success(this.$t('messages.updateEmail'), this.$t('notification.successful'));
-                }).catch(exception => {
-                    this.saving = false;
-                    if (_.has(exception, 'response.data.errors')) {
-                        const keys = _.keys(exception.response.data.errors);
-                        this.$snotify.error(_.head(exception.response.data.errors[_.head(keys)]), this.$t('notification.error'));
-                    } else {
-                        this.$snotify.error(this.$t('notification.tryAgain'), this.$t('notification.unexpectedError'));
-                    }
-                });
+                this.$store.dispatch('updateEmail', this.form)
+                    .then(() => {
+                        this.saving = false;
+                        this.$snotify.success(this.$t('messages.updateEmail'), this.$t('notification.successful'));
+                    })
+                    .catch(exception => {
+                        this.saving = false;
+                        if (_.has(exception, 'response.data.errors')) {
+                            const keys = _.keys(exception.response.data.errors);
+                            this.$snotify.error(_.head(exception.response.data.errors[_.head(keys)]), this.$t('notification.error'));
+                        } else {
+                            this.$snotify.error(this.$t('notification.tryAgain'), this.$t('notification.unexpectedError'));
+                        }
+                    });
             }
         }
     }
