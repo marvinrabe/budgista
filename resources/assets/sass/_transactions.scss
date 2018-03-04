@@ -38,8 +38,6 @@
       }
     }
 
-    .transaction-outflow,
-    .transaction-inflow,
     .transaction-amount {
       font-weight: 500;
     }
@@ -89,13 +87,7 @@
   max-width: 130px;
 }
 
-.transaction-outflow,
-.transaction-inflow {
-  flex: 0.8;
-}
 
-.transaction-outflow,
-.transaction-inflow,
 .transaction-amount {
   white-space: nowrap;
   text-align: right;
@@ -111,26 +103,6 @@
 .transaction-clear {
   .btn {
     transition: background-color .2s ease-in, color .2s ease-in, border-color .2s ease-in;
-  }
-}
-
-.transactions-row {
-  .transaction-outflow {
-    @extend .text-danger;
-    span:before {
-      content: "-";
-    }
-  }
-  .transaction-inflow {
-    @extend .text-success;
-    span:before {
-      content: "+";
-    }
-  }
-  .transaction-amount {
-    .text-success:before {
-      content: "+";
-    }
   }
 }
 
@@ -161,18 +133,7 @@
 }
 
 @include media-breakpoint-down(md) {
-  .transaction-outflow,
-  .transaction-inflow {
-    display: none;
-  }
-
   .transaction-column-2 {
     flex: 2;
-  }
-}
-
-@include media-breakpoint-up(lg) {
-  .transaction-amount {
-    display: none;
   }
 }

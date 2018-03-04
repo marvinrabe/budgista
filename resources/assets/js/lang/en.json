@@ -64,8 +64,6 @@
     },
     "date": "Date",
     "payee": "Payee",
-    "outflow": "Outflow",
-    "inflow": "Inflow",
     "expense": "Expense",
     "income": "Income",
     "transferTransactions": "Transfer Transactions to",
