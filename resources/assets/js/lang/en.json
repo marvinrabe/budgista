@@ -9,7 +9,7 @@
     "successful": "Successful"
   },
   "messages": {
-    "updateEmail": "E-Mail Address has been updated.",
+    "updateEmail": "Email Address has been updated.",
     "updatePassword": "Password has been updated."
   },
   "action": {
@@ -39,7 +39,7 @@
     },
     "settings": {
       "password": "Change Password",
-      "email": "Change E-Mail Address"
+      "email": "Change Email Address"
     }
   },
   "form": {
@@ -72,7 +72,7 @@
     "language": "Language",
     "locale": "Locale",
     "currency": "Currency",
-    "email": "E-Mail Address",
+    "email": "Email Address",
     "password": "Password",
     "oldPassword": "Old Password",
     "newPassword": "New Password"
@@ -84,7 +84,9 @@
     "help": "Help",
     "account": "Account",
     "security": "Security",
-    "general": "General"
+    "general": "General",
+    "updatePassword": "Change Password",
+    "updateEmail": "Change Email Address"
   },
   "frequency": {
     "daily": "Daily",

@@ -84,7 +84,9 @@
         "help": "Hilfe",
         "account": "Benutzerkonto",
         "security": "Sicherheit",
-        "general": "Allgemeines"
+        "general": "Allgemeines",
+        "updatePassword": "Passwort ändern",
+        "updateEmail": "E-Mail Adresse ändern"
     },
     "frequency": {
         "daily": "Täglich",
