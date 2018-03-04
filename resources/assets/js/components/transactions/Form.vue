@@ -1,7 +1,7 @@
 <template>
     <div class="main">
 
-        <app-toolbar :title="title" />
+        <app-toolbar :title="title"/>
 
         <div class="content">
             <form id="transaction" class="container pt-2"
@@ -14,13 +14,13 @@
                 <div class="form-group">
                     <label for="amount">{{ $t('form.amount')}}</label>
                     <div class="input-group" :class="[{'is-invalid': errors.has('transaction.amount')}]">
-                        <div class="input-group-btn">
-                            <a href="#" class="btn btn-success dropdown-toggle"
-                               :class="[{'btn-success': type === 1},{'btn-danger': type === -1}]"
+                        <div class="input-group-prepend">
+                            <button class="btn dropdown-toggle" type="button"
+                               :class="[{'btn-outline-success': type === 1},{'btn-outline-danger': type === -1}]"
                                data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
                                 {{ (type === 1) ? $t('form.income') : $t('form.expense') }}
-                            </a>
+                            </button>
 
                             <div class="dropdown-menu" role="menu" aria-labelledby="user-menu">
                                 <a class="link-action dropdown-item" v-on:click="setToExpense">
@@ -54,7 +54,7 @@
                            data-vv-name="payee"
                            :data-vv-as="$t('form.payee')">
                     <datalist id="payees">
-                        <option v-for="payee in getPayees" :key="payee" :value="payee" />
+                        <option v-for="payee in getPayees" :key="payee" :value="payee"/>
                     </datalist>
 
                     <span class="invalid-feedback">{{ errors.first('transaction.payee') }}</span>
@@ -86,40 +86,36 @@
                     <date-input v-else id="date" v-model="date"></date-input>
                 </div>
 
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" v-model="recurring">
-                        {{ $t('form.recurring') }}
-                    </label>
-                </div>
-
-                <div class="form-row mb-3" v-if="recurring">
-                    <div class="col">
-                        <label for="freq">{{ $t('form.recurringFrequency') }}</label>
-                        <select id="freq" class="form-control" v-model="freq">
-                            <option value="3">{{ $t('frequency.daily') }}</option>
-                            <option value="2">{{ $t('frequency.weekly') }}</option>
-                            <option value="1">{{ $t('frequency.monthly') }}</option>
-                            <option value="0">{{ $t('frequency.yearly') }}</option>
-                        </select>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" v-model="recurring">
+                            {{ $t('form.recurring') }}
+                        </label>
                     </div>
 
-                    <div class="col">
-                        <label for="interval">{{ $t('form.recurringInterval') }}</label>
-                        <div class="input-group mb-2 mb-sm-0">
-                            <input type="number" min="1" max="50" step="1" id="interval"
-                                   class="form-control" v-model="interval"/>
-                            <div class="input-group-addon" v-if="freq == 3">
-                                {{ $t('frequencyUnit.days') }}
-                            </div>
-                            <div class="input-group-addon" v-if="freq == 2">
-                                {{ $t('frequencyUnit.weeks') }}
-                            </div>
-                            <div class="input-group-addon" v-if="freq == 1">
-                                {{ $t('frequencyUnit.months') }}
-                            </div>
-                            <div class="input-group-addon" v-if="freq == 0">
-                                {{ $t('frequencyUnit.years') }}
+                    <div class="form-row" v-if="recurring">
+                        <div class="col">
+                            <label for="freq">{{ $t('form.recurringFrequency') }}</label>
+                            <select id="freq" class="form-control" v-model="freq">
+                                <option value="3">{{ $t('frequency.daily') }}</option>
+                                <option value="2">{{ $t('frequency.weekly') }}</option>
+                                <option value="1">{{ $t('frequency.monthly') }}</option>
+                                <option value="0">{{ $t('frequency.yearly') }}</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="interval">{{ $t('form.recurringInterval') }}</label>
+                            <div class="input-group mb-2 mb-sm-0">
+                                <input type="number" min="1" max="50" step="1" id="interval"
+                                       class="form-control" v-model="interval"/>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" v-if="freq == 3">{{ $t('frequencyUnit.days') }}</span>
+                                    <span class="input-group-text" v-if="freq == 2">{{ $t('frequencyUnit.weeks') }}</span>
+                                    <span class="input-group-text" v-if="freq == 1">{{ $t('frequencyUnit.months') }}</span>
+                                    <span class="input-group-text" v-if="freq == 0">{{ $t('frequencyUnit.years') }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -131,7 +127,7 @@
                     <button class="btn btn-outline-danger"
                             :title="$t('action.delete.transaction')"
                             v-on:click="deleteTransaction">
-                        <font-awesome-icon :icon="['far', 'trash-alt']" />
+                        <font-awesome-icon :icon="['far', 'trash-alt']"/>
                     </button>
                 </div>
 

@@ -32,7 +32,7 @@ $menu-width: 280px;
     outline: none;
 
     svg {
-      opacity: .75;
+      color: $gray-600;
     }
 
     &:hover {
@@ -45,7 +45,6 @@ $menu-width: 280px;
       font-weight: 500;
 
       svg {
-        opacity: 1;
         color: theme-color('primary');
       }
     }
