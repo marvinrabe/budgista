@@ -3,22 +3,22 @@
         <header>
             <app-toolbar :title="account.name">
                 <balance :account="account"></balance>
+
+                <div slot="submenu">
+                    <a class="btn btn-secondary" href="#"
+                       @click.stop="showEditAccountModal"
+                       :title="$t('action.edit.account')">
+                        <font-awesome-icon icon="cog"/>
+                    </a>
+                </div>
             </app-toolbar>
 
-            <div class="toolbar toolbar-secondary">
-                <router-link
-                        :to="{ name: 'transaction.new'}"
-                        class="btn btn-primary">
-                    <font-awesome-icon icon="plus"/>
-                    {{ $t('action.new.transaction') }}
-                </router-link>
-
-                <a class="btn btn-primary ml-auto" href="#"
-                   @click.stop="showEditAccountModal"
-                   :title="$t('action.edit.account')">
-                    <font-awesome-icon icon="cog"/>
-                </a>
-            </div>
+            <router-link
+                    :to="{ name: 'transaction.new'}"
+                    class="floating-action btn btn-primary btn-lg rounded-circle"
+                    :title="$t('action.new.transaction')">
+                <font-awesome-icon icon="plus"/>
+            </router-link>
 
             <div class="container-fluid">
                 <div class="transactions-header">
@@ -123,6 +123,15 @@
         </modal>
     </div>
 </template>
+
+<style>
+    .floating-action {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+    }
+</style>
 
 <script>
     import InfiniteLoading from 'vue-infinite-loading';

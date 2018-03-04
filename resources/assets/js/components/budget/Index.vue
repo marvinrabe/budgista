@@ -75,13 +75,6 @@
 
         </app-toolbar>
 
-        <div class="toolbar toolbar-secondary">
-            <button class="btn btn-primary" v-on:click="showNewCategoryModal">
-                <font-awesome-icon icon="plus"/>
-                {{ $t('action.new.category') }}
-            </button>
-        </div>
-
         <div class=" container-fluid">
             <div class="budget-header">
                 <div class="budget-column-drag"></div>
@@ -112,6 +105,13 @@
                         @update:value="val => rows.splice(index, 1, val)"
                         @edit:category="row => showEditCategoryModal(row)"/>
             </draggable>
+
+            <div class="p-2 ml-3 pl-3 small" v-if="!loading">
+                <a href="#" class="text-muted" @click.prevent="showNewCategoryModal">
+                    <font-awesome-icon icon="plus"/>
+                    {{ $t('action.new.category') }}
+                </a>
+            </div>
 
             <app-spinner v-if="loading"></app-spinner>
         </div>
