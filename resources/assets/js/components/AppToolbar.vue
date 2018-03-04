@@ -16,8 +16,12 @@
 </template>
 
 <script>
+    import AppWindow from './AppWindow';
+    import AppSidebarToggle from './AppSidebarToggle'
+
     export default {
-        'props': ['title']
+        props: ['title'],
+        components: {AppSidebarToggle, AppWindow}
     }
 </script>
 

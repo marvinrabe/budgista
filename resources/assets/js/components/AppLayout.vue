@@ -25,7 +25,10 @@
 </style>
 
 <script>
+    import AppSidebar from './AppSidebar'
+
     export default {
+        components: {AppSidebar},
         computed: {
             loading () {
                 return this.$store.state.loading;
