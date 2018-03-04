@@ -58,7 +58,7 @@ const actions = {
             .catch(e => {
                 console.error(e);
             });
-    },
+    }
 
 };
 

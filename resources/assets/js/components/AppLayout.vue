@@ -8,6 +8,7 @@
 
             <router-view :key="$router.fullPath"></router-view>
         </div>
+        <vue-snotify></vue-snotify>
     </div>
 </template>
 

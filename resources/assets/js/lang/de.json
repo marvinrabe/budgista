@@ -2,6 +2,16 @@
     "app": {
         "name": "Budgista"
     },
+    "notification": {
+        "error": "Fehler",
+        "unexpectedError": "Unerwarteter Fehler",
+        "tryAgain": "Bitte versuche es später erneut.",
+        "successful": "Erfolgreich"
+    },
+    "messages": {
+        "updateEmail": "E-Mail Adresse wurde geändert.",
+        "updatePassword": "Passwort wurde geändert."
+    },
     "action": {
         "save": "Speichern",
         "saveAndNew": "Speichern & Neu",

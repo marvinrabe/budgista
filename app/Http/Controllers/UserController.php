@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\User as UserResource;
 use App\Models\Account;
 use App\Models\Category;
+use App\Rules\ValidPassword;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -52,10 +53,10 @@ class UserController extends Controller
             abort(403);
         }
 
-        Auth()->user()->accounts->each(function(Account $account) {
+        Auth()->user()->accounts->each(function (Account $account) {
             $account->transactions()->delete();
         });
-        Auth()->user()->categories->each(function(Category $category) {
+        Auth()->user()->categories->each(function (Category $category) {
             $category->budgets()->delete();
         });
 
@@ -68,16 +69,17 @@ class UserController extends Controller
 
         request()->validate([
             'email' => 'required|string|email|max:191|unique:users,email,' . $user->id,
-            'password' => 'required'
+            'password' => [
+                'required',
+                new ValidPassword()
+            ]
         ]);
-
-        if (!Hash::check(request('password'), $user->password)) {
-            abort(403);
-        }
 
         $user->update([
             'email' => request('email')
         ]);
+
+        return new UserResource(Auth::user());
     }
 
     public function password()
@@ -85,13 +87,13 @@ class UserController extends Controller
         $user = Auth()->user();
 
         request()->validate([
-            'password' => 'required|string',
+            'password' => [
+                'required',
+                'string',
+                new ValidPassword()
+            ],
             'new_password' => 'required|string|min:6'
         ]);
-
-        if (!Hash::check(request('password'), $user->password)) {
-            abort(403);
-        }
 
         $user->update([
             'password' => bcrypt(request('new_password'))

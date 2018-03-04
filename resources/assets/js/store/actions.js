@@ -1,10 +1,10 @@
 import user from '../api/user'
 
-export const initialize = ({ dispatch, commit }) => {
+export const initialize = ({dispatch, commit}) => {
     dispatch('loadUser');
 };
 
-export const loadUser = ({ commit }) => {
+export const loadUser = ({commit}) => {
     return new Promise((resolve, reject) => {
         user.get(
             ({data, accounts, categories}) => {
@@ -16,5 +16,12 @@ export const loadUser = ({ commit }) => {
             () => reject()
         );
     })
+};
 
+export const updateEmail = ({commit}, data) => {
+    return axios
+        .post('/api/user/email', data)
+        .then(({data}) => {
+            commit('LOAD_USER', data.data);
+        });
 };

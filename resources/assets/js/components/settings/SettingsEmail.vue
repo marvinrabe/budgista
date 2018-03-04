@@ -23,7 +23,7 @@
         </form-group>
 
         <div slot="actions">
-            <button class="btn btn-text-light" @click.prevent="reset">
+            <button class="btn btn-text-light" @click.prevent="reset" type="reset">
                 {{ $t('action.cancel') }}
             </button>
 
@@ -51,11 +51,27 @@
         },
         methods: {
             reset() {
+                this.saving = false;
                 this.form.email = this.$store.state.user.email;
                 this.form.password = '';
             },
             save() {
-                console.log('save');
+                this.saving = true;
+                this.$store.dispatch('updateEmail', {
+                    email: this.form.email,
+                    password: this.form.password
+                }).then(response => {
+                    this.reset();
+                    this.$snotify.success(this.$t('messages.updateEmail'), this.$t('notification.successful'));
+                }).catch(exception => {
+                    this.saving = false;
+                    if (_.has(exception, 'response.data.errors')) {
+                        const keys = _.keys(exception.response.data.errors);
+                        this.$snotify.error(_.head(exception.response.data.errors[_.head(keys)]), this.$t('notification.error'));
+                    } else {
+                        this.$snotify.error(this.$t('notification.tryAgain'), this.$t('notification.unexpectedError'));
+                    }
+                });
             }
         }
     }

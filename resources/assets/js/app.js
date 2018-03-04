@@ -26,6 +26,13 @@ Vue.use(VueI18n);
 import FontAwesome from './fontawesome';
 Vue.use(FontAwesome);
 
+import Snotify from 'vue-snotify';
+Vue.use(Snotify, {
+    toast: {
+        timeout: 9000
+    }
+});
+
 const messages = {
     en: require('./lang/en.json'),
     de: require('./lang/de.json')
