@@ -15,7 +15,6 @@ class User extends Resource
     public function toArray($request)
     {
         return [
-            'name' => $this->name,
             'email' => $this->email,
             'localization' => [
                 'language' => $this->language,

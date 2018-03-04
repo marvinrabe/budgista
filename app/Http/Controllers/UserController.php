@@ -24,7 +24,6 @@ class UserController extends Controller
     {
         Auth::user()->update(
             request()->validate([
-                'name' => 'required',
                 'language' => [
                     'required',
                     Rule::in(config('app.available_locales'))
