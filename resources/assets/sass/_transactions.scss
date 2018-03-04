@@ -76,7 +76,6 @@
 }
 
 .transaction-date,
-.transaction-column-2,
 .transaction-payee,
 .transaction-category,
 .transaction-amount {
@@ -129,11 +128,5 @@
 
   .transactions-header {
     display: none;
-  }
-}
-
-@include media-breakpoint-down(md) {
-  .transaction-column-2 {
-    flex: 2;
   }
 }

@@ -13,11 +13,11 @@
             </a>
         </div>
 
-        <svg viewBox="0 0 123 2" class="VuePassword__Meter" preserveAspectRatio="none" v-if="!disableStrength">
-            <path d="M0 1 L30 1" :class="getStrengthClass(0)"></path>
-            <path d="M31 1 L61 1" :class="getStrengthClass(1)"></path>
-            <path d="M62 1 L92 1" :class="getStrengthClass(2)"></path>
-            <path d="M93 1 L123 1" :class="getStrengthClass(3)"></path>
+        <svg viewBox="0 0 40 2" class="VuePassword__Meter" preserveAspectRatio="none" v-if="!disableStrength">
+            <path d="M0 1 L10 1" :class="getStrengthClass(0)"></path>
+            <path d="M10.25 1 L20 1" :class="getStrengthClass(1)"></path>
+            <path d="M20.25 1 L30 1" :class="getStrengthClass(2)"></path>
+            <path d="M30.25 1 L40 1" :class="getStrengthClass(3)"></path>
         </svg>
     </div>
 </template>

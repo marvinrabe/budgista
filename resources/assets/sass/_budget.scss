@@ -67,14 +67,13 @@
     &-budget {
       input {
         text-align: right;
-
-        &.opacity-50 {
-          background-color: transparent;
-        }
+        border-color: white;
+        background-color: transparent;
 
         &:hover,
         &:focus {
-          background-color: $input-bg;
+          border-color: $input-border-color;
+          background-color: white;
           opacity: 1;
         }
       }
@@ -99,15 +98,6 @@
       &-values {
         margin-left: 24px;
         flex: 100%;
-      }
-
-      &-budget,
-      &-activity,
-      &-available {
-        text-align: center;
-      }
-      &-budget input {
-        text-align: center;
       }
     }
 

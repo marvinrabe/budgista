@@ -1,5 +1,5 @@
 <template>
-    <div class="toolbar toolbar-primary">
+    <div class="toolbar">
         <app-sidebar-toggle></app-sidebar-toggle>
 
         <app-window :title="title"></app-window>
