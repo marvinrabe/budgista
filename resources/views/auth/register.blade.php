@@ -28,7 +28,15 @@
         <div class="form-group">
             <label for="password" class="control-label">{{ trans('form.password') }}</label>
 
-            <vue-password></vue-password>
+            <app-password>
+                <input id="password"
+                       name="password"
+                       class="form-control {{ $errors->has('password') ? 'border-danger' : '' }}"
+                       slot-scope="{bindings, handlers}"
+                       v-bind="bindings"
+                       v-on="handlers"
+                       required>
+            </app-password>
 
             @if ($errors->has('password'))
                 <div class="form-text text-danger">

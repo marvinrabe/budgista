@@ -1,79 +1,95 @@
 {
-    "app": {
-        "name": "Budgista"
+  "app": {
+    "name": "Budgista"
+  },
+  "action": {
+    "save": "Save",
+    "saveAndNew": "Save & New",
+    "back": "Back",
+    "cancel": "Cancel",
+    "nextMonth": "Next Month",
+    "previousMonth": "Previous Month",
+    "navigation": "Toggle navigation",
+    "logout": "Logout",
+    "loading": "Loading",
+    "new": {
+      "account": "Add Account",
+      "category": "Create Category",
+      "transaction": "Add Transaction"
     },
-    "action": {
-        "save": "Save",
-        "saveAndNew": "Save & New",
-        "back": "Back",
-        "cancel": "Cancel",
-        "nextMonth": "Next Month",
-        "previousMonth": "Previous Month",
-        "navigation": "Toggle navigation",
-        "logout": "Logout",
-        "loading": "Loading",
-        "new": {
-            "account": "Add Account",
-            "category": "Create Category",
-            "transaction": "Add Transaction"
-        },
-        "edit": {
-            "category": "Edit Category",
-            "account": "Edit Account",
-            "transaction": "Edit Transaction"
-        },
-        "delete": {
-            "category": "Delete Category",
-            "account": "Delete Account",
-            "transaction": "Delete Transaction"
-        }
+    "edit": {
+      "category": "Edit Category",
+      "account": "Edit Account",
+      "transaction": "Edit Transaction"
     },
-    "form": {
-        "name": "Name",
-        "amount": "Amount",
-        "recurring": "Recurring?",
-        "recurringFrequency": "Repeats",
-        "recurringInterval": "Repeat every",
-        "category": "Category",
-        "budget": "Budget",
-        "activity": "Activity",
-        "uncategorized": "Uncategorized",
-        "available": "Available",
-        "recommendedBudget": "Recommended Budget",
-        "allocated": "Allocated",
-        "unallocated": "Unallocated",
-        "previousMonth": "Previous Month",
-        "balance": {
-            "current": "Present",
-            "upcoming": "Upcoming",
-            "future": "Available"
-        },
-        "date": "Date",
-        "payee": "Payee",
-        "outflow": "Outflow",
-        "inflow": "Inflow",
-        "expense": "Expense",
-        "income": "Income",
-        "transferTransactions": "Transfer Transactions to"
+    "delete": {
+      "category": "Delete Category",
+      "account": "Delete Account",
+      "transaction": "Delete Transaction"
     },
-    "title": {
-        "accounts": "Accounts",
-        "budget": "Budget",
-        "settings": "Settings",
-        "help": "Help",
-        "account": "Account",
-        "security": "Security"
-    },
-    "frequency": {
-        "daily": "Daily",
-        "weekly": "Weekly",
-        "monthly": "Monthly",
-        "yearly": "Yearly"
-    },
-    "frequencyUnit": {
-        "days": "Days",
-        "weeks": "Weeks",
-        "months": "Months",
-        "years": "Years"
+    "settings": {
+      "password": "Change Password",
+      "email": "Change E-Mail Address"
     }
+  },
+  "form": {
+    "name": "Name",
+    "amount": "Amount",
+    "recurring": "Recurring?",
+    "recurringFrequency": "Repeats",
+    "recurringInterval": "Repeat every",
+    "category": "Category",
+    "budget": "Budget",
+    "activity": "Activity",
+    "uncategorized": "Uncategorized",
+    "available": "Available",
+    "recommendedBudget": "Recommended Budget",
+    "allocated": "Allocated",
+    "unallocated": "Unallocated",
+    "previousMonth": "Previous Month",
+    "balance": {
+      "current": "Present",
+      "upcoming": "Upcoming",
+      "future": "Available"
+    },
+    "date": "Date",
+    "payee": "Payee",
+    "outflow": "Outflow",
+    "inflow": "Inflow",
+    "expense": "Expense",
+    "income": "Income",
+    "transferTransactions": "Transfer Transactions to",
+    "language": "Language",
+    "locale": "Locale",
+    "currency": "Currency",
+    "email": "E-Mail Address",
+    "password": "Password",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password"
+  },
+  "title": {
+    "accounts": "Accounts",
+    "budget": "Budget",
+    "settings": "Settings",
+    "help": "Help",
+    "account": "Account",
+    "security": "Security",
+    "general": "General"
+  },
+  "frequency": {
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "yearly": "Yearly"
+  },
+  "frequencyUnit": {
+    "days": "Days",
+    "weeks": "Weeks",
+    "months": "Months",
+    "years": "Years"
+  },
+  "language": {
+    "de": "Deutsch",
+    "en": "English"
+  }
 }

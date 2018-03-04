@@ -13,7 +13,9 @@ fontawesome.library.add([
     require('@fortawesome/fontawesome-free-solid/faChevronLeft'),
     require('@fortawesome/fontawesome-free-solid/faChevronRight'),
     require('@fortawesome/fontawesome-free-solid/faBars'),
-    require('@fortawesome/fontawesome-free-solid/faShieldAlt')
+    require('@fortawesome/fontawesome-free-solid/faShieldAlt'),
+    require('@fortawesome/fontawesome-free-solid/faEye'),
+    require('@fortawesome/fontawesome-free-solid/faEyeSlash')
 ]);
 
 const FontAwesome = {

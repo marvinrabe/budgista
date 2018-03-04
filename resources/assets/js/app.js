@@ -18,11 +18,12 @@ window.Vue = require('vue');
 import VueI18n from 'vue-i18n'
 import VueRouter from 'vue-router'
 import VeeValidate from 'vee-validate';
-import FontAwesome from './fontawesome'
 import AppIntl from './intl'
 import store from './store'
 
 Vue.use(VueI18n);
+
+import FontAwesome from './fontawesome';
 Vue.use(FontAwesome);
 
 const messages = {
@@ -83,6 +84,21 @@ Vue.component(
 Vue.component(
     'modal',
     require('./components/AppModal.vue')
+);
+
+Vue.component(
+    'app-form',
+    require('./form/AppForm.vue')
+);
+
+Vue.component(
+    'app-password',
+    require('./form/AppPassword.vue')
+);
+
+Vue.component(
+    'form-group',
+    require('./form/FormGroup.vue')
 );
 
 Vue.component(
