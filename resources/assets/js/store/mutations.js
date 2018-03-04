@@ -1,7 +1,6 @@
 
 export const state = {
     user: {
-        name: '',
         email: ''
     },
     language: 'en',
@@ -12,7 +11,6 @@ export const state = {
 
 export const mutations = {
     LOAD_USER(state, user) {
-        state.user.name = user.name;
         state.user.email = user.email;
 
         state.language = user.localization.language;

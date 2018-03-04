@@ -3,15 +3,6 @@
 
         <h5>{{ $t('title.general') }}</h5>
 
-        <form-group name="name">
-            <input type="text"
-                   class="form-control"
-                   slot-scope="{bindings}"
-                   v-bind="bindings"
-                   v-model="form.name"
-                   v-validate.initial="'required'">
-        </form-group erro>
-
         <form-group name="language">
             <select class="form-control"
                     slot-scope="{bindings}"
@@ -63,7 +54,6 @@
             return {
                 saving: false,
                 form: {
-                    name: '',
                     language: 'en',
                     locale: 'en',
                     currency: 'EUR'
@@ -86,7 +76,6 @@
         },
         methods: {
             reset() {
-                this.form.name = this.$store.state.user.name;
                 this.form.language = this.$store.state.language;
                 this.form.locale = this.$store.state.locale;
                 this.form.currency = this.$store.state.currency;

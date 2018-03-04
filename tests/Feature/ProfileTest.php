@@ -18,7 +18,6 @@ class ProfileTest extends TestCase
         return $this
             ->signIn()
             ->put('/api/user', array_merge([
-                'name' => 'New Name',
                 'language' => 'de',
                 'locale' => 'de',
                 'currency' => 'USD',
@@ -33,7 +32,6 @@ class ProfileTest extends TestCase
             ->assertJson([
                 'data' => [
                     'email' => Auth()->user()->email,
-                    'name' => Auth()->user()->name,
                     'localization' => [
                         'language' => Auth()->user()->language,
                         'locale' => Auth()->user()->locale,
@@ -50,7 +48,6 @@ class ProfileTest extends TestCase
             ->updateProfile()
             ->assertJson([
                 'data' => [
-                    'name' => 'New Name',
                     'localization' => [
                         'language' => 'de',
                         'locale' => 'de',
