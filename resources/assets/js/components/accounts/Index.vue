@@ -31,8 +31,6 @@
                             <div class="transaction-category">{{ $t('form.category') }}</div>
                             <div class="transaction-amount">{{ $t('form.amount') }}</div>
                         </div>
-                        <div class="transaction-outflow">{{ $t('form.outflow') }}</div>
-                        <div class="transaction-inflow">{{ $t('form.inflow') }}</div>
                     </div>
                     <div class="transaction-clear">&nbsp;</div>
                 </div>
@@ -66,22 +64,10 @@
                         </span>
                         <span class="transaction-amount">
                             <money-format
-                                    :class="[{ 'text-danger': item.amount < 0 }, { 'text-success': item.amount >= 0 }]"
+                                    :class="[{ 'text-danger': item.amount < 0 }]"
                                     :value="item.amount">
                             </money-format>
                         </span>
-                    </span>
-                    <span class="transaction-outflow">
-                        <money-format
-                                v-if="item.amount < 0"
-                                :value="-1*item.amount">
-                        </money-format>
-                    </span>
-                    <span class="transaction-inflow">
-                        <money-format
-                                v-if="item.amount >= 0"
-                                :value="item.amount">
-                        </money-format>
                     </span>
                 </router-link>
                 <div class="transaction-clear">

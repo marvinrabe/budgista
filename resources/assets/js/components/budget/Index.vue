@@ -22,30 +22,30 @@
 
             <div class="d-none d-sm-block ml-auto">
                 <transition name="fade">
-                    <div class="container d-flex" v-if="!loading">
-                        <div class="d-none d-lg-block text-right mr-2">
-                            <div style="font-size: 64%;">
-                                {{ $t('form.previousMonth') }}:
-                                <money-format
-                                        class="font-weight-bold"
-                                        :value="sheet.previousMonth">
-                                </money-format>
-                                <br>
-                                {{ $t('form.income') }}:
-                                <money-format
-                                        class="font-weight-bold"
-                                        :value="sheet.income">
-                                </money-format>
-                                <br>
-                                {{ $t('form.allocated') }}:
-                                <money-format
-                                        class="font-weight-bold"
-                                        :value="sheet.allocated">
-                                </money-format>
-                            </div>
+                    <div class="d-flex align-items-center" v-if="!loading">
+                        <div class="d-none d-lg-block kpi small mr-2">
+                            <money-format
+                                    class="font-weight-bold"
+                                    :value="sheet.previousMonth">
+                            </money-format><br>
+                            <span class="kpi-label">{{ $t('form.previousMonth') }}</span>
+                        </div>
+                        <div class="d-none d-lg-block kpi small mr-2">
+                            <money-format
+                                    class="font-weight-bold"
+                                    :value="sheet.income">
+                            </money-format><br>
+                            <span class="kpi-label">{{ $t('form.income') }}</span>
+                        </div>
+                        <div class="d-none d-lg-block kpi small mr-2">
+                            <money-format
+                                    class="font-weight-bold"
+                                    :value="sheet.allocated">
+                            </money-format><br>
+                            <span class="kpi-label">{{ $t('form.allocated') }}</span>
                         </div>
 
-                        <div class="badge"
+                        <div class="mr-1 badge"
                              :class="[{ 'badge-danger': unallocated < 0 }, { 'badge-success': unallocated >= 0 }]">
                             <money-format
                                     class="h4 p-2 text-number"
@@ -182,6 +182,16 @@
         <delete-category ref="deleteCategory" @delete:category="refresh"></delete-category>
     </div>
 </template>
+
+<style>
+    .kpi {
+        text-align: center;
+    }
+
+    .kpi-label {
+        opacity: .8;
+    }
+</style>
 
 <script>
     import draggable from 'vuedraggable'

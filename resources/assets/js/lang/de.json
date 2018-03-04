@@ -64,8 +64,6 @@
         },
         "date": "Datum",
         "payee": "Empfänger",
-        "outflow": "Abfluss",
-        "inflow": "Zufluss",
         "expense": "Ausgabe",
         "income": "Einnahme",
         "transferTransactions": "Kontobewegungen übertragen nach",

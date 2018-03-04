@@ -34,7 +34,7 @@
                         <ellipsis style="flex: 1;">{{ account.name }}</ellipsis>
                         <money-format
                                 class="ml-auto badge"
-                                :class="[{ 'badge-danger': account.workingBalance < 0 }, { 'badge-success': account.workingBalance >= 0 }]"
+                                :class="[{ 'badge-danger': account.workingBalance < 0 }]"
                                 :value="account.workingBalance">
                         </money-format>
                     </router-link>
