@@ -34,10 +34,6 @@
         </form-group>
 
         <div slot="actions">
-            <button class="btn btn-text-light" @click.prevent="reset">
-                {{ $t('action.cancel') }}
-            </button>
-
             <button class="btn btn-primary">
                 {{ $t('action.save') }}
             </button>
