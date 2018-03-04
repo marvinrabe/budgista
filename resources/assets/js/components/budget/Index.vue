@@ -27,21 +27,24 @@
                             <money-format
                                     class="font-weight-bold"
                                     :value="sheet.previousMonth">
-                            </money-format><br>
+                            </money-format>
+                            <br>
                             <span class="kpi-label">{{ $t('form.previousMonth') }}</span>
                         </div>
                         <div class="d-none d-lg-block kpi small mr-2">
                             <money-format
                                     class="font-weight-bold"
                                     :value="sheet.income">
-                            </money-format><br>
+                            </money-format>
+                            <br>
                             <span class="kpi-label">{{ $t('form.income') }}</span>
                         </div>
                         <div class="d-none d-lg-block kpi small mr-2">
                             <money-format
                                     class="font-weight-bold"
                                     :value="sheet.allocated">
-                            </money-format><br>
+                            </money-format>
+                            <br>
                             <span class="kpi-label">{{ $t('form.allocated') }}</span>
                         </div>
 
@@ -63,14 +66,15 @@
                 <div class="col-flex text-left small">
                     {{ $t('form.unallocated') }}
                 </div>
-                <transition name="fade">
-                    <div class="col-flex text-right" v-if="!loading">
-                        <money-format
-                                class="h5 mb-0 text-number"
-                                :value="unallocated">
-                        </money-format>
-                    </div>
-                </transition>
+                <div class="col-flex text-right" v-if="!loading">
+                    <money-format
+                            class="h5 mb-0 text-number"
+                            :value="unallocated">
+                    </money-format>
+                </div>
+                <div class="col-flex text-right" v-else>
+                    <span class="h5 mb-0">&nbsp;</span>
+                </div>
             </div>
 
         </app-toolbar>

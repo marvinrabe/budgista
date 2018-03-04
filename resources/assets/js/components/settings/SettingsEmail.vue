@@ -23,10 +23,6 @@
         </form-group>
 
         <div slot="actions">
-            <button class="btn btn-text-light" @click.prevent="reset" type="reset">
-                {{ $t('action.cancel') }}
-            </button>
-
             <button class="btn btn-primary" type="submit" :disabled="saving">
                 <font-awesome-icon icon="spinner" spin v-show="saving"/>
                 {{ $t('action.settings.email') }}
