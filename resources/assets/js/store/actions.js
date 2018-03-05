@@ -18,6 +18,10 @@ export const loadUser = ({commit}) => {
     })
 };
 
+export const updateSettings = ({commit}, data) => {
+    return axios.put('/api/user', data);
+};
+
 export const updateEmail = ({commit}, data) => {
     return axios
         .post('/api/user/email', data)

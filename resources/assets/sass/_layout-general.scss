@@ -4,20 +4,4 @@
     border-top: 5px solid theme-color('primary');
   }
 
-  .pagination {
-    a,
-    .active {
-      @extend .btn;
-      @extend .mr-3;
-    }
-    a {
-      @extend .btn-outline-primary;
-    }
-    .active {
-      @extend .btn-primary;
-    }
-    .disabled {
-      @extend .invisible;
-    }
-  }
 }
