@@ -23,7 +23,7 @@
         </form-group>
 
         <div slot="actions">
-            <button class="btn btn-primary" type="submit" :disabled="saving">
+            <button class="btn btn-primary" :disabled="saving">
                 <font-awesome-icon icon="spinner" spin v-show="saving"/>
                 {{ $t('action.settings.email') }}
             </button>

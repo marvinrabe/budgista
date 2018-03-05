@@ -19,7 +19,7 @@
                     v-bind="bindings"
                     v-model="form.locale"
                     v-validate.initial="'required'">
-                <option v-for="locale in locales" :value="locale" v-html="$t('locale.'+locale)"></option>
+                <option v-for="locale in locales" :value="locale" v-html="$t('language.'+locale)"></option>
             </select>
         </form-group>
 
@@ -34,7 +34,8 @@
         </form-group>
 
         <div slot="actions">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" :disabled="saving">
+                <font-awesome-icon icon="spinner" spin v-show="saving"/>
                 {{ $t('action.save') }}
             </button>
         </div>
@@ -61,10 +62,10 @@
                 return languages;
             },
             locales() {
-                return [];
+                return _.keys(this.$i18n.messages[this.$i18n.locale].language);
             },
             currencies() {
-                return [];
+                return _.keys(this.$i18n.messages[this.$i18n.locale].currency);
             }
         },
         mounted() {
@@ -77,7 +78,21 @@
                 this.form.currency = this.$store.state.currency;
             },
             save() {
-                console.log('save');
+                this.saving = true;
+                this.$store.dispatch('updateSettings', this.form)
+                    .then(() => {
+                        this.saving = false;
+                        location.reload();
+                    })
+                    .catch(exception => {
+                        this.saving = false;
+                        if (_.has(exception, 'response.data.errors')) {
+                            const keys = _.keys(exception.response.data.errors);
+                            this.$snotify.error(_.head(exception.response.data.errors[_.head(keys)]), this.$t('notification.error'));
+                        } else {
+                            this.$snotify.error(this.$t('notification.tryAgain'), this.$t('notification.unexpectedError'));
+                        }
+                    });
             }
         }
     }
