@@ -32,6 +32,19 @@ class AdminPanelTest extends TestCase
     }
 
     /** @test */
+    public function it_displays_user()
+    {
+        $this->signIn();
+
+        $user = Auth()->user();
+        $user->is_admin = true;
+        $user->save();
+
+        $this->get('/admin')
+            ->assertSee(Auth()->user()->email);
+    }
+
+    /** @test */
     public function it_has_a_command_to_promote_users()
     {
         $user = factory(User::class)->create();
