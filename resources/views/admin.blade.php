@@ -18,7 +18,6 @@
         <thead>
         <tr>
             <th>{{ trans('form.email') }}</th>
-            <th>{{ trans('form.name') }}</th>
             <th>{{ trans('form.created_at') }}</th>
             <th>{{ trans('form.language') }}</th>
             <th>{{ trans('form.locale') }}</th>
@@ -29,7 +28,6 @@
         @foreach ($users as $user)
             <tr>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->name }}</td>
                 <td>{{ $user->created_at }}</td>
                 <td>{{ $user->language }}</td>
                 <td>{{ $user->locale }}</td>
