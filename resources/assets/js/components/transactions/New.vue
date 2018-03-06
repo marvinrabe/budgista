@@ -6,7 +6,7 @@
         props: ['account_id'],
         computed: {
             title() {
-                return this.$t('action.new.transaction');
+                return this.$t('action.create.transaction');
             },
             isNew() {
                 return true;
