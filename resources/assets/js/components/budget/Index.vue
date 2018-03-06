@@ -79,26 +79,24 @@
 
         </app-toolbar>
 
-        <div class="container-fluid">
-            <div class="budget-header">
-                <div class="budget-column-name">
-                    {{ $t('form.category') }}
+        <div class="budget-header">
+            <div class="budget-column-name">
+                {{ $t('form.category') }}
+            </div>
+            <div class="budget-column-values">
+                <div class="budget-column-budget">
+                    {{ $t('form.budget') }}
                 </div>
-                <div class="budget-column-values">
-                    <div class="budget-column-budget">
-                        {{ $t('form.budget') }}
-                    </div>
-                    <div class="budget-column-activity">
-                        {{ $t('form.activity') }}
-                    </div>
-                    <div class="budget-column-available">
-                        {{ $t('form.available') }}
-                    </div>
+                <div class="budget-column-activity">
+                    {{ $t('form.activity') }}
+                </div>
+                <div class="budget-column-available">
+                    {{ $t('form.available') }}
                 </div>
             </div>
         </div>
 
-        <div class="content container-fluid">
+        <div class="content">
             <category-row
                     v-for="(row, index) in rows"
                     :key="month+'#'+row.id"
