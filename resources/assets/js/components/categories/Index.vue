@@ -15,15 +15,17 @@
         <div class="content container-fluid">
             <div class="row justify-content-center">
                 <div class="col mt-3 col-lg-8">
-                    <draggable v-model="categories" :options="{handle:'.name'}" class="list-group">
+                    <draggable v-model="categories" :options="{handle:'.handle'}" class="list-group">
                         <div class="list-group-item" v-for="category in categories">
-                            <div class="d-flex">
+                            <div class="d-flex align-items-center">
+                                <span class="handle">
+                                    <font-awesome-icon icon="arrows-alt-v" fixed-width/>
+                                </span>
                                 <div class="name">
-                                    <span class="handle"></span>
                                     {{ category.name}}
                                 </div>
                                 <a href="#"
-                                   class="text-muted ml-auto"
+                                   class="text-muted"
                                    @click.prevent="$refs.updateCategory.showModal(category)"
                                    :title="$t('action.edit.category')">
                                     <font-awesome-icon icon="pencil-alt"/>
@@ -44,37 +46,16 @@
 
 <style lang="scss" scoped>
     .name {
-        position: relative;
+        flex: 1;
+        cursor: default;
     }
 
-    .name, span.handle {
+    .handle {
         cursor: move;
         cursor: -webkit-grab;
         cursor: -moz-grab;
-    }
-
-    span.handle {
-        position: absolute;
-        content: '....';
-        width: 12px;
-        height: 20px;
-        display: inline-block;
-        overflow: hidden;
-        line-height: 5px;
-        padding: 3px 4px;
-        vertical-align: middle;
-        margin-top: -.7em;
-        margin-right: .3em;
-        font-size: 12px;
-        font-family: sans-serif;
-        letter-spacing: 2px;
-        color: #cccccc;
-        left: -19px;
-        top: 8px;
-    }
-
-    span.handle::after {
-        content: '.. .. .. ..';
+        opacity: .5;
+        padding: 0 .3em;
     }
 </style>
 
