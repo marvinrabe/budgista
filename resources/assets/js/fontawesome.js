@@ -18,7 +18,8 @@ fontawesome.library.add([
     require('@fortawesome/fontawesome-free-solid/faEye'),
     require('@fortawesome/fontawesome-free-solid/faEyeSlash'),
     require('@fortawesome/fontawesome-free-solid/faSpinner'),
-    require('@fortawesome/fontawesome-free-solid/faPencilAlt')
+    require('@fortawesome/fontawesome-free-solid/faPencilAlt'),
+    require('@fortawesome/fontawesome-free-solid/faArrowsAltV')
 ]);
 
 const FontAwesome = {
