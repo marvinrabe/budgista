@@ -1,10 +1,10 @@
 <template>
-    <div class="budget-row">
+    <div class="budget-row" @click.stop="$refs.input.focus()">
         <div class="budget-column-name">
             <ellipsis>{{ category.name }}</ellipsis>
         </div>
         <div class="budget-column-values">
-            <div class="budget-column-budget">
+            <div class="budget-column-budget" @click.stop="">
                 <money-input
                         class="py-0 px-1"
                         ref="input"
@@ -27,6 +27,11 @@
     </div>
 </template>
 
+<style>
+    .budget-row {
+        cursor: pointer;
+    }
+</style>
 
 <script>
     export default {
