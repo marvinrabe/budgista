@@ -1,41 +1,39 @@
 <template>
     <div v-if="account" class="main">
-        <header>
-            <app-toolbar :title="account.name">
-                <balance :account="account"></balance>
+        <app-toolbar :title="account.name">
+            <balance :account="account"></balance>
 
-                <div slot="submenu">
-                    <a class="btn btn-secondary" href="#"
-                       @click.stop="showEditAccountModal"
-                       :title="$t('action.edit.account')">
-                        <font-awesome-icon icon="cog"/>
-                    </a>
-                </div>
-            </app-toolbar>
-
-            <router-link
-                    :to="{ name: 'transaction.new'}"
-                    class="floating-action btn btn-primary btn-lg rounded-circle"
-                    :title="$t('action.new.transaction')">
-                <font-awesome-icon icon="plus"/>
-            </router-link>
-
-            <div class="container-fluid">
-                <div class="transactions-header">
-                    <div class="transaction-item">&nbsp;
-                        <div class="transaction-column">
-                            <div class="transaction-date">{{ $t('form.date') }}</div>
-                            <div class="transaction-payee">{{ $t('form.payee') }}</div>
-                        </div>
-                        <div class="transaction-column-2">
-                            <div class="transaction-category">{{ $t('form.category') }}</div>
-                            <div class="transaction-amount">{{ $t('form.amount') }}</div>
-                        </div>
-                    </div>
-                    <div class="transaction-clear">&nbsp;</div>
-                </div>
+            <div slot="submenu">
+                <a class="btn btn-secondary" href="#"
+                   @click.stop="showEditAccountModal"
+                   :title="$t('action.edit.account')">
+                    <font-awesome-icon icon="cog"/>
+                </a>
             </div>
-        </header>
+        </app-toolbar>
+
+        <router-link
+                :to="{ name: 'transaction.new'}"
+                class="floating-action btn btn-primary btn-lg rounded-circle"
+                :title="$t('action.create.transaction')">
+            <font-awesome-icon icon="plus"/>
+        </router-link>
+
+        <div class="container-fluid">
+            <div class="transactions-header">
+                <div class="transaction-item">&nbsp;
+                    <div class="transaction-column">
+                        <div class="transaction-date">{{ $t('form.date') }}</div>
+                        <div class="transaction-payee">{{ $t('form.payee') }}</div>
+                    </div>
+                    <div class="transaction-column-2">
+                        <div class="transaction-category">{{ $t('form.category') }}</div>
+                        <div class="transaction-amount">{{ $t('form.amount') }}</div>
+                    </div>
+                </div>
+                <div class="transaction-clear">&nbsp;</div>
+            </div>
+        </div>
 
         <div class="content container-fluid">
             <div class="transactions-row" :class="[{ 'transactions-row-future': new Date(item.date) > new Date() }]"

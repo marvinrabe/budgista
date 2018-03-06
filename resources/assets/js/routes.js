@@ -6,6 +6,11 @@ export default [
         component: require('./components/budget/Index.vue')
     },
     {
+        path: '/categories',
+        name: 'categories',
+        component: require('./components/categories/Index.vue')
+    },
+    {
         path: '/settings',
         name: 'settings',
         component: require('./components/settings/Index.vue'),

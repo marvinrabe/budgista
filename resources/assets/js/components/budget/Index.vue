@@ -79,9 +79,8 @@
 
         </app-toolbar>
 
-        <div class=" container-fluid">
+        <div class="container-fluid">
             <div class="budget-header">
-                <div class="budget-column-drag"></div>
                 <div class="budget-column-name">
                     {{ $t('form.category') }}
                 </div>
@@ -100,90 +99,16 @@
         </div>
 
         <div class="content container-fluid">
-            <draggable v-model="rows" :options="{handle:'.handle'}" @end="persistSorting">
-                <category-row
-                        v-for="(row, index) in rows"
-                        :key="month+'#'+row.id"
-                        :month="month"
-                        :value="row"
-                        @update:value="val => rows.splice(index, 1, val)"
-                        @edit:category="row => showEditCategoryModal(row)"/>
-            </draggable>
-
-            <div class="p-2 ml-3 pl-3 small" v-if="!loading">
-                <a href="#" class="text-muted" @click.prevent="showNewCategoryModal">
-                    <font-awesome-icon icon="plus"/>
-                    {{ $t('action.new.category') }}
-                </a>
-            </div>
+            <category-row
+                    v-for="(row, index) in rows"
+                    :key="month+'#'+row.id"
+                    :month="month"
+                    :value="row"
+                    @update:value="val => rows.splice(index, 1, val)"/>
 
             <app-spinner v-if="loading"></app-spinner>
         </div>
 
-        <modal v-if="newCategory.modalVisible" @close="hideNewCategoryModal" :title="$t('action.new.category')">
-            <form slot="body"
-                  v-on:submit.stop.prevent="createCategory"
-                  v-bind:class="[{'was-validated': newCategory.validated}]"
-                  data-vv-scope="newCategory"
-                  novalidate>
-                <div class="form-group">
-                    <label for="name" v-html="$t('form.name')"></label>
-                    <input id="name" type="text" class="form-control"
-                           v-model="newCategory.name"
-                           v-validate="'required'"
-                           v-focus
-                           data-vv-name="name"
-                           :data-vv-as="$t('form.name')">
-                    <span class="invalid-feedback">{{ errors.first('newCategory.name') }}</span>
-                </div>
-            </form>
-
-            <div slot="footer">
-                <button class="btn btn-text-light" v-on:click="hideNewCategoryModal">
-                    {{ $t('action.cancel') }}
-                </button>
-                <button class="btn btn-primary" v-on:click="createCategory">
-                    {{ $t('action.save') }}
-                </button>
-            </div>
-        </modal>
-
-        <modal v-if="editCategory.modalVisible" @close="hideEditCategoryModal" :title="$t('action.edit.category')">
-            <form slot="body"
-                  v-on:submit.stop.prevent="updateCategory"
-                  v-bind:class="[{'was-validated': editCategory.validated}]"
-                  data-vv-scope="editCategory"
-                  novalidate>
-                <div class="form-group">
-                    <label for="name" v-html="$t('form.name')"></label>
-                    <input id="name" type="text" class="form-control"
-                           v-model="editCategory.name"
-                           v-validate="'required'"
-                           v-focus
-                           data-vv-name="name"
-                           :data-vv-as="$t('form.name')">
-                    <span class="invalid-feedback">{{ errors.first('editCategory.name') }}</span>
-                </div>
-            </form>
-            <div slot="footer">
-                <div class="float-left">
-                    <button class="btn btn-outline-danger"
-                            :title="$t('action.delete.category')"
-                            @click="deleteCategory(editCategory.id)">
-                        <font-awesome-icon :icon="['far', 'trash-alt']"/>
-                    </button>
-                </div>
-
-                <button class="btn btn-text-light" v-on:click="hideEditCategoryModal">
-                    {{ $t('action.cancel') }}
-                </button>
-                <button class="btn btn-primary" v-on:click="updateCategory">
-                    {{ $t('action.save') }}
-                </button>
-            </div>
-        </modal>
-
-        <delete-category ref="deleteCategory" @delete:category="refresh"></delete-category>
     </div>
 </template>
 
@@ -198,14 +123,10 @@
 </style>
 
 <script>
-    import draggable from 'vuedraggable'
     import row from './Row.vue'
-    import DeleteCategory from './DeleteCategory.vue'
 
     export default {
         components: {
-            draggable,
-            DeleteCategory,
             'category-row': row
         },
         computed: {
@@ -230,18 +151,7 @@
             month: new Date().getFullYear() + '-' + (new Date().getMonth() + 1),
             rows: [],
             previousMonth: null,
-            nextMonth: null,
-            newCategory: {
-                name: '',
-                validated: false,
-                modalVisible: false
-            },
-            editCategory: {
-                id: '',
-                name: '',
-                validated: false,
-                modalVisible: false
-            }
+            nextMonth: null
         }),
 
         mounted() {
@@ -249,9 +159,6 @@
         },
 
         methods: {
-            refresh() {
-                this.loadSheet('/api/month/' + this.month);
-            },
             loadSheet(url) {
                 this.loading = true;
                 this.rows = [];
@@ -285,109 +192,6 @@
                 this.month = newDate.getFullYear() + '-' + (newDate.getMonth() + 1);
 
                 this.loadSheet(this.nextMonth);
-            },
-
-            showNewCategoryModal() {
-                // Reset Validation
-                this.newCategory.validated = false;
-                this.errors.clear('newCategory');
-
-                // Reset Data
-                this.newCategory.name = '';
-                this.newCategory.modalVisible = true;
-            },
-            hideNewCategoryModal() {
-                this.newCategory.modalVisible = false;
-            },
-            createCategory() {
-
-                this.$validator.validateAll('newCategory').then(isValid => {
-                    this.newCategory.validated = true;
-
-                    if (isValid) {
-                        axios
-                            .post('/api/categories', {
-                                'name': this.newCategory.name
-                            })
-                            .then(response => {
-                                this.$store.commit('ADD_CATEGORY', response.data.data);
-                                this.addRow(response.data.data);
-                            })
-                            .catch(e => {
-                                console.error(e);
-                            });
-
-                        this.hideNewCategoryModal();
-                    }
-                });
-
-            },
-            showEditCategoryModal(row) {
-                // Reset Validation
-                this.editCategory.validated = false;
-                this.errors.clear('editAccount');
-
-                // Reset Data
-                this.editCategory.id = row.id;
-                this.editCategory.name = row.name;
-                this.editCategory.modalVisible = true;
-            },
-            hideEditCategoryModal() {
-                this.editCategory.modalVisible = false;
-            },
-            updateCategory() {
-                this.$validator.validateAll('editCategory').then(isValid => {
-                    this.editCategory.validated = true;
-
-                    if (isValid) {
-                        axios
-                            .put('/api/categories/' + this.editCategory.id, {
-                                'name': this.editCategory.name
-                            })
-                            .then(response => {
-                                this.rows.find(x => x.id === this.editCategory.id).name = response.data.data.name;
-                                this.$store.commit('ADD_CATEGORY', response.data.data);
-                            })
-                            .catch(e => {
-                                console.error(e);
-                            });
-
-                        this.hideEditCategoryModal();
-                    }
-                });
-            },
-            deleteCategory(category_id) {
-                this.hideEditCategoryModal();
-                this.$refs.deleteCategory.showModal(category_id);
-            },
-
-            addRow(category) {
-                category.month = this.month;
-                category.budget = 0;
-                category.available = 0;
-                category.previousMonth = 0;
-                category.activity = 0;
-                category.recommendedBudget = 0;
-
-                this.rows.push(category);
-            },
-            removeRow({id}) {
-                this.rows = this.rows.filter(item => item.id !== id);
-            },
-            persistSorting() {
-                let list = this.rows.reduce(function (prevVal, elem) {
-                    prevVal.push(elem.id);
-                    return prevVal;
-                }, []);
-
-                axios
-                    .put('/api/categories/sort', {
-                        'categories': list
-                    })
-                    .catch(e => {
-                        console.error(e);
-                    });
-
             }
 
         }

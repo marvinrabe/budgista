@@ -22,7 +22,7 @@
     "navigation": "Navigation hin- und herschalten",
     "logout": "Abmelden",
     "loading": "Lädt",
-    "new": {
+    "create": {
       "account": "Bankkonto hinzufügen",
       "category": "Kategorie erstellen",
       "transaction": "Kontobewegung hinzufügen"
@@ -78,6 +78,7 @@
   "title": {
     "accounts": "Bankkonten",
     "budget": "Budget",
+    "categories": "Kategorien",
     "settings": "Einstellungen",
     "help": "Hilfe",
     "account": "Benutzerkonto",

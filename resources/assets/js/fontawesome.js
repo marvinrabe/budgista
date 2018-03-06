@@ -5,6 +5,7 @@ fontawesome.library.add([
     require('@fortawesome/fontawesome-free-regular/faEnvelope'),
     require('@fortawesome/fontawesome-free-regular/faTrashAlt'),
     require('@fortawesome/fontawesome-free-regular/faUserCircle'),
+    require('@fortawesome/fontawesome-free-regular/faCalendarAlt'),
     require('@fortawesome/fontawesome-free-solid/faTimes'),
     require('@fortawesome/fontawesome-free-solid/faPlus'),
     require('@fortawesome/fontawesome-free-solid/faCog'),
@@ -16,7 +17,8 @@ fontawesome.library.add([
     require('@fortawesome/fontawesome-free-solid/faShieldAlt'),
     require('@fortawesome/fontawesome-free-solid/faEye'),
     require('@fortawesome/fontawesome-free-solid/faEyeSlash'),
-    require('@fortawesome/fontawesome-free-solid/faSpinner')
+    require('@fortawesome/fontawesome-free-solid/faSpinner'),
+    require('@fortawesome/fontawesome-free-solid/faPencilAlt')
 ]);
 
 const FontAwesome = {

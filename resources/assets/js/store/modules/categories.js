@@ -1,16 +1,12 @@
-import categories from '../../api/categories'
-
-// initial state
-// accounts: [{ id, name, sort }]
+// categories: [{ id, name, sort }]
 const state = {
     categories: []
 };
 
-// getters
 const getters = {
     sortedCategories(state) {
         return state.categories.slice().sort(function (a, b) {
-            return a.name.localeCompare(b.name);
+            return a.sort - b.sort;
         })
     },
     findCategoryById: (state) => (id) => {
@@ -18,27 +14,33 @@ const getters = {
     }
 };
 
-// actions
 const actions = {
 
-    loadCategories({commit, rootState}) {
-        categories.getAll(
-            ({data}) => data.forEach(category => commit('ADD_CATEGORY', category))
-        )
+    loadCategories({commit}) {
+        return axios
+            .get('/api/categories/')
+            .then(({data}) => {
+                let categories = data.data;
+                categories.forEach(category => commit('ADD_CATEGORY', category))
+            });
     },
 
-    createCategory({commit, rootState}, category) {
-        categories.create(
-            category,
-            ({data}) => commit('ADD_CATEGORY', data)
-        )
+    createCategory({commit}, category) {
+        return axios
+            .post('/api/categories/', category)
+            .then(({data}) => {
+                commit('ADD_CATEGORY', data.data);
+            });
     },
 
     updateCategory({commit}, category) {
-        categories.update(
-            category,
-            ({data}) => commit('ADD_CATEGORY', data)
-        )
+        return axios
+            .put('/api/categories/' + category.id, {
+                'name': category.name
+            })
+            .then(({data}) => {
+                commit('ADD_CATEGORY', data.data);
+            });
     },
 
     deleteCategory({commit}, {oldCategory, newCategory}) {
@@ -54,19 +56,28 @@ const actions = {
                     from: oldCategory,
                     to: newCategory
                 });
-            })
-            .catch(e => {
-                console.error(e);
             });
+    },
+
+    sortCategories({commit}, categories) {
+        commit('SORT_CATEGORIES', categories);
+
+        return axios.put('/api/categories/sort', {
+            categories: categories.map(e => e.id)
+        });
     }
 
 };
 
-// mutations
 const mutations = {
     ADD_CATEGORY(state, category) {
         state.categories = state.categories.filter(x => x.id !== category.id);
         state.categories.push(category);
+    },
+    SORT_CATEGORIES(state, sortedCategories) {
+        state.categories.forEach(category => {
+            category.sort = _.findIndex(sortedCategories, x => x.id === category.id);
+        });
     },
     REMOVE_CATEGORY(state, {id}) {
         state.categories = state.categories.filter(x => x.id !== id);
