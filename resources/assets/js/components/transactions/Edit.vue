@@ -11,6 +11,9 @@
         computed: {
             title() {
                 return this.$t('action.edit.transaction');
+            },
+            transaction() {
+                return this.$store.getters.findTransactionById(this.transaction_id);
             }
         },
 
@@ -41,7 +44,7 @@
             initialize() {
                 this.reset();
 
-                let transaction = this.$store.getters.findTransactionById(this.transaction_id);
+                let transaction = this.transaction;
 
                 this.type = 1;
                 this.amount = transaction.amount;
@@ -63,6 +66,9 @@
                     this.freq = rule.options.freq;
                     this.interval = rule.options.interval;
                 }
+            },
+            cancel() {
+                this.$router.push({ name: 'account', params: { account_id: this.transaction.account_id }});
             },
 
             saveTransaction() {

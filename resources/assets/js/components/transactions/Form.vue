@@ -1,7 +1,7 @@
 <template>
     <div class="main">
 
-        <app-toolbar :title="title"/>
+        <app-toolbar :title="title" :back="true" @back="cancel"/>
 
         <div class="content">
             <form id="transaction" class="container pt-2"
@@ -212,11 +212,6 @@
             setToIncome() {
                 this.type = INCOME;
             },
-
-            cancel() {
-                this.$router.go(-1);
-            },
-
             reset() {
                 // Reset Validation
                 this.validated = false;
@@ -241,6 +236,10 @@
                         this.saveTransaction();
                     }
                 });
+            },
+
+            cancel() {
+                // To be implemented by child forms.
             },
 
             saveTransaction() {
