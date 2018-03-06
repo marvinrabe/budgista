@@ -23,9 +23,8 @@
             }
         },
         methods: {
-            focus(value) {
+            focus() {
                 this.$el.focus();
-                this.selectAll();
             },
             formatValue(value) {
                 this.$el.value = this.$moneyFormatter().format(value);
