@@ -25,6 +25,9 @@
 
 
         methods: {
+            cancel() {
+                this.$router.push({ name: 'account', params: { account_id: this.account_id }});
+            },
             saveTransaction() {
                 let transaction = this.getResult();
                 transaction.account_id = this.account_id;
@@ -45,7 +48,7 @@
                 this.$nextTick(() => {
                     this.$refs.amount.$el.focus();
                 });
-            },
+            }
         }
     }
 </script>

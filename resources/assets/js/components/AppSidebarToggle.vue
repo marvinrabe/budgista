@@ -1,28 +1,10 @@
 <template>
-    <button class="menu-toggle d-md-none float-sm-none" type="button" aria-controls="menu"
+    <button class="btn btn-secondary" type="button" aria-controls="menu"
             :aria-label="$t('action.navigation')"
             @click.prevent="showMenu">
         <font-awesome-icon icon="bars" fixed-width />
     </button>
 </template>
-
-<style scoped>
-    .menu-toggle {
-        flex: 0;
-        border: 0;
-        background: transparent;
-        font-size: 1rem;
-        margin: 0 0 0 15px;
-        color: white;
-        padding: 0;
-        opacity: 1;
-    }
-
-    .menu-toggle:hover {
-        opacity: .8;
-        cursor: pointer;
-    }
-</style>
 
 <script>
     export default {

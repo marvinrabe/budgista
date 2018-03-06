@@ -1,15 +1,25 @@
 <template>
     <div class="toolbar">
-        <app-sidebar-toggle></app-sidebar-toggle>
-
         <app-window :title="title"></app-window>
+
+        <div class="button-left" :class="[{'d-md-none': !back}]">
+            <button v-if="back"
+                    class="btn btn-secondary"
+                    type="button"
+                    :aria-label="$t('action.back')"
+                    @click.prevent="$emit('back')">
+                <font-awesome-icon icon="chevron-left" fixed-width />
+            </button>
+            <app-sidebar-toggle v-else></app-sidebar-toggle>
+        </div>
+
         <div class="title">
             <slot name="title">
                 <ellipsis>{{ title }}</ellipsis>
             </slot>
         </div>
 
-        <div class="sub-menu-placeholder">
+        <div class="button-right">
             <slot name="submenu">&nbsp;</slot>
         </div>
 
@@ -22,13 +32,15 @@
     import AppSidebarToggle from './AppSidebarToggle'
 
     export default {
-        props: ['title'],
+        props: ['title', 'back'],
         components: {AppSidebarToggle, AppWindow}
     }
 </script>
 
 <style scoped>
-    .sub-menu-placeholder {
+    .button-left,
+    .button-right {
+        text-align: center;
         width: 45px;
         flex: 45px;
         flex-grow: 0;
