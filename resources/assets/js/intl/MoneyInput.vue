@@ -23,13 +23,17 @@
             }
         },
         methods: {
-            formatValue: function (value) {
+            focus(value) {
+                this.$el.focus();
+                this.selectAll();
+            },
+            formatValue(value) {
                 this.$el.value = this.$moneyFormatter().format(value);
             },
-            unformatValue: function (value) {
+            unformatValue(value) {
                 return this.$moneyFormatter().unformat(value);
             },
-            updateValue: function (value) {
+            updateValue(value) {
                 let result = this.unformatValue(value);
                 this.$emit('update:value', result);
                 this.formatValue(result);
