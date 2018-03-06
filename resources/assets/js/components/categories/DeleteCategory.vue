@@ -1,22 +1,23 @@
 <template>
     <modal v-if="visible" @close="hideModal" :title="$t('action.delete.category')">
-        <form slot="body" novalidate
-              @submit.stop.prevent="deleteCategory">
-            <div class="form-group">
-                <label for="category" v-html="$t('form.transferTransactions')"></label>
-                <select id="category" class="form-control" v-model="new_category_id">
+        <app-form slot="body" @submit="deleteCategory" id="deleteCategory">
+            <form-group name="transferTransactions">
+                <select class="form-control"
+                        v-model="new_category_id"
+                        slot-scope="{bindings}"
+                        v-bind="bindings">
                     <option value="">{{ $t('form.uncategorized') }}</option>
-                    <option v-for="category in sortedCategories" :key="category.id" :value="category.id">
+                    <option v-for="category in categories" :key="category.id" :value="category.id">
                         {{ category.name }}
                     </option>
                 </select>
-            </div>
-        </form>
+            </form-group>
+        </app-form>
         <div slot="footer">
             <button class="btn btn-text-light" @click="hideModal">
                 {{ $t('action.cancel') }}
             </button>
-            <button class="btn btn-danger" @click="deleteCategory">
+            <button class="btn btn-danger" form="deleteCategory" type="submit">
                 {{ $t('action.delete.category') }}
             </button>
         </div>
@@ -34,13 +35,13 @@
             }
         },
         computed: {
-            sortedCategories() {
+            categories() {
                 return this.$store.getters.sortedCategories.filter((item) => item.id !== this.old_category_id);
             }
         },
         methods: {
-            showModal(category_id) {
-                this.old_category_id = category_id;
+            showModal(category) {
+                this.old_category_id = category.id;
                 this.new_category_id = "";
                 this.visible = true;
             },
@@ -51,13 +52,15 @@
                 let oldCategory = this.$store.getters.findCategoryById(this.old_category_id);
                 let newCategory = this.$store.getters.findCategoryById(this.new_category_id);
 
-                this.$store.dispatch('deleteCategory', {
-                    oldCategory: oldCategory,
-                    newCategory: newCategory
-                }).then(response => {
-                    this.hideModal();
-                    this.$emit('delete:category', oldCategory)
-                });
+                this.$store
+                    .dispatch('deleteCategory', {
+                        oldCategory: oldCategory,
+                        newCategory: newCategory
+                    })
+                    .then(() => {
+                        this.hideModal();
+                        this.$emit('delete:category', oldCategory)
+                    });
             }
         }
     }

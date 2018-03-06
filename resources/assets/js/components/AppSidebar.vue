@@ -21,8 +21,15 @@
                         :to="{ name: 'budget' }"
                         @click.native="hideMenu"
                         active-class="active" :exact="true" class="nav-link-main">
-                    <font-awesome-icon :icon="['far', 'envelope']" fixed-width class="mr-1"/>
+                    <font-awesome-icon :icon="['far', 'calendar-alt']" fixed-width class="mr-1"/>
                     {{ $t('title.budget') }}
+                </router-link>
+                <router-link
+                        :to="{ name: 'categories' }"
+                        @click.native="hideMenu"
+                        active-class="active" :exact="true" class="nav-link-main">
+                    <font-awesome-icon :icon="['far', 'envelope']" fixed-width class="mr-1"/>
+                    {{ $t('title.categories') }}
                 </router-link>
                 <div class="mt-3">
                     <p class="nav-header">{{ $t('title.accounts') }}</p>
@@ -40,7 +47,7 @@
                     </router-link>
                     <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small">
                         <font-awesome-icon icon="plus"/>
-                        {{ $t('action.new.account') }}
+                        {{ $t('action.create.account') }}
                     </a>
                 </div>
                 <ul class="nav-small">
@@ -65,7 +72,7 @@
 
         </div>
 
-        <modal v-if="newAccount.modalVisible" @close="hideNewAccountModal" :title="$t('action.new.account')">
+        <modal v-if="newAccount.modalVisible" @close="hideNewAccountModal" :title="$t('action.create.account')">
             <form slot="body"
                   @submit.stop.prevent="createAccount"
                   :class="[{'was-validated': newAccount.validated}]"

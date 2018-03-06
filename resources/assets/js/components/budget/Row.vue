@@ -1,11 +1,8 @@
 <template>
     <div class="budget-row">
-        <div class="budget-column-drag">
-            <span class="handle"></span>
-        </div>
-        <a href="#" @click="$emit('edit:category', value)" class="budget-column-name">
+        <div class="budget-column-name">
             <ellipsis>{{ category.name }}</ellipsis>
-        </a>
+        </div>
         <div class="budget-column-values">
             <div class="budget-column-budget">
                 <money-input

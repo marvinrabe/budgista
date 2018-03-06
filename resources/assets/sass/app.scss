@@ -78,47 +78,6 @@ a.text-muted:hover {
 
 }
 
-/*
- * Grip
- */
-span.handle {
-  content: '....';
-  width: 12px;
-  height: 24px;
-  display: inline-block;
-  overflow: hidden;
-  line-height: 6px;
-  padding: 0;
-  vertical-align: middle;
-  margin-top: -6px;
-  margin-left: 2px;
-  font-size: 16px;
-  font-family: $font-family-sans-serif;
-  letter-spacing: 2px;
-  color: $gray-800;
-
-  &::after {
-    content: '.. .. ..';
-  }
-
-  &,
-  &::after {
-    cursor: move;
-    cursor: -webkit-grab;
-    cursor: -moz-grab;
-  }
-
-}
-
-.sortable-drag {
-  .handle,
-  .handle::after {
-    cursor: move;
-    cursor: -webkit-grabbing;
-    cursor: -moz-grabbing;
-  }
-}
-
 .layout-auth {
   overflow-y: scroll; /* has to be scroll, not auto */
   -webkit-overflow-scrolling: touch;

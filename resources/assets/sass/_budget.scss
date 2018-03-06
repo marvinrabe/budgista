@@ -40,12 +40,6 @@
 
   &-column {
 
-    &-drag {
-      text-align: center;
-      width: 24px;
-      flex-shrink: 0;
-    }
-
     &-name {
       flex: 2;
       padding: .5em;
@@ -83,7 +77,7 @@
 
   @include media-breakpoint-down(sm) {
     &-header {
-      .budget-column-name, .budget-column-drag {
+      .budget-column-name {
         display: none;
       }
     }

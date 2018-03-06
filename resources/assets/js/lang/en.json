@@ -22,7 +22,7 @@
     "navigation": "Toggle navigation",
     "logout": "Logout",
     "loading": "Loading",
-    "new": {
+    "create": {
       "account": "Add Account",
       "category": "Create Category",
       "transaction": "Add Transaction"
@@ -78,6 +78,7 @@
   "title": {
     "accounts": "Accounts",
     "budget": "Budget",
+    "categories": "Categories",
     "settings": "Settings",
     "help": "Help",
     "account": "Account",
