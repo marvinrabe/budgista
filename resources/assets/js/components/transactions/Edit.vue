@@ -23,7 +23,7 @@
                 return;
             }
 
-            store.dispatch('getTransaction', to.params.transaction_id).then(() => {
+            store.dispatch('loadTransaction', to.params.transaction_id).then(() => {
                 next(vm => vm.initialize())
             });
         },
@@ -34,7 +34,7 @@
                 next();
                 return;
             }
-            this.$store.dispatch('getTransaction', to.params.transaction_id).then(() => {
+            this.$store.dispatch('loadTransaction', to.params.transaction_id).then(() => {
                 this.initialize();
                 next();
             });

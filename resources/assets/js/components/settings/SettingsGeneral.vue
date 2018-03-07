@@ -73,9 +73,9 @@
         },
         methods: {
             reset() {
-                this.form.language = this.$store.state.language;
-                this.form.locale = this.$store.state.locale;
-                this.form.currency = this.$store.state.currency;
+                this.form.language = this.$store.state.user.language;
+                this.form.locale = this.$store.state.user.locale;
+                this.form.currency = this.$store.state.user.currency;
             },
             save() {
                 this.saving = true;

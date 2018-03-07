@@ -1,15 +1,10 @@
-import transactions from '../../api/transactions'
-import _ from 'lodash';
 
-// initial state
 // transactions: [{ id, payee, amount, cleared, rrule, recurring, category: {id, name}, account_id }],
-// loaded: [account_id]
 const state = {
     transactions: [],
-    loaded: [],
+    nextUrls: {}
 };
 
-// getters
 export const getters = {
     findTransactionById: (state) => (id) => {
         return state.transactions.find(x => x.id === id)
@@ -29,98 +24,93 @@ export const getters = {
     }
 };
 
-// actions
 const actions = {
 
-    getTransaction({commit}, transaction_id) {
-        return new Promise((resolve, reject) => {
-            transactions.get(
-                transaction_id,
-                ({data}) => {
-                    if (data.category) {
-                        commit('ADD_CATEGORY', data.category);
-                    }
-                    commit('ADD_TRANSACTION', data);
-                    resolve(data)
-                },
-                () => reject()
-            );
-        })
+    loadTransaction({commit}, transaction_id) {
+        return axios
+            .get('/api/transactions/' + transaction_id)
+            .then(({data}) => {
+                if (data.category) {
+                    commit('ADD_CATEGORY', data.data.category);
+                }
+                commit('ADD_TRANSACTION', data.data);
+            });
     },
 
     loadTransactions({state, commit, dispatch}, account_id) {
-        if (state.loaded.indexOf(account_id) === -1) {
+        if (!(account_id in state.nextUrls)) {
+            commit('NEXT_TRANSACTIONS', {
+                account_id: account_id,
+                url: '/api/accounts/' + account_id + '/transactions'
+            });
             dispatch('loadMoreTransactions', account_id);
-            commit('MARK_LOADED', account_id)
         }
     },
 
-    loadMoreTransactions({commit}, account_id) {
-        return new Promise((resolve, reject) => {
-            transactions.getMoreTransactions(
-                account_id,
-                ({data}) => {
-                    if (data) {
-                        data.forEach(transaction => commit('ADD_TRANSACTION', transaction));
-                        resolve();
-                    } else {
-                        reject();
-                    }
-                })
-        });
+    loadMoreTransactions({state, commit}, account_id) {
+        if (!state.nextUrls[account_id]) {
+            return Promise.reject();
+        }
+
+        return axios
+            .get(state.nextUrls[account_id])
+            .then(({data}) => {
+                commit('NEXT_TRANSACTIONS', {
+                    account_id: account_id,
+                    url: data.links.next
+                });
+                data.data.forEach(transaction => commit('ADD_TRANSACTION', transaction));
+            });
     },
 
     createTransaction({commit, rootState}, transaction) {
-        transactions.create(
-            transaction,
-            ({data}) => {
-                commit('ADD_TRANSACTION', data);
-                commit('ADD_BALANCE', data);
-            }
-        )
+        return axios
+            .post('/api/transactions/', transaction)
+            .then(({data}) => {
+                commit('ADD_TRANSACTION', data.data);
+                commit('ADD_BALANCE', data.data);
+            });
     },
 
     updateTransaction({commit, getters}, transaction) {
-        transactions.update(
-            transaction,
-            ({data}) => {
+        return axios
+            .put('/api/transactions/' + transaction.id, transaction)
+            .then(({data}) => {
                 let oldTransaction = getters.findTransactionById(transaction.id);
                 commit('REMOVE_BALANCE', oldTransaction);
-                commit('ADD_TRANSACTION', data);
-                commit('ADD_BALANCE', data);
-            }
-        )
+                commit('ADD_TRANSACTION', data.data);
+                commit('ADD_BALANCE', data.data);
+            });
     },
 
     clearTransaction({commit}, transaction) {
-        transactions.clear(
-            transaction,
-            ({data}) => commit('ADD_TRANSACTION', data)
-        )
+        return axios
+            .put('/api/transactions/' + transaction.id + '/clear')
+            .then(({data}) => {
+                commit('ADD_TRANSACTION', data.data);
+            })
     },
 
     deleteTransaction({commit, getters}, transaction) {
-        transactions.delete(
-            transaction,
-            ({data}) => {
+        return axios
+            .delete('/api/transactions/' + transaction.id)
+            .then(() => {
                 let oldTransaction = getters.findTransactionById(transaction.id);
                 commit('REMOVE_BALANCE', oldTransaction);
                 commit('REMOVE_TRANSACTION', transaction);
-            }
-        )
+            });
     }
 
 };
 
-// mutations
 const mutations = {
     ADD_TRANSACTION(state, transaction) {
         state.transactions = state.transactions.filter(x => x.id !== transaction.id);
         // TODO unset category attribute if exists and set category_id
         state.transactions.push(transaction);
     },
-    MARK_LOADED(state, account_id) {
-        state.loaded.push(account_id);
+    NEXT_TRANSACTIONS(state, {account_id, url}) {
+        state.nextUrls[account_id] = url;
     },
     REMOVE_TRANSACTION(state, {id}) {
         state.transactions = state.transactions.filter(x => x.id !== id);

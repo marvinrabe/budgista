@@ -5,7 +5,7 @@
 
             <div slot="submenu">
                 <a class="btn btn-secondary" href="#"
-                   @click.stop="showEditAccountModal"
+                   @click.stop="$refs.updateAccount.showModal(account)"
                    :title="$t('action.edit.account')">
                     <font-awesome-icon icon="cog"/>
                 </a>
@@ -37,8 +37,8 @@
             <div class="transactions-row" :class="[{ 'transactions-row-future': new Date(item.date) > new Date() }]"
                  v-for="(item, index) of transactions" :key="index">
                 <router-link
-                        :to="{ name: 'transaction.edit', params: { transaction_id: item.id }}"
-                        :title="$t('action.edit.transaction')" class="transaction-item">
+                        class="transaction-item"
+                        :to="{ name: 'transaction.edit', params: { transaction_id: item.id }}">
                     <span class="transaction-column">
                         <span class="transaction-date">
                             <date-format
@@ -83,40 +83,7 @@
             </infinite-loading>
         </div>
 
-        <modal v-if="editAccount.modalVisible" @close="hideEditAccountModal" :title="$t('action.edit.account')">
-            <form slot="body"
-                  @submit.stop.prevent="updateAccount"
-                  :class="[{'was-validated': editAccount.validated}]"
-                  data-vv-scope="editAccount"
-                  novalidate>
-                <div class="form-group">
-                    <label for="name" v-html="$t('form.name')"></label>
-                    <input id="name" type="text" class="form-control"
-                           v-model="editAccount.name"
-                           v-focus
-                           v-validate="'required'"
-                           data-vv-name="name"
-                           :data-vv-as="$t('form.name')">
-                    <span class="invalid-feedback">{{ errors.first('editAccount.name') }}</span>
-                </div>
-            </form>
-            <div slot="footer">
-                <div class="float-left">
-                    <button class="btn btn-outline-danger"
-                            :title="$t('action.delete.account')"
-                            v-on:click="deleteAccount">
-                        <font-awesome-icon :icon="['far', 'trash-alt']"/>
-                    </button>
-                </div>
-
-                <button class="btn btn-text-light" v-on:click="hideEditAccountModal">
-                    {{ $t('action.cancel') }}
-                </button>
-                <button class="btn btn-primary" v-on:click="updateAccount">
-                    {{ $t('action.save') }}
-                </button>
-            </div>
-        </modal>
+        <update-account ref="updateAccount"></update-account>
     </div>
 </template>
 
@@ -131,17 +98,15 @@
 </style>
 
 <script>
-    import InfiniteLoading from 'vue-infinite-loading';
     import Balance from './Balance.vue';
+    import InfiniteLoading from 'vue-infinite-loading';
+    import UpdateAccount from './UpdateAccount';
 
-    var rrulestr = require('rrule').rrulestr;
+    let rrulestr = require('rrule').rrulestr;
 
     export default {
         props: ['account_id'],
-        components: {
-            Balance,
-            InfiniteLoading
-        },
+        components: {Balance, InfiniteLoading, UpdateAccount},
         computed: {
             account() {
                 return this.$store.getters.findAccountById(this.account_id);
@@ -158,21 +123,11 @@
         created() {
             this.$store.dispatch('loadTransactions', this.account_id);
         },
-        data: () => ({
-            editAccount: {
-                id: '',
-                name: '',
-                validated: false,
-                active: false,
-                modalVisible: false
-            }
-        }),
         methods: {
             humanRRule: function (rrule) {
                 let rule = rrulestr(rrule);
                 return rule.toText();
             },
-
             loadMore: function ($state) {
                 this.$store.dispatch('loadMoreTransactions', this.account.id)
                     .then(() => {
@@ -185,39 +140,7 @@
             },
             toggleCleared(transaction) {
                 this.$store.dispatch('clearTransaction', transaction);
-            },
-
-            showEditAccountModal() {
-                // Reset Validation
-                this.editAccount.validated = false;
-                this.errors.clear('editAccount');
-
-                // Reset Data
-                this.editAccount.id = this.account.id;
-                this.editAccount.name = this.account.name;
-
-                this.editAccount.modalVisible = true;
-            },
-            hideEditAccountModal() {
-                this.editAccount.modalVisible = false;
-            },
-            updateAccount() {
-                this.$validator.validateAll('editAccount').then(isValid => {
-                    this.editAccount.validated = true;
-
-                    if (isValid) {
-                        this.$store.dispatch('updateAccount', this.editAccount);
-                        this.hideEditAccountModal();
-                    }
-                });
-            },
-            deleteAccount() {
-                this.$store.dispatch('deleteAccount', this.editAccount);
-
-                this.hideEditAccountModal();
-
-                this.$router.push({name: 'budget'});
-            },
+            }
         }
 
     }

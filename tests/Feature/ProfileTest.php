@@ -32,11 +32,9 @@ class ProfileTest extends TestCase
             ->assertJson([
                 'data' => [
                     'email' => Auth()->user()->email,
-                    'localization' => [
-                        'language' => Auth()->user()->language,
-                        'locale' => Auth()->user()->locale,
-                        'currency' => Auth()->user()->currency,
-                    ]
+                    'language' => Auth()->user()->language,
+                    'locale' => Auth()->user()->locale,
+                    'currency' => Auth()->user()->currency
                 ]
             ]);
     }
@@ -48,11 +46,9 @@ class ProfileTest extends TestCase
             ->updateProfile()
             ->assertJson([
                 'data' => [
-                    'localization' => [
-                        'language' => 'de',
-                        'locale' => 'de',
-                        'currency' => 'USD',
-                    ]
+                    'language' => 'de',
+                    'locale' => 'de',
+                    'currency' => 'USD'
                 ]
             ]);
     }
