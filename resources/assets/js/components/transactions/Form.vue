@@ -94,7 +94,7 @@
                         </label>
                     </div>
 
-                    <div class="form-row" v-if="recurring">
+                    <div class="form-row mt-3" v-if="recurring">
                         <div class="col">
                             <label for="freq">{{ $t('form.recurringFrequency') }}</label>
                             <select id="freq" class="form-control" v-model="freq">
