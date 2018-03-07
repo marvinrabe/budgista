@@ -25,8 +25,8 @@ const AppIntl = {
         );
 
         Vue.prototype.$moneyFormatter = _.memoize(function() {
-            let currency = this.$store.state.currency;
-            let locale = this.$store.state.locale;
+            let currency = this.$store.state.user.currency;
+            let locale = this.$store.state.user.locale;
 
             return new IntegerMoneyFormatter(locale, currency);
         });

@@ -1,5 +1,3 @@
-import accounts from '../../api/accounts'
-
 // initial state
 // accounts: [{ id, name, workingBalance, clearedBalance, unclearedBalance }]
 const state = {
@@ -22,30 +20,40 @@ const getters = {
 const actions = {
 
     loadAccounts({commit, rootState}) {
-        accounts.getAll(
-            ({data}) => data.forEach(account => commit('ADD_ACCOUNT', account))
-        )
+        return axios
+            .get('/api/accounts')
+            .then(({data}) => {
+                let accounts = data.data;
+                accounts.forEach(account => commit('ADD_ACCOUNT', account))
+            });
     },
 
     createAccount({commit, rootState}, account) {
-        accounts.create(
-            account,
-            ({data}) => commit('ADD_ACCOUNT', data)
-        )
+        return axios
+            .post('/api/accounts/', {
+                'name': account.name
+            })
+            .then(({data}) => {
+                commit('ADD_ACCOUNT', data.data);
+            });
     },
 
     updateAccount({commit}, account) {
-        accounts.update(
-            account,
-            ({data}) => commit('ADD_ACCOUNT', data)
-        )
+        return axios
+            .put('/api/accounts/' + account.id, {
+                'name': account.name
+            })
+            .then(({data}) => {
+                commit('ADD_ACCOUNT', data.data);
+            });
     },
 
     deleteAccount({commit}, account) {
-        accounts.delete(
-            account,
-            () => commit('REMOVE_ACCOUNT', account)
-        )
+        return axios
+            .delete('/api/accounts/' + account.id)
+            .then(({data}) => {
+                commit('REMOVE_ACCOUNT', account);
+            });
     },
 
     clearTransaction({commit}, transaction) {
