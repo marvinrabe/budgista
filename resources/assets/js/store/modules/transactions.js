@@ -1,3 +1,4 @@
+import _ from 'lodash';
 
 // transactions: [{ id, payee, amount, cleared, rrule, recurring, category: {id, name}, account_id }],
 const state = {

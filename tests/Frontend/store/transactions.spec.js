@@ -1,7 +1,7 @@
 import expect from 'expect';
 import {getters} from '../../../resources/assets/js/store/modules/transactions'
 
-describe('DateFormat', () => {
+describe('Transactions Store', () => {
     it('returns a payee list', () => {
         const state = {
             transactions: [
