@@ -53,6 +53,7 @@
 
 <script>
     export default {
-        props: ['title']
+        props: ['title'],
+        inject: ['$validator']
     }
 </script>
