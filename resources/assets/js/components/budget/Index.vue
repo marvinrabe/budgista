@@ -163,17 +163,13 @@
 
                 axios
                     .get(url)
-                    .then(response => {
-                        // JSON responses are automatically parsed.
+                    .then(({data}) => {
                         this.loading = false;
-                        this.sheet = response.data.data;
+                        this.sheet = data.data;
                         this.month = this.sheet.month;
                         this.rows = this.sheet.rows;
-                        this.previousMonth = response.data.links.prev;
-                        this.nextMonth = response.data.links.next;
-                    })
-                    .catch(e => {
-                        this.errors.push(e)
+                        this.previousMonth = data.links.prev;
+                        this.nextMonth = data.links.next;
                     })
             },
             showPreviousMonth() {
