@@ -1,5 +1,6 @@
 import IntegerMoneyFormatter from './IntegerMoneyFormatter';
 import _ from 'lodash';
+import moment from 'moment';
 
 const AppIntl = {
     install(Vue, options = {}) {
@@ -23,6 +24,8 @@ const AppIntl = {
             'date-input',
             require('./DateInput.vue')
         );
+
+        Vue.prototype.moment = moment;
 
         Vue.prototype.$moneyFormatter = _.memoize(function() {
             let currency = this.$store.state.user.currency;

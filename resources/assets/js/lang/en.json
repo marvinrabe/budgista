@@ -22,6 +22,7 @@
     "navigation": "Toggle navigation",
     "logout": "Logout",
     "loading": "Loading",
+    "futureTransactions": "No future transactions | Display 1 future transaction | Display {count} future transactions",
     "create": {
       "account": "Add Account",
       "category": "Create Category",

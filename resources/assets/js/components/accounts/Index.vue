@@ -34,7 +34,15 @@
         </div>
 
         <div class="content">
-            <div class="transactions-row" :class="[{ 'transactions-row-future': new Date(item.date) > new Date() }]"
+            <div class="text-center p-2 transactions-row-dummy"
+                 v-if="countFutureTransactions > 0 && !showFutureTransactions">
+                <a href="#" class="text-muted" @click.prevent="showFutureTransactions = true">
+                    {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions }) }}
+                </a>
+            </div>
+            <div class="transactions-row"
+                 :class="[{ 'transactions-row-future': moment(item.date).isAfter() }]"
+                 v-if="!moment(item.date).isAfter() || showFutureTransactions"
                  v-for="(item, index) of transactions" :key="index">
                 <router-link
                         class="transaction-item"
@@ -107,12 +115,20 @@
     export default {
         props: ['account_id'],
         components: {Balance, InfiniteLoading, UpdateAccount},
+        data() {
+            return {
+                showFutureTransactions: false
+            };
+        },
         computed: {
             account() {
                 return this.$store.getters.findAccountById(this.account_id);
             },
             transactions() {
                 return this.$store.getters.findTransactionsByAccountId(this.account_id);
+            },
+            countFutureTransactions() {
+                return this.$store.getters.countFutureTransactions(this.account);
             }
         },
         watch: {
@@ -122,6 +138,10 @@
         },
         created() {
             this.$store.dispatch('loadTransactions', this.account_id);
+        },
+        beforeRouteUpdate (to, from, next) {
+            this.showFutureTransactions = false;
+            next();
         },
         methods: {
             humanRRule: function (rrule) {
