@@ -19,10 +19,12 @@
         <tr>
             <th class="text-center">Active</th>
             <th>{{ trans('form.email') }}</th>
-            <th>{{ trans('form.created_at') }}</th>
             <th>Language</th>
-            <th>Locale</th>
             <th>Currency</th>
+            <th>Accounts</th>
+            <th>Categories</th>
+            <th>Transactions</th>
+            <th>Joined</th>
         </tr>
         </thead>
         <tbody>
@@ -32,10 +34,15 @@
                     <span class="fa fa-circle {{ $user->isActive()?'text-success':'text-danger' }}"></span>
                 </td>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->created_at }}</td>
-                <td>{{ $user->language }}</td>
-                <td>{{ $user->locale }}</td>
-                <td>{{ $user->currency }}</td>
+                <td>
+                    {{ Language::all()[$user->locale] }}<br>
+                    <small>{{ Language::all()[$user->language] }}</small>
+                </td>
+                <td>{{ Currency::all()[$user->currency] }}</td>
+                <td>{{ $user->accounts()->count() }}</td>
+                <td>{{ $user->categories()->count() }}</td>
+                <td>{{ $user->transactions()->count() }}</td>
+                <td>{{ $user->created_at->format('d.m.Y') }}</td>
             </tr>
         @endforeach
         </tbody>
