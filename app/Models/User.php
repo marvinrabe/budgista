@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Month;
 use App\MonthlyBudget;
 use App\Mail\ResetPasswordNotification;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -65,6 +66,25 @@ class User extends Authenticatable
     public function budget(Month $month)
     {
         return new MonthlyBudget($this, $month);
+    }
+
+    public function transactions()
+    {
+        return $this->hasManyThrough(Transaction::class, Account::class);
+    }
+
+    public function isActive() {
+        $oldTransactionCount = $this
+            ->transactions()
+            ->whereBetween('date', [Carbon::now()->subDays(31), Carbon::now()])
+            ->count();
+
+        $futureTransactionCount = $this
+            ->transactions()
+            ->where('date', '>', Carbon::now())
+            ->count();
+
+        return ($oldTransactionCount - $futureTransactionCount) > 0;
     }
 
 }
