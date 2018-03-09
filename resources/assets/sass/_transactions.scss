@@ -27,7 +27,11 @@
   },
 
   &-row-dummy {
-    background: $gray-100;
+    background: theme-color-level('warning', $alert-bg-level);
+
+    a {
+      color: theme-color-level('warning', $alert-color-level);
+    }
   }
 
   &-row {

@@ -34,9 +34,9 @@
         </div>
 
         <div class="content">
-            <div class="text-center p-2 transactions-row-dummy"
+            <div class="text-center p-1 transactions-row-dummy"
                  v-if="countFutureTransactions > 0 && !showFutureTransactions">
-                <a href="#" class="text-muted" @click.prevent="showFutureTransactions = true">
+                <a href="#" class="small" @click.prevent="showFutureTransactions = true">
                     {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions }) }}
                 </a>
             </div>
