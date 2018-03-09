@@ -18,7 +18,7 @@
 
             <nav class="nav flex-column flex-nowrap mt-2">
                 <router-link
-                        :to="{ name: 'budget', params: {month: currentMonth} }"
+                        :to="{ name: 'budget_default' }"
                         @click.native="hideMenu"
                         active-class="active" class="nav-link-main">
                     <font-awesome-icon :icon="['far', 'calendar-alt']" fixed-width class="mr-1"/>
@@ -105,7 +105,6 @@
 <script>
     import {mapGetters} from 'vuex'
     import AppLogout from './AppLogout.vue'
-    import Month from '../intl/Month.js'
 
     export default {
         components: {
@@ -119,9 +118,6 @@
             }
         }),
         computed: {
-            currentMonth() {
-                return Month.current().toString();
-            },
             user() {
                 return this.$store.state.user;
             },

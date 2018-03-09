@@ -9,6 +9,13 @@ export default [
         }
     },
     {
+        path: '/budget',
+        name: 'budget_default',
+        redirect: to => {
+            return {name: 'budget', params: {month: Month.current().toString()}};
+        }
+    },
+    {
         path: '/budget/:month',
         name: 'budget',
         component: require('./components/budget/Index.vue'),
