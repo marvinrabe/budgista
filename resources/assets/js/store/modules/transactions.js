@@ -1,6 +1,7 @@
 import _ from 'lodash';
+import moment from 'moment';
 
-// transactions: [{ id, payee, amount, cleared, rrule, recurring, category: {id, name}, account_id }],
+// transactions: [{ id, date, payee, amount, cleared, rrule, recurring, category: {id, name}, account_id }],
 const state = {
     transactions: [],
     nextUrls: {}
@@ -10,12 +11,18 @@ export const getters = {
     findTransactionById: (state) => (id) => {
         return state.transactions.find(x => x.id === id)
     },
-    isTransactionLoaded: (state) => (id) => {
-        return state.transactions.find(x => x.id === id) !== undefined;
+    isTransactionLoaded: (state, getters) => (id) => {
+        return getters.findTransactionById(id) !== undefined;
     },
     findTransactionsByAccountId: (state) => (id) => {
         let transactions = state.transactions.filter(x => x.account_id === id).slice();
         return _.sortBy(transactions, ['date', 'created_at', 'payee']).reverse();
+    },
+    countFutureTransactions: (state, getters) => ({id}) => {
+        return getters
+            .findTransactionsByAccountId(id)
+            .filter(x => moment(x.date).isAfter())
+            .length;
     },
     getPayees(state) {
         return _.uniq(

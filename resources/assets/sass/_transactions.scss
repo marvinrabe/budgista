@@ -21,8 +21,16 @@
     cursor: default;
   }
 
-  &-row {
+  &-row,
+  &-row-dummy {
     border-bottom: 1px solid $gray-200;
+  },
+
+  &-row-dummy {
+    background: $gray-100;
+  }
+
+  &-row {
 
     &-future, &-future span {
       color: $gray-600 !important;

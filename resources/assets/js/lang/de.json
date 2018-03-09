@@ -15,6 +15,7 @@
   "action": {
     "save": "Speichern",
     "saveAndNew": "Speichern & Neu",
+    "futureTransactions": "Keine zukünftigen Transaktionen | Zeige 1 zukünftige Transaktion | Zeige {count} zukünftige Transaktionen",
     "back": "Zurück",
     "cancel": "Abbrechen",
     "nextMonth": "Nächster Monat",
