@@ -16,7 +16,7 @@
                 </ul>
             </nav>
 
-            <nav class="nav flex-column mt-2">
+            <nav class="nav flex-column flex-nowrap mt-2">
                 <router-link
                         :to="{ name: 'budget' }"
                         @click.native="hideMenu"
@@ -31,7 +31,7 @@
                     <font-awesome-icon :icon="['far', 'envelope']" fixed-width class="mr-1"/>
                     {{ $t('title.categories') }}
                 </router-link>
-                <div class="mt-3">
+                <div class="mt-2">
                     <p class="nav-header">{{ $t('title.accounts') }}</p>
                     <router-link
                             v-for="account in sortedAccounts" :key="account.id"
@@ -50,7 +50,7 @@
                         {{ $t('action.create.account') }}
                     </a>
                 </div>
-                <ul class="nav-small">
+                <ul class="nav-small my-2">
                     <li>
                         <router-link
                                 :to="{ name: 'settings.account' }"
