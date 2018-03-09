@@ -27,7 +27,7 @@ const AppIntl = {
 
         Vue.prototype.moment = moment;
 
-        Vue.prototype.$moneyFormatter = _.memoize(function() {
+        Vue.prototype.$moneyFormatter = _.memoize(function () {
             let currency = this.$store.state.user.currency;
             let locale = this.$store.state.user.locale;
 

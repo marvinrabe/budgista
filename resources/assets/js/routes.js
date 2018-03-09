@@ -1,9 +1,18 @@
+import Month from './intl/Month.js';
 
 export default [
     {
         path: '/',
+        name: 'home',
+        redirect: to => {
+            return {name: 'budget', params: {month: Month.current().toString()}};
+        }
+    },
+    {
+        path: '/budget/:month',
         name: 'budget',
-        component: require('./components/budget/Index.vue')
+        component: require('./components/budget/Index.vue'),
+        props: true
     },
     {
         path: '/categories',
