@@ -3,21 +3,21 @@
 
         <app-toolbar :title="$t('title.budget')">
             <div slot="title" class="d-flex">
-                <a href="#" class="text-light small"
-                   :title="$t('action.previousMonth')"
-                   @click.prevent.stop="showPreviousMonth">
+                <router-link
+                        :to="{ name: 'budget', params: {month: monthObject.previous().toString()} }"
+                        class="text-light small"
+                        :title="$t('action.previousMonth')">
                     <font-awesome-icon icon="chevron-left"/>
-                </a>
-                <date-format
-                        :value="month"
-                        class="mx-1"
-                        :options="{year: 'numeric', month: 'short'}">
-                </date-format>
-                <a href="#" class="text-light small"
-                   :title="$t('action.nextMonth')"
-                   @click.prevent.stop="showNextMonth">
+                </router-link>
+                <span class="mx-1">
+                    {{ $formatMonth(monthObject) }}
+                </span>
+                <router-link
+                        :to="{ name: 'budget', params: {month: monthObject.next().toString()} }"
+                        class="text-light small"
+                        :title="$t('action.previousMonth')">
                     <font-awesome-icon icon="chevron-right"/>
-                </a>
+                </router-link>
             </div>
 
             <div class="d-none d-sm-block ml-auto">
@@ -122,12 +122,17 @@
 
 <script>
     import row from './Row.vue'
+    import Month from '../../intl/Month.js'
 
     export default {
+        props: ['month'],
         components: {
             'category-row': row
         },
         computed: {
+            monthObject() {
+                return Month.fromString(this.month);
+            },
             allocated: function () {
                 let sum = 0;
                 this.rows.forEach(function (row) {
@@ -146,46 +151,40 @@
                 previousMonth: 0
             },
             loading: true,
-            month: new Date().getFullYear() + '-' + (new Date().getMonth() + 1),
-            rows: [],
-            previousMonth: null,
-            nextMonth: null
+            rows: []
         }),
 
         mounted() {
-            this.loadSheet('/api/month');
+            this.loadSheet();
+        },
+
+        beforeRouteUpdate(to, from, next) {
+            this.loadSheet(to.params.month);
+            next();
         },
 
         methods: {
-            loadSheet(url) {
+            reset() {
+                this.sheet = {
+                    income: 0,
+                    allocated: 0,
+                    previousMonth: 0
+                };
                 this.loading = true;
                 this.rows = [];
+            },
+            loadSheet(month) {
+                this.reset();
 
                 axios
-                    .get(url)
+                    .get('/api/month/' + (month || this.month))
                     .then(({data}) => {
                         this.loading = false;
                         this.sheet = data.data;
-                        this.month = this.sheet.month;
                         this.rows = this.sheet.rows;
                         this.previousMonth = data.links.prev;
                         this.nextMonth = data.links.next;
                     })
-            },
-            showPreviousMonth() {
-                let currentDate = new Date(this.month);
-                let newDate = new Date(currentDate.setMonth(currentDate.getMonth() - 1));
-                this.month = newDate.getFullYear() + '-' + (newDate.getMonth() + 1);
-
-                this.loadSheet(this.previousMonth);
-            },
-
-            showNextMonth() {
-                let currentDate = new Date(this.month);
-                let newDate = new Date(currentDate.setMonth(currentDate.getMonth() + 1));
-                this.month = newDate.getFullYear() + '-' + (newDate.getMonth() + 1);
-
-                this.loadSheet(this.nextMonth);
             }
 
         }

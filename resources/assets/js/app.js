@@ -15,9 +15,11 @@ import Vue from 'vue';
  * Font Awesome
  */
 import FontAwesome from './fontawesome';
+
 Vue.use(FontAwesome);
 
 import Snotify from 'vue-snotify';
+
 Vue.use(Snotify, {
     toast: {
         timeout: 9000
@@ -28,6 +30,7 @@ Vue.use(Snotify, {
  * Validation
  */
 import VeeValidate from 'vee-validate';
+
 Vue.use(VeeValidate, {
     validity: true
 });
@@ -83,6 +86,7 @@ Vue.component(
  * Translations
  */
 import VueI18n from 'vue-i18n'
+
 Vue.use(VueI18n);
 
 const messages = {
@@ -97,10 +101,15 @@ const i18n = new VueI18n({
     silentTranslationWarn: process.env.NODE_ENV === 'production'
 });
 
+Vue.prototype.$formatMonth = (month) => {
+    return messages[document.documentElement.lang].month[month.month] + ' ' + month.year;
+};
+
 /**
  * Intl
  */
 import AppIntl from './intl';
+
 Vue.use(AppIntl);
 
 /**
@@ -108,6 +117,7 @@ Vue.use(AppIntl);
  */
 import VueRouter from 'vue-router';
 import routes from './routes.js';
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({routes: routes});
@@ -121,6 +131,7 @@ import store from './store'
  * Scaffold
  */
 import AppLayout from './components/AppLayout';
+
 const Budgista = Vue.extend(AppLayout);
 
 /**

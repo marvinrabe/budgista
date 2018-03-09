@@ -64,7 +64,7 @@
                     .dispatch('deleteAccount', this.account)
                     .then(() => {
                         this.hideModal();
-                        this.$router.push({name: 'budget'});
+                        this.$router.push({name: 'home'});
                     });
             }
         }
