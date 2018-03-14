@@ -41,8 +41,8 @@
                 </a>
             </div>
             <div class="transactions-row"
-                 :class="[{ 'transactions-row-future': moment(item.date).isAfter() }]"
-                 v-if="!moment(item.date).isAfter() || showFutureTransactions"
+                 :class="[{ 'transactions-row-future': item.isFuture() }]"
+                 v-if="!item.isFuture() || showFutureTransactions"
                  v-for="(item, index) of transactions" :key="index">
                 <router-link
                         class="transaction-item"

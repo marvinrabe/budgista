@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import moment from 'moment';
+import Transaction from '../../models/Transaction';
 
 // transactions: [{ id, date, payee, amount, cleared, rrule, recurring, category: {id, name}, account_id }],
 const state = {
@@ -21,7 +21,7 @@ export const getters = {
     countFutureTransactions: (state, getters) => ({id}) => {
         return getters
             .findTransactionsByAccountId(id)
-            .filter(x => moment(x.date).isAfter())
+            .filter(x => x.isFuture())
             .length;
     },
     getPayees(state) {
@@ -41,7 +41,8 @@ const actions = {
                 if (data.category) {
                     commit('ADD_CATEGORY', data.data.category);
                 }
-                commit('ADD_TRANSACTION', data.data);
+                let transaction = Object.assign(new Transaction, data.data);
+                commit('ADD_TRANSACTION', transaction);
             });
     },
 
@@ -67,7 +68,10 @@ const actions = {
                     account_id: account_id,
                     url: data.links.next
                 });
-                data.data.forEach(transaction => commit('ADD_TRANSACTION', transaction));
+                data.data.forEach(rawTransaction => {
+                    let transaction = Object.assign(new Transaction, rawTransaction);
+                    commit('ADD_TRANSACTION', transaction)
+                });
             });
     },
 
@@ -75,8 +79,9 @@ const actions = {
         return axios
             .post('/api/transactions/', transaction)
             .then(({data}) => {
-                commit('ADD_TRANSACTION', data.data);
-                commit('ADD_BALANCE', data.data);
+                let transaction = Object.assign(new Transaction, data.data);
+                commit('ADD_TRANSACTION', transaction);
+                commit('ADD_BALANCE', transaction);
             });
     },
 
@@ -84,10 +89,11 @@ const actions = {
         return axios
             .put('/api/transactions/' + transaction.id, transaction)
             .then(({data}) => {
+                let transaction = Object.assign(new Transaction, data.data);
                 let oldTransaction = getters.findTransactionById(transaction.id);
                 commit('REMOVE_BALANCE', oldTransaction);
-                commit('ADD_TRANSACTION', data.data);
-                commit('ADD_BALANCE', data.data);
+                commit('ADD_TRANSACTION', transaction);
+                commit('ADD_BALANCE', transaction);
             });
     },
 
@@ -95,7 +101,8 @@ const actions = {
         return axios
             .put('/api/transactions/' + transaction.id + '/clear')
             .then(({data}) => {
-                commit('ADD_TRANSACTION', data.data);
+                let transaction = Object.assign(new Transaction, data.data);
+                commit('ADD_TRANSACTION', transaction);
             })
     },
 
