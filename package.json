@@ -13,7 +13,7 @@
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "deployment": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "test": "mocha-webpack --webpack-config=node_modules/laravel-mix/setup/webpack.config.js --require tests/Frontend/setup.js tests/Frontend/**/*.spec.js"
+    "test": "mocha-webpack --webpack-config=node_modules/laravel-mix/setup/webpack.config.js --require tests/Frontend/setup.js \"tests/Frontend/**/*.spec.js\""
   },
   "devDependencies": {
     "@fortawesome/fontawesome": "^1.1.4",
