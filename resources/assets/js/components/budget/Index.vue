@@ -122,7 +122,7 @@
 
 <script>
     import row from './Row.vue'
-    import Month from '../../intl/Month.js'
+    import Month from './Month.js'
 
     export default {
         props: ['month'],
