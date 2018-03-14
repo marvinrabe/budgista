@@ -1,4 +1,4 @@
-import Month from './intl/Month.js';
+import Month from './components/budget/Month.js';
 
 export default [
     {
