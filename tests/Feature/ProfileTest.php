@@ -98,7 +98,7 @@ class ProfileTest extends TestCase
         $category = factory(Category::class)->create([
             'user_id' => Auth()->id()
         ]);
-        $budget = $category->budgetIn(Month::current());
+        $budget = $category->budget(Month::current());
         $budget->amount = 1234;
         $budget->save();
 

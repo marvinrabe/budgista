@@ -2,10 +2,9 @@
 
 namespace App\AutoBudget;
 
+use App\Budget\Month;
 use App\Models\Transaction;
-use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use RRule\RRule;
 
 class Foresight
 {
@@ -16,9 +15,9 @@ class Foresight
 
     private $previouslySavedMoney;
 
-    public function __construct(Carbon $startAt, Collection $upcomingTransactions, $previouslySavedMoney = 0)
+    public function __construct(Month $month, Collection $upcomingTransactions, $previouslySavedMoney = 0)
     {
-        $this->startAt = $startAt;
+        $this->startAt = $month->firstDay();
         $this->upcomingTransactions = $upcomingTransactions;
         $this->previouslySavedMoney = $previouslySavedMoney;
     }

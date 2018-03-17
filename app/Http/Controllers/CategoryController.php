@@ -74,8 +74,8 @@ class CategoryController extends Controller
                 'category_id' => $newCategory->id
             ]);
 
-            $category->budgets()->get()->each(function(Budget $budget) use ($newCategory) {
-                $newBudget = $newCategory->budgetIn($budget->month);
+            $category->budgets()->get()->each(function (Budget $budget) use ($newCategory) {
+                $newBudget = $newCategory->budget($budget->month);
                 $newBudget->amount += $budget->amount;
                 $newBudget->save();
             });
@@ -97,11 +97,13 @@ class CategoryController extends Controller
 
         $month = Month::fromString(request('month'));
 
-        $categoryBudget = $category->budgetIn($month);
-        $categoryBudget->amount = request('amount');
-        $categoryBudget->save();
+        $budget = $category->budget($month);
 
-        return new BudgetCategory($category, $month);
+        $budget->update(
+            request(['amount'])
+        );
+
+        return $budget;
     }
 
     public function sort()
