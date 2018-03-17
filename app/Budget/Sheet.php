@@ -22,9 +22,9 @@ class Sheet implements JsonSerializable
         $this->user = $user;
         $this->month = $month;
 
-        foreach ($user->categories as $category) {
-            $this->rows[] = new Category($category, $month);
-        }
+        $this->rows = $user->categories->map(function($category) use ($month) {
+            return $category->budget($month);
+        });
     }
 
     public function getMonth()
@@ -73,11 +73,7 @@ class Sheet implements JsonSerializable
 
     public function getBudgeted()
     {
-        $sum = 0;
-        foreach ($this->rows as $row) {
-            $sum += $row->budget();
-        }
-        return $sum;
+        return $this->rows->sum('amount');
     }
 
     public function getAvailable()

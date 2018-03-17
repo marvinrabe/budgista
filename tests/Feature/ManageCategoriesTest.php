@@ -109,7 +109,7 @@ class ManageCategoriesTest extends TestCase
             'user_id' => Auth()->id()
         ]);
 
-        $budget = $categories->first()->budgetIn(Month::current());
+        $budget = $categories->first()->budget(Month::current());
         $budget->amount = 12345;
         $budget->save();
 
@@ -119,7 +119,7 @@ class ManageCategoriesTest extends TestCase
             ])
             ->assertSuccessful();
 
-        $this->assertEquals(12345, $categories->last()->budgetIn(Month::current())->amount);
+        $this->assertEquals(12345, $categories->last()->budget(Month::current())->amount);
     }
 
 }

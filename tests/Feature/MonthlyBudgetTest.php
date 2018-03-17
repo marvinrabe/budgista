@@ -14,7 +14,7 @@ class MonthlyBudgetTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function check_funds()
+    public function it_calculates_funds()
     {
         $this->signIn();
 
@@ -49,7 +49,7 @@ class MonthlyBudgetTest extends TestCase
     }
 
     /** @test */
-    public function check_activity()
+    public function it_calculates_activity()
     {
         $this->signIn();
 
@@ -89,7 +89,7 @@ class MonthlyBudgetTest extends TestCase
     }
 
     /** @test */
-    public function calculate_minimum_budgeted()
+    public function it_calculates_recommended_budget()
     {
         $this->signIn();
 
@@ -106,7 +106,7 @@ class MonthlyBudgetTest extends TestCase
             'user_id' => Auth()->id()
         ]);
 
-        $budgetLastMonth = $category->budgetIn($month->previous());
+        $budgetLastMonth = $category->budget($month->previous());
         $budgetLastMonth->amount = 10;
         $budgetLastMonth->save();
 
@@ -130,6 +130,27 @@ class MonthlyBudgetTest extends TestCase
                     ]
                 ]
             ]);
+    }
+
+    /** @test */
+    public function it_saves_budget()
+    {
+        $category = factory(Category::class)->create();
+        $month = Month::current();
+
+        $this
+            ->signIn($category->user)
+            ->put('/api/categories/' . $category->id . '/budget', [
+                'month' => (string) $month,
+                'amount' => 123456
+            ])
+            ->assertSuccessful();
+
+        $this->assertDatabaseHas('budgets', [
+            'category_id' => $category->id,
+            'month' => (string) $month,
+            'amount' => 123456
+        ]);
     }
 
 }

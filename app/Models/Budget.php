@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use App\AutoBudget\Foresight;
 use App\Models\Traits\BelongsToUserTrait;
 use App\Models\Traits\HasCompositePrimaryKeyTrait;
 use App\Budget\Month;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property Category $category
  */
-class Budget extends Model
+class Budget extends Model implements \JsonSerializable
 {
 
     use BelongsToUserTrait,
@@ -39,6 +41,70 @@ class Budget extends Model
     public function category()
     {
         return $this->belongsTo('App\Models\Category');
+    }
+
+    private function previousMonthBudget()
+    {
+        return DB::table('budgets')
+            ->join('categories', 'categories.id', '=', 'budgets.category_id')
+            ->where([
+                ['month', '<', (string)$this->month],
+                ['category_id', '=', $this->category_id]
+            ])
+            ->sum('amount');
+    }
+
+    public function previousMonthAvailable()
+    {
+        $activity = $this
+            ->category->transactions()
+            ->where('date', '<=', $this->month->previous()->lastDay())
+            ->sum('amount');
+        return $this->previousMonthBudget() + $activity;
+    }
+
+    public function activity()
+    {
+        return $this
+            ->category->transactions()
+            ->whereBetween('date', [
+                $this->month->firstDay(),
+                $this->month->lastDay()
+            ])
+            ->sum('amount');
+    }
+
+    public function available()
+    {
+        return $this->previousMonthAvailable() + $this->amount + $this->activity();
+    }
+
+    public function recommendedBudget()
+    {
+        $upcomingTransactions = $this
+            ->category->transactions()
+            ->where('date', '>=', $this->month->firstDay())
+            ->get();
+
+        return (new Foresight(
+            $this->month,
+            $upcomingTransactions,
+            $this->previousMonthAvailable()
+        ))->recommendedBudget();
+    }
+
+    function jsonSerialize()
+    {
+        return [
+            'id' => $this->category->id,
+            'name' => $this->category->name,
+            'month' => (string)$this->month,
+            'previousMonth' => (int)$this->previousMonthAvailable(),
+            'budget' => (int)$this->amount,
+            'activity' => (int)$this->activity(),
+            'available' => (int)$this->available(),
+            'recommendedBudget' => (int)$this->recommendedBudget()
+        ];
     }
 
 }
