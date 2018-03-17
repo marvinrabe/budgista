@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\AutoBudget\Foresight;
+use App\Budget\Foresight;
 use App\Budget\Month;
 use App\Models\Transaction;
 use Carbon\Carbon;

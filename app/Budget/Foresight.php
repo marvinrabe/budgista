@@ -1,8 +1,7 @@
 <?php
 
-namespace App\AutoBudget;
+namespace App\Budget;
 
-use App\Budget\Month;
 use App\Models\Transaction;
 use Illuminate\Support\Collection;
 

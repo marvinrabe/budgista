@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\AutoBudget\AutoBudget;
 use Illuminate\Http\Resources\Json\Resource;
 
 class Category extends Resource

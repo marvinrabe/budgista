@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Transaction;
 use App\Rules\Own;
-use Illuminate\Http\Request;
 use App\Http\Resources\Transaction as TransactionResource;
 use RRule\RRule;
 
@@ -23,7 +22,7 @@ class TransactionController extends Controller
 
     public function store()
     {
-        $this->authorize('create', Transaction::class);;
+        $this->authorize('create', Transaction::class);
 
         $transaction = Transaction::make(
             request()->validate([
