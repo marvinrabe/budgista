@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Transaction;
 use App\Budget\Month;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class MonthlyBudgetTest extends TestCase
@@ -141,16 +143,38 @@ class MonthlyBudgetTest extends TestCase
         $this
             ->signIn($category->user)
             ->put('/api/categories/' . $category->id . '/budget', [
-                'month' => (string) $month,
+                'month' => (string)$month,
                 'amount' => 123456
             ])
             ->assertSuccessful();
 
         $this->assertDatabaseHas('budgets', [
             'category_id' => $category->id,
-            'month' => (string) $month,
+            'month' => (string)$month,
             'amount' => 123456
         ]);
+    }
+
+    /** @test */
+    public function it_cleans_the_database()
+    {
+        $category = factory(Category::class)->create();
+        $month = Month::current();
+
+        $category->budget($month)->update([
+            'amount' => 0
+        ]);
+
+        $category->budget($month->previous())->update([
+            'amount' => 123
+        ]);
+
+        $this->assertEquals(2, DB::table('budgets')->count());
+
+        Artisan::call('app:clean');
+
+        $this->assertEquals(1, DB::table('budgets')->count());
+        $this->assertEquals(0, DB::table('budgets')->where('amount', '=', 0)->count());
     }
 
 }
