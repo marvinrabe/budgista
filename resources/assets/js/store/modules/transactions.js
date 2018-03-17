@@ -103,6 +103,7 @@ const actions = {
             .then(({data}) => {
                 let transaction = Object.assign(new Transaction, data.data);
                 commit('ADD_TRANSACTION', transaction);
+                commit('CLEAR_ACCOUNT_BALANCE', transaction);
             })
     },
 
@@ -121,7 +122,6 @@ const actions = {
 const mutations = {
     ADD_TRANSACTION(state, transaction) {
         state.transactions = state.transactions.filter(x => x.id !== transaction.id);
-        // TODO unset category attribute if exists and set category_id
         state.transactions.push(transaction);
     },
     NEXT_TRANSACTIONS(state, {account_id, url}) {
