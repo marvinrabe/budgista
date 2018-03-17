@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\Clean;
 use App\Console\Commands\ProcessRecurringTransactions;
 use App\Console\Commands\PromoteUserToAdmin;
 use Illuminate\Console\Scheduling\Schedule;
@@ -15,6 +16,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        Clean::class,
         ProcessRecurringTransactions::class,
         PromoteUserToAdmin::class
     ];
@@ -27,6 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command(Clean::class)->monthly();
         $schedule->command(ProcessRecurringTransactions::class)->hourly();
     }
 
