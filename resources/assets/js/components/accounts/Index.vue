@@ -5,7 +5,7 @@
 
             <div slot="submenu">
                 <a class="btn btn-secondary" href="#"
-                   @click.stop="$refs.updateAccount.showModal(account)"
+                   @click.prevent="$refs.updateAccount.showModal(account)"
                    :title="$t('action.edit.account')">
                     <font-awesome-icon icon="cog"/>
                 </a>
@@ -77,8 +77,8 @@
                 <div class="transaction-clear">
                     <a href="#"
                        v-if="new Date(item.date) <= new Date()"
-                       v-bind:class="[{ 'text-success': item.cleared }, {'text-darker-light': !item.cleared}]"
-                       v-on:click="toggleCleared(item)">
+                       :class="[{ 'text-success': item.cleared }, {'text-darker-light': !item.cleared}]"
+                       @click.prevent="toggleCleared(item)">
                         <font-awesome-icon icon="check-circle" symbol/>
                     </a>
                 </div>

@@ -54,13 +54,6 @@ const actions = {
             .then(({data}) => {
                 commit('REMOVE_ACCOUNT', account);
             });
-    },
-
-    clearTransaction({commit}, transaction) {
-        commit('CLEAR_ACCOUNT_BALANCE', {
-            account_id: transaction.account_id,
-            value: (transaction.cleared ? -1 : 1) * transaction.amount
-        });
     }
 
 };
@@ -74,15 +67,16 @@ const mutations = {
     REMOVE_ACCOUNT(state, {id}) {
         state.accounts = state.accounts.filter(x => x.id !== id);
     },
-    CLEAR_ACCOUNT_BALANCE(state, {account_id, value}) {
-        let account = state.accounts.find(x => x.id === account_id);
+    CLEAR_ACCOUNT_BALANCE(state, {account_id, amount, cleared}) {
+        const account = state.accounts.find(x => x.id === account_id);
+        const value = (cleared ? 1 : -1) * amount;
         account.clearedBalance += value;
         account.unclearedBalance -= value;
     },
     ADD_BALANCE(state, transaction) {
         let account = state.accounts.find(x => x.id === transaction.account_id);
 
-        if (new Date(transaction.date) > new Date()) {
+        if (transaction.isFuture()) {
             return;
         }
 
@@ -96,7 +90,7 @@ const mutations = {
     REMOVE_BALANCE(state, transaction) {
         let account = state.accounts.find(x => x.id === transaction.account_id);
 
-        if (new Date(transaction.date) > new Date()) {
+        if (transaction.isFuture()) {
             return;
         }
 
