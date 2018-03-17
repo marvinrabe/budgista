@@ -5,7 +5,7 @@ namespace App\Models;
 use Alsofronie\Uuid\UuidModelTrait;
 use App\AutoBudget\AutoBudget;
 use App\Models\Traits\BelongsToUserTrait;
-use App\Month;
+use App\Budget\Month;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 

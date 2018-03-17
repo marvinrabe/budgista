@@ -1,19 +1,19 @@
 <?php
 
-namespace App;
+namespace App\Budget;
 
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use JsonSerializable;
 
-class MonthlyBudget implements JsonSerializable
+class Sheet implements JsonSerializable
 {
 
     protected $user;
     protected $month;
 
     /**
-     * @var Row[]
+     * @var Category[]
      */
     protected $rows = [];
 
@@ -23,7 +23,7 @@ class MonthlyBudget implements JsonSerializable
         $this->month = $month;
 
         foreach ($user->categories as $category) {
-            $this->rows[] = new Row($category, $month);
+            $this->rows[] = new Category($category, $month);
         }
     }
 

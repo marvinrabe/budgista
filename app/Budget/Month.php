@@ -1,8 +1,7 @@
 <?php
 
-namespace App;
+namespace App\Budget;
 
-use App\Models\Category;
 use Carbon\Carbon;
 
 class Month

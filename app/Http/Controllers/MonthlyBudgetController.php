@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Month;
+use App\Budget\Month;
 use Auth;
 
 class MonthlyBudgetController extends Controller

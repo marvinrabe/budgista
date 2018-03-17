@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Category as CategoryResource;
 use App\Models\Budget;
 use App\Models\Category;
-use App\Month;
-use App\Row;
+use App\Budget\Month;
+use App\Budget\Category as BudgetCategory;
 use App\Rules\Own;
 use Illuminate\Support\Facades\Auth;
 
@@ -101,7 +101,7 @@ class CategoryController extends Controller
         $categoryBudget->amount = request('amount');
         $categoryBudget->save();
 
-        return new Row($category, $month);
+        return new BudgetCategory($category, $month);
     }
 
     public function sort()

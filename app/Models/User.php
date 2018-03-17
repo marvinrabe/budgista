@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Month;
-use App\MonthlyBudget;
+use App\Budget\Month;
+use App\Budget\Sheet;
 use App\Mail\ResetPasswordNotification;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -65,7 +65,7 @@ class User extends Authenticatable
 
     public function budget(Month $month)
     {
-        return new MonthlyBudget($this, $month);
+        return new Sheet($this, $month);
     }
 
     public function transactions()
