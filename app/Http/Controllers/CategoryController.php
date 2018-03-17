@@ -6,7 +6,6 @@ use App\Http\Resources\Category as CategoryResource;
 use App\Models\Budget;
 use App\Models\Category;
 use App\Budget\Month;
-use App\Budget\Category as BudgetCategory;
 use App\Rules\Own;
 use Illuminate\Support\Facades\Auth;
 
