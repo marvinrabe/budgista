@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
-use App\Month;
+use App\Budget\Month;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

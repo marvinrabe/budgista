@@ -1,19 +1,19 @@
 <?php
 
-namespace App;
+namespace App\Budget;
 
 use App\AutoBudget\Foresight;
-use App\Models\Category;
+use App\Models\Category as CategoryModel;
 use Illuminate\Support\Facades\DB;
 use JsonSerializable;
 
-class Row implements JsonSerializable
+class Category implements JsonSerializable
 {
 
     protected $category;
     protected $month;
 
-    public function __construct(Category $category, Month $month)
+    public function __construct(CategoryModel $category, Month $month)
     {
         $this->category = $category;
         $this->month = $month;

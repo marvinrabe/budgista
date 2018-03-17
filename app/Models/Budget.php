@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\BelongsToUserTrait;
 use App\Models\Traits\HasCompositePrimaryKeyTrait;
-use App\Month;
+use App\Budget\Month;
 use Illuminate\Database\Eloquent\Model;
 
 /**
