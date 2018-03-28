@@ -5,8 +5,7 @@ jobs:
     working_directory: ~/repo
 
     docker:
-      - image: circleci/php:7.1-cli
-
+      - image: circleci/php:7.2-cli-node-browsers
       - image: circleci/mysql:5.7
 
     steps:
@@ -15,9 +14,7 @@ jobs:
 
       - run:
           name: Install system packages
-          command: |
-            curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-            sudo apt-get update && sudo apt-get -y install nodejs icu-devtools libicu-dev
+          command: sudo apt install -y icu-devtools libicu-dev
 
       - run:
           name: Install PHP extensions
@@ -27,18 +24,22 @@ jobs:
           name: Setup configuration
           command: cp ./.circleci/.env.testing ./.env
 
-      # NPM
+      # Yarn
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}
+            - yarn-packages-master
+            - yarn-packages-
       - run:
-          name: Install NodeJS Packages
-          command: |
-            npm install
-            npm install full-icu
+          name: Install Yarn Dependencies
+          command: yarn install
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
-            - ./node_modules
+            - node_modules/
 
       - run:
           name: Test Mocha
@@ -48,14 +49,16 @@ jobs:
 
       # Composer
       - restore_cache:
+          name: Restore Composer Package Cache
           keys:
           - v1-dependencies-{{ checksum "composer.lock" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run:
-          name: Install Composer dependencies
+          name: Install Composer Dependencies
           command: composer install -n --prefer-dist
       - save_cache:
+          name: Save Composer Package Cache
           key: v1-dependencies-{{ checksum "composer.lock" }}
           paths:
             - ./vendor
