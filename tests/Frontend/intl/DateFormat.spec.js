@@ -1,4 +1,4 @@
-import {shallow, createLocalVue} from 'vue-test-utils';
+import {shallow, createLocalVue} from '@vue/test-utils';
 import expect from 'expect';
 import DateFormat from '../../../resources/assets/js/intl/DateFormat.vue';
 import Vuex from 'vuex';
