@@ -4,7 +4,7 @@ $table-cell-padding: .5em;
 
 @function match-hue($color, $root) {
   $root-hue: hue($root);
-  $color-saturation: 21%;
+  $color-saturation: 13%;
   $color-lightness: lightness($color);
   @return hsl($root-hue, $color-saturation, $color-lightness);
 }
