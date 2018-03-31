@@ -1,0 +1,59 @@
+/*
+ * Toast
+ */
+@import "~vue-snotify/styles/material.css";
+
+.snotify-success {
+  background-color: theme-color('success');
+}
+
+.snotify-error {
+  background-color: theme-color('danger');
+}
+
+.snotify-success .snotifyToast__progressBar {
+  background-color: darken(theme-color('success'), 10%);
+}
+
+.snotify-success .snotifyToast__progressBar__percentage {
+  background-color: lighten(theme-color('success'), 10%);
+}
+
+.snotify-error .snotifyToast__progressBar {
+  background-color: darken(theme-color('danger'), 15%);
+}
+
+.snotify-error .snotifyToast__progressBar__percentage {
+  background-color: lighten(theme-color('danger'), 10%);
+}
+
+.snotifyToast {
+  @extend .shadow-2;
+  border-radius: $border-radius;
+  padding: 0;
+}
+
+.snotify-icon {
+  display: none;
+}
+
+.snotifyToast__inner {
+  padding: 15px;
+}
+
+.snotifyToast__title {
+  font-size: 1rem;
+  padding: 0;
+  color: white !important;
+  font-weight: bold;
+}
+
+.snotifyToast__body {
+  font-size: 1rem;
+  padding: 0;
+  color: white !important;
+}
+
+.snotifyToast__progressBar, .snotifyToast__progressBar__percentage {
+  height: 5px;
+}
