@@ -18,6 +18,9 @@ import FontAwesome from './fontawesome';
 
 Vue.use(FontAwesome);
 
+/**
+ * Toasts
+ */
 import Snotify from 'vue-snotify';
 
 Vue.use(Snotify, {
@@ -83,51 +86,6 @@ Vue.component(
 );
 
 /**
- * Translations
- */
-import VueI18n from 'vue-i18n'
-
-Vue.use(VueI18n);
-
-const messages = {
-    en: require('./lang/en.json'),
-    de: require('./lang/de.json')
-};
-
-const i18n = new VueI18n({
-    locale: document.documentElement.lang,
-    fallbackLocale: 'en',
-    messages: messages,
-    silentTranslationWarn: process.env.NODE_ENV === 'production'
-});
-
-Vue.prototype.$formatMonth = (month) => {
-    return messages[document.documentElement.lang].month[month.month] + ' ' + month.year;
-};
-
-/**
- * Intl
- */
-import AppIntl from './intl';
-
-Vue.use(AppIntl);
-
-/**
- * Routes
- */
-import VueRouter from 'vue-router';
-import routes from './routes.js';
-
-Vue.use(VueRouter);
-
-const router = new VueRouter({routes: routes});
-
-/**
- * Store
- */
-import store from './store'
-
-/**
  * Scaffold
  */
 import AppLayout from './components/AppLayout';
@@ -137,4 +95,8 @@ const Budgista = Vue.extend(AppLayout);
 /**
  * And go!
  */
-new Budgista({router, store, i18n}).$mount('#app');
+import {i18n} from './i18n'
+import {router} from './router'
+import store from './store'
+
+new Budgista({i18n, router, store}).$mount('#app');

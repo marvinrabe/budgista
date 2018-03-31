@@ -49,10 +49,7 @@
                         :to="{ name: 'transaction.edit', params: { transaction_id: item.id }}">
                     <span class="transaction-column">
                         <span class="transaction-date">
-                            <date-format
-                                    :value="item.date"
-                                    :options="{year: 'numeric', month: '2-digit', day: '2-digit'}">
-                            </date-format>
+                            {{ $dateFormatter().format(new Date(item.date)) }}
                             <span v-if="item.recurring"
                                   :title="humanRRule(item.rrule)">
                                 <font-awesome-icon icon="sync" symbol/>
@@ -139,7 +136,7 @@
         created() {
             this.$store.dispatch('loadTransactions', this.account_id);
         },
-        beforeRouteUpdate (to, from, next) {
+        beforeRouteUpdate(to, from, next) {
             this.showFutureTransactions = false;
             next();
         },

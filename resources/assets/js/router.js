@@ -1,6 +1,10 @@
-import Month from './components/budget/Month.js';
+import Vue from 'vue'
+import VueRouter from 'vue-router';
+import Month from './models/Month'
 
-export default [
+Vue.use(VueRouter);
+
+export const routes = [
     {
         path: '/',
         name: 'home',
@@ -28,7 +32,6 @@ export default [
     },
     {
         path: '/settings',
-        name: 'settings',
         component: require('./components/settings/Index.vue'),
         children: [
             {
@@ -62,3 +65,5 @@ export default [
         props: true
     }
 ];
+
+export const router = new VueRouter({routes: routes});

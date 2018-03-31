@@ -1,8 +1,8 @@
 <template>
     <span style="white-space: nowrap;">{{ formattedValue }}</span>
 </template>
-
 <script>
+    // {year: 'numeric', month: '2-digit', day: '2-digit'}
     export default {
         props: ['value', 'options'],
         computed: {
@@ -10,7 +10,8 @@
                 let locale = this.$store.state.locale;
                 let date = new Date(this.value);
 
-                return Intl.DateTimeFormat(locale, this.options).format(date);
+                return this.$d(date, 'short', this.$store.state.locale);
+                //return Intl.DateTimeFormat(locale, this.options).format(date);
             }
         }
     }

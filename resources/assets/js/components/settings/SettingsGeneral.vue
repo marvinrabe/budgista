@@ -82,7 +82,7 @@
                 this.$store.dispatch('updateSettings', this.form)
                     .then(() => {
                         this.saving = false;
-                        location.reload();
+                        //location.reload();
                     })
                     .catch(exception => {
                         this.saving = false;

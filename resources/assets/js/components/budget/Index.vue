@@ -10,7 +10,7 @@
                     <font-awesome-icon icon="chevron-left"/>
                 </router-link>
                 <span class="mx-1">
-                    {{ $formatMonth(monthObject) }}
+                    {{ monthObject.format() }}
                 </span>
                 <router-link
                         :to="{ name: 'budget', params: {month: monthObject.next().toString()} }"
@@ -122,7 +122,7 @@
 
 <script>
     import row from './Row.vue'
-    import Month from './Month.js'
+    import Month from '../../models/Month.js'
 
     export default {
         props: ['month'],

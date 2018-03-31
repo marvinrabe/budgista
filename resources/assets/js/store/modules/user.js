@@ -1,3 +1,5 @@
+import {setLanguage} from '../../i18n'
+
 const state = {
     email: '',
     language: 'en',
@@ -13,12 +15,18 @@ const actions = {
         return axios
             .get('/api/user')
             .then(({data}) => {
+                setLanguage(data.data.language);
                 commit('LOAD_USER', data.data);
             });
     },
 
     updateSettings({commit}, data) {
-        return axios.put('/api/user', data);
+        return axios
+            .put('/api/user', data)
+            .then(({data}) => {
+                setLanguage(data.data.language);
+                commit('LOAD_USER', data.data);
+            });
     },
 
     updateEmail({commit}, data) {
