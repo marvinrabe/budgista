@@ -82,7 +82,7 @@
                 this.$store.dispatch('updateSettings', this.form)
                     .then(() => {
                         this.saving = false;
-                        //location.reload();
+                        this.$snotify.success(this.$t('messages.updateSettings'), this.$t('notification.successful'));
                     })
                     .catch(exception => {
                         this.saving = false;
