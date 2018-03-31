@@ -10,7 +10,8 @@ export default {
   },
   "messages": {
     "updateEmail": "E-Mail Adresse wurde geändert.",
-    "updatePassword": "Passwort wurde geändert."
+    "updatePassword": "Passwort wurde geändert.",
+    "updateSettings": "Einstellungen wurden gespeichert."
   },
   "action": {
     "save": "Speichern",
