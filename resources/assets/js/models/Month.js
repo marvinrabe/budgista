@@ -1,4 +1,5 @@
 import moment from 'moment';
+import {i18n} from '../i18n'
 
 export default class Month {
 
@@ -33,5 +34,9 @@ export default class Month {
     next() {
         let next = this.getDate().add(1, 'months');
         return new Month(next.year(), next.month() + 1);
+    }
+
+    format() {
+        return i18n.messages[i18n.locale].month[this.month] + ' ' + this.year;
     }
 };
