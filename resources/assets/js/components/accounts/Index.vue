@@ -52,7 +52,7 @@
                             {{ $dateFormatter().format(new Date(item.date)) }}
                             <span v-if="item.recurring"
                                   :title="humanRRule(item.rrule)">
-                                <font-awesome-icon icon="sync" symbol/>
+                                <font-awesome-icon icon="sync"/>
                             </span>
                         </span>
                         <span class="transaction-payee">
@@ -76,7 +76,7 @@
                        v-if="new Date(item.date) <= new Date()"
                        :class="[{ 'text-success': item.cleared }, {'text-darker-light': !item.cleared}]"
                        @click.prevent="toggleCleared(item)">
-                        <font-awesome-icon icon="check-circle" symbol/>
+                        <font-awesome-icon icon="check-circle"/>
                     </a>
                 </div>
             </div>
