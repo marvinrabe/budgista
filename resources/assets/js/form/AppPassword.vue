@@ -4,12 +4,7 @@
             <slot :bindings="bindings" :handlers="handlers"></slot>
 
             <a href="#" class="VuePassword__Toggle text-darker-light" role="button" @click.prevent="togglePassword">
-                <span v-show="type === 'password'">
-                    <font-awesome-icon icon="eye" />
-                </span>
-                <span v-show="type === 'text'">
-                    <font-awesome-icon icon="eye-slash" />
-                </span>
+                <font-awesome-icon :icon="toggleIcon" />
             </a>
         </div>
 
@@ -73,6 +68,9 @@
 </style>
 
 <script>
+    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+    import faEye from '@fortawesome/fontawesome-free-solid/faEye'
+    import faEyeSlash from '@fortawesome/fontawesome-free-solid/faEyeSlash'
     import passwordStrength from 'zxcvbn'
 
     export default {
@@ -95,6 +93,9 @@
                 default: false
             }
         },
+        components: {
+            FontAwesomeIcon
+        },
         data() {
             return {
                 type: 'password',
@@ -102,6 +103,12 @@
             }
         },
         computed: {
+            toggleIcon() {
+                if(this.type === 'password') {
+                    return faEye;
+                }
+                return faEyeSlash;
+            },
             strengthClass() {
                 if (this.strengthClasses[this.strength.score]) {
                     return this.strengthClasses[this.strength.score]
