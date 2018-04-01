@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="alternate" hreflang="x-default" href="{{ route('app') }}" />
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 
     @include('snippets.icons')
 
