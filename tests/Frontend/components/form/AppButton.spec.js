@@ -1,6 +1,6 @@
 import {mount} from '@vue/test-utils';
 import expect from 'expect';
-import AppButton from '@/form/AppButton.vue';
+import AppButton from '@/components/form/AppButton.vue';
 
 describe('AppButton', () => {
 

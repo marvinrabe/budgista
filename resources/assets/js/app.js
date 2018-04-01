@@ -57,22 +57,22 @@ Vue.component(
 
 Vue.component(
     'app-form',
-    require('./form/AppForm.vue')
+    require('./components/form/AppForm.vue')
 );
 
 Vue.component(
     'app-password',
-    require('./form/AppPassword.vue')
+    require('./components/form/AppPassword.vue')
 );
 
 Vue.component(
     'app-button',
-    require('./form/AppButton.vue')
+    require('./components/form/AppButton.vue')
 );
 
 Vue.component(
     'form-group',
-    require('./form/FormGroup.vue')
+    require('./components/form/AppFormGroup.vue')
 );
 
 Vue.component(

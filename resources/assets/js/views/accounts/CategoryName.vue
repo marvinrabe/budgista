@@ -5,12 +5,12 @@
 </template>
 
 <script>
-    import AppElipsis from '../AppEllipsis';
+    import AppElipsis from '../../components/AppEllipsis';
 
     export default {
         props: {
             id: {
-                type: Number
+                type: String
             }
         },
         components: {
