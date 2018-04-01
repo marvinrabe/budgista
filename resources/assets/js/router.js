@@ -22,46 +22,46 @@ export const routes = [
     {
         path: '/budget/:month',
         name: 'budget',
-        component: require('./components/budget/Index.vue'),
+        component: require('./views/budget/Index.vue'),
         props: true
     },
     {
         path: '/categories',
         name: 'categories',
-        component: require('./components/categories/Index.vue')
+        component: require('./views/categories/Index.vue')
     },
     {
         path: '/settings',
-        component: require('./components/settings/Index.vue'),
+        component: require('./views/settings/Index.vue'),
         children: [
             {
                 path: '',
                 name: 'settings.account',
-                component: require('./components/settings/Account.vue')
+                component: require('./views/settings/Account.vue')
             },
             {
                 path: 'security',
                 name: 'settings.security',
-                component: require('./components/settings/Security.vue')
+                component: require('./views/settings/Security.vue')
             }
         ]
     },
     {
         path: '/account/:account_id',
         name: 'account',
-        component: require('./components/accounts/Index.vue'),
+        component: require('./views/accounts/Index.vue'),
         props: true
     },
     {
         path: '/account/:account_id/newTransaction',
         name: 'transaction.new',
-        component: require('./components/transactions/New.vue'),
+        component: require('./views/transactions/New.vue'),
         props: true
     },
     {
         path: '/transaction/:transaction_id',
         name: 'transaction.edit',
-        component: require('./components/transactions/Edit.vue'),
+        component: require('./views/transactions/Edit.vue'),
         props: true
     }
 ];
