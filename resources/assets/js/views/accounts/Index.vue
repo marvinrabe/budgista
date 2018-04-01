@@ -33,7 +33,8 @@
             <div class="transaction-clear">&nbsp;</div>
         </div>
 
-        <div class="content">
+        <reconcile-form v-if="isEmpty" :account="account"></reconcile-form>
+        <div v-else class="content">
             <div class="text-center p-1 transactions-row-dummy"
                  v-if="countFutureTransactions > 0 && !showFutureTransactions">
                 <a href="#" class="small" @click.prevent="showFutureTransactions = true">
@@ -41,10 +42,10 @@
                 </a>
             </div>
             <transaction-row
-                v-for="transaction of transactions"
-                 v-if="!transaction.isFuture() || showFutureTransactions"
-                 :key="transaction.id"
-                 :transaction="transaction">
+                    v-for="transaction of transactions"
+                    v-if="!transaction.isFuture() || showFutureTransactions"
+                    :key="transaction.id"
+                    :transaction="transaction">
             </transaction-row>
             <infinite-loading :key="account_id" @infinite="loadMore" spinner="waveDots" ref="infiniteLoading">
                 <span slot="no-more"></span>
@@ -73,21 +74,27 @@
     import InfiniteLoading from 'vue-infinite-loading';
     import UpdateAccount from './UpdateAccount';
     import TransactionRow from './TransactionRow';
+    import ReconcileForm from './ReconcileForm';
 
     export default {
         props: ['account_id'],
         components: {
             Balance,
-            TransactionRow,
             InfiniteLoading,
+            ReconcileForm,
+            TransactionRow,
             UpdateAccount
         },
         data() {
             return {
-                showFutureTransactions: false
+                showFutureTransactions: false,
+                loading: false
             };
         },
         computed: {
+            isEmpty() {
+                return this.transactions.length === 0 && !this.loading;
+            },
             account() {
                 return this.$store.getters.findAccountById(this.account_id);
             },
@@ -112,6 +119,7 @@
         },
         methods: {
             loadMore: function ($state) {
+                this.loading = true;
                 this.$store.dispatch('loadMoreTransactions', this.account.id)
                     .then(() => {
                         $state.loaded();
@@ -119,6 +127,9 @@
                     .catch(() => {
                         $state.loaded();
                         $state.complete();
+                    })
+                    .finally(() => {
+                        this.loading = false;
                     });
             }
         }
