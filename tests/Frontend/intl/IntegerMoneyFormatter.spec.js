@@ -1,5 +1,5 @@
 import expect from 'expect';
-import IntegerMoneyFormatter from '../../../resources/assets/js/intl/IntegerMoneyFormatter.js';
+import IntegerMoneyFormatter from '../../../resources/assets/js/i18n/IntegerMoneyFormatter.js';
 
 describe('IntegerMoneyFormatter', () => {
 
