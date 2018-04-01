@@ -57,8 +57,8 @@
                 this.date = transaction.date;
                 this.payee = transaction.payee;
                 this.category = '';
-                if (transaction.category) {
-                    this.category = transaction.category.id;
+                if (transaction.category_id) {
+                    this.category = transaction.category_id;
                 }
                 if (transaction.recurring) {
                     let rule = rrulestr(transaction.rrule+";COUNT=1");
