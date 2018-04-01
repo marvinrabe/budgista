@@ -9,8 +9,6 @@ return [
     'home' => 'Home',
     'users' => 'Users',
     'help' => 'Help',
-
-    // Used in Settings
-    'settings' => 'Settings'
+    'terms' => 'Terms of Service'
 
 ];

@@ -10,19 +10,19 @@
 
             <h1 class="card-title h4">{{ trans('title.login') }}</h1>
 
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('login') }}" novalidate>
                 {{ csrf_field() }}
 
                 <div class="form-group">
                     <label for="email" class="control-label">{{ trans('form.email') }}</label>
 
                     <input id="email" type="email"
-                           class="form-control {{ $errors->has('email') ? 'border-danger' : '' }}" name="email"
+                           class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email"
                            value="{{ old('email') }}" required
                            autofocus>
 
                     @if ($errors->has('email'))
-                        <div class="form-text text-danger">
+                        <div class="invalid-feedback">
                             {{ $errors->first('email') }}
                         </div>
                     @endif
@@ -34,7 +34,7 @@
                     <app-password :disable-strength="true">
                         <input id="password"
                                name="password"
-                               class="form-control {{ $errors->has('password') ? 'border-danger' : '' }}"
+                               class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
                                slot-scope="{bindings, handlers}"
                                v-bind="bindings"
                                v-on="handlers"
@@ -42,7 +42,7 @@
                     </app-password>
 
                     @if ($errors->has('password'))
-                        <div class="form-text text-danger">
+                        <div class="invalid-feedback">
                             {{ $errors->first('password') }}
                         </div>
                     @endif

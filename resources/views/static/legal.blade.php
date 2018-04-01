@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="text-center">
+    <div class="container text-center">
         <h1>{{ trans('title.legal') }}</h1>
 
         <p>{{ trans('static.legal.tmg_notice') }}</p>

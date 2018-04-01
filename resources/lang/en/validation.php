@@ -101,9 +101,9 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+        'terms' => [
+            'required' => 'You must agree before submitting.',
+        ]
     ],
 
     /*

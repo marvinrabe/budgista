@@ -17,6 +17,7 @@ class RegisterTest extends TestCase
             ->post('/register', [
                 'email' => 'john.doe@example.com',
                 'password' => 'secret',
+                'terms' => true
             ])
             ->assertRedirect(route('app'));
 
