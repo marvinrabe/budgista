@@ -33,7 +33,7 @@ return [
             [
                 'icon' => 'far fa-life-ring',
                 'title' => 'Immer für dich da',
-                'body' => 'Wenn du Schwierigkeiten beim Führen eines Budgets hast, dann frage einfach per E-Mail, Facebook oder Twitter nach Hilfe. Wir beantworten jede Frage. 42!'
+                'body' => 'Wenn du Schwierigkeiten beim Führen eines Budgets hast, dann frage einfach per E-Mail nach Hilfe. Wir beantworten jede Frage. 42!'
             ],
             [
                 'icon' => 'fa fa-lock',
