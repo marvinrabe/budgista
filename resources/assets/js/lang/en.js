@@ -58,13 +58,13 @@ export default {
         "uncategorized": "Uncategorized",
         "available": "Available",
         "recommendedBudget": "Recommended Budget",
-        "allocated": "Allocated",
-        "unallocated": "Unallocated",
-        "previousMonth": "Previous Month",
-        "balance": {
-            "current": "Present",
-            "upcoming": "Upcoming",
-            "future": "Available"
+        allocated: "Budgeted",
+        unallocated: "To be Budgeted",
+        previousMonth: "Previous Month",
+        balance: {
+            current: "Cleared",
+            upcoming: "Uncleared",
+            future: "Balance"
         },
         "date": "Date",
         "payee": "Payee",

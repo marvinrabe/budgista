@@ -9,37 +9,37 @@
                     <div class="d-flex align-items-center" v-if="!loading">
                         <div class="d-none d-lg-block kpi small mr-2">
                             <money-format
-                                    class="font-weight-bold"
+                                    class="font-weight-bold text-number"
                                     :value="sheet.previousMonth">
                             </money-format>
                             <br>
-                            <span class="kpi-label">{{ $t('form.previousMonth') }}</span>
+                            <span class="small kpi-label">{{ $t('form.previousMonth') }}</span>
                         </div>
                         <div class="d-none d-lg-block kpi small mr-2">
                             <money-format
-                                    class="font-weight-bold"
+                                    class="font-weight-bold text-number"
                                     :value="sheet.income">
                             </money-format>
                             <br>
-                            <span class="kpi-label">{{ $t('form.income') }}</span>
+                            <span class="small kpi-label">{{ $t('form.income') }}</span>
                         </div>
-                        <div class="d-none d-lg-block kpi small mr-2">
+                        <div class="d-none d-lg-block kpi small">
                             <money-format
-                                    class="font-weight-bold"
-                                    :value="sheet.allocated">
+                                    class="font-weight-bold text-number"
+                                    :value="allocated">
                             </money-format>
                             <br>
-                            <span class="kpi-label">{{ $t('form.allocated') }}</span>
+                            <span class="small kpi-label">{{ $t('form.allocated') }}</span>
                         </div>
 
-                        <div class="mr-1 badge"
-                             :class="[{ 'badge-danger': unallocated < 0 }, { 'badge-success': unallocated >= 0 }]">
+                        <div class=" kpi small mr-1 py-1 px-2 rounded"
+                             :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated >= 0 }]">
                             <money-format
-                                    class="h4 p-2 text-number"
+                                    class="font-weight-bold text-number"
                                     :value="unallocated">
                             </money-format>
                             <br>
-                            <span class="small">{{ $t('form.unallocated') }}</span>
+                            <span class="kpi-label">{{ $t('form.unallocated') }}</span>
                         </div>
                     </div>
                 </transition>
@@ -52,12 +52,9 @@
                 </div>
                 <div class="col-flex text-right" v-if="!loading">
                     <money-format
-                            class="h5 mb-0 text-number"
+                            class="font-weight-bold text-number"
                             :value="unallocated">
                     </money-format>
-                </div>
-                <div class="col-flex text-right" v-else>
-                    <span class="h5 mb-0">&nbsp;</span>
                 </div>
             </div>
 
@@ -96,6 +93,8 @@
 
 <style>
     .kpi {
+        margin-right: 1em;
+        padding: 0 1em;
         text-align: center;
     }
 

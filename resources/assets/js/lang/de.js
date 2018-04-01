@@ -58,13 +58,13 @@ export default {
         "uncategorized": "Ohne Kategorie",
         "available": "Verfügbar",
         "recommendedBudget": "Empfohlenes Budget",
-        "allocated": "Zugewiesen",
-        "unallocated": "Nicht Zugewiesen",
-        "previousMonth": "Vorheriger Monat",
-        "balance": {
-            "current": "Aktuell",
-            "upcoming": "Anstehend",
-            "future": "Verfügbar"
+        allocated: "Eingeplant",
+        unallocated: "Noch nicht eingeplant",
+        previousMonth: "Vorheriger Monat",
+        balance: {
+            current: "Verrechnet",
+            upcoming: "Ausstehend",
+            future: "Kontostand"
         },
         "date": "Datum",
         "payee": "Empfänger",
