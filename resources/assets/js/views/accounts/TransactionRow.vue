@@ -7,10 +7,7 @@
             <span class="transaction-column">
                 <span class="transaction-date">
                     {{ $dateFormatter().format(new Date(transaction.date)) }}
-                    <span v-if="transaction.recurring"
-                          :title="humanRRule">
-                        <font-awesome-icon :icon="recurringIcon"/>
-                    </span>
+                    <recurring-icon :rrule="transaction.rrule"></recurring-icon>
                 </span>
                 <span class="transaction-payee">
                     <ellipsis>{{ transaction.payee }}</ellipsis>
@@ -41,12 +38,10 @@
 
 <script>
     import Transaction from '../../models/Transaction';
-    import CategoryName from './CategoryName';
     import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faSync from '@fortawesome/fontawesome-free-solid/faSync'
     import faCheckCircle from '@fortawesome/fontawesome-free-solid/faCheckCircle'
-
-    let rrulestr = require('rrule').rrulestr;
+    import CategoryName from './CategoryName';
+    import RecurringIcon from './RecurringIcon';
 
     export default {
         props: {
@@ -56,18 +51,12 @@
         },
         components: {
             CategoryName,
-            FontAwesomeIcon
+            FontAwesomeIcon,
+            RecurringIcon
         },
         computed: {
             clearIcon() {
                 return faCheckCircle;
-            },
-            humanRRule() {
-                let rule = rrulestr(this.transaction.rrule);
-                return rule.toText();
-            },
-            recurringIcon() {
-                return faSync;
             }
         },
         methods: {
