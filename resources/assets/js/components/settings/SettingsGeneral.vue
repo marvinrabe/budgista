@@ -34,10 +34,7 @@
         </form-group>
 
         <div slot="actions">
-            <button class="btn btn-primary" :disabled="saving">
-                <font-awesome-icon icon="spinner" spin v-show="saving"/>
-                {{ $t('action.save') }}
-            </button>
+            <app-button :label="$t('action.save')" :busy="saving"></app-button>
         </div>
 
     </app-form>
@@ -82,7 +79,7 @@
                 this.$store.dispatch('updateSettings', this.form)
                     .then(() => {
                         this.saving = false;
-                        this.$snotify.success(this.$t('messages.updateSettings'), this.$t('notification.successful'));
+                        this.$snotify.success(this.$t('messages.updateSettings'));
                     })
                     .catch(exception => {
                         this.saving = false;
