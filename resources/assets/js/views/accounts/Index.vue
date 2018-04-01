@@ -88,7 +88,7 @@
         data() {
             return {
                 showFutureTransactions: false,
-                loading: false
+                loading: true
             };
         },
         computed: {
@@ -115,6 +115,7 @@
         },
         beforeRouteUpdate(to, from, next) {
             this.showFutureTransactions = false;
+            this.loading = true;
             next();
         },
         methods: {
