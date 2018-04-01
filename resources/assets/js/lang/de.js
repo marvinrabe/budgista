@@ -27,18 +27,18 @@ export default {
         "logout": "Abmelden",
         "loading": "Lädt",
         "create": {
-            "account": "Bankkonto hinzufügen",
+            "account": "Konto hinzufügen",
             "category": "Kategorie erstellen",
             "transaction": "Kontobewegung hinzufügen"
         },
         "edit": {
             "category": "Kategorie bearbeiten",
-            "account": "Bankkonto bearbeiten",
+            "account": "Konto bearbeiten",
             "transaction": "Kontobewegung bearbeiten"
         },
         "delete": {
             "category": "Kategorie löschen",
-            "account": "Bankkonto löschen",
+            "account": "Konto löschen",
             "transaction": "Kontobewegung löschen"
         },
         "settings": {
@@ -80,7 +80,7 @@ export default {
         "newPassword": "Neues Passwort"
     },
     title: {
-        accounts: "Bankkonten",
+        accounts: "Konten",
         budget: "Budget",
         categories: "Kategorien",
         settings: "Einstellungen",
@@ -90,7 +90,7 @@ export default {
         general: "Allgemeines",
         updatePassword: "Passwort ändern",
         updateEmail: "E-Mail Adresse ändern",
-        emptyAccount: "Dieses Bankkonto ist leer."
+        emptyAccount: "Dieses Konto ist leer."
     },
     "frequency": {
         "daily": "Täglich",
