@@ -18,8 +18,8 @@ class Transaction extends Resource
         return [
             'id' => $this->id,
             'payee' => $this->payee,
-            'account_id' => $this->account->id,
-            'category' => $this->category !== null ? new Category($this->category) : null,
+            'account_id' => $this->account_id,
+            'category_id' => $this->category_id,
             'amount' => $this->amount,
             'recurring' => $this->recurring,
             'rrule' => $this->recurring ? $this->rrule->rfcString() : null,

@@ -61,7 +61,7 @@
                     </span>
                     <span class="transaction-column-2">
                         <span class="transaction-category">
-                            <ellipsis v-if="item.category">{{ item.category.name }}</ellipsis>
+                            <category-name :id="item.category_id"></category-name>
                         </span>
                         <span class="transaction-amount">
                             <money-format
@@ -106,12 +106,18 @@
     import Balance from './Balance.vue';
     import InfiniteLoading from 'vue-infinite-loading';
     import UpdateAccount from './UpdateAccount';
+    import CategoryName from './CategoryName';
 
     let rrulestr = require('rrule').rrulestr;
 
     export default {
         props: ['account_id'],
-        components: {Balance, InfiniteLoading, UpdateAccount},
+        components: {
+            Balance,
+            CategoryName,
+            InfiniteLoading,
+            UpdateAccount
+        },
         data() {
             return {
                 showFutureTransactions: false

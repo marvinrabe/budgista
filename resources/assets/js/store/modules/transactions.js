@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import Transaction from '../../models/Transaction';
 
-// transactions: [{ id, date, payee, amount, cleared, rrule, recurring, category: {id, name}, account_id }],
+// transactions: [{ id, date, payee, amount, cleared, rrule, recurring, category_id, account_id }],
 const state = {
     transactions: [],
     nextUrls: {}
@@ -38,9 +38,6 @@ const actions = {
         return axios
             .get('/api/transactions/' + transaction_id)
             .then(({data}) => {
-                if (data.category) {
-                    commit('ADD_CATEGORY', data.data.category);
-                }
                 let transaction = Object.assign(new Transaction, data.data);
                 commit('ADD_TRANSACTION', transaction);
             });
@@ -132,8 +129,8 @@ const mutations = {
     },
     TRANSFER_CATEGORY(state, {from, to}) {
         state.transactions
-            .filter(x => _.get(x, 'category.id') === from.id)
-            .forEach(transaction => transaction.category = to);
+            .filter(x => _.get(x, 'category_id') === from.id)
+            .forEach(transaction => transaction.category_id = to.id);
     }
 };
 
