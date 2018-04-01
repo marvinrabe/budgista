@@ -2,23 +2,7 @@
     <div class="main">
 
         <app-toolbar :title="$t('title.budget')">
-            <div slot="title" class="d-flex">
-                <router-link
-                        :to="{ name: 'budget', params: {month: monthObject.previous().toString()} }"
-                        class="text-light small"
-                        :title="$t('action.previousMonth')">
-                    <font-awesome-icon icon="chevron-left"/>
-                </router-link>
-                <span class="mx-1">
-                    {{ monthObject.format() }}
-                </span>
-                <router-link
-                        :to="{ name: 'budget', params: {month: monthObject.next().toString()} }"
-                        class="text-light small"
-                        :title="$t('action.previousMonth')">
-                    <font-awesome-icon icon="chevron-right"/>
-                </router-link>
-            </div>
+            <month-picker :month="monthObject" slot="title"></month-picker>
 
             <div class="d-none d-sm-block ml-auto">
                 <transition name="fade">
@@ -123,11 +107,13 @@
 <script>
     import row from './Row.vue'
     import Month from '../../models/Month.js'
+    import MonthPicker from './MonthPicker'
 
     export default {
         props: ['month'],
         components: {
-            'category-row': row
+            'category-row': row,
+            MonthPicker
         },
         computed: {
             monthObject() {
