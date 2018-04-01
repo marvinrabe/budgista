@@ -39,7 +39,8 @@ mix
         },
         resolve: {
             alias: {
-                modernizr$: path.resolve(__dirname, ".modernizrrc")
+                modernizr$: path.resolve(__dirname, ".modernizrrc"),
+                '@': path.resolve(__dirname, 'resources/assets/js')
             }
         }
     })
