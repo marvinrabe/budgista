@@ -33,7 +33,7 @@
                         </div>
 
                         <div class="kpi mr-1 py-1 px-2 rounded"
-                             :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated > 0 }]">
+                             :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated >= 0 }]">
                             <money-format
                                     class="font-weight-bold text-number"
                                     :value="unallocated">
@@ -47,14 +47,14 @@
         </app-toolbar>
 
         <transition name="slide">
-            <div class="d-sm-none"
-                 v-if="unallocated !== 0"
-                 :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated > 0 }]">
+            <div v-if="!loading"
+                 class="d-sm-none"
+                 :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated >= 0 }]">
                 <div class="d-flex small text-white p-2">
                     <div class="col-flex text-left">
                         {{ $t('form.unallocated') }}
                     </div>
-                    <div class="col-flex text-right" v-if="!loading">
+                    <div class="col-flex text-right">
                         <money-format
                                 class="font-weight-bold text-number"
                                 :value="unallocated">
