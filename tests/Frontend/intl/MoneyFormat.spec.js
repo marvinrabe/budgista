@@ -1,7 +1,7 @@
 import {shallow} from '@vue/test-utils';
 import expect from 'expect';
-import MoneyFormat from '../../../resources/assets/js/i18n/MoneyFormat.vue';
-import IntegerMoneyFormatter from '../../../resources/assets/js/i18n/IntegerMoneyFormatter';
+import MoneyFormat from '@/i18n/MoneyFormat.vue';
+import IntegerMoneyFormatter from '@/i18n/IntegerMoneyFormatter';
 
 describe('MoneyFormat', () => {
 

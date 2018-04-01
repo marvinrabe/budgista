@@ -1,7 +1,7 @@
 import expect from 'expect';
 import moment from 'moment';
-import {getters} from '../../../resources/assets/js/store/modules/transactions'
-import Transaction from '../../../resources/assets/js/models/Transaction'
+import {getters} from '@/store/modules/transactions'
+import Transaction from '@/models/Transaction'
 
 describe('Transactions Store', () => {
     it('returns a payee list', () => {

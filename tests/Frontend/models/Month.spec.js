@@ -1,6 +1,6 @@
 import expect from 'expect';
 import moment from "moment/moment";
-import Month from "../../../resources/assets/js/models/Month.js"
+import Month from "@/models/Month"
 
 describe('Month', () => {
     it('formats month as string', () => {
