@@ -31,6 +31,9 @@
                 <a href="mailto:support@budgista.com">{{ trans('title.help') }}</a>
             </li>
             <li class="list-inline-item">
+                <a href="{{ url('/terms') }}">{{ trans('title.terms') }}</a>
+            </li>
+            <li class="list-inline-item">
                 <a href="{{ url('/legal') }}">{{ trans('title.legal') }}</a>
             </li>
             <li class="list-inline-item">

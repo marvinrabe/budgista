@@ -8,6 +8,7 @@ return [
     'password_confirm' => 'Passwort wiederholen',
     'password_new' => 'Neues Passwort',
     'password_new_confirm' => 'Neues Passwort wiederholen',
-    'remember' => 'Angemeldet bleiben'
+    'remember' => 'Angemeldet bleiben',
+    'termsOfService' => 'Ich akzeptiere die <a href=":url" target="__blank">Nutzungsbedingungen</a>.'
 
 ];
