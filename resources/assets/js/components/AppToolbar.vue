@@ -8,7 +8,7 @@
                     type="button"
                     :aria-label="$t('action.back')"
                     @click.prevent="$emit('back')">
-                <font-awesome-icon icon="chevron-left" fixed-width />
+                <font-awesome-icon :icon="backIcon" fixed-width/>
             </button>
             <app-sidebar-toggle v-else></app-sidebar-toggle>
         </div>
@@ -30,10 +30,21 @@
 <script>
     import AppWindow from './AppWindow';
     import AppSidebarToggle from './AppSidebarToggle'
+    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+    import faChevronLeft from '@fortawesome/fontawesome-free-solid/faChevronLeft'
 
     export default {
         props: ['title', 'back'],
-        components: {AppSidebarToggle, AppWindow}
+        components: {
+            AppSidebarToggle,
+            AppWindow,
+            FontAwesomeIcon
+        },
+        computed: {
+            backIcon() {
+                return faChevronLeft;
+            }
+        }
     }
 </script>
 

@@ -40,46 +40,12 @@
                     {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions }) }}
                 </a>
             </div>
-            <div class="transactions-row"
-                 :class="[{ 'transactions-row-future': item.isFuture() }]"
-                 v-if="!item.isFuture() || showFutureTransactions"
-                 v-for="(item, index) of transactions" :key="index">
-                <router-link
-                        class="transaction-item"
-                        :to="{ name: 'transaction.edit', params: { transaction_id: item.id }}">
-                    <span class="transaction-column">
-                        <span class="transaction-date">
-                            {{ $dateFormatter().format(new Date(item.date)) }}
-                            <span v-if="item.recurring"
-                                  :title="humanRRule(item.rrule)">
-                                <font-awesome-icon icon="sync"/>
-                            </span>
-                        </span>
-                        <span class="transaction-payee">
-                            <ellipsis>{{ item.payee }}</ellipsis>
-                        </span>
-                    </span>
-                    <span class="transaction-column-2">
-                        <span class="transaction-category">
-                            <category-name :id="item.category_id"></category-name>
-                        </span>
-                        <span class="transaction-amount">
-                            <money-format
-                                    :class="[{ 'text-danger': item.amount < 0 }]"
-                                    :value="item.amount">
-                            </money-format>
-                        </span>
-                    </span>
-                </router-link>
-                <div class="transaction-clear">
-                    <a href="#"
-                       v-if="new Date(item.date) <= new Date()"
-                       :class="[{ 'text-success': item.cleared }, {'text-darker-light': !item.cleared}]"
-                       @click.prevent="toggleCleared(item)">
-                        <font-awesome-icon icon="check-circle"/>
-                    </a>
-                </div>
-            </div>
+            <transaction-row
+                v-for="transaction of transactions"
+                 v-if="!transaction.isFuture() || showFutureTransactions"
+                 :key="transaction.id"
+                 :transaction="transaction">
+            </transaction-row>
             <infinite-loading :key="account_id" @infinite="loadMore" spinner="waveDots" ref="infiniteLoading">
                 <span slot="no-more"></span>
                 <span slot="spinner">
@@ -106,15 +72,13 @@
     import Balance from './Balance.vue';
     import InfiniteLoading from 'vue-infinite-loading';
     import UpdateAccount from './UpdateAccount';
-    import CategoryName from './CategoryName';
-
-    let rrulestr = require('rrule').rrulestr;
+    import TransactionRow from './TransactionRow';
 
     export default {
         props: ['account_id'],
         components: {
             Balance,
-            CategoryName,
+            TransactionRow,
             InfiniteLoading,
             UpdateAccount
         },
@@ -147,10 +111,6 @@
             next();
         },
         methods: {
-            humanRRule: function (rrule) {
-                let rule = rrulestr(rrule);
-                return rule.toText();
-            },
             loadMore: function ($state) {
                 this.$store.dispatch('loadMoreTransactions', this.account.id)
                     .then(() => {
@@ -160,9 +120,6 @@
                         $state.loaded();
                         $state.complete();
                     });
-            },
-            toggleCleared(transaction) {
-                this.$store.dispatch('clearTransaction', transaction);
             }
         }
 
