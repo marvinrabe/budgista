@@ -6,34 +6,34 @@
 
             <div class="d-none d-sm-block ml-auto">
                 <transition name="fade">
-                    <div class="d-flex align-items-center" v-if="!loading">
-                        <div class="d-none d-lg-block kpi small mr-2">
+                    <div class="d-flex align-items-center small" v-if="!loading">
+                        <div class="d-none d-lg-block kpi mr-2">
                             <money-format
                                     class="font-weight-bold text-number"
                                     :value="sheet.previousMonth">
                             </money-format>
                             <br>
-                            <span class="small kpi-label">{{ $t('form.previousMonth') }}</span>
+                            <span class="kpi-label">{{ $t('form.previousMonth') }}</span>
                         </div>
-                        <div class="d-none d-lg-block kpi small mr-2">
+                        <div class="d-none d-lg-block kpi mr-2">
                             <money-format
                                     class="font-weight-bold text-number"
                                     :value="sheet.income">
                             </money-format>
                             <br>
-                            <span class="small kpi-label">{{ $t('form.income') }}</span>
+                            <span class="kpi-label">{{ $t('form.income') }}</span>
                         </div>
-                        <div class="d-none d-lg-block kpi small">
+                        <div class="d-none d-lg-block kpi">
                             <money-format
                                     class="font-weight-bold text-number"
                                     :value="allocated">
                             </money-format>
                             <br>
-                            <span class="small kpi-label">{{ $t('form.allocated') }}</span>
+                            <span class="kpi-label">{{ $t('form.allocated') }}</span>
                         </div>
 
-                        <div class=" kpi small mr-1 py-1 px-2 rounded"
-                             :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated >= 0 }]">
+                        <div class="kpi mr-1 py-1 px-2 rounded"
+                             :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated > 0 }]">
                             <money-format
                                     class="font-weight-bold text-number"
                                     :value="unallocated">
@@ -44,21 +44,25 @@
                     </div>
                 </transition>
             </div>
+        </app-toolbar>
 
-            <div style="flex: 100%; align-items: center;" class="d-flex d-sm-none p-2"
-                 :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated >= 0 }]">
-                <div class="col-flex text-left small">
-                    {{ $t('form.unallocated') }}
-                </div>
-                <div class="col-flex text-right" v-if="!loading">
-                    <money-format
-                            class="font-weight-bold text-number"
-                            :value="unallocated">
-                    </money-format>
+        <transition name="slide">
+            <div class="d-sm-none"
+                 v-if="unallocated !== 0"
+                 :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated > 0 }]">
+                <div class="d-flex small text-white p-2">
+                    <div class="col-flex text-left">
+                        {{ $t('form.unallocated') }}
+                    </div>
+                    <div class="col-flex text-right" v-if="!loading">
+                        <money-format
+                                class="font-weight-bold text-number"
+                                :value="unallocated">
+                        </money-format>
+                    </div>
                 </div>
             </div>
-
-        </app-toolbar>
+        </transition>
 
         <div class="budget-header">
             <div class="budget-column-name">
@@ -95,7 +99,7 @@
     .kpi {
         margin-right: 1em;
         padding: 0 1em;
-        text-align: center;
+        text-align: right;
     }
 
     .kpi-label {
