@@ -66,6 +66,11 @@ Vue.component(
 );
 
 Vue.component(
+    'app-button',
+    require('./form/AppButton.vue')
+);
+
+Vue.component(
     'form-group',
     require('./form/FormGroup.vue')
 );
