@@ -33,7 +33,7 @@ return [
             [
                 'icon' => 'far fa-life-ring',
                 'title' => 'Always there for you',
-                'body' => 'If you struggle setting up your budget just ask for help via E-Mail, Facebook or Twitter. We answer every question you have. 42!'
+                'body' => 'If you struggle setting up your budget just ask for help via E-Mail. We answer every question you have. 42!'
             ],
             [
                 'icon' => 'fa fa-lock',
