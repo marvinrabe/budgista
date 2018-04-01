@@ -51,7 +51,7 @@
                        {{ (old('terms') == 1) ? 'checked' : '' }}
                        id="terms" name="terms" value="1">
                 <label class="form-check-label" for="terms">
-                    {!! Lang::get('form.termsOfService', ['url' => url('/terms')]) !!}
+                    {!! Lang::get('form.termsOfService', ['url' => route('terms')]) !!}
                 </label>
 
                 @if ($errors->has('terms'))
