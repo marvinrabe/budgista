@@ -4,7 +4,12 @@
             <slot :bindings="bindings" :handlers="handlers"></slot>
 
             <a href="#" class="VuePassword__Toggle text-darker-light" role="button" @click.prevent="togglePassword">
-                <font-awesome-icon :icon="toggleIcon" />
+                <span v-show="type === 'password'">
+                    <font-awesome-icon :icon="passwordIcon" />
+                </span>
+                <span v-show="type === 'text'">
+                    <font-awesome-icon :icon="textIcon" />
+                </span>
             </a>
         </div>
 
@@ -103,10 +108,10 @@
             }
         },
         computed: {
-            toggleIcon() {
-                if(this.type === 'password') {
-                    return faEye;
-                }
+            passwordIcon() {
+                return faEye;
+            },
+            textIcon() {
                 return faEyeSlash;
             },
             strengthClass() {
