@@ -59,7 +59,7 @@ export default {
         "available": "Verfügbar",
         "recommendedBudget": "Empfohlenes Budget",
         allocated: "Eingeplant",
-        unallocated: "Noch nicht eingeplant",
+        unallocated: "Nicht eingeplant",
         previousMonth: "Vorheriger Monat",
         balance: {
             current: "Verrechnet",
