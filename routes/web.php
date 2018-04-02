@@ -12,17 +12,19 @@
 */
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
-    Auth::routes();
+    //Auth::routes();
 
     Route::get('/', 'HomeController@index')->name('home');
     Route::view('/legal', 'static.legal')->name('legal');
     Route::view('/terms', 'static.terms')->name('terms');
+    Route::view('/login', 'app')->name('login');
+    Route::view('/register', 'app')->name('register');
+    Route::view('/app', 'app')->name('app');
 });
 
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::view('/app', 'app')->name('app');
     Route::get('/admin', 'AdminController@index')->name('admin');
 
 });

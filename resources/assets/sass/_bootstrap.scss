@@ -149,6 +149,11 @@ label {
   border-color: $input-border-color;
 }
 
+.was-validated .form-check-input:valid ~ .form-check-label,
+.form-check-input.is-valid ~ .form-check-label {
+  color: $text-muted;
+}
+
 .form-control:focus, .was-validated .form-control:valid:focus {
   box-shadow: 0 0 2px 0.1rem rgba(theme-color('primary'), 0.1);
   border-color: $input-focus-border-color;

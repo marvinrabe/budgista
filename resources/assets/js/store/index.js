@@ -12,10 +12,11 @@ const debug = process.env.NODE_ENV !== 'production';
 
 export default new Vuex.Store({
     state: {
-        loading: true
+        loading: false
     },
     actions: {
-        initialize({dispatch, commit}) {
+        initialize({dispatch, commit, state}) {
+            commit('IS_LOADING');
             Promise
                 .all([
                     dispatch('loadUser'),
@@ -23,13 +24,16 @@ export default new Vuex.Store({
                     dispatch('loadCategories')
                 ])
                 .then(() => {
-                    commit('IS_LOADED');
+                    commit('HAS_LOADED');
                 })
         }
     },
     mutations: {
-        IS_LOADED(state) {
+        HAS_LOADED(state) {
             state.loading = false;
+        },
+        IS_LOADING(state) {
+            state.loading = true;
         }
     },
     modules: {

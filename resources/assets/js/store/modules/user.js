@@ -1,6 +1,8 @@
 import {setLanguage} from '../../i18n'
+import axios from 'axios'
 
 const state = {
+    token: null,
     email: '',
     language: 'en',
     locale: 'en',
@@ -39,11 +41,30 @@ const actions = {
 
     updatePassword({commit}, data) {
         return axios.post('/api/user/password', data);
+    },
+
+    login({commit}, data) {
+        return axios
+            .post('/api/auth/login', data)
+            .then(({data}) => {
+                axios.defaults.headers.common['Authorization'] = [
+                    data.token_type, data.access_token,
+                ].join(' ');
+                commit('SET_TOKEN', data);
+            });
+    },
+
+    logout({commit}) {
+        axios.defaults.headers.common['Authorization'] = null;
+        commit('RESET');
     }
 
 };
 
 const mutations = {
+    SET_TOKEN(state, token) {
+        state.token = token;
+    },
     LOAD_USER(state, user) {
         state.email = user.email;
         state.language = user.language;
