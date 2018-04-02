@@ -6,7 +6,7 @@
 
 @section('body')
 
-    <header>
+    <header class="border-bottom">
         <nav class="navbar navbar-expand navbar-light">
             <div class="container">
                 <a class="navbar-brand logo" href="{{ route('home') }}">
@@ -26,14 +26,14 @@
                 <h1>{{ trans('static.home.heading') }}</h1>
                 <p class="lead">{{ trans('static.home.lead') }}</p>
 
-                <a href="{{ route('register') }}" class="btn btn-lg btn-primary mt-2">
+                <a href="{{ route('register') }}" class="btn btn-lg btn-primary mt-2 shadow-1">
                     {{ trans('static.home.cta') }}
                 </a>
             </div>
         </div>
     </header>
 
-    <div class="container py-5">
+    <div class="container pt-4">
         <div class="row">
             @each('static._bullet', trans('static.home.bullets'), 'bullet')
         </div>
@@ -43,7 +43,7 @@
     </div>
 
     <div class="container text-center">
-        <div class="py-5 second-cta">
+        <div class="py-4 second-cta">
             <p class="h2 m-0">{{ trans('static.home.lead2') }}</p>
 
             <a href="{{ route('register') }}" class="btn btn-lg btn-primary mt-3">
@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <div class="container text-muted py-5 help">
+    <div class="container text-muted py-4 help">
         <p class="h4 m-0">
             {{ trans('static.home.help') }}
         </p>
