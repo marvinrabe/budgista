@@ -4,7 +4,6 @@ namespace Tests;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Laravel\Passport\Passport;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -16,9 +15,6 @@ abstract class TestCase extends BaseTestCase
 
         // Authenticate with Web
         $this->actingAs($user);
-
-        // Authenticate with API
-        Passport::actingAs($user);
 
         return $this;
     }
