@@ -23,10 +23,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 Route::group(['middleware' => ['auth']], function () {
 
     Route::view('/app', 'app')->name('app');
-
-    Route::get('/settings', 'Auth\SettingsController@get')->name('settings');
-    Route::put('/settings', 'Auth\SettingsController@put')->name('settings.store');
-
     Route::get('/admin', 'AdminController@index')->name('admin');
 
 });
