@@ -17,9 +17,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::view('/legal', 'static.legal')->name('legal');
     Route::view('/terms', 'static.terms')->name('terms');
-    Route::view('/login', 'app')->name('login');
-    Route::view('/register', 'app')->name('register');
-    Route::view('/app', 'app')->name('app');
+});
+
+Route::view('/login', 'app')->name('login');
+Route::view('/register', 'app')->name('register');
+Route::view('/app', 'app')->name('app');
+Route::group(['prefix' => 'app'], function() {
+    Route::view('{any}', 'app')->where('any', '.*');
 });
 
 
