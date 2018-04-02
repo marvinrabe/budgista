@@ -15,25 +15,25 @@ export const routes = [
         component: require('./components/AppLayout.vue'),
         children: [
             {
-                path: '/budget',
+                path: 'budget',
                 name: 'budget_default',
                 redirect: to => {
                     return {name: 'budget', params: {month: Month.current().toString()}};
                 }
             },
             {
-                path: '/budget/:month',
+                path: 'budget/:month',
                 name: 'budget',
                 component: require('./views/budget/Index.vue'),
                 props: true
             },
             {
-                path: '/categories',
+                path: 'categories',
                 name: 'categories',
                 component: require('./views/categories/Index.vue')
             },
             {
-                path: '/settings',
+                path: 'settings',
                 component: require('./views/settings/Index.vue'),
                 children: [
                     {
@@ -49,19 +49,19 @@ export const routes = [
                 ]
             },
             {
-                path: '/account/:account_id',
+                path: 'account/:account_id',
                 name: 'account',
                 component: require('./views/accounts/Index.vue'),
                 props: true
             },
             {
-                path: '/account/:account_id/newTransaction',
+                path: 'account/:account_id/newTransaction',
                 name: 'transaction.new',
                 component: require('./views/transactions/New.vue'),
                 props: true
             },
             {
-                path: '/transaction/:transaction_id',
+                path: 'transaction/:transaction_id',
                 name: 'transaction.edit',
                 component: require('./views/transactions/Edit.vue'),
                 props: true
