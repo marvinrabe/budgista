@@ -1,10 +1,16 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+window._ = require('lodash');
 
-require('./bootstrap');
+/**
+ * Initialize Raven for error logging with sentry, but only on production builds.
+ */
+import Raven from 'raven-js'
+import {sentryUrl} from './config.js'
+
+if (process.env.NODE_ENV === 'production') {
+    Raven
+        .config(sentryUrl)
+        .install();
+}
 
 /**
  * Vue
