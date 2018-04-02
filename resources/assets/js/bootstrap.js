@@ -51,15 +51,3 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
-
-/**
- * Initialize Raven for error logging with sentry, but only on production builds.
- */
-
-if(process.env.NODE_ENV === 'production') {
-    let Raven = require('raven-js') ;
-
-    Raven
-        .config('https://f4cdc8808ff548dc8c94ebcd548305a9@sentry.io/230247')
-        .install();
-}
