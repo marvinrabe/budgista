@@ -24,6 +24,7 @@ export default {
         "nextMonth": "Nächster Monat",
         "previousMonth": "Vorheriger Monat",
         "navigation": "Navigation hin- und herschalten",
+        login: "Login",
         "logout": "Abmelden",
         "loading": "Lädt",
         "create": {
@@ -58,6 +59,7 @@ export default {
         "uncategorized": "Ohne Kategorie",
         "available": "Verfügbar",
         "recommendedBudget": "Empfohlenes Budget",
+        remember: "Angemeldet bleiben",
         allocated: "Eingeplant",
         unallocated: "Nicht eingeplant",
         previousMonth: "Vorheriger Monat",
@@ -85,6 +87,7 @@ export default {
         categories: "Kategorien",
         settings: "Einstellungen",
         help: "Hilfe",
+        login: "Login",
         account: "Benutzerkonto",
         security: "Sicherheit",
         general: "Allgemeines",

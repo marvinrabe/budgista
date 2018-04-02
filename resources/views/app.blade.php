@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ auth()->user()->language }}">
+<html lang="{{ app()->getLocale() }}">
 <head>
     @include('snippets.google-analytics')
 
@@ -28,10 +28,12 @@
 </head>
 <body>
 
-<div id="app"></div>
+<div id="app">
+    <router-view></router-view>
+</div>
 
 @if(config('app.env') == 'production')
-<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Intl,Intl.~locale.{{ auth()->user()->language }}"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Intl,Intl.~locale.{{ app()->getLocale() }}"></script>
 @endif
 
 <script src="{{ mix('js/app.js') }}"></script>

@@ -91,17 +91,10 @@ Vue.component(
 );
 
 /**
- * Scaffold
- */
-import AppLayout from './components/AppLayout';
-
-const Budgista = Vue.extend(AppLayout);
-
-/**
  * And go!
  */
 import {i18n} from './i18n'
 import {router} from './router'
 import store from './store'
 
-new Budgista({i18n, router, store}).$mount('#app');
+const App = new Vue({i18n, router, store}).$mount('#app');

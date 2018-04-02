@@ -4,7 +4,7 @@
           novalidate>
         <slot></slot>
 
-        <div class="text-right">
+        <div class="d-flex justify-content-end align-items-baseline">
             <slot name="actions"></slot>
         </div>
     </form>
