@@ -69,7 +69,7 @@ jobs:
           name: Setup keys
           command: |
             php artisan key:generate
-            php artisan passport:keys
+            php artisan jwt:secret --force
 
       - run:
          name: Compile assets
