@@ -10,10 +10,6 @@ Setup local environment with Valet: https://laravel.com/docs/5.5/valet
 
 PhpStorm needs some configuration for developing Laravel applications.
 
-### The Laravel IDE Helper
-
-After running `php artisan ide-helper:generate`, PhpStorm will have code completion support and syntax highlighting for many of Laravel’s facades.
-
 ### The Laravel Plugin for PhpStorm
 
 To further enhance the Laravel experience, we can also install the Laravel Plugin. Under **Settings (Preferences) | Plugins**, click the Browse repositories… button and search for Laravel. The Install plugin button will download and install the plugin into our IDE.
@@ -34,6 +30,6 @@ Simply run:
 
 For running JavaScript tests we use Mocha. You can start the tests by running:
 
-    npm test
+    yarn test
 
 For running tests requiring `Intl` you have to install the `full-icu` package if your Node installation does not come with it. Afterwards you have to set the environment variable `NODE_ICU_DATA` to `node_modules/full-icu`.
