@@ -1,13 +1,15 @@
 import {setLanguage} from '../../i18n'
 import axios from 'axios'
 
-const state = {
+const defaultState = {
     token: null,
     email: '',
     language: 'en',
     locale: 'en',
     currency: 'EUR'
 };
+
+const state = defaultState;
 
 const getters = {};
 
@@ -57,6 +59,8 @@ const actions = {
     logout({commit}) {
         axios.defaults.headers.common['Authorization'] = null;
         commit('RESET');
+
+        return Promise.resolve();
     }
 
 };
@@ -70,6 +74,9 @@ const mutations = {
         state.language = user.language;
         state.locale = user.locale;
         state.currency = user.currency;
+    },
+    RESET(state) {
+        console.debug('reset?');
     }
 };
 
