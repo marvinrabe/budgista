@@ -65,7 +65,9 @@
                         </a>
                     </li>
                     <li>
-                        <app-logout></app-logout>
+                        <a href="#" class="text-muted small" @click.prevent="logout">
+                            {{ $t('action.logout') }}
+                        </a>
                     </li>
                 </ul>
             </nav>
@@ -104,12 +106,8 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    import AppLogout from './AppLogout.vue'
 
     export default {
-        components: {
-            AppLogout
-        },
         data: () => ({
             newAccount: {
                 name: '',
@@ -169,6 +167,12 @@
                     menu.classList.add("menu--animatable");
                     menu.classList.remove('menu--visible');
                 }
+            },
+            logout() {
+                this.$store.dispatch('logout')
+                    .then(() => {
+                        this.$router.push({name: 'login'});
+                    });
             }
         }
     }

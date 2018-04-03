@@ -1,4 +1,5 @@
 window._ = require('lodash');
+window.axios = require('axios');
 
 /**
  * Initialize Raven for error logging with sentry, but only on production builds.
