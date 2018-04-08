@@ -160,6 +160,7 @@
             },
             logout() {
                 this.$auth.logout({
+                    makeRequest: true,
                     redirect: {name: 'login'}
                 })
             }

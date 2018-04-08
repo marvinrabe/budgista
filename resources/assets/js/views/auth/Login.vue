@@ -70,8 +70,7 @@
                         this.loading = false
                     },
                     rememberMe: true,
-                    redirect: {name: 'budget_default'},
-                    fetchUser: false
+                    redirect: {name: 'budget_default'}
                 })
             }
         }

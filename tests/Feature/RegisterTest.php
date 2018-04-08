@@ -14,12 +14,11 @@ class RegisterTest extends TestCase
     protected function registerUser()
     {
         $this
-            ->post('/register', [
+            ->post('/api/auth/register', [
                 'email' => 'john.doe@example.com',
                 'password' => 'secret',
                 'terms' => true
-            ])
-            ->assertRedirect(route('app'));
+            ]);
 
         return User::where('email', 'john.doe@example.com')->first();
     }
@@ -62,6 +61,19 @@ class RegisterTest extends TestCase
 
         $this->assertGreaterThan(0, $user->accounts()->count());
         $this->assertEquals('Bargeld', $user->accounts()->first()->name);
+    }
+
+    /** @test */
+    public function it_requires_accepted_terms()
+    {
+        $this
+            ->withExceptionHandling()
+            ->post('/api/auth/register', [
+                'email' => 'john.doe@example.com',
+                'password' => 'secret',
+                'terms' => false
+            ])
+            ->assertSessionHasErrors(['terms']);
     }
 
 }

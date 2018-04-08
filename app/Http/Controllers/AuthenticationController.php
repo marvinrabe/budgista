@@ -2,24 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+
 class AuthenticationController extends Controller
 {
 
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function login()
     {
         $credentials = request(['email', 'password']);
@@ -31,11 +24,24 @@ class AuthenticationController extends Controller
         return $this->respondWithToken($token);
     }
 
-    /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    public function register()
+    {
+        request()->validate([
+            'email' => 'required|string|email|max:191|unique:users',
+            'password' => 'required|string|min:6',
+            'terms' => 'required|accepted'
+        ]);
+
+        $user = User::create([
+            'email' => request('email'),
+            'password' => bcrypt(request('password')),
+            'language' => app()->getLocale(),
+            'locale' => app()->getLocale()
+        ]);
+
+        event(new Registered($user));
+    }
+
     public function logout()
     {
         auth()->logout();
@@ -43,23 +49,11 @@ class AuthenticationController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function refresh()
     {
         return $this->respondWithToken(auth()->refresh());
     }
 
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     protected function respondWithToken($token)
     {
         return response()
