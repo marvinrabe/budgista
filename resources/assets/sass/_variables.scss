@@ -1,5 +1,7 @@
 $enable-transitions: false;
 
+$font-family-sans-serif: Roboto, sans-serif;
+
 $table-cell-padding: .5em;
 
 @function match-hue($color, $root) {
@@ -88,6 +90,7 @@ $border-radius: .2em;
   transition: max-height .3s ease;
   max-height: 36px;
 }
+
 .slide-enter, .slide-leave-to {
   max-height: 0;
 }
@@ -95,6 +98,7 @@ $border-radius: .2em;
 .opacity-30 {
   opacity: .3;
 }
+
 .opacity-50 {
   opacity: .5;
 }

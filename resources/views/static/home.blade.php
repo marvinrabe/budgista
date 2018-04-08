@@ -9,8 +9,8 @@
     <header class="border-bottom">
         <nav class="navbar navbar-expand navbar-light">
             <div class="container">
-                <a class="navbar-brand logo" href="{{ route('home') }}">
-                    {{ config('app.name') }}
+                <a class="navbar-brand" href="{{ route('home') }}">
+                    <img src="{{ asset('/images/logo.svg') }}" alt="{{ config('app.name') }}" height="30">
                 </a>
 
                 <ul class="navbar-nav ml-auto">
