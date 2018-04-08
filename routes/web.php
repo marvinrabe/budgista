@@ -19,11 +19,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::view('/terms', 'static.terms')->name('terms');
 });
 
-Route::view('/login', 'app')->name('login');
-Route::view('/register', 'app')->name('register');
+Route::view('/auth/login', 'app')->name('login');
+Route::view('/auth/register', 'app')->name('register');
 Route::view('/app', 'app')->name('app');
+
 Route::group(['prefix' => 'app'], function() {
     Route::view('{any}', 'app')->where('any', '.*');
+});
+Route::group(['prefix' => 'auth'], function() {
+    Route::view('{any}', 'auth')->where('any', '.*');
 });
 
 

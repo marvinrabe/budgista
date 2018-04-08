@@ -25,7 +25,7 @@
 </style>
 
 <script>
-    import AppSidebar from './AppSidebar'
+    import AppSidebar from '../AppSidebar'
 
     export default {
         components: {AppSidebar},

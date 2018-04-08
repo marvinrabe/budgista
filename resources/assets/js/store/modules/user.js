@@ -1,4 +1,5 @@
 import {setLanguage} from '../../i18n'
+import {setToken, removeToken} from '../../authentication'
 import axios from 'axios'
 
 const defaultState = {
@@ -49,16 +50,12 @@ const actions = {
         return axios
             .post('/api/auth/login', data)
             .then(({data}) => {
-                axios.defaults.headers.common['Authorization'] = [
-                    data.token_type, data.access_token,
-                ].join(' ');
-                commit('SET_TOKEN', data);
+                setToken(data)
             });
     },
 
     logout({commit}) {
-        axios.defaults.headers.common['Authorization'] = null;
-        commit('RESET');
+        removeToken()
 
         return Promise.resolve();
     }
@@ -74,9 +71,6 @@ const mutations = {
         state.language = user.language;
         state.locale = user.locale;
         state.currency = user.currency;
-    },
-    RESET(state) {
-        console.debug('reset?');
     }
 };
 

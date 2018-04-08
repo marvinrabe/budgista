@@ -2,18 +2,8 @@
     <div class="menu" @click="hideMenu">
         <div class="app-menu" @click.stop>
 
-            <nav class="navbar navbar-expand navbar-light">
-                <a class="navbar-brand logo" href="/">
-                    {{ $t('app.name') }}
-                </a>
-
-                <ul class="navbar-nav ml-auto d-md-none">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" @click="hideMenu">
-                            <font-awesome-icon icon="times"/>
-                        </a>
-                    </li>
-                </ul>
+            <nav class="navbar navbar-expand navbar-light justify-content-center">
+                <app-logo :height="32" class="my-2"></app-logo>
             </nav>
 
             <nav class="nav flex-column flex-nowrap mt-2">
@@ -105,9 +95,13 @@
 </template>
 
 <script>
+    import AppLogo from './AppLogo.vue'
     import {mapGetters} from 'vuex'
 
     export default {
+        components: {
+            AppLogo
+        },
         data: () => ({
             newAccount: {
                 name: '',
