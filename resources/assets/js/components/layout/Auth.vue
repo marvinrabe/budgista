@@ -1,6 +1,6 @@
 <template>
     <div id="auth" class="py-4">
-        <app-logo :height="48" class="mb-2"></app-logo>
+        <app-logo :height="48" class="mb-2" style="flex-shrink: 0"></app-logo>
 
         <div class="container">
             <div class="row justify-content-md-center">
@@ -17,6 +17,7 @@
         height: 100%;
         display: flex;
         flex-direction: column;
+        align-items: center;
 
         overflow-y: scroll; /* has to be scroll, not auto */
         -webkit-overflow-scrolling: touch;
