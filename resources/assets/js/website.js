@@ -5,12 +5,3 @@
  */
 
 require('./bootstrap');
-
-/**
- * Vue
- */
-window.Vue = require('vue');
-
-Vue.component('app-password', require('./components/form/AppPassword.vue'));
-
-const app = new Vue().$mount('#app');
