@@ -166,7 +166,7 @@
                 this.reset();
 
                 axios
-                    .get('/api/month/' + (month || this.month))
+                    .get('/month/' + (month || this.month))
                     .then(({data}) => {
                         this.loading = false;
                         this.sheet = data.data;

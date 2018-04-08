@@ -1,13 +1,16 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router';
+import VueRouter from 'vue-router'
 import Month from './models/Month'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 export const routes = [
     {
         path: '/auth',
         component: require('./components/layout/Auth.vue'),
+        meta: {
+            auth: false
+        },
         children: [
             {
                 path: 'login',
@@ -24,12 +27,15 @@ export const routes = [
     {
         path: '/app',
         component: require('./components/layout/App.vue'),
+        meta: {
+            auth: true
+        },
         children: [
             {
                 path: 'budget',
                 name: 'budget_default',
                 redirect: to => {
-                    return {name: 'budget', params: {month: Month.current().toString()}};
+                    return {name: 'budget', params: {month: Month.current().toString()}}
                 }
             },
             {
@@ -79,9 +85,11 @@ export const routes = [
             }
         ]
     },
-];
+]
 
 export const router = new VueRouter({
     mode: 'history',
     routes: routes
-});
+})
+
+Vue.router = router;

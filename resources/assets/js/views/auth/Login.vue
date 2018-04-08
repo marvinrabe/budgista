@@ -53,18 +53,26 @@
                     password: ''
                 },
                 loading: false
-            };
+            }
         },
         methods: {
             login() {
-                this.loading = true;
-                this.$store.dispatch('login', this.form)
-                    .then(() => {
-                        this.$router.push({name: 'budget_default'});
-                    })
-                    .finally(() => {
-                        this.loading = false;
-                    });
+                this.loading = true
+                this.$auth.login({
+                    params: {
+                        email: this.form.email,
+                        password: this.form.password
+                    },
+                    success: function () {
+                        this.loading = false
+                    },
+                    error: function () {
+                        this.loading = false
+                    },
+                    rememberMe: true,
+                    redirect: {name: 'budget_default'},
+                    fetchUser: false
+                })
             }
         }
     }

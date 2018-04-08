@@ -21,7 +21,7 @@ const actions = {
 
     loadAccounts({commit, rootState}) {
         return axios
-            .get('/api/accounts')
+            .get('/accounts')
             .then(({data}) => {
                 let accounts = data.data;
                 accounts.forEach(account => commit('ADD_ACCOUNT', account))
@@ -30,7 +30,7 @@ const actions = {
 
     createAccount({commit, rootState}, account) {
         return axios
-            .post('/api/accounts/', {
+            .post('/accounts/', {
                 'name': account.name
             })
             .then(({data}) => {
@@ -40,7 +40,7 @@ const actions = {
 
     updateAccount({commit}, account) {
         return axios
-            .put('/api/accounts/' + account.id, {
+            .put('/accounts/' + account.id, {
                 'name': account.name
             })
             .then(({data}) => {
@@ -50,7 +50,7 @@ const actions = {
 
     deleteAccount({commit}, account) {
         return axios
-            .delete('/api/accounts/' + account.id)
+            .delete('/accounts/' + account.id)
             .then(({data}) => {
                 commit('REMOVE_ACCOUNT', account);
             });

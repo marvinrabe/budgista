@@ -18,7 +18,7 @@ const actions = {
 
     loadCategories({commit}) {
         return axios
-            .get('/api/categories/')
+            .get('/categories/')
             .then(({data}) => {
                 let categories = data.data;
                 categories.forEach(category => commit('ADD_CATEGORY', category))
@@ -27,7 +27,7 @@ const actions = {
 
     createCategory({commit}, category) {
         return axios
-            .post('/api/categories/', category)
+            .post('/categories/', category)
             .then(({data}) => {
                 commit('ADD_CATEGORY', data.data);
             });
@@ -35,7 +35,7 @@ const actions = {
 
     updateCategory({commit}, category) {
         return axios
-            .put('/api/categories/' + category.id, {
+            .put('/categories/' + category.id, {
                 'name': category.name
             })
             .then(({data}) => {
@@ -45,7 +45,7 @@ const actions = {
 
     deleteCategory({commit}, {oldCategory, newCategory}) {
         return axios
-            .delete('/api/categories/' + oldCategory.id, {
+            .delete('/categories/' + oldCategory.id, {
                 data: {
                     category_id: _.get(newCategory, 'id', null)
                 }
@@ -62,7 +62,7 @@ const actions = {
     sortCategories({commit}, categories) {
         commit('SORT_CATEGORIES', categories);
 
-        return axios.put('/api/categories/sort', {
+        return axios.put('/categories/sort', {
             categories: categories.map(e => e.id)
         });
     }

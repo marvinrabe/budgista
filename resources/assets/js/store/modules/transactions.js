@@ -36,7 +36,7 @@ const actions = {
 
     loadTransaction({commit}, transaction_id) {
         return axios
-            .get('/api/transactions/' + transaction_id)
+            .get('/transactions/' + transaction_id)
             .then(({data}) => {
                 let transaction = Object.assign(new Transaction, data.data);
                 commit('ADD_TRANSACTION', transaction);
@@ -47,7 +47,7 @@ const actions = {
         if (!(account_id in state.nextUrls)) {
             commit('NEXT_TRANSACTIONS', {
                 account_id: account_id,
-                url: '/api/accounts/' + account_id + '/transactions'
+                url: '/accounts/' + account_id + '/transactions'
             });
             dispatch('loadMoreTransactions', account_id);
         }
@@ -74,7 +74,7 @@ const actions = {
 
     createTransaction({commit, rootState}, transaction) {
         return axios
-            .post('/api/transactions/', transaction)
+            .post('/transactions/', transaction)
             .then(({data}) => {
                 let transaction = Object.assign(new Transaction, data.data);
                 commit('ADD_TRANSACTION', transaction);
@@ -84,7 +84,7 @@ const actions = {
 
     updateTransaction({commit, getters}, transaction) {
         return axios
-            .put('/api/transactions/' + transaction.id, transaction)
+            .put('/transactions/' + transaction.id, transaction)
             .then(({data}) => {
                 let transaction = Object.assign(new Transaction, data.data);
                 let oldTransaction = getters.findTransactionById(transaction.id);
@@ -96,7 +96,7 @@ const actions = {
 
     clearTransaction({commit}, transaction) {
         return axios
-            .put('/api/transactions/' + transaction.id + '/clear')
+            .put('/transactions/' + transaction.id + '/clear')
             .then(({data}) => {
                 let transaction = Object.assign(new Transaction, data.data);
                 commit('ADD_TRANSACTION', transaction);
@@ -106,7 +106,7 @@ const actions = {
 
     deleteTransaction({commit, getters}, transaction) {
         return axios
-            .delete('/api/transactions/' + transaction.id)
+            .delete('/transactions/' + transaction.id)
             .then(() => {
                 let oldTransaction = getters.findTransactionById(transaction.id);
                 commit('REMOVE_BALANCE', oldTransaction);

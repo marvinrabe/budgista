@@ -1,9 +1,7 @@
 import {setLanguage} from '../../i18n'
-import {setToken, removeToken} from '../../authentication'
 import axios from 'axios'
 
 const defaultState = {
-    token: null,
     email: '',
     language: 'en',
     locale: 'en',
@@ -18,7 +16,7 @@ const actions = {
 
     loadUser({commit}) {
         return axios
-            .get('/api/user')
+            .get('/user')
             .then(({data}) => {
                 setLanguage(data.data.language);
                 commit('LOAD_USER', data.data);
@@ -27,7 +25,7 @@ const actions = {
 
     updateSettings({commit}, data) {
         return axios
-            .put('/api/user', data)
+            .put('/user', data)
             .then(({data}) => {
                 setLanguage(data.data.language);
                 commit('LOAD_USER', data.data);
@@ -36,36 +34,19 @@ const actions = {
 
     updateEmail({commit}, data) {
         return axios
-            .post('/api/user/email', data)
+            .post('/user/email', data)
             .then(({data}) => {
                 commit('LOAD_USER', data.data);
             });
     },
 
     updatePassword({commit}, data) {
-        return axios.post('/api/user/password', data);
-    },
-
-    login({commit}, data) {
-        return axios
-            .post('/api/auth/login', data)
-            .then(({data}) => {
-                setToken(data)
-            });
-    },
-
-    logout({commit}) {
-        removeToken()
-
-        return Promise.resolve();
+        return axios.post('/user/password', data);
     }
 
 };
 
 const mutations = {
-    SET_TOKEN(state, token) {
-        state.token = token;
-    },
     LOAD_USER(state, user) {
         state.email = user.email;
         state.language = user.language;

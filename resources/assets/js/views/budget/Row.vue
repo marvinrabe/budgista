@@ -62,7 +62,7 @@
         methods: {
             updateBudget: function (value) {
                 axios
-                    .put('/api/categories/' + this.category_id + '/budget', {
+                    .put('/categories/' + this.category_id + '/budget', {
                         'month': this.month,
                         'amount': value
                     })
