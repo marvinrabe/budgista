@@ -2,8 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Month from './models/Month'
 
-Vue.use(VueRouter)
-
 export const routes = [
     {
         path: '/auth',
@@ -92,4 +90,5 @@ export const router = new VueRouter({
     routes: routes
 })
 
-Vue.router = router;
+Vue.use(VueRouter)
+Vue.router = router

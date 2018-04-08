@@ -101,13 +101,13 @@ Vue.component(
  * And go!
  */
 import {i18n} from './i18n'
+import {store} from './store'
 import {router} from './router'
-import store from './store'
-import './http'
 import './auth'
+import './http'
 
 window.app = new Vue({
     i18n,
-    router,
-    store
+    store,
+    router
 }).$mount('#app')

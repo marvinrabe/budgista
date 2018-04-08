@@ -1,3 +1,5 @@
+import './http'
+import './router'
 import Vue from 'vue';
 
 Vue.use(require('@websanova/vue-auth'), {
