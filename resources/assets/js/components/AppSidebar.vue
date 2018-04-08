@@ -7,55 +7,48 @@
             </nav>
 
             <nav class="nav flex-column flex-nowrap mt-2">
-                <router-link
-                        :to="{ name: 'budget_default' }"
-                        @click.native="hideMenu"
-                        active-class="active" class="nav-link-main">
-                    <font-awesome-icon :icon="['far', 'calendar-alt']" fixed-width class="mr-1"/>
-                    {{ $t('title.budget') }}
-                </router-link>
-                <router-link
-                        :to="{ name: 'categories' }"
-                        @click.native="hideMenu"
-                        active-class="active" :exact="true" class="nav-link-main">
-                    <font-awesome-icon :icon="['far', 'envelope']" fixed-width class="mr-1"/>
-                    {{ $t('title.categories') }}
-                </router-link>
-                <div class="mt-2">
-                    <p class="nav-header">{{ $t('title.accounts') }}</p>
-                    <router-link
-                            v-for="account in sortedAccounts" :key="account.id"
-                            :to="{ name: 'account', params: { account_id: account.id }}"
-                            @click.native="hideMenu"
-                            active-class="active" class="nav-link-main">
-                        <ellipsis style="flex: 1;">{{ account.name }}</ellipsis>
-                        <money-format
-                                class="ml-auto badge"
-                                :class="[{ 'text-danger': account.workingBalance < 0, 'text-success': account.workingBalance >= 0 }]"
-                                :value="account.workingBalance">
-                        </money-format>
-                    </router-link>
-                    <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small">
-                        <font-awesome-icon icon="plus"/>
-                        {{ $t('action.create.account') }}
-                    </a>
-                </div>
-                <ul class="nav-small my-2">
-                    <li>
+                <template v-for="item in menu">
+                    <div class="my-2" v-if="item.accounts">
+                        <p class="nav-header">{{ $t('title.accounts') }}</p>
                         <router-link
-                                :to="{ name: 'settings.account' }"
+                                v-for="account in sortedAccounts" :key="account.id"
+                                :to="{ name: 'account', params: { account_id: account.id }}"
                                 @click.native="hideMenu"
-                                class="text-muted small"
-                                v-t="'title.settings'">
+                                active-class="active" class="nav-link-main">
+                            <ellipsis style="flex: 1;">{{ account.name }}</ellipsis>
+                            <money-format
+                                    class="ml-auto badge"
+                                    :class="[{ 'text-danger': account.workingBalance < 0, 'text-success': account.workingBalance >= 0 }]"
+                                    :value="account.workingBalance">
+                            </money-format>
                         </router-link>
-                    </li>
-                    <li>
-                        <a href="mailto:support@budgista.com" class="text-muted small" v-t="'title.help'"></a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-muted small" @click.prevent="logout" v-t="'action.logout'"></a>
-                    </li>
-                </ul>
+                        <a v-on:click="showNewAccountModal" class="nav-link link-action text-muted small">
+                            <font-awesome-icon icon="plus"/>
+                            {{ $t('action.create.account') }}
+                        </a>
+                    </div>
+                    <router-link
+                            v-else-if="item.route"
+                            :to="item.route"
+                            @click.native="hideMenu"
+                            active-class="active"
+                            :exact="!!item.exact"
+                            class="nav-link-main">
+                        <font-awesome-icon :icon="item.icon" v-if="item.icon" fixed-width class="mr-1"/>
+                        <span class="d-block mr-1" style="width: 1.3em" v-else></span>
+                        {{ $t(item.label) }}
+                    </router-link>
+                    <a v-else-if="item.click" href="#" class="nav-link-main" @click.prevent="item.click">
+                        <font-awesome-icon :icon="item.icon" v-if="item.icon" fixed-width class="mr-1"/>
+                        <span class="d-block mr-1" style="width: 1.3em" v-else></span>
+                        {{ $t(item.label) }}
+                    </a>
+                    <a v-else :href="item.href" class="nav-link-main">
+                        <font-awesome-icon :icon="item.icon" v-if="item.icon" fixed-width class="mr-1"/>
+                        <span class="d-block mr-1" style="width: 1.3em" v-else></span>
+                        {{ $t(item.label) }}
+                    </a>
+                </template>
             </nav>
 
         </div>
@@ -92,11 +85,17 @@
 
 <script>
     import AppLogo from './AppLogo.vue'
+    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+    import faEnvelope from '@fortawesome/fontawesome-free-solid/faEnvelope'
+    import faThLarge from '@fortawesome/fontawesome-free-solid/faThLarge'
+    import faCog from '@fortawesome/fontawesome-free-solid/faCog'
+    import faLifeRing from '@fortawesome/fontawesome-free-solid/faLifeRing'
     import {mapGetters} from 'vuex'
 
     export default {
         components: {
-            AppLogo
+            AppLogo,
+            FontAwesomeIcon
         },
         data: () => ({
             newAccount: {
@@ -108,6 +107,39 @@
         computed: {
             user() {
                 return this.$store.state.user
+            },
+            menu() {
+                return [
+                    {
+                        route: {name: 'budget_default'},
+                        exact: false,
+                        icon: faEnvelope,
+                        label: 'title.budget'
+                    },
+                    {
+                        route: {name: 'categories'},
+                        exact: true,
+                        icon: faThLarge,
+                        label: 'title.categories'
+                    },
+                    {
+                        accounts: true
+                    },
+                    {
+                        route: { name: 'settings.account' },
+                        label: 'title.settings',
+                        icon: faCog
+                    },
+                    {
+                        href: 'mailto:support@budgista.com',
+                        label: 'title.help',
+                        icon: faLifeRing
+                    },
+                    {
+                        click: this.logout,
+                        label: 'action.logout',
+                    }
+                ]
             },
             ...mapGetters([
                 'sortedAccounts',
