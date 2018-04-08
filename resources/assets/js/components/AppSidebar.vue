@@ -1,7 +1,6 @@
 <template>
     <div class="menu" @click="hideMenu">
         <div class="app-menu" @click.stop>
-
             <nav class="navbar navbar-expand navbar-light justify-content-center">
                 <app-logo :height="32" class="my-2"></app-logo>
             </nav>
@@ -35,22 +34,21 @@
                             :exact="!!item.exact"
                             class="nav-link-main">
                         <font-awesome-icon :icon="item.icon" v-if="item.icon" fixed-width class="mr-1"/>
-                        <span class="d-block mr-1" style="width: 1.3em" v-else></span>
+                        <span class="d-block mr-1" style="width: 1.25em" v-else></span>
                         {{ $t(item.label) }}
                     </router-link>
                     <a v-else-if="item.click" href="#" class="nav-link-main" @click.prevent="item.click">
                         <font-awesome-icon :icon="item.icon" v-if="item.icon" fixed-width class="mr-1"/>
-                        <span class="d-block mr-1" style="width: 1.3em" v-else></span>
+                        <span class="d-block mr-1" style="width: 1.25em" v-else></span>
                         {{ $t(item.label) }}
                     </a>
                     <a v-else :href="item.href" class="nav-link-main">
                         <font-awesome-icon :icon="item.icon" v-if="item.icon" fixed-width class="mr-1"/>
-                        <span class="d-block mr-1" style="width: 1.3em" v-else></span>
+                        <span class="d-block mr-1" style="width: 1.25em" v-else></span>
                         {{ $t(item.label) }}
                     </a>
                 </template>
             </nav>
-
         </div>
 
         <modal v-if="newAccount.modalVisible" @close="hideNewAccountModal" :title="$t('action.create.account')">
