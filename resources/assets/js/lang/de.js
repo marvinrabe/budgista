@@ -14,6 +14,9 @@ export default {
         updateSettings: 'Einstellungen wurden gespeichert.',
         addTransactionBefore: 'Füge Kontobewegungen hinzu indem du',
         addTransactionAfter: 'unten rechts drückst.',
+        forgotPassword: 'Passwort vergessen?',
+        noAccount: 'Kein Konto vorhanden?',
+        noAccountSignUp: 'Jetzt registrieren',
     },
     'action': {
         'save': 'Speichern',
