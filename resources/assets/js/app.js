@@ -1,5 +1,5 @@
-window._ = require('lodash');
-window.axios = require('axios');
+window._ = require('lodash')
+window.axios = require('axios')
 
 /**
  * Initialize Raven for error logging with sentry, but only on production builds.
@@ -10,40 +10,40 @@ import {sentryUrl} from './config.js'
 if (process.env.NODE_ENV === 'production') {
     Raven
         .config(sentryUrl)
-        .install();
+        .install()
 }
 
 /**
  * Vue
  */
-import Vue from 'vue';
+import Vue from 'vue'
 
 /*
  * Font Awesome
  */
-import FontAwesome from './fontawesome';
+import FontAwesome from './fontawesome'
 
-Vue.use(FontAwesome);
+Vue.use(FontAwesome)
 
 /**
  * Toasts
  */
-import Snotify from 'vue-snotify';
+import Snotify from 'vue-snotify'
 
 Vue.use(Snotify, {
     toast: {
         timeout: 9000
     }
-});
+})
 
 /**
  * Validation
  */
-import VeeValidate from 'vee-validate';
+import VeeValidate from 'vee-validate'
 
 Vue.use(VeeValidate, {
     validity: true
-});
+})
 
 // Focus
 Vue.directive('focus', {
@@ -52,7 +52,7 @@ Vue.directive('focus', {
         // Focus the element
         el.focus()
     }
-});
+})
 
 /**
  * Vue Components
@@ -60,42 +60,42 @@ Vue.directive('focus', {
 Vue.component(
     'modal',
     require('./components/AppModal.vue')
-);
+)
 
 Vue.component(
     'app-form',
     require('./components/form/AppForm.vue')
-);
+)
 
 Vue.component(
     'app-password',
     require('./components/form/AppPassword.vue')
-);
+)
 
 Vue.component(
     'app-button',
     require('./components/form/AppButton.vue')
-);
+)
 
 Vue.component(
     'form-group',
     require('./components/form/AppFormGroup.vue')
-);
+)
 
 Vue.component(
     'app-toolbar',
     require('./components/AppToolbar.vue')
-);
+)
 
 Vue.component(
     'ellipsis',
     require('./components/AppEllipsis.vue')
-);
+)
 
 Vue.component(
     'app-spinner',
     require('./components/AppSpinner.vue')
-);
+)
 
 /**
  * And go!
@@ -103,5 +103,13 @@ Vue.component(
 import {i18n} from './i18n'
 import {router} from './router'
 import store from './store'
+import {initialize as initializeAuthentication} from './authentication'
 
-const App = new Vue({i18n, router, store}).$mount('#app');
+window.app = new Vue({
+    i18n,
+    router,
+    store,
+    beforeCreate() {
+        initializeAuthentication()
+    }
+}).$mount('#app')

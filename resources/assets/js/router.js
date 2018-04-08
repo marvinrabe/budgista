@@ -6,13 +6,24 @@ Vue.use(VueRouter);
 
 export const routes = [
     {
-        path: '/login',
-        name: 'login',
-        component: require('./views/auth/Login.vue'),
+        path: '/auth',
+        component: require('./components/layout/Auth.vue'),
+        children: [
+            {
+                path: 'login',
+                name: 'login',
+                component: require('./views/auth/Login.vue'),
+            },
+            {
+                path: 'register',
+                name: 'register',
+                component: require('./views/auth/Register.vue'),
+            },
+        ]
     },
     {
         path: '/app',
-        component: require('./components/AppLayout.vue'),
+        component: require('./components/layout/App.vue'),
         children: [
             {
                 path: 'budget',

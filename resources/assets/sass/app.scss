@@ -17,7 +17,6 @@ body {
   height: 100%;
 }
 
-
 body {
   background: $gray-100;
 }
@@ -27,12 +26,6 @@ body {
   &:hover {
     background: none;
   }
-}
-
-a.nav-header:hover,
-a.text-muted:hover {
-  color: $gray-700 !important;
-  text-decoration: none;
 }
 
 .link-action {
@@ -75,21 +68,6 @@ a.text-muted:hover {
     }
   }
 
-}
-
-.auth {
-  .card-title {
-    text-align: center;
-  }
-
-  .cover {
-    padding-top: 25px;
-    padding-bottom: 20px;
-  }
-
-  .overlap {
-    padding-bottom: 40px;
-  }
 }
 
 #layout {
