@@ -60,7 +60,7 @@ body {
     @extend .text-muted;
 
     &:after {
-      content: "\00b7";
+      content: " \00b7";
     }
 
     &:last-child:after {

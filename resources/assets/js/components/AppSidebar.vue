@@ -45,19 +45,15 @@
                         <router-link
                                 :to="{ name: 'settings.account' }"
                                 @click.native="hideMenu"
-                                class="text-muted small">
-                            {{ $t('title.settings') }}
+                                class="text-muted small"
+                                v-t="'title.settings'">
                         </router-link>
                     </li>
                     <li>
-                        <a href="mailto:support@budgista.com" class="text-muted small">
-                            {{ $t('title.help') }}
-                        </a>
+                        <a href="mailto:support@budgista.com" class="text-muted small" v-t="'title.help'"></a>
                     </li>
                     <li>
-                        <a href="#" class="text-muted small" @click.prevent="logout">
-                            {{ $t('action.logout') }}
-                        </a>
+                        <a href="#" class="text-muted small" @click.prevent="logout" v-t="'action.logout'"></a>
                     </li>
                 </ul>
             </nav>
