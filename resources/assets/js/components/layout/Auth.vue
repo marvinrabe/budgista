@@ -1,6 +1,8 @@
 <template>
     <div id="auth" class="py-4">
-        <app-logo :height="48" class="mb-4" style="flex-shrink: 0"></app-logo>
+        <router-link :to="{name:'login'}">
+            <app-logo :height="48" class="mb-4" style="flex-shrink: 0"></app-logo>
+        </router-link>
 
         <div class="container">
             <div class="row justify-content-md-center">
