@@ -27,6 +27,8 @@ class AuthenticationTest extends TestCase
         $this->assertNotEmpty($data['access_token']);
         $this->assertEquals('bearer', $data['token_type']);
         $this->assertNotEmpty($data['expires_in']);
+
+        $response->assertHeader('Authorization', $data['access_token']);
     }
 
 }

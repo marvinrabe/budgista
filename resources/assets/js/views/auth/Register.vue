@@ -58,15 +58,24 @@
             }
         },
         methods: {
-            login() {
+            register() {
                 this.loading = true
-                this.$store.dispatch('register', this.form)
-                    .then(() => {
-                        this.$router.push({name: 'budget_default'})
-                    })
-                    .finally(() => {
+                this.$auth.register({
+                    params: {
+                        email: this.form.email,
+                        password: this.form.password,
+                        terms: this.form.terms
+                    },
+                    success: function () {
                         this.loading = false
-                    })
+                    },
+                    error: function () {
+                        this.loading = false
+                    },
+                    autoLogin: true,
+                    rememberMe: true,
+                    redirect: {name: 'budget_default'}
+                });
             }
         }
     }
