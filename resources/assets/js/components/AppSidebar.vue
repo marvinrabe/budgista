@@ -111,7 +111,7 @@
         }),
         computed: {
             user() {
-                return this.$store.state.user;
+                return this.$store.state.user
             },
             ...mapGetters([
                 'sortedAccounts',
@@ -119,54 +119,53 @@
             ])
         },
         mounted() {
-            let menu = this.$el;
+            let menu = this.$el
 
-            menu.addEventListener("transitionend", function () {
-                menu.classList.remove("menu--animatable");
-            }, false);
+            menu.addEventListener('transitionend', function () {
+                menu.classList.remove('menu--animatable')
+            }, false)
         },
         methods: {
 
             showNewAccountModal() {
                 // Hide menu
-                this.hideMenu();
+                this.hideMenu()
 
                 // Reset Validation
-                this.newAccount.validated = false;
-                this.errors.clear('newAccount');
+                this.newAccount.validated = false
+                this.errors.clear('newAccount')
 
                 // Reset Data
-                this.newAccount.name = '';
+                this.newAccount.name = ''
 
                 // Show modal
-                this.newAccount.modalVisible = true;
+                this.newAccount.modalVisible = true
             },
             hideNewAccountModal() {
                 // Hide Modal
-                this.newAccount.modalVisible = false;
+                this.newAccount.modalVisible = false
             },
             createAccount() {
                 this.$validator.validateAll('newAccount').then(isValid => {
-                    this.newAccount.validated = true;
+                    this.newAccount.validated = true
 
                     if (isValid) {
-                        this.$store.dispatch('createAccount', this.newAccount);
-                        this.hideNewAccountModal();
+                        this.$store.dispatch('createAccount', this.newAccount)
+                        this.hideNewAccountModal()
                     }
-                });
+                })
             },
             hideMenu() {
-                let menu = this.$el;
-                if (menu.classList.contains("menu--visible")) {
-                    menu.classList.add("menu--animatable");
-                    menu.classList.remove('menu--visible');
+                let menu = this.$el
+                if (menu.classList.contains('menu--visible')) {
+                    menu.classList.add('menu--animatable')
+                    menu.classList.remove('menu--visible')
                 }
             },
             logout() {
-                this.$store.dispatch('logout')
-                    .then(() => {
-                        this.$router.push({name: 'login'});
-                    });
+                this.$auth.logout({
+                    redirect: {name: 'login'}
+                })
             }
         }
     }

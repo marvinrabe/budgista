@@ -103,13 +103,11 @@ Vue.component(
 import {i18n} from './i18n'
 import {router} from './router'
 import store from './store'
-import {initialize as initializeAuthentication} from './authentication'
+import './http'
+import './auth'
 
 window.app = new Vue({
     i18n,
     router,
-    store,
-    beforeCreate() {
-        initializeAuthentication()
-    }
+    store
 }).$mount('#app')
