@@ -6,17 +6,17 @@ import categories from './modules/categories'
 import transactions from './modules/transactions'
 import user from './modules/user'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
-const debug = process.env.NODE_ENV !== 'production';
+const debug = process.env.NODE_ENV !== 'production'
 
-export default new Vuex.Store({
+export const store = new Vuex.Store({
     state: {
         loading: false
     },
     actions: {
         initialize({dispatch, commit, state}) {
-            commit('IS_LOADING');
+            commit('IS_LOADING')
             Promise
                 .all([
                     dispatch('loadUser'),
@@ -24,16 +24,16 @@ export default new Vuex.Store({
                     dispatch('loadCategories')
                 ])
                 .then(() => {
-                    commit('HAS_LOADED');
+                    commit('HAS_LOADED')
                 })
         }
     },
     mutations: {
         HAS_LOADED(state) {
-            state.loading = false;
+            state.loading = false
         },
         IS_LOADING(state) {
-            state.loading = true;
+            state.loading = true
         }
     },
     modules: {
@@ -44,3 +44,5 @@ export default new Vuex.Store({
     },
     strict: debug
 })
+
+export default store
