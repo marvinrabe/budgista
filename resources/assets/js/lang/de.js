@@ -66,6 +66,7 @@ export default {
         allocated: 'Eingeplant',
         unallocated: 'Nicht eingeplant',
         previousMonth: 'Vorheriger Monat',
+        termsOfService: 'Ich akzeptiere die <a href="{0}" target="__blank">Nutzungsbedingungen</a>.',
         balance: {
             current: 'Verrechnet',
             upcoming: 'Ausstehend',

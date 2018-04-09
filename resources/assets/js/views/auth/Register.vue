@@ -31,9 +31,7 @@
                                type="checkbox"
                                class="form-check-input"
                                v-model="form.terms">
-                        <label class="form-check-label" for="terms">
-                            {!! Lang::get('form.termsOfService', ['url' => route('terms')]) !!}
-                        </label>
+                        <label class="form-check-label" for="terms" v-html="$t('form.termsOfService', [terms])"></label>
                     </div>
                 </div>
 
@@ -46,6 +44,8 @@
 </template>
 
 <script>
+    import {termsUrl} from '../../config'
+
     export default {
         data() {
             return {
@@ -55,6 +55,11 @@
                     terms: false
                 },
                 loading: false
+            }
+        },
+        computed: {
+            terms() {
+                return termsUrl
             }
         },
         methods: {
@@ -75,7 +80,7 @@
                     autoLogin: true,
                     rememberMe: true,
                     redirect: {name: 'budget_default'}
-                });
+                })
             }
         }
     }

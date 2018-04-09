@@ -66,6 +66,7 @@ export default {
         allocated: 'Budgeted',
         unallocated: 'To be Budgeted',
         previousMonth: 'Previous Month',
+        termsOfService: 'I agree to the <a href="{0}" target="__blank">Terms of Service</a>.',
         balance: {
             current: 'Cleared',
             upcoming: 'Uncleared',
