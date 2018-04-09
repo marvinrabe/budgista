@@ -17,6 +17,10 @@ body {
   background: $gray-100;
 }
 
+#app {
+  height: 100%;
+}
+
 .dropdown-static {
   @extend .dropdown-item;
   &:hover {
@@ -112,8 +116,7 @@ body {
 
 @import "menu";
 @import "toast";
-
 @import "budget";
 @import "transactions";
 @import "balance";
-
+@import "spinner";

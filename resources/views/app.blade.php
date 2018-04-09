@@ -23,14 +23,26 @@
 <body>
 
 <div id="app">
-    <noscript>
-        <div class="container my-5">
-            <div class="alert alert-warning">
+    <div class="d-flex flex-column align-items-center justify-content-center container" style="height: 100%">
+
+        <div class="spinner" role="progressbar">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+
+        <noscript>
+            <div class="alert alert-warning" role="alert">
                 <strong>{{ trans('title.no_script') }}</strong>
                 {{ trans('message.no_script') }}
             </div>
-        </div>
-    </noscript>
+            <style>
+                .spinner {
+                    display: none;
+                }
+            </style>
+        </noscript>
+    </div>
 </div>
 
 @if(config('app.env') == 'production')
