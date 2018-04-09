@@ -11,7 +11,7 @@ return [
         'contact' => 'Contact us',
         'bullets' => [
             [
-                'icon' => 'far fa-envelope',
+                'icon' => 'fa fa-envelope',
                 'title' => 'Keep a Budget',
                 'body' => 'Never overspend again. Break your monthly paycheck down in multiple categories and know how much money you really have left.'
             ],
@@ -31,7 +31,7 @@ return [
                 'body' => 'Take your budget on the road. Open Budgista in the browser on your mobile devices. Android and iOS apps are coming soon.'
             ],
             [
-                'icon' => 'far fa-life-ring',
+                'icon' => 'fa fa-life-ring',
                 'title' => 'Always there for you',
                 'body' => 'If you struggle setting up your budget just ask for help via E-Mail. We answer every question you have. 42!'
             ],

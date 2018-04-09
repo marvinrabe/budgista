@@ -11,7 +11,7 @@ return [
         'contact' => 'Kontaktiere uns',
         'bullets' => [
             [
-                'icon' => 'far fa-envelope',
+                'icon' => 'fa fa-envelope',
                 'title' => 'Erstelle ein Budget',
                 'body' => 'Nie mehr zu viel ausgeben. Teile dein Gehalt in mehrere Kategorien auf und du weißt immer wieviel du wirklich noch übrig hast.'
             ],
@@ -31,7 +31,7 @@ return [
                 'body' => 'Nimm dein Budget überall mit hin. Öffne Budgista im Browser deines mobilen Gerätes. Android und iOS Apps kommen demnächst.'
             ],
             [
-                'icon' => 'far fa-life-ring',
+                'icon' => 'fa fa-life-ring',
                 'title' => 'Immer für dich da',
                 'body' => 'Wenn du Schwierigkeiten beim Führen eines Budgets hast, dann frage einfach per E-Mail nach Hilfe. Wir beantworten jede Frage. 42!'
             ],
