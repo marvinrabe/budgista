@@ -13,7 +13,6 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 /**
  * @property Account[] $accounts
  * @property Category[] $categories
- * @property bool $is_admin
  */
 class User extends Authenticatable implements JWTSubject
 {
@@ -35,19 +34,9 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'is_admin'
+        'password', 'remember_token'
     ];
 
-    protected $casts = [
-        'is_admin' => 'bool'
-    ];
-
-    /**
-     * Send the password reset notification.
-     *
-     * @param  string $token
-     * @return void
-     */
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
