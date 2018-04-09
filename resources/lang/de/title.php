@@ -10,6 +10,7 @@ return [
     'users' => 'Benutzer',
     'help' => 'Hilfe',
     'terms' => 'Nutzungsbedingungen',
+    'privacy' => 'Datenschutzerklärung',
     'no_script' => 'JavaScript ist deaktiviert.'
 
 ];

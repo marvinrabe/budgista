@@ -17,6 +17,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::view('/legal', 'static.legal')->name('legal');
     Route::view('/terms', 'static.terms')->name('terms');
+    Route::view('/privacy', 'static.privacy')->name('privacy');
 });
 
 Route::view('/auth/login', 'app')->name('login');
