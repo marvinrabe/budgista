@@ -9,6 +9,7 @@ return [
     'home' => 'Startseite',
     'users' => 'Benutzer',
     'help' => 'Hilfe',
-    'terms' => 'Nutzungsbedingungen'
+    'terms' => 'Nutzungsbedingungen',
+    'no_script' => 'JavaScript ist deaktiviert.'
 
 ];

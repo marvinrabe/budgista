@@ -9,6 +9,7 @@ return [
     'home' => 'Home',
     'users' => 'Users',
     'help' => 'Help',
-    'terms' => 'Terms of Service'
+    'terms' => 'Terms of Service',
+    'no_script' => 'JavaScript is disabled.'
 
 ];
