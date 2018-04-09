@@ -41,7 +41,7 @@
                         classes.push('btn-light');
                         break;
                     case 'tertiary':
-                        classes.push('btn-text-light');
+                        classes.push('btn-text-dark');
                         break;
                 }
                 return classes.join(' ');
