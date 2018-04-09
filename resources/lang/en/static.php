@@ -13,7 +13,7 @@ return [
             [
                 'icon' => 'fa fa-envelope',
                 'title' => 'Keep a Budget',
-                'body' => 'Never overspend again. Break your monthly paycheck down in multiple categories and know how much money you really have left.'
+                'body' => 'Never overspend again. Break your paycheck down in multiple categories and know how much money you have left.'
             ],
             [
                 'icon' => 'fa fa-university',
@@ -23,7 +23,7 @@ return [
             [
                 'icon' => 'fa fa-sync',
                 'title' => 'Recurring Expenses',
-                'body' => 'Never forget recurring expenses again. We’ll help you setting aside some money every month to cover them later on. No more surprises.'
+                'body' => 'Never forget recurring expenses again. We help you setting aside some money every month to cover them later on. No more surprises.'
             ],
             [
                 'icon' => 'fa fa-mobile-alt',
