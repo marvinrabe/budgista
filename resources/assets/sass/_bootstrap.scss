@@ -3,6 +3,7 @@
 @import "variables";
 // Bootstrap 4
 @import "~bootstrap/scss/bootstrap";
+@import "button-text";
 
 /*
  * Titles
@@ -177,24 +178,4 @@ a.h2:hover {
 .btn {
   cursor: pointer;
   font-weight: 500;
-}
-
-.btn-text-light {
-  @extend .btn-outline-light;
-  background: transparent;
-  border-color: transparent;
-  color: $gray-500 !important;
-
-  &:hover {
-    background: transparent;
-    border-color: transparent;
-    color: $gray-700 !important;
-  }
-
-  &:active, &:focus {
-    background: transparent !important;
-    border-color: transparent !important;
-    color: $body-color !important;
-    box-shadow: none !important;
-  }
 }

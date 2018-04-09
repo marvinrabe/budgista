@@ -25,7 +25,7 @@ describe('AppButton', () => {
             propsData: {label: 'Save', type: 'tertiary'}
         });
 
-        expect(wrapper.html()).toContain('btn-text-light');
+        expect(wrapper.html()).toContain('btn-text-dark');
     });
 
     it('hides spinner by default', () => {
