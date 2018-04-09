@@ -106,7 +106,9 @@ import {router} from './router'
 import './auth'
 import './http'
 
-window.app = new Vue({
+const App = Vue.extend(require('./components/App.vue'));
+
+window.app = new App({
     i18n,
     store,
     router

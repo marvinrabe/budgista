@@ -5,10 +5,10 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="alternate" hreflang="x-default" href="{{ route('app') }}" />
+    <link rel="alternate" hreflang="x-default" href="{{ route('app') }}"/>
 
     @include('snippets.icons')
 
@@ -23,12 +23,18 @@
 <body>
 
 <div id="app">
-    <router-view></router-view>
-    <vue-snotify></vue-snotify>
+    <noscript>
+        <div class="container my-5">
+            <div class="alert alert-warning">
+                <strong>{{ trans('title.no_script') }}</strong>
+                {{ trans('message.no_script') }}
+            </div>
+        </div>
+    </noscript>
 </div>
 
 @if(config('app.env') == 'production')
-<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Intl,Intl.~locale.{{ app()->getLocale() }}"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Intl,Intl.~locale.{{ app()->getLocale() }}"></script>
 @endif
 
 <script src="{{ mix('js/app.js') }}"></script>

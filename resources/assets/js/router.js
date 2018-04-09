@@ -24,7 +24,7 @@ export const routes = [
     },
     {
         path: '/app',
-        component: require('./components/layout/App.vue'),
+        component: require('./components/layout/Default.vue'),
         meta: {
             auth: true
         },
