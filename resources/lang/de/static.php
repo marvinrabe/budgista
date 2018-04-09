@@ -13,17 +13,17 @@ return [
             [
                 'icon' => 'fa fa-envelope',
                 'title' => 'Erstelle ein Budget',
-                'body' => 'Nie mehr zu viel ausgeben. Teile dein Gehalt in mehrere Kategorien auf und du weißt immer wieviel du wirklich noch übrig hast.'
+                'body' => 'Nie mehr zu viel ausgeben. Teile dein Gehalt in mehrere Kategorien auf und du weißt immer wieviel noch übrig ist.'
             ],
             [
                 'icon' => 'fa fa-university',
                 'title' => 'Konten immer im Blick',
-                'body' => 'Habe alle deine Bankkonten an einem Platz. Merke Kontobewegungen vor, die noch nicht auf dem Kontoauszug zu sehen sind.'
+                'body' => 'Habe deine Bankkonten an einem Platz. Merke Kontobewegungen vor, die noch nicht auf dem Kontoauszug zu sehen sind.'
             ],
             [
                 'icon' => 'fa fa-sync',
                 'title' => 'Wiederkehrende Ausgaben',
-                'body' => 'Vergesse nie wieder wiederkehrende Ausgaben. Wir helfen dir sogar dabei jeden Monat etwas Geld zur Seite zu legen, um die Ausgaben später bezahlen zu können. Keine Überraschungen mehr.'
+                'body' => 'Vergesse nie wieder wiederkehrende Ausgaben. Wir helfen dir jeden Monat etwas Geld zur Seite zu legen, um die Ausgaben später bezahlen zu können. Keine Überraschungen mehr.'
             ],
             [
                 'icon' => 'fa fa-mobile-alt',
@@ -33,7 +33,7 @@ return [
             [
                 'icon' => 'fa fa-life-ring',
                 'title' => 'Immer für dich da',
-                'body' => 'Wenn du Schwierigkeiten beim Führen eines Budgets hast, dann frage einfach per E-Mail nach Hilfe. Wir beantworten jede Frage. 42!'
+                'body' => 'Wenn du Schwierigkeiten hast, dann frage einfach per E-Mail nach Hilfe. Wir beantworten jede Frage. 42!'
             ],
             [
                 'icon' => 'fa fa-lock',
