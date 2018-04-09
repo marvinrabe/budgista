@@ -14,7 +14,7 @@
             </form-group>
         </app-form>
         <div slot="footer">
-            <button class="btn btn-text-light" @click="hideModal">
+            <button class="btn btn-text-dark" @click="hideModal">
                 {{ $t('action.cancel') }}
             </button>
             <button class="btn btn-danger" form="deleteCategory" type="submit">

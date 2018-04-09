@@ -15,7 +15,7 @@
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="btn btn-light" href="{{ route('login') }}">{{ trans('title.login') }}</a>
+                        <a class="btn btn-text-dark" href="{{ route('login') }}">{{ trans('title.login') }}</a>
                     </li>
                 </ul>
             </div>
@@ -33,7 +33,7 @@
         </div>
     </header>
 
-    <div class="container pt-4">
+    <div class="container pt-5">
         <div class="row">
             @each('static._bullet', trans('static.home.bullets'), 'bullet')
         </div>
@@ -43,10 +43,10 @@
     </div>
 
     <div class="container text-center">
-        <div class="py-4 second-cta">
+        <div class="py-5 second-cta">
             <p class="h2 m-0">{{ trans('static.home.lead2') }}</p>
 
-            <a href="{{ route('register') }}" class="btn btn-lg btn-primary mt-3">
+            <a href="{{ route('register') }}" class="btn btn-lg btn-primary mt-3 shadow-1">
                 {{ trans('static.home.cta') }}
             </a>
         </div>
@@ -56,7 +56,7 @@
         <p class="h4 m-0">
             {{ trans('static.home.help') }}
         </p>
-        <a href="mailto:support@budgista.com" class="btn btn-outline-secondary">
+        <a href="mailto:support@budgista.com" class="btn btn-lg btn-text-primary">
             {{ trans('static.home.contact') }}
         </a>
     </div>

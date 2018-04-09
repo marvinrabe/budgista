@@ -3,7 +3,6 @@
   header {
     background: $gray-100 url(../images/bg.png) no-repeat center top -250px;
     background-size: 720px;
-    border-top: 3px solid theme-color('primary');
   }
 
   .lead {
@@ -12,7 +11,7 @@
 
   .intro-message {
     padding-top: 12rem;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
     text-align: center;
   }
 
@@ -23,11 +22,16 @@
 
   .info-bullet {
     display: flex;
-    padding: 0 1em 1em;
+    align-items: flex-start;
+    padding: 0 1em 2em;
 
     &-icon {
-      @extend .h2;
-      font-size: 1.5em;
+      @extend .rounded-circle;
+      @extend .p-2;
+      font-size: 1em;
+      line-height: 1.25em;
+      margin-top: -.2em;
+      background: theme-color('light');
       color: theme-color('primary');
       flex: 0;
       margin-right: .5em;
@@ -56,19 +60,8 @@
 
   .help {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
-
-    .btn {
-      margin-left: 1em;
-      color: $text-muted !important;
-      border-color: $text-muted !important;
-
-      &:hover {
-        color: $white !important;
-        background-color: $text-muted !important;
-      }
-    }
   }
 
   @include media-breakpoint-down(md) {

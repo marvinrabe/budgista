@@ -9,17 +9,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="alternate" hreflang="x-default" href="{{ route('app') }}" />
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
 
     @include('snippets.icons')
 
-    {{--
-    Enables web app support. Only useful when Navigation between pages not via links
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    + android manifest
-    --}}
     <meta name="application-name" content="{{ config('app.name') }}"/>
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 
     <title>{{ config('app.name') }}</title>
 
