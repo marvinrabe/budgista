@@ -7,28 +7,30 @@
 @section('body')
 
     <header class="border-bottom">
-        <nav class="navbar navbar-expand navbar-light">
+        <div class="decoration">
+            <nav class="navbar navbar-expand navbar-light">
+                <div class="container">
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                        <img src="{{ asset('/images/logo.svg') }}" alt="{{ config('app.name') }}" height="30">
+                    </a>
+
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="btn btn-text-dark" href="{{ route('login') }}">{{ trans('title.login') }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
             <div class="container">
-                <a class="navbar-brand" href="{{ route('home') }}">
-                    <img src="{{ asset('/images/logo.svg') }}" alt="{{ config('app.name') }}" height="30">
-                </a>
+                <div class="intro-message">
+                    <h1>{{ trans('static.home.heading') }}</h1>
+                    <p class="lead">{{ trans('static.home.lead') }}</p>
 
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="btn btn-text-dark" href="{{ route('login') }}">{{ trans('title.login') }}</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        <div class="container">
-            <div class="intro-message">
-                <h1>{{ trans('static.home.heading') }}</h1>
-                <p class="lead">{{ trans('static.home.lead') }}</p>
-
-                <a href="{{ route('register') }}" class="btn btn-lg btn-primary mt-2 shadow-1">
-                    {{ trans('static.home.cta') }}
-                </a>
+                    <a href="{{ route('register') }}" class="btn btn-lg btn-primary mt-2 shadow-1">
+                        {{ trans('static.home.cta') }}
+                    </a>
+                </div>
             </div>
         </div>
     </header>
