@@ -3,10 +3,10 @@
 return [
     'home' => [
         'title' => 'Kostenlose Haushaltsbuch App',
-        'heading' => 'Ein Budget haben ist einfach!',
+        'heading' => 'Ein Haushaltsbuch führen ist einfach!',
         'cta' => 'Registriere dich kostenlos',
         'lead' => 'Werde schuldenfrei und spare Geld.',
-        'lead2' => 'Erstelle jetzt dein Budget',
+        'lead2' => 'Erstelle jetzt dein Haushaltsbuch',
         'help' => 'Immer noch Fragen?',
         'contact' => 'Kontaktiere uns',
         'bullets' => [
