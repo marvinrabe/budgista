@@ -10,17 +10,15 @@
 
 @section('body')
 
-    <div id="app">
-        <div class="cover">
-            <div class="container text-center">
-                <a href="{{ route('home') }}" class="h2 logo">
-                    {{ config('app.name') }}
+    <div id="auth">
+        <div class="container text-center my-4">
+            <div class="mb-4">
+                <a href="{{ route('login') }}">
+                    <img src="{{ asset('/images/logo.svg') }}" alt="{{ config('app.name') }}" height="48">
                 </a>
             </div>
-        </div>
 
-        <div class="container overlap">
-            <div class="row justify-content-md-center">
+            <div class="row justify-content-md-center text-left">
                 <div class="col-sm-12 col-md-6 col-lg-5 center">
                     @yield('card')
                 </div>

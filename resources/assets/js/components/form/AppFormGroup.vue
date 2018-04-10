@@ -1,7 +1,7 @@
 <template>
     <div class="form-group">
-        <label :for="name">{{ $t(labelTranslation)}}</label>
-        <slot :bindings="bindings"></slot>
+        <label :for="name" v-if="hasLabel">{{ $t(labelTranslation)}}</label>
+        <slot :bindings="bindings" :id="name"></slot>
         <span class="invalid-feedback" v-if="hasError">
             {{ errors.first(name) }}
         </span>
@@ -17,6 +17,10 @@
             label: {
                 type: String,
                 default: null
+            },
+            hasLabel: {
+                type: Boolean,
+                default: true
             }
         },
         inject: ['$validator'],
