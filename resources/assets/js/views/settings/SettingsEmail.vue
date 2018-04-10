@@ -1,5 +1,5 @@
 <template>
-    <app-form @submit="save">
+    <app-form @submit="save" ref="form">
         <h5>{{ $t('title.updateEmail') }}</h5>
 
         <form-group name="email">
@@ -7,7 +7,7 @@
                    class="form-control"
                    slot-scope="{bindings}"
                    v-bind="bindings"
-                   v-validate.initial="'required|email'"
+                   v-validate="'required|email'"
                    v-model="form.email">
         </form-group>
 
@@ -17,7 +17,7 @@
                        slot-scope="{bindings, handlers}"
                        v-bind="Object.assign(bindings, group.bindings)"
                        v-on="handlers"
-                       v-validate.initial="'required'"
+                       v-validate="'required'"
                        v-model="form.password">
             </app-password>
         </form-group>
@@ -53,17 +53,11 @@
                 this.saving = true;
                 this.$store.dispatch('updateEmail', this.form)
                     .then(() => {
-                        this.saving = false;
                         this.$snotify.success(this.$t('messages.updateEmail'));
                     })
-                    .catch(exception => {
+                    .catch(this.$refs.form.error)
+                    .finally(() => {
                         this.saving = false;
-                        if (_.has(exception, 'response.data.errors')) {
-                            const keys = _.keys(exception.response.data.errors);
-                            this.$snotify.error(_.head(exception.response.data.errors[_.head(keys)]), this.$t('notification.error'));
-                        } else {
-                            this.$snotify.error(this.$t('notification.tryAgain'), this.$t('notification.unexpectedError'));
-                        }
                     });
             }
         }

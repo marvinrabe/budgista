@@ -36,7 +36,7 @@
                         <money-input
                                 id="amount"
                                 :value.sync="amount"
-                                v-validate.initial="'required'"
+                                v-validate="'required'"
                                 data-vv-name="amount"
                                 :data-vv-as="$t('form.amount')"
                                 v-focus
@@ -50,7 +50,7 @@
                     <label for="payee">{{ $t('form.payee')}}</label>
                     <input id="payee" type="text" class="form-control" list="payees"
                            v-model="payee"
-                           v-validate.initial="'required'"
+                           v-validate="'required'"
                            data-vv-name="payee"
                            :data-vv-as="$t('form.payee')">
                     <datalist id="payees">
@@ -77,7 +77,7 @@
                                id="date"
                                class="form-control"
                                v-model="date"
-                               v-validate.initial="'required'"
+                               v-validate="'required'"
                                data-vv-name="date"
                                :data-vv-as="$t('form.date')">
                         <span class="invalid-feedback">{{ errors.first('transaction.date') }}</span>

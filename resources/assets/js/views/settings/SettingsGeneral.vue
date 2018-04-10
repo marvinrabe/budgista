@@ -1,5 +1,5 @@
 <template>
-    <app-form @submit="save">
+    <app-form @submit="save" ref="form">
 
         <h5>{{ $t('title.general') }}</h5>
 
@@ -8,7 +8,7 @@
                     slot-scope="{bindings}"
                     v-bind="bindings"
                     v-model="form.language"
-                    v-validate.initial="'required'">
+                    v-validate="'required'">
                 <option v-for="language in languages" :value="language" v-html="$t('language.'+language)"></option>
             </select>
         </form-group>
@@ -18,7 +18,7 @@
                     slot-scope="{bindings}"
                     v-bind="bindings"
                     v-model="form.locale"
-                    v-validate.initial="'required'">
+                    v-validate="'required'">
                 <option v-for="locale in locales" :value="locale" v-html="$t('language.'+locale)"></option>
             </select>
         </form-group>
@@ -28,7 +28,7 @@
                     slot-scope="{bindings}"
                     v-bind="bindings"
                     v-model="form.currency"
-                    v-validate.initial="'required'">
+                    v-validate="'required'">
                 <option v-for="currency in currencies" :value="currency" v-html="$t('currency.'+currency)"></option>
             </select>
         </form-group>
@@ -78,17 +78,11 @@
                 this.saving = true;
                 this.$store.dispatch('updateSettings', this.form)
                     .then(() => {
-                        this.saving = false;
                         this.$snotify.success(this.$t('messages.updateSettings'));
                     })
-                    .catch(exception => {
+                    .catch(this.$refs.form.error)
+                    .finally(() => {
                         this.saving = false;
-                        if (_.has(exception, 'response.data.errors')) {
-                            const keys = _.keys(exception.response.data.errors);
-                            this.$snotify.error(_.head(exception.response.data.errors[_.head(keys)]), this.$t('notification.error'));
-                        } else {
-                            this.$snotify.error(this.$t('notification.tryAgain'), this.$t('notification.unexpectedError'));
-                        }
                     });
             }
         }

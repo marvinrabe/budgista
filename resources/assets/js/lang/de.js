@@ -2,13 +2,9 @@ export default {
     app: {
         name: 'Budgista'
     },
-    'notification': {
-        'error': 'Fehler',
-        'unexpectedError': 'Unerwarteter Fehler',
-        'tryAgain': 'Bitte versuche es später erneut.',
-        'successful': 'Erfolgreich'
-    },
     messages: {
+        loginFailed: 'Diese Kombination aus Zugangsdaten wurden nicht in unserer Datenbank gefunden.',
+        unexpectedError: 'Ein unerwarteter Fehler ist aufgetreten.',
         updateEmail: 'E-Mail Adresse wurde geändert.',
         updatePassword: 'Passwort wurde geändert.',
         updateSettings: 'Einstellungen wurden gespeichert.',

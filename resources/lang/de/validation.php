@@ -103,6 +103,7 @@ return [
     'custom' => [
         'terms' => [
             'required' => 'Du musst die Nutzungsbedingungen akzeptieren.',
+            'accepted' => 'Du musst die Nutzungsbedingungen akzeptieren.'
         ],
     ],
 

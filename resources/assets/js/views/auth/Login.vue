@@ -3,14 +3,14 @@
         <div class="card-body">
             <h1 class="card-title h4 mb-3" v-t="'title.login'"></h1>
 
-            <app-form @submit="login">
+            <app-form @submit="login" ref="form">
 
                 <form-group name="email">
                     <input type="email"
                            class="form-control"
                            slot-scope="{bindings}"
                            v-bind="bindings"
-                           v-validate.initial="'required|email'"
+                           v-validate="'required|email'"
                            v-model="form.email"
                            v-focus>
                 </form-group>
@@ -21,7 +21,7 @@
                                slot-scope="{bindings, handlers}"
                                v-bind="Object.assign(bindings, group.bindings)"
                                v-on="handlers"
-                               v-validate.initial="'required'"
+                               v-validate="'required'"
                                v-model="form.password">
                     </app-password>
                 </form-group>
@@ -66,8 +66,13 @@
                     success: function () {
                         this.loading = false
                     },
-                    error: function () {
+                    error: function (error) {
                         this.loading = false
+                        if (error.response && error.response.status === 401) {
+                            this.$refs.form.addError('email', this.$t('messages.loginFailed'))
+                        } else {
+                            this.$refs.form.error(error)
+                        }
                     },
                     rememberMe: true,
                     redirect: {name: 'budget_default'}

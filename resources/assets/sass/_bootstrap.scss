@@ -132,33 +132,6 @@ a.h2:hover {
 }
 
 /*
- * Form
- */
-.was-validated .form-control:valid {
-  border-color: $input-border-color;
-}
-
-.was-validated .form-check-input:valid ~ .form-check-label,
-.form-check-input.is-valid ~ .form-check-label {
-  color: $body-color;
-}
-
-.form-control:focus, .was-validated .form-control:valid:focus {
-  box-shadow: 0 0 2px 0.1rem rgba(theme-color('primary'), 0.1);
-  border-color: $input-focus-border-color;
-}
-
-.was-validated .form-control:invalid:focus {
-  box-shadow: 0 0 2px 0.1rem rgba(theme-color('danger'), 0.1);
-  border-color: theme-color('danger');
-}
-
-// Invalid Feedback is always displayed as block, because we use vue to hide message if there is no error.
-.was-validated .invalid-feedback {
-  display: block;
-}
-
-/*
  * Table
  */
 
