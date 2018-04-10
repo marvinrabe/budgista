@@ -25,15 +25,16 @@
                     </app-password>
                 </form-group>
 
-                <div class="form-group">
-                    <div class="form-check">
-                        <input id="terms"
-                               type="checkbox"
+                <form-group name="terms" :has-label="false">
+                    <div class="form-check" slot-scope="{bindings, id}">
+                        <input type="checkbox"
                                class="form-check-input"
+                               v-bind="bindings"
+                               v-validate="'required'"
                                v-model="form.terms">
-                        <label class="form-check-label" for="terms" v-html="$t('form.termsOfService', [terms])"></label>
+                        <label class="form-check-label" :for="id" v-html="$t('form.termsOfService', [terms])"></label>
                     </div>
-                </div>
+                </form-group>
 
                 <template slot="actions">
                     <app-button :label="$t('action.register')" :busy="loading"></app-button>

@@ -59,6 +59,7 @@ export default {
         'uncategorized': 'Ohne Kategorie',
         'available': 'Verfügbar',
         'recommendedBudget': 'Empfohlenes Budget',
+        remember: 'Angemeldet bleiben',
         allocated: 'Eingeplant',
         unallocated: 'Nicht eingeplant',
         previousMonth: 'Vorheriger Monat',

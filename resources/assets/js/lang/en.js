@@ -59,6 +59,7 @@ export default {
         'uncategorized': 'Uncategorized',
         'available': 'Available',
         'recommendedBudget': 'Recommended Budget',
+        remember: 'Remember Me',
         allocated: 'Budgeted',
         unallocated: 'To be Budgeted',
         previousMonth: 'Previous Month',

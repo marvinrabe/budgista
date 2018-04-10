@@ -16,19 +16,32 @@
                 </form-group>
 
                 <form-group name="password">
-                    <app-password slot-scope="group" :disable-strength="true">
-                        <input class="form-control"
-                               slot-scope="{bindings, handlers}"
-                               v-bind="Object.assign(bindings, group.bindings)"
-                               v-on="handlers"
-                               v-validate="'required'"
-                               v-model="form.password">
-                    </app-password>
+                    <template slot-scope="group">
+                        <div class="float-right">
+                            <a class="text-muted small" href="/password/reset" v-t="'messages.forgotPassword'"></a>
+                        </div>
+                        <app-password  :disable-strength="true">
+                            <input class="form-control"
+                                   slot-scope="{bindings, handlers}"
+                                   v-bind="Object.assign(bindings, group.bindings)"
+                                   v-on="handlers"
+                                   v-validate="'required'"
+                                   v-model="form.password">
+                        </app-password>
+                    </template>
                 </form-group>
 
                 <template slot="actions">
-                    <div class="mr-auto">
-                        <a class="text-muted" href="#" v-t="'messages.forgotPassword'"></a>
+                    <div class="form-group mr-auto">
+                        <div class="form-check">
+                            <input id="remember"
+                                   class="form-check-input"
+                                   type="checkbox"
+                                   v-model="form.remember">
+                            <label for="remember"
+                                   class="form-check-label"
+                                   v-t="'form.remember'"></label>
+                        </div>
                     </div>
 
                     <app-button :label="$t('action.login')" :busy="loading"></app-button>
@@ -50,7 +63,8 @@
             return {
                 form: {
                     email: '',
-                    password: ''
+                    password: '',
+                    remember: false
                 },
                 loading: false
             }
@@ -74,7 +88,7 @@
                             this.$refs.form.error(error)
                         }
                     },
-                    rememberMe: true,
+                    rememberMe: this.form.remember,
                     redirect: {name: 'budget_default'}
                 })
             }

@@ -16,6 +16,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::view('/legal', 'static.legal')->name('legal');
     Route::view('/terms', 'static.terms')->name('terms');
     Route::view('/privacy', 'static.privacy')->name('privacy');
+
+    $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+    $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.request');
 });
 
 Route::view('/auth/login', 'app')->name('login');

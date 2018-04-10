@@ -11,7 +11,8 @@ return [
 
     // Reset Password E-Mail
     'reset' => [
-        'intro' => 'Du erhältst diese E-Mail, weil jemand das Zurücksetzen deines Passworts angefordert hat.',
+        'subject' => 'Neues Passwort für Budgista festlegen',
+        'intro' => 'Jemand hat ein neues Passwort für dein Budgista Konto angefordert.',
         'action' => 'Passwort zurücksetzen',
         'outro' => 'Falls du diese E-Mail nicht angefordert hast, dann kann diese getrost ignoriert werden.'
     ]

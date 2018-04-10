@@ -14,25 +14,27 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('password.email') }}" class="{{ $errors->any()?'was-validated':'' }}">
+    <form method="POST" action="{{ route('password.email') }}" novalidate>
         {{ csrf_field() }}
 
         <div class="form-group">
             <label for="email" class="control-label">{{ trans('form.email') }}</label>
 
-            <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'border-danger' : '' }}" name="email" value="{{ old('email') }}"
+            <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email') }}"
                    required>
 
             @if ($errors->has('email'))
-                <div class="form-text text-danger">
+                <div class="invalid-feedback">
                     {{ $errors->first('email') }}
                 </div>
             @endif
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block">
-            {{ trans('action.send_reset') }}
-        </button>
+        <div class="d-flex justify-content-end align-items-baseline">
+            <button type="submit" class="btn btn-primary">
+                {{ trans('action.send_reset') }}
+            </button>
+        </div>
 
     </form>
 @endsection
