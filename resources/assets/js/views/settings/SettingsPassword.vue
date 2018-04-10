@@ -1,14 +1,14 @@
 <template>
-    <app-form @submit="save">
+    <app-form @submit="save" ref="form">
         <h5>{{ $t('title.updatePassword') }}</h5>
 
-        <form-group name="oldPassword">
+        <form-group name="password" label="oldPassword">
             <app-password :disable-strength="true" slot-scope="group">
                 <input class="form-control"
                        slot-scope="{bindings, handlers}"
                        v-bind="Object.assign(bindings, group.bindings)"
                        v-on="handlers"
-                       v-validate.initial="'required'"
+                       v-validate="'required'"
                        v-model="form.password">
             </app-password>
         </form-group>
@@ -19,7 +19,7 @@
                        slot-scope="{bindings, handlers}"
                        v-bind="Object.assign(bindings, group.bindings)"
                        v-on="handlers"
-                       v-validate.initial="'required|min:6'"
+                       v-validate="'required|min:6'"
                        v-model="form.new_password">
             </app-password>
         </form-group>
@@ -54,17 +54,11 @@
                 this.saving = true;
                 this.$store.dispatch('updatePassword', this.form)
                     .then(() => {
-                        this.saving = false;
                         this.$snotify.success(this.$t('messages.updatePassword'));
                     })
-                    .catch(exception => {
+                    .catch(this.$refs.form.error)
+                    .finally(() => {
                         this.saving = false;
-                        if (_.has(exception, 'response.data.errors')) {
-                            const keys = _.keys(exception.response.data.errors);
-                            this.$snotify.error(_.head(exception.response.data.errors[_.head(keys)]), this.$t('notification.error'));
-                        } else {
-                            this.$snotify.error(this.$t('notification.tryAgain'), this.$t('notification.unexpectedError'));
-                        }
                     });
             }
         }
