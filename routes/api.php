@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -12,13 +10,14 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::group(['prefix' => 'auth'], function () {
 
     Route::post('login', 'AuthenticationController@login');
     Route::post('logout', 'AuthenticationController@logout');
     Route::post('register', 'AuthenticationController@register');
     Route::get('refresh', 'AuthenticationController@refresh');
-    Route::get('user', 'UserController@show')->name('user');
+    Route::get('user', 'UserController@show');
 
 });
 
@@ -56,8 +55,10 @@ Route::group(['middleware' => ['auth:api']], function () {
      * Transactions
      */
     Route::put('transactions/{transaction}/clear', 'TransactionController@clear')->name('transactions.clear');
-    Route::apiResource('transactions', 'TransactionController', ['except' => [
-        'index'
-    ]]);
+    Route::apiResource('transactions', 'TransactionController', [
+        'except' => [
+            'index'
+        ]
+    ]);
 
 });

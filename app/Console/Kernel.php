@@ -17,8 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Clean::class,
-        ProcessRecurringTransactions::class,
-        PromoteUserToAdmin::class
+        ProcessRecurringTransactions::class
     ];
 
     /**

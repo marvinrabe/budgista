@@ -1,6 +1,5 @@
 <template>
-    <form :class="[{'was-validated': validated}]"
-          @submit.stop.prevent="submit"
+    <form @submit.stop.prevent="submit"
           novalidate>
         <slot></slot>
 
@@ -29,6 +28,34 @@
                         this.$emit('submit');
                     }
                 });
+            },
+            addError(field, message) {
+                if (_.has(this.fields, field)) {
+                    this.errors.add(field, message, 'server');
+                    this.$validator.flag(field, {
+                        invalid: true,
+                        valid: false,
+                        dirty: true
+                    });
+                } else {
+                    this.$snotify.error(message);
+                }
+            },
+            error(exception) {
+                if (_.has(exception, 'response.data.errors')) {
+                    let serverErrors = exception.response.data.errors;
+                    //console.log(exception.response.data.errors);
+                    //this.errors.add('email', 'test', 'server');
+                    console.log(this.fields);
+                    const keys = _.keys(serverErrors);
+                    keys.forEach((key) => {
+                        let message = _.head(serverErrors[key]);
+                        this.addError(key, message);
+                    });
+                } else {
+                    this.$snotify.error(this.$t('messages.unexpectedError'));
+                    console.error(exception);
+                }
             }
         }
     }
