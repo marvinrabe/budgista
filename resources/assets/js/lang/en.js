@@ -2,13 +2,9 @@ export default {
     app: {
         name: 'Budgista'
     },
-    'notification': {
-        'error': 'Error',
-        'unexpectedError': 'Unexpected Error',
-        'tryAgain': 'Please try again later',
-        'successful': 'Successful'
-    },
     messages: {
+        loginFailed: 'These credentials do not match our records.',
+        unexpectedError: 'An unexpected Error occurred.',
         updateEmail: 'Email Address has been updated.',
         updatePassword: 'Password has been updated.',
         updateSettings: 'Settings have been saved.',

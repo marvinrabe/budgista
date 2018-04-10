@@ -103,6 +103,7 @@ return [
     'custom' => [
         'terms' => [
             'required' => 'You must agree before submitting.',
+            'accepted' => 'You must agree before submitting.'
         ]
     ],
 
