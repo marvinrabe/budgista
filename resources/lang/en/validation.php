@@ -102,8 +102,8 @@ return [
 
     'custom' => [
         'terms' => [
-            'required' => 'You must agree before submitting.',
-            'accepted' => 'You must agree before submitting.'
+            'required' => 'You must agree to the Terms of Service.',
+            'accepted' => 'You must agree to the Terms of Service.'
         ]
     ],
 

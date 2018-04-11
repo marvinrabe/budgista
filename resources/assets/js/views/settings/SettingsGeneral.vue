@@ -41,6 +41,7 @@
 </template>
 
 <script>
+    import _ from 'lodash'
     import {languages} from '../../config.js'
 
     export default {
@@ -78,7 +79,7 @@
                 this.saving = true;
                 this.$store.dispatch('updateSettings', this.form)
                     .then(() => {
-                        this.$snotify.success(this.$t('messages.updateSettings'));
+                        this.$snotify.success(this.$t('message.updateSettings'));
                     })
                     .catch(this.$refs.form.error)
                     .finally(() => {

@@ -10,6 +10,8 @@
 </template>
 
 <script>
+    import _ from 'lodash'
+
     export default {
         inject: ['$validator'],
         data() {
@@ -53,7 +55,7 @@
                         this.addError(key, message);
                     });
                 } else {
-                    this.$snotify.error(this.$t('messages.unexpectedError'));
+                    this.$snotify.error(this.$t('message.unexpectedError'));
                     console.error(exception);
                 }
             }

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash'
 import Transaction from '../../models/Transaction';
 
 // transactions: [{ id, date, payee, amount, cleared, rrule, recurring, category_id, account_id }],
@@ -117,6 +117,10 @@ const actions = {
 };
 
 const mutations = {
+    RESET(state) {
+        state.transactions = []
+        state.nextUrls = {}
+    },
     ADD_TRANSACTION(state, transaction) {
         state.transactions = state.transactions.filter(x => x.id !== transaction.id);
         state.transactions.push(transaction);

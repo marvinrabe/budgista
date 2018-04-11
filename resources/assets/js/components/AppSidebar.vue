@@ -124,7 +124,7 @@
                         accounts: true
                     },
                     {
-                        route: { name: 'settings.account' },
+                        route: {name: 'settings.account'},
                         label: 'title.settings',
                         icon: faCog
                     },
@@ -191,6 +191,9 @@
             logout() {
                 this.$auth.logout({
                     makeRequest: true,
+                    success: function () {
+                        this.$store.dispatch('RESET')
+                    },
                     redirect: {name: 'login'}
                 })
             }

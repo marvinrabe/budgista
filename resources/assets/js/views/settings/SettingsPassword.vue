@@ -54,7 +54,7 @@
                 this.saving = true;
                 this.$store.dispatch('updatePassword', this.form)
                     .then(() => {
-                        this.$snotify.success(this.$t('messages.updatePassword'));
+                        this.$snotify.success(this.$t('message.updatePassword'));
                     })
                     .catch(this.$refs.form.error)
                     .finally(() => {

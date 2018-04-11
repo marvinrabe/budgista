@@ -9,3 +9,6 @@
 
 <meta name="msapplication-TileColor" content="#2196f3"/>
 <meta name="msapplication-TileImage" content="{{ asset('images/mstile-144x144.png') }}"/>
+
+<meta name="application-name" content="{{ config('app.name') }}"/>
+<link rel="manifest" href="{{ asset('manifest.json') }}">

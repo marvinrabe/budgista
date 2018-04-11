@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="container">
-        <h1 class="mb-0">
+        <h1 class="h3 mb-0">
             {{ trans('title.terms') }}
         </h1>
         <span class="h4 text-muted small">Effective Date: January 1st, 2018</span>

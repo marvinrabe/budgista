@@ -29,15 +29,19 @@
                 return 'form.' + (this.label || this.name)
             },
             hasError() {
-                return this.errors.has(this.name);
+                return this.errors.has(this.name)
             },
             bindings() {
-                return {
+                let bindings = {
                     id: this.name,
-                    "data-vv-name": this.name,
-                    "data-vv-as": this.$t('form.' + this.name),
-                    class: this.hasError ? 'is-invalid' : ''
+                    name: this.name
                 }
+
+                if (this.hasLabel) {
+                    bindings['data-vv-as'] = this.$t('form.' + this.name)
+                }
+
+                return bindings
             }
         }
     }
