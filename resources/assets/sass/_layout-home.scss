@@ -58,7 +58,7 @@
   }
 
   .second-cta {
-    border-top: 2px solid theme-color('light');
+    //border-top: 2px solid theme-color('light');
     border-bottom: 2px solid theme-color('light');
   }
 
@@ -101,6 +101,11 @@
 
     .h4 {
       font-size: 1em;
+    }
+
+    .help {
+      align-items: center;
+      flex-direction: column;
     }
 
   }
