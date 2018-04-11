@@ -10,6 +10,7 @@
                            slot-scope="{bindings}"
                            v-bind="bindings"
                            v-validate="'required|email'"
+                           data-vv-validate-on="input"
                            v-model="form.email"
                            v-focus>
                 </form-group>
@@ -21,6 +22,7 @@
                                v-bind="Object.assign(bindings, group.bindings)"
                                v-on="handlers"
                                v-validate="'required|min:6'"
+                               data-vv-validate-on="input"
                                v-model="form.password">
                     </app-password>
                 </form-group>
@@ -46,6 +48,7 @@
 
 <script>
     import {termsUrl} from '../../config'
+    import {Validator} from 'vee-validate'
 
     export default {
         data() {

@@ -53,7 +53,7 @@
                 this.saving = true;
                 this.$store.dispatch('updateEmail', this.form)
                     .then(() => {
-                        this.$snotify.success(this.$t('messages.updateEmail'));
+                        this.$snotify.success(this.$t('message.updateEmail'));
                     })
                     .catch(this.$refs.form.error)
                     .finally(() => {

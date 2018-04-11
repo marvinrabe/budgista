@@ -2,7 +2,7 @@ export default {
     app: {
         name: 'Budgista'
     },
-    messages: {
+    message: {
         loginFailed: 'These credentials do not match our records.',
         unexpectedError: 'An unexpected Error occurred.',
         updateEmail: 'Email Address has been updated.',
@@ -14,7 +14,7 @@ export default {
         noAccount: 'Don\'t have an account?',
         noAccountSignUp: 'Sign up now',
     },
-    'action': {
+    action: {
         'save': 'Save',
         'saveAndNew': 'Save & New',
         'back': 'Back',
@@ -47,7 +47,7 @@ export default {
             'email': 'Change Email Address'
         }
     },
-    'form': {
+    form: {
         'name': 'Name',
         'amount': 'Amount',
         'recurring': 'Recurring?',
@@ -77,10 +77,10 @@ export default {
         'language': 'Language',
         'locale': 'Locale',
         'currency': 'Currency',
-        'email': 'Email Address',
-        'password': 'Password',
-        'oldPassword': 'Old Password',
-        'newPassword': 'New Password'
+        email: 'Email Address',
+        password: 'Password',
+        oldPassword: 'Old Password',
+        newPassword: 'New Password'
     },
     title: {
         accounts: 'Accounts',
@@ -96,6 +96,48 @@ export default {
         updateEmail: 'Change Email Address',
         emptyAccount: 'This account is empty.',
         register: 'Sign up'
+    },
+    validation: {
+        messages: {
+            '_default': 'The {0} value is not valid.',
+            'after': 'The {0} must be after or equal to {1}.',
+            'alpha_dash': 'The {0} field may contain alpha-numeric characters as well as dashes and underscores.',
+            'alpha_num': 'The {0} field may only contain alpha-numeric characters.',
+            'alpha_spaces': 'The {0} field may only contain alphabetic characters as well as spaces.',
+            'alpha': 'The {0} field may only contain alphabetic characters.',
+            'before': 'The {0} must be before or equal to {1}.',
+            'between': 'The {0} field must be between {1} and {2}.',
+            'confirmed': 'The {0} confirmation does not match.',
+            'credit_card': 'The {0} field is invalid.',
+            'date_between': 'The {0} must be between {1} and {2}.',
+            'date_format': 'The {0} must be in the format {1}.',
+            'decimal': 'The {0} field must be numeric and may contain {1} decimal points.',
+            'digits': 'The {0} field must be numeric and exactly contain {1} digits.',
+            'dimensions': 'The {0} field must be {1} pixels by {2} pixels.',
+            'email': 'The {0} field must be a valid email.',
+            'ext': 'The {0} field must be a valid file.',
+            'image': 'The {0} field must be an image.',
+            'in': 'The {0} field must be a valid value.',
+            'integer': 'The {0} field must be an integer.',
+            'ip': 'The {0} field must be a valid ip address.',
+            'length': 'The {0} length must be between {1} and {2}.',
+            'max': 'The {0} field may not be greater than {1} characters.',
+            'max_value': 'The {0} field must be {1} or less.',
+            'mimes': 'The {0} field must have a valid file type.',
+            'min': 'The {0} field must be at least {1} characters.',
+            'min_value': 'The {0} field must be {1} or more.',
+            'not_in': 'The {0} field must be a valid value.',
+            'numeric': 'The {0} field may only contain numeric characters.',
+            'regex': 'The {0} field format is invalid.',
+            'required': 'The {0} field is required.',
+            'size': 'The {0} size must be less than NaN undefined.',
+            'url': 'The {0} field is not a valid URL.'
+        },
+        custom: {
+            terms: {
+                required: 'You must agree to the Terms of Service.'
+            }
+        }
     },
     'frequency': {
         'daily': 'Daily',

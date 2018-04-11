@@ -6,11 +6,11 @@ const defaultState = {
     language: 'en',
     locale: 'en',
     currency: 'EUR'
-};
+}
 
-const state = defaultState;
+const state = defaultState
 
-const getters = {};
+const getters = {}
 
 const actions = {
 
@@ -18,42 +18,46 @@ const actions = {
         return axios
             .get('/user')
             .then(({data}) => {
-                setLanguage(data.data.language);
-                commit('LOAD_USER', data.data);
-            });
+                setLanguage(data.data.language)
+                commit('LOAD_USER', data.data)
+            })
     },
 
     updateSettings({commit}, data) {
         return axios
             .put('/user', data)
             .then(({data}) => {
-                setLanguage(data.data.language);
-                commit('LOAD_USER', data.data);
-            });
+                setLanguage(data.data.language)
+                commit('LOAD_USER', data.data)
+            })
     },
 
     updateEmail({commit}, data) {
         return axios
             .post('/user/email', data)
             .then(({data}) => {
-                commit('LOAD_USER', data.data);
-            });
+                commit('LOAD_USER', data.data)
+            })
     },
 
     updatePassword({commit}, data) {
-        return axios.post('/user/password', data);
+        return axios.post('/user/password', data)
     }
 
-};
+}
 
 const mutations = {
+    RESET(state) {
+        state.email = ''
+        state.currency = 'EUR'
+    },
     LOAD_USER(state, user) {
-        state.email = user.email;
-        state.language = user.language;
-        state.locale = user.locale;
-        state.currency = user.currency;
+        state.email = user.email
+        state.language = user.language
+        state.locale = user.locale
+        state.currency = user.currency
     }
-};
+}
 
 export default {
     state,

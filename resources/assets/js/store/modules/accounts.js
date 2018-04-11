@@ -60,6 +60,9 @@ const actions = {
 
 // mutations
 const mutations = {
+    RESET(state) {
+        state.accounts = []
+    },
     ADD_ACCOUNT(state, account) {
         state.accounts = state.accounts.filter(x => x.id !== account.id);
         state.accounts.push(account);

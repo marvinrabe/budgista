@@ -17,6 +17,7 @@ export const store = new Vuex.Store({
     actions: {
         initialize({dispatch, commit, state}) {
             commit('IS_LOADING')
+            commit('RESET')
             Promise
                 .all([
                     dispatch('loadUser'),

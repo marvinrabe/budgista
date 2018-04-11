@@ -11,17 +11,17 @@
                         :class="[{ 'opacity-50': budget == 0 }]"
                         :value="budget"
                         @update:value="val => updateBudget(val)"
-                        :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)" />
+                        :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)"></money-input>
             </div>
             <div class="budget-column-activity">
                 <money-format
                         :class="[{ 'opacity-50': activity == 0 }, { 'opacity-80': activity != 0 }]"
-                        :value="activity" />
+                        :value="activity"></money-format>
             </div>
             <div class="budget-column-available">
                 <money-format
                         :class="[{ 'text-danger': available < 0 }, { 'text-success': available > 0 }, { 'opacity-50': available == 0 }]"
-                        :value="available" />
+                        :value="available"></money-format>
             </div>
         </div>
     </div>
@@ -43,20 +43,20 @@
                 budget: this.value.budget,
                 recommendedBudget: this.value.recommendedBudget,
                 activity: this.value.activity
-            };
+            }
         },
         computed: {
             category() {
-                let category = this.$store.getters.findCategoryById(this.category_id);
-                if (_.isEmpty(category)) { // TODO remove when category row list is managed by vuex
+                let category = this.$store.getters.findCategoryById(this.category_id)
+                if (category === undefined) {
                     return {
                         name: ''
-                    };
+                    }
                 }
-                return category;
+                return category
             },
             available() {
-                return this.previousMonth + this.budget + this.activity;
+                return this.previousMonth + this.budget + this.activity
             }
         },
         methods: {
@@ -67,12 +67,12 @@
                         'amount': value
                     })
                     .then(response => {
-                        this.budget = value;
-                        this.$emit('update:value', response.data);
+                        this.budget = value
+                        this.$emit('update:value', response.data)
                     })
                     .catch(e => {
-                        console.error(e);
-                    });
+                        console.error(e)
+                    })
 
             }
         }

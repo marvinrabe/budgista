@@ -11,6 +11,7 @@
                            slot-scope="{bindings}"
                            v-bind="bindings"
                            v-validate="'required|email'"
+                           data-vv-validate-on="input"
                            v-model="form.email"
                            v-focus>
                 </form-group>
@@ -18,7 +19,7 @@
                 <form-group name="password">
                     <template slot-scope="group">
                         <div class="float-right">
-                            <a class="text-muted small" href="/password/reset" v-t="'messages.forgotPassword'"></a>
+                            <a class="text-muted small" href="/password/reset" v-t="'message.forgotPassword'"></a>
                         </div>
                         <app-password  :disable-strength="true">
                             <input class="form-control"
@@ -26,6 +27,7 @@
                                    v-bind="Object.assign(bindings, group.bindings)"
                                    v-on="handlers"
                                    v-validate="'required'"
+                                   data-vv-validate-on="input"
                                    v-model="form.password">
                         </app-password>
                     </template>
@@ -51,8 +53,8 @@
         </div>
 
         <div class="card-body card-body-secondary text-center">
-            <span v-t="'messages.noAccount'"></span>
-            <router-link :to="{name: 'register'}" v-t="'messages.noAccountSignUp'"></router-link>
+            <span v-t="'message.noAccount'"></span>
+            <router-link :to="{name: 'register'}" v-t="'message.noAccountSignUp'"></router-link>
         </div>
     </div>
 </template>
@@ -83,7 +85,7 @@
                     error: function (error) {
                         this.loading = false
                         if (error.response && error.response.status === 401) {
-                            this.$refs.form.addError('email', this.$t('messages.loginFailed'))
+                            this.$refs.form.addError('email', this.$t('message.loginFailed'))
                         } else {
                             this.$refs.form.error(error)
                         }

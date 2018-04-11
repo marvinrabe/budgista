@@ -30,6 +30,12 @@ export const routes = [
         },
         children: [
             {
+                path: '',
+                redirect: to => {
+                    return {name: 'budget_default'}
+                }
+            },
+            {
                 path: 'budget',
                 name: 'budget_default',
                 redirect: to => {

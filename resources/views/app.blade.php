@@ -12,9 +12,6 @@
 
     @include('snippets.icons')
 
-    <meta name="application-name" content="{{ config('app.name') }}"/>
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
-
     <title>{{ config('app.name') }}</title>
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
