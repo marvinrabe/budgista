@@ -21,6 +21,7 @@
                                v-bind="Object.assign(bindings, group.bindings)"
                                v-on="handlers"
                                v-validate="'required|min:6'"
+                               data-vv-validate-on="input"
                                v-model="form.password">
                     </app-password>
                 </form-group>
@@ -31,6 +32,7 @@
                                class="form-check-input"
                                v-bind="bindings"
                                v-validate="'required'"
+                               data-vv-validate-on="input"
                                v-model="form.terms">
                         <label class="form-check-label" :for="id" v-html="$t('form.termsOfService', [terms])"></label>
                     </div>
