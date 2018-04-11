@@ -25,7 +25,4 @@
             </div>
         </div>
     </div>
-
-    <script src="{{ mix('js/website.js') }}"></script>
-
 @endsection

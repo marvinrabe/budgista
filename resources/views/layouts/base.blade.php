@@ -31,5 +31,6 @@
 
 @yield('body')
 
+<script src="{{ mix('js/website.js') }}"></script>
 </body>
 </html>
