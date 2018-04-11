@@ -41,10 +41,10 @@
         </div>
         <div class="row mb-md-3">
             <div class="px-4 px-md-5 d-sm-block d-none">
-                <img src="{{ asset('images/desktop.png') }}" class="img-fluid">
+                <img src="{{ asset('images/desktop.png') }}" class="img-fluid" alt="Budgista on Laptop">
             </div>
             <div class="px-3 d-sm-none">
-                <img src="{{ asset('images/mobile.png') }}" class="img-fluid">
+                <img src="{{ asset('images/mobile.png') }}" class="img-fluid" alt="Budgista on Mobile Device">
             </div>
         </div>
     </div>
