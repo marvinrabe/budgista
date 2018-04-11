@@ -35,17 +35,22 @@
         </div>
     </header>
 
-    <div class="container pt-5">
+    <div class="container pt-4 pt-md-5">
         <div class="row">
             @each('static._bullet', trans('static.home.bullets'), 'bullet')
         </div>
-        {{--
-        <img src="{{ asset('images/product/desktop_'.config('app.locale').'.png') }}" class="img-fluid px-5 mt-3">
-        --}}
+        <div class="row mb-md-3">
+            <div class="px-4 px-md-5 d-sm-block d-none">
+                <img src="{{ asset('images/desktop.png') }}" class="img-fluid">
+            </div>
+            <div class="px-3 d-sm-none">
+                <img src="{{ asset('images/mobile.png') }}" class="img-fluid">
+            </div>
+        </div>
     </div>
 
     <div class="container text-center">
-        <div class="py-5 second-cta">
+        <div class="pb-4 pb-md-5 second-cta">
             <p class="h2 m-0">{{ trans('static.home.lead2') }}</p>
 
             <a href="{{ route('register') }}" class="btn btn-lg btn-primary mt-3 shadow-1">
