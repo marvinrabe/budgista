@@ -70,6 +70,9 @@ const actions = {
 };
 
 const mutations = {
+    RESET(state) {
+        state.categories = []
+    },
     ADD_CATEGORY(state, category) {
         state.categories = state.categories.filter(x => x.id !== category.id);
         state.categories.push(category);
