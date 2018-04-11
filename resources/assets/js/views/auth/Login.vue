@@ -11,6 +11,7 @@
                            slot-scope="{bindings}"
                            v-bind="bindings"
                            v-validate="'required|email'"
+                           data-vv-validate-on="input"
                            v-model="form.email"
                            v-focus>
                 </form-group>
@@ -26,6 +27,7 @@
                                    v-bind="Object.assign(bindings, group.bindings)"
                                    v-on="handlers"
                                    v-validate="'required'"
+                                   data-vv-validate-on="input"
                                    v-model="form.password">
                         </app-password>
                     </template>
