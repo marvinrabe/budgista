@@ -42,7 +42,11 @@ return [
             ]
         ]
     ],
-
+    'cookie' => [
+        'message' => 'Diese Webseite verwendet Cookies um die Inhalte zu personalisieren.',
+        'dismiss' => 'Alles klar!',
+        'link' => 'Mehr erfahren'
+    ],
     'legal' => [
         'email' => 'E-Mail',
         'telephone' => 'Telefon',

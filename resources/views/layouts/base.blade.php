@@ -32,5 +32,6 @@
 @yield('body')
 
 <script src="{{ mix('js/website.js') }}"></script>
+@include('snippets.cookie-law')
 </body>
 </html>
