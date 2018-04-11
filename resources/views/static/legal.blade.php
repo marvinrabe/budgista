@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="container text-center">
-        <h1>{{ trans('title.legal') }}</h1>
+        <h1 class="h3">{{ trans('title.legal') }}</h1>
 
         <p>{{ trans('static.legal.tmg_notice') }}</p>
 
@@ -18,7 +18,7 @@
             {{ trans('static.legal.germany') }}
         </p>
 
-        <h2>{{ trans('static.legal.contact') }}</h2>
+        <h2 class="h4">{{ trans('static.legal.contact') }}</h2>
 
         <p>
             {{ trans('static.legal.email') }}: <a href="mailto:support@budgista.com">support@budgista.com</a><br>
