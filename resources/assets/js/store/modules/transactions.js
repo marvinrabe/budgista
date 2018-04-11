@@ -117,6 +117,10 @@ const actions = {
 };
 
 const mutations = {
+    RESET(state) {
+        state.transactions = []
+        state.nextUrls = {}
+    },
     ADD_TRANSACTION(state, transaction) {
         state.transactions = state.transactions.filter(x => x.id !== transaction.id);
         state.transactions.push(transaction);
