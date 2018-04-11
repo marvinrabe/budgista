@@ -36,14 +36,6 @@ Vue.use(Snotify, {
     }
 })
 
-/**
- * Validation
- */
-import VeeValidate from 'vee-validate'
-
-Vue.use(VeeValidate, {
-    validity: true
-})
 
 // Focus
 Vue.directive('focus', {
@@ -97,16 +89,17 @@ Vue.component(
     require('./components/AppSpinner.vue')
 )
 
-/**
- * And go!
- */
 import {i18n} from './i18n'
 import {store} from './store'
 import {router} from './router'
 import './auth'
 import './http'
+import './validation'
 
-const App = Vue.extend(require('./components/App.vue'));
+/**
+ * And go!
+ */
+const App = Vue.extend(require('./components/App.vue'))
 
 window.app = new App({
     i18n,

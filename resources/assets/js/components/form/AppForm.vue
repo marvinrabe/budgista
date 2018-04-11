@@ -53,7 +53,7 @@
                         this.addError(key, message);
                     });
                 } else {
-                    this.$snotify.error(this.$t('messages.unexpectedError'));
+                    this.$snotify.error(this.$t('message.unexpectedError'));
                     console.error(exception);
                 }
             }
