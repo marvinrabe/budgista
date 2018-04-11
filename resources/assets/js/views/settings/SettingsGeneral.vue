@@ -41,6 +41,7 @@
 </template>
 
 <script>
+    import _ from 'lodash'
     import {languages} from '../../config.js'
 
     export default {

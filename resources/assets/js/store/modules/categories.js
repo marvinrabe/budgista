@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 // categories: [{ id, name, sort }]
 const state = {
     categories: []

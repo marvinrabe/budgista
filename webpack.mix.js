@@ -1,4 +1,7 @@
-let mix = require('laravel-mix');
+const webpack = require('webpack')
+const mix = require('laravel-mix')
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 /*
  |--------------------------------------------------------------------------
@@ -39,14 +42,23 @@ mix
         },
         resolve: {
             alias: {
-                modernizr$: path.resolve(__dirname, ".modernizrrc"),
+                modernizr$: path.resolve(__dirname, '.modernizrrc'),
                 '@': path.resolve(__dirname, 'resources/assets/js')
             }
-        }
+        },
+        plugins: [
+            // lodash optimization
+            new LodashModuleReplacementPlugin({
+                'shorthands': true
+            }),
+            // Remove moment languages
+            new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+            new BundleAnalyzerPlugin()
+        ]
     })
-    .sourceMaps();
+    .sourceMaps()
 
 if (mix.inProduction()) {
-    mix.version();
+    mix.version()
 }
 
