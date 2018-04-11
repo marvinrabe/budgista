@@ -2,7 +2,7 @@ export default {
     app: {
         name: 'Budgista'
     },
-    messages: {
+    message: {
         loginFailed: 'Diese Kombination aus Zugangsdaten wurden nicht in unserer Datenbank gefunden.',
         unexpectedError: 'Ein unerwarteter Fehler ist aufgetreten.',
         updateEmail: 'E-Mail Adresse wurde geändert.',
@@ -14,7 +14,7 @@ export default {
         noAccount: 'Kein Konto vorhanden?',
         noAccountSignUp: 'Jetzt registrieren',
     },
-    'action': {
+    action: {
         'save': 'Speichern',
         'saveAndNew': 'Speichern & Neu',
         'futureTransactions': 'Keine zukünftigen Transaktionen | Zeige 1 zukünftige Transaktion | Zeige {count} zukünftige Transaktionen',
@@ -47,7 +47,7 @@ export default {
             'email': 'E-Mail Adresse ändern'
         }
     },
-    'form': {
+    form: {
         'name': 'Name',
         'amount': 'Betrag',
         'recurring': 'Wiederholend?',
@@ -77,10 +77,10 @@ export default {
         'language': 'Sprache',
         'locale': 'Gebietsschema',
         'currency': 'Währung',
-        'email': 'E-Mail Adresse',
-        'password': 'Passwort',
-        'oldPassword': 'Altes Passwort',
-        'newPassword': 'Neues Passwort'
+        email: 'E-Mail Adresse',
+        password: 'Passwort',
+        oldPassword: 'Altes Passwort',
+        newPassword: 'Neues Passwort'
     },
     title: {
         accounts: 'Konten',
@@ -96,6 +96,42 @@ export default {
         updateEmail: 'E-Mail Adresse ändern',
         emptyAccount: 'Dieses Konto ist leer.',
         register: 'Registrieren'
+    },
+    validation: {
+        messages: {
+            '_default': '{0} ist ungültig.',
+            'after': '{0} muss nach {1} liegen.',
+            'alpha_dash': '{0} darf alphanumerische Zeichen sowie Striche und Unterstriche enthalten.',
+            'alpha_num': '{0} darf nur alphanumerische Zeichen enthalten.',
+            'alpha': '{0} darf nur alphabetische Zeichen enthalten.',
+            'before': '{0} muss vor {1} liegen.',
+            'between': '{0} muss zwischen {1} und {2} liegen.',
+            'confirmed': '{0} passt nicht zum Inhalt von {1}.',
+            'date_between': '{0} muss zwischen {1} und {2} liegen.',
+            'date_format': '{0} muss das Format {1} haben.',
+            'decimal': '{0} muss numerisch sein und darf {1} Dezimalpunkte enthalten.',
+            'digits': '{0} muss numerisch sein und exakt {1} Ziffern enthalten.',
+            'dimensions': '{0} muss {1} x {2} Bildpunkte groß sein.',
+            'email': '{0} muss eine gültige E-Mail Adresse sein.',
+            'ext': '{0} muss eine gültige Datei sein.',
+            'image': '{0} muss eine Grafik sein.',
+            'in': '{0} muss ein gültiger Wert sein.',
+            'ip': '{0} muss eine gültige IP-Adresse sein.',
+            'max': '{0} darf nicht länger als {1} Zeichen sein.',
+            'mimes': '{0} muss einen gültigen Dateityp haben.',
+            'min': '{0} muss mindestens {1} Zeichen lang sein.',
+            'not_in': '{0} muss ein gültiger Wert sein.',
+            'numeric': '{0} darf nur numerische Zeichen enthalten.',
+            'regex': 'Das Format von {0} ist ungültig.',
+            'required': '{0} ist ein Pflichtfeld.',
+            'size': '{0} muss kleiner als NaN undefined sein.',
+            'url': '{0} ist keine gültige URL.'
+        },
+        custom: {
+            terms: {
+                required: 'Du musst die Nutzungsbedingungen akzeptieren.'
+            }
+        }
     },
     'frequency': {
         'daily': 'Täglich',
