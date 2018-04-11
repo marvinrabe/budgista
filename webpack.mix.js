@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const mix = require('laravel-mix')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 /*
  |--------------------------------------------------------------------------
@@ -53,7 +53,7 @@ mix
             }),
             // Remove moment languages
             new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-            new BundleAnalyzerPlugin()
+            //new BundleAnalyzerPlugin()
         ]
     })
     .sourceMaps()
