@@ -5,8 +5,7 @@
 
         <div class="content">
             <form id="transaction" class="container pt-2"
-                  v-on:submit.stop.prevent="submitForm"
-                  v-bind:class="[{'was-validated': validated}]"
+                  @submit.prevent="submitForm"
                   autocomplete="off"
                   data-vv-scope="transaction"
                   novalidate>
