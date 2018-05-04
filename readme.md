@@ -4,7 +4,7 @@
 
 ## Local Development
 
-Setup local environment with Valet: https://laravel.com/docs/5.5/valet
+Setup local environment with Valet: https://laravel.com/docs/5.6/valet
 
 ## PhpStorm
 
