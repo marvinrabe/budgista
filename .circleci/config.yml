@@ -44,6 +44,10 @@ jobs:
             - node_modules/
 
       - run:
+         name: Compile assets
+         command:  npm run deployment
+
+      - run:
           name: Test Mocha
           command: |
             export NODE_ICU_DATA=node_modules/full-icu
@@ -72,25 +76,5 @@ jobs:
             php artisan jwt:secret --force
 
       - run:
-         name: Compile assets
-         command: |
-           npm run deployment
-           if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              git config --global user.name "Circle CI"
-              git config --global user.email "support@budgista.com"
-              git add public/.
-              git commit -m "Assets"
-           fi
-
-      - run:
           name: Test PHPUnit
           command: vendor/bin/phpunit
-
-      - deploy:
-          name: Deploy
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo "172.104.149.190 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCfOgLiIHX0TBftsLLGWDGJKBsWUJ1GzBYR1447ktBMnqtxGszGOf9DqHSzPMTPl54OwowahK4vvxM0UQGkXZbI=" >> ~/.ssh/known_hosts
-              git remote add dokku dokku@172.104.149.190:app
-              git push dokku master --force
-            fi
