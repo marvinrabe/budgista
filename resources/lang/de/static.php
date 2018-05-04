@@ -7,8 +7,9 @@ return [
         'cta' => 'Registriere dich kostenlos',
         'lead' => 'Werde schuldenfrei und spare Geld.',
         'lead2' => 'Erstelle jetzt dein Haushaltsbuch',
-        'help' => 'Immer noch Fragen?',
-        'contact' => 'Kontaktiere uns',
+        'contributeHeadline' => 'Wir sind Open Source',
+        'contributeMessage' => 'Du kannst dich jederzeit beteiligen um Budgista zu verbessern!',
+        'contributeAction' => 'Mehr erfahren',
         'bullets' => [
             [
                 'icon' => 'fa fa-envelope',

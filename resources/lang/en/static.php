@@ -7,8 +7,9 @@ return [
         'lead' => 'Get out of debt and save money.',
         'cta' => 'Sign up for free',
         'lead2' => 'Create your Budget now',
-        'help' => 'Still have Questions?',
-        'contact' => 'Contact us',
+        'contributeHeadline' => 'We are Open Source',
+        'contributeMessage' => 'You can contribute anytime to make Budgista even better!',
+        'contributeAction' => 'Learn more',
         'bullets' => [
             [
                 'icon' => 'fa fa-envelope',
