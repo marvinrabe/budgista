@@ -1,5 +1,20 @@
 .layout-home {
 
+  .contribute {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    &-icon {
+      font-size: 2em;
+    }
+
+    &-body {
+      margin: 0 1em;
+    }
+  }
+
   header {
     background: $gray-100;
   }
@@ -62,12 +77,6 @@
     border-bottom: 2px solid theme-color('light');
   }
 
-  .help {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-  }
-
   @include media-breakpoint-down(md) {
     header .decoration {
       background-size: 640px;
@@ -99,13 +108,8 @@
       padding: 0 0 1em;
     }
 
-    .h4 {
-      font-size: 1em;
-    }
-
-    .help {
-      align-items: center;
-      flex-direction: column;
+    .contribute-body {
+      margin: 1em;
     }
 
   }
