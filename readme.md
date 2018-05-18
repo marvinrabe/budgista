@@ -1,4 +1,6 @@
-# Budgista
+# <img src="https://raw.githubusercontent.com/marvinrabe/budgista/develop/resources/assets/images/logo.png" alt="Budgista" height="53">
+
+> Keeping a Budget is easy! Open Source Budget App
 
 [![CircleCI](https://circleci.com/bb/marvinrabe/budgista/tree/develop.svg?style=svg&circle-token=fe9198d5d2b9a92602ea1ea275d2b1dfe5397d4f)](https://circleci.com/bb/marvinrabe/budgista/tree/develop)
 

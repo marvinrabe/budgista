@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 
 class AuthenticationController extends Controller
 {
@@ -51,7 +52,11 @@ class AuthenticationController extends Controller
 
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        try {
+            return $this->respondWithToken(auth()->refresh());
+        } catch (TokenExpiredException $exception) {
+            return abort(401);
+        }
     }
 
     protected function respondWithToken($token)
