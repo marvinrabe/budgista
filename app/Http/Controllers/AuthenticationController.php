@@ -11,7 +11,7 @@ class AuthenticationController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'refresh']]);
     }
 
     public function login()
@@ -55,7 +55,7 @@ class AuthenticationController extends Controller
         try {
             return $this->respondWithToken(auth()->refresh());
         } catch (TokenExpiredException $exception) {
-            return abort(401);
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
     }
 
