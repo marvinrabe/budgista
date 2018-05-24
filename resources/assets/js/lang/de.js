@@ -90,7 +90,6 @@ export default {
         help: 'Hilfe',
         login: 'Login',
         account: 'Benutzerkonto',
-        security: 'Sicherheit',
         general: 'Allgemeines',
         updatePassword: 'Passwort ändern',
         updateEmail: 'E-Mail Adresse ändern',

@@ -23,8 +23,8 @@
 
 <script>
     import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faUserCircle from '@fortawesome/fontawesome-free-regular/faUserCircle'
-    import faShieldAlt from '@fortawesome/fontawesome-free-solid/faShieldAlt'
+    import faCog from '@fortawesome/fontawesome-free-solid/faCog'
+    import faUserCircle from '@fortawesome/fontawesome-free-solid/faUserCircle'
 
     export default {
         components: {
@@ -34,14 +34,14 @@
             tabs() {
                 return [
                     {
+                        label: 'title.general',
+                        icon: faCog,
+                        route: 'settings.general'
+                    },
+                    {
                         label: 'title.account',
                         icon: faUserCircle,
                         route: 'settings.account'
-                    },
-                    {
-                        label: 'title.security',
-                        icon: faShieldAlt,
-                        route: 'settings.security'
                     }
                 ];
             }
