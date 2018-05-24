@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <router-view></router-view>
+        <portal-target name="modal"></portal-target>
         <vue-snotify></vue-snotify>
     </div>
 </template>
