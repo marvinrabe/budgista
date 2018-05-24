@@ -59,13 +59,13 @@ export const routes = [
                 children: [
                     {
                         path: '',
-                        name: 'settings.account',
-                        component: require('./views/settings/Account.vue')
+                        name: 'settings.general',
+                        component: require('./views/settings/General.vue')
                     },
                     {
                         path: 'security',
-                        name: 'settings.security',
-                        component: require('./views/settings/Security.vue')
+                        name: 'settings.account',
+                        component: require('./views/settings/Account.vue')
                     }
                 ]
             },

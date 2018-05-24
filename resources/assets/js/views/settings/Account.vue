@@ -2,24 +2,24 @@
     <div class="content container-fluid">
         <div class="row justify-content-center">
             <div class="col mt-3 col-lg-8">
-                <settings-general />
+                <settings-email />
             </div>
             <div class="w-100"></div>
             <div class="col mt-3 col-lg-8">
-                <settings-email />
+                <settings-password />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import SettingsGeneral from './SettingsGeneral.vue'
     import SettingsEmail from './SettingsEmail.vue'
+    import SettingsPassword from './SettingsPassword.vue'
 
     export default {
         components: {
-            SettingsGeneral,
-            SettingsEmail
+            SettingsEmail,
+            SettingsPassword
         }
     }
 </script>
