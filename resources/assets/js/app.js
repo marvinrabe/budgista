@@ -25,6 +25,13 @@ import FontAwesome from './fontawesome'
 Vue.use(FontAwesome)
 
 /**
+ * Portals
+ */
+import PortalVue from 'portal-vue'
+
+Vue.use(PortalVue)
+
+/**
  * Toasts
  */
 import Snotify from 'vue-snotify'
