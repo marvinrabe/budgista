@@ -124,7 +124,7 @@
                         accounts: true
                     },
                     {
-                        route: {name: 'settings.account'},
+                        route: {name: 'settings.general'},
                         label: 'title.settings',
                         icon: faCog
                     },

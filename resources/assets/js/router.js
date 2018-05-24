@@ -63,7 +63,7 @@ export const routes = [
                         component: require('./views/settings/General.vue')
                     },
                     {
-                        path: 'security',
+                        path: 'account',
                         name: 'settings.account',
                         component: require('./views/settings/Account.vue')
                     }
