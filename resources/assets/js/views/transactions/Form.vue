@@ -14,22 +14,16 @@
                     <label for="amount">{{ $t('form.amount')}}</label>
                     <div class="input-group" :class="[{'is-invalid': errors.has('transaction.amount')}]">
                         <div class="input-group-prepend">
-                            <button class="btn dropdown-toggle" type="button"
-                               :class="[{'btn-outline-success': type === 1},{'btn-outline-danger': type === -1}]"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                {{ (type === 1) ? $t('form.income') : $t('form.expense') }}
-                            </button>
-
-                            <div class="dropdown-menu" role="menu" aria-labelledby="user-menu">
-                                <a class="link-action dropdown-item" v-on:click="setToExpense">
+                            <b-dropdown
+                                    :variant="(type === 1) ? 'outline-success':'outline-danger'"
+                                    :text="(type === 1) ? $t('form.income') : $t('form.expense')">
+                                <b-dropdown-item @click="setToExpense">
                                     {{ $t('form.expense') }}
-                                </a>
-                                <a class="link-action dropdown-item" v-on:click="setToIncome">
+                                </b-dropdown-item>
+                                <b-dropdown-item @click="setToIncome">
                                     {{ $t('form.income') }}
-                                </a>
-                            </div>
-
+                                </b-dropdown-item>
+                            </b-dropdown>
                         </div>
 
                         <money-input
@@ -149,12 +143,29 @@
 <script>
     import Modernizr from 'modernizr';
     import {mapGetters} from 'vuex'
+    import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
+    import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
     import RRule from 'rrule'
 
     const EXPENSE = -1;
     const INCOME = 1;
 
     export default {
+        components: {
+            bDropdown,
+            bDropdownItem
+        },
+        data: () => ({
+            type: EXPENSE,
+            amount: 0,
+            date: new Date().toISOString().slice(0, 10),
+            recurring: false,
+            freq: RRule.MONTHLY,
+            interval: 1,
+            payee: '',
+            category: '',
+            validated: false
+        }),
         computed: {
             rrule() {
                 if (!this.recurring) {
@@ -179,18 +190,6 @@
                 'getPayees'
             ])
         },
-        data: () => ({
-            type: EXPENSE,
-            amount: 0,
-            date: new Date().toISOString().slice(0, 10),
-            recurring: false,
-            freq: RRule.MONTHLY,
-            interval: 1,
-            payee: '',
-            category: '',
-            validated: false
-        }),
-
         methods: {
 
             getResult() {
