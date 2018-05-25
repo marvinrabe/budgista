@@ -9,12 +9,12 @@
 
             <ul class="nav ml-auto">
                 <li class="nav-item">
-                    <button class="btn btn-text-secondary">
+                    <button class="btn btn-text-dark">
                         <font-awesome-icon :icon="iconPlus"></font-awesome-icon>
                     </button>
                 </li>
                 <li class="nav-item dropdown d-none d-md-block">
-                    <button class="btn btn-text-secondary dropdown-toggle">
+                    <button class="btn btn-text-dark dropdown-toggle">
                         <font-awesome-icon :icon="iconCog"></font-awesome-icon>
                     </button>
                 </li>
