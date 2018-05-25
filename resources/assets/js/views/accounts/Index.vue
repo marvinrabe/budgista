@@ -4,7 +4,7 @@
             <balance :account="account"></balance>
 
             <template slot="submenu">
-                <a class="btn btn-light" href="#"
+                <a class="btn btn-light btn-sm" href="#"
                    @click.prevent="$refs.updateAccount.showModal(account)"
                    :title="$t('action.edit.account')">
                     <font-awesome-icon :icon="ellipsisIcon"/>
@@ -12,7 +12,7 @@
 
                 <router-link
                         :to="{ name: 'transaction.new'}"
-                        class="btn btn-primary"
+                        class="btn btn-primary btn-sm"
                         :title="$t('action.create.transaction')">
                     <font-awesome-icon icon="plus"/>
                     {{ $t('word.transaction') }}
