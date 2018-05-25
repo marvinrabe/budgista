@@ -3,11 +3,12 @@
 
         <app-toolbar :title="$t('title.categories')">
             <button type="button"
-                    class="btn btn-light"
+                    class="btn btn-primary"
                     @click.prevent="$refs.createCategory.showModal()"
-                    slot="submenu">
+                    slot="submenu"
+                    :title="$t('action.create.category')">
                 <font-awesome-icon icon="plus"/>
-                {{ $t('action.create.category') }}
+                {{ $t('word.category') }}
             </button>
         </app-toolbar>
 

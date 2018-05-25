@@ -8,8 +8,7 @@ export default {
         updateEmail: 'Email Address has been updated.',
         updatePassword: 'Password has been updated.',
         updateSettings: 'Settings have been saved.',
-        addTransactionBefore: 'Add transactions by pressing',
-        addTransactionAfter: 'on the bottom right.',
+        addTransaction: 'Add a transactions now.',
         forgotPassword: 'Forgot Your Password?',
         noAccount: 'Don\'t have an account?',
         noAccountSignUp: 'Sign up now',
@@ -81,6 +80,10 @@ export default {
         password: 'Password',
         oldPassword: 'Old Password',
         newPassword: 'New Password'
+    },
+    word: {
+        transaction: 'Transaction',
+        category: 'Category'
     },
     title: {
         accounts: 'Accounts',

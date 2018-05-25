@@ -8,8 +8,7 @@ export default {
         updateEmail: 'E-Mail Adresse wurde geändert.',
         updatePassword: 'Passwort wurde geändert.',
         updateSettings: 'Einstellungen wurden gespeichert.',
-        addTransactionBefore: 'Füge Kontobewegungen hinzu indem du',
-        addTransactionAfter: 'unten rechts drückst.',
+        addTransaction: 'Füge jetzt Kontobewegungen hinzu.',
         forgotPassword: 'Passwort vergessen?',
         noAccount: 'Kein Konto vorhanden?',
         noAccountSignUp: 'Jetzt registrieren',
@@ -81,6 +80,10 @@ export default {
         password: 'Passwort',
         oldPassword: 'Altes Passwort',
         newPassword: 'Neues Passwort'
+    },
+    word: {
+        transaction: 'Kontobewegung',
+        category: 'Kategorie'
     },
     title: {
         accounts: 'Konten',
