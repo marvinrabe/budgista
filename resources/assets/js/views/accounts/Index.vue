@@ -4,7 +4,7 @@
             <balance :account="account"></balance>
 
             <div slot="submenu">
-                <a class="btn btn-secondary" href="#"
+                <a class="btn btn-light" href="#"
                    @click.prevent="$refs.updateAccount.showModal(account)"
                    :title="$t('action.edit.account')">
                     <font-awesome-icon icon="cog"/>
@@ -33,27 +33,31 @@
             <div class="transaction-clear">&nbsp;</div>
         </div>
 
-        <reconcile-form v-if="isEmpty" :account="account"></reconcile-form>
-        <div v-else class="content">
-            <div class="text-center p-1 transactions-row-dummy"
-                 v-if="countFutureTransactions > 0 && !showFutureTransactions">
-                <a href="#" class="small" @click.prevent="showFutureTransactions = true">
-                    {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions }) }}
-                </a>
-            </div>
-            <transaction-row
-                    v-for="transaction of transactions"
-                    v-if="!transaction.isFuture() || showFutureTransactions"
-                    :key="transaction.id"
-                    :transaction="transaction">
-            </transaction-row>
-            <infinite-loading :key="account_id" @infinite="loadMore" spinner="waveDots" ref="infiniteLoading">
-                <span slot="no-more"></span>
-                <span slot="spinner">
+        <div class="content">
+            <reconcile-form v-if="isEmpty" :account="account"></reconcile-form>
+            <template v-else>
+                <div class="text-center p-1 transactions-row-dummy"
+                     v-if="countFutureTransactions > 0 && !showFutureTransactions">
+                    <a href="#" class="small" @click.prevent="showFutureTransactions = true">
+                        {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions }) }}
+                    </a>
+                </div>
+                <transaction-row
+                        v-for="transaction of transactions"
+                        v-if="!transaction.isFuture() || showFutureTransactions"
+                        :key="transaction.id"
+                        :transaction="transaction">
+                </transaction-row>
+            </template>
+        </div>
+
+        <infinite-loading v-if="!isEmpty" :key="account_id" @infinite="loadMore" spinner="waveDots" ref="infiniteLoading">
+            <span slot="no-more"></span>
+            <span slot="spinner">
                     <app-spinner></app-spinner>
                 </span>
-            </infinite-loading>
-        </div>
+        </infinite-loading>
+
 
         <update-account ref="updateAccount"></update-account>
     </div>

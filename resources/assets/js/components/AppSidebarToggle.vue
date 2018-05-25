@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-secondary" type="button" aria-controls="menu"
+    <button class="btn btn-text-secondary" type="button" aria-controls="menu"
             :aria-label="$t('action.navigation')"
             @click.prevent="showMenu">
         <font-awesome-icon icon="bars" fixed-width />

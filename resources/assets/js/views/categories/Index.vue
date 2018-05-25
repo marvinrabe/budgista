@@ -3,39 +3,32 @@
 
         <app-toolbar :title="$t('title.categories')">
             <button type="button"
-                    class="btn btn-secondary"
+                    class="btn btn-light"
                     @click.prevent="$refs.createCategory.showModal()"
-                    :title="$t('action.create.category')"
                     slot="submenu">
                 <font-awesome-icon icon="plus"/>
+                {{ $t('action.create.category') }}
             </button>
         </app-toolbar>
 
-
-        <div class="content container-fluid">
-            <div class="row justify-content-center">
-                <div class="col mt-3 col-lg-8">
-                    <draggable v-model="categories" :options="{handle:'.handle'}" class="list-group">
-                        <div class="list-group-item" v-for="category in categories">
-                            <div class="d-flex align-items-center">
+        <draggable v-model="categories" :options="{handle:'.handle'}" class="list-group border-0 shadow-1">
+            <div class="list-group-item" v-for="category in categories">
+                <div class="d-flex align-items-center">
                                 <span class="handle">
                                     <font-awesome-icon icon="arrows-alt-v" fixed-width/>
                                 </span>
-                                <div class="name">
-                                    {{ category.name}}
-                                </div>
-                                <a href="#"
-                                   class="text-muted"
-                                   @click.prevent="$refs.updateCategory.showModal(category)"
-                                   :title="$t('action.edit.category')">
-                                    <font-awesome-icon icon="pencil-alt"/>
-                                </a>
-                            </div>
-                        </div>
-                    </draggable>
+                    <div class="name">
+                        {{ category.name}}
+                    </div>
+                    <a href="#"
+                       class="text-muted"
+                       @click.prevent="$refs.updateCategory.showModal(category)"
+                       :title="$t('action.edit.category')">
+                        <font-awesome-icon icon="pencil-alt"/>
+                    </a>
                 </div>
             </div>
-        </div>
+        </draggable>
 
         <create-category ref="createCategory"></create-category>
         <update-category ref="updateCategory"
@@ -60,9 +53,9 @@
 </style>
 
 <script>
-    import CreateCategory from './CreateCategory';
-    import UpdateCategory from './UpdateCategory';
-    import DeleteCategory from './DeleteCategory';
+    import CreateCategory from './CreateCategory'
+    import UpdateCategory from './UpdateCategory'
+    import DeleteCategory from './DeleteCategory'
     import draggable from 'vuedraggable'
 
     export default {
@@ -70,7 +63,7 @@
         computed: {
             categories: {
                 get() {
-                    return this.$store.getters.sortedCategories;
+                    return this.$store.getters.sortedCategories
                 },
                 set(value) {
                     this.$store.dispatch('sortCategories', value)

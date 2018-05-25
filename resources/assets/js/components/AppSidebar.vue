@@ -1,11 +1,7 @@
 <template>
     <div class="menu" @click="hideMenu">
-        <div class="app-menu" @click.stop>
-            <nav class="navbar navbar-expand navbar-light justify-content-center">
-                <app-logo :height="32" class="my-2"></app-logo>
-            </nav>
-
-            <nav class="nav flex-column flex-nowrap mt-2">
+        <div class="app-menu py-3 py-md-2" @click.stop>
+            <nav class="nav flex-column flex-nowrap">
                 <template v-for="item in menu">
                     <div class="my-2" v-if="item.accounts">
                         <p class="nav-header">{{ $t('title.accounts') }}</p>
@@ -32,17 +28,18 @@
                             @click.native="hideMenu"
                             active-class="active"
                             :exact="!!item.exact"
-                            class="nav-link-main">
+                            class="nav-link-main"
+                            :class="item.class">
                         <font-awesome-icon :icon="item.icon" v-if="item.icon" fixed-width class="mr-1"/>
                         <span class="d-block mr-1" style="width: 1.25em" v-else></span>
                         {{ $t(item.label) }}
                     </router-link>
-                    <a v-else-if="item.click" href="#" class="nav-link-main" @click.prevent="item.click">
+                    <a v-else-if="item.click" href="#" class="nav-link-main" @click.prevent="item.click" :class="item.class">
                         <font-awesome-icon :icon="item.icon" v-if="item.icon" fixed-width class="mr-1"/>
                         <span class="d-block mr-1" style="width: 1.25em" v-else></span>
                         {{ $t(item.label) }}
                     </a>
-                    <a v-else :href="item.href" class="nav-link-main">
+                    <a v-else :href="item.href" class="nav-link-main" :class="item.class">
                         <font-awesome-icon :icon="item.icon" v-if="item.icon" fixed-width class="mr-1"/>
                         <span class="d-block mr-1" style="width: 1.25em" v-else></span>
                         {{ $t(item.label) }}
@@ -126,16 +123,19 @@
                     {
                         route: {name: 'settings.general'},
                         label: 'title.settings',
-                        icon: faCog
+                        icon: faCog,
+                        class: 'd-md-none'
                     },
                     {
                         href: 'mailto:support@budgista.com',
                         label: 'title.help',
-                        icon: faLifeRing
+                        icon: faLifeRing,
+                        class: 'd-md-none'
                     },
                     {
                         click: this.logout,
                         label: 'action.logout',
+                        class: 'd-md-none'
                     }
                 ]
             },
