@@ -8,11 +8,11 @@
             </slot>
         </div>
 
+        <slot></slot>
+
         <div class="button-right">
             <slot name="submenu">&nbsp;</slot>
         </div>
-
-        <slot></slot>
     </div>
 </template>
 
