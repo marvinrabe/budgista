@@ -27,10 +27,10 @@
   }
 
   &-row-dummy {
-    background: theme-color-level('warning', $alert-bg-level);
+    background: theme-color-level('dark', $alert-bg-level);
 
     a {
-      color: theme-color-level('warning', $alert-color-level);
+      color: theme-color-level('dark', $alert-color-level);
     }
   }
 
