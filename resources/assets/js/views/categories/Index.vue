@@ -3,7 +3,7 @@
 
         <app-toolbar :title="$t('title.categories')">
             <button type="button"
-                    class="btn btn-primary"
+                    class="btn btn-primary btn-sm"
                     @click.prevent="$refs.createCategory.showModal()"
                     slot="submenu"
                     :title="$t('action.create.category')">
