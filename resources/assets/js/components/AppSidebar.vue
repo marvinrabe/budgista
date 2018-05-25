@@ -1,6 +1,6 @@
 <template>
     <div class="menu" @click="hideMenu">
-        <div class="app-menu py-3 py-md-2" @click.stop>
+        <div class="app-menu py-3 py-md-0" @click.stop>
             <nav class="nav flex-column flex-nowrap">
                 <template v-for="item in menu">
                     <div class="my-2" v-if="item.accounts">

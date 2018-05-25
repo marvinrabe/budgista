@@ -1,32 +1,24 @@
 <template>
     <div class="balance">
-        <div class="balance-current">
-            <money-format
-                    class="balance-value"
-                    :value="account.clearedBalance">
-            </money-format>
-            <p class="balance-label">{{ $t('form.balance.current') }}</p>
-        </div>
-        <div class="balance-upcoming">
-            <money-format
-                    class="balance-value"
-                    :value="account.unclearedBalance">
-            </money-format>
-            <p class="balance-label">{{ $t('form.balance.upcoming') }}</p>
-        </div>
-        <div class="balance-future">
-            <money-format
-                    class="balance-value"
-                    :class="{'text-success': account.workingBalance >= 0, 'text-danger': account.workingBalance < 0 }"
-                    :value="account.workingBalance">
-            </money-format>
-            <p class="balance-label">{{ $t('form.balance.future') }}</p>
-        </div>
+        <app-number :value="account.clearedBalance" label="form.balance.current"></app-number>
+        <app-number :value="account.unclearedBalance" label="form.balance.upcoming"></app-number>
+        <app-number :value="account.workingBalance" label="form.balance.future" :color="true"></app-number>
     </div>
 </template>
 
+<style scoped>
+    .balance {
+        display: flex;
+    }
+</style>
+
 <script>
+    import AppNumber from '../../components/AppNumber'
+
     export default {
-        props: ['account']
+        props: ['account'],
+        components: {
+            AppNumber
+        }
     }
 </script>

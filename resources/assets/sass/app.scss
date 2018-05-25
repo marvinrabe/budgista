@@ -24,8 +24,8 @@ body {
 }
 
 .content {
-  background: $white;
-  @extend .shadow-1;
+  //background: $white;
+  //@extend .shadow-1;
 }
 
 .toolbar {
@@ -36,11 +36,12 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 0;
+  margin-bottom: .5em;
 
   .title {
     @extend .h4;
     margin: 0;
-    line-height: 3.5rem;
+    line-height: 2.5rem;
     flex: 1;
     position: relative;
   }
@@ -55,5 +56,4 @@ body {
 @import "toast";
 @import "budget";
 @import "transactions";
-@import "balance";
 @import "spinner";

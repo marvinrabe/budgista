@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-light fixed-top bg-white shadow-2">
+    <nav class="navbar navbar-light fixed-top bg-white shadow-0">
         <div class="container">
             <div class="d-md-none mr-auto">
                 <app-sidebar-toggle></app-sidebar-toggle>

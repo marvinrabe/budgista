@@ -4,65 +4,10 @@
         <app-toolbar :title="$t('title.budget')">
             <month-picker :month="monthObject" slot="title"></month-picker>
 
-            <div class="d-none d-sm-block ml-auto">
-                <transition name="fade">
-                    <div class="d-flex align-items-center small" v-if="!loading">
-                        <div class="d-none d-lg-block kpi mr-2">
-                            <money-format
-                                    class="font-weight-bold text-number"
-                                    :value="sheet.previousMonth">
-                            </money-format>
-                            <br>
-                            <span class="kpi-label">{{ $t('form.previousMonth') }}</span>
-                        </div>
-                        <div class="d-none d-lg-block kpi mr-2">
-                            <money-format
-                                    class="font-weight-bold text-number"
-                                    :value="sheet.income">
-                            </money-format>
-                            <br>
-                            <span class="kpi-label">{{ $t('form.income') }}</span>
-                        </div>
-                        <div class="d-none d-lg-block kpi mr-2">
-                            <money-format
-                                    class="font-weight-bold text-number"
-                                    :value="allocated">
-                            </money-format>
-                            <br>
-                            <span class="kpi-label">{{ $t('form.allocated') }}</span>
-                        </div>
-
-                        <div class="kpi">
-                            <money-format
-                                    class="font-weight-bold text-number"
-                                    :class="[{ 'text-danger': unallocated < 0 }, { 'text-success': unallocated >= 0 }]"
-                                    :value="unallocated">
-                            </money-format>
-                            <br>
-                            <span class="kpi-label">{{ $t('form.unallocated') }}</span>
-                        </div>
-                    </div>
-                </transition>
-            </div>
+            <transition name="fade">
+                <overview :sheet="sheet" v-if="!loading"></overview>
+            </transition>
         </app-toolbar>
-
-        <transition name="slide">
-            <div v-if="!loading"
-                 class="d-sm-none"
-                 :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated >= 0 }]">
-                <div class="d-flex small text-white p-2">
-                    <div class="col-flex text-left">
-                        {{ $t('form.unallocated') }}
-                    </div>
-                    <div class="col-flex text-right">
-                        <money-format
-                                class="font-weight-bold text-number"
-                                :value="unallocated">
-                        </money-format>
-                    </div>
-                </div>
-            </div>
-        </transition>
 
         <div class="budget-header">
             <div class="budget-column-name">
@@ -95,28 +40,18 @@
     </div>
 </template>
 
-<style>
-    .kpi {
-        margin-right: 1em;
-        padding: 0 1em;
-        text-align: right;
-    }
-
-    .kpi-label {
-        opacity: .8;
-    }
-</style>
-
 <script>
     import row from './Row.vue'
     import Month from '../../models/Month.js'
     import MonthPicker from './MonthPicker'
+    import Overview from './Overview'
 
     export default {
         props: ['month'],
         components: {
             'category-row': row,
-            MonthPicker
+            MonthPicker,
+            Overview
         },
         computed: {
             monthObject() {
