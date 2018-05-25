@@ -5,7 +5,7 @@
                 <app-sidebar-toggle></app-sidebar-toggle>
             </div>
 
-            <app-logo class="navbar-brand" :height="40"></app-logo>
+            <app-logo class="navbar-brand ml-md-3" :height="40"></app-logo>
 
             <ul class="nav ml-auto">
                 <li class="nav-item">
