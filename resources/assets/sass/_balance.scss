@@ -6,67 +6,30 @@
   flex-grow: 0;
   align-self: stretch;
 
-  &-minor {
-    display: flex;
-  }
-
   &-current,
   &-upcoming,
-  &-minor,
   &-future {
-    text-align: right;
-    padding: .2em;
-  }
-
-  &-minor,
-  &-future {
-    flex: 50%;
+    text-align: center;
+    padding: .5em;
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: center;
-    padding: .3em;
   }
 
   &-label,
   &-value {
     @extend .small;
     flex: 1;
+    flex-grow: 0;
   }
+
   &-value {
-    text-shadow: rgba($black, .5) 0 1px 1px;
+    font-size: 1rem;
   }
 
-  &-minor {
-    background-color: $gray-750;
-
-    > div {
-      display: flex;
-    }
-
-    > div:first-child {
-      border-bottom: 1px solid $gray-650;
-    }
-
-    .balance-label {
-      color: $gray-400;
-      text-align: left;
-    }
-
-  }
-
-  &-future {
-    background-color: $gray-700;
-    padding: .5em;
-
-    .balance-label {
-      color: $gray-400;
-      flex-grow: 0;
-    }
-
-    .balance-value {
-      font-size: 1rem;
-      flex-grow: 0;
-    }
+  &-label {
+    color: $gray-600;
   }
 
   @include media-breakpoint-down(xs) {

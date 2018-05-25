@@ -35,6 +35,7 @@
   }
 
   &-row {
+    background: $white;
 
     &-future, &-future span {
       color: $gray-600 !important;
@@ -69,13 +70,10 @@
 
 .content .transaction-item {
   color: $body-color;
-  opacity: .8;
-  transition: opacity .2ms ease-in;
 
   &:hover {
     color: $body-color;
     text-decoration: none;
-    opacity: 1;
   }
 }
 

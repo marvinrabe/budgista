@@ -1,31 +1,7 @@
 @import "bootstrap";
 
-// Block iOS and Chrome Overscrolling
-html,
-body {
-  height: 100%;
-  width: 100%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  position: fixed;
-  overflow: hidden;
-}
-
 body {
   background: $gray-100;
-}
-
-#app {
-  height: 100%;
-}
-
-.dropdown-static {
-  @extend .dropdown-item;
-  &:hover {
-    background: none;
-  }
 }
 
 .link-action {
@@ -47,71 +23,32 @@ body {
   }
 }
 
-#layout {
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-}
-
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
+.content {
   background: $white;
+  @extend .shadow-1;
 }
 
 .toolbar {
   display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0;
 
-    flex-shrink: 0;
-    color: white;
-    background: $gray-800;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 0;
-
-    .title {
-      @extend .h4;
-      @extend .mb-0;
-      flex: 1;
-      padding: .5em 15px;
-      line-height: 1.3em;
-      position: relative;
-
-      @include media-breakpoint-down(xs) {
-        text-align: center;
-
-        .d-flex {
-          justify-content: center;
-        }
-      }
-
-    }
-
-
+  .title {
+    @extend .h4;
+    margin: 0;
+    line-height: 3.5rem;
+    flex: 1;
+    position: relative;
+  }
 
   p, h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0;
   }
 
-  .btn {
-    @extend .btn-sm;
-  }
-}
-
-.content {
-  background: $white;
-  flex: 1;
-
-  overflow-y: scroll; /* has to be scroll, not auto */
-  -webkit-overflow-scrolling: touch;
-
-  > div:last-child {
-    margin-bottom: 10%;
-  }
 }
 
 @import "menu";

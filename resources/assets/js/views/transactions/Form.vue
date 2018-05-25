@@ -3,8 +3,8 @@
 
         <app-toolbar :title="title" :back="true" @back="cancel"/>
 
-        <div class="content">
-            <div class="container mt-3">
+        <div class="card border-0">
+            <div class="card-body">
                 <app-form @submit="saveTransaction" ref="form">
                     <form-group name="amount">
                         <div class="input-group"

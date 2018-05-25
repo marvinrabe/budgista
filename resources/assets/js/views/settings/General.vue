@@ -1,10 +1,6 @@
 <template>
-    <div class="content container-fluid">
-        <div class="row justify-content-center">
-            <div class="col mt-3 col-lg-8">
-                <settings-general />
-            </div>
-        </div>
+    <div class="my-3">
+        <settings-general/>
     </div>
 </template>
 

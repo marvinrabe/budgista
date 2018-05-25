@@ -1,5 +1,5 @@
 <template>
-    <div class="content container-fluid d-flex flex-column justify-content-center">
+    <div class="d-flex text-muted flex-column justify-content-center">
         <div class="my-4 text-center">
             <h5 v-t="'title.emptyAccount'"></h5>
             <div class="mt-2">

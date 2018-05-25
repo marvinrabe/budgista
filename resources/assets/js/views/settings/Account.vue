@@ -1,14 +1,8 @@
 <template>
-    <div class="content container-fluid">
-        <div class="row justify-content-center">
-            <div class="col mt-3 col-lg-8">
-                <settings-email />
-            </div>
-            <div class="w-100"></div>
-            <div class="col mt-3 col-lg-8">
-                <settings-password />
-            </div>
-        </div>
+    <div class="my-3">
+        <settings-email/>
+        <div class="w-100"></div>
+        <settings-password/>
     </div>
 </template>
 

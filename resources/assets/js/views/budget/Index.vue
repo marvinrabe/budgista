@@ -23,7 +23,7 @@
                             <br>
                             <span class="kpi-label">{{ $t('form.income') }}</span>
                         </div>
-                        <div class="d-none d-lg-block kpi">
+                        <div class="d-none d-lg-block kpi mr-2">
                             <money-format
                                     class="font-weight-bold text-number"
                                     :value="allocated">
@@ -32,10 +32,10 @@
                             <span class="kpi-label">{{ $t('form.allocated') }}</span>
                         </div>
 
-                        <div class="kpi mr-1 py-1 px-2 rounded"
-                             :class="[{ 'bg-danger': unallocated < 0 }, { 'bg-success': unallocated >= 0 }]">
+                        <div class="kpi">
                             <money-format
                                     class="font-weight-bold text-number"
+                                    :class="[{ 'text-danger': unallocated < 0 }, { 'text-success': unallocated >= 0 }]"
                                     :value="unallocated">
                             </money-format>
                             <br>
@@ -88,9 +88,9 @@
                     :month="month"
                     :value="row"
                     @update:value="val => rows.splice(index, 1, val)"/>
-
-            <app-spinner v-if="loading"></app-spinner>
         </div>
+
+        <app-spinner v-if="loading"></app-spinner>
 
     </div>
 </template>
@@ -120,17 +120,17 @@
         },
         computed: {
             monthObject() {
-                return Month.fromString(this.month);
+                return Month.fromString(this.month)
             },
             allocated: function () {
-                let sum = 0;
+                let sum = 0
                 this.rows.forEach(function (row) {
-                    sum += row.budget;
-                });
-                return sum;
+                    sum += row.budget
+                })
+                return sum
             },
             unallocated: function () {
-                return this.sheet.previousMonth + this.sheet.income - this.allocated;
+                return this.sheet.previousMonth + this.sheet.income - this.allocated
             }
         },
         data: () => ({
@@ -144,12 +144,12 @@
         }),
 
         mounted() {
-            this.loadSheet();
+            this.loadSheet()
         },
 
         beforeRouteUpdate(to, from, next) {
-            this.loadSheet(to.params.month);
-            next();
+            this.loadSheet(to.params.month)
+            next()
         },
 
         methods: {
@@ -158,21 +158,21 @@
                     income: 0,
                     allocated: 0,
                     previousMonth: 0
-                };
-                this.loading = true;
-                this.rows = [];
+                }
+                this.loading = true
+                this.rows = []
             },
             loadSheet(month) {
-                this.reset();
+                this.reset()
 
                 axios
                     .get('/month/' + (month || this.month))
                     .then(({data}) => {
-                        this.loading = false;
-                        this.sheet = data.data;
-                        this.rows = this.sheet.rows;
-                        this.previousMonth = data.links.prev;
-                        this.nextMonth = data.links.next;
+                        this.loading = false
+                        this.sheet = data.data
+                        this.rows = this.sheet.rows
+                        this.previousMonth = data.links.prev
+                        this.nextMonth = data.links.next
                     })
             }
 
