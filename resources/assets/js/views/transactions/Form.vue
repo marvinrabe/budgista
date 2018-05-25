@@ -60,52 +60,51 @@
 
                     <form-group name="date">
                         <template slot-scope="{bindings}">
-                            <input class="form-control"
-                                   type="date"
-                                   v-if="hasHTML5DateInput"
-                                   v-bind="bindings"
-                                   v-model="date"
-                                   v-validate="'required'">
-                            <date-input v-else v-bind="bindings" v-model="date"></date-input>
+                            <div class="input-group">
+                                <input class="form-control"
+                                       type="date"
+                                       v-if="hasHTML5DateInput"
+                                       v-bind="bindings"
+                                       v-model="date"
+                                       v-validate="'required'">
+                                <date-input v-else v-bind="bindings" v-model="date"></date-input>
+                                <div class="input-group-append">
+                                    <button class="btn"
+                                            type="button"
+                                            :class="{
+                                                'btn-dark': !recurring,
+                                                'btn-primary': recurring
+                                            }"
+                                            :title="$t('form.recurring')"
+                                            style="color: white !important"
+                                            @click="recurring = !recurring">
+                                        <font-awesome-icon :icon="recurringIcon"></font-awesome-icon>
+                                    </button>
+                                </div>
+                            </div>
                         </template>
                     </form-group>
 
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" v-model="recurring">
-                                {{ $t('form.recurring') }}
-                            </label>
+                    <div class="input-group mb-3" v-if="recurring">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"
+                                  v-t="'form.recurringInterval'">
+                            </span>
                         </div>
-
-                        <div class="form-row mt-3" v-if="recurring">
-                            <div class="col">
-                                <label for="freq">{{ $t('form.recurringFrequency') }}</label>
-                                <select id="freq" class="form-control" v-model="freq">
-                                    <option value="3">{{ $t('frequency.daily') }}</option>
-                                    <option value="2">{{ $t('frequency.weekly') }}</option>
-                                    <option value="1">{{ $t('frequency.monthly') }}</option>
-                                    <option value="0">{{ $t('frequency.yearly') }}</option>
-                                </select>
-                            </div>
-
-                            <div class="col">
-                                <label for="interval">{{ $t('form.recurringInterval') }}</label>
-                                <div class="input-group mb-2 mb-sm-0">
-                                    <input type="number" min="1" max="50" step="1" id="interval"
-                                           class="form-control" v-model="interval"/>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"
-                                              v-if="freq == 3">{{ $t('frequencyUnit.days') }}</span>
-                                        <span class="input-group-text"
-                                              v-if="freq == 2">{{ $t('frequencyUnit.weeks') }}</span>
-                                        <span class="input-group-text"
-                                              v-if="freq == 1">{{ $t('frequencyUnit.months') }}</span>
-                                        <span class="input-group-text"
-                                              v-if="freq == 0">{{ $t('frequencyUnit.years') }}</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <input class="form-control"
+                               type="number"
+                               min="1"
+                               max="50"
+                               step="1"
+                               v-model="interval">
+                        <div class="input-group-append">
+                            <select class="form-control"
+                                    v-model="freq">
+                                <option value="3">{{ $t('frequencyUnit.days') }}</option>
+                                <option value="2">{{ $t('frequencyUnit.weeks') }}</option>
+                                <option value="1">{{ $t('frequencyUnit.months') }}</option>
+                                <option value="0">{{ $t('frequencyUnit.years') }}</option>
+                            </select>
                         </div>
                     </div>
 
@@ -147,6 +146,7 @@
     import {mapGetters} from 'vuex'
     import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
     import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
+    import faSync from '@fortawesome/fontawesome-free-solid/faSync'
     import RRule from 'rrule'
 
     const EXPENSE = -1
@@ -168,6 +168,9 @@
             category: ''
         }),
         computed: {
+            recurringIcon() {
+                return faSync
+            },
             rrule() {
                 if (!this.recurring) {
                     return ''

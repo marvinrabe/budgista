@@ -135,12 +135,6 @@ export default {
             }
         }
     },
-    'frequency': {
-        'daily': 'Täglich',
-        'weekly': 'Wöchentlich',
-        'monthly': 'Monatlich',
-        'yearly': 'Jährlich'
-    },
     'frequencyUnit': {
         'days': 'Tage',
         'weeks': 'Wochen',
