@@ -1,4 +1,4 @@
-@extends('layouts.base', ['body_class' => 'layout-home', 'style' => 'css/website.css'])
+@extends('layouts.base', ['body_class' => 'layout-home'])
 
 @section('title')
     {{ trans('static.home.title') }} - {{ config('app.name') }}
