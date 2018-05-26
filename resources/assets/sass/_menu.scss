@@ -42,11 +42,12 @@ $menu-width: 280px;
 
     &.active {
       background: rgba(255, 255, 255, 0.5);
-
+      border-left: 2px solid theme-color('primary');
+      margin-left: -2px;
       font-weight: 500;
 
       svg {
-        color: theme-color('primary');
+        //color: theme-color('primary');
       }
     }
   }

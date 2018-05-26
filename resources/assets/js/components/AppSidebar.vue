@@ -40,18 +40,18 @@
                             :class="item.class">
                         <font-awesome-icon :icon="item.icon" v-if="item.icon" fixed-width class="mr-1"/>
                         <span class="d-block mr-1" style="width: 1.25em" v-else></span>
-                        {{ $t(item.label) }}
+                        <span class="nav-link-main-label">{{ $t(item.label) }}</span>
                     </router-link>
                     <a v-else-if="item.click" href="#" class="nav-link-main" @click.prevent="item.click"
                        :class="item.class">
                         <font-awesome-icon :icon="item.icon" v-if="item.icon" fixed-width class="mr-1"/>
                         <span class="d-block mr-1" style="width: 1.25em" v-else></span>
-                        {{ $t(item.label) }}
+                        <span class="nav-link-main-label">{{ $t(item.label) }}</span>
                     </a>
                     <a v-else :href="item.href" class="nav-link-main" :class="item.class">
                         <font-awesome-icon :icon="item.icon" v-if="item.icon" fixed-width class="mr-1"/>
                         <span class="d-block mr-1" style="width: 1.25em" v-else></span>
-                        {{ $t(item.label) }}
+                        <span class="nav-link-main-label">{{ $t(item.label) }}</span>
                     </a>
                 </template>
 
