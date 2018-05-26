@@ -26,7 +26,7 @@
     }
 
     #layout {
-        margin-top: 56px;
+        padding-top: 56px;
     }
 
     #loading {
