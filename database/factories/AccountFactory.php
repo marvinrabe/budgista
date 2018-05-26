@@ -13,3 +13,9 @@ $factory->define(Account::class, function (Faker $faker) {
         }
     ];
 });
+
+$factory->state(Account::class, 'tracking', function (Faker $faker) {
+    return [
+        'tracking' => true,
+    ];
+});

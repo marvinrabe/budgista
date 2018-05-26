@@ -61,7 +61,8 @@ class Sheet implements JsonSerializable
     public function getFunds()
     {
         $sum = 0;
-        foreach ($this->user->accounts as $account) {
+        $accounts = $this->user->accounts()->where('tracking', false)->get();
+        foreach ($accounts as $account) {
             $sum += $account
                 ->transactions()
                 ->whereNull('category_id')
