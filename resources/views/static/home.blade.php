@@ -59,23 +59,6 @@
         </div>
     </div>
 
-    <div class="container py-4 contribute">
-        <div class="contribute-icon text-success">
-            <span class="fab fa-osi"></span>
-        </div>
-        <div class="contribute-body">
-            <p class="h4">
-                {{ trans('static.home.contributeHeadline') }}
-            </p>
-            <p class="m-0">
-                {{ trans('static.home.contributeMessage') }}
-                <a href="https://github.com/marvinrabe/budgista/wiki/Contribute">
-                    {{ trans('static.home.contributeAction') }}
-                </a>
-            </p>
-        </div>
-    </div>
-
     @include('snippets.footer')
 
 @endsection('body')
