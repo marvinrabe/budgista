@@ -58,6 +58,7 @@ export default {
         'uncategorized': 'Ohne Kategorie',
         'available': 'Verfügbar',
         'recommendedBudget': 'Empfohlenes Budget',
+        trackingAccount: 'Tracking Konto',
         remember: 'Angemeldet bleiben',
         allocated: 'Eingeplant',
         unallocated: 'Nicht eingeplant',
@@ -97,7 +98,8 @@ export default {
         updatePassword: 'Passwort ändern',
         updateEmail: 'E-Mail Adresse ändern',
         emptyAccount: 'Dieses Konto ist leer.',
-        register: 'Registrieren'
+        register: 'Registrieren',
+        trackingAccounts: 'Tracking Konten'
     },
     validation: {
         messages: {

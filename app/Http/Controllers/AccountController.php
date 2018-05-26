@@ -20,7 +20,8 @@ class AccountController extends Controller
 
         $account = Auth::user()->accounts()->create(
             request()->validate([
-                'name' => 'required'
+                'name' => 'required',
+                'tracking' => 'nullable|boolean'
             ])
         );
 
@@ -40,7 +41,8 @@ class AccountController extends Controller
 
         $account->update(
             request()->validate([
-                'name' => 'required'
+                'name' => 'required',
+                'tracking' => 'nullable|boolean'
             ])
         );
 

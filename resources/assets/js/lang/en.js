@@ -58,6 +58,7 @@ export default {
         'uncategorized': 'Uncategorized',
         'available': 'Available',
         'recommendedBudget': 'Recommended Budget',
+        trackingAccount: 'Tracking Account',
         remember: 'Remember Me',
         allocated: 'Budgeted',
         unallocated: 'To be Budgeted',
@@ -97,7 +98,8 @@ export default {
         updatePassword: 'Change Password',
         updateEmail: 'Change Email Address',
         emptyAccount: 'This account is empty.',
-        register: 'Sign up'
+        register: 'Sign up',
+        trackingAccounts: 'Tracking Accounts'
     },
     validation: {
         messages: {

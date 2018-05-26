@@ -11,6 +11,12 @@ const getters = {
             return a.name.localeCompare(b.name);
         })
     },
+    spendingAccounts(state) {
+        return getters.sortedAccounts(state).filter(x => x.tracking === false);
+    },
+    trackingAccounts(state) {
+        return getters.sortedAccounts(state).filter(x => x.tracking === true);
+    },
     findAccountById: (state) => (id) => {
         return state.accounts.find(x => x.id === id)
     }
@@ -31,7 +37,8 @@ const actions = {
     createAccount({commit, rootState}, account) {
         return axios
             .post('/accounts/', {
-                'name': account.name
+                'name': account.name,
+                'tracking': account.tracking
             })
             .then(({data}) => {
                 commit('ADD_ACCOUNT', data.data);
@@ -41,7 +48,8 @@ const actions = {
     updateAccount({commit}, account) {
         return axios
             .put('/accounts/' + account.id, {
-                'name': account.name
+                'name': account.name,
+                'tracking': account.tracking
             })
             .then(({data}) => {
                 commit('ADD_ACCOUNT', data.data);

@@ -10,6 +10,10 @@
                        v-validate="'required'"
                        v-focus>
             </form-group>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="tracking" v-model="tracking" :value="true">
+                <label class="form-check-label" for="tracking" v-t="'form.trackingAccount'"></label>
+            </div>
         </app-form>
 
         <div slot="footer">
@@ -44,6 +48,7 @@
             showModal(account) {
                 this.account = account;
                 this.name = account.name;
+                this.tracking = account.tracking;
                 this.visible = true;
             },
             hideModal() {
@@ -53,7 +58,8 @@
                 this.$store
                     .dispatch('updateAccount', {
                         id: this.account.id,
-                        name: this.name
+                        name: this.name,
+                        tracking: this.tracking
                     })
                     .then(() => {
                         this.hideModal();
