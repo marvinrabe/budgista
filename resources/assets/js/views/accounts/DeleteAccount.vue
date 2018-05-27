@@ -1,8 +1,10 @@
 <template>
     <modal v-if="visible" @close="hideModal" :title="$t('action.delete.account')">
         <p slot="body"
-           class="mb-0"
-           v-html="$t('message.deleteAccount', {name: account.name})">
+           class="mb-0">
+            <i18n path="message.deleteAccount" tag="p" class="mb-0" slot="body">
+                <strong place="name">{{ account.name }}</strong>
+            </i18n>
         </p>
 
         <div slot="footer">

@@ -3,7 +3,7 @@ export default {
         name: 'Budgista'
     },
     message: {
-        deleteAccount: 'Do you really want to delete <strong>{name}</strong>? All transactions will be lost. This action can\'t be reversed.',
+        deleteAccount: 'Do you really want to delete {name}? All transactions will be lost. This action can\'t be reversed.',
         loginFailed: 'These credentials do not match our records.',
         unexpectedError: 'An unexpected Error occurred.',
         updateEmail: 'Email Address has been updated.',
