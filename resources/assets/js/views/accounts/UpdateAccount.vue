@@ -19,22 +19,14 @@
             </div>
         </app-form>
 
-        <div slot="footer">
-            <div class="float-left">
-                <button class="btn btn-outline-danger"
-                        :title="$t('action.delete.account')"
-                        @click="deleteAccount">
-                    <font-awesome-icon :icon="['far', 'trash-alt']"/>
-                </button>
-            </div>
-
+        <template slot="footer">
             <button class="btn btn-text-dark" @click="hideModal">
                 {{ $t('action.cancel') }}
             </button>
             <button class="btn btn-primary" form="updateAccount" type="submit">
                 {{ $t('action.save') }}
             </button>
-        </div>
+        </template>
     </modal>
 </template>
 
@@ -42,24 +34,23 @@
     import AccountIconPicker from './AccountIconPicker'
 
     export default {
+        props: ['account'],
         components: {
             AccountIconPicker
         },
         data() {
             return {
                 visible: false,
-                account: null,
                 name: '',
                 icon: '',
                 tracking: false
             }
         },
         methods: {
-            showModal(account) {
-                this.account = account;
-                this.name = account.name;
-                this.tracking = account.tracking;
-                this.icon = account.icon;
+            showModal() {
+                this.name = this.account.name;
+                this.tracking = this.account.tracking;
+                this.icon = this.account.icon;
                 this.visible = true;
             },
             hideModal() {
@@ -75,14 +66,6 @@
                     })
                     .then(() => {
                         this.hideModal();
-                    });
-            },
-            deleteAccount() {
-                this.$store
-                    .dispatch('deleteAccount', this.account)
-                    .then(() => {
-                        this.hideModal();
-                        this.$router.push({name: 'budget_default'});
                     });
             }
         }

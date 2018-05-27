@@ -4,12 +4,6 @@
             <balance :account="account"></balance>
 
             <template slot="submenu">
-                <a class="btn btn-light btn-sm" href="#"
-                   @click.prevent="$refs.updateAccount.showModal(account)"
-                   :title="$t('action.edit.account')">
-                    <font-awesome-icon :icon="ellipsisIcon"/>
-                </a>
-
                 <router-link
                         :to="{ name: 'transaction.new'}"
                         class="btn btn-primary btn-sm"
@@ -17,6 +11,8 @@
                     <font-awesome-icon icon="plus"/>
                     {{ $t('word.transaction') }}
                 </router-link>
+
+                <account-settings :account="account"></account-settings>
             </template>
         </app-toolbar>
 
@@ -60,30 +56,24 @@
                     <app-spinner></app-spinner>
                 </span>
         </infinite-loading>
-
-
-        <update-account ref="updateAccount"></update-account>
     </div>
 </template>
 
 <script>
     import Balance from './Balance.vue'
     import InfiniteLoading from 'vue-infinite-loading'
-    import UpdateAccount from './UpdateAccount'
+    import AccountSettings from './AccountSettings'
     import TransactionRow from './TransactionRow'
     import ReconcileForm from './ReconcileForm'
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faEllipsisH from '@fortawesome/fontawesome-free-solid/faEllipsisH'
 
     export default {
         props: ['account_id'],
         components: {
+            AccountSettings,
             Balance,
             InfiniteLoading,
             ReconcileForm,
-            TransactionRow,
-            UpdateAccount,
-            FontAwesomeIcon
+            TransactionRow
         },
         data() {
             return {
@@ -92,9 +82,6 @@
             }
         },
         computed: {
-            ellipsisIcon() {
-                return faEllipsisH
-            },
             isEmpty() {
                 return this.transactions.length === 0 && !this.loading
             },
@@ -137,6 +124,5 @@
                     })
             }
         }
-
     }
 </script>
