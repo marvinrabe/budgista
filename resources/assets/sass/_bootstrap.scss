@@ -82,13 +82,17 @@ a.h2:hover {
   font-size: 1.25em;
 }
 
-.modal-content, .card {
+.card {
   @extend .shadow-1;
   border: 0;
-  border-top: 5px solid theme-color('primary');
   border-radius: 0;
 }
 
+.modal-content {
+  @extend .shadow-2;
+  border: 0;
+  border-radius: 0;
+}
 /*
  * Tabs
  */

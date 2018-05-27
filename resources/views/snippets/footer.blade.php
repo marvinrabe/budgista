@@ -28,7 +28,7 @@
         </ul>
 
         @donottrack
-        <button class="btn btn-outline-secondary my-2" disabled style="cursor: initial">
+        <button class="btn btn-outline-dark my-2" disabled style="cursor: initial">
             🙈 {{ trans('message.do_not_track') }}
         </button>
         @endtrack
