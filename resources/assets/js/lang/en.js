@@ -58,6 +58,7 @@ export default {
         'uncategorized': 'Uncategorized',
         'available': 'Available',
         'recommendedBudget': 'Recommended Budget',
+        icon: 'Icon',
         trackingAccount: 'Tracking Account',
         remember: 'Remember Me',
         allocated: 'Budgeted',

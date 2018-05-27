@@ -2,9 +2,12 @@
 
 return [
     'accounts' => [
-        'Bargeld',
-        'Girokonto',
-        'Kreditkarte'
+        [
+            'name' => 'Bargeld',
+            'icon' => 'wallet'
+        ],
+        ['name' => 'Girokonto'],
+        ['name' => 'Kreditkarte']
     ],
 
     'categories' => [

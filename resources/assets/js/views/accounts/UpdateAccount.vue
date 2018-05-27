@@ -10,6 +10,9 @@
                        v-validate="'required'"
                        v-focus>
             </form-group>
+            <form-group name="icon">
+                <account-icon-picker v-model="icon"></account-icon-picker>
+            </form-group>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="tracking" v-model="tracking" :value="true">
                 <label class="form-check-label" for="tracking" v-t="'form.trackingAccount'"></label>
@@ -36,12 +39,19 @@
 </template>
 
 <script>
+    import AccountIconPicker from './AccountIconPicker'
+
     export default {
+        components: {
+            AccountIconPicker
+        },
         data() {
             return {
                 visible: false,
                 account: null,
-                name: ''
+                name: '',
+                icon: '',
+                tracking: false
             }
         },
         methods: {
@@ -49,6 +59,7 @@
                 this.account = account;
                 this.name = account.name;
                 this.tracking = account.tracking;
+                this.icon = account.icon;
                 this.visible = true;
             },
             hideModal() {
@@ -59,7 +70,8 @@
                     .dispatch('updateAccount', {
                         id: this.account.id,
                         name: this.name,
-                        tracking: this.tracking
+                        tracking: this.tracking,
+                        icon: this.icon
                     })
                     .then(() => {
                         this.hideModal();

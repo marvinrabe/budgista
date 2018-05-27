@@ -76,4 +76,14 @@ class RegisterTest extends TestCase
             ->assertSessionHasErrors(['terms']);
     }
 
+    /** @test */
+    public function it_assigns_wallet_icon_to_cash_account()
+    {
+        $user = $this->registerUser();
+
+        $account = $user->accounts()->where('name', 'Cash')->first();
+
+        $this->assertEquals('wallet', $account->icon);
+    }
+
 }

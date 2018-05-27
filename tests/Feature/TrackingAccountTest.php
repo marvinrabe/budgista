@@ -69,14 +69,17 @@ class TrackingAccountTest extends TestCase
     public function it_can_be_updated_as_a_tracking_account()
     {
         $account = factory(Account::class)
-            ->states('tracking')
             ->create([
                 'user_id' => Auth()->id()
             ]);
 
         $newName = 'Changed Name';
 
-        $this->put('/api/accounts/' . $account->id, ['name' => $newName])
+        $this
+            ->put('/api/accounts/' . $account->id, [
+                'name' => $newName,
+                'tracking' => true
+            ])
             ->assertSuccessful()
             ->assertJson([
                 'data' => [
