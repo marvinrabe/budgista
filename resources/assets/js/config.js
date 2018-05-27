@@ -14,6 +14,10 @@ export const accountIcons = [
         icon: require('@fortawesome/fontawesome-free-solid/faWallet')
     },
     {
+        name: 'bank',
+        icon: require('@fortawesome/fontawesome-free-solid/faUniversity')
+    },
+    {
         name: 'money-bill-alt',
         icon: require('@fortawesome/fontawesome-free-solid/faMoneyBillAlt')
     },
