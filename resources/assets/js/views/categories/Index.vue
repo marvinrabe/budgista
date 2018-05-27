@@ -12,7 +12,7 @@
             </button>
         </app-toolbar>
 
-        <draggable v-model="categories" :options="{handle:'.handle'}" class="list-group shadow-1">
+        <draggable v-model="categories" :options="{handle:'.handle'}" class="list-group">
             <div class="list-group-item" v-for="category in categories">
                 <div class="d-flex align-items-center">
                                 <span class="handle">

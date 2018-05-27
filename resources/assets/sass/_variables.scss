@@ -3,6 +3,8 @@ $enable-transitions: false;
 $font-family-sans-serif: Roboto, sans-serif;
 
 $table-cell-padding: .5em;
+$list-group-item-padding-y: .5em;
+$list-group-item-padding-x: .5em;
 
 @function match-hue($color, $root) {
   $root-hue: hue($root);
