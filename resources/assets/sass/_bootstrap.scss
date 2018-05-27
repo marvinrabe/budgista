@@ -36,14 +36,6 @@ a.h2:hover {
   text-decoration: none;
 }
 
-.card-body-secondary {
-  @extend .text-muted;
-  background: $gray-50;
-  border-top: 1px solid $gray-300;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
 .col-flex,
 .col-flex-1 {
   flex: 1;
@@ -60,6 +52,12 @@ a.h2:hover {
 // Make modal display as block instead of inline style because Vue's v-show deletes inline "display" style
 .modal {
   display: block;
+
+  &-content {
+    @extend .shadow-2;
+    border: 0;
+    border-radius: 0;
+  }
 
   &-header,
   &-footer {
@@ -82,17 +80,41 @@ a.h2:hover {
   font-size: 1.25em;
 }
 
+/*
+ * Card
+ */
 .card {
   @extend .shadow-1;
   border: 0;
   border-radius: 0;
+
+  &-body-secondary {
+    @extend .text-muted;
+    background: $gray-50;
+    border-top: 1px solid $gray-300;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
 }
 
-.modal-content {
-  @extend .shadow-2;
-  border: 0;
-  border-radius: 0;
+/*
+ * List
+ */
+.list-group {
+  @extend .shadow-1;
+
+  &-item {
+    margin: 0;
+    border: 0;
+    border-bottom: 1px solid $gray-300;
+    border-radius: 0;
+  }
+
+  &-item:last-child {
+    border-bottom: 0;
+  }
 }
+
 /*
  * Tabs
  */

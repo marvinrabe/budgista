@@ -127,7 +127,7 @@
                             {{ $t('action.cancel') }}
                         </button>
 
-                        <button class="btn btn-light d-sm-inline-block d-none"
+                        <button class="btn btn-light d-sm-inline-block mr-1 d-none"
                                 type="button"
                                 v-if="isNew"
                                 @click="saveAndNew">
