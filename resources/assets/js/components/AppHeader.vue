@@ -5,7 +5,7 @@
                 <app-sidebar-toggle></app-sidebar-toggle>
             </div>
 
-            <app-logo class="navbar-brand ml-md-3" :height="40"></app-logo>
+            <app-logo class="navbar-brand" :height="40"></app-logo>
 
             <ul class="nav ml-auto">
                 <li class="nav-item d-none">
@@ -16,12 +16,11 @@
                 <li class="nav-item dropdown d-none d-md-block">
                     <b-dropdown variant="text-dark" right>
                         <template slot="button-content">
-                            <font-awesome-icon :icon="iconCog"></font-awesome-icon>
+                            <font-awesome-icon :icon="iconUser"></font-awesome-icon>
                         </template>
                         <div v-for="item in menu" :key="item.label">
                             <b-dropdown-divider v-if="item.divider"></b-dropdown-divider>
                             <b-dropdown-item v-else @click="item.click">
-                                <font-awesome-icon :icon="item.icon" v-if="item.icon"></font-awesome-icon>
                                 {{ $t(item.label) }}
                             </b-dropdown-item>
                         </div>
@@ -40,8 +39,7 @@
     import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
     import bDropdownDivider from 'bootstrap-vue/es/components/dropdown/dropdown-divider'
     import faPlus from '@fortawesome/fontawesome-free-solid/faPlus'
-    import faCog from '@fortawesome/fontawesome-free-solid/faCog'
-    import faLifeRing from '@fortawesome/fontawesome-free-solid/faLifeRing'
+    import faUserCircle from '@fortawesome/fontawesome-free-solid/faUserCircle'
 
     export default {
         components: {
@@ -57,13 +55,11 @@
                 menu: [
                     {
                         click: this.settings,
-                        label: 'title.settings',
-                        icon: faCog
+                        label: 'title.settings'
                     },
                     {
                         click: this.email,
-                        label: 'title.help',
-                        icon: faLifeRing
+                        label: 'title.help'
                     },
                     {
                         divider: true
@@ -79,8 +75,8 @@
             iconPlus() {
                 return faPlus
             },
-            iconCog() {
-                return faCog
+            iconUser() {
+                return faUserCircle
             }
         },
         methods: {
