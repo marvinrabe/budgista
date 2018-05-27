@@ -172,4 +172,8 @@ a.h2:hover {
 .btn-outline-light {
   color: $gray-600;
   border-color: $gray-300;
+
+  &:hover {
+    border-color: $gray-300;
+  }
 }
