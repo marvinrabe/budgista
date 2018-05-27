@@ -72,11 +72,10 @@
                                     <button class="btn"
                                             type="button"
                                             :class="{
-                                                'btn-dark': !recurring,
+                                                'btn-outline-light': !recurring,
                                                 'btn-primary': recurring
                                             }"
                                             :title="$t('form.recurring')"
-                                            style="color: white !important"
                                             @click="recurring = !recurring">
                                         <font-awesome-icon :icon="recurringIcon"></font-awesome-icon>
                                     </button>
