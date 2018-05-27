@@ -2,6 +2,7 @@
 
 return [
     'account' => [
+        'bank',
         'wallet',
         'money-bill-alt',
         'money-bill',
