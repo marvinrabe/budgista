@@ -3,7 +3,7 @@ export default {
         name: 'Budgista'
     },
     message: {
-        deleteAccount: 'Möchtest du wirklich <strong>{name}</strong> löschen? Alle Kontobewegungen werden entfernt. Dies kann nicht rückgängig gemacht werden.',
+        deleteAccount: 'Möchtest du wirklich {name} löschen? Alle Kontobewegungen werden entfernt. Dies kann nicht rückgängig gemacht werden.',
         loginFailed: 'Diese Kombination aus Zugangsdaten wurden nicht in unserer Datenbank gefunden.',
         unexpectedError: 'Ein unerwarteter Fehler ist aufgetreten.',
         updateEmail: 'E-Mail Adresse wurde geändert.',
