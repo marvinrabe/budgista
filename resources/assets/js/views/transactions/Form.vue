@@ -72,12 +72,9 @@
                                                v-validate="'required'">
                                         <date-input v-else v-bind="bindings" v-model="date"></date-input>
                                         <div class="input-group-append">
-                                            <button class="btn"
+                                            <button class="btn btn-outline-light"
                                                     type="button"
-                                                    :class="{
-                                                'btn-outline-light': !recurring,
-                                                'btn-primary': recurring
-                                            }"
+                                                    :class="{'text-primary': recurring}"
                                                     :title="$t('form.recurring')"
                                                     @click="recurring = !recurring">
                                                 <font-awesome-icon :icon="recurringIcon"></font-awesome-icon>
