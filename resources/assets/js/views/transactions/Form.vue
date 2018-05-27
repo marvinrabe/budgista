@@ -46,64 +46,69 @@
                         </template>
                     </form-group>
 
-                    <form-group name="category">
-                        <select class="form-control"
-                                slot-scope="{bindings}"
-                                v-bind="bindings"
-                                v-model="category">
-                            <option value="">{{ $t('form.uncategorized') }}</option>
-                            <option v-for="category in sortedCategories" :key="category.id" :value="category.id">
-                                {{ category.name }}
-                            </option>
-                        </select>
-                    </form-group>
-
-                    <form-group name="date">
-                        <template slot-scope="{bindings}">
-                            <div class="input-group">
-                                <input class="form-control"
-                                       type="date"
-                                       v-if="hasHTML5DateInput"
-                                       v-bind="bindings"
-                                       v-model="date"
-                                       v-validate="'required'">
-                                <date-input v-else v-bind="bindings" v-model="date"></date-input>
-                                <div class="input-group-append">
-                                    <button class="btn"
-                                            type="button"
-                                            :class="{
+                    <div class="form-row">
+                        <div class="col-sm-6">
+                            <form-group name="category">
+                                <select class="form-control"
+                                        slot-scope="{bindings}"
+                                        v-bind="bindings"
+                                        v-model="category">
+                                    <option value="">{{ $t('form.uncategorized') }}</option>
+                                    <option v-for="category in sortedCategories" :key="category.id" :value="category.id">
+                                        {{ category.name }}
+                                    </option>
+                                </select>
+                            </form-group>
+                        </div>
+                        <div class="col-sm-6">
+                            <form-group name="date">
+                                <template slot-scope="{bindings}">
+                                    <div class="input-group">
+                                        <input class="form-control"
+                                               type="date"
+                                               v-if="hasHTML5DateInput"
+                                               v-bind="bindings"
+                                               v-model="date"
+                                               v-validate="'required'">
+                                        <date-input v-else v-bind="bindings" v-model="date"></date-input>
+                                        <div class="input-group-append">
+                                            <button class="btn"
+                                                    type="button"
+                                                    :class="{
                                                 'btn-outline-light': !recurring,
                                                 'btn-primary': recurring
                                             }"
-                                            :title="$t('form.recurring')"
-                                            @click="recurring = !recurring">
-                                        <font-awesome-icon :icon="recurringIcon"></font-awesome-icon>
-                                    </button>
-                                </div>
-                            </div>
-                        </template>
-                    </form-group>
+                                                    :title="$t('form.recurring')"
+                                                    @click="recurring = !recurring">
+                                                <font-awesome-icon :icon="recurringIcon"></font-awesome-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </template>
+                            </form-group>
 
-                    <div class="input-group mb-3" v-if="recurring">
-                        <div class="input-group-prepend">
+                            <div class="input-group mb-3" v-if="recurring">
+                                <div class="input-group-prepend">
                             <span class="input-group-text"
                                   v-t="'form.recurringInterval'">
                             </span>
-                        </div>
-                        <input class="form-control"
-                               type="number"
-                               min="1"
-                               max="50"
-                               step="1"
-                               v-model="interval">
-                        <div class="input-group-append">
-                            <select class="form-control"
-                                    v-model="freq">
-                                <option value="3">{{ $t('frequencyUnit.days') }}</option>
-                                <option value="2">{{ $t('frequencyUnit.weeks') }}</option>
-                                <option value="1">{{ $t('frequencyUnit.months') }}</option>
-                                <option value="0">{{ $t('frequencyUnit.years') }}</option>
-                            </select>
+                                </div>
+                                <input class="form-control"
+                                       type="number"
+                                       min="1"
+                                       max="50"
+                                       step="1"
+                                       v-model="interval">
+                                <div class="input-group-append">
+                                    <select class="form-control"
+                                            v-model="freq">
+                                        <option value="3">{{ $t('frequencyUnit.days') }}</option>
+                                        <option value="2">{{ $t('frequencyUnit.weeks') }}</option>
+                                        <option value="1">{{ $t('frequencyUnit.months') }}</option>
+                                        <option value="0">{{ $t('frequencyUnit.years') }}</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
