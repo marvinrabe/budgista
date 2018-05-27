@@ -32,6 +32,7 @@
 
 @yield('body')
 
+@include('snippets.sentry')
 <script src="{{ mix('js/website.js') }}"></script>
 </body>
 </html>
