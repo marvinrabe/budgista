@@ -2,9 +2,12 @@
 
 return [
     'accounts' => [
-        'Cash',
-        'Debit Card',
-        'Credit Card'
+        [
+            'name' => 'Cash',
+            'icon' => 'wallet'
+        ],
+        ['name' => 'Debit Card'],
+        ['name' => 'Credit Card']
     ],
 
     'categories' => [

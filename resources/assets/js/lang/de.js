@@ -58,6 +58,7 @@ export default {
         'uncategorized': 'Ohne Kategorie',
         'available': 'Verfügbar',
         'recommendedBudget': 'Empfohlenes Budget',
+        icon: 'Symbol',
         trackingAccount: 'Tracking Konto',
         remember: 'Angemeldet bleiben',
         allocated: 'Eingeplant',

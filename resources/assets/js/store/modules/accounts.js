@@ -38,7 +38,8 @@ const actions = {
         return axios
             .post('/accounts/', {
                 'name': account.name,
-                'tracking': account.tracking
+                'tracking': account.tracking,
+                'icon': account.icon
             })
             .then(({data}) => {
                 commit('ADD_ACCOUNT', data.data);
@@ -49,7 +50,8 @@ const actions = {
         return axios
             .put('/accounts/' + account.id, {
                 'name': account.name,
-                'tracking': account.tracking
+                'tracking': account.tracking,
+                'icon': account.icon
             })
             .then(({data}) => {
                 commit('ADD_ACCOUNT', data.data);
