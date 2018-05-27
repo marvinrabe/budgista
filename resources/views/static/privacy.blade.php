@@ -10,7 +10,7 @@
             {{ trans('title.privacy') }}
         </h1>
 
-        <div class="card border-0 mt-3">
+        <div class="card mt-3">
             <div class="card-body">
                 <p>
                     This privacy policy has been compiled to better serve those who are concerned with how their

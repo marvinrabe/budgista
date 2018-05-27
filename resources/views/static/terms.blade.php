@@ -11,7 +11,7 @@
         </h1>
         <span class="h4 text-muted small">Effective Date: January 1st, 2018</span>
 
-        <div class="card border-0 mt-3">
+        <div class="card mt-3">
             <div class="card-body">
                 <h2 class="h4">1. Terms</h2>
                 <p>By accessing the website at <a href="https://www.budgista.com/">http://budgista.com/</a>, you are

@@ -6,6 +6,12 @@ body,
   height: 100%;
 }
 
+#auth {
+  .card {
+    border-top: 5px solid theme-color('primary');
+  }
+}
+
 body {
   background: $gray-100;
 }

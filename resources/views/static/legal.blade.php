@@ -9,7 +9,7 @@
     <div class="container">
         <h1 class="h3 mb-0">{{ trans('title.legal') }}</h1>
 
-        <div class="card border-0 mt-3">
+        <div class="card mt-3">
             <div class="card-body">
                 <p>{{ trans('static.legal.tmg_notice') }}</p>
 
