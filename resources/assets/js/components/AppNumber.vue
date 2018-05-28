@@ -29,6 +29,10 @@
             white-space: nowrap;
         }
 
+        &-value {
+            font-weight: 500;
+        }
+
         &-label {
             font-size: .8em;
             color: $gray-600;
