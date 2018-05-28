@@ -21,12 +21,11 @@
                     <div class="name">
                         {{ category.name}}
                     </div>
-                    <a href="#"
-                       class="text-muted"
-                       @click.prevent="$refs.updateCategory.showModal(category)"
-                       :title="$t('action.edit.category')">
+                    <button class="btn btn-sm btn-text-dark"
+                            @click.prevent="$refs.updateCategory.showModal(category)"
+                            :title="$t('action.edit.category')">
                         <font-awesome-icon icon="pencil-alt"/>
-                    </a>
+                    </button>
                 </div>
             </div>
         </draggable>

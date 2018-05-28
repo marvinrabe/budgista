@@ -47,7 +47,7 @@
         },
         computed: {
             loading() {
-                return this.$store.state.loading
+                return this.$store.state.loading || !this.$auth.ready()
             }
         },
         mounted() {
