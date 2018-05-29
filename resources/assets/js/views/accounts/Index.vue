@@ -59,6 +59,25 @@
     </div>
 </template>
 
+<style scoped>
+    @media (max-width: 575.98px){
+        .toolbar .title {
+            order: 1;
+        }
+
+        .toolbar .button-right {
+            order: 2;
+        }
+
+        .toolbar .balance {
+            order: 3;
+            flex: 100%;
+            padding: 0;
+            margin-top: .5em;
+        }
+    }
+</style>
+
 <script>
     import Balance from './Balance.vue'
     import InfiniteLoading from 'vue-infinite-loading'
