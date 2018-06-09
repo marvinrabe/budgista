@@ -1,8 +1,6 @@
 <template>
     <app-form @submit="save" ref="form">
 
-        <h5>{{ $t('title.general') }}</h5>
-
         <form-group name="language">
             <select class="form-control"
                     slot-scope="{bindings}"

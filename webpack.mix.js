@@ -53,12 +53,12 @@ mix
                 'shorthands': true
             }),
             // Google Fonts
-            new GoogleFontsPlugin({
+            /*new GoogleFontsPlugin({
                 filename: 'css/fonts.css',
                 fonts: [
                     {family: 'Roboto', variants: ['300', '400', '500', '700']}
                 ]
-            }),
+            }),*/
             // Remove moment languages
             new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
             //new BundleAnalyzerPlugin()

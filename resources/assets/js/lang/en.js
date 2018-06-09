@@ -24,6 +24,7 @@ export default {
         'navigation': 'Toggle navigation',
         register: 'Sign up for free',
         login: 'Login',
+        deleteUserAccount: 'Delete my user account',
         'logout': 'Logout',
         'loading': 'Loading',
         'futureTransactions': 'No future transactions | Display 1 future transaction | Display {count} future transactions',
@@ -88,6 +89,7 @@ export default {
         category: 'Category'
     },
     title: {
+        profile: 'User account',
         accounts: 'Accounts',
         budget: 'Budget',
         categories: 'Categories',
@@ -95,7 +97,6 @@ export default {
         help: 'Help',
         login: 'Login',
         account: 'Account',
-        general: 'General',
         updatePassword: 'Change Password',
         updateEmail: 'Change Email Address',
         emptyAccount: 'This account is empty.',

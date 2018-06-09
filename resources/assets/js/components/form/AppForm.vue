@@ -22,7 +22,6 @@
         },
         methods: {
             submit() {
-                // this.errors.clear('settings.general');
                 this.$validator.validateAll().then(isValid => {
                     this.validated = true
 

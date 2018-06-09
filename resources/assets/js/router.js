@@ -55,19 +55,13 @@ export const routes = [
             },
             {
                 path: 'settings',
-                component: require('./components/settings/Index.vue'),
-                children: [
-                    {
-                        path: '',
-                        name: 'settings.general',
-                        component: require('./components/settings/General.vue')
-                    },
-                    {
-                        path: 'account',
-                        name: 'settings.account',
-                        component: require('./components/settings/Account.vue')
-                    }
-                ]
+                name: 'settings',
+                component: require('./components/settings/Index.vue')
+            },
+            {
+                path: 'profile',
+                name: 'profile',
+                component: require('./components/profile/Index.vue')
             },
             {
                 path: 'account/:account_id',

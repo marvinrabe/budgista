@@ -22,6 +22,9 @@
                             <b-dropdown-divider v-if="item.divider"></b-dropdown-divider>
                             <b-dropdown-item v-else @click="item.click">
                                 {{ $t(item.label) }}
+                                <span class="d-block text-muted"
+                                      v-if="item.sublabel"
+                                      v-text="item.sublabel"></span>
                             </b-dropdown-item>
                         </div>
                     </b-dropdown>
@@ -53,6 +56,14 @@
         data() {
             return {
                 menu: [
+                    {
+                        click: this.profile,
+                        label: 'title.profile',
+                        sublabel: this.$store.state.user.email
+                    },
+                    {
+                        divider: true
+                    },
                     {
                         click: this.settings,
                         label: 'title.settings'
@@ -90,7 +101,10 @@
                 })
             },
             settings() {
-                this.$router.push({name: 'settings.general'})
+                this.$router.push({name: 'settings'})
+            },
+            profile() {
+                this.$router.push({name: 'profile'})
             },
             email() {
                 window.location = 'mailto:support@budgista.com'
