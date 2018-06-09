@@ -1,6 +1,6 @@
 <template>
     <modal v-if="visible" @close="hideModal" :title="$t('action.delete.category')">
-        <app-form slot="body" @submit="deleteCategory" id="deleteCategory">
+        <app-form ref="form" @submit="deleteCategory">
 
             <form-group name="transferTransactions">
                 <select class="form-control"
@@ -18,15 +18,21 @@
                 <strong place="name">{{ category.name }}</strong>
             </i18n>
 
+            <template slot="actions">
+                <button class="btn btn-text-dark"
+                        type="button"
+                        @click="hideModal">
+                    {{ $t('action.cancel') }}
+                </button>
+
+                <app-button variant="danger"
+                            :label="$t('action.delete.category')"
+                            :busy="saving"
+                            @click="createCategory">
+                </app-button>
+            </template>
+
         </app-form>
-        <div slot="footer">
-            <button class="btn btn-text-dark" @click="hideModal">
-                {{ $t('action.cancel') }}
-            </button>
-            <button class="btn btn-danger" form="deleteCategory" type="submit">
-                {{ $t('action.delete.category') }}
-            </button>
-        </div>
     </modal>
 </template>
 
@@ -36,28 +42,30 @@
         data() {
             return {
                 visible: false,
-                validated: false,
+                saving: false,
                 old_category_id: null,
-                new_category_id: ""
+                new_category_id: ''
             }
         },
         computed: {
             categories() {
-                return this.$store.getters.sortedCategories.filter((item) => item.id !== this.old_category_id);
+                return this.$store.getters.sortedCategories.filter((item) => item.id !== this.old_category_id)
             }
         },
         methods: {
             showModal() {
-                this.old_category_id = this.category.id;
-                this.new_category_id = "";
-                this.visible = true;
+                this.old_category_id = this.category.id
+                this.new_category_id = ''
+                this.visible = true
+                this.saving = false
             },
             hideModal() {
-                this.visible = false;
+                this.visible = false
             },
             deleteCategory() {
-                let oldCategory = this.$store.getters.findCategoryById(this.old_category_id);
-                let newCategory = this.$store.getters.findCategoryById(this.new_category_id);
+                let oldCategory = this.$store.getters.findCategoryById(this.old_category_id)
+                let newCategory = this.$store.getters.findCategoryById(this.new_category_id)
+                this.saving = true
 
                 this.$store
                     .dispatch('deleteCategory', {
@@ -65,9 +73,13 @@
                         newCategory: newCategory
                     })
                     .then(() => {
-                        this.hideModal();
+                        this.hideModal()
                         this.$emit('delete:category', oldCategory)
-                    });
+                    })
+                    .catch(this.$refs.form.error)
+                    .finally(() => {
+                        this.saving = false
+                    })
             }
         }
     }

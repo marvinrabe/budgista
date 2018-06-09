@@ -1,6 +1,6 @@
 <template>
     <modal v-if="visible" @close="hideModal" :title="$t('action.edit.account')">
-        <app-form slot="body" id="updateAccount" @submit="updateAccount">
+        <app-form ref="form" @submit="updateAccount">
             <form-group name="name">
                 <input type="text"
                        class="form-control"
@@ -10,23 +10,29 @@
                        v-validate="'required'"
                        v-focus>
             </form-group>
+
             <form-group name="icon">
                 <account-icon-picker v-model="icon"></account-icon-picker>
             </form-group>
+
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="tracking" v-model="tracking" :value="true">
                 <label class="form-check-label" for="tracking" v-t="'form.trackingAccount'"></label>
             </div>
-        </app-form>
 
-        <template slot="footer">
-            <button class="btn btn-text-dark" @click="hideModal">
-                {{ $t('action.cancel') }}
-            </button>
-            <button class="btn btn-primary" form="updateAccount" type="submit">
-                {{ $t('action.save') }}
-            </button>
-        </template>
+            <template slot="actions">
+                <button class="btn btn-text-dark"
+                        type="button"
+                        @click="hideModal">
+                    {{ $t('action.cancel') }}
+                </button>
+
+                <app-button :label="$t('action.save')"
+                            :busy="saving"
+                            @click="updateAccount">
+                </app-button>
+            </template>
+        </app-form>
     </modal>
 </template>
 
@@ -41,6 +47,7 @@
         data() {
             return {
                 visible: false,
+                saving: false,
                 name: '',
                 icon: '',
                 tracking: false
@@ -48,15 +55,18 @@
         },
         methods: {
             showModal() {
-                this.name = this.account.name;
-                this.tracking = this.account.tracking;
-                this.icon = this.account.icon;
-                this.visible = true;
+                this.name = this.account.name
+                this.tracking = this.account.tracking
+                this.icon = this.account.icon
+                this.visible = true
+                this.saving = false
             },
             hideModal() {
-                this.visible = false;
+                this.visible = false
             },
             updateAccount() {
+                this.saving = true
+
                 this.$store
                     .dispatch('updateAccount', {
                         id: this.account.id,
@@ -65,8 +75,12 @@
                         icon: this.icon
                     })
                     .then(() => {
-                        this.hideModal();
-                    });
+                        this.hideModal()
+                    })
+                    .catch(this.$refs.form.error)
+                    .finally(() => {
+                        this.saving = false
+                    })
             }
         }
     }

@@ -1,6 +1,5 @@
-//@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
-// Variables
 @import "variables";
+@import "shadows";
 // Bootstrap 4
 @import "~bootstrap/scss/bootstrap";
 @import "button-text";
@@ -43,41 +42,6 @@ a.h2:hover {
 
 .col-flex-none {
   flex: 0;
-}
-
-/*
- * Modal
- */
-
-// Make modal display as block instead of inline style because Vue's v-show deletes inline "display" style
-.modal {
-  display: block;
-
-  &-content {
-    @extend .shadow-2;
-    border: 0;
-    border-radius: 0;
-  }
-
-  &-header,
-  &-footer {
-    border: 0;
-  }
-
-  &-body {
-    padding-bottom: 0;
-    padding-top: 0;
-
-    .form-group:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
-
-.modal-header .close {
-  cursor: pointer;
-  line-height: 1.5em;
-  font-size: 1.25em;
 }
 
 /*
