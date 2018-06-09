@@ -8,7 +8,6 @@
 
 <style scoped>
     .overview {
-        margin: 0 -.5em;
         display: flex;
     }
 </style>

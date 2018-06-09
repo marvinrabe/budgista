@@ -1,6 +1,7 @@
 <template>
     <modal v-if="visible" @close="hideModal" :title="$t('action.delete.category')">
         <app-form slot="body" @submit="deleteCategory" id="deleteCategory">
+
             <form-group name="transferTransactions">
                 <select class="form-control"
                         v-model="new_category_id"
@@ -12,6 +13,11 @@
                     </option>
                 </select>
             </form-group>
+
+            <i18n path="message.deleteCategory" tag="p" class="mb-0">
+                <strong place="name">{{ category.name }}</strong>
+            </i18n>
+
         </app-form>
         <div slot="footer">
             <button class="btn btn-text-dark" @click="hideModal">
@@ -26,6 +32,7 @@
 
 <script>
     export default {
+        props: ['category'],
         data() {
             return {
                 visible: false,
@@ -40,8 +47,8 @@
             }
         },
         methods: {
-            showModal(category) {
-                this.old_category_id = category.id;
+            showModal() {
+                this.old_category_id = this.category.id;
                 this.new_category_id = "";
                 this.visible = true;
             },

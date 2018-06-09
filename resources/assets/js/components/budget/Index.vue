@@ -7,49 +7,35 @@
             <transition name="fade">
                 <overview :sheet="sheet" v-if="!loading"></overview>
             </transition>
+
+            <template slot="submenu">
+                <budget-settings :month="monthObject"></budget-settings>
+            </template>
         </app-toolbar>
 
-        <div class="budget-header">
-            <div class="budget-column-name">
-                {{ $t('form.category') }}
-            </div>
-            <div class="budget-column-values">
-                <div class="budget-column-budget">
-                    {{ $t('form.budget') }}
-                </div>
-                <div class="budget-column-activity">
-                    {{ $t('form.activity') }}
-                </div>
-                <div class="budget-column-available">
-                    {{ $t('form.available') }}
-                </div>
-            </div>
-        </div>
-
-        <div class="content">
-            <category-row
-                    v-for="(row, index) in rows"
-                    :key="month+'#'+row.id"
-                    :month="month"
-                    :value="row"
-                    @update:value="val => rows.splice(index, 1, val)"/>
-        </div>
-
         <app-spinner v-if="loading"></app-spinner>
+
+        <category-budget-table
+                v-model="rows"
+                :month="month"
+                v-else>
+        </category-budget-table>
 
     </div>
 </template>
 
 <script>
-    import row from './Row.vue'
     import Month from '../../models/Month.js'
     import MonthPicker from './MonthPicker'
     import Overview from './Overview'
+    import BudgetSettings from './BudgetSettings'
+    import CategoryBudgetTable from '../categories/CategoryBudgetTable'
 
     export default {
         props: ['month'],
         components: {
-            'category-row': row,
+            BudgetSettings,
+            CategoryBudgetTable,
             MonthPicker,
             Overview
         },
@@ -65,13 +51,20 @@
                 return sum
             },
             unallocated: function () {
-                return this.sheet.previousMonth + this.sheet.income - this.allocated
+                return this.budget.previousMonth + this.budget.income - this.allocated
+            },
+            sheet: function () {
+                return {
+                    income: this.budget.income,
+                    allocated: this.allocated,
+                    unallocated: this.unallocated,
+                    previousMonth: this.budget.previousMonth
+                }
             }
         },
         data: () => ({
-            sheet: {
+            budget: {
                 income: 0,
-                allocated: 0,
                 previousMonth: 0
             },
             loading: true,
@@ -89,9 +82,8 @@
 
         methods: {
             reset() {
-                this.sheet = {
+                this.budget = {
                     income: 0,
-                    allocated: 0,
                     previousMonth: 0
                 }
                 this.loading = true
@@ -104,8 +96,8 @@
                     .get('/month/' + (month || this.month))
                     .then(({data}) => {
                         this.loading = false
-                        this.sheet = data.data
-                        this.rows = this.sheet.rows
+                        this.budget = data.data
+                        this.rows = data.data.rows
                         this.previousMonth = data.links.prev
                         this.nextMonth = data.links.next
                     })

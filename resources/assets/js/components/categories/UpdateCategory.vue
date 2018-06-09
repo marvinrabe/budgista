@@ -13,14 +13,6 @@
         </app-form>
 
         <div slot="footer">
-            <div class="float-left">
-                <button class="btn btn-outline-danger"
-                        @click.prevent="deleteCategory"
-                        :title="$t('action.delete.category')">
-                    <font-awesome-icon :icon="['far', 'trash-alt']"/>
-                </button>
-            </div>
-
             <button class="btn btn-text-dark" @click="hideModal">
                 {{ $t('action.cancel') }}
             </button>
@@ -35,25 +27,20 @@
 
 <script>
     export default {
+        props: ['category'],
         data() {
             return {
                 visible: false,
-                category: null,
                 name: ''
             }
         },
         methods: {
-            showModal(category) {
-                this.category = category;
-                this.name = category.name;
+            showModal() {
+                this.name = this.category.name;
                 this.visible = true;
             },
             hideModal() {
                 this.visible = false;
-            },
-            deleteCategory() {
-                this.hideModal();
-                this.$emit('delete:category', this.category);
             },
             updateCategory() {
                 this.$store

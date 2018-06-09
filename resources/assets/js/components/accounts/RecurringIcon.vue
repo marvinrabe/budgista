@@ -1,5 +1,7 @@
 <template>
-    <span v-if="rrule" :title="text">
+    <span class="small"
+          v-if="rrule"
+          :title="text">
         <font-awesome-icon :icon="icon"/>
     </span>
 </template>
