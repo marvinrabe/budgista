@@ -16,7 +16,6 @@
         inject: ['$validator'],
         data() {
             return {
-                saving: false,
                 validated: false
             }
         },

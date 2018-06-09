@@ -1,6 +1,6 @@
 <template>
     <modal v-if="visible" @close="hideModal" :title="$t('action.edit.category')">
-        <app-form slot="body" id="updateCategory" @submit="updateCategory">
+        <app-form ref="form" @submit="updateCategory">
             <form-group name="name">
                 <input type="text"
                        class="form-control"
@@ -10,18 +10,20 @@
                        v-validate="'required'"
                        v-focus>
             </form-group>
-        </app-form>
 
-        <div slot="footer">
-            <button class="btn btn-text-dark" @click="hideModal">
-                {{ $t('action.cancel') }}
-            </button>
-            <button class="btn btn-primary"
-                    form="updateCategory"
-                    type="submit">
-                {{ $t('action.save') }}
-            </button>
-        </div>
+            <template slot="actions">
+                <button class="btn btn-text-dark"
+                        type="button"
+                        @click="hideModal">
+                    {{ $t('action.cancel') }}
+                </button>
+
+                <app-button :label="$t('action.save')"
+                            :busy="saving"
+                            @click="updateCategory">
+                </app-button>
+            </template>
+        </app-form>
     </modal>
 </template>
 
@@ -31,6 +33,7 @@
         data() {
             return {
                 visible: false,
+                saving: false,
                 name: ''
             }
         },
@@ -38,11 +41,14 @@
             showModal() {
                 this.name = this.category.name;
                 this.visible = true;
+                this.saving = false;
             },
             hideModal() {
                 this.visible = false;
             },
             updateCategory() {
+                this.saving = true;
+
                 this.$store
                     .dispatch('updateCategory', {
                         id: this.category.id,
@@ -51,6 +57,10 @@
                     .then(() => {
                         this.hideModal();
                         this.$emit('update:category');
+                    })
+                    .catch(this.$refs.form.error)
+                    .finally(() => {
+                        this.saving = false;
                     });
             }
         }

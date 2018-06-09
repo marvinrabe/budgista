@@ -1,20 +1,24 @@
 <template>
     <modal v-if="visible" @close="hideModal" :title="$t('action.delete.account')">
-        <p slot="body"
-           class="mb-0">
-            <i18n path="message.deleteAccount" tag="p" class="mb-0" slot="body">
+        <app-form ref="form" @submit="deleteAccount">
+            <i18n path="message.deleteAccount" tag="p">
                 <strong place="name">{{ account.name }}</strong>
             </i18n>
-        </p>
 
-        <div slot="footer">
-            <button class="btn btn-text-dark" @click="hideModal">
-                {{ $t('action.cancel') }}
-            </button>
-            <button class="btn btn-danger" @click="deleteAccount">
-                {{ $t('action.delete.account') }}
-            </button>
-        </div>
+            <template slot="actions">
+                <button class="btn btn-text-dark"
+                        type="button"
+                        @click="hideModal">
+                    {{ $t('action.cancel') }}
+                </button>
+
+                <app-button variant="danger"
+                            :label="$t('action.delete.account')"
+                            :busy="saving"
+                            @click="deleteAccount">
+                </app-button>
+            </template>
+        </app-form>
     </modal>
 </template>
 
@@ -28,22 +32,30 @@
         },
         data() {
             return {
-                visible: false
+                visible: false,
+                saving: false
             }
         },
         methods: {
-            showModal(account) {
+            showModal() {
                 this.visible = true
+                this.saving = false
             },
             hideModal() {
                 this.visible = false
             },
             deleteAccount() {
+                this.saving = true
+
                 this.$store
                     .dispatch('deleteAccount', this.account)
                     .then(() => {
                         this.hideModal()
                         this.$router.push({name: 'budget_default'})
+                    })
+                    .catch(this.$refs.form.error)
+                    .finally(() => {
+                        this.saving = false
                     })
             }
         }

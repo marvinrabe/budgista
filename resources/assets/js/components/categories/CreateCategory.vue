@@ -1,6 +1,6 @@
 <template>
     <modal v-if="visible" @close="hideModal" :title="$t('action.create.category')">
-        <app-form slot="body" id="createCategory" @submit="createCategory">
+        <app-form ref="form" @submit="createCategory">
             <form-group name="name">
                 <input type="text"
                        class="form-control"
@@ -10,18 +10,20 @@
                        v-validate="'required'"
                        v-focus>
             </form-group>
-        </app-form>
 
-        <div slot="footer">
-            <button class="btn btn-text-dark" @click="hideModal">
-                {{ $t('action.cancel') }}
-            </button>
-            <button class="btn btn-primary"
-                    form="createCategory"
-                    type="submit">
-                {{ $t('action.save') }}
-            </button>
-        </div>
+            <template slot="actions">
+                <button class="btn btn-text-dark"
+                        type="button"
+                        @click="hideModal">
+                    {{ $t('action.cancel') }}
+                </button>
+
+                <app-button :label="$t('action.save')"
+                            :busy="saving"
+                            @click="createCategory">
+                </app-button>
+            </template>
+        </app-form>
     </modal>
 </template>
 
@@ -30,26 +32,33 @@
         data() {
             return {
                 visible: false,
+                saving: false,
                 name: ''
             }
         },
         methods: {
             showModal() {
-                this.name = "";
-                this.visible = true;
+                this.name = ''
+                this.visible = true
+                this.saving = false
             },
             hideModal() {
-                this.visible = false;
+                this.visible = false
             },
             createCategory() {
+                this.saving = true
+
                 this.$store
                     .dispatch('createCategory', {
                         name: this.name
                     })
                     .then(() => {
-                        this.hideModal();
-                        this.$emit('create:category');
-                    });
+                        this.hideModal()
+                    })
+                    .catch(this.$refs.form.error)
+                    .finally(() => {
+                        this.saving = false
+                    })
             }
         }
     }
