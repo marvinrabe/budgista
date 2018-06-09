@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import AppElipsis from '../../components/AppEllipsis';
+    import AppElipsis from '../AppEllipsis';
 
     export default {
         props: {

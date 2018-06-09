@@ -63,8 +63,8 @@
 
 <script>
     import AppLogo from './AppLogo.vue'
-    import AccountMenuItem from '../views/accounts/MenuItem'
-    import CreateAccount from '../views/accounts/CreateAccount'
+    import AccountMenuItem from './accounts/MenuItem'
+    import CreateAccount from './accounts/CreateAccount'
     import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
     import faEnvelope from '@fortawesome/fontawesome-free-solid/faEnvelope'
     import faThLarge from '@fortawesome/fontawesome-free-solid/faThLarge'

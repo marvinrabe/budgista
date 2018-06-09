@@ -14,7 +14,7 @@
 </style>
 
 <script>
-    import AppNumber from '../../components/AppNumber'
+    import AppNumber from '../AppNumber'
 
     export default {
         props: ['sheet'],
