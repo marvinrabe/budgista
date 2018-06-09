@@ -21,13 +21,13 @@
 
         <div class="content">
             <draggable v-model="categories" :options="{handle:'.handle'}" class="list-group">
-                <category-budget-row
+                <budget-row
                         v-for="category in categories"
                         :key="category.id"
                         :category="category"
                         :budget="budgetForCategory(category)"
                         @update:budget="updateBudget">
-                </category-budget-row>
+                </budget-row>
             </draggable>
         </div>
     </div>
@@ -53,13 +53,13 @@
 </style>
 
 <script>
-    import CategoryBudgetRow from './CategoryBudgetRow'
+    import BudgetRow from './BudgetRow'
     import draggable from 'vuedraggable'
 
     export default {
         props: ['value', 'month'],
         components: {
-            CategoryBudgetRow,
+            BudgetRow,
             draggable
         },
         computed: {
