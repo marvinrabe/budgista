@@ -70,6 +70,7 @@
     import faThLarge from '@fortawesome/fontawesome-free-solid/faThLarge'
     import faCog from '@fortawesome/fontawesome-free-solid/faCog'
     import faLifeRing from '@fortawesome/fontawesome-free-solid/faLifeRing'
+    import faUserCircle from '@fortawesome/fontawesome-free-solid/faUserCircle'
     import {mapGetters} from 'vuex'
 
     export default {
@@ -101,7 +102,13 @@
                         accounts: true
                     },
                     {
-                        route: {name: 'settings.general'},
+                        route: {name: 'profile'},
+                        label: 'title.profile',
+                        icon: faUserCircle,
+                        class: 'd-md-none'
+                    },
+                    {
+                        route: {name: 'settings'},
                         label: 'title.settings',
                         icon: faCog,
                         class: 'd-md-none'

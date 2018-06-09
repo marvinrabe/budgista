@@ -25,6 +25,7 @@ export default {
         'navigation': 'Navigation hin- und herschalten',
         register: 'Kostenlos registrieren',
         login: 'Login',
+        deleteUserAccount: 'Mein Benutzerkonto löschen',
         'logout': 'Abmelden',
         'loading': 'Lädt',
         'create': {
@@ -87,6 +88,7 @@ export default {
         category: 'Kategorie'
     },
     title: {
+        profile: 'Benutzerkonto',
         accounts: 'Konten',
         budget: 'Budget',
         categories: 'Kategorien',
@@ -94,7 +96,6 @@ export default {
         help: 'Hilfe',
         login: 'Login',
         account: 'Benutzerkonto',
-        general: 'Allgemeines',
         updatePassword: 'Passwort ändern',
         updateEmail: 'E-Mail Adresse ändern',
         emptyAccount: 'Dieses Konto ist leer.',

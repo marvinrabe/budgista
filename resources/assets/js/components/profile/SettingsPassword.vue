@@ -1,17 +1,7 @@
 <template>
     <app-form @submit="save" ref="form">
-        <h5>{{ $t('title.updateEmail') }}</h5>
 
-        <form-group name="email">
-            <input type="email"
-                   class="form-control"
-                   slot-scope="{bindings}"
-                   v-bind="bindings"
-                   v-validate="'required|email'"
-                   v-model="form.email">
-        </form-group>
-
-        <form-group name="password">
+        <form-group name="password" label="oldPassword">
             <app-password :disable-strength="true" slot-scope="group">
                 <input class="form-control"
                        slot-scope="{bindings, handlers}"
@@ -22,12 +12,22 @@
             </app-password>
         </form-group>
 
+        <form-group name="newPassword">
+            <app-password slot-scope="group">
+                <input class="form-control"
+                       slot-scope="{bindings, handlers}"
+                       v-bind="Object.assign(bindings, group.bindings)"
+                       v-on="handlers"
+                       v-validate="'required|min:6'"
+                       v-model="form.new_password">
+            </app-password>
+        </form-group>
+
         <div slot="actions">
-            <app-button :label="$t('action.settings.email')" :busy="saving"></app-button>
+            <app-button :label="$t('action.settings.password')" :busy="saving"></app-button>
         </div>
     </app-form>
 </template>
-
 
 <script>
     export default {
@@ -35,8 +35,8 @@
             return {
                 saving: false,
                 form: {
-                    email: '',
-                    password: ''
+                    password: '',
+                    new_password: ''
                 }
             }
         },
@@ -46,14 +46,14 @@
         methods: {
             reset() {
                 this.saving = false;
-                this.form.email = this.$store.state.user.email;
                 this.form.password = '';
+                this.form.new_password = '';
             },
             save() {
                 this.saving = true;
-                this.$store.dispatch('updateEmail', this.form)
+                this.$store.dispatch('updatePassword', this.form)
                     .then(() => {
-                        this.$snotify.success(this.$t('message.updateEmail'));
+                        this.$snotify.success(this.$t('message.updatePassword'));
                     })
                     .catch(this.$refs.form.error)
                     .finally(() => {
