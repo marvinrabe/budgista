@@ -79,7 +79,7 @@
 
 
 <script>
-    import CategorySettings from './CategorySettings'
+    import CategorySettings from '../categories/CategorySettings'
 
     export default {
         props: ['category', 'budget'],
