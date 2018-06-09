@@ -67,7 +67,6 @@
     import CreateAccount from './accounts/CreateAccount'
     import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
     import faEnvelope from '@fortawesome/fontawesome-free-solid/faEnvelope'
-    import faThLarge from '@fortawesome/fontawesome-free-solid/faThLarge'
     import faCog from '@fortawesome/fontawesome-free-solid/faCog'
     import faLifeRing from '@fortawesome/fontawesome-free-solid/faLifeRing'
     import faUserCircle from '@fortawesome/fontawesome-free-solid/faUserCircle'
@@ -91,12 +90,6 @@
                         exact: false,
                         icon: faEnvelope,
                         label: 'title.budget'
-                    },
-                    {
-                        route: {name: 'categories'},
-                        exact: true,
-                        icon: faThLarge,
-                        label: 'title.categories'
                     },
                     {
                         accounts: true
