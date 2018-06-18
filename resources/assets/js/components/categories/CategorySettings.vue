@@ -1,7 +1,7 @@
 <template>
-    <b-dropdown variant="text-dark" size="sm" no-caret right>
+    <b-dropdown variant="text-dark" size="sm" toggle-class="p-0" no-caret right>
         <template slot="button-content">
-            <font-awesome-icon :icon="icon"/>
+            <font-awesome-icon :icon="icon" fixed-width/>
         </template>
         <b-dropdown-item
                 @click="$refs.updateCategory.showModal()"
