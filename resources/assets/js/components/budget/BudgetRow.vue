@@ -1,8 +1,10 @@
 <template>
     <div class="budget-row">
-        <span class="handle small text-dark">
-            <font-awesome-icon icon="arrows-alt-v" fixed-width/>
-        </span>
+        <div class="handle">
+            <span class="small text-dark">
+                <font-awesome-icon icon="arrows-alt-v" fixed-width/>
+            </span>
+        </div>
         <div class="data"
              @click.stop="$refs.input.focus()">
             <div class="budget-column-name">
@@ -39,9 +41,13 @@
 
         .handle {
             text-align: center;
-            flex: 20px;
+            flex: 16px;
             flex-shrink: 0;
             flex-grow: 0;
+            cursor: move;
+            cursor: -webkit-grab;
+            cursor: -moz-grab;
+            padding: .5em .3em;
         }
 
         .data {
@@ -52,10 +58,11 @@
         }
 
         .actions {
-            text-align: center;
-            flex: 48px;
+            text-align: left;
+            flex: 28px;
             flex-shrink: 0;
             flex-grow: 0;
+            padding: .5em .5em .5em 0;
         }
 
         .actions,
@@ -66,13 +73,6 @@
         &:hover .actions,
         &:hover .handle {
             visibility: visible;
-        }
-
-        .handle {
-            cursor: move;
-            cursor: -webkit-grab;
-            cursor: -moz-grab;
-            padding: 0 .3em;
         }
     }
 </style>
