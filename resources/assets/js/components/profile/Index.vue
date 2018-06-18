@@ -23,7 +23,7 @@
         </div>
 
         <div class="text-right">
-            <button class="btn btn-text-dark" v-t="'action.deleteUserAccount'"></button>
+            <button class="btn btn-text-dark d-none" v-t="'action.deleteUserAccount'"></button>
         </div>
 
     </div>
