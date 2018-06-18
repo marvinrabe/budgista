@@ -19,17 +19,15 @@
             <div class="actions">&nbsp;</div>
         </div>
 
-        <div class="content">
-            <draggable v-model="categories" :options="{handle:'.handle'}" class="list-group">
-                <budget-row
-                        v-for="category in categories"
-                        :key="category.id"
-                        :category="category"
-                        :budget="budgetForCategory(category)"
-                        @update:budget="updateBudget">
-                </budget-row>
-            </draggable>
-        </div>
+        <draggable v-model="categories" :options="{handle:'.handle'}" class="content">
+            <budget-row
+                    v-for="category in categories"
+                    :key="category.id"
+                    :category="category"
+                    :budget="budgetForCategory(category)"
+                    @update:budget="updateBudget">
+            </budget-row>
+        </draggable>
     </div>
 </template>
 
@@ -75,7 +73,7 @@
         methods: {
             budgetForCategory(category) {
                 let budget = this.value.find(x => category.id === x.id)
-                if(budget) {
+                if (budget) {
                     budget.month = this.month
                     return budget
                 }
