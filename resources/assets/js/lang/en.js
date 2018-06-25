@@ -14,8 +14,10 @@ export default {
         forgotPassword: 'Forgot Your Password?',
         noAccount: 'Don\'t have an account?',
         noAccountSignUp: 'Sign up now',
+        pageNotFound: 'The requested page could not be found.'
     },
     action: {
+        returnToApp: 'Return to App',
         'save': 'Save',
         'saveAndNew': 'Save & New',
         'back': 'Back',
@@ -102,7 +104,8 @@ export default {
         updateEmail: 'Change Email Address',
         emptyAccount: 'This account is empty.',
         register: 'Sign up',
-        trackingAccounts: 'Tracking Accounts'
+        trackingAccounts: 'Tracking Accounts',
+        pageNotFound: 'Not Found'
     },
     validation: {
         messages: {

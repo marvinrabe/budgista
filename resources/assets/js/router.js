@@ -78,6 +78,7 @@ export const routes = [
             }
         ]
     },
+    { path: "*", component: require('./components/layout/PageNotFound.vue') }
 ]
 
 export const router = new VueRouter({
