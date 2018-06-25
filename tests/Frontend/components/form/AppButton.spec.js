@@ -14,7 +14,7 @@ describe('AppButton', () => {
 
     it('has a secondary style', () => {
         const wrapper = mount(AppButton, {
-            propsData: {label: 'Save', type: 'secondary'}
+            propsData: {label: 'Save', variant: 'light'}
         });
 
         expect(wrapper.html()).toContain('btn-light');
@@ -22,7 +22,7 @@ describe('AppButton', () => {
 
     it('has a tertiary style', () => {
         const wrapper = mount(AppButton, {
-            propsData: {label: 'Save', type: 'tertiary'}
+            propsData: {label: 'Save', variant: 'text-dark'}
         });
 
         expect(wrapper.html()).toContain('btn-text-dark');
