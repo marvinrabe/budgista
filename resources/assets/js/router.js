@@ -13,12 +13,12 @@ export const routes = [
             {
                 path: 'login',
                 name: 'login',
-                component: require('./views/auth/Login.vue'),
+                component: require('./components/auth/Login.vue'),
             },
             {
                 path: 'register',
                 name: 'register',
-                component: require('./views/auth/Register.vue'),
+                component: require('./components/auth/Register.vue'),
             },
         ]
     },
@@ -45,50 +45,40 @@ export const routes = [
             {
                 path: 'budget/:month',
                 name: 'budget',
-                component: require('./views/budget/Index.vue'),
+                component: require('./components/budget/Index.vue'),
                 props: true
             },
             {
-                path: 'categories',
-                name: 'categories',
-                component: require('./views/categories/Index.vue')
+                path: 'settings',
+                name: 'settings',
+                component: require('./components/settings/Index.vue')
             },
             {
-                path: 'settings',
-                component: require('./views/settings/Index.vue'),
-                children: [
-                    {
-                        path: '',
-                        name: 'settings.account',
-                        component: require('./views/settings/Account.vue')
-                    },
-                    {
-                        path: 'security',
-                        name: 'settings.security',
-                        component: require('./views/settings/Security.vue')
-                    }
-                ]
+                path: 'profile',
+                name: 'profile',
+                component: require('./components/profile/Index.vue')
             },
             {
                 path: 'account/:account_id',
                 name: 'account',
-                component: require('./views/accounts/Index.vue'),
+                component: require('./components/accounts/Index.vue'),
                 props: true
             },
             {
                 path: 'account/:account_id/newTransaction',
                 name: 'transaction.new',
-                component: require('./views/transactions/New.vue'),
+                component: require('./components/transactions/New.vue'),
                 props: true
             },
             {
                 path: 'transaction/:transaction_id',
                 name: 'transaction.edit',
-                component: require('./views/transactions/Edit.vue'),
+                component: require('./components/transactions/Edit.vue'),
                 props: true
             }
         ]
     },
+    { path: "*", component: require('./components/layout/PageNotFound.vue') }
 ]
 
 export const router = new VueRouter({

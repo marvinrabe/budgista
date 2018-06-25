@@ -14,6 +14,7 @@
 
     <title>{{ config('app.name') }}</title>
 
+    <link href="{{ asset('css/fonts.css') }}" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
 </head>
@@ -45,7 +46,7 @@
 @if(config('app.env') == 'production')
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Intl,Intl.~locale.{{ app()->getLocale() }}"></script>
 @endif
-
+@include('snippets.sentry')
 <script src="{{ mix('js/app.js') }}"></script>
 
 </body>

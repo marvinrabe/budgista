@@ -56,8 +56,11 @@ class Budget extends Model implements \JsonSerializable
 
     public function previousMonthAvailable()
     {
-        $activity = $this
-            ->category->transactions()
+        $activity = $this->category
+            ->transactions()
+            ->whereHas('account', function ($query) {
+                $query->where('tracking', false);
+            })
             ->where('date', '<=', $this->month->previous()->lastDay())
             ->sum('amount');
         return $this->previousMonthBudget() + $activity;
@@ -65,8 +68,11 @@ class Budget extends Model implements \JsonSerializable
 
     public function activity()
     {
-        return $this
-            ->category->transactions()
+        return $this->category
+            ->transactions()
+            ->whereHas('account', function ($query) {
+                $query->where('tracking', false);
+            })
             ->whereBetween('date', [
                 $this->month->firstDay(),
                 $this->month->lastDay()
@@ -81,8 +87,11 @@ class Budget extends Model implements \JsonSerializable
 
     public function recommendedBudget()
     {
-        $upcomingTransactions = $this
-            ->category->transactions()
+        $upcomingTransactions = $this ->category
+            ->transactions()
+            ->whereHas('account', function ($query) {
+                $query->where('tracking', false);
+            })
             ->where('date', '>=', $this->month->firstDay())
             ->get();
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Account as AccountResource;
 use App\Models\Account;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class AccountController extends Controller
 {
@@ -20,11 +21,17 @@ class AccountController extends Controller
 
         $account = Auth::user()->accounts()->create(
             request()->validate([
-                'name' => 'required'
+                'name' => 'required',
+                'tracking' => 'nullable|boolean',
+                'icon' => [
+                    'nullable',
+                    'string',
+                    Rule::in(config('icons.account')),
+                ]
             ])
         );
 
-        return new AccountResource($account);
+        return new AccountResource($account->refresh());
     }
 
     public function show(Account $account)
@@ -40,7 +47,13 @@ class AccountController extends Controller
 
         $account->update(
             request()->validate([
-                'name' => 'required'
+                'name' => 'required',
+                'tracking' => 'nullable|boolean',
+                'icon' => [
+                    'nullable',
+                    'string',
+                    Rule::in(config('icons.account')),
+                ]
             ])
         );
 

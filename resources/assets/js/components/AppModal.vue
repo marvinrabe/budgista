@@ -1,40 +1,60 @@
 <template>
-    <transition name="modal">
-        <div class="modal d-block" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" v-html="title"></h5>
-                        <button type="button" class="close" @click="$emit('close')" aria-label="Close">
-                            <font-awesome-icon icon="times" />
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <slot name="body"></slot>
-                    </div>
-                    <div class="modal-footer">
-                        <slot name="footer"></slot>
+    <portal to="modal">
+        <transition name="modal">
+            <div class="modal d-block" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" v-html="title"></h5>
+                            <button type="button" class="close" @click="$emit('close')" aria-label="Close">
+                                <font-awesome-icon icon="times"/>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <slot></slot>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </transition>
+        </transition>
+    </portal>
 </template>
 
-<style>
+<style lang="scss">
+    @import "../../sass/_shadows";
+
     .modal {
         background-color: rgba(0, 0, 0, .5);
-        transition: opacity .3s ease;
-    }
-
-    .modal-footer {
         display: block;
-        text-align: right;
-        width: 100%;
-    }
+        transition: opacity .3s ease;
 
-    .modal-dialog {
-        transition: all .3s ease;
+        &-dialog {
+            transition: all .3s ease;
+        }
+
+        &-content {
+            @extend .shadow-2;
+            border: 0;
+            border-radius: 0;
+        }
+
+        &-header {
+            border: 0;
+
+            .close {
+                cursor: pointer;
+                line-height: 1.5em;
+                font-size: 1.25em;
+            }
+        }
+
+        &-body {
+            padding-top: 0;
+
+            .form-group:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
 
     .modal-enter {

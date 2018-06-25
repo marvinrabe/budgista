@@ -1,4 +1,4 @@
-@extends('layouts.base', ['body_class' => 'layout-home', 'style' => 'css/website.css'])
+@extends('layouts.base', ['body_class' => 'layout-home'])
 
 @section('title')
     {{ trans('static.home.title') }} - {{ config('app.name') }}
@@ -40,11 +40,8 @@
             @each('static._bullet', trans('static.home.bullets'), 'bullet')
         </div>
         <div class="row mb-md-3">
-            <div class="px-4 px-md-5 d-sm-block d-none">
+            <div class="pb-4 pb-md-0 px-4 px-md-5 mx-xl-5">
                 <img src="{{ asset('images/desktop.png') }}" class="img-fluid" alt="Budgista on Laptop">
-            </div>
-            <div class="px-3 d-sm-none">
-                <img src="{{ asset('images/mobile.png') }}" class="img-fluid" alt="Budgista on Mobile Device">
             </div>
         </div>
     </div>
@@ -56,23 +53,6 @@
             <a href="{{ route('register') }}" class="btn btn-lg btn-primary mt-3 shadow-1">
                 {{ trans('static.home.cta') }}
             </a>
-        </div>
-    </div>
-
-    <div class="container py-4 contribute">
-        <div class="contribute-icon text-success">
-            <span class="fab fa-osi"></span>
-        </div>
-        <div class="contribute-body">
-            <p class="h4">
-                {{ trans('static.home.contributeHeadline') }}
-            </p>
-            <p class="m-0">
-                {{ trans('static.home.contributeMessage') }}
-                <a href="https://github.com/marvinrabe/budgista/wiki/Contribute">
-                    {{ trans('static.home.contributeAction') }}
-                </a>
-            </p>
         </div>
     </div>
 

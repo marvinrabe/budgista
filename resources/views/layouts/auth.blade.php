@@ -1,4 +1,4 @@
-@extends('layouts.base', ['body_class' => 'layout-auth', 'style' => 'css/website.css'])
+@extends('layouts.base', ['body_class' => 'layout-auth'])
 
 @section('card')
     <div class="card">

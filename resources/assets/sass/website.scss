@@ -6,4 +6,8 @@
 
 .layout-auth {
   background: $gray-100;
+
+  .card {
+    border-top: 5px solid theme-color('primary');
+  }
 }

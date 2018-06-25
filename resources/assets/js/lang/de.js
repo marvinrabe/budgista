@@ -3,18 +3,21 @@ export default {
         name: 'Budgista'
     },
     message: {
+        deleteAccount: 'Möchtest du {name} wirklich löschen? Alle Kontobewegungen werden entfernt. Dies kann nicht rückgängig gemacht werden.',
+        deleteCategory: 'Möchtest du {name} wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
         loginFailed: 'Diese Kombination aus Zugangsdaten wurden nicht in unserer Datenbank gefunden.',
         unexpectedError: 'Ein unerwarteter Fehler ist aufgetreten.',
         updateEmail: 'E-Mail Adresse wurde geändert.',
         updatePassword: 'Passwort wurde geändert.',
         updateSettings: 'Einstellungen wurden gespeichert.',
-        addTransactionBefore: 'Füge Kontobewegungen hinzu indem du',
-        addTransactionAfter: 'unten rechts drückst.',
+        addTransaction: 'Füge jetzt Kontobewegungen hinzu.',
         forgotPassword: 'Passwort vergessen?',
         noAccount: 'Kein Konto vorhanden?',
         noAccountSignUp: 'Jetzt registrieren',
+        pageNotFound: 'Die gewünschte Seite konnte nicht gefunden werden.'
     },
     action: {
+        returnToApp: 'Zur App zurückkehren',
         'save': 'Speichern',
         'saveAndNew': 'Speichern & Neu',
         'futureTransactions': 'Keine zukünftigen Transaktionen | Zeige 1 zukünftige Transaktion | Zeige {count} zukünftige Transaktionen',
@@ -25,6 +28,7 @@ export default {
         'navigation': 'Navigation hin- und herschalten',
         register: 'Kostenlos registrieren',
         login: 'Login',
+        deleteUserAccount: 'Mein Benutzerkonto löschen',
         'logout': 'Abmelden',
         'loading': 'Lädt',
         'create': {
@@ -59,30 +63,37 @@ export default {
         'uncategorized': 'Ohne Kategorie',
         'available': 'Verfügbar',
         'recommendedBudget': 'Empfohlenes Budget',
+        icon: 'Symbol',
+        trackingAccount: 'Tracking Konto',
         remember: 'Angemeldet bleiben',
-        allocated: 'Eingeplant',
-        unallocated: 'Nicht eingeplant',
         previousMonth: 'Vorheriger Monat',
+        allocated: 'Budgetiert',
+        unallocated: 'Nicht Budgetiert',
         termsOfService: 'Ich akzeptiere die <a href="{0}" target="__blank">Nutzungsbedingungen</a>.',
         balance: {
-            current: 'Verrechnet',
-            upcoming: 'Ausstehend',
-            future: 'Kontostand'
+            cleared: 'Abgerechneter Betrag',
+            uncleared: 'Offener Betrag',
+            working: 'Verfügbarer Betrag'
         },
-        'date': 'Datum',
-        'payee': 'Empfänger',
-        'expense': 'Ausgabe',
-        'income': 'Einnahme',
-        'transferTransactions': 'Kontobewegungen übertragen nach',
-        'language': 'Sprache',
-        'locale': 'Gebietsschema',
-        'currency': 'Währung',
+        date: 'Datum',
+        payee: 'Empfänger',
+        expense: 'Ausgabe',
+        income: 'Einnahme',
+        transferTransactions: 'Kontobewegungen übertragen nach',
+        language: 'Sprache',
+        locale: 'Gebietsschema',
+        currency: 'Währung',
         email: 'E-Mail Adresse',
         password: 'Passwort',
         oldPassword: 'Altes Passwort',
         newPassword: 'Neues Passwort'
     },
+    word: {
+        transaction: 'Kontobewegung',
+        category: 'Kategorie'
+    },
     title: {
+        profile: 'Benutzerkonto',
         accounts: 'Konten',
         budget: 'Budget',
         categories: 'Kategorien',
@@ -90,12 +101,12 @@ export default {
         help: 'Hilfe',
         login: 'Login',
         account: 'Benutzerkonto',
-        security: 'Sicherheit',
-        general: 'Allgemeines',
         updatePassword: 'Passwort ändern',
         updateEmail: 'E-Mail Adresse ändern',
         emptyAccount: 'Dieses Konto ist leer.',
-        register: 'Registrieren'
+        register: 'Registrieren',
+        trackingAccounts: 'Tracking Konten',
+        pageNotFound: 'Nicht gefunden'
     },
     validation: {
         messages: {
@@ -132,12 +143,6 @@ export default {
                 required: 'Du musst die Nutzungsbedingungen akzeptieren.'
             }
         }
-    },
-    'frequency': {
-        'daily': 'Täglich',
-        'weekly': 'Wöchentlich',
-        'monthly': 'Monatlich',
-        'yearly': 'Jährlich'
     },
     'frequencyUnit': {
         'days': 'Tage',

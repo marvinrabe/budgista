@@ -1,23 +1,4 @@
-try {
-    window.$ = window.jQuery = require('jquery');
-    window.Popper = require('popper.js').default;
-    require('bootstrap');
-} catch (e) {
-}
-
 window.axios = require('axios')
-
-/**
- * Initialize Raven for error logging with sentry, but only on production builds.
- */
-import Raven from 'raven-js'
-import {sentryUrl} from './config.js'
-
-if (process.env.NODE_ENV === 'production') {
-    Raven
-        .config(sentryUrl)
-        .install()
-}
 
 /**
  * Vue
@@ -30,6 +11,13 @@ import Vue from 'vue'
 import FontAwesome from './fontawesome'
 
 Vue.use(FontAwesome)
+
+/**
+ * Portals
+ */
+import PortalVue from 'portal-vue'
+
+Vue.use(PortalVue)
 
 /**
  * Toasts

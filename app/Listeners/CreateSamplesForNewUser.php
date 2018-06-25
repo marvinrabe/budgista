@@ -11,7 +11,6 @@ class CreateSamplesForNewUser
 {
 
     protected $availableSamples = [
-        'accounts' => Account::class,
         'categories' => Category::class
     ];
 
@@ -32,6 +31,10 @@ class CreateSamplesForNewUser
             $user->$sample()->saveMany(
                 $this->createAll(trans("samples.{$sample}"), $class)
             );
+        }
+
+        foreach (trans("samples.accounts") as $accountData) {
+            $user->accounts()->save(new Account($accountData));
         }
     }
 
