@@ -59,6 +59,14 @@
     </div>
 </template>
 
+<style>
+    @media (max-width: 575.98px){
+        .toolbar .balance .numeric:first-child {
+            text-align: left !important;
+        }
+    }
+</style>
+
 <style scoped>
     @media (max-width: 575.98px){
         .toolbar .title {
@@ -74,6 +82,10 @@
             flex: 100%;
             padding: 0;
             margin-top: .5em;
+        }
+
+        .toolbar .balance .numeric {
+            text-align: center !important;
         }
     }
 </style>

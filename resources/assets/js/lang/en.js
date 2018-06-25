@@ -72,7 +72,8 @@ export default {
         termsOfService: 'I agree to the <a href="{0}" target="__blank">Terms of Service</a>.',
         balance: {
             cleared: 'Cleared Balance',
-            working: 'Current Balance'
+            uncleared: 'Uncleared Balance',
+            working: 'Available Balance'
         },
         date: 'Date',
         payee: 'Payee',

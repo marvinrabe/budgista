@@ -67,11 +67,13 @@ export default {
         trackingAccount: 'Tracking Konto',
         remember: 'Angemeldet bleiben',
         previousMonth: 'Vorheriger Monat',
-        unallocated: 'Nicht Zugeteilt',
+        allocated: 'Budgetiert',
+        unallocated: 'Nicht Budgetiert',
         termsOfService: 'Ich akzeptiere die <a href="{0}" target="__blank">Nutzungsbedingungen</a>.',
         balance: {
-            cleared: 'Verrechneter Kontostand',
-            working: 'Laufender Kontostand'
+            cleared: 'Abgerechneter Betrag',
+            uncleared: 'Offener Betrag',
+            working: 'Verfügbarer Betrag'
         },
         date: 'Datum',
         payee: 'Empfänger',
