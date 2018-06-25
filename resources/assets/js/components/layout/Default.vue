@@ -4,9 +4,18 @@
             <app-spinner></app-spinner>
         </div>
         <div id="layout" v-else>
-            <app-sidebar></app-sidebar>
+            <app-header></app-header>
 
-            <router-view :key="$router.fullPath"></router-view>
+            <div class="container py-3">
+                <div class="form-row">
+                    <div class="col-md-4 col-xl-3">
+                        <app-sidebar></app-sidebar>
+                    </div>
+                    <div class="col-12 col-md-8 col-xl-9">
+                        <router-view :key="$router.fullPath"></router-view>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -14,6 +23,10 @@
 <style scoped>
     #wrapper, #loading, #layout {
         height: 100%;
+    }
+
+    #layout {
+        padding-top: 56px;
     }
 
     #loading {
@@ -24,17 +37,21 @@
 </style>
 
 <script>
+    import AppHeader from '../AppHeader'
     import AppSidebar from '../AppSidebar'
 
     export default {
-        components: {AppSidebar},
+        components: {
+            AppHeader,
+            AppSidebar
+        },
         computed: {
-            loading () {
-                return this.$store.state.loading;
+            loading() {
+                return this.$store.state.loading || !this.$auth.ready()
             }
         },
-        mounted () {
-            this.$store.dispatch('initialize');
+        mounted() {
+            this.$store.dispatch('initialize')
         }
     }
 </script>

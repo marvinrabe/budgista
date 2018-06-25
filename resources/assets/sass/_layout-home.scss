@@ -1,20 +1,5 @@
 .layout-home {
 
-  .contribute {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
-
-    &-icon {
-      font-size: 2em;
-    }
-
-    &-body {
-      margin: 0 1em;
-    }
-  }
-
   header {
     background: $gray-100;
   }
@@ -72,11 +57,6 @@
 
   }
 
-  .second-cta {
-    //border-top: 2px solid theme-color('light');
-    border-bottom: 2px solid theme-color('light');
-  }
-
   @include media-breakpoint-down(md) {
     header .decoration {
       background-size: 640px;
@@ -106,10 +86,6 @@
 
     .info-bullet {
       padding: 0 0 1em;
-    }
-
-    .contribute-body {
-      margin: 1em;
     }
 
   }

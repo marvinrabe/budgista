@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'analytics' => 'UA-1348458-29',
+    'analytics' => env('ANALYTICS'),
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
@@ -29,6 +29,11 @@ return [
 
     'sparkpost' => [
         'secret' => env('SPARKPOST_SECRET'),
+    ],
+
+    'sentry' => [
+        'browser' => env('SENTRY_BROWSER'),
+        'php' => env('SENTRY_PHP'),
     ],
 
     'stripe' => [

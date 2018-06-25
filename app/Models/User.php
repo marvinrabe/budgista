@@ -25,7 +25,13 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'language', 'locale', 'currency'
+        'name',
+        'email',
+        'password',
+        'language',
+        'locale',
+        'currency',
+        'last_login_at'
     ];
 
     /**
@@ -34,7 +40,8 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token'
+        'password',
+        'remember_token'
     ];
 
     public function sendPasswordResetNotification($token)
@@ -62,7 +69,8 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasManyThrough(Transaction::class, Account::class);
     }
 
-    public function isActive() {
+    public function isActive()
+    {
         $oldTransactionCount = $this
             ->transactions()
             ->whereBetween('date', [Carbon::now()->subDays(31), Carbon::now()])

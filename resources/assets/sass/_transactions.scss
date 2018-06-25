@@ -27,14 +27,15 @@
   }
 
   &-row-dummy {
-    background: theme-color-level('warning', $alert-bg-level);
+    background: theme-color-level('dark', $alert-bg-level);
 
     a {
-      color: theme-color-level('warning', $alert-color-level);
+      color: theme-color-level('dark', $alert-color-level);
     }
   }
 
   &-row {
+    background: $white;
 
     &-future, &-future span {
       color: $gray-600 !important;
@@ -69,13 +70,10 @@
 
 .content .transaction-item {
   color: $body-color;
-  opacity: .8;
-  transition: opacity .2ms ease-in;
 
   &:hover {
     color: $body-color;
     text-decoration: none;
-    opacity: 1;
   }
 }
 

@@ -1,7 +1,9 @@
 .layout-general {
 
+  background: $gray-100;
+
   .navbar {
-    border-top: 3px solid theme-color('primary');
+    @extend .shadow-0;
   }
 
 }

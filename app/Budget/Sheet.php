@@ -41,7 +41,8 @@ class Sheet implements JsonSerializable
     {
         $budgeted = $this->getCategoryBudgetSum();
         $funds = 0;
-        foreach ($this->user->accounts as $account) {
+        $accounts = $this->user->accounts()->where('tracking', false)->get();
+        foreach ($accounts as $account) {
             $funds += $account->transactions()->where('date', '<=', $this->month->previous()->lastDay())->whereNull('category_id')->sum('amount');
         }
         return $funds - $budgeted;
@@ -61,7 +62,8 @@ class Sheet implements JsonSerializable
     public function getFunds()
     {
         $sum = 0;
-        foreach ($this->user->accounts as $account) {
+        $accounts = $this->user->accounts()->where('tracking', false)->get();
+        foreach ($accounts as $account) {
             $sum += $account
                 ->transactions()
                 ->whereNull('category_id')

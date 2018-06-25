@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const mix = require('laravel-mix')
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+const GoogleFontsPlugin = require('google-fonts-webpack-plugin')
 //const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 /*
@@ -51,8 +52,15 @@ mix
             new LodashModuleReplacementPlugin({
                 'shorthands': true
             }),
+            // Google Fonts
+            /*new GoogleFontsPlugin({
+                filename: 'css/fonts.css',
+                fonts: [
+                    {family: 'Roboto', variants: ['300', '400', '500', '700']}
+                ]
+            }),*/
             // Remove moment languages
-            new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+            new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
             //new BundleAnalyzerPlugin()
         ]
     })

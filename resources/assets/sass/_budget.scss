@@ -4,10 +4,6 @@
   &-row {
     display: flex;
     align-items: center;
-
-    & > div {
-      padding: $table-cell-padding;
-    }
   }
 
   &-header {
@@ -20,8 +16,9 @@
   }
 
   &-row {
+    background: $white;
     border-bottom: 1px solid $gray-200;
-    flex-wrap: wrap;
+    align-items: start;
 
     &:hover {
       background: $gray-50;
@@ -42,12 +39,8 @@
 
     &-name {
       flex: 2;
-      padding: .5em;
-    }
-
-    &-values {
-      flex: 3;
-      display: flex;
+      padding: $table-cell-padding;
+      padding-left: 0;
     }
 
     &-budget,
@@ -56,6 +49,7 @@
       flex: 1;
       white-space: nowrap;
       text-align: right;
+      padding: $table-cell-padding;
     }
 
     &-budget {
@@ -83,13 +77,8 @@
     }
 
     &-row {
-      .budget-column-values {
-        padding-top: 0 !important;
-      }
-    }
-
-    &-column {
-      &-values {
+      .budget-column-name {
+        padding-bottom: 0 !important;
         flex: 100%;
       }
     }

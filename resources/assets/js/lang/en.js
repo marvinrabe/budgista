@@ -3,18 +3,21 @@ export default {
         name: 'Budgista'
     },
     message: {
+        deleteAccount: 'Do you really want to delete {name}? All transactions will be lost. This action can\'t be reversed.',
+        deleteCategory: 'Do you really want to delete {name}? This action can\'t be reversed.',
         loginFailed: 'These credentials do not match our records.',
         unexpectedError: 'An unexpected Error occurred.',
         updateEmail: 'Email Address has been updated.',
         updatePassword: 'Password has been updated.',
         updateSettings: 'Settings have been saved.',
-        addTransactionBefore: 'Add transactions by pressing',
-        addTransactionAfter: 'on the bottom right.',
+        addTransaction: 'Add a transactions now.',
         forgotPassword: 'Forgot Your Password?',
         noAccount: 'Don\'t have an account?',
         noAccountSignUp: 'Sign up now',
+        pageNotFound: 'The requested page could not be found.'
     },
     action: {
+        returnToApp: 'Return to App',
         'save': 'Save',
         'saveAndNew': 'Save & New',
         'back': 'Back',
@@ -24,6 +27,7 @@ export default {
         'navigation': 'Toggle navigation',
         register: 'Sign up for free',
         login: 'Login',
+        deleteUserAccount: 'Delete my user account',
         'logout': 'Logout',
         'loading': 'Loading',
         'futureTransactions': 'No future transactions | Display 1 future transaction | Display {count} future transactions',
@@ -59,30 +63,37 @@ export default {
         'uncategorized': 'Uncategorized',
         'available': 'Available',
         'recommendedBudget': 'Recommended Budget',
+        icon: 'Icon',
+        trackingAccount: 'Tracking Account',
         remember: 'Remember Me',
         allocated: 'Budgeted',
         unallocated: 'To be Budgeted',
         previousMonth: 'Previous Month',
         termsOfService: 'I agree to the <a href="{0}" target="__blank">Terms of Service</a>.',
         balance: {
-            current: 'Cleared',
-            upcoming: 'Uncleared',
-            future: 'Balance'
+            cleared: 'Cleared Balance',
+            uncleared: 'Uncleared Balance',
+            working: 'Available Balance'
         },
-        'date': 'Date',
-        'payee': 'Payee',
-        'expense': 'Expense',
-        'income': 'Income',
-        'transferTransactions': 'Transfer Transactions to',
-        'language': 'Language',
-        'locale': 'Locale',
-        'currency': 'Currency',
+        date: 'Date',
+        payee: 'Payee',
+        expense: 'Expense',
+        income: 'Income',
+        transferTransactions: 'Transfer Transactions to',
+        language: 'Language',
+        locale: 'Locale',
+        currency: 'Currency',
         email: 'Email Address',
         password: 'Password',
         oldPassword: 'Old Password',
         newPassword: 'New Password'
     },
+    word: {
+        transaction: 'Transaction',
+        category: 'Category'
+    },
     title: {
+        profile: 'User account',
         accounts: 'Accounts',
         budget: 'Budget',
         categories: 'Categories',
@@ -90,12 +101,12 @@ export default {
         help: 'Help',
         login: 'Login',
         account: 'Account',
-        security: 'Security',
-        general: 'General',
         updatePassword: 'Change Password',
         updateEmail: 'Change Email Address',
         emptyAccount: 'This account is empty.',
-        register: 'Sign up'
+        register: 'Sign up',
+        trackingAccounts: 'Tracking Accounts',
+        pageNotFound: 'Not Found'
     },
     validation: {
         messages: {
@@ -138,12 +149,6 @@ export default {
                 required: 'You must agree to the Terms of Service.'
             }
         }
-    },
-    'frequency': {
-        'daily': 'Daily',
-        'weekly': 'Weekly',
-        'monthly': 'Monthly',
-        'yearly': 'Yearly'
     },
     'frequencyUnit': {
         'days': 'Days',

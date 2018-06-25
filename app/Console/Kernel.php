@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\Commands\Clean;
 use App\Console\Commands\ProcessRecurringTransactions;
 use App\Console\Commands\PromoteUserToAdmin;
+use App\Console\Commands\Statistic;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -17,7 +18,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Clean::class,
-        ProcessRecurringTransactions::class
+        ProcessRecurringTransactions::class,
+        Statistic::class
     ];
 
     /**

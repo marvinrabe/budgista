@@ -17,7 +17,15 @@ class Account extends Model
     use UuidModelTrait,
         BelongsToUserTrait;
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'tracking',
+        'icon'
+    ];
+
+    protected $casts = [
+        'tracking' => 'boolean'
+    ];
 
     protected static function boot()
     {

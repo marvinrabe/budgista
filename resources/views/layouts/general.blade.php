@@ -1,7 +1,7 @@
-@extends('layouts.base', ['body_class' => 'layout-general', 'style' => 'css/website.css'])
+@extends('layouts.base', ['body_class' => 'layout-general'])
 
 @section('body')
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light bg-white">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('/images/logo.svg') }}" alt="{{ config('app.name') }}" height="30">
@@ -34,7 +34,7 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="mt-4">
         @yield('content')
     </div>
 

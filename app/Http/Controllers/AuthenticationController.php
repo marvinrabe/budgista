@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
+use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 
 class AuthenticationController extends Controller
@@ -21,6 +23,10 @@ class AuthenticationController extends Controller
         if (!$token = auth()->attempt($credentials)) { // ->setTTL(7200)
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+
+        auth()->user()->update([
+            'last_login_at' => Carbon::now()
+        ]);
 
         return $this->respondWithToken($token);
     }
@@ -53,8 +59,16 @@ class AuthenticationController extends Controller
     public function refresh()
     {
         try {
-            return $this->respondWithToken(auth()->refresh());
+            $token = auth()->refresh();
+
+            auth()->user()->update([
+                'last_login_at' => Carbon::now()
+            ]);
+
+            return $this->respondWithToken($token);
         } catch (TokenExpiredException $exception) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        } catch (TokenBlacklistedException $exception) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
     }

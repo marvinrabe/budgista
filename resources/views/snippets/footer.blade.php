@@ -27,6 +27,12 @@
             </li>
         </ul>
 
+        @donottrack
+        <button class="btn btn-outline-dark my-2" disabled style="cursor: initial">
+            🙈 {{ trans('message.do_not_track') }}
+        </button>
+        @endtrack
+
         <p class="copyright">
             &copy; {{ date('Y') }} Budgista.com
         </p>
