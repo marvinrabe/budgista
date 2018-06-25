@@ -22,7 +22,7 @@
         <template slot="actions">
             <button class="btn btn-text-dark"
                     type="button"
-                    @click="$emit('success')">
+                    @click="$emit('cancel')">
                 {{ $t('action.cancel') }}
             </button>
 
