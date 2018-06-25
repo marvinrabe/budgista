@@ -14,8 +14,10 @@ export default {
         forgotPassword: 'Passwort vergessen?',
         noAccount: 'Kein Konto vorhanden?',
         noAccountSignUp: 'Jetzt registrieren',
+        pageNotFound: 'Die gewünschte Seite konnte nicht gefunden werden.'
     },
     action: {
+        returnToApp: 'Zur App zurückkehren',
         'save': 'Speichern',
         'saveAndNew': 'Speichern & Neu',
         'futureTransactions': 'Keine zukünftigen Transaktionen | Zeige 1 zukünftige Transaktion | Zeige {count} zukünftige Transaktionen',
@@ -101,7 +103,8 @@ export default {
         updateEmail: 'E-Mail Adresse ändern',
         emptyAccount: 'Dieses Konto ist leer.',
         register: 'Registrieren',
-        trackingAccounts: 'Tracking Konten'
+        trackingAccounts: 'Tracking Konten',
+        pageNotFound: 'Nicht gefunden'
     },
     validation: {
         messages: {
