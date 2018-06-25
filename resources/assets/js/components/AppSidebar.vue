@@ -58,7 +58,7 @@
                     </a>
                 </template>
 
-                <create-account ref="createAccount"></create-account>
+                <create-account-modal ref="createAccount"></create-account-modal>
             </div>
         </div>
     </div>
@@ -69,7 +69,7 @@
     import VueResize from 'vue-resize-directive'
     import AppLogo from './AppLogo.vue'
     import AccountMenuItem from './accounts/MenuItem'
-    import CreateAccount from './accounts/CreateAccount'
+    import CreateAccountModal from './accounts/CreateAccountModal'
     import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
     import faEnvelope from '@fortawesome/fontawesome-free-solid/faEnvelope'
     import faCog from '@fortawesome/fontawesome-free-solid/faCog'
@@ -81,7 +81,7 @@
         components: {
             AppLogo,
             AccountMenuItem,
-            CreateAccount,
+            CreateAccountModal,
             FontAwesomeIcon
         },
         directives: {
