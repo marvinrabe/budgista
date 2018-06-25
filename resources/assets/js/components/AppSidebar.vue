@@ -1,7 +1,10 @@
 <template>
-    <div class="menu" @click="hideMenu">
+    <div class="menu"
+         @click="hideMenu"
+         v-sticky="{ zIndex: 1030, stickyTop: sticky ? 72 : 0, disabled: !sticky}"
+         v-resize="resizePage">
         <div class="app-menu py-3 py-md-0" @click.stop>
-            <nav class="nav flex-column flex-nowrap">
+            <div class="nav flex-column flex-nowrap">
                 <template v-for="item in menu">
                     <div class="my-2" v-if="item.accounts">
                         <div class="d-flex align-items-center">
@@ -56,12 +59,14 @@
                 </template>
 
                 <create-account ref="createAccount"></create-account>
-            </nav>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import VueSticky from 'vue-sticky'
+    import VueResize from 'vue-resize-directive'
     import AppLogo from './AppLogo.vue'
     import AccountMenuItem from './accounts/MenuItem'
     import CreateAccount from './accounts/CreateAccount'
@@ -78,6 +83,15 @@
             AccountMenuItem,
             CreateAccount,
             FontAwesomeIcon
+        },
+        directives: {
+            sticky: VueSticky,
+            resize: VueResize
+        },
+        data() {
+            return {
+                sticky: window.innerWidth >= 768
+            }
         },
         computed: {
             user() {
@@ -132,6 +146,9 @@
             }, false)
         },
         methods: {
+            resizePage() {
+                this.sticky = window.innerWidth >= 768
+            },
             showNewAccountModal() {
                 // Hide menu
                 this.hideMenu()
