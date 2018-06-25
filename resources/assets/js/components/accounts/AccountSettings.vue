@@ -3,21 +3,13 @@
         <template slot="button-content">
             <font-awesome-icon :icon="icon"/>
         </template>
-        <b-dropdown-item
-                @click="$refs.updateAccount.showModal()"
-                v-t="'action.edit.account'">
-        </b-dropdown-item>
-        <update-account-modal :account="account" ref="updateAccount"></update-account-modal>
-        <b-dropdown-item
-                @click="$refs.deleteAccount.showModal()"
-                v-t="'action.delete.account'">
-        </b-dropdown-item>
-        <delete-account :account="account" ref="deleteAccount"></delete-account>
+        <update-account :account="account"></update-account>
+        <delete-account :account="account"></delete-account>
     </b-dropdown>
 </template>
 
 <script>
-    import UpdateAccountModal from './UpdateAccountModal'
+    import UpdateAccount from './UpdateAccount'
     import DeleteAccount from './DeleteAccount'
     import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
     import faEllipsisH from '@fortawesome/fontawesome-free-solid/faEllipsisH'
@@ -31,7 +23,7 @@
             bDropdownItem,
             FontAwesomeIcon,
             DeleteAccount,
-            UpdateAccountModal
+            UpdateAccount
         },
         computed: {
             icon() {

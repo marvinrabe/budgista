@@ -9,12 +9,7 @@
                     <div class="my-2" v-if="item.accounts">
                         <div class="d-flex align-items-center">
                             <p class="nav-header">{{ $t('title.accounts') }}</p>
-                            <button class="ml-auto btn btn-light btn-sm text-muted"
-                                    type="button"
-                                    :title="$t('action.create.account')"
-                                    @click="showNewAccountModal">
-                                <font-awesome-icon icon="plus"/>
-                            </button>
+                            <create-account ref="createAccount" class="ml-auto"></create-account>
                         </div>
 
                         <account-menu-item
@@ -57,8 +52,6 @@
                         <span class="nav-link-main-label">{{ $t(item.label) }}</span>
                     </a>
                 </template>
-
-                <create-account-modal ref="createAccount"></create-account-modal>
             </div>
         </div>
     </div>
@@ -69,7 +62,7 @@
     import VueResize from 'vue-resize-directive'
     import AppLogo from './AppLogo.vue'
     import AccountMenuItem from './accounts/MenuItem'
-    import CreateAccountModal from './accounts/CreateAccountModal'
+    import CreateAccount from './accounts/CreateAccount'
     import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
     import faEnvelope from '@fortawesome/fontawesome-free-solid/faEnvelope'
     import faCog from '@fortawesome/fontawesome-free-solid/faCog'
@@ -81,7 +74,7 @@
         components: {
             AppLogo,
             AccountMenuItem,
-            CreateAccountModal,
+            CreateAccount,
             FontAwesomeIcon
         },
         directives: {
