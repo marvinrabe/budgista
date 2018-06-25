@@ -40,11 +40,8 @@
             @each('static._bullet', trans('static.home.bullets'), 'bullet')
         </div>
         <div class="row mb-md-3">
-            <div class="px-4 px-md-5 d-sm-block d-none">
+            <div class="pb-4 pb-md-0 px-4 px-md-5 mx-xl-5">
                 <img src="{{ asset('images/desktop.png') }}" class="img-fluid" alt="Budgista on Laptop">
-            </div>
-            <div class="px-3 d-sm-none">
-                <img src="{{ asset('images/mobile.png') }}" class="img-fluid" alt="Budgista on Mobile Device">
             </div>
         </div>
     </div>
