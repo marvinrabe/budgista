@@ -4,6 +4,8 @@
             <balance :account="account"></balance>
 
             <template slot="submenu">
+                <account-settings :account="account"></account-settings>
+
                 <router-link
                         :to="{ name: 'transaction.new'}"
                         class="btn btn-primary btn-sm"
@@ -11,8 +13,6 @@
                     <font-awesome-icon icon="plus"/>
                     {{ $t('word.transaction') }}
                 </router-link>
-
-                <account-settings :account="account"></account-settings>
             </template>
         </app-toolbar>
 
