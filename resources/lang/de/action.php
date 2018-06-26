@@ -3,6 +3,7 @@
 return [
 
     'reset' => 'Passwort zurücksetzen',
-    'send_reset' => 'E-Mail senden'
+    'send_reset' => 'E-Mail senden',
+    'reconciliation' => 'Abstimmung'
 
 ];

@@ -23,7 +23,7 @@
                             </div>
 
                             <money-input
-                                    :value.sync="amount"
+                                    v-model="amount"
                                     v-bind="bindings"
                                     v-focus
                                     v-validate="'required'"

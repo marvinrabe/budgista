@@ -10,6 +10,15 @@
                    v-focus>
         </form-group>
 
+        <form-group name="initialBalance">
+            <money-input
+                    slot-scope="{bindings}"
+                    v-bind="bindings"
+                    v-model="initialBalance"
+                    v-validate="'numeric'">
+            </money-input>
+        </form-group>
+
         <form-group name="icon">
             <account-icon-picker v-model="icon"></account-icon-picker>
         </form-group>
@@ -45,6 +54,7 @@
             return {
                 saving: false,
                 name: '',
+                initialBalance: null,
                 icon: 'credit-card',
                 tracking: false
             }
@@ -57,7 +67,8 @@
                     .dispatch('createAccount', {
                         name: this.name,
                         tracking: this.tracking,
-                        icon: this.icon
+                        icon: this.icon,
+                        initial_balance: this.initialBalance
                     })
                     .then(() => {
                         this.$emit('success')

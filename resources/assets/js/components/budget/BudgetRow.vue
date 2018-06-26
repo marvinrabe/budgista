@@ -16,7 +16,7 @@
                         ref="input"
                         :class="[{ 'opacity-50': budgeted == 0 }]"
                         :value="budgeted"
-                        @update:value="val => updateBudget(val)"
+                        @input="val => updateBudget(val)"
                         :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)"></money-input>
             </div>
             <div class="budget-column-activity">
