@@ -61,9 +61,13 @@ class AuthenticationController extends Controller
         try {
             $token = auth()->refresh();
 
-            auth()->user()->update([
-                'last_login_at' => Carbon::now()
-            ]);
+            $user = auth()->user();
+
+            if($user) {
+                $user->update([
+                    'last_login_at' => Carbon::now()
+                ]);
+            }
 
             return $this->respondWithToken($token);
         } catch (TokenExpiredException $exception) {
