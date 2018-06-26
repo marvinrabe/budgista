@@ -4,12 +4,18 @@ import Month from './models/Month'
 
 export const routes = [
     {
-        path: '/auth',
+        path: '/',
         component: require('./components/layout/Auth.vue'),
         meta: {
             auth: false
         },
         children: [
+            {
+                path: '',
+                redirect: to => {
+                    return {name: 'login'}
+                }
+            },
             {
                 path: 'login',
                 name: 'login',
@@ -23,7 +29,7 @@ export const routes = [
         ]
     },
     {
-        path: '/app',
+        path: '/',
         component: require('./components/layout/Default.vue'),
         meta: {
             auth: true

@@ -10,7 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::redirect('/', 'app', 301);
+Route::view('/', 'app')->name('app');
+Route::view('/login', 'app')->name('login');
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
@@ -19,13 +20,4 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.request');
 });
 
-Route::view('/auth/login', 'app')->name('login');
-Route::view('/auth/register', 'app')->name('register');
-Route::view('/app', 'app')->name('app');
-
-Route::group(['prefix' => 'app'], function() {
-    Route::view('{any}', 'app')->where('any', '.*');
-});
-Route::group(['prefix' => 'auth'], function() {
-    Route::view('{any}', 'auth')->where('any', '.*');
-});
+Route::view('{any}', 'app')->where('any', '.*');
