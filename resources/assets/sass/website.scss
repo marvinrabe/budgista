@@ -1,13 +1,6 @@
 @import "bootstrap";
 @import "errors";
-@import "footer";
-@import "layout-general";
-@import "layout-home";
 
-.layout-auth {
+body {
   background: $gray-100;
-
-  .card {
-    border-top: 5px solid theme-color('primary');
-  }
 }
