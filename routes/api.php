@@ -45,6 +45,11 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::apiResource('categories', 'CategoryController');
 
     /*
+     * Groups
+     */
+    Route::apiResource('groups', 'GroupController');
+
+    /*
      * Accounts
      */
     Route::get('accounts/{account}/transactions', 'TransactionController@index')->name('accounts.transactions');

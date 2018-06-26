@@ -51,12 +51,17 @@ class User extends Authenticatable implements JWTSubject
 
     public function accounts()
     {
-        return $this->hasMany('App\Models\Account');
+        return $this->hasMany(Account::class);
     }
 
     public function categories()
     {
-        return $this->hasMany('App\Models\Category');
+        return $this->hasMany(Category::class);
+    }
+
+    public function groups()
+    {
+        return $this->hasMany(Group::class);
     }
 
     public function budget(Month $month)
