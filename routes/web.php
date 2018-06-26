@@ -10,13 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::redirect('/', 'app', 301);
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
-    Route::get('/', 'HomeController@index')->name('home');
-    Route::view('/legal', 'static.legal')->name('legal');
-    Route::view('/terms', 'static.terms')->name('terms');
-    Route::view('/privacy', 'static.privacy')->name('privacy');
-
     $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
     $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
