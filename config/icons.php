@@ -24,5 +24,3 @@ return [
         'sign-dollar'
     ]
 ];
-
-//credit-card
