@@ -3,6 +3,7 @@
 return [
 
     'reset' => 'Reset Password',
-    'send_reset' => 'Send Password Reset Link'
+    'send_reset' => 'Send Password Reset Link',
+    'reconciliation' => 'Reconciliation'
 
 ];

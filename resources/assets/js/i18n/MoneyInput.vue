@@ -34,7 +34,7 @@
             },
             updateValue(value) {
                 let result = this.unformatValue(value);
-                this.$emit('update:value', result);
+                this.$emit('input', result);
                 this.formatValue(result);
             },
             selectAll: function (event) {

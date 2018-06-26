@@ -36,11 +36,7 @@ const actions = {
 
     createAccount({commit, rootState}, account) {
         return axios
-            .post('/accounts/', {
-                'name': account.name,
-                'tracking': account.tracking,
-                'icon': account.icon
-            })
+            .post('/accounts/', account)
             .then(({data}) => {
                 commit('ADD_ACCOUNT', data.data);
             });

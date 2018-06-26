@@ -75,6 +75,7 @@ export default {
             uncleared: 'Uncleared Balance',
             working: 'Available Balance'
         },
+        initialBalance: 'Initial Balance',
         date: 'Date',
         payee: 'Payee',
         expense: 'Expense',

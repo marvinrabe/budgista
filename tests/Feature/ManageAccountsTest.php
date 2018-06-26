@@ -37,6 +37,24 @@ class ManageAccountsTest extends TestCase
     }
 
     /** @test */
+    public function it_initialises_account_balance()
+    {
+        $this
+            ->post("/api/accounts", [
+                'name' => 'Test Account',
+                'initial_balance' => 1234
+            ])
+            ->assertSuccessful()
+            ->assertJson([
+                'data' => [
+                    'workingBalance' => 1234,
+                    'clearedBalance' => 1234,
+                    'unclearedBalance' => 0
+                ]
+            ]);
+    }
+
+    /** @test */
     public function accounts_should_have_a_name()
     {
         $this->post("/api/accounts", [])

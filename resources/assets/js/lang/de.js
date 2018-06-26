@@ -75,6 +75,7 @@ export default {
             uncleared: 'Offener Betrag',
             working: 'Verfügbarer Betrag'
         },
+        initialBalance: 'Anfangskontostand',
         date: 'Datum',
         payee: 'Empfänger',
         expense: 'Ausgabe',

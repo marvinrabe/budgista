@@ -6,6 +6,7 @@ use App\Http\Resources\Account as AccountResource;
 use App\Models\Account;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
@@ -15,21 +16,29 @@ class AccountController extends Controller
         return AccountResource::collection(Auth::user()->accounts);
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $this->authorize('create', Account::class);
 
+        $request->validate([
+            'name' => 'required',
+            'initial_balance' => 'nullable|integer',
+            'tracking' => 'nullable|boolean',
+            'icon' => [
+                'nullable',
+                'string',
+                Rule::in(config('icons.account')),
+            ]
+        ]);
+
         $account = Auth::user()->accounts()->create(
-            request()->validate([
-                'name' => 'required',
-                'tracking' => 'nullable|boolean',
-                'icon' => [
-                    'nullable',
-                    'string',
-                    Rule::in(config('icons.account')),
-                ]
-            ])
+            $request->only(['name', 'tracking', 'icon'])
         );
+
+        $initialBalance = $request->input('initial_balance');
+        if($initialBalance) {
+            $account->reconcile($initialBalance);
+        }
 
         return new AccountResource($account->refresh());
     }
