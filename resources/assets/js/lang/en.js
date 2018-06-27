@@ -5,6 +5,7 @@ export default {
     message: {
         deleteAccount: 'Do you really want to delete {name}? All transactions will be lost. This action can\'t be reversed.',
         deleteCategory: 'Do you really want to delete {name}? This action can\'t be reversed.',
+        deleteGroup: 'Do you really want to delete {name}? The categories won\'t get deleted. This action can\'t be reversed.',
         loginFailed: 'These credentials do not match our records.',
         unexpectedError: 'An unexpected Error occurred.',
         updateEmail: 'Email Address has been updated.',
@@ -34,16 +35,19 @@ export default {
         'create': {
             'account': 'Add Account',
             'category': 'Create Category',
+            group: 'Create Group',
             'transaction': 'Add Transaction'
         },
         'edit': {
             'category': 'Edit Category',
             'account': 'Edit Account',
+            group: 'Edit Group',
             'transaction': 'Edit Transaction'
         },
         'delete': {
             'category': 'Delete Category',
             'account': 'Delete Account',
+            group: 'Delete Group',
             'transaction': 'Delete Transaction'
         },
         'settings': {
@@ -107,7 +111,8 @@ export default {
         emptyAccount: 'This account is empty.',
         register: 'Sign up',
         trackingAccounts: 'Tracking Accounts',
-        pageNotFound: 'Not Found'
+        pageNotFound: 'Not Found',
+        ungrouped: 'Ungrouped'
     },
     validation: {
         messages: {

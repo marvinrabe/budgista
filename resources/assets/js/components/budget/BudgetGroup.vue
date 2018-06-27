@@ -1,0 +1,111 @@
+<template>
+    <div class="card mb-3">
+        <div class="budget-group">
+            <div class="handle budget-group-handle">
+                <span class="small text-dark"
+                      v-if="group">
+                    <font-awesome-icon icon="arrows-alt-v" fixed-width/>
+                </span>
+            </div>
+            <div class="data">
+                <div class="budget-column-name" v-if="group">
+                    {{ group.name }}
+                </div>
+                <div class="budget-column-name" v-else>
+                    {{ $t('title.ungrouped') }}
+                </div>
+                <div class="budget-column-budget">
+                    <money-format :value="budget"></money-format>
+                </div>
+                <div class="budget-column-activity">
+                    <money-format :value="activity"></money-format>
+                </div>
+                <div class="budget-column-available">
+                    <money-format :value="available"></money-format>
+                </div>
+            </div>
+            <div class="actions">
+                <group-settings :group="group" v-if="group"></group-settings>
+            </div>
+        </div>
+
+        <draggable class="budget-categories"
+                   v-model="categories"
+                   :options="{handle:'.budget-row-handle', group: 'categories'}">
+            <budget-category
+                    v-for="category in categories"
+                    :key="category.id"
+                    :category="category"
+                    :budget="budgetForCategory(category)"
+                    @update:budget="updateBudget">
+            </budget-category>
+        </draggable>
+    </div>
+</template>
+
+<script>
+    import BudgetCategory from './BudgetCategory'
+    import GroupSettings from '../groups/GroupSettings'
+    import draggable from 'vuedraggable'
+    import collect from 'collect.js'
+
+    export default {
+        props: ['group', 'value', 'month'],
+        components: {
+            BudgetCategory,
+            GroupSettings,
+            draggable
+        },
+        computed: {
+            sheet() {
+                let categories = this.categories.map(x => x.id);
+                return collect(this.value).filter(x => categories.includes(x.id) )
+            },
+            groupId() {
+                return this.group ? this.group.id : null
+            },
+            categories: {
+                get() {
+                    return this.$store.getters.sortedCategoriesByGroup(this.groupId)
+                },
+                set(value) {
+                    this.$store.dispatch('sortCategories', {
+                        group_id: this.groupId,
+                        categories: value
+                    })
+                }
+            },
+            budget() {
+                return this.sheet.sum('budget')
+            },
+            activity() {
+                return this.sheet.sum('activity')
+            },
+            available() {
+                return this.sheet.sum('available')
+            }
+        },
+        methods: {
+            budgetForCategory(category) {
+                let budget = this.value.find(x => category.id === x.id)
+                if (budget) {
+                    budget.month = this.month
+                    return budget
+                }
+                return {
+                    month: this.month,
+                    budget: 0,
+                    previousMonth: 0,
+                    recommendedBudget: 0,
+                    activity: 0
+                }
+            },
+            updateBudget(value) {
+                let result = this.value.filter(x => x.id !== value.id)
+                result.push(value)
+
+                this.$emit('input', result)
+            }
+        }
+    }
+</script>

@@ -20,4 +20,5 @@ class Group extends Resource
             'sort' => $this->sort
         ];
     }
+
 }

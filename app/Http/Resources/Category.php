@@ -17,7 +17,8 @@ class Category extends Resource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'sort' => $this->sort
+            'sort' => $this->sort,
+            'group_id' => $this->group_id
         ];
     }
 }
