@@ -14,19 +14,16 @@
                 <money-input
                         class="py-0 px-1"
                         ref="input"
-                        :class="[{ 'opacity-50': budgeted == 0 }]"
                         :value="budgeted"
                         @input="val => updateBudget(val)"
                         :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)"></money-input>
             </div>
             <div class="budget-column-activity">
-                <money-format
-                        :class="[{ 'opacity-50': activity == 0 }, { 'opacity-80': activity != 0 }]"
-                        :value="activity"></money-format>
+                <money-format :value="activity"></money-format>
             </div>
             <div class="budget-column-available">
                 <money-format
-                        :class="[{ 'text-danger': available < 0 }, { 'text-success': available > 0 }, { 'opacity-50': available == 0 }]"
+                        :class="[{ 'text-danger': available < 0 }, { 'text-success': available > 0 }]"
                         :value="available"></money-format>
             </div>
         </div>
