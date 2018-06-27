@@ -72,13 +72,9 @@
 
   &-group {
     color: $text-muted;
+    background: $gray-50;
     font-weight: 500;
     border-bottom: 1px solid $gray-200;
-    margin-bottom: 1px;
-
-    .budget-column-name {
-      color: $body-color;
-    }
 
     .budget-column-budget,
     .budget-column-activity,
@@ -90,12 +86,13 @@
     }
 
     &:hover {
-      background: white;
+      background: $gray-50;
     }
   }
 
   &-categories {
     min-height: 42px;
+    margin-top: 1px;
     border-top: 1px solid $gray-200;
   }
 
