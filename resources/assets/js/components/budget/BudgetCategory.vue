@@ -1,6 +1,6 @@
 <template>
     <div class="budget-row">
-        <div class="handle">
+        <div class="handle budget-row-handle">
             <span class="small text-dark">
                 <font-awesome-icon icon="arrows-alt-v" fixed-width/>
             </span>
@@ -39,44 +39,12 @@
 <style lang="scss" scoped>
     .budget-row {
 
-        .handle {
-            text-align: center;
-            flex: 16px;
-            flex-shrink: 0;
-            flex-grow: 0;
-            cursor: move;
-            cursor: -webkit-grab;
-            cursor: -moz-grab;
-            padding: .5em .3em;
-        }
-
         .data {
             cursor: pointer;
-            flex: 1;
-            display: flex;
-            flex-wrap: wrap;
         }
 
-        .actions {
-            text-align: left;
-            flex: 28px;
-            flex-shrink: 0;
-            flex-grow: 0;
-            padding: .5em .5em .5em 0;
-        }
-
-        .actions,
-        .handle {
-            visibility: hidden;
-        }
-
-        &:hover .actions,
-        &:hover .handle {
-            visibility: visible;
-        }
     }
 </style>
-
 
 <script>
     import CategorySettings from '../categories/CategorySettings'

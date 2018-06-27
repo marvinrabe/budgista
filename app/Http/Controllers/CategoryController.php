@@ -108,14 +108,24 @@ class CategoryController extends Controller
     public function sort()
     {
         request()->validate([
+            'group_id' => [
+                'nullable',
+                'string',
+                new Own('groups'),
+            ],
             'categories' => 'required'
         ]);
 
-        $sorting = array_flip(request('categories'));
+        $categories = request('categories');
+
+        $sorting = array_flip($categories);
 
         foreach (Auth::user()->categories as $category) {
-            $category->sort = $sorting[$category->id];
-            $category->save();
+            if(in_array($category->id, $categories)) {
+                $category->sort = $sorting[$category->id];
+                $category->group_id = request('group_id');
+                $category->save();
+            }
         }
 
         return [];

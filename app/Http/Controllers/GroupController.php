@@ -56,4 +56,21 @@ class GroupController extends Controller
 
         return [];
     }
+
+    public function sort(Request $request)
+    {
+        $request->validate([
+            'groups' => 'required'
+        ]);
+
+        $sorting = array_flip(request('groups'));
+
+        foreach (Auth::user()->groups as $group) {
+            $group->sort = $sorting[$group->id];
+            $group->save();
+        }
+
+        return [];
+    }
+
 }

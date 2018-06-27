@@ -5,6 +5,7 @@ export default {
     message: {
         deleteAccount: 'Möchtest du {name} wirklich löschen? Alle Kontobewegungen werden entfernt. Dies kann nicht rückgängig gemacht werden.',
         deleteCategory: 'Möchtest du {name} wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
+        deleteGroup: 'Möchtest du {name} wirklich löschen? Die Kategorien werden nicht gelöscht. Dies kann nicht rückgängig gemacht werden.',
         loginFailed: 'Diese Kombination aus Zugangsdaten wurden nicht in unserer Datenbank gefunden.',
         unexpectedError: 'Ein unerwarteter Fehler ist aufgetreten.',
         updateEmail: 'E-Mail Adresse wurde geändert.',
@@ -34,16 +35,19 @@ export default {
         'create': {
             'account': 'Konto hinzufügen',
             'category': 'Kategorie erstellen',
+            group: 'Gruppe erstellen',
             'transaction': 'Kontobewegung hinzufügen'
         },
         'edit': {
             'category': 'Kategorie bearbeiten',
             'account': 'Konto bearbeiten',
+            group: 'Gruppe bearbeiten',
             'transaction': 'Kontobewegung bearbeiten'
         },
         'delete': {
             'category': 'Kategorie löschen',
             'account': 'Konto löschen',
+            group: 'Gruppe löschen',
             'transaction': 'Kontobewegung löschen'
         },
         'settings': {
@@ -107,7 +111,8 @@ export default {
         emptyAccount: 'Dieses Konto ist leer.',
         register: 'Registrieren',
         trackingAccounts: 'Tracking Konten',
-        pageNotFound: 'Nicht gefunden'
+        pageNotFound: 'Nicht gefunden',
+        ungrouped: 'Ungruppiert'
     },
     validation: {
         messages: {
