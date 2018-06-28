@@ -30,7 +30,7 @@
             <div class="transaction-clear">&nbsp;</div>
         </div>
 
-        <div class="content">
+        <div class="card">
             <reconcile-form v-if="isEmpty" :account="account"></reconcile-form>
             <template v-else>
                 <div class="text-center p-1 transactions-row-dummy"

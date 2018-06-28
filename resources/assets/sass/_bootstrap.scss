@@ -45,12 +45,18 @@ a.h2:hover {
 }
 
 /*
+ * Navbar
+ */
+.navbar-light {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+/*
  * Card
  */
 .card {
-  @extend .shadow-1;
-  border: 0;
-  border-radius: 0;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 1px 2px 0;
 
   &-body-secondary {
     @extend .text-muted;
@@ -58,24 +64,6 @@ a.h2:hover {
     border-top: 1px solid $gray-300;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-  }
-}
-
-/*
- * List
- */
-.list-group {
-  @extend .shadow-1;
-
-  &-item {
-    margin: 0;
-    border: 0;
-    border-bottom: 1px solid $gray-300;
-    border-radius: 0;
-  }
-
-  &-item:last-child {
-    border-bottom: 0;
   }
 }
 

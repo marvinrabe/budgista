@@ -12,10 +12,6 @@ $menu-width: 280px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
-  .navbar {
-    width: 100%;
-  }
-
   .nav-header {
     @extend .nav-link;
     margin-bottom: 0;
