@@ -27,31 +27,23 @@ class CreateSamplesForNewUser
          */
         $user = $event->user;
 
-        foreach ($this->availableSamples as $sample => $class) {
-            $user->$sample()->saveMany(
-                $this->createAll(trans("samples.{$sample}"), $class)
-            );
+        foreach (trans("samples.categories") as $groupName => $categories) {
+            $group = $user->groups()->create([
+                'name' => $groupName
+            ]);
+
+            foreach($categories as $categoryName) {
+                $category = $user->categories()->make([
+                    'name' => $categoryName
+                ]);
+                $category->group_id = $group->id;
+                $category->save();
+            }
         }
 
         foreach (trans("samples.accounts") as $accountData) {
             $user->accounts()->save(new Account($accountData));
         }
-    }
-
-    /**
-     * Returns an array of unsaved classes with specified names.
-     *
-     * @param array $names Array of names that should be used.
-     * @param string $class Class that objects should have
-     * @return array Array of unsaved classes with specified names
-     */
-    protected function createAll(array $names, $class)
-    {
-        return array_map(function ($name) use ($class) {
-            return new $class([
-                'name' => $name
-            ]);
-        }, $names);
     }
 
 }

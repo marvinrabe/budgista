@@ -39,7 +39,7 @@ class RegisterTest extends TestCase
         $user = $this->registerUser();
 
         $this->assertGreaterThan(0, $user->categories()->count());
-        $this->assertEquals('Rent', $user->categories()->first()->name);
+        $this->assertEquals('Groceries', $user->categories()->first()->name);
 
         $this->assertGreaterThan(0, $user->accounts()->count());
         $this->assertEquals('Cash', $user->accounts()->first()->name);
@@ -57,7 +57,7 @@ class RegisterTest extends TestCase
         $this->assertEquals('de', $user->language);
 
         $this->assertGreaterThan(0, $user->categories()->count());
-        $this->assertEquals('Miete', $user->categories()->first()->name);
+        $this->assertEquals('Lebensmittel', $user->categories()->first()->name);
 
         $this->assertGreaterThan(0, $user->accounts()->count());
         $this->assertEquals('Bargeld', $user->accounts()->first()->name);
