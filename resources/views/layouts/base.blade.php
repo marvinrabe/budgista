@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ LaravelLocalization::getCurrentLocale() }}">
+<html lang="{{ app()->getLocale() }}">
 <head>
     @include('snippets.google-analytics')
 
