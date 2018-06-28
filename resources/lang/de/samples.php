@@ -11,15 +11,24 @@ return [
     ],
 
     'categories' => [
-        'Miete',
-        'Wasser & Strom',
-        'Internet, Fernsehen & Telefon',
-        'Auto & Öffentliche Verkehrsmittel',
-        'Lebensmittel',
-        'Restaurants',
-        'Weiterbildung',
-        'Unterhaltung',
-        'Abos',
-        'Notfallrücklagen'
+        'Variable Kosten' => [
+            'Lebensmittel',
+            'Restaurants',
+            'Freizeit',
+            'Benzin',
+            'Weiterbildung',
+            'Haushaltsbedarf'
+        ],
+        'Fixkosten' => [
+            'Miete',
+            'Wasser & Strom',
+            'Internet, Fernsehen & Telefon',
+            'Mitgliedschaften & Abos',
+            'Versicherungen',
+        ],
+        'Sparen' => [
+            'Altersvorsorge',
+            'Notfallrücklagen'
+        ]
     ]
 ];
