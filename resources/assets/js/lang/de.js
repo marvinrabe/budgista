@@ -15,7 +15,9 @@ export default {
         forgotPassword: 'Passwort vergessen?',
         noAccount: 'Kein Konto vorhanden?',
         noAccountSignUp: 'Jetzt registrieren',
-        pageNotFound: 'Die gewünschte Seite konnte nicht gefunden werden.'
+        pageNotFound: 'Die gewünschte Seite konnte nicht gefunden werden.',
+        resetPasswordEmailSent: 'Eine E-Mail zum zurücksetzen des Passworts wurde verschickt.',
+        resetPasswordSuccessful: 'Passwort wurde erfolgreich zurückgesetzt.'
     },
     action: {
         returnToApp: 'Zur App zurückkehren',
@@ -53,7 +55,9 @@ export default {
         'settings': {
             'password': 'Passwort ändern',
             'email': 'E-Mail Adresse ändern'
-        }
+        },
+        reset: 'Passwort zurücksetzen',
+        send_reset: 'E-Mail senden',
     },
     form: {
         'name': 'Name',
@@ -112,7 +116,8 @@ export default {
         register: 'Registrieren',
         trackingAccounts: 'Tracking Konten',
         pageNotFound: 'Nicht gefunden',
-        ungrouped: 'Ungruppiert'
+        ungrouped: 'Ungruppiert',
+        reset: 'Passwort zurücksetzen',
     },
     validation: {
         messages: {

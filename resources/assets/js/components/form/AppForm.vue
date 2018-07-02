@@ -46,7 +46,7 @@
                 }
             },
             error(exception) {
-                if (_.has(exception, 'response.data.errors')) {
+                if (exception.response && exception.response.data && exception.response.data.errors) {
                     let serverErrors = exception.response.data.errors
                     const keys = _.keys(serverErrors)
                     keys.forEach((key) => {
