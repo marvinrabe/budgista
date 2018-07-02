@@ -17,7 +17,8 @@ class Group extends Resource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'sort' => $this->sort
+            'sort' => $this->sort,
+            'collapsed' => $this->collapsed
         ];
     }
 

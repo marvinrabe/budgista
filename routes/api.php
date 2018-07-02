@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth:api']], function () {
      * Groups
      */
     Route::put('groups/sort', 'GroupController@sort');
+    Route::put('groups/{group}/collapse', 'GroupController@collapse');
     Route::apiResource('groups', 'GroupController');
 
     /*

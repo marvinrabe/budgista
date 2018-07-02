@@ -17,7 +17,8 @@ class Group extends Model
 
     protected $fillable = [
         'name',
-        'sort'
+        'sort',
+        'collapsed'
     ];
 
     protected static function boot()
