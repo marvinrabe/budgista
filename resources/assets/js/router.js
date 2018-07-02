@@ -26,6 +26,17 @@ export const routes = [
                 name: 'register',
                 component: require('./components/auth/Register.vue'),
             },
+            {
+                path: 'reset-password',
+                name: 'send_reset',
+                component: require('./components/auth/Email.vue'),
+            },
+            {
+                path: 'reset-password/:token',
+                name: 'reset',
+                component: require('./components/auth/Reset.vue'),
+                props: true
+            },
         ]
     },
     {

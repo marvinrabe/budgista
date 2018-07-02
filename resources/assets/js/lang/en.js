@@ -15,7 +15,9 @@ export default {
         forgotPassword: 'Forgot Your Password?',
         noAccount: 'Don\'t have an account?',
         noAccountSignUp: 'Sign up now',
-        pageNotFound: 'The requested page could not be found.'
+        pageNotFound: 'The requested page could not be found.',
+        resetPasswordEmailSent: 'An email with a password reset link has been sent.',
+        resetPasswordSuccessful: 'Password has been reset successfully.'
     },
     action: {
         returnToApp: 'Return to App',
@@ -53,7 +55,9 @@ export default {
         'settings': {
             'password': 'Change Password',
             'email': 'Change Email Address'
-        }
+        },
+        reset: 'Reset Password',
+        send_reset: 'Send Password Reset Link',
     },
     form: {
         'name': 'Name',
@@ -112,7 +116,8 @@ export default {
         register: 'Sign up',
         trackingAccounts: 'Tracking Accounts',
         pageNotFound: 'Not Found',
-        ungrouped: 'Ungrouped'
+        ungrouped: 'Ungrouped',
+        reset: 'Reset Password'
     },
     validation: {
         messages: {

@@ -12,12 +12,5 @@
 */
 Route::view('/', 'app')->name('app');
 Route::view('/login', 'app')->name('login');
-
-Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
-    $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
-    $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-    $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.request');
-});
-
+Route::view('/reset-password/{token}', 'app')->name('password.reset');
 Route::view('{any}', 'app')->where('any', '.*');
