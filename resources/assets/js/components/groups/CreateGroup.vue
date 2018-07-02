@@ -9,16 +9,13 @@
 </template>
 
 <script>
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faPlus from '@fortawesome/fontawesome-free-solid/faPlus'
     import CreateGroupForm from './CreateGroupForm'
     import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 
     export default {
         components: {
             bDropdownItem,
-            CreateGroupForm,
-            FontAwesomeIcon
+            CreateGroupForm
         },
         data() {
             return {

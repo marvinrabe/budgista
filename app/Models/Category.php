@@ -18,7 +18,11 @@ class Category extends Model
     use UuidModelTrait,
         BelongsToUserTrait;
 
-    protected $fillable = ['name', 'sort'];
+    protected $fillable = [
+        'name',
+        'sort',
+        'group_id'
+    ];
 
     protected static function boot()
     {
