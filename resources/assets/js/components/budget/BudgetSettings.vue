@@ -4,11 +4,6 @@
             <font-awesome-icon :icon="icon"/>
         </template>
         <create-group></create-group>
-        <b-dropdown-item
-                @click="$refs.createCategory.showModal()"
-                v-t="'action.create.category'">
-        </b-dropdown-item>
-        <create-category ref="createCategory"></create-category>
     </b-dropdown>
 </template>
 

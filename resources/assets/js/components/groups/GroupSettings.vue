@@ -3,6 +3,8 @@
         <template slot="button-content">
             <font-awesome-icon :icon="icon" fixed-width/>
         </template>
+        <create-category :group="group"></create-category>
+        <b-dropdown-divider></b-dropdown-divider>
         <update-group :group="group"></update-group>
         <delete-group :group="group"></delete-group>
     </b-dropdown>
@@ -11,17 +13,21 @@
 <script>
     import DeleteGroup from './DeleteGroup'
     import UpdateGroup from './UpdateGroup'
+    import CreateCategory from '../categories/CreateCategory'
     import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
     import faEllipsisH from '@fortawesome/fontawesome-free-solid/faEllipsisH'
     import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
     import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
+    import bDropdownDivider from 'bootstrap-vue/es/components/dropdown/dropdown-divider'
 
     export default {
         props: ['group'],
         components: {
             bDropdown,
             bDropdownItem,
+            bDropdownDivider,
             FontAwesomeIcon,
+            CreateCategory,
             DeleteGroup,
             UpdateGroup
         },

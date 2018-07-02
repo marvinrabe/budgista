@@ -23,7 +23,11 @@ class CategoryController extends Controller
 
         $category = new Category(
             request()->validate([
-                'name' => 'required'
+                'name' => 'required',
+                'group_id' => [
+                    'nullable',
+                    new Own('groups')
+                ]
             ])
         );
 
