@@ -48,6 +48,19 @@ class GroupController extends Controller
         return new GroupResource($group);
     }
 
+    public function collapse(Request $request, Group $group)
+    {
+        $this->authorize('update', $group);
+
+        $group->update(
+            $request->validate([
+                'collapsed' => 'required|boolean'
+            ])
+        );
+
+        return new GroupResource($group);
+    }
+
     public function destroy(Group $group)
     {
         $this->authorize('delete', $group);

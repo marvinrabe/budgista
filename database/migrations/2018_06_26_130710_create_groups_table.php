@@ -18,6 +18,7 @@ class CreateGroupsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('name');
             $table->integer('sort')->default(0);
+            $table->boolean('collapsed')->default(false);
             $table->primary('id');
 
             $table->foreign('user_id')

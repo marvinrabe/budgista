@@ -9,7 +9,10 @@
             </div>
             <div class="data">
                 <div class="budget-column-name" v-if="group">
-                    {{ group.name }}
+                    <font-awesome-icon :icon="collapsedIcon" @click.prevent="collapse" fixed-width/>
+                    <a href="#" @click.prevent="collapse" class="text-dark">
+                        {{ group.name }}
+                    </a>
                 </div>
                 <div class="budget-column-name" v-else>
                     {{ $t('title.ungrouped') }}
@@ -31,6 +34,7 @@
 
         <draggable class="budget-categories"
                    v-model="categories"
+                   v-if="categoriesVisible"
                    :options="{handle:'.budget-row-handle', group: 'categories'}">
             <budget-category
                     v-for="category in categories"
@@ -48,18 +52,28 @@
     import GroupSettings from '../groups/GroupSettings'
     import draggable from 'vuedraggable'
     import collect from 'collect.js'
+    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+    import faChevronDown from '@fortawesome/fontawesome-free-solid/faChevronDown'
+    import faChevronRight from '@fortawesome/fontawesome-free-solid/faChevronRight'
 
     export default {
         props: ['group', 'value', 'month'],
         components: {
             BudgetCategory,
             GroupSettings,
-            draggable
+            draggable,
+            FontAwesomeIcon
         },
         computed: {
+            categoriesVisible() {
+                return !this.group || !this.group.collapsed
+            },
+            collapsedIcon() {
+                return this.categoriesVisible ? faChevronDown : faChevronRight
+            },
             sheet() {
-                let categories = this.categories.map(x => x.id);
-                return collect(this.value).filter(x => categories.includes(x.id) )
+                let categories = this.categories.map(x => x.id)
+                return collect(this.value).filter(x => categories.includes(x.id))
             },
             groupId() {
                 return this.group ? this.group.id : null
@@ -105,6 +119,13 @@
                 result.push(value)
 
                 this.$emit('input', result)
+            },
+            collapse() {
+                this.$store
+                    .dispatch('toggleGroupCollapsed', {
+                        id: this.groupId,
+                        collapsed: this.categoriesVisible
+                    })
             }
         }
     }
