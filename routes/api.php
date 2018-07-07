@@ -30,6 +30,8 @@ Route::group(['middleware' => ['auth:api']], function () {
      */
     Route::get('user', 'UserController@show')->name('user');
     Route::put('user', 'UserController@update')->name('user.update');
+    Route::delete('user', 'UserController@destroy')->name('user.destroy');
+
     Route::post('user/email', 'UserController@email')->name('user.email');
     Route::post('user/password', 'UserController@password')->name('user.password');
     Route::post('user/reset', 'UserController@reset')->name('user.reset');

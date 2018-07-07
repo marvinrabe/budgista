@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Middleware\DetectLocale;
 use App\Http\Middleware\LoadUserLocale;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -50,7 +51,7 @@ class RegisterTest extends TestCase
     {
         app()->setLocale('de');
 
-        $this->withoutMiddleware(LoadUserLocale::class);
+        $this->withoutMiddleware(DetectLocale::class);
 
         $user = $this->registerUser();
 

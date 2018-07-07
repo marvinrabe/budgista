@@ -43,6 +43,21 @@ class UserController extends Controller
         return new UserResource(Auth::user());
     }
 
+    public function destroy()
+    {
+        $user = Auth()->user();
+
+        request()->validate([
+            'password' => [
+                'required',
+                'string',
+                new ValidPassword()
+            ]
+        ]);
+
+        $user->delete();
+    }
+
     public function reset()
     {
         request()->validate([
