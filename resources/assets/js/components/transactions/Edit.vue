@@ -1,93 +1,55 @@
-<script>
-    import Form from './Form'
-    import store from '../../store/index'
+<template>
+    <div v-if="transaction" class="main">
 
-    var rrulestr = require('rrule').rrulestr;
+        <app-toolbar :title="$t('action.edit.transaction')">
+            <template slot="submenu">
+                <button class="btn btn-light btn-sm"
+                        type="button"
+                        :title="$t('action.delete.transaction')"
+                        @click="deleteTransaction">
+                    <font-awesome-icon :icon="['far', 'trash-alt']"/>
+                </button>
+            </template>
+        </app-toolbar>
+
+        <div class="card">
+            <div class="card-body">
+                <transaction-form
+                        :transaction="transaction"
+                        @cancel="finish"
+                        @success="finish"></transaction-form>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import TransactionForm from './TransactionForm'
 
     export default {
-        extends: Form,
         props: ['transaction_id'],
-
+        components: {
+            TransactionForm
+        },
         computed: {
-            title() {
-                return this.$t('action.edit.transaction');
-            },
             transaction() {
-                return this.$store.getters.findTransactionById(this.transaction_id);
+                return this.$store.getters.findTransactionById(this.transaction_id)
             }
-        },
-
-        beforeRouteEnter(to, from, next) {
-            if (store.getters.isTransactionLoaded(to.params.transaction_id)) {
-                next(vm => vm.initialize());
-                return;
-            }
-
-            store.dispatch('loadTransaction', to.params.transaction_id).then(() => {
-                next(vm => vm.initialize())
-            });
-        },
-
-        beforeRouteUpdate(to, from, next) {
-            if (this.$store.getters.isTransactionLoaded(to.params.transaction_id)) {
-                this.initialize();
-                next();
-                return;
-            }
-            this.$store.dispatch('loadTransaction', to.params.transaction_id).then(() => {
-                this.initialize();
-                next();
-            });
         },
 
         methods: {
-            initialize() {
-                this.reset();
-
-                let transaction = this.transaction;
-
-                this.type = 1;
-                this.amount = transaction.amount;
-
-                if (transaction.amount < 0) {
-                    this.type = -1;
-                    this.amount *= -1;
-                }
-
-                this.date = transaction.date;
-                this.payee = transaction.payee;
-                this.category = '';
-                if (transaction.category_id) {
-                    this.category = transaction.category_id;
-                }
-                if (transaction.recurring) {
-                    let rule = rrulestr(transaction.rrule+";COUNT=1");
-                    this.recurring = true;
-                    this.freq = rule.options.freq;
-                    this.interval = rule.options.interval;
-                }
-            },
-            cancel() {
-                this.$router.push({ name: 'account', params: { account_id: this.transaction.account_id }});
-            },
-
-            saveTransaction() {
-                let transaction = this.getResult();
-                transaction.id = this.transaction_id;
-
-                this.$store.dispatch('updateTransaction', transaction);
-
-                this.cancel();
+            finish() {
+                this.$router.push({name: 'account', params: {account_id: this.transaction.account_id}})
             },
 
             deleteTransaction() {
                 let transaction = {
                     'id': this.transaction_id
-                };
+                }
 
-                this.$store.dispatch('deleteTransaction', transaction);
+                this.$store.dispatch('deleteTransaction', transaction)
 
-                this.cancel();
+                this.finish()
             }
         }
     }
