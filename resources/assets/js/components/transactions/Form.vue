@@ -22,13 +22,13 @@
                                 </b-dropdown>
                             </div>
 
-                            <money-input
-                                    v-model="amount"
+                            <app-money-input
                                     v-bind="bindings"
                                     v-focus
+                                    v-model="amount"
                                     v-validate="'required'"
                                     ref="amount">
-                            </money-input>
+                            </app-money-input>
                         </div>
                     </form-group>
 
@@ -149,12 +149,14 @@
     import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
     import faSync from '@fortawesome/fontawesome-free-solid/faSync'
     import RRule from 'rrule'
+    import AppMoneyInput from '../form/AppMoneyInput'
 
     const EXPENSE = -1
     const INCOME = 1
 
     export default {
         components: {
+            AppMoneyInput,
             bDropdown,
             bDropdownItem
         },
