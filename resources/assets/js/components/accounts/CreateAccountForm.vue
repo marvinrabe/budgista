@@ -11,12 +11,12 @@
         </form-group>
 
         <form-group name="initialBalance">
-            <money-input
+            <app-money-input
                     slot-scope="{bindings}"
                     v-bind="bindings"
                     v-model="initialBalance"
                     v-validate="'numeric'">
-            </money-input>
+            </app-money-input>
         </form-group>
 
         <form-group name="icon">
@@ -45,16 +45,18 @@
 
 <script>
     import AccountIconPicker from './AccountIconPicker'
+    import AppMoneyInput from '../form/AppMoneyInput'
 
     export default {
         components: {
-            AccountIconPicker
+            AccountIconPicker,
+            AppMoneyInput
         },
         data() {
             return {
                 saving: false,
                 name: '',
-                initialBalance: null,
+                initialBalance: 0,
                 icon: 'credit-card',
                 tracking: false
             }

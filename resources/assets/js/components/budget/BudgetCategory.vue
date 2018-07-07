@@ -11,12 +11,12 @@
                 <ellipsis>{{ category.name }}</ellipsis>
             </div>
             <div class="budget-column-budget" @click.stop="">
-                <money-input
+                <app-money-input
                         class="py-0 px-1"
                         ref="input"
                         :value="budgeted"
                         @input="val => updateBudget(val)"
-                        :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)"></money-input>
+                        :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)"></app-money-input>
             </div>
             <div class="budget-column-activity">
                 <money-format :value="activity"></money-format>
@@ -45,10 +45,12 @@
 
 <script>
     import CategorySettings from '../categories/CategorySettings'
+    import AppMoneyInput from '../form/AppMoneyInput'
 
     export default {
         props: ['category', 'budget'],
         components: {
+            AppMoneyInput,
             CategorySettings
         },
         data() {

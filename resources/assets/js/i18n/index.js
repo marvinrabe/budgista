@@ -22,11 +22,6 @@ export const intl = {
         );
 
         Vue.component(
-            'money-input',
-            require('./MoneyInput.vue')
-        );
-
-        Vue.component(
             'date-input',
             require('./DateInput.vue')
         );
