@@ -21,8 +21,7 @@ export default {
     },
     action: {
         returnToApp: 'Return to App',
-        'save': 'Save',
-        'saveAndNew': 'Save & New',
+        save: 'Save',
         'back': 'Back',
         'cancel': 'Cancel',
         'nextMonth': 'Next Month',

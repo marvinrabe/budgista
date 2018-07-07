@@ -19,18 +19,12 @@
 <script>
     import AppWindow from './AppWindow';
     import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faChevronLeft from '@fortawesome/fontawesome-free-solid/faChevronLeft'
 
     export default {
-        props: ['title', 'back'],
+        props: ['title'],
         components: {
             AppWindow,
             FontAwesomeIcon
-        },
-        computed: {
-            backIcon() {
-                return faChevronLeft;
-            }
         }
     }
 </script>

@@ -21,8 +21,7 @@ export default {
     },
     action: {
         returnToApp: 'Zur App zurückkehren',
-        'save': 'Speichern',
-        'saveAndNew': 'Speichern & Neu',
+        save: 'Speichern',
         'futureTransactions': 'Keine zukünftigen Transaktionen | Zeige 1 zukünftige Transaktion | Zeige {count} zukünftige Transaktionen',
         'back': 'Zurück',
         'cancel': 'Abbrechen',
