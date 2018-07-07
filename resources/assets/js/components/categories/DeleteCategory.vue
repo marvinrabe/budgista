@@ -3,15 +3,11 @@
         <app-form ref="form" @submit="deleteCategory">
 
             <form-group name="transferTransactions">
-                <select class="form-control"
-                        v-model="new_category_id"
-                        slot-scope="{bindings}"
-                        v-bind="bindings">
-                    <option value="">{{ $t('form.uncategorized') }}</option>
-                    <option v-for="category in categories" :key="category.id" :value="category.id">
-                        {{ category.name }}
-                    </option>
-                </select>
+                <category-select slot-scope="{bindings}"
+                                 :exclude="old_category_id"
+                                 v-model="new_category_id"
+                                 v-bind="bindings">
+                </category-select>
             </form-group>
 
             <i18n path="message.deleteCategory" tag="p" class="mb-0">
@@ -37,6 +33,8 @@
 </template>
 
 <script>
+    import CategorySelect from './CategorySelect'
+
     export default {
         props: ['category'],
         data() {
@@ -47,10 +45,8 @@
                 new_category_id: ''
             }
         },
-        computed: {
-            categories() {
-                return this.$store.getters.sortedCategories.filter((item) => item.id !== this.old_category_id)
-            }
+        components: {
+            CategorySelect
         },
         methods: {
             showModal() {

@@ -21,15 +21,10 @@
         <div class="form-row">
             <div class="col-sm-6">
                 <form-group name="category">
-                    <select class="form-control"
-                            slot-scope="{bindings}"
-                            v-bind="bindings"
-                            v-model="category_id">
-                        <option :value="null">{{ $t('form.uncategorized') }}</option>
-                        <option v-for="category in sortedCategories" :key="category.id" :value="category.id">
-                            {{ category.name }}
-                        </option>
-                    </select>
+                    <category-select slot-scope="{bindings}"
+                                     v-bind="bindings"
+                                     v-model="category_id">
+                    </category-select>
                 </form-group>
             </div>
             <div class="col-sm-6">
@@ -82,12 +77,14 @@
     import faSync from '@fortawesome/fontawesome-free-solid/faSync'
     import AmountInput from './AmountInput'
     import RecurringInput from './RecurringInput'
+    import CategorySelect from '../categories/CategorySelect'
     import _ from 'lodash'
 
     export default {
         props: ['transaction'],
         components: {
             AmountInput,
+            CategorySelect,
             RecurringInput
         },
         data() {
