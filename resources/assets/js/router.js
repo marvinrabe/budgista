@@ -76,6 +76,11 @@ export const routes = [
                 component: require('./components/profile/Index.vue')
             },
             {
+                path: 'leave',
+                name: 'leave',
+                component: require('./components/profile/Delete.vue')
+            },
+            {
                 path: 'account/:account_id',
                 name: 'account',
                 component: require('./components/accounts/Index.vue'),

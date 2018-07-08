@@ -3,6 +3,7 @@ export default {
         name: 'Budgista'
     },
     message: {
+        deleteUser: 'Wenn du dein Benutzerkonto löscht, dann werden deine Daten sofort, vollständig und unwiderruflich entfernt. Bitte gib dein Passwort ein um die Löschung zu bestätigen.',
         deleteAccount: 'Möchtest du {name} wirklich löschen? Alle Kontobewegungen werden entfernt. Dies kann nicht rückgängig gemacht werden.',
         deleteCategory: 'Möchtest du {name} wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
         deleteGroup: 'Möchtest du {name} wirklich löschen? Die Kategorien werden nicht gelöscht. Dies kann nicht rückgängig gemacht werden.',
@@ -17,7 +18,8 @@ export default {
         noAccountSignUp: 'Jetzt registrieren',
         pageNotFound: 'Die gewünschte Seite konnte nicht gefunden werden.',
         resetPasswordEmailSent: 'Eine E-Mail zum zurücksetzen des Passworts wurde verschickt.',
-        resetPasswordSuccessful: 'Passwort wurde erfolgreich zurückgesetzt.'
+        resetPasswordSuccessful: 'Passwort wurde erfolgreich zurückgesetzt.',
+        userDeleted: 'Benutzerkonto wurde gelöscht. Vielen Dank dass du Budgista ausprobiert hast.'
     },
     action: {
         returnToApp: 'Zur App zurückkehren',
@@ -30,7 +32,7 @@ export default {
         'navigation': 'Navigation hin- und herschalten',
         register: 'Kostenlos registrieren',
         login: 'Login',
-        deleteUserAccount: 'Mein Benutzerkonto löschen',
+        deleteUser: 'Mein Benutzerkonto dauerhaft löschen',
         'logout': 'Abmelden',
         'loading': 'Lädt',
         'create': {
@@ -59,6 +61,7 @@ export default {
         send_reset: 'E-Mail senden',
     },
     form: {
+        feedback: 'Wieso möchtest du dein Benutzerkonto löschen?',
         'name': 'Name',
         'amount': 'Betrag',
         'recurring': 'Wiederholend?',
@@ -101,6 +104,7 @@ export default {
         category: 'Kategorie'
     },
     title: {
+        deleteUser: 'Benutzerkonto löschen',
         profile: 'Benutzerkonto',
         accounts: 'Konten',
         budget: 'Budget',
