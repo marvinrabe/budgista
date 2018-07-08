@@ -51,4 +51,23 @@ class UserTest extends TestCase
         ]);
     }
 
+    /** @test */
+    public function it_logs_deleted_accounts()
+    {
+        $this->signIn();
+
+        $user = Auth()->user();
+
+        $this
+            ->delete('/api/user', [
+                'feedback' => 'my feedback',
+                'password' => 'secret'
+            ]);
+
+        $this->assertDatabaseHas('deleted_users', [
+            'created_at' => $user->created_at,
+            'feedback' => 'my feedback',
+        ]);
+    }
+
 }

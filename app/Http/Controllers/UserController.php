@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\User as UserResource;
 use App\Models\Account;
 use App\Models\Category;
+use App\Models\DeletedUser;
 use App\Rules\ValidPassword;
 use Auth;
 use Illuminate\Support\Facades\Hash;
@@ -52,7 +53,13 @@ class UserController extends Controller
                 'required',
                 'string',
                 new ValidPassword()
-            ]
+            ],
+            'feedback' => 'nullable|string'
+        ]);
+
+        DeletedUser::create([
+           'feedback' => request('feedback'),
+           'created_at' => $user->created_at
         ]);
 
         $user->delete();
