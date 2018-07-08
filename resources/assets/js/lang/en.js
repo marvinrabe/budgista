@@ -3,6 +3,7 @@ export default {
         name: 'Budgista'
     },
     message: {
+        deleteUser: 'If you delete your user account all your data will be immediately, completely and irrevocably lost. Please enter your password to confirm the deletion.',
         deleteAccount: 'Do you really want to delete {name}? All transactions will be lost. This action can\'t be reversed.',
         deleteCategory: 'Do you really want to delete {name}? This action can\'t be reversed.',
         deleteGroup: 'Do you really want to delete {name}? The categories won\'t get deleted. This action can\'t be reversed.',
@@ -17,7 +18,8 @@ export default {
         noAccountSignUp: 'Sign up now',
         pageNotFound: 'The requested page could not be found.',
         resetPasswordEmailSent: 'An email with a password reset link has been sent.',
-        resetPasswordSuccessful: 'Password has been reset successfully.'
+        resetPasswordSuccessful: 'Password has been reset successfully.',
+        userDeleted: 'User account deleted. Thank you for using Budgista.'
     },
     action: {
         returnToApp: 'Return to App',
@@ -29,7 +31,7 @@ export default {
         'navigation': 'Toggle navigation',
         register: 'Sign up for free',
         login: 'Login',
-        deleteUserAccount: 'Delete my user account',
+        deleteUser: 'Delete my user account permanently',
         'logout': 'Logout',
         'loading': 'Loading',
         'futureTransactions': 'No future transactions | Display 1 future transaction | Display {count} future transactions',
@@ -59,6 +61,7 @@ export default {
         send_reset: 'Send Password Reset Link',
     },
     form: {
+        feedback: 'Why are you leaving?',
         'name': 'Name',
         'amount': 'Amount',
         'recurring': 'Recurring?',
@@ -101,6 +104,7 @@ export default {
         category: 'Category'
     },
     title: {
+        deleteUser: 'Delete user account',
         profile: 'User account',
         accounts: 'Accounts',
         budget: 'Budget',

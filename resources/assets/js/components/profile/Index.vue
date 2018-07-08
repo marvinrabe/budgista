@@ -2,7 +2,6 @@
     <div class="main">
         <app-toolbar :title="$t('title.profile')"/>
 
-
         <div class="card mb-3">
             <div class="card-body">
                 <h5>{{ $t('title.updateEmail') }}</h5>
@@ -18,7 +17,10 @@
         </div>
 
         <div class="text-right">
-            <button class="btn btn-text-dark d-none" v-t="'action.deleteUserAccount'"></button>
+            <router-link class="btn btn-text-dark"
+                         :to="{name: 'leave'}"
+                         v-t="'title.deleteUser'">
+            </router-link>
         </div>
 
     </div>
