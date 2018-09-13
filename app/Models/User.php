@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Budget\Month;
 use App\Budget\Sheet;
-use App\Mail\ResetPasswordNotification;
 use Carbon\Carbon;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -14,7 +14,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property Account[] $accounts
  * @property Category[] $categories
  */
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
 
     use Notifiable;
@@ -43,11 +43,6 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'remember_token'
     ];
-
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ResetPasswordNotification($token));
-    }
 
     public function accounts()
     {
