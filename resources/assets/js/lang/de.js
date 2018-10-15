@@ -19,7 +19,9 @@ export default {
         pageNotFound: 'Die gewünschte Seite konnte nicht gefunden werden.',
         resetPasswordEmailSent: 'Eine E-Mail zum zurücksetzen des Passworts wurde verschickt.',
         resetPasswordSuccessful: 'Passwort wurde erfolgreich zurückgesetzt.',
-        userDeleted: 'Benutzerkonto wurde gelöscht. Vielen Dank dass du Budgista ausprobiert hast.'
+        userDeleted: 'Benutzerkonto wurde gelöscht. Vielen Dank dass du Budgista ausprobiert hast.',
+        verifyEmail: 'Bitte bestätige deine E-Mail Adresse {email}.',
+        verificationSent: 'Versandt!'
     },
     action: {
         returnToApp: 'Zur App zurückkehren',
@@ -58,9 +60,13 @@ export default {
             'email': 'E-Mail Adresse ändern'
         },
         reset: 'Passwort zurücksetzen',
-        send_reset: 'E-Mail senden',
+        sendReset: 'E-Mail versenden',
+        sendVerification: 'Verifizierungs Link versenden',
+        changeEmail: 'E-Mail Adresse ändern'
     },
     form: {
+        newEmail: 'Neue E-Mail Adresse',
+        currentEmail: 'Aktuelle E-Mail Adresse',
         feedback: 'Wieso möchtest du dein Benutzerkonto löschen?',
         'name': 'Name',
         'amount': 'Betrag',
@@ -120,7 +126,7 @@ export default {
         trackingAccounts: 'Tracking Konten',
         pageNotFound: 'Nicht gefunden',
         ungrouped: 'Ungruppiert',
-        reset: 'Passwort zurücksetzen',
+        reset: 'Passwort zurücksetzen'
     },
     validation: {
         messages: {

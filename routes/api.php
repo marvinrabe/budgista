@@ -13,13 +13,14 @@
 
 Route::group(['prefix' => 'auth'], function () {
 
+    Route::post('register', 'AuthenticationController@register');
     Route::post('login', 'AuthenticationController@login');
     Route::post('logout', 'AuthenticationController@logout');
-    Route::post('register', 'AuthenticationController@register');
-    Route::get('refresh', 'AuthenticationController@refresh');
-    Route::get('user', 'UserController@show');
     Route::post('reset-password', 'PasswordResetController@store');
     Route::put('reset-password/{token}', 'PasswordResetController@update');
+    Route::post('verify', 'VerificationController@resend');
+    Route::get('refresh', 'AuthenticationController@refresh');
+    Route::get('user', 'UserController@show');
 
 });
 

@@ -4,13 +4,13 @@
 
         <div class="card mb-3">
             <div class="card-body">
-                <h5>{{ $t('title.updateEmail') }}</h5>
+                <h5 class="mb-3">{{ $t('title.updateEmail') }}</h5>
 
                 <settings-email/>
             </div>
 
             <div class="card-body border-top">
-                <h5>{{ $t('title.updatePassword') }}</h5>
+                <h5 class="mb-3">{{ $t('title.updatePassword') }}</h5>
 
                 <settings-password/>
             </div>

@@ -1,7 +1,16 @@
 <template>
     <app-form @submit="save" ref="form">
 
-        <form-group name="email">
+        <form-group name="currentEmail">
+            <div class="form-text">
+                {{ email }}
+                <span class="badge badge-success" v-if="verified">Verified</span>
+                <span class="badge badge-warning" v-else>Unverified</span>
+                <resend-verification class="btn-sm" v-if="!verified"></resend-verification>
+            </div>
+        </form-group>
+
+        <form-group name="newEmail">
             <input type="email"
                    class="form-control"
                    slot-scope="{bindings}"
@@ -29,7 +38,12 @@
 
 
 <script>
+    import ResendVerification from '../profile/ResendVerification'
+
     export default {
+        components: {
+            ResendVerification
+        },
         data() {
             return {
                 saving: false,
@@ -39,13 +53,21 @@
                 }
             }
         },
+        computed: {
+            email() {
+                return this.$store.state.user.email;
+            },
+            verified() {
+                return this.$store.state.user.verified;
+            }
+        },
         mounted() {
             this.reset();
         },
         methods: {
             reset() {
                 this.saving = false;
-                this.form.email = this.$store.state.user.email;
+                this.form.email = '';
                 this.form.password = '';
             },
             save() {

@@ -19,7 +19,9 @@ export default {
         pageNotFound: 'The requested page could not be found.',
         resetPasswordEmailSent: 'An email with a password reset link has been sent.',
         resetPasswordSuccessful: 'Password has been reset successfully.',
-        userDeleted: 'User account deleted. Thank you for using Budgista.'
+        userDeleted: 'User account deleted. Thank you for using Budgista.',
+        verifyEmail: 'Please verify your email address {email}.',
+        verificationSent: 'Sent!'
     },
     action: {
         returnToApp: 'Return to App',
@@ -58,9 +60,13 @@ export default {
             'email': 'Change Email Address'
         },
         reset: 'Reset Password',
-        send_reset: 'Send Password Reset Link',
+        sendReset: 'Send Password Reset Link',
+        sendVerification: 'Send Verfication Link',
+        changeEmail: 'Change email address'
     },
     form: {
+        newEmail: 'New Email address',
+        currentEmail: 'Current Email address',
         feedback: 'Why are you leaving?',
         'name': 'Name',
         'amount': 'Amount',

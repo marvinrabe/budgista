@@ -1,6 +1,7 @@
 <template>
     <button :class="styling"
-            :disabled="busy || disabled">
+            :disabled="busy || disabled"
+            @click="$emit('click')">
         <font-awesome-icon :icon="icon" spin v-if="busy"/>
         {{ text }}
     </button>
