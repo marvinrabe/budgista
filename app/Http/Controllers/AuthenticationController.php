@@ -63,7 +63,7 @@ class AuthenticationController extends Controller
 
             $user = auth()->user();
 
-            if($user) {
+            if ($user) {
                 $user->update([
                     'last_login_at' => Carbon::now()
                 ]);

@@ -5,7 +5,8 @@ const defaultState = {
     email: '',
     language: 'en',
     locale: 'en',
-    currency: 'EUR'
+    currency: 'EUR',
+    verified: false
 }
 
 const state = defaultState
@@ -56,6 +57,7 @@ const mutations = {
         state.language = user.language
         state.locale = user.locale
         state.currency = user.currency
+        state.verified = user.verified
     }
 }
 

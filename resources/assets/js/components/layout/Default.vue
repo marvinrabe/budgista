@@ -3,20 +3,24 @@
         <div id="loading" v-if="loading">
             <app-spinner></app-spinner>
         </div>
-        <div id="layout" v-else>
-            <app-header></app-header>
+        <template v-else>
+            <div id="layout">
+                <app-header></app-header>
 
-            <div class="container py-3">
-                <div class="form-row">
-                    <div class="col-md-4 col-xl-3">
-                        <app-sidebar></app-sidebar>
-                    </div>
-                    <div class="col-12 col-md-8 col-xl-9">
-                        <router-view :key="$router.fullPath"></router-view>
+                <div class="container py-3">
+                    <app-verify></app-verify>
+
+                    <div class="form-row">
+                        <div class="col-md-4 col-xl-3">
+                            <app-sidebar></app-sidebar>
+                        </div>
+                        <div class="col-12 col-md-8 col-xl-9">
+                            <router-view :key="$router.fullPath"></router-view>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </template>
     </div>
 </template>
 
@@ -39,11 +43,13 @@
 <script>
     import AppHeader from '../AppHeader'
     import AppSidebar from '../AppSidebar'
+    import AppVerify from '../auth/Verify'
 
     export default {
         components: {
             AppHeader,
-            AppSidebar
+            AppSidebar,
+            AppVerify
         },
         computed: {
             loading() {

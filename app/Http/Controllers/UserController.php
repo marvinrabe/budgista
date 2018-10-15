@@ -6,6 +6,7 @@ use App\Http\Resources\User as UserResource;
 use App\Models\Account;
 use App\Models\Category;
 use App\Models\DeletedUser;
+use App\Models\User;
 use App\Rules\ValidPassword;
 use Auth;
 use Illuminate\Support\Facades\Hash;
@@ -58,8 +59,8 @@ class UserController extends Controller
         ]);
 
         DeletedUser::create([
-           'feedback' => request('feedback'),
-           'created_at' => $user->created_at
+            'feedback' => request('feedback'),
+            'created_at' => $user->created_at
         ]);
 
         $user->delete();
@@ -87,6 +88,9 @@ class UserController extends Controller
 
     public function email()
     {
+        /**
+         * @var User $user
+         */
         $user = Auth()->user();
 
         request()->validate([
@@ -100,6 +104,12 @@ class UserController extends Controller
         $user->update([
             'email' => request('email')
         ]);
+
+        $user->forceFill([
+            'email_verified_at' => null
+        ])->save();
+
+        $user->sendEmailVerificationNotification();
 
         return new UserResource(Auth::user());
     }

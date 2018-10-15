@@ -17,7 +17,7 @@
                 </form-group>
 
                 <template slot="actions">
-                    <app-button :label="$t('action.send_reset')" :busy="loading"></app-button>
+                    <app-button :label="$t('action.sendReset')" :busy="loading"></app-button>
                 </template>
             </app-form>
 
