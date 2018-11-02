@@ -83,8 +83,16 @@
     .budget-column-activity,
     .budget-column-available {
       span {
+        padding-right: 0.1em;
         font-weight: 500;
         font-size: $small-font-size;
+      }
+    }
+
+
+    .budget-column-budget {
+      span {
+        padding-right: 0.4em;
       }
     }
 
