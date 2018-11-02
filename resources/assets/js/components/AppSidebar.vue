@@ -1,7 +1,7 @@
 <template>
     <div class="menu"
          @click="hideMenu"
-         v-sticky="{ zIndex: 900, stickyTop: sticky ? 72 : 0, disabled: !sticky}"
+         v-sticky="{ zIndex:  1035, stickyTop: sticky ? 72 : 0, disabled: !sticky}"
          v-resize="resizePage">
         <div class="app-menu py-3 py-md-0" @click.stop>
             <div class="nav flex-column flex-nowrap">
