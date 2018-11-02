@@ -107,7 +107,9 @@ export default {
     },
     word: {
         transaction: 'Kontobewegung',
-        category: 'Kategorie'
+        category: 'Kategorie',
+        verified: 'Verifiziert',
+        unverified: 'Unverifiziert'
     },
     title: {
         deleteUser: 'Benutzerkonto löschen',
