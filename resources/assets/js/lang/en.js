@@ -107,7 +107,9 @@ export default {
     },
     word: {
         transaction: 'Transaction',
-        category: 'Category'
+        category: 'Category',
+        verified: 'Verified',
+        unverified: 'Unverified'
     },
     title: {
         deleteUser: 'Delete user account',
