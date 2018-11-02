@@ -74,7 +74,7 @@
 <script>
     import Modernizr from 'modernizr'
     import {mapGetters} from 'vuex'
-    import faSync from '@fortawesome/fontawesome-free-solid/faSync'
+    import {faSync} from '@fortawesome/free-solid-svg-icons'
     import AmountInput from './AmountInput'
     import RecurringInput from './RecurringInput'
     import CategorySelect from '../categories/CategorySelect'

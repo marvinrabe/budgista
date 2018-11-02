@@ -7,9 +7,9 @@
 </template>
 
 <script>
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faSync from '@fortawesome/fontawesome-free-solid/faSync'
-    import {rrulestr} from 'rrule';
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faSync} from '@fortawesome/free-solid-svg-icons'
+    import {rrulestr} from 'rrule'
 
     export default {
         props: {
@@ -22,10 +22,10 @@
         },
         computed: {
             text() {
-                return rrulestr(this.rrule).toText();
+                return rrulestr(this.rrule).toText()
             },
             icon() {
-                return faSync;
+                return faSync
             }
         }
     }

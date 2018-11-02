@@ -58,8 +58,8 @@
 </style>
 
 <script>
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faQuestionCircle from '@fortawesome/fontawesome-free-solid/faQuestionCircle'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faQuestionCircle} from '@fortawesome/free-solid-svg-icons'
 
     export default {
         components: {

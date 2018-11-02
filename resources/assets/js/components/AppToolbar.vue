@@ -18,7 +18,7 @@
 
 <script>
     import AppWindow from './AppWindow';
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 
     export default {
         props: ['title'],
