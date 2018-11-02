@@ -21,6 +21,7 @@ return [
         'sign-pound',
         'sign-lira',
         'sign-euro',
-        'sign-dollar'
+        'sign-dollar',
+        'sign-hryvnia'
     ]
 ];
