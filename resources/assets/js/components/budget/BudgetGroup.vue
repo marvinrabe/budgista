@@ -52,9 +52,8 @@
     import GroupSettings from '../groups/GroupSettings'
     import draggable from 'vuedraggable'
     import collect from 'collect.js'
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faChevronDown from '@fortawesome/fontawesome-free-solid/faChevronDown'
-    import faChevronRight from '@fortawesome/fontawesome-free-solid/faChevronRight'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faChevronDown, faChevronRight} from '@fortawesome/free-solid-svg-icons'
 
     export default {
         props: ['group', 'value', 'month'],

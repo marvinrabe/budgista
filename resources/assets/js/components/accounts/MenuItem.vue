@@ -14,8 +14,8 @@
 
 <script>
     import {accountIcons} from '../../config'
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faCreditCard from '@fortawesome/fontawesome-free-solid/faCreditCard'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faCreditCard} from '@fortawesome/free-solid-svg-icons'
 
     export default {
         props: ['account'],

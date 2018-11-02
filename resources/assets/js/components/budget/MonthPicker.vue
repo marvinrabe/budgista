@@ -21,9 +21,8 @@
 
 <script>
     import Month from '../../models/Month'
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faChevronLeft from '@fortawesome/fontawesome-free-solid/faChevronLeft'
-    import faChevronRight from '@fortawesome/fontawesome-free-solid/faChevronRight'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons'
 
     export default {
         props: {

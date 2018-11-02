@@ -37,12 +37,11 @@
 <script>
     import AppLogo from './AppLogo'
     import AppSidebarToggle from './AppSidebarToggle'
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
     import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
     import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
     import bDropdownDivider from 'bootstrap-vue/es/components/dropdown/dropdown-divider'
-    import faPlus from '@fortawesome/fontawesome-free-solid/faPlus'
-    import faUserCircle from '@fortawesome/fontawesome-free-solid/faUserCircle'
+    import {faPlus, faUserCircle} from '@fortawesome/free-solid-svg-icons'
 
     export default {
         components: {

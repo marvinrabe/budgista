@@ -4,86 +4,109 @@ export const languages = [
     'de', 'en'
 ]
 
+import {
+    faCreditCard,
+    faWallet,
+    faUniversity,
+    faMoneyBillAlt,
+    faMoneyBill,
+    faMoneyCheckAlt,
+    faMoneyCheck,
+    faMoneyBillWaveAlt,
+    faMoneyBillWave,
+    faCoins,
+    faPiggyBank,
+    faWonSign,
+    faYenSign,
+    faShekelSign,
+    faRupeeSign,
+    faRubleSign,
+    faPoundSign,
+    faLiraSign,
+    faEuroSign,
+    faDollarSign
+} from '@fortawesome/free-solid-svg-icons'
+
 export const accountIcons = [
     {
         name: 'credit-card',
-        icon: require('@fortawesome/fontawesome-free-solid/faCreditCard')
+        icon: faCreditCard
     },
     {
         name: 'wallet',
-        icon: require('@fortawesome/fontawesome-free-solid/faWallet')
+        icon: faWallet
     },
     {
         name: 'bank',
-        icon: require('@fortawesome/fontawesome-free-solid/faUniversity')
+        icon: faUniversity
     },
     {
         name: 'money-bill-alt',
-        icon: require('@fortawesome/fontawesome-free-solid/faMoneyBillAlt')
+        icon: faMoneyBillAlt
     },
     {
         name: 'money-bill',
-        icon: require('@fortawesome/fontawesome-free-solid/faMoneyBill')
+        icon: faMoneyBill
     },
     {
         name: 'money-check-alt',
-        icon: require('@fortawesome/fontawesome-free-solid/faMoneyCheckAlt')
+        icon: faMoneyCheckAlt
     },
     {
         name: 'money-check',
-        icon: require('@fortawesome/fontawesome-free-solid/faMoneyCheck')
+        icon: faMoneyCheck
     },
     {
         name: 'money-bill-wave-alt',
-        icon: require('@fortawesome/fontawesome-free-solid/faMoneyBillWaveAlt')
+        icon: faMoneyBillWaveAlt
     },
     {
         name: 'money-bill-wave',
-        icon: require('@fortawesome/fontawesome-free-solid/faMoneyBillWave')
+        icon: faMoneyBillWave
     },
     {
         name: 'coins',
-        icon: require('@fortawesome/fontawesome-free-solid/faCoins')
+        icon: faCoins
     },
     {
         name: 'piggy-bank',
-        icon: require('@fortawesome/fontawesome-free-solid/faPiggyBank')
+        icon: faPiggyBank
     },
     {
         name: 'sign-yen',
-        icon: require('@fortawesome/fontawesome-free-solid/faYenSign')
+        icon: faYenSign
     },
     {
         name: 'sign-won',
-        icon: require('@fortawesome/fontawesome-free-solid/faWonSign')
+        icon: faWonSign
     },
     {
         name: 'sign-shekel',
-        icon: require('@fortawesome/fontawesome-free-solid/faShekelSign')
+        icon: faShekelSign
     },
     {
         name: 'sign-rupee',
-        icon: require('@fortawesome/fontawesome-free-solid/faRupeeSign')
+        icon: faRupeeSign
     },
     {
         name: 'sign-rubel',
-        icon: require('@fortawesome/fontawesome-free-solid/faRubleSign')
+        icon: faRubleSign
     },
     {
         name: 'sign-pound',
-        icon: require('@fortawesome/fontawesome-free-solid/faPoundSign')
+        icon: faPoundSign
     },
     {
         name: 'sign-lira',
-        icon: require('@fortawesome/fontawesome-free-solid/faLiraSign')
+        icon: faLiraSign
     },
     {
         name: 'sign-euro',
-        icon: require('@fortawesome/fontawesome-free-solid/faEuroSign')
+        icon: faEuroSign
     },
     {
         name: 'sign-dollar',
-        icon: require('@fortawesome/fontawesome-free-solid/faDollarSign')
+        icon: faDollarSign
     }
 ]
 

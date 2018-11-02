@@ -63,11 +63,8 @@
     import AppLogo from './AppLogo.vue'
     import AccountMenuItem from './accounts/MenuItem'
     import CreateAccount from './accounts/CreateAccount'
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faEnvelope from '@fortawesome/fontawesome-free-solid/faEnvelope'
-    import faCog from '@fortawesome/fontawesome-free-solid/faCog'
-    import faLifeRing from '@fortawesome/fontawesome-free-solid/faLifeRing'
-    import faUserCircle from '@fortawesome/fontawesome-free-solid/faUserCircle'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faEnvelope, faCog, faLifeRing, faUserCircle} from '@fortawesome/free-solid-svg-icons'
     import {mapGetters} from 'vuex'
 
     export default {
