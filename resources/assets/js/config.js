@@ -24,7 +24,8 @@ import {
     faPoundSign,
     faLiraSign,
     faEuroSign,
-    faDollarSign
+    faDollarSign,
+    faHryvnia
 } from '@fortawesome/free-solid-svg-icons'
 
 export const accountIcons = [
@@ -107,6 +108,10 @@ export const accountIcons = [
     {
         name: 'sign-dollar',
         icon: faDollarSign
+    },
+    {
+        name: 'sign-hryvnia',
+        icon: faHryvnia
     }
 ]
 
