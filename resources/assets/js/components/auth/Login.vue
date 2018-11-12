@@ -49,7 +49,9 @@
                         </div>
                     </div>
 
-                    <app-button :label="$t('action.login')" :busy="loading"></app-button>
+                    <app-button :label="$t('action.login')"
+                                :busy="loading">
+                    </app-button>
                 </template>
             </app-form>
 

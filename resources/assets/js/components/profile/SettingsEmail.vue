@@ -31,7 +31,9 @@
         </form-group>
 
         <div slot="actions">
-            <app-button :label="$t('action.settings.email')" :busy="saving"></app-button>
+            <app-button :label="$t('action.settings.email')"
+                        :busy="saving">
+            </app-button>
         </div>
     </app-form>
 </template>

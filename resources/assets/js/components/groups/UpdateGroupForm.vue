@@ -18,8 +18,7 @@
             </button>
 
             <app-button :label="$t('action.save')"
-                        :busy="saving"
-                        @click="updateGroup">
+                        :busy="saving">
             </app-button>
         </template>
     </app-form>

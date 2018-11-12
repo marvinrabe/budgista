@@ -23,8 +23,7 @@
 
                 <app-button variant="danger"
                             :label="$t('action.delete.category')"
-                            :busy="saving"
-                            @click="createCategory">
+                            :busy="saving">
                 </app-button>
             </template>
 
