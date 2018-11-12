@@ -43,6 +43,11 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('month/{month?}', 'MonthlyBudgetController@show')->name('month');
 
     /*
+     * Statistic
+     */
+    Route::get('statistics/monthly', 'StatisticController@monthly');
+
+    /*
      * Categories
      */
     Route::put('categories/sort', 'CategoryController@sort')->name('categories.sort');
