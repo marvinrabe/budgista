@@ -13,7 +13,8 @@ class StatisticController extends Controller
     {
         $data = [];
         foreach ($this->months() as $month) {
-            $data[(string)$month] = [
+            $data[] = [
+                'month' => (string)$month,
                 'worth' => (int)Auth()->user()->transactions()
                     ->where('date', '<=', $month->lastDay())
                     ->sum('amount'),
@@ -40,7 +41,7 @@ class StatisticController extends Controller
     {
         $months = [];
         for ($i = 0; $i <= 11; $i++) {
-            $months[] = Month::fromString(Carbon::now()->subMonth($i)->format('Y-m'));
+            $months[] = Month::fromString(Carbon::now()->subMonth(11 - $i)->format('Y-m'));
         }
         return $months;
     }

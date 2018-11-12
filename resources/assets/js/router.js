@@ -66,6 +66,11 @@ export const routes = [
                 props: true
             },
             {
+                path: 'statistics',
+                name: 'statistics',
+                component: require('./components/statistics/Index.vue')
+            },
+            {
                 path: 'settings',
                 name: 'settings',
                 component: require('./components/settings/Index.vue')

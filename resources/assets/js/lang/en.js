@@ -128,7 +128,9 @@ export default {
         trackingAccounts: 'Tracking Accounts',
         pageNotFound: 'Not Found',
         ungrouped: 'Ungrouped',
-        reset: 'Reset Password'
+        reset: 'Reset Password',
+        statistics: 'Statistics',
+        statisticNetWorth: 'Net Worth'
     },
     validation: {
         messages: {

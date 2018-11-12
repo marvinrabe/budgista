@@ -36,7 +36,7 @@ class StatisticTest extends TestCase
     {
         $months = [];
         for ($i = 0; $i <= 11; $i++) {
-            $months[] = Carbon::now()->subMonth($i);
+            $months[] = Carbon::now()->subMonth(11 - $i);
         }
         return $months;
     }
@@ -48,8 +48,9 @@ class StatisticTest extends TestCase
 
         $expectedData = [];
         foreach ($this->lastYearMonths() as $key => $date) {
-            $expectedData[$date->format('Y-m')] = [
-                'worth' => 12 * 100 - $key * 100,
+            $expectedData[] = [
+                'month' => $date->format('Y-m'),
+                'worth' => $key * 100 + 100,
                 'income' => 200,
                 'expense' => 100
             ];
