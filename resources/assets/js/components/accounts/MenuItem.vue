@@ -1,7 +1,7 @@
 <template>
     <router-link :to="{ name: 'account', params: { account_id: account.id }}"
                  active-class="active"
-                 class="nav-link-main">
+                 class="menu__item">
         <font-awesome-icon :icon="icon" fixed-width class="mr-1"/>
         <ellipsis style="flex: 1;">{{ account.name }}</ellipsis>
         <money-format
@@ -24,11 +24,11 @@
         },
         computed: {
             icon() {
-                let icon = accountIcons.find(x => x.name === this.account.icon);
-                if(icon) {
-                    return icon.icon;
+                let icon = accountIcons.find(x => x.name === this.account.icon)
+                if (icon) {
+                    return icon.icon
                 }
-                return faCreditCard;
+                return faCreditCard
             }
         }
     }
