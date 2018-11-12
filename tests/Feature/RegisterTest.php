@@ -6,11 +6,17 @@ use App\Http\Middleware\DetectLocale;
 use App\Http\Middleware\LoadUserLocale;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function setUp() {
+        parent::setUp();
+        Notification::fake();
+    }
 
     protected function registerUser()
     {
@@ -32,6 +38,18 @@ class RegisterTest extends TestCase
         $this->assertDatabaseHas('users', [
             'email' => 'john.doe@example.com'
         ]);
+    }
+
+    /** @test */
+    public function it_sends_verify_email()
+    {
+        $this->registerUser();
+
+        $user = User::where('email', 'john.doe@example.com')->first();
+
+        Notification::assertSentTo(
+            $user, \Illuminate\Auth\Notifications\VerifyEmail::class
+        );
     }
 
     /** @test */
