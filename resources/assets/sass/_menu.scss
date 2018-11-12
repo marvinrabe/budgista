@@ -1,11 +1,12 @@
 $menu-width: 280px;
 
-.menu-open,
-.menu-close {
-  cursor: pointer;
+.sidebar {
+  position: sticky;
+  top: 72px;
+  z-index: $zindex-sticky+10;
 }
 
-.app-menu {
+.sidebar__content {
   padding: 0 .5rem;
   height: 100%;
 
@@ -53,15 +54,8 @@ $menu-width: 280px;
   }
 }
 
-.menu-open.btn-outline-light {
-  border-color: $gray-200;
-  &:hover {
-    border-color: $gray-300;
-  }
-}
-
 @include media-breakpoint-down(sm) {
-  .menu {
+  .sidebar {
     position: fixed;
     left: 0;
     top: 0;
@@ -76,7 +70,7 @@ $menu-width: 280px;
     }
   }
 
-  .app-menu {
+  .sidebar__content {
     background-color: $gray-100;
     color: #fff;
     position: relative;
@@ -93,20 +87,20 @@ $menu-width: 280px;
     pointer-events: auto;
   }
 
-  .menu--visible .app-menu {
+  .sidebar--visible .sidebar__content {
     -webkit-transform: none;
     transform: none;
   }
 
-  .menu--animatable .app-menu {
+  .sidebar--animatable .sidebar__content {
     transition: all 130ms ease-in;
   }
 
-  .menu--visible.menu--animatable .app-menu {
+  .sidebar--visible.sidebar--animatable .sidebar__content {
     transition: all 330ms ease-out;
   }
 
-  .menu:after {
+  .sidebar:after {
     content: '';
     display: block;
     position: absolute;
@@ -121,7 +115,7 @@ $menu-width: 280px;
     transition: opacity 0.3s cubic-bezier(0, 0, 0.3, 1);
   }
 
-  .menu--visible.menu:after {
+  .sidebar--visible.sidebar:after {
     opacity: 1;
     pointer-events: auto;
   }
