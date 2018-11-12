@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -13,9 +14,9 @@ class StatisticTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function prepareTransactions()
+    protected function prepareTransactions($user = null)
     {
-        $this->signIn();
+        $this->signIn($user);
 
         $account = factory(Account::class)->create(['user_id' => Auth()->id()]);
         $category = factory(Category::class)->create(['user_id' => Auth()->id()]);
@@ -45,6 +46,28 @@ class StatisticTest extends TestCase
     public function it_returns_monthly_statistics()
     {
         $this->prepareTransactions();
+
+        $expectedData = [];
+        foreach ($this->lastYearMonths() as $key => $date) {
+            $expectedData[] = [
+                'month' => $date->format('Y-m'),
+                'worth' => $key * 100 + 100,
+                'income' => 200,
+                'expense' => 100
+            ];
+        }
+
+        $this->get('/api/statistics/monthly')
+            ->assertJson([
+                'data' => $expectedData
+            ]);
+    }
+
+    /** @test */
+    public function it_returns_only_values_of_current_user()
+    {
+        $this->prepareTransactions();
+        $this->prepareTransactions(factory(User::class)->create());
 
         $expectedData = [];
         foreach ($this->lastYearMonths() as $key => $date) {
