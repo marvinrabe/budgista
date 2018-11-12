@@ -13,9 +13,12 @@
 
 Route::group(['prefix' => 'auth'], function () {
 
+    Route::post('register', 'AuthenticationController@register');
     Route::post('login', 'AuthenticationController@login');
     Route::post('logout', 'AuthenticationController@logout');
-    Route::post('register', 'AuthenticationController@register');
+    Route::post('reset-password', 'PasswordResetController@store');
+    Route::put('reset-password/{token}', 'PasswordResetController@update');
+    Route::post('verify', 'VerificationController@resend');
     Route::get('refresh', 'AuthenticationController@refresh');
     Route::get('user', 'UserController@show');
 
@@ -28,6 +31,8 @@ Route::group(['middleware' => ['auth:api']], function () {
      */
     Route::get('user', 'UserController@show')->name('user');
     Route::put('user', 'UserController@update')->name('user.update');
+    Route::delete('user', 'UserController@destroy')->name('user.destroy');
+
     Route::post('user/email', 'UserController@email')->name('user.email');
     Route::post('user/password', 'UserController@password')->name('user.password');
     Route::post('user/reset', 'UserController@reset')->name('user.reset');
@@ -38,11 +43,23 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('month/{month?}', 'MonthlyBudgetController@show')->name('month');
 
     /*
+     * Statistic
+     */
+    Route::get('statistics/monthly', 'StatisticController@monthly');
+
+    /*
      * Categories
      */
     Route::put('categories/sort', 'CategoryController@sort')->name('categories.sort');
     Route::put('categories/{category}/budget', 'CategoryController@budget')->name('categories.budget');
     Route::apiResource('categories', 'CategoryController');
+
+    /*
+     * Groups
+     */
+    Route::put('groups/sort', 'GroupController@sort');
+    Route::put('groups/{group}/collapse', 'GroupController@collapse');
+    Route::apiResource('groups', 'GroupController');
 
     /*
      * Accounts

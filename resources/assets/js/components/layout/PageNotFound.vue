@@ -4,7 +4,7 @@
             <font-awesome-icon :icon="icon" size="5x"></font-awesome-icon>
             <h1 v-t="'title.pageNotFound'">Not Found</h1>
             <p v-t="'message.pageNotFound'">The requested page could not be found.</p>
-            <router-link to="/app" class="btn btn-dark" v-t="'action.returnToApp'"></router-link>
+            <router-link to="/" class="btn btn-dark" v-t="'action.returnToApp'"></router-link>
         </div>
     </div>
 </template>
@@ -58,8 +58,8 @@
 </style>
 
 <script>
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faQuestionCircle from '@fortawesome/fontawesome-free-solid/faQuestionCircle'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faQuestionCircle} from '@fortawesome/free-solid-svg-icons'
 
     export default {
         components: {

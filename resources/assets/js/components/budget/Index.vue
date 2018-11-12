@@ -15,11 +15,9 @@
 
         <app-spinner v-if="loading"></app-spinner>
 
-        <budget-table
+        <budget v-else
                 v-model="rows"
-                :month="month"
-                v-else>
-        </budget-table>
+                :month="month"></budget>
 
     </div>
 </template>
@@ -28,14 +26,14 @@
     import Month from '../../models/Month.js'
     import MonthPicker from './MonthPicker'
     import Overview from './Overview'
+    import Budget from './Budget'
     import BudgetSettings from './BudgetSettings'
-    import BudgetTable from './BudgetTable'
 
     export default {
         props: ['month'],
         components: {
+            Budget,
             BudgetSettings,
-            BudgetTable,
             MonthPicker,
             Overview
         },

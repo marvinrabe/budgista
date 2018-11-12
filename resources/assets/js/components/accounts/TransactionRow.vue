@@ -37,11 +37,11 @@
 </template>
 
 <script>
-    import Transaction from '../../models/Transaction';
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faCheckCircle from '@fortawesome/fontawesome-free-solid/faCheckCircle'
-    import CategoryName from './CategoryName';
-    import RecurringIcon from './RecurringIcon';
+    import Transaction from '../../models/Transaction'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faCheckCircle} from '@fortawesome/free-solid-svg-icons'
+    import CategoryName from './CategoryName'
+    import RecurringIcon from './RecurringIcon'
 
     export default {
         props: {
@@ -56,12 +56,12 @@
         },
         computed: {
             clearIcon() {
-                return faCheckCircle;
+                return faCheckCircle
             }
         },
         methods: {
             toggleCleared() {
-                this.$store.dispatch('clearTransaction', this.transaction);
+                this.$store.dispatch('clearTransaction', this.transaction)
             }
         }
     }

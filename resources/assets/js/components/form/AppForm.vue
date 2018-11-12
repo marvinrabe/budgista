@@ -46,13 +46,15 @@
                 }
             },
             error(exception) {
-                if (_.has(exception, 'response.data.errors')) {
+                if (exception.response && exception.response.data && exception.response.data.errors) {
                     let serverErrors = exception.response.data.errors
                     const keys = _.keys(serverErrors)
                     keys.forEach((key) => {
                         let message = _.head(serverErrors[key])
                         this.addError(key, message)
                     })
+                } else if (exception.response && exception.response.data && exception.response.data.error) {
+                    this.$snotify.error(exception.response.data.error)
                 } else {
                     this.$snotify.error(this.$t('message.unexpectedError'))
                     throw exception

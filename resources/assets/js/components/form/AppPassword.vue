@@ -73,9 +73,8 @@
 </style>
 
 <script>
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faEye from '@fortawesome/fontawesome-free-solid/faEye'
-    import faEyeSlash from '@fortawesome/fontawesome-free-solid/faEyeSlash'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons'
     import passwordStrength from 'zxcvbn'
 
     export default {

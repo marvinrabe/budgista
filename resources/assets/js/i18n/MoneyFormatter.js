@@ -21,7 +21,13 @@ export default class MoneyFormatter {
         return this.intlFormatter.format(value);
     }
 
+    formatSimple(value) {
+        return this.format(value).replace(/[^\d.,-]/g, '');
+    }
+
     unformat(value) {
+        value = String(value);
+
         // remove thousand seperator
         if (this.thousandSeparator) {
             value = value.replace(this.thousandSeparator, '')

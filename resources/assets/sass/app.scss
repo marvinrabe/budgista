@@ -6,12 +6,6 @@ body,
   height: 100%;
 }
 
-#auth {
-  .card {
-    border-top: 5px solid theme-color('primary');
-  }
-}
-
 body {
   background: $gray-100;
 }
@@ -33,11 +27,6 @@ body {
     @extend .py-0;
     @extend .px-1;
   }
-}
-
-.content {
-  background: $white;
-  @extend .shadow-1;
 }
 
 .toolbar {
@@ -64,6 +53,7 @@ body {
 
 }
 
+@import "sidebar";
 @import "menu";
 @import "toast";
 @import "budget";

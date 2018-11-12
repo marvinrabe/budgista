@@ -10,6 +10,15 @@
                    v-focus>
         </form-group>
 
+        <form-group name="initialBalance">
+            <app-money-input
+                    slot-scope="{bindings}"
+                    v-bind="bindings"
+                    v-model="initialBalance"
+                    v-validate="'numeric'">
+            </app-money-input>
+        </form-group>
+
         <form-group name="icon">
             <account-icon-picker v-model="icon"></account-icon-picker>
         </form-group>
@@ -27,8 +36,7 @@
             </button>
 
             <app-button :label="$t('action.save')"
-                        :busy="saving"
-                        @click="createAccount">
+                        :busy="saving">
             </app-button>
         </template>
     </app-form>
@@ -36,15 +44,18 @@
 
 <script>
     import AccountIconPicker from './AccountIconPicker'
+    import AppMoneyInput from '../form/AppMoneyInput'
 
     export default {
         components: {
-            AccountIconPicker
+            AccountIconPicker,
+            AppMoneyInput
         },
         data() {
             return {
                 saving: false,
                 name: '',
+                initialBalance: 0,
                 icon: 'credit-card',
                 tracking: false
             }
@@ -57,7 +68,8 @@
                     .dispatch('createAccount', {
                         name: this.name,
                         tracking: this.tracking,
-                        icon: this.icon
+                        icon: this.icon,
+                        initial_balance: this.initialBalance
                     })
                     .then(() => {
                         this.$emit('success')

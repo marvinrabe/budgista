@@ -11,8 +11,8 @@
 <script>
     import UpdateAccount from './UpdateAccount'
     import DeleteAccount from './DeleteAccount'
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faEllipsisH from '@fortawesome/fontawesome-free-solid/faEllipsisH'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faEllipsisH} from '@fortawesome/free-solid-svg-icons'
     import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
     import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 

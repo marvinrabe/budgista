@@ -14,7 +14,6 @@
   }
 
   &-header {
-    border-bottom: 1px solid $gray-200;
     color: $text-muted;
     font-family: $headings-font-family;
     font-size: $small-font-size;
@@ -24,13 +23,18 @@
   &-row,
   &-row-dummy {
     border-bottom: 1px solid $gray-200;
+
+    &:last-child {
+      border-bottom: 0;
+    }
   }
 
   &-row-dummy {
-    background: theme-color-level('dark', $alert-bg-level);
+    background: $gray-50;
 
     a {
-      color: theme-color-level('dark', $alert-color-level);
+      font-weight: 500;
+      color: $text-muted;
     }
   }
 
@@ -68,7 +72,7 @@
   }
 }
 
-.content .transaction-item {
+.card .transaction-item {
   color: $body-color;
 
   &:hover {

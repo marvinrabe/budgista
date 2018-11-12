@@ -15,5 +15,6 @@ return [
 
     'failed' => 'Diese Kombination aus Zugangsdaten wurden nicht in unserer Datenbank gefunden.',
     'throttle' => 'Zu viele Loginversuche. Versuchen Sie es bitte in :seconds Sekunden nochmal.',
+    'verified' => 'Deine E-Mail Adresse wurde bereits verifiziert.',
 
 ];

@@ -19,8 +19,8 @@
 <script>
     import DeleteCategory from './DeleteCategory'
     import UpdateCategory from './UpdateCategory'
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faEllipsisH from '@fortawesome/fontawesome-free-solid/faEllipsisH'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faEllipsisH} from '@fortawesome/free-solid-svg-icons'
     import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
     import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 

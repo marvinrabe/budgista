@@ -3,8 +3,10 @@ export default {
         name: 'Budgista'
     },
     message: {
+        deleteUser: 'Wenn du dein Benutzerkonto löscht, dann werden deine Daten sofort, vollständig und unwiderruflich entfernt. Bitte gib dein Passwort ein um die Löschung zu bestätigen.',
         deleteAccount: 'Möchtest du {name} wirklich löschen? Alle Kontobewegungen werden entfernt. Dies kann nicht rückgängig gemacht werden.',
         deleteCategory: 'Möchtest du {name} wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
+        deleteGroup: 'Möchtest du {name} wirklich löschen? Die Kategorien werden nicht gelöscht. Dies kann nicht rückgängig gemacht werden.',
         loginFailed: 'Diese Kombination aus Zugangsdaten wurden nicht in unserer Datenbank gefunden.',
         unexpectedError: 'Ein unerwarteter Fehler ist aufgetreten.',
         updateEmail: 'E-Mail Adresse wurde geändert.',
@@ -14,12 +16,16 @@ export default {
         forgotPassword: 'Passwort vergessen?',
         noAccount: 'Kein Konto vorhanden?',
         noAccountSignUp: 'Jetzt registrieren',
-        pageNotFound: 'Die gewünschte Seite konnte nicht gefunden werden.'
+        pageNotFound: 'Die gewünschte Seite konnte nicht gefunden werden.',
+        resetPasswordEmailSent: 'Eine E-Mail zum zurücksetzen des Passworts wurde verschickt.',
+        resetPasswordSuccessful: 'Passwort wurde erfolgreich zurückgesetzt.',
+        userDeleted: 'Benutzerkonto wurde gelöscht. Vielen Dank dass du Budgista ausprobiert hast.',
+        verifyEmail: 'Bitte bestätige deine E-Mail Adresse {email}.',
+        verificationSent: 'Versandt!'
     },
     action: {
         returnToApp: 'Zur App zurückkehren',
-        'save': 'Speichern',
-        'saveAndNew': 'Speichern & Neu',
+        save: 'Speichern',
         'futureTransactions': 'Keine zukünftigen Transaktionen | Zeige 1 zukünftige Transaktion | Zeige {count} zukünftige Transaktionen',
         'back': 'Zurück',
         'cancel': 'Abbrechen',
@@ -28,30 +34,40 @@ export default {
         'navigation': 'Navigation hin- und herschalten',
         register: 'Kostenlos registrieren',
         login: 'Login',
-        deleteUserAccount: 'Mein Benutzerkonto löschen',
+        deleteUser: 'Mein Benutzerkonto dauerhaft löschen',
         'logout': 'Abmelden',
         'loading': 'Lädt',
         'create': {
             'account': 'Konto hinzufügen',
             'category': 'Kategorie erstellen',
+            group: 'Gruppe erstellen',
             'transaction': 'Kontobewegung hinzufügen'
         },
         'edit': {
             'category': 'Kategorie bearbeiten',
             'account': 'Konto bearbeiten',
+            group: 'Gruppe bearbeiten',
             'transaction': 'Kontobewegung bearbeiten'
         },
         'delete': {
             'category': 'Kategorie löschen',
             'account': 'Konto löschen',
+            group: 'Gruppe löschen',
             'transaction': 'Kontobewegung löschen'
         },
         'settings': {
             'password': 'Passwort ändern',
             'email': 'E-Mail Adresse ändern'
-        }
+        },
+        reset: 'Passwort zurücksetzen',
+        sendReset: 'E-Mail versenden',
+        sendVerification: 'Verifizierungs Link versenden',
+        changeEmail: 'E-Mail Adresse ändern'
     },
     form: {
+        newEmail: 'Neue E-Mail Adresse',
+        currentEmail: 'Aktuelle E-Mail Adresse',
+        feedback: 'Wieso möchtest du dein Benutzerkonto löschen?',
         'name': 'Name',
         'amount': 'Betrag',
         'recurring': 'Wiederholend?',
@@ -75,6 +91,7 @@ export default {
             uncleared: 'Offener Betrag',
             working: 'Verfügbarer Betrag'
         },
+        initialBalance: 'Anfangskontostand',
         date: 'Datum',
         payee: 'Empfänger',
         expense: 'Ausgabe',
@@ -90,9 +107,12 @@ export default {
     },
     word: {
         transaction: 'Kontobewegung',
-        category: 'Kategorie'
+        category: 'Kategorie',
+        verified: 'Verifiziert',
+        unverified: 'Unverifiziert'
     },
     title: {
+        deleteUser: 'Benutzerkonto löschen',
         profile: 'Benutzerkonto',
         accounts: 'Konten',
         budget: 'Budget',
@@ -106,7 +126,11 @@ export default {
         emptyAccount: 'Dieses Konto ist leer.',
         register: 'Registrieren',
         trackingAccounts: 'Tracking Konten',
-        pageNotFound: 'Nicht gefunden'
+        pageNotFound: 'Nicht gefunden',
+        ungrouped: 'Ungruppiert',
+        reset: 'Passwort zurücksetzen',
+        statistics: 'Statistiken',
+        statisticNetWorth: 'Vermögen'
     },
     validation: {
         messages: {

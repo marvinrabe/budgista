@@ -10,12 +10,4 @@ into your web browser',
         'default' => 'Hello!'
     ],
 
-    // Reset Password E-Mail
-    'reset' => [
-        'subject' => 'Choose a new password for Budgista',
-        'intro' => 'Someone requested a new password for your Budgista account.',
-        'action' => 'Reset Password',
-        'outro' => 'If you did not request a password reset, no further action is required.'
-    ]
-
 ];

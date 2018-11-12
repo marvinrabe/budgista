@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\DeletedUser;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -43,5 +44,6 @@ class Statistic extends Command
         $this->info('Users: '. User::count());
         $this->info('Active Users: '. User::where('last_login_at', '>=', Carbon::now()->subDays(30))->count());
         $this->info('New Users last 14 days: '. User::where('created_at', '>=', Carbon::now()->subDays(14))->count());
+        $this->info('Deleted Users: '. DeletedUser::count());
     }
 }

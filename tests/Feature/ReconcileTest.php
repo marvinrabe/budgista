@@ -85,7 +85,7 @@ class ReconcileTest extends TestCase
 
         $this->assertDatabaseHas('transactions', [
             'amount' => 12345,
-            'payee' => 'Abgleich'
+            'payee' => 'Abstimmung'
         ]);
     }
 

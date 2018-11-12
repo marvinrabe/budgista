@@ -17,7 +17,6 @@ const GoogleFontsPlugin = require('google-fonts-webpack-plugin')
 
 mix
     .js('resources/assets/js/app.js', 'public/js')
-    .js('resources/assets/js/website.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/website.scss', 'public/css')
     .options({
@@ -53,12 +52,12 @@ mix
                 'shorthands': true
             }),
             // Google Fonts
-            /*new GoogleFontsPlugin({
+            new GoogleFontsPlugin({
                 filename: 'css/fonts.css',
                 fonts: [
                     {family: 'Roboto', variants: ['300', '400', '500', '700']}
                 ]
-            }),*/
+            }),
             // Remove moment languages
             new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
             //new BundleAnalyzerPlugin()
