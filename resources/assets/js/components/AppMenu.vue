@@ -33,7 +33,7 @@
     import AccountMenu from './accounts/Menu'
     import CreateAccount from './accounts/CreateAccount'
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
-    import {faEnvelope, faCog, faLifeRing, faUserCircle} from '@fortawesome/free-solid-svg-icons'
+    import {faEnvelope, faCog, faLifeRing, faUserCircle, faChartBar} from '@fortawesome/free-solid-svg-icons'
 
     export default {
         components: {
@@ -49,6 +49,11 @@
                         exact: false,
                         icon: faEnvelope,
                         label: 'title.budget'
+                    },
+                    {
+                        route: {name: 'statistics'},
+                        icon: faChartBar,
+                        label: 'title.statistics'
                     },
                     {
                         accounts: true
