@@ -14,6 +14,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 /*
  * Misc. utilites
  */
+label {
+  font-weight: 300;
+}
+
 .text-smaller {
   font-size: .5em;
 }
@@ -45,37 +49,32 @@ a.h2:hover {
 }
 
 /*
+ * Navbar
+ */
+.navbar-light {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+/*
  * Card
  */
 .card {
-  @extend .shadow-1;
-  border: 0;
-  border-radius: 0;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 1px 2px 0;
+
+  > *:first-child {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+
+  > *:last-child {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
 
   &-body-secondary {
     @extend .text-muted;
     background: $gray-50;
     border-top: 1px solid $gray-300;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-}
-
-/*
- * List
- */
-.list-group {
-  @extend .shadow-1;
-
-  &-item {
-    margin: 0;
-    border: 0;
-    border-bottom: 1px solid $gray-300;
-    border-radius: 0;
-  }
-
-  &-item:last-child {
-    border-bottom: 0;
   }
 }
 

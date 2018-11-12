@@ -18,7 +18,8 @@ class User extends Resource
             'email' => $this->email,
             'language' => $this->language,
             'locale' => $this->locale,
-            'currency' => $this->currency
+            'currency' => $this->currency,
+            'verified' => $this->hasVerifiedEmail()
         ];
     }
 }

@@ -2,14 +2,21 @@
 
 namespace Tests\Feature;
 
+use App\Http\Middleware\DetectLocale;
 use App\Http\Middleware\LoadUserLocale;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function setUp() {
+        parent::setUp();
+        Notification::fake();
+    }
 
     protected function registerUser()
     {
@@ -34,12 +41,24 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
+    public function it_sends_verify_email()
+    {
+        $this->registerUser();
+
+        $user = User::where('email', 'john.doe@example.com')->first();
+
+        Notification::assertSentTo(
+            $user, \Illuminate\Auth\Notifications\VerifyEmail::class
+        );
+    }
+
+    /** @test */
     public function user_has_sample_content()
     {
         $user = $this->registerUser();
 
         $this->assertGreaterThan(0, $user->categories()->count());
-        $this->assertEquals('Rent', $user->categories()->first()->name);
+        $this->assertEquals('Groceries', $user->categories()->first()->name);
 
         $this->assertGreaterThan(0, $user->accounts()->count());
         $this->assertEquals('Cash', $user->accounts()->first()->name);
@@ -50,14 +69,14 @@ class RegisterTest extends TestCase
     {
         app()->setLocale('de');
 
-        $this->withoutMiddleware(LoadUserLocale::class);
+        $this->withoutMiddleware(DetectLocale::class);
 
         $user = $this->registerUser();
 
         $this->assertEquals('de', $user->language);
 
         $this->assertGreaterThan(0, $user->categories()->count());
-        $this->assertEquals('Miete', $user->categories()->first()->name);
+        $this->assertEquals('Lebensmittel', $user->categories()->first()->name);
 
         $this->assertGreaterThan(0, $user->accounts()->count());
         $this->assertEquals('Bargeld', $user->accounts()->first()->name);

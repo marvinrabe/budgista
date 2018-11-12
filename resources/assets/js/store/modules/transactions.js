@@ -1,36 +1,36 @@
 import _ from 'lodash'
-import Transaction from '../../models/Transaction';
+import Transaction from '../../models/Transaction'
 
 // transactions: [{ id, date, payee, amount, cleared, rrule, recurring, category_id, account_id }],
 const state = {
     transactions: [],
     nextUrls: {}
-};
+}
 
 export const getters = {
     findTransactionById: (state) => (id) => {
         return state.transactions.find(x => x.id === id)
     },
     isTransactionLoaded: (state, getters) => (id) => {
-        return getters.findTransactionById(id) !== undefined;
+        return getters.findTransactionById(id) !== undefined
     },
     findTransactionsByAccountId: (state) => (id) => {
-        let transactions = state.transactions.filter(x => x.account_id === id).slice();
-        return _.sortBy(transactions, ['date', 'created_at', 'payee']).reverse();
+        let transactions = state.transactions.filter(x => x.account_id === id).slice()
+        return _.sortBy(transactions, ['date', 'created_at', 'payee']).reverse()
     },
     countFutureTransactions: (state, getters) => ({id}) => {
         return getters
             .findTransactionsByAccountId(id)
             .filter(x => x.isFuture())
-            .length;
+            .length
     },
     getPayees(state) {
         return _.uniq(
             state.transactions
                 .map(transaction => transaction.payee)
-        );
+        )
     }
-};
+}
 
 const actions = {
 
@@ -38,9 +38,9 @@ const actions = {
         return axios
             .get('/transactions/' + transaction_id)
             .then(({data}) => {
-                let transaction = Object.assign(new Transaction, data.data);
-                commit('ADD_TRANSACTION', transaction);
-            });
+                let transaction = Object.assign(new Transaction, data.data)
+                commit('ADD_TRANSACTION', transaction)
+            })
     },
 
     loadTransactions({state, commit, dispatch}, account_id) {
@@ -48,14 +48,14 @@ const actions = {
             commit('NEXT_TRANSACTIONS', {
                 account_id: account_id,
                 url: '/accounts/' + account_id + '/transactions'
-            });
-            dispatch('loadMoreTransactions', account_id);
+            })
+            dispatch('loadMoreTransactions', account_id)
         }
     },
 
     loadMoreTransactions({state, commit}, account_id) {
         if (!state.nextUrls[account_id]) {
-            return Promise.reject();
+            return Promise.reject()
         }
 
         return axios
@@ -64,43 +64,50 @@ const actions = {
                 commit('NEXT_TRANSACTIONS', {
                     account_id: account_id,
                     url: data.links.next
-                });
+                })
                 data.data.forEach(rawTransaction => {
-                    let transaction = Object.assign(new Transaction, rawTransaction);
+                    let transaction = Object.assign(new Transaction, rawTransaction)
                     commit('ADD_TRANSACTION', transaction)
-                });
-            });
+                })
+            })
+    },
+
+    saveTransaction({dispatch}, transaction) {
+        if (transaction.id) {
+            return dispatch('updateTransaction', transaction)
+        }
+        return dispatch('createTransaction', transaction)
     },
 
     createTransaction({commit, rootState}, transaction) {
         return axios
             .post('/transactions/', transaction)
             .then(({data}) => {
-                let transaction = Object.assign(new Transaction, data.data);
-                commit('ADD_TRANSACTION', transaction);
-                commit('ADD_BALANCE', transaction);
-            });
+                let transaction = Object.assign(new Transaction, data.data)
+                commit('ADD_TRANSACTION', transaction)
+                commit('ADD_BALANCE', transaction)
+            })
     },
 
     updateTransaction({commit, getters}, transaction) {
         return axios
             .put('/transactions/' + transaction.id, transaction)
             .then(({data}) => {
-                let transaction = Object.assign(new Transaction, data.data);
-                let oldTransaction = getters.findTransactionById(transaction.id);
-                commit('REMOVE_BALANCE', oldTransaction);
-                commit('ADD_TRANSACTION', transaction);
-                commit('ADD_BALANCE', transaction);
-            });
+                let transaction = Object.assign(new Transaction, data.data)
+                let oldTransaction = getters.findTransactionById(transaction.id)
+                commit('REMOVE_BALANCE', oldTransaction)
+                commit('ADD_TRANSACTION', transaction)
+                commit('ADD_BALANCE', transaction)
+            })
     },
 
     clearTransaction({commit}, transaction) {
         return axios
             .put('/transactions/' + transaction.id + '/clear')
             .then(({data}) => {
-                let transaction = Object.assign(new Transaction, data.data);
-                commit('ADD_TRANSACTION', transaction);
-                commit('CLEAR_ACCOUNT_BALANCE', transaction);
+                let transaction = Object.assign(new Transaction, data.data)
+                commit('ADD_TRANSACTION', transaction)
+                commit('CLEAR_ACCOUNT_BALANCE', transaction)
             })
     },
 
@@ -108,13 +115,13 @@ const actions = {
         return axios
             .delete('/transactions/' + transaction.id)
             .then(() => {
-                let oldTransaction = getters.findTransactionById(transaction.id);
-                commit('REMOVE_BALANCE', oldTransaction);
-                commit('REMOVE_TRANSACTION', transaction);
-            });
+                let oldTransaction = getters.findTransactionById(transaction.id)
+                commit('REMOVE_BALANCE', oldTransaction)
+                commit('REMOVE_TRANSACTION', transaction)
+            })
     }
 
-};
+}
 
 const mutations = {
     RESET(state) {
@@ -122,21 +129,21 @@ const mutations = {
         state.nextUrls = {}
     },
     ADD_TRANSACTION(state, transaction) {
-        state.transactions = state.transactions.filter(x => x.id !== transaction.id);
-        state.transactions.push(transaction);
+        state.transactions = state.transactions.filter(x => x.id !== transaction.id)
+        state.transactions.push(transaction)
     },
     NEXT_TRANSACTIONS(state, {account_id, url}) {
-        state.nextUrls[account_id] = url;
+        state.nextUrls[account_id] = url
     },
     REMOVE_TRANSACTION(state, {id}) {
-        state.transactions = state.transactions.filter(x => x.id !== id);
+        state.transactions = state.transactions.filter(x => x.id !== id)
     },
     TRANSFER_CATEGORY(state, {from, to}) {
         state.transactions
             .filter(x => _.get(x, 'category_id') === from.id)
-            .forEach(transaction => transaction.category_id = to.id);
+            .forEach(transaction => transaction.category_id = to.id)
     }
-};
+}
 
 export default {
     state,

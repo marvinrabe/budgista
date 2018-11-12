@@ -19,9 +19,12 @@
                 <form-group name="password">
                     <template slot-scope="group">
                         <div class="float-right">
-                            <a class="text-muted small" href="/password/reset" v-t="'message.forgotPassword'"></a>
+                            <router-link class="text-muted small"
+                                         :to="{name: 'send_reset'}"
+                                         v-t="'message.forgotPassword'">
+                            </router-link>
                         </div>
-                        <app-password  :disable-strength="true">
+                        <app-password :disable-strength="true">
                             <input class="form-control"
                                    slot-scope="{bindings, handlers}"
                                    v-bind="Object.assign(bindings, group.bindings)"
@@ -46,7 +49,9 @@
                         </div>
                     </div>
 
-                    <app-button :label="$t('action.login')" :busy="loading"></app-button>
+                    <app-button :label="$t('action.login')"
+                                :busy="loading">
+                    </app-button>
                 </template>
             </app-form>
 

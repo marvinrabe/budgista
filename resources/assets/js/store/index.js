@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import accounts from './modules/accounts'
 import categories from './modules/categories'
+import groups from './modules/groups'
 import transactions from './modules/transactions'
 import user from './modules/user'
 
@@ -22,7 +23,8 @@ export const store = new Vuex.Store({
                 .all([
                     dispatch('loadUser'),
                     dispatch('loadAccounts'),
-                    dispatch('loadCategories')
+                    dispatch('loadCategories'),
+                    dispatch('loadGroups')
                 ])
                 .then(() => {
                     commit('HAS_LOADED')
@@ -40,6 +42,7 @@ export const store = new Vuex.Store({
     modules: {
         accounts,
         categories,
+        groups,
         transactions,
         user
     },

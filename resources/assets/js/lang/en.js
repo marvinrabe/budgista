@@ -3,8 +3,10 @@ export default {
         name: 'Budgista'
     },
     message: {
+        deleteUser: 'If you delete your user account all your data will be immediately, completely and irrevocably lost. Please enter your password to confirm the deletion.',
         deleteAccount: 'Do you really want to delete {name}? All transactions will be lost. This action can\'t be reversed.',
         deleteCategory: 'Do you really want to delete {name}? This action can\'t be reversed.',
+        deleteGroup: 'Do you really want to delete {name}? The categories won\'t get deleted. This action can\'t be reversed.',
         loginFailed: 'These credentials do not match our records.',
         unexpectedError: 'An unexpected Error occurred.',
         updateEmail: 'Email Address has been updated.',
@@ -14,12 +16,16 @@ export default {
         forgotPassword: 'Forgot Your Password?',
         noAccount: 'Don\'t have an account?',
         noAccountSignUp: 'Sign up now',
-        pageNotFound: 'The requested page could not be found.'
+        pageNotFound: 'The requested page could not be found.',
+        resetPasswordEmailSent: 'An email with a password reset link has been sent.',
+        resetPasswordSuccessful: 'Password has been reset successfully.',
+        userDeleted: 'User account deleted. Thank you for using Budgista.',
+        verifyEmail: 'Please verify your email address {email}.',
+        verificationSent: 'Sent!'
     },
     action: {
         returnToApp: 'Return to App',
-        'save': 'Save',
-        'saveAndNew': 'Save & New',
+        save: 'Save',
         'back': 'Back',
         'cancel': 'Cancel',
         'nextMonth': 'Next Month',
@@ -27,31 +33,41 @@ export default {
         'navigation': 'Toggle navigation',
         register: 'Sign up for free',
         login: 'Login',
-        deleteUserAccount: 'Delete my user account',
+        deleteUser: 'Delete my user account permanently',
         'logout': 'Logout',
         'loading': 'Loading',
         'futureTransactions': 'No future transactions | Display 1 future transaction | Display {count} future transactions',
         'create': {
             'account': 'Add Account',
             'category': 'Create Category',
+            group: 'Create Group',
             'transaction': 'Add Transaction'
         },
         'edit': {
             'category': 'Edit Category',
             'account': 'Edit Account',
+            group: 'Edit Group',
             'transaction': 'Edit Transaction'
         },
         'delete': {
             'category': 'Delete Category',
             'account': 'Delete Account',
+            group: 'Delete Group',
             'transaction': 'Delete Transaction'
         },
         'settings': {
             'password': 'Change Password',
             'email': 'Change Email Address'
-        }
+        },
+        reset: 'Reset Password',
+        sendReset: 'Send Password Reset Link',
+        sendVerification: 'Send Verfication Link',
+        changeEmail: 'Change email address'
     },
     form: {
+        newEmail: 'New Email address',
+        currentEmail: 'Current Email address',
+        feedback: 'Why are you leaving?',
         'name': 'Name',
         'amount': 'Amount',
         'recurring': 'Recurring?',
@@ -75,6 +91,7 @@ export default {
             uncleared: 'Uncleared Balance',
             working: 'Available Balance'
         },
+        initialBalance: 'Initial Balance',
         date: 'Date',
         payee: 'Payee',
         expense: 'Expense',
@@ -90,9 +107,12 @@ export default {
     },
     word: {
         transaction: 'Transaction',
-        category: 'Category'
+        category: 'Category',
+        verified: 'Verified',
+        unverified: 'Unverified'
     },
     title: {
+        deleteUser: 'Delete user account',
         profile: 'User account',
         accounts: 'Accounts',
         budget: 'Budget',
@@ -106,7 +126,11 @@ export default {
         emptyAccount: 'This account is empty.',
         register: 'Sign up',
         trackingAccounts: 'Tracking Accounts',
-        pageNotFound: 'Not Found'
+        pageNotFound: 'Not Found',
+        ungrouped: 'Ungrouped',
+        reset: 'Reset Password',
+        statistics: 'Statistics',
+        statisticNetWorth: 'Net Worth'
     },
     validation: {
         messages: {

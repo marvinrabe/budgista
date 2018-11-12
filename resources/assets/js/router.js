@@ -4,12 +4,18 @@ import Month from './models/Month'
 
 export const routes = [
     {
-        path: '/auth',
+        path: '/',
         component: require('./components/layout/Auth.vue'),
         meta: {
             auth: false
         },
         children: [
+            {
+                path: '',
+                redirect: to => {
+                    return {name: 'login'}
+                }
+            },
             {
                 path: 'login',
                 name: 'login',
@@ -20,10 +26,21 @@ export const routes = [
                 name: 'register',
                 component: require('./components/auth/Register.vue'),
             },
+            {
+                path: 'reset-password',
+                name: 'send_reset',
+                component: require('./components/auth/Email.vue'),
+            },
+            {
+                path: 'reset-password/:token',
+                name: 'reset',
+                component: require('./components/auth/Reset.vue'),
+                props: true
+            },
         ]
     },
     {
-        path: '/app',
+        path: '/',
         component: require('./components/layout/Default.vue'),
         meta: {
             auth: true
@@ -49,6 +66,11 @@ export const routes = [
                 props: true
             },
             {
+                path: 'statistics',
+                name: 'statistics',
+                component: require('./components/statistics/Index.vue')
+            },
+            {
                 path: 'settings',
                 name: 'settings',
                 component: require('./components/settings/Index.vue')
@@ -57,6 +79,11 @@ export const routes = [
                 path: 'profile',
                 name: 'profile',
                 component: require('./components/profile/Index.vue')
+            },
+            {
+                path: 'leave',
+                name: 'leave',
+                component: require('./components/profile/Delete.vue')
             },
             {
                 path: 'account/:account_id',

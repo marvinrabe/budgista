@@ -24,7 +24,9 @@
         </form-group>
 
         <div slot="actions">
-            <app-button :label="$t('action.settings.password')" :busy="saving"></app-button>
+            <app-button :label="$t('action.settings.password')"
+                        :busy="saving">
+            </app-button>
         </div>
     </app-form>
 </template>

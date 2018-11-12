@@ -1,14 +1,15 @@
 <template>
     <button :class="styling"
-            :disabled="busy || disabled">
+            :disabled="busy || disabled"
+            @click="$emit('click')">
         <font-awesome-icon :icon="icon" spin v-if="busy"/>
         {{ text }}
     </button>
 </template>
 
 <script>
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faSpinner from '@fortawesome/fontawesome-free-solid/faSpinner'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faSpinner} from '@fortawesome/free-solid-svg-icons'
 
     export default {
         props: {

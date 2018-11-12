@@ -6,13 +6,6 @@
 <script>
     zE(function() {
         zE.hide();
-        @if(Auth()->check())
-        zE.setLocale('{{ auth()->user()->language }}');
-        zE.identify(
-            @json(['name' => auth()->user()->name, 'email' => auth()->user()->email])
-        );
-        @else
-        zE.setLocale('{{ LaravelLocalization::getCurrentLocale() }}');
-        @endif
+        zE.setLocale('{{ app()->getLocale() }}');
     });
 </script>

@@ -4,7 +4,7 @@
              v-for="icon in icons"
              :key="icon.name"
              :class="{'bg-primary text-white': icon.name === value, 'text-dark': icon.name !== value}"
-            @click="$emit('input', icon.name)">
+             @click="$emit('input', icon.name)">
             <font-awesome-icon :icon="icon.icon" fixed-width/>
         </div>
     </div>
@@ -18,7 +18,7 @@
 
 <script>
     import {accountIcons} from '../../config'
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 
     export default {
         props: ['value'],

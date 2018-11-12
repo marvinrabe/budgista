@@ -21,7 +21,6 @@
 </template>
 
 <style lang="scss">
-    @import "../../sass/_shadows";
 
     .modal {
         background-color: rgba(0, 0, 0, .5);
@@ -33,9 +32,7 @@
         }
 
         &-content {
-            @extend .shadow-2;
-            border: 0;
-            border-radius: 0;
+            box-shadow: rgba(0, 0, 0, 0.04) 0 3px 6px 0;
         }
 
         &-header {

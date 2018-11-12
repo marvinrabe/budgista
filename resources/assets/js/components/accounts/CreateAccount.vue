@@ -11,8 +11,8 @@
 </template>
 
 <script>
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faPlus from '@fortawesome/fontawesome-free-solid/faPlus'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import { faPlus } from '@fortawesome/free-solid-svg-icons'
     import CreateAccountForm from './CreateAccountForm'
 
     export default {

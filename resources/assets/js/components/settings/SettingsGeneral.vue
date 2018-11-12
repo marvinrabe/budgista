@@ -32,7 +32,9 @@
         </form-group>
 
         <div slot="actions">
-            <app-button :label="$t('action.save')" :busy="saving"></app-button>
+            <app-button :label="$t('action.save')"
+                        :busy="saving">
+            </app-button>
         </div>
 
     </app-form>
@@ -55,34 +57,34 @@
         },
         computed: {
             languages() {
-                return languages;
+                return languages
             },
             locales() {
-                return _.keys(this.$i18n.messages[this.$i18n.locale].language);
+                return _.keys(this.$i18n.messages[this.$i18n.locale].language)
             },
             currencies() {
-                return _.keys(this.$i18n.messages[this.$i18n.locale].currency);
+                return _.keys(this.$i18n.messages[this.$i18n.locale].currency)
             }
         },
         mounted() {
-            this.reset();
+            this.reset()
         },
         methods: {
             reset() {
-                this.form.language = this.$store.state.user.language;
-                this.form.locale = this.$store.state.user.locale;
-                this.form.currency = this.$store.state.user.currency;
+                this.form.language = this.$store.state.user.language
+                this.form.locale = this.$store.state.user.locale
+                this.form.currency = this.$store.state.user.currency
             },
             save() {
-                this.saving = true;
+                this.saving = true
                 this.$store.dispatch('updateSettings', this.form)
                     .then(() => {
-                        this.$snotify.success(this.$t('message.updateSettings'));
+                        this.$snotify.success(this.$t('message.updateSettings'))
                     })
                     .catch(this.$refs.form.error)
                     .finally(() => {
-                        this.saving = false;
-                    });
+                        this.saving = false
+                    })
             }
         }
     }

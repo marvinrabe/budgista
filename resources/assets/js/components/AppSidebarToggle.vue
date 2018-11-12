@@ -1,18 +1,27 @@
 <template>
-    <button class="btn btn-text-dark" type="button" aria-controls="menu"
+    <button class="btn btn-text-dark"
+            type="button"
+            aria-controls="menu"
             :aria-label="$t('action.navigation')"
             @click.prevent="showMenu">
-        <font-awesome-icon icon="bars" fixed-width />
+        <font-awesome-icon :icon="icon" fixed-width/>
     </button>
 </template>
 
 <script>
+    import {faBars} from '@fortawesome/free-solid-svg-icons'
+
     export default {
+        computed: {
+            icon() {
+                return faBars
+            }
+        },
         methods: {
             showMenu() {
-                let menu = document.querySelector(".menu");
-                menu.classList.add("menu--animatable");
-                menu.classList.add("menu--visible");
+                let menu = document.querySelector('[rel=\'sidebar\']')
+                menu.classList.add('sidebar--animatable')
+                menu.classList.add('sidebar--visible')
             }
         }
     }

@@ -3,18 +3,15 @@
         <template slot="button-content">
             <font-awesome-icon :icon="icon"/>
         </template>
-        <b-dropdown-item
-                @click="$refs.createCategory.showModal()"
-                v-t="'action.create.category'">
-        </b-dropdown-item>
-        <create-category ref="createCategory"></create-category>
+        <create-group></create-group>
     </b-dropdown>
 </template>
 
 <script>
+    import CreateGroup from '../groups/CreateGroup'
     import CreateCategory from '../categories/CreateCategory'
-    import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-    import faEllipsisH from '@fortawesome/fontawesome-free-solid/faEllipsisH'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faEllipsisH} from '@fortawesome/free-solid-svg-icons'
     import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
     import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 
@@ -24,7 +21,8 @@
             bDropdown,
             bDropdownItem,
             FontAwesomeIcon,
-            CreateCategory
+            CreateCategory,
+            CreateGroup
         },
         computed: {
             icon() {

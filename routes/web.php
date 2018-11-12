@@ -11,25 +11,8 @@
 |
 */
 
-Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
-    Route::get('/', 'HomeController@index')->name('home');
-    Route::view('/legal', 'static.legal')->name('legal');
-    Route::view('/terms', 'static.terms')->name('terms');
-    Route::view('/privacy', 'static.privacy')->name('privacy');
-
-    $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
-    $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-    $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.request');
-});
-
-Route::view('/auth/login', 'app')->name('login');
-Route::view('/auth/register', 'app')->name('register');
-Route::view('/app', 'app')->name('app');
-
-Route::group(['prefix' => 'app'], function() {
-    Route::view('{any}', 'app')->where('any', '.*');
-});
-Route::group(['prefix' => 'auth'], function() {
-    Route::view('{any}', 'auth')->where('any', '.*');
-});
+Route::view('/', 'app')->name('app');
+Route::view('/login', 'app')->name('login');
+Route::get('/verify/{id}', 'VerificationController@verify')->name('verification.verify');
+Route::view('/reset-password/{token}', 'app')->name('password.reset');
+Route::view('{any}', 'app')->where('any', '.*');
