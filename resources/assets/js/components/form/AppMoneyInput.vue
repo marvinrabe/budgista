@@ -1,6 +1,7 @@
 <template>
     <input class="form-control"
            type="text"
+           ref="input"
            :placeholder="placeholder"
            @focus="onFocus"
            @input="onInput($event.target.value)"
@@ -38,8 +39,11 @@
                 if (this.number !== 0) {
                     this.$el.value = this.formatSimpleValue(this.number)
                 } else {
-                    this.$el.value = '';
+                    this.$el.value = ''
                 }
+            },
+            focus() {
+                this.$refs.input.focus()
             },
             onFocus() {
                 this.prepareValue()
@@ -54,7 +58,7 @@
                 this.prepareValue()
             },
             selectAll() {
-                let input = this.$el;
+                let input = this.$el
                 setTimeout(function () {
                     input.select()
                 }, 0)

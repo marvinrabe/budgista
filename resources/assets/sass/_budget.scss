@@ -127,6 +127,8 @@
         text-align: right;
         border-color: transparent;
         background-color: transparent;
+        height: calc(1.5em + 2px);
+        padding: 0 0.25rem;
 
         &:hover,
         &:focus {

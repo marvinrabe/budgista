@@ -5,18 +5,16 @@
                 <font-awesome-icon icon="arrows-alt-v" fixed-width/>
             </span>
         </div>
-        <div class="data"
-             @click.stop="$refs.input.focus()">
+        <div class="data" @click.stop="$refs.budgetInput.focus()">
             <div class="budget-column-name">
                 <ellipsis>{{ category.name }}</ellipsis>
             </div>
             <div class="budget-column-budget" @click.stop="">
                 <app-money-input
-                        class="py-0 px-1"
-                        ref="input"
+                        ref="budgetInput"
                         :value="budgeted"
-                        @input="val => updateBudget(val)"
-                        :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)"></app-money-input>
+                        :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)"
+                        @input="val => updateBudget(val)"></app-money-input>
             </div>
             <div class="budget-column-activity">
                 <money-format :value="activity"></money-format>
