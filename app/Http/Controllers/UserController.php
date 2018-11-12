@@ -101,13 +101,15 @@ class UserController extends Controller
             ]
         ]);
 
-        $user->update([
+        $user->fill([
             'email' => request('email')
         ]);
 
         $user->forceFill([
             'email_verified_at' => null
-        ])->save();
+        ]);
+
+        $user->save();
 
         $user->sendEmailVerificationNotification();
 
