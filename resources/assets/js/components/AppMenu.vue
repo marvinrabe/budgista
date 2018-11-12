@@ -1,28 +1,7 @@
 <template>
     <div class="menu">
         <template v-for="item in menu">
-            <div class="my-2" v-if="item.accounts">
-                <div class="d-flex align-items-center">
-                    <p class="menu__header">{{ $t('title.accounts') }}</p>
-                    <create-account ref="createAccount" class="ml-auto"></create-account>
-                </div>
-
-                <account-menu-item
-                        v-for="account in spendingAccounts"
-                        :key="account.id"
-                        :account="account"
-                        @click.native="$emit('navigate')">
-                </account-menu-item>
-                <template v-if="trackingAccounts.length">
-                    <p class="nav-header mt-2">{{ $t('title.trackingAccounts') }}</p>
-                    <account-menu-item
-                            v-for="account in trackingAccounts"
-                            :key="account.id"
-                            :account="account"
-                            @click.native="$emit('navigate')">
-                    </account-menu-item>
-                </template>
-            </div>
+            <account-menu v-if="item.accounts"></account-menu>
             <router-link
                     v-else-if="item.route"
                     :to="item.route"
@@ -51,22 +30,18 @@
 </template>
 
 <script>
-    import AccountMenuItem from './accounts/MenuItem'
+    import AccountMenu from './accounts/Menu'
     import CreateAccount from './accounts/CreateAccount'
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
     import {faEnvelope, faCog, faLifeRing, faUserCircle} from '@fortawesome/free-solid-svg-icons'
-    import {mapGetters} from 'vuex'
 
     export default {
         components: {
-            AccountMenuItem,
+            AccountMenu,
             CreateAccount,
             FontAwesomeIcon
         },
         computed: {
-            user() {
-                return this.$store.state.user
-            },
             menu() {
                 return [
                     {
@@ -102,11 +77,7 @@
                         class: 'd-md-none'
                     }
                 ]
-            },
-            ...mapGetters([
-                'spendingAccounts',
-                'trackingAccounts'
-            ])
+            }
         },
         methods: {
             logout() {
