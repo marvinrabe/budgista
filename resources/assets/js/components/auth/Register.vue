@@ -39,7 +39,9 @@
                 </form-group>
 
                 <template slot="actions">
-                    <app-button :label="$t('action.register')" :busy="loading"></app-button>
+                    <app-button :label="$t('action.register')"
+                                :busy="loading">
+                    </app-button>
                 </template>
             </app-form>
         </div>

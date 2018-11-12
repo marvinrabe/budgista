@@ -17,7 +17,9 @@
                 </form-group>
 
                 <template slot="actions">
-                    <app-button :label="$t('action.sendReset')" :busy="loading"></app-button>
+                    <app-button :label="$t('action.sendReset')"
+                                :busy="loading">
+                    </app-button>
                 </template>
             </app-form>
 
@@ -44,7 +46,7 @@
                         email: this.form.email
                     })
                     .then(() => {
-                        this.$snotify.success(this.$t('message.resetPasswordEmailSent'));
+                        this.$snotify.success(this.$t('message.resetPasswordEmailSent'))
                     })
                     .catch(this.$refs.form.error)
                     .finally(() => {

@@ -13,8 +13,7 @@
 
             <app-button variant="danger"
                         :label="$t('action.delete.group')"
-                        :busy="saving"
-                        @click="deleteGroup">
+                        :busy="saving">
             </app-button>
         </template>
     </app-form>
