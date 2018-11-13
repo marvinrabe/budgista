@@ -2,7 +2,9 @@
     <div class="my-2">
         <div class="d-flex align-items-center">
             <p class="menu__header">{{ $t('title.accounts') }}</p>
-            <create-account ref="createAccount" class="ml-auto"></create-account>
+            <create-account ref="createAccount"
+                            class="ml-auto">
+            </create-account>
         </div>
 
         <menu-item
