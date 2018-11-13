@@ -23,7 +23,7 @@
             }
         },
         mounted() {
-            this.prepareValue()
+            this.unprepareValue()
         },
         methods: {
             formatValue(value) {
@@ -42,6 +42,13 @@
                     this.$el.value = ''
                 }
             },
+            unprepareValue() {
+                if (this.number !== 0) {
+                    this.$el.value = this.formatValue(this.number)
+                } else {
+                    this.$el.value = ''
+                }
+            },
             focus() {
                 this.$refs.input.focus()
             },
@@ -55,7 +62,7 @@
             },
             onBlur(value) {
                 this.onInput(value)
-                this.prepareValue()
+                this.unprepareValue()
             },
             selectAll() {
                 let input = this.$el
