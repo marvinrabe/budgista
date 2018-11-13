@@ -4,19 +4,15 @@
         <app-toolbar :title="$t('title.budget')">
             <month-picker :month="monthObject" slot="title"></month-picker>
 
-            <transition name="fade">
-                <overview :sheet="sheet" v-if="!loading"></overview>
-            </transition>
+            <overview :sheet="sheet" :loading="loading"></overview>
 
             <template slot="submenu">
                 <budget-settings :month="monthObject"></budget-settings>
             </template>
         </app-toolbar>
 
-        <app-spinner v-if="loading"></app-spinner>
-
-        <budget v-else
-                v-model="rows"
+        <budget v-model="rows"
+                :loading="loading"
                 :month="month"></budget>
 
     </div>

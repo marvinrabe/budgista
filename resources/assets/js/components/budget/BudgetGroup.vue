@@ -18,13 +18,19 @@
                     {{ $t('title.ungrouped') }}
                 </div>
                 <div class="budget-column-budget">
-                    <money-format :value="budget"></money-format>
+                    <app-skeleton :busy="loading" variant="dark-light">
+                        <money-format :value="budget"></money-format>
+                    </app-skeleton>
                 </div>
                 <div class="budget-column-activity">
-                    <money-format :value="activity"></money-format>
+                    <app-skeleton :busy="loading" variant="dark-light">
+                        <money-format :value="activity"></money-format>
+                    </app-skeleton>
                 </div>
                 <div class="budget-column-available">
-                    <money-format :value="available"></money-format>
+                    <app-skeleton :busy="loading" variant="dark-light">
+                        <money-format :value="available"></money-format>
+                    </app-skeleton>
                 </div>
             </div>
             <div class="actions">
@@ -39,6 +45,7 @@
             <budget-category
                     v-for="category in categories"
                     :key="category.id"
+                    :loading="loading"
                     :category="category"
                     :budget="budgetForCategory(category)"
                     @update:budget="updateBudget">
@@ -54,14 +61,16 @@
     import collect from 'collect.js'
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
     import {faChevronDown, faChevronRight} from '@fortawesome/free-solid-svg-icons'
+    import AppSkeleton from '../AppSkeleton'
 
     export default {
-        props: ['group', 'value', 'month'],
+        props: ['group', 'value', 'month', 'loading'],
         components: {
             BudgetCategory,
             GroupSettings,
             draggable,
-            FontAwesomeIcon
+            FontAwesomeIcon,
+            AppSkeleton
         },
         computed: {
             categoriesVisible() {

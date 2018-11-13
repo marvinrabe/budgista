@@ -59,6 +59,7 @@
   "dependencies": {
     "chart.js": "^2.7.3",
     "collectjs": "^0.0.2",
+    "tb-skeleton": "^0.3.6",
     "vue-chartjs": "^3.4.0"
   }
 }
