@@ -36,8 +36,7 @@
                 <div class="text-center p-1 transactions-row-dummy"
                      v-if="countFutureTransactions > 0 && !showFutureTransactions">
                     <a href="#" class="small" @click.prevent="showFutureTransactions = true">
-                        {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions })
-                        }}
+                        {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions }) }}
                     </a>
                 </div>
                 <transaction-row
@@ -62,7 +61,7 @@
 <style>
     @media (max-width: 575.98px){
         .toolbar .balance .numeric:first-child {
-            text-align: left !important;
+            align-items: flex-start !important;
         }
     }
 </style>
