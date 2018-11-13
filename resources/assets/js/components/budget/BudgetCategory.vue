@@ -55,15 +55,19 @@
             AppSkeleton,
             CategorySettings
         },
-        data() {
-            return {
-                previousMonth: this.budget.previousMonth,
-                budgeted: this.budget.budget,
-                recommendedBudget: this.budget.recommendedBudget,
-                activity: this.budget.activity
-            }
-        },
         computed: {
+            previousMonth() {
+                return this.budget.previousMonth
+            },
+            budgeted() {
+                return this.budget.budget
+            },
+            recommendedBudget() {
+                return this.budget.recommendedBudget
+            },
+            activity() {
+                return this.budget.activity
+            },
             available() {
                 return this.previousMonth + this.budgeted + this.activity
             }
