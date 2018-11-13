@@ -35,7 +35,10 @@
             },
             addError(field, message) {
                 if (_.has(this.fields, field)) {
-                    this.errors.add(field, message, 'server')
+                    this.errors.add({
+                        field: field,
+                        msg: message
+                    })
                     this.$validator.flag(field, {
                         invalid: true,
                         valid: false,
