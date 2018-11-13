@@ -1,7 +1,9 @@
 <template>
     <div class="menu">
         <template v-for="item in menu">
-            <account-menu v-if="item.accounts"></account-menu>
+            <account-menu v-if="item.accounts"
+                          @navigate="$emit('navigate')">
+            </account-menu>
             <router-link
                     v-else-if="item.route"
                     :to="item.route"
