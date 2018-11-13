@@ -10,19 +10,23 @@
                 <ellipsis>{{ category.name }}</ellipsis>
             </div>
             <div class="budget-column-budget" @click.stop="">
-                <app-money-input
-                        ref="budgetInput"
-                        :value="budgeted"
-                        :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)"
-                        @input="val => updateBudget(val)"></app-money-input>
+                <app-skeleton :busy="loading">
+                    <app-money-input ref="budgetInput"
+                                     :value="budgeted"
+                                     :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)"
+                                     @input="val => updateBudget(val)"></app-money-input>
+                </app-skeleton>
             </div>
             <div class="budget-column-activity">
-                <money-format :value="activity"></money-format>
+                <app-skeleton :busy="loading">
+                    <money-format :value="activity"></money-format>
+                </app-skeleton>
             </div>
             <div class="budget-column-available">
-                <money-format
-                        :class="[{ 'text-danger': available < 0 }, { 'text-success': available > 0 }]"
-                        :value="available"></money-format>
+                <app-skeleton :busy="loading">
+                    <money-format :class="[{ 'text-danger': available < 0 }, { 'text-success': available > 0 }]"
+                                  :value="available"></money-format>
+                </app-skeleton>
             </div>
         </div>
         <div class="actions">
@@ -33,22 +37,22 @@
 
 <style lang="scss" scoped>
     .budget-row {
-
         .data {
             cursor: pointer;
         }
-
     }
 </style>
 
 <script>
     import CategorySettings from '../categories/CategorySettings'
     import AppMoneyInput from '../form/AppMoneyInput'
+    import AppSkeleton from '../AppSkeleton'
 
     export default {
-        props: ['category', 'budget'],
+        props: ['category', 'budget', 'loading'],
         components: {
             AppMoneyInput,
+            AppSkeleton,
             CategorySettings
         },
         data() {

@@ -1,10 +1,12 @@
 <template>
     <div class="numeric">
-        <money-format
-                class="numeric-value"
-                :class="colorClasses"
-                :value="value">
-        </money-format>
+        <app-skeleton :busy="loading" variant="dark">
+            <money-format
+                    class="numeric-value"
+                    :class="colorClasses"
+                    :value="value">
+            </money-format>
+        </app-skeleton>
         <p class="numeric-label">{{ $t(label) }}</p>
     </div>
 </template>
@@ -13,12 +15,12 @@
     @import "../../sass/_variables.scss";
 
     .numeric {
-        text-align: right;
-        padding: 0 .5em;
+        padding: 0 1em;
         display: flex;
         flex: 1;
         flex-direction: column;
-        justify-content: center;
+        align-items: flex-end;
+        border-right: 1px solid $gray-300;
 
         &-label,
         &-value {
@@ -37,12 +39,24 @@
             font-size: .8em;
             color: $gray-600;
         }
+
+        &:last-child {
+            border-right: 0;
+        }
+
+        &:first-child {
+            border-left: 0;
+        }
     }
 </style>
 
 <script>
+    import AppSkeleton from './AppSkeleton'
     export default {
-        props: ['value', 'label', 'color'],
+        props: ['value', 'label', 'color', 'loading'],
+        components: {
+            AppSkeleton
+        },
         computed: {
             colorClasses() {
                 if (this.color) {

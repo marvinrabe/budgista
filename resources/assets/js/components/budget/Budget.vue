@@ -1,5 +1,5 @@
 <template>
-    <div class="budget" v-else>
+    <div class="budget">
         <div class="budget-header">
             <div class="handle">&nbsp;</div>
             <div class="data">
@@ -7,13 +7,13 @@
                     {{ $t('form.category') }}
                 </div>
                 <div class="budget-column-budget">
-                    {{ $t('form.budget') }}
+                    <span>{{ $t('form.budget') }}</span>
                 </div>
                 <div class="budget-column-activity">
-                    {{ $t('form.activity') }}
+                    <span>{{ $t('form.activity') }}</span>
                 </div>
                 <div class="budget-column-available">
-                    {{ $t('form.available') }}
+                    <span>{{ $t('form.available') }}</span>
                 </div>
             </div>
             <div class="actions">&nbsp;</div>
@@ -27,6 +27,7 @@
                    @end="drag=false">
             <budget-group
                     v-for="group in groups"
+                    :loading="loading"
                     :value="value"
                     @input="value => $emit('input', value)"
                     :key="group.id"
@@ -37,6 +38,7 @@
 
         <budget-group
                 v-if="hasUngroupedCategories"
+                :loading="loading"
                 :value="value"
                 @input="value => $emit('input', value)"
                 :month="month">
@@ -53,10 +55,10 @@
 <script>
     import draggable from 'vuedraggable'
     import BudgetGroup from './BudgetGroup'
-    import { mapGetters } from 'vuex'
+    import {mapGetters} from 'vuex'
 
     export default {
-        props: ['value', 'month'],
+        props: ['value', 'month', 'loading'],
         components: {
             BudgetGroup,
             draggable

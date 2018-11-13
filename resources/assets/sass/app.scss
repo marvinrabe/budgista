@@ -53,6 +53,20 @@ body {
 
 }
 
+@import "~tb-skeleton/dist/skeleton.css";
+
+@each $color, $value in $theme-colors {
+  .c-skeleton__tb--color-#{$color} {
+    background-color: $value;
+  }
+  .c-skeleton__tb--color-light-#{$color} {
+    background-color: lighten($value, 20%);
+  }
+  .c-skeleton__tb--color-dark-#{$color} {
+    background-color: darken($value, 20%);
+  }
+}
+
 @import "sidebar";
 @import "menu";
 @import "toast";
