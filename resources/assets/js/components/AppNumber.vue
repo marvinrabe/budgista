@@ -1,6 +1,6 @@
 <template>
     <div class="numeric">
-        <app-skeleton :busy="loading" variant="dark">
+        <app-skeleton :busy="loading">
             <money-format
                     class="numeric-value"
                     :class="colorClasses"
@@ -27,7 +27,6 @@
             flex: 1;
             flex-grow: 0;
             font-size: 1em;
-            line-height: 1.25em;
             white-space: nowrap;
         }
 

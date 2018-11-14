@@ -3,9 +3,6 @@
 
     export default {
         props: {
-            variant: {
-                default: 'light'
-            },
             busy: {
                 default: false
             },
@@ -13,12 +10,7 @@
                 default: '66%'
             },
             height: {
-                default: '1.25em'
-            }
-        },
-        computed: {
-            classes() {
-                return ['c-skeleton__tb--color-' + this.variant]
+                default: '1em'
             }
         },
         render(createElement) {
@@ -27,10 +19,11 @@
             }
 
             return createElement(TbSkeleton, {
-                'class': this.classes,
                 style: {
                     height: this.height,
-                    width: this.width
+                    width: this.width,
+                    backgroundColor: 'rgba(0, 0, 0, 10%)',
+                    margin: '0.25em'
                 },
                 props: {
                     theme: 'opacity',

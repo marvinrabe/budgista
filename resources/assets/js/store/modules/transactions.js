@@ -4,6 +4,7 @@ import Transaction from '../../models/Transaction'
 // transactions: [{ id, date, payee, amount, cleared, rrule, recurring, category_id, account_id }],
 const state = {
     transactions: [],
+    loaded: [],
     nextUrls: {}
 }
 
@@ -13,6 +14,9 @@ export const getters = {
     },
     isTransactionLoaded: (state, getters) => (id) => {
         return getters.findTransactionById(id) !== undefined
+    },
+    areAccountTransactionsLoaded: (state) => (id) => {
+        return state.loaded.includes(id)
     },
     findTransactionsByAccountId: (state) => (id) => {
         let transactions = state.transactions.filter(x => x.account_id === id).slice()
@@ -43,24 +47,20 @@ const actions = {
             })
     },
 
-    loadTransactions({state, commit, dispatch}, account_id) {
-        if (!(account_id in state.nextUrls)) {
-            commit('NEXT_TRANSACTIONS', {
-                account_id: account_id,
-                url: '/accounts/' + account_id + '/transactions'
-            })
-            dispatch('loadMoreTransactions', account_id)
-        }
-    },
+    loadTransactions({state, getters, commit}, account_id) {
+        let url = '/accounts/' + account_id + '/transactions'
+        if (getters.areAccountTransactionsLoaded(account_id)) {
+            url = state.nextUrls[account_id]
 
-    loadMoreTransactions({state, commit}, account_id) {
-        if (!state.nextUrls[account_id]) {
-            return Promise.reject()
+            if (!state.nextUrls[account_id]) {
+                return Promise.reject()
+            }
         }
 
         return axios
-            .get(state.nextUrls[account_id])
+            .get(url)
             .then(({data}) => {
+                commit('MARK_ACCOUNT_AS_LOADED', account_id)
                 commit('NEXT_TRANSACTIONS', {
                     account_id: account_id,
                     url: data.links.next
@@ -142,6 +142,11 @@ const mutations = {
         state.transactions
             .filter(x => _.get(x, 'category_id') === from.id)
             .forEach(transaction => transaction.category_id = to.id)
+    },
+    MARK_ACCOUNT_AS_LOADED(state, account_id) {
+        if (!state.loaded.includes(account_id)) {
+            state.loaded.push(account_id)
+        }
     }
 }
 
