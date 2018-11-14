@@ -104,6 +104,10 @@
 .transaction-amount {
   white-space: nowrap;
   text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .transaction-clear {
@@ -135,8 +139,8 @@
   .transaction-category {
     text-align: right !important;
 
-    div {
-      text-align: right !important;
+    .tb-skeleton {
+      margin-left: auto !important;
     }
   }
 
