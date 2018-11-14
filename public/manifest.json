@@ -2,7 +2,7 @@
   "name": "Budgista",
   "short_name": "Budgista",
   "description": "Free Budget App",
-  "start_url": "/app",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#39434b",
   "background_color": "#F4F5F6",
