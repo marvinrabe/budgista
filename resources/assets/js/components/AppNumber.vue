@@ -27,7 +27,6 @@
             flex: 1;
             flex-grow: 0;
             font-size: 1em;
-            line-height: 1.25em;
             white-space: nowrap;
         }
 

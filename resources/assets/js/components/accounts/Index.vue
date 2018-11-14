@@ -31,12 +31,15 @@
         </div>
 
         <div class="card">
-            <reconcile-form v-if="isEmpty" :account="account"></reconcile-form>
+            <template v-if="isLoading">
+                <transaction-skeleton v-for="n in 25" :key="n"></transaction-skeleton>
+            </template>
+            <reconcile-form v-else-if="isEmpty" :account="account"></reconcile-form>
             <template v-else>
                 <div class="text-center p-1 transactions-row-dummy"
                      v-if="countFutureTransactions > 0 && !showFutureTransactions">
                     <a href="#" class="small" @click.prevent="showFutureTransactions = true">
-                        {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions }) }}
+                        {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions })}}
                     </a>
                 </div>
                 <transaction-row
@@ -48,7 +51,9 @@
             </template>
         </div>
 
-        <infinite-loading v-if="!isEmpty" :key="account_id" @infinite="loadMore" spinner="waveDots"
+        <infinite-loading :key="account_id"
+                          @infinite="load"
+                          spinner="waveDots"
                           ref="infiniteLoading">
             <span slot="no-more"></span>
             <span slot="spinner">
@@ -59,7 +64,7 @@
 </template>
 
 <style>
-    @media (max-width: 575.98px){
+    @media (max-width: 575.98px) {
         .toolbar .balance .numeric:first-child {
             align-items: flex-start !important;
         }
@@ -67,7 +72,7 @@
 </style>
 
 <style scoped>
-    @media (max-width: 575.98px){
+    @media (max-width: 575.98px) {
         .toolbar .title {
             order: 1;
         }
@@ -94,6 +99,7 @@
     import InfiniteLoading from 'vue-infinite-loading'
     import AccountSettings from './AccountSettings'
     import TransactionRow from './TransactionRow'
+    import TransactionSkeleton from './TransactionSkeleton'
     import ReconcileForm from './ReconcileForm'
 
     export default {
@@ -103,7 +109,8 @@
             Balance,
             InfiniteLoading,
             ReconcileForm,
-            TransactionRow
+            TransactionRow,
+            TransactionSkeleton
         },
         data() {
             return {
@@ -113,7 +120,10 @@
         },
         computed: {
             isEmpty() {
-                return this.transactions.length === 0 && !this.loading
+                return this.$store.getters.areAccountTransactionsLoaded(this.account_id) && this.transactions.length === 0 && !this.loading
+            },
+            isLoading() {
+                return !this.$store.getters.areAccountTransactionsLoaded(this.account_id)
             },
             account() {
                 return this.$store.getters.findAccountById(this.account_id)
@@ -127,27 +137,30 @@
         },
         watch: {
             account_id() {
-                this.$store.dispatch('loadTransactions', this.account_id)
+                this.load(this.$refs.infiniteLoading.stateChanger)
             }
         },
-        created() {
-            this.$store.dispatch('loadTransactions', this.account_id)
+        mounted() {
+            this.load()
         },
         beforeRouteUpdate(to, from, next) {
             this.showFutureTransactions = false
-            this.loading = true
             next()
         },
         methods: {
-            loadMore: function ($state) {
+            load: function (loader) {
                 this.loading = true
-                this.$store.dispatch('loadMoreTransactions', this.account.id)
+                this.$store.dispatch('loadTransactions', this.account_id)
                     .then(() => {
-                        $state.loaded()
+                        if (loader) {
+                            loader.loaded()
+                        }
                     })
                     .catch(() => {
-                        $state.loaded()
-                        $state.complete()
+                        if (loader) {
+                            loader.loaded()
+                            loader.complete()
+                        }
                     })
                     .finally(() => {
                         this.loading = false

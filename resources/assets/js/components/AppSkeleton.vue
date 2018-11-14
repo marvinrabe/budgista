@@ -10,7 +10,7 @@
                 default: '66%'
             },
             height: {
-                default: '1.25em'
+                default: '1em'
             }
         },
         render(createElement) {
@@ -22,7 +22,8 @@
                 style: {
                     height: this.height,
                     width: this.width,
-                    backgroundColor: 'rgba(0, 0, 0, 10%)'
+                    backgroundColor: 'rgba(0, 0, 0, 10%)',
+                    margin: '0.25em'
                 },
                 props: {
                     theme: 'opacity',
