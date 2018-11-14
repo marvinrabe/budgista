@@ -18,17 +18,17 @@
                     {{ $t('title.ungrouped') }}
                 </div>
                 <div class="budget-column-budget">
-                    <app-skeleton :busy="loading" variant="dark-light">
+                    <app-skeleton :busy="loading">
                         <money-format :value="budget"></money-format>
                     </app-skeleton>
                 </div>
                 <div class="budget-column-activity">
-                    <app-skeleton :busy="loading" variant="dark-light">
+                    <app-skeleton :busy="loading">
                         <money-format :value="activity"></money-format>
                     </app-skeleton>
                 </div>
                 <div class="budget-column-available">
-                    <app-skeleton :busy="loading" variant="dark-light">
+                    <app-skeleton :busy="loading">
                         <money-format :value="available"></money-format>
                     </app-skeleton>
                 </div>
