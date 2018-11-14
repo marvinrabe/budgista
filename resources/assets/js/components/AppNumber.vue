@@ -1,6 +1,6 @@
 <template>
     <div class="numeric">
-        <app-skeleton :busy="loading" variant="dark">
+        <app-skeleton :busy="loading">
             <money-format
                     class="numeric-value"
                     :class="colorClasses"
