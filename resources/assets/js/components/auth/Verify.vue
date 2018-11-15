@@ -1,18 +1,19 @@
 <template>
-    <div class="alert alert-warning" v-if="notVerified">
-        <div class="d-md-flex align-items-center">
-            <i18n path="message.verifyEmail" tag="div">
-                <strong place="email">{{ email }}</strong>
-            </i18n>
-            <div class="mt-2 mt-md-0 ml-auto text-right">
-                <div class="btn-group btn-group-sm">
-                    <resend-verification></resend-verification>
-                    <router-link class="btn btn-link d-none d-md-inline-block"
-                                 :to="{name: 'profile'}"
-                                 v-t="'action.changeEmail'">
-                    </router-link>
-                </div>
+    <div class="card">
+        <div class="card-body">
+
+            <div class="text-center p-5" style="min-height: 230px;" v-if="loading">
+                <app-spinner></app-spinner>
             </div>
+            <div class="verify" v-else>
+                <font-awesome-icon :icon="icon" size="5x"></font-awesome-icon>
+
+                <h1 v-t="title"></h1>
+                <p v-t="message"></p>
+
+                <router-link to="/" class="btn btn-dark" v-t="'action.returnToApp'"></router-link>
+            </div>
+
         </div>
     </div>
 </template>
@@ -20,25 +21,67 @@
 <style lang="scss" scoped>
     @import '../../../sass/_variables.scss';
 
-    .btn-link {
-        color: $black;
+    .verify {
+        text-align: center;
+
+        svg {
+            margin-bottom: .2em;
+        }
+
+        .fa {
+            &-exclamation-circle {
+                color: $yellow;
+            }
+
+            &-check-circle {
+                color: $green;
+            }
+        }
     }
 </style>
 
 <script>
-    import ResendVerification from '../profile/ResendVerification'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faExclamationCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons'
+    import AppSpinner from '../AppSpinner'
 
     export default {
+        props: ['token'],
         components: {
-            ResendVerification
+            AppSpinner,
+            FontAwesomeIcon
+        },
+        data() {
+            return {
+                loading: true,
+                verified: false
+            }
         },
         computed: {
-            email() {
-                return this.$store.state.user.email
+            icon() {
+                if (this.verified) {
+                    return faCheckCircle
+                }
+                return faExclamationCircle
             },
-            notVerified() {
-                return !this.$store.state.user.verified
+            title() {
+                if (this.verified) {
+                    return 'title.success'
+                }
+                return 'title.error'
+            },
+            message() {
+                if (this.verified) {
+                    return 'message.verificationSuccessful'
+                }
+                return 'message.verificationFailed'
             }
+        },
+        created() {
+            return new Promise(resolve => setTimeout(resolve, 2000))
+                .then(() => {
+                    this.loading = false;
+                })
         }
     }
 </script>
