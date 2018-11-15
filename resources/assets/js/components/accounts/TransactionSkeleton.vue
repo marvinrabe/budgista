@@ -1,5 +1,5 @@
 <template>
-    <skeleton theme="opacity" duration="1" class="transactions-row" bg-color="rgba(0, 0, 0, 10%)">
+    <skeleton theme="opacity" duration="1" class="transactions-row" bg-color="rgba(0, 0, 0, 0.1)">
         <div class="transaction-item">
             <span class="transaction-column">
                 <span class="transaction-date">
