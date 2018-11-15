@@ -1,3 +1,4 @@
+@import "~typeface-roboto";
 @import "variables";
 @import "shadows";
 // Bootstrap 4
@@ -52,7 +53,7 @@ a.h2:hover {
  * Navbar
  */
 .navbar-light {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 /*
