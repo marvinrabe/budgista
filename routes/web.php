@@ -13,6 +13,6 @@
 
 Route::view('/', 'app')->name('app');
 Route::view('/login', 'app')->name('login');
-Route::get('/verify/{id}', 'VerificationController@verify')->name('verification.verify');
+Route::view('/verify/{token}', 'app')->name('email.verify');
 Route::view('/reset-password/{token}', 'app')->name('password.reset');
 Route::view('{any}', 'app')->where('any', '.*');

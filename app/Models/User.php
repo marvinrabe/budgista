@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Auth\EmailTokenRepository;
 use App\Budget\Month;
 use App\Budget\Sheet;
-use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -77,19 +77,14 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         $this->delete();
     }
 
-    public function isActive()
+    /**
+     * Sends verification email.
+     */
+    public function sendEmailVerificationNotification()
     {
-        $oldTransactionCount = $this
-            ->transactions()
-            ->whereBetween('date', [Carbon::now()->subDays(31), Carbon::now()])
-            ->count();
+        $token = resolve(EmailTokenRepository::class)->get($this->email);
 
-        $futureTransactionCount = $this
-            ->transactions()
-            ->where('date', '>', Carbon::now())
-            ->count();
-
-        return ($oldTransactionCount - $futureTransactionCount) > 0;
+        $this->notify(new \App\Notifications\VerifyEmail($token));
     }
 
     /**
