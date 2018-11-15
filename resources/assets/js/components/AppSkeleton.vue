@@ -22,7 +22,7 @@
                 style: {
                     height: this.height,
                     width: this.width,
-                    backgroundColor: 'rgba(0, 0, 0, 10%)',
+                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
                     margin: '0.25em'
                 },
                 props: {
