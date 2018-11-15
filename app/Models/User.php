@@ -21,7 +21,6 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
     /**
      * The attributes that are mass assignable.
-     *
      * @var array
      */
     protected $fillable = [
@@ -36,7 +35,6 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
     /**
      * The attributes that should be hidden for arrays.
-     *
      * @var array
      */
     protected $hidden = [
@@ -44,9 +42,9 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'remember_token'
     ];
 
-    public function accounts()
+    public function groups()
     {
-        return $this->hasMany(Account::class);
+        return $this->hasMany(Group::class);
     }
 
     public function categories()
@@ -54,9 +52,14 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         return $this->hasMany(Category::class);
     }
 
-    public function groups()
+    public function accounts()
     {
-        return $this->hasMany(Group::class);
+        return $this->hasMany(Account::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasManyThrough(Transaction::class, Account::class);
     }
 
     public function budget(Month $month)
@@ -64,9 +67,14 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         return new Sheet($this, $month);
     }
 
-    public function transactions()
+    public function terminate($reason = null)
     {
-        return $this->hasManyThrough(Transaction::class, Account::class);
+        DeletedUser::create([
+            'feedback' => $reason,
+            'created_at' => $this->created_at
+        ]);
+
+        $this->delete();
     }
 
     public function isActive()
@@ -86,7 +94,6 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
-     *
      * @return mixed
      */
     public function getJWTIdentifier()
@@ -96,7 +103,6 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
-     *
      * @return array
      */
     public function getJWTCustomClaims()

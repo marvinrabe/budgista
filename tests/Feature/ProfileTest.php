@@ -120,7 +120,7 @@ class ProfileTest extends TestCase
             ->post('/api/user/reset', [
                 'password' => 'not-valid'
             ])
-            ->assertStatus(403);
+            ->assertSessionHasErrors('password');
     }
 
 }
