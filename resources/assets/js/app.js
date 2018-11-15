@@ -93,10 +93,11 @@ import './validation'
 /**
  * And go!
  */
-const App = Vue.extend(require('./components/App.vue'))
+const App = require('./components/App.vue')
 
-window.app = new App({
+window.app = new Vue({
     i18n,
     store,
-    router
+    router,
+    render: (h) => h(App)
 }).$mount('#app')

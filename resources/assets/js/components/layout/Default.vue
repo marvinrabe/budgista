@@ -8,7 +8,7 @@
                 <app-header></app-header>
 
                 <div class="container py-3">
-                    <app-verify></app-verify>
+                    <verify-alert></verify-alert>
 
                     <div class="form-row">
                         <div class="col-md-4 col-xl-3">
@@ -43,13 +43,13 @@
 <script>
     import AppHeader from '../AppHeader'
     import AppSidebar from '../AppSidebar'
-    import AppVerify from '../auth/Verify'
+    import VerifyAlert from '../auth/VerifyAlert'
 
     export default {
         components: {
             AppHeader,
             AppSidebar,
-            AppVerify
+            VerifyAlert
         },
         computed: {
             loading() {
