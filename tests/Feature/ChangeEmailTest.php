@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
@@ -44,10 +45,7 @@ class ChangeEmailTest extends TestCase
 
         $this->assertEquals('something_new@example.com', Auth()->user()->email);
 
-        Notification::assertSentTo(
-            Auth()->user(),
-            \Illuminate\Auth\Notifications\VerifyEmail::class
-        );
+        Notification::assertSentTo(Auth()->user(), VerifyEmail::class);
     }
 
     /** @test */

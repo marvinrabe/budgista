@@ -2,31 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Auth\EmailTokenRepository;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
 
 class VerificationController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Email Verification Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling email verification for any
-    | user that recently registered with the application. Emails may also
-    | be resent if the user did not receive the original email message.
-    |
-    */
-
-    use RedirectsUsers;
-
-    /**
-     * Where to redirect users after verification.
-     * @var string
-     */
-    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -35,8 +17,6 @@ class VerificationController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api')->only('resend');
-        $this->middleware('signed')->only('verify');
-        $this->middleware('throttle:6,1')->only('verify');
     }
 
     /**
@@ -46,16 +26,31 @@ class VerificationController extends Controller
      */
     public function verify(Request $request)
     {
-        /**
-         * @var User $user
-         */
-        $user = User::find($request->route('id'));
+        $record = resolve(EmailTokenRepository::class)->find('token', request('token'));
 
-        if ($user && $user->markEmailAsVerified()) {
-            event(new Verified($request->user()));
+        if ($record === null) {
+            return response()->json([
+                'error' => trans('errors.404'),
+            ], 404);
         }
 
-        return redirect($this->redirectPath());
+        $user = User::where('email', $record->email)->first();
+
+        if ($user === null) {
+            return response()->json([
+                'error' => trans('errors.404'),
+            ], 404);
+        }
+
+        if ($user->hasVerifiedEmail()) {
+            return response()->json([], 200);
+        }
+
+        $user->markEmailAsVerified();
+
+        event(new Verified($request->user()));
+
+        return response()->json([], 200);
     }
 
     /**

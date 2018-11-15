@@ -41,6 +41,7 @@
 </style>
 
 <script>
+    import axios from 'axios'
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
     import {faExclamationCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons'
     import AppSpinner from '../AppSpinner'
@@ -78,9 +79,12 @@
             }
         },
         created() {
-            return new Promise(resolve => setTimeout(resolve, 2000))
+            return new axios.put('/auth/verify/' + this.token)
                 .then(() => {
-                    this.loading = false;
+                    this.verified = true
+                })
+                .finally(() => {
+                    this.loading = false
                 })
         }
     }

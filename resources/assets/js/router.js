@@ -37,6 +37,15 @@ export const routes = [
                 component: require('./components/auth/Reset.vue'),
                 props: true
             },
+            {
+                path: 'verify/:token',
+                name: 'verify',
+                component: require('./components/auth/verify.vue'),
+                props: true,
+                meta: {
+                    auth: undefined
+                }
+            }
         ]
     },
     {

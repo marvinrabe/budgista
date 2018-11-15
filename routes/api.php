@@ -19,6 +19,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('reset-password', 'PasswordResetController@store');
     Route::put('reset-password/{token}', 'PasswordResetController@update');
     Route::post('verify', 'VerificationController@resend');
+    Route::put('verify/{token}', 'VerificationController@verify');
     Route::get('refresh', 'AuthenticationController@refresh');
     Route::get('user', 'UserController@show');
 
