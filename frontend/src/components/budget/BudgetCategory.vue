@@ -44,6 +44,7 @@
 </style>
 
 <script>
+    import axios from 'axios'
     import CategorySettings from '../categories/CategorySettings'
     import AppMoneyInput from '../form/AppMoneyInput'
     import AppSkeleton from '../AppSkeleton'
