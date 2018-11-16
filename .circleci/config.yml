@@ -24,6 +24,36 @@ jobs:
           name: Setup configuration
           command: cp ./.circleci/.env.testing ./.env
 
+    # Composer
+      - restore_cache:
+          name: Restore Composer Package Cache
+          keys:
+          - v1-dependencies-{{ checksum "composer.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run:
+          name: Install Composer Dependencies
+          command: composer install -n --prefer-dist
+      - save_cache:
+          name: Save Composer Package Cache
+          key: v1-dependencies-{{ checksum "composer.lock" }}
+          paths:
+          - ./vendor
+
+      - run:
+          name: Setup keys
+          command: |
+            php artisan key:generate
+            php artisan jwt:secret --force
+
+      - run:
+          name: Test PHPUnit
+          command: vendor/bin/phpunit
+
+      - run:
+          name: Switch to frontend
+          command: cd frontend
+
       # Yarn
       - restore_cache:
           name: Restore Yarn Package Cache
@@ -44,37 +74,11 @@ jobs:
             - node_modules/
 
       - run:
-         name: Compile assets
-         command:  npm run deployment
-
-      - run:
           name: Test Mocha
           command: |
             export NODE_ICU_DATA=node_modules/full-icu
-            npm run test
-
-      # Composer
-      - restore_cache:
-          name: Restore Composer Package Cache
-          keys:
-          - v1-dependencies-{{ checksum "composer.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-      - run:
-          name: Install Composer Dependencies
-          command: composer install -n --prefer-dist
-      - save_cache:
-          name: Save Composer Package Cache
-          key: v1-dependencies-{{ checksum "composer.lock" }}
-          paths:
-            - ./vendor
+            yarn run test:unit
 
       - run:
-          name: Setup keys
-          command: |
-            php artisan key:generate
-            php artisan jwt:secret --force
-
-      - run:
-          name: Test PHPUnit
-          command: vendor/bin/phpunit
+         name: Compile assets
+         command:  yarn run build
