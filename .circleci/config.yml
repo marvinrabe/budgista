@@ -50,35 +50,35 @@ jobs:
           name: Test PHPUnit
           command: vendor/bin/phpunit
 
-      - run:
-          name: Switch to frontend
-          command: cd frontend
-
       # Yarn
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}-{{ checksum "frontend/yarn.lock" }}
             - yarn-packages-{{ .Branch }}
             - yarn-packages-master
             - yarn-packages-
       - run:
           name: Install Yarn Dependencies
           command: |
+            cd frontend
             yarn install
             yarn add full-icu
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ .Branch }}-{{ checksum "frontend/yarn.lock" }}
           paths:
-            - node_modules/
+            - frontend/node_modules/
 
       - run:
           name: Test Mocha
           command: |
+            cd frontend
             export NODE_ICU_DATA=node_modules/full-icu
             yarn run test:unit
 
       - run:
          name: Compile assets
-         command:  yarn run build
+         command: |
+            cd frontend
+            yarn run build
