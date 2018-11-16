@@ -1,5 +1,5 @@
 import {shallow} from '@vue/test-utils';
-import expect from 'expect';
+import {expect} from 'chai'
 import MoneyFormat from '@/i18n/MoneyFormat.vue';
 import IntegerMoneyFormatter from '@/i18n/IntegerMoneyFormatter';
 
@@ -12,7 +12,7 @@ describe('MoneyFormat', () => {
             mocks: {$moneyFormatter}
         });
 
-        expect(wrapper.html()).toContain('1.234,56&nbsp;€');
+        expect(wrapper.html()).to.contain('1.234,56&nbsp;€');
     });
 
 });
