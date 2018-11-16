@@ -1,4 +1,4 @@
-import expect from 'expect';
+import {expect} from 'chai'
 import moment from 'moment';
 import {getters} from '@/store/modules/transactions'
 import Transaction from '@/models/Transaction'
@@ -15,12 +15,12 @@ describe('Transactions Store', () => {
 
         const payees = getters.getPayees(state);
 
-        expect(payees).toEqual(['a', 'b']);
+        expect(payees).to.deep.equal(['a', 'b']);
     });
 
     it('counts future transactions', () => {
         const mockGetter = {
-            findTransactionsByAccountId: (id) => [
+            findTransactionsByAccountId: () => [
                 Object.assign(new Transaction, {
                     'account_id': '5532ca25-dc33-468b-8b75-37cfe6ba81e0',
                     'date': moment().add(1, 'days').format('YYYY-MM-DD')
@@ -36,6 +36,6 @@ describe('Transactions Store', () => {
 
         const count = getters.countFutureTransactions({}, mockGetter)(account);
 
-        expect(count).toEqual(1);
+        expect(count).to.equal(1);
     });
 });

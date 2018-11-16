@@ -1,4 +1,4 @@
-import expect from 'expect';
+import {expect} from 'chai'
 import IntegerMoneyFormatter from '@/i18n/IntegerMoneyFormatter';
 
 describe('IntegerMoneyFormatter', () => {
@@ -10,11 +10,11 @@ describe('IntegerMoneyFormatter', () => {
     });
 
     it('returns a formatted currency value', () => {
-        expect(formatter.format(123456)).toBe('1.234,56\xa0€');
+        expect(formatter.format(123456)).to.equal('1.234,56\xa0€');
     });
 
     it('returns an unformatted currency value', () => {
-        expect(formatter.unformat('1.234,56\xa0€')).toBe(123456);
+        expect(formatter.unformat('1.234,56\xa0€')).to.equal(123456);
     });
 
 });

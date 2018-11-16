@@ -1,4 +1,4 @@
-import expect from 'expect';
+import {expect} from 'chai'
 import MoneyFormatter from '@/i18n/MoneyFormatter';
 
 describe('MoneyFormatter', () => {
@@ -22,16 +22,16 @@ describe('MoneyFormatter', () => {
     });
 
     it('returns a formatted currency value', () => {
-        expect(formatter.format(1234.56)).toBe('1.234,56\xa0€');
+        expect(formatter.format(1234.56)).to.equal('1.234,56\xa0€');
     });
 
     it('returns an unformatted currency value', () => {
-        expect(formatter.unformat('1.234,56\xa0€')).toBe(1234.56);
+        expect(formatter.unformat('1.234,56\xa0€')).to.equal(1234.56);
     });
 
     it('can be used even if no decimal point is present', () => {
         let yenFormatter = new MoneyFormatter('de', 'JPY');
-        expect(yenFormatter.format(1234)).toBe('1.234\xa0¥');
+        expect(yenFormatter.format(1234)).to.equal('1.234\xa0¥');
     });
 
 });
