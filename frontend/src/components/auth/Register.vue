@@ -50,7 +50,6 @@
 
 <script>
     import {termsUrl} from '../../config'
-    import {Validator} from 'vee-validate'
 
     export default {
         data() {
