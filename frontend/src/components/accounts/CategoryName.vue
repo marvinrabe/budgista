@@ -1,11 +1,11 @@
 <template>
-    <ellipsis v-if="category">
+    <app-ellipsis v-if="category">
         {{ category.name }}
-    </ellipsis>
+    </app-ellipsis>
 </template>
 
 <script>
-    import AppElipsis from '../AppEllipsis';
+    import AppEllipsis from '../AppEllipsis';
 
     export default {
         props: {
@@ -14,7 +14,7 @@
             }
         },
         components: {
-            AppElipsis
+            AppEllipsis
         },
         computed: {
             category() {

@@ -1,18 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
+    @include('snippets.google-analytics')
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="mask-icon" href="<%= BASE_URL %>img/icon.svg" color="#2196f3">
     <title>Budgista</title>
 </head>
 <body>
-<noscript>
-    <strong>We're sorry but frontend doesn't work properly without JavaScript enabled. Please enable it to
-        continue.</strong>
-</noscript>
-<div id="app"></div>
+<div id="app">
+    <div class="d-flex flex-column align-items-center justify-content-center container" style="height: 100%">
+
+        <div class="spinner" role="progressbar">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+
+        <noscript>
+            <div class="alert alert-warning" role="alert">
+                <strong>{{ trans('title.no_script') }}</strong>
+                {{ trans('message.no_script') }}
+            </div>
+            <style>.spinner {
+                display: none;
+            }</style>
+        </noscript>
+    </div>
+</div>
+@include('snippets.sentry')
 <!-- built files will be auto injected -->
 </body>
 </html>

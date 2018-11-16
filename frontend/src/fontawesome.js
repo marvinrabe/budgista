@@ -14,7 +14,7 @@ library.add([
 ])
 
 const FontAwesome = {
-    install(Vue, options = {}) {
+    install(Vue) {
         Vue.component('font-awesome-icon', FontAwesomeIcon)
     }
 }

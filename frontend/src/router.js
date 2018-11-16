@@ -14,7 +14,7 @@ export const routes = [
         children: [
             {
                 path: '',
-                redirect: to => {
+                redirect: () => {
                     return {name: 'login'}
                 }
             },
@@ -59,14 +59,14 @@ export const routes = [
         children: [
             {
                 path: '',
-                redirect: to => {
+                redirect: () => {
                     return {name: 'budget_default'}
                 }
             },
             {
                 path: 'budget',
                 name: 'budget_default',
-                redirect: to => {
+                redirect: () => {
                     return {name: 'budget', params: {month: Month.current().toString()}}
                 }
             },
@@ -79,7 +79,7 @@ export const routes = [
             {
                 path: 'statistics',
                 name: 'statistics',
-                component: require('./components/statistics/Index.vue').default
+                component: () => import(/* webpackChunkName: "statistics" */ './components/statistics/Index.vue')
             },
             {
                 path: 'settings',

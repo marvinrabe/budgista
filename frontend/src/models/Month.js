@@ -39,4 +39,4 @@ export default class Month {
     format() {
         return i18n.messages[i18n.locale].month[this.month] + ' ' + this.year
     }
-};
+}

@@ -33,14 +33,12 @@
 
 <script>
     import AccountMenu from './accounts/Menu'
-    import CreateAccount from './accounts/CreateAccount'
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
     import {faEnvelope, faCog, faLifeRing, faUserCircle, faChartBar} from '@fortawesome/free-solid-svg-icons'
 
     export default {
         components: {
             AccountMenu,
-            CreateAccount,
             FontAwesomeIcon
         },
         computed: {

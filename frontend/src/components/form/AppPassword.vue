@@ -5,19 +5,20 @@
 
             <a href="#" class="VuePassword__Toggle text-darker-light" role="button" @click.prevent="togglePassword">
                 <span v-show="type === 'password'">
-                    <font-awesome-icon :icon="passwordIcon" />
+                    <font-awesome-icon :icon="passwordIcon"/>
                 </span>
                 <span v-show="type === 'text'">
-                    <font-awesome-icon :icon="textIcon" />
+                    <font-awesome-icon :icon="textIcon"/>
                 </span>
             </a>
         </div>
 
-        <svg viewBox="0 0 40 2" class="VuePassword__Meter" preserveAspectRatio="none" v-if="!disableStrength">
+        <svg viewBox="0 0 50 2" class="VuePassword__Meter" preserveAspectRatio="none" v-if="!disableStrength">
             <path d="M0 1 L10 1" :class="getStrengthClass(0)"></path>
             <path d="M10.25 1 L20 1" :class="getStrengthClass(1)"></path>
             <path d="M20.25 1 L30 1" :class="getStrengthClass(2)"></path>
             <path d="M30.25 1 L40 1" :class="getStrengthClass(3)"></path>
+            <path d="M40.25 1 L50 1" :class="getStrengthClass(4)"></path>
         </svg>
     </div>
 </template>
@@ -75,7 +76,6 @@
 <script>
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
     import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons'
-    import passwordStrength from 'zxcvbn'
 
     export default {
         inheritAttrs: false,
@@ -85,6 +85,7 @@
                 default() {
                     return [
                         'text-darker-light',
+                        'text-danger',
                         'text-danger',
                         'text-warning',
                         'text-success',
@@ -108,16 +109,16 @@
         },
         computed: {
             passwordIcon() {
-                return faEye;
+                return faEye
             },
             textIcon() {
-                return faEyeSlash;
+                return faEyeSlash
             },
             strengthClass() {
-                if (this.strengthClasses[this.strength.score]) {
-                    return this.strengthClasses[this.strength.score]
+                if (this.strengthClasses[this.strength.score + 1]) {
+                    return this.strengthClasses[this.strength.score + 1]
                 }
-                return this.strengthClasses[0];
+                return this.strengthClasses[0]
             },
             bindings() {
                 return {
@@ -132,16 +133,18 @@
         },
         methods: {
             emitInput(event) {
-                this.strength = passwordStrength(event.target.value);
+                import(/* webpackChunkName: "zxcvbn" */ 'zxcvbn').then(x => {
+                    this.strength = x.default(event.target.value)
+                })
             },
             togglePassword() {
-                this.type = this.type === 'password' ? 'text' : 'password';
+                this.type = this.type === 'password' ? 'text' : 'password'
             },
             getStrengthClass(strength) {
-                if (this.strength.score > strength) {
+                if (this.strength.score >= strength) {
                     return this.strengthClass
                 }
-                return this.strengthClasses[0];
+                return this.strengthClasses[0]
             }
         }
     }

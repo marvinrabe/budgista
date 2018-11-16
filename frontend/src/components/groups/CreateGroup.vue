@@ -22,11 +22,6 @@
                 visible: false
             }
         },
-        computed: {
-            icon() {
-                return faPlus
-            }
-        },
         methods: {
             showModal() {
                 this.visible = true

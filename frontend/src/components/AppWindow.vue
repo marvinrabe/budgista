@@ -11,7 +11,7 @@
             }
         },
         render() {
-            // Has to be defined.
+            return '';
         },
         methods: {
             updateTitle: function (title) {

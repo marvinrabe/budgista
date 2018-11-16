@@ -16,7 +16,7 @@ export const store = new Vuex.Store({
         loading: false
     },
     actions: {
-        initialize({dispatch, commit, state}) {
+        initialize({dispatch, commit}) {
             commit('IS_LOADING')
             commit('RESET')
             Promise
