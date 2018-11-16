@@ -28,6 +28,8 @@
 </template>
 
 <script>
+    import axios from 'axios'
+
     export default {
         data() {
             return {
@@ -41,8 +43,7 @@
             sendReset() {
                 this.loading = true
 
-                axios
-                    .post('/auth/reset-password/', {
+                axios.post('/auth/reset-password/', {
                         email: this.form.email
                     })
                     .then(() => {

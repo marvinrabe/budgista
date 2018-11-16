@@ -29,11 +29,9 @@
                 this.visible = true
             },
             hideModal() {
-                console.log('hide')
                 this.visible = false
             },
             onSuccess() {
-                console.log('hello')
                 this.$router.push({name: 'budget_default'})
                 this.hideModal()
             }
