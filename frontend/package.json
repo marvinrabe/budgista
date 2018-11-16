@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "rm -rf ../public/{js,css,images,fonts} && vue-cli-service build --no-clean",
+    "build": "rm -rf ../public/{js,css,img,fonts} && vue-cli-service build --no-clean",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
@@ -25,7 +25,7 @@
     "moment": "^2.22.2",
     "portal-vue": "^1.4.0",
     "register-service-worker": "^1.0.0",
-    "rrule": "^2.5.6",
+    "rrule": "2.3.6",
     "tb-skeleton": "^0.3.6",
     "typeface-roboto": "^0.0.54",
     "vee-validate": "^2.1.3",

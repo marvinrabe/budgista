@@ -17,14 +17,12 @@
 </template>
 
 <script>
-    import AppWindow from './AppWindow';
-    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import AppWindow from './AppWindow'
 
     export default {
         props: ['title'],
         components: {
-            AppWindow,
-            FontAwesomeIcon
+            AppWindow
         }
     }
 </script>

@@ -65,7 +65,7 @@ const actions = {
                     category_id: _.get(newCategory, 'id', null)
                 }
             })
-            .then(response => {
+            .then(() => {
                 commit('REMOVE_CATEGORY', oldCategory)
                 commit('TRANSFER_CATEGORY', {
                     from: oldCategory,

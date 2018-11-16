@@ -80,7 +80,7 @@ const actions = {
         return dispatch('createTransaction', transaction)
     },
 
-    createTransaction({commit, rootState}, transaction) {
+    createTransaction({commit}, transaction) {
         return axios
             .post('/transactions/', transaction)
             .then(({data}) => {

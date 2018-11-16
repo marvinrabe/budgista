@@ -3,11 +3,12 @@
 /public/css
 /public/js
 /public/fonts
-/public/images
+/public/img
 /public/manifest.json
 /public/robots.txt
 /public/favicon.ico
 /public/*.js
+/resources/views/index.blade.php
 /storage/*.key
 /vendor
 /.idea

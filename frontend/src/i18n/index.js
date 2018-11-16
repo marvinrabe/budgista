@@ -23,7 +23,7 @@ export function setLanguage(lang) {
 }
 
 export const intl = {
-    install(Vue, options = {}) {
+    install(Vue) {
 
         Vue.component('money-format', MoneyFormat)
 

@@ -58,7 +58,7 @@ const actions = {
     deleteGroup({commit}, group) {
         return axios
             .delete('/groups/' + group.id)
-            .then(response => {
+            .then(() => {
                 commit('REMOVE_GROUP', group)
             })
     },
