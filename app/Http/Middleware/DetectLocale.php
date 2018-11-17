@@ -19,8 +19,8 @@ class DetectLocale
     {
         $availableLocales = config('app.available_locales');
 
-        $prefferedLocale = $request->getPreferredLanguage($availableLocales);
-        $locale = $request->query('lang', $prefferedLocale);
+        $preferredLocale = $request->getPreferredLanguage($availableLocales);
+        $locale = $request->query('lang', $preferredLocale);
 
         if (!in_array($locale, $availableLocales)) {
             $locale = config('app.fallback_locale');

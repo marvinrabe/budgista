@@ -20,11 +20,11 @@ class ReconcileTest extends TestCase
         $this->account = factory(Account::class)->create();
     }
 
-    public function reconcileBalance($data = [])
+    public function reconcileBalance($data = [], $headers = [])
     {
         return $this
             ->signIn($this->account->user)
-            ->post("/api/accounts/{$this->account->id}/reconcile", $data);
+            ->post("/api/accounts/{$this->account->id}/reconcile", $data, $headers);
     }
 
     /** @test */
@@ -81,7 +81,7 @@ class ReconcileTest extends TestCase
             'language' => 'de'
         ]);
 
-        $this->reconcileBalance(['amount' => 12345]);
+        $this->reconcileBalance(['amount' => 12345], ['Accept-Language' => 'de']);
 
         $this->assertDatabaseHas('transactions', [
             'amount' => 12345,

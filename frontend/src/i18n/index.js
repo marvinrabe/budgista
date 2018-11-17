@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import messages from '../lang/index'
 import axios from 'axios'
+import browserLocale from 'browser-locale'
+import {languages} from '../config.js'
 import DateInput from './DateInput'
 import MoneyFormat from './MoneyFormat'
 import IntegerMoneyFormatter from './IntegerMoneyFormatter'
@@ -10,16 +12,30 @@ import _ from 'lodash'
 Vue.use(VueI18n)
 
 export const i18n = new VueI18n({
-    locale: document.querySelector('html').getAttribute('lang') || 'en',
+    locale: defaultLanguage,
     fallbackLocale: 'en',
     messages
 })
 
-export function setLanguage(lang) {
-    i18n.locale = lang
-    axios.defaults.headers.common['Accept-Language'] = lang
-    document.querySelector('html').setAttribute('lang', lang)
-    return lang
+export const defaultLanguage = setLanguage(clientDefaultLanguage())
+
+export function clientDefaultLanguage() {
+    return browserLocale().split('-').shift()
+}
+
+export function setLanguage(languageCode) {
+    let validLanguageCode = sanitizeLanguage(languageCode)
+    i18n.locale = validLanguageCode
+    axios.defaults.headers.common['Accept-Language'] = validLanguageCode
+    document.querySelector('html').setAttribute('lang', validLanguageCode)
+    return validLanguageCode
+}
+
+export function sanitizeLanguage(languageCode) {
+    if (languages.includes(languageCode)) {
+        return languageCode
+    }
+    return 'en'
 }
 
 export const intl = {
