@@ -10,11 +10,6 @@
 
 <script>
     import 'typeface-roboto'
-    import {setLanguage} from './i18n'
 
-    export default {
-        mounted() {
-            setLanguage(document.querySelector('html').getAttribute('lang'))
-        }
-    }
+    export default {}
 </script>
