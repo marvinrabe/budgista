@@ -9,7 +9,7 @@ Vue.use(VueAnalytics, {
     id: process.env.VUE_APP_GOOGLE_ANALYTICS,
     router,
     debug: {
-        enabled: !isProduction,
+        //enabled: !isProduction,
         sendHitTask: isProduction
     }
 })
