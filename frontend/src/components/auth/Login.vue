@@ -86,6 +86,7 @@
                     },
                     success: function () {
                         this.loading = false
+                        this.$ga.event('Login', 'submit')
                     },
                     error: function (error) {
                         this.loading = false
