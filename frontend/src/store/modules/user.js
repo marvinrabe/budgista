@@ -1,4 +1,4 @@
-import {setLanguage} from '../../i18n'
+import {changeLanguage} from '../../i18n'
 import axios from 'axios'
 
 const defaultState = {
@@ -19,7 +19,7 @@ const actions = {
         return axios
             .get('/user')
             .then(({data}) => {
-                setLanguage(data.data.language)
+                changeLanguage(data.data.language)
                 commit('LOAD_USER', data.data)
             })
     },
@@ -28,7 +28,7 @@ const actions = {
         return axios
             .put('/user', data)
             .then(({data}) => {
-                setLanguage(data.data.language)
+                changeLanguage(data.data.language)
                 commit('LOAD_USER', data.data)
             })
     },

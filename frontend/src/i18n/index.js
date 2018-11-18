@@ -11,21 +11,24 @@ import _ from 'lodash'
 
 Vue.use(VueI18n)
 
+export const defaultLanguage = setLanguage(clientDefaultLanguage())
+
 export const i18n = new VueI18n({
     locale: defaultLanguage,
     fallbackLocale: 'en',
     messages
 })
 
-export const defaultLanguage = setLanguage(clientDefaultLanguage())
-
 export function clientDefaultLanguage() {
     return browserLocale().split('-').shift()
 }
 
+export function changeLanguage(languageCode) {
+    i18n.locale = setLanguage(languageCode)
+}
+
 export function setLanguage(languageCode) {
     let validLanguageCode = sanitizeLanguage(languageCode)
-    i18n.locale = validLanguageCode
     axios.defaults.headers.common['Accept-Language'] = validLanguageCode
     document.querySelector('html').setAttribute('lang', validLanguageCode)
     return validLanguageCode
