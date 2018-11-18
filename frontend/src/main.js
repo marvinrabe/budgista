@@ -8,6 +8,7 @@ import store from './store'
 import './auth'
 import './fontawesome'
 import './http'
+import './logging'
 import './registerServiceWorker'
 import './validation'
 
