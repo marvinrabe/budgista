@@ -78,6 +78,7 @@
                     },
                     success: function () {
                         this.loading = false
+                        this.$ga.event('Register', 'submit')
                     },
                     error: function (error) {
                         this.loading = false
