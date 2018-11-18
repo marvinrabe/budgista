@@ -5,17 +5,10 @@
         </form-group>
 
         <form-group name="payee">
-            <template slot-scope="{bindings}">
-                <input class="form-control"
-                       type="text"
-                       list="payees"
-                       v-bind="bindings"
-                       v-model="payee"
-                       v-validate="'required'">
-                <datalist id="payees">
-                    <option v-for="payee in getPayees" :key="payee" :value="payee"/>
-                </datalist>
-            </template>
+            <payee-input slot-scope="{bindings}"
+                         v-bind="bindings"
+                         v-model="payee">
+            </payee-input>
         </form-group>
 
         <div class="form-row">
@@ -78,10 +71,12 @@
     import RecurringInput from './RecurringInput'
     import CategorySelect from '../categories/CategorySelect'
     import _ from 'lodash'
+    import PayeeInput from './PayeeInput'
 
     export default {
         props: ['transaction'],
         components: {
+            PayeeInput,
             AmountInput,
             CategorySelect,
             RecurringInput
@@ -107,8 +102,7 @@
                 return Modernizr.inputtypes.date
             },
             ...mapGetters([
-                'sortedCategories',
-                'getPayees'
+                'sortedCategories'
             ])
         },
         methods: {

@@ -14,10 +14,12 @@
     import axios from 'axios'
     import collect from 'collect.js'
     import Month from '../../models/Month'
+    import AppSpinner from '../AppSpinner'
     import NetWorthChart from './NetWorthChart'
 
     export default {
         components: {
+            AppSpinner,
             NetWorthChart
         },
         data() {

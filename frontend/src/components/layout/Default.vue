@@ -43,12 +43,14 @@
 <script>
     import AppHeader from '../AppHeader'
     import AppSidebar from '../AppSidebar'
+    import AppSpinner from '../AppSpinner'
     import VerifyAlert from '../auth/VerifyAlert'
 
     export default {
         components: {
             AppHeader,
             AppSidebar,
+            AppSpinner,
             VerifyAlert
         },
         computed: {

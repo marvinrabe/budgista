@@ -79,12 +79,6 @@ Vue.component(
     require('./components/AppEllipsis.vue').default
 )
 
-Vue.component(
-    'app-spinner',
-    require('./components/AppSpinner.vue').default
-)
-
-
 new Vue({
     i18n,
     router,

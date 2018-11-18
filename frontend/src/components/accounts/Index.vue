@@ -95,6 +95,7 @@
 </style>
 
 <script>
+    import AppSpinner from '../AppSpinner'
     import Balance from './Balance.vue'
     import InfiniteLoading from 'vue-infinite-loading'
     import AccountSettings from './AccountSettings'
@@ -105,6 +106,7 @@
     export default {
         props: ['account_id'],
         components: {
+            AppSpinner,
             AccountSettings,
             Balance,
             InfiniteLoading,
