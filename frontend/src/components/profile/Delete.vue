@@ -17,14 +17,14 @@
                     </form-group>
 
                     <form-group name="password">
-                        <app-password :disable-strength="true" slot-scope="group">
+                        <PasswordInput :disable-strength="true" slot-scope="group">
                             <input class="form-control"
                                    slot-scope="{bindings, handlers}"
                                    v-bind="Object.assign(bindings, group.bindings)"
                                    v-on="handlers"
                                    v-validate="'required'"
                                    v-model="password">
-                        </app-password>
+                        </PasswordInput>
                     </form-group>
 
                     <div slot="actions">
@@ -41,8 +41,12 @@
 
 <script>
     import axios from 'axios'
+    import PasswordInput from '@/components/form/PasswordInput'
 
     export default {
+        components: {
+            PasswordInput
+        },
         data() {
             return {
                 feedback: '',

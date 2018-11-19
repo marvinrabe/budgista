@@ -20,14 +20,14 @@
         </form-group>
 
         <form-group name="password">
-            <app-password :disable-strength="true" slot-scope="group">
+            <PasswordInput :disable-strength="true" slot-scope="group">
                 <input class="form-control"
                        slot-scope="{bindings, handlers}"
                        v-bind="Object.assign(bindings, group.bindings)"
                        v-on="handlers"
                        v-validate="'required'"
                        v-model="form.password">
-            </app-password>
+            </PasswordInput>
         </form-group>
 
         <div slot="actions">
@@ -41,9 +41,11 @@
 
 <script>
     import ResendVerification from '../profile/ResendVerification'
+    import PasswordInput from '@/components/form/PasswordInput'
 
     export default {
         components: {
+            PasswordInput,
             ResendVerification
         },
         data() {

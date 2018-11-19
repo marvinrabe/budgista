@@ -17,7 +17,7 @@
                 </form-group>
 
                 <form-group name="password">
-                    <app-password slot-scope="group">
+                    <PasswordInput slot-scope="group">
                         <input class="form-control"
                                slot-scope="{bindings, handlers}"
                                v-bind="Object.assign(bindings, group.bindings)"
@@ -25,7 +25,7 @@
                                v-validate="'required|min:6'"
                                data-vv-validate-on="input"
                                v-model="form.password">
-                    </app-password>
+                    </PasswordInput>
                 </form-group>
 
                 <template slot="actions">
@@ -41,9 +41,13 @@
 
 <script>
     import axios from 'axios'
+    import PasswordInput from '@/components/form/PasswordInput'
 
     export default {
         props: ['token'],
+        components: {
+            PasswordInput
+        },
         data() {
             return {
                 form: {

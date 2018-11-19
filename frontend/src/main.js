@@ -55,11 +55,6 @@ Vue.component(
 )
 
 Vue.component(
-    'app-password',
-    require('./components/form/AppPassword.vue').default
-)
-
-Vue.component(
     'app-button',
     require('./components/form/AppButton.vue').default
 )
