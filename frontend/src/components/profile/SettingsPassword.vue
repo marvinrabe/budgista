@@ -2,25 +2,25 @@
     <app-form @submit="save" ref="form">
 
         <form-group name="password" label="oldPassword">
-            <app-password :disable-strength="true" slot-scope="group">
+            <PasswordInput :disable-strength="true" slot-scope="group">
                 <input class="form-control"
                        slot-scope="{bindings, handlers}"
                        v-bind="Object.assign(bindings, group.bindings)"
                        v-on="handlers"
                        v-validate="'required'"
                        v-model="form.password">
-            </app-password>
+            </PasswordInput>
         </form-group>
 
         <form-group name="newPassword">
-            <app-password slot-scope="group">
+            <PasswordInput slot-scope="group">
                 <input class="form-control"
                        slot-scope="{bindings, handlers}"
                        v-bind="Object.assign(bindings, group.bindings)"
                        v-on="handlers"
                        v-validate="'required|min:6'"
                        v-model="form.new_password">
-            </app-password>
+            </PasswordInput>
         </form-group>
 
         <div slot="actions">
@@ -32,7 +32,12 @@
 </template>
 
 <script>
+    import PasswordInput from '@/components/form/PasswordInput'
+
     export default {
+        components: {
+            PasswordInput
+        },
         data() {
             return {
                 saving: false,

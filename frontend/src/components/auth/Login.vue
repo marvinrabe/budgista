@@ -24,7 +24,7 @@
                                          v-t="'message.forgotPassword'">
                             </router-link>
                         </div>
-                        <app-password :disable-strength="true">
+                        <PasswordInput :disable-strength="true">
                             <input class="form-control"
                                    slot-scope="{bindings, handlers}"
                                    v-bind="Object.assign(bindings, group.bindings)"
@@ -32,7 +32,7 @@
                                    v-validate="'required'"
                                    data-vv-validate-on="input"
                                    v-model="form.password">
-                        </app-password>
+                        </PasswordInput>
                     </template>
                 </form-group>
 
@@ -65,7 +65,12 @@
 </template>
 
 <script>
+    import PasswordInput from '@/components/form/PasswordInput'
+
     export default {
+        components: {
+            PasswordInput
+        },
         data() {
             return {
                 form: {
