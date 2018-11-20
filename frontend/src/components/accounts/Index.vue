@@ -7,7 +7,7 @@
                 <account-settings :account="account"></account-settings>
 
                 <router-link
-                        :to="{ name: 'transaction.new'}"
+                        :to="{ name: 'transaction.new', query: { account: account_id }}"
                         class="btn btn-primary btn-sm"
                         :title="$t('action.create.transaction')">
                     <font-awesome-icon icon="plus"/>

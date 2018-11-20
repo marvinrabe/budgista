@@ -14,18 +14,19 @@
 
         <div class="card">
             <div class="card-body">
-                <transaction-form
+                <TransactionForm
                         :transaction="transaction"
                         @cancel="finish"
-                        @success="finish"></transaction-form>
+                        @success="finish"
+                />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import TransactionForm from './TransactionForm'
-    import store from '@/store'
+    import TransactionForm from '@/components/transactions/TransactionForm'
+    import store from '@/store/index'
 
     export default {
         props: ['transaction_id'],
