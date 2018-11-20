@@ -1,6 +1,5 @@
 <template>
     <div class="main">
-
         <app-toolbar :title="$t('action.create.transaction')"/>
 
         <div class="card">
@@ -32,14 +31,6 @@
         methods: {
             finish() {
                 this.$router.push({name: 'account', params: {account_id: this.account_id}})
-            },
-            saveTransaction() {
-                let transaction = this.getResult()
-                transaction.account_id = this.account_id
-
-                this.$store.dispatch('createTransaction', transaction)
-
-                this.cancel()
             }
         }
     }

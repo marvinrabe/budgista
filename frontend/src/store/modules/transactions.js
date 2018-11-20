@@ -39,7 +39,10 @@ export const getters = {
 
 const actions = {
 
-    loadTransaction({commit}, transaction_id) {
+    loadTransaction({commit, getters}, transaction_id) {
+        if (getters.isTransactionLoaded(transaction_id)) {
+            return Promise.resolve()
+        }
         return axios
             .get('/transactions/' + transaction_id)
             .then(({data}) => {

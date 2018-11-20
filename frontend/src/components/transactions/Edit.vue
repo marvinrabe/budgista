@@ -25,6 +25,7 @@
 
 <script>
     import TransactionForm from './TransactionForm'
+    import store from '@/store'
 
     export default {
         props: ['transaction_id'],
@@ -36,7 +37,15 @@
                 return this.$store.getters.findTransactionById(this.transaction_id)
             }
         },
-
+        beforeRouteEnter(to, from, next) {
+            store.dispatch('loadTransaction', to.params.transaction_id)
+                .then(() => {
+                    next()
+                })
+                .catch((error) => {
+                    next(error)
+                })
+        },
         methods: {
             finish() {
                 this.$router.push({name: 'account', params: {account_id: this.transaction.account_id}})
