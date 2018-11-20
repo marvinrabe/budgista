@@ -1,7 +1,15 @@
 <template>
     <div class="balance">
-        <app-number :value="account.clearedBalance" label="form.balance.cleared" :color="true"></app-number>
-        <app-number :value="account.workingBalance" label="form.balance.working" :color="true"></app-number>
+        <AppNumber
+                :color="true"
+                :value="account.clearedBalance"
+                label="form.balance.cleared"
+        />
+        <AppNumber
+                :color="true"
+                :value="account.workingBalance"
+                label="form.balance.working"
+        />
     </div>
 </template>
 
