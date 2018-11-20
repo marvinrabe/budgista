@@ -1,7 +1,7 @@
 <template>
     <div v-if="account" class="main">
         <app-toolbar :title="account.name">
-            <balance :account="account"></balance>
+            <AccountBalance :account="account"/>
 
             <template slot="submenu">
                 <account-settings :account="account"></account-settings>
@@ -39,7 +39,8 @@
                 <div class="text-center p-1 transactions-row-dummy"
                      v-if="countFutureTransactions > 0 && !showFutureTransactions">
                     <a href="#" class="small" @click.prevent="showFutureTransactions = true">
-                        {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions })}}
+                        {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions
+                        })}}
                     </a>
                 </div>
                 <transaction-row
@@ -96,7 +97,7 @@
 
 <script>
     import AppSpinner from '../AppSpinner'
-    import Balance from './Balance.vue'
+    import AccountBalance from './AccountBalance.vue'
     import InfiniteLoading from 'vue-infinite-loading'
     import AccountSettings from './AccountSettings'
     import TransactionRow from './TransactionRow'
@@ -108,7 +109,7 @@
         components: {
             AppSpinner,
             AccountSettings,
-            Balance,
+            AccountBalance,
             InfiniteLoading,
             ReconcileForm,
             TransactionRow,
