@@ -50,8 +50,7 @@ export const guestRoutes = {
     ]
 }
 
-import EditTransactions from '@/views/transactions/Edit'
-import NewTransactions from '@/views/transactions/New'
+import Transactions from '@/views/transactions'
 
 export const userRoutes = {
     path: '/',
@@ -105,18 +104,7 @@ export const userRoutes = {
             component: require('./components/accounts/Index.vue').default,
             props: true
         },
-        {
-            path: 'transaction/create',
-            name: 'transaction.new',
-            component: NewTransactions,
-            props: (route) => ({account_id: route.query.account})
-        },
-        {
-            path: 'transaction/:transaction_id',
-            name: 'transaction.edit',
-            component: EditTransactions,
-            props: true
-        }
+        ...Transactions
     ]
 }
 
