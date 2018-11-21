@@ -19,7 +19,7 @@
                 },
                 tooltips: {
                     callbacks: {
-                        label: function (item, data) {
+                        label: function (item) {
                             return self.$moneyFormatter().format(item.yLabel)
                         }
                     }
@@ -28,7 +28,7 @@
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
-                            callback: function (value, index, values) {
+                            callback: function (value) {
                                 return self.$moneyFormatter().format(value)
                             }
                         }
