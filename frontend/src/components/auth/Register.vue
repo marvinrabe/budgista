@@ -16,15 +16,12 @@
                 </form-group>
 
                 <form-group name="password">
-                    <PasswordInput slot-scope="group">
-                        <input class="form-control"
-                               slot-scope="{bindings, handlers}"
-                               v-bind="Object.assign(bindings, group.bindings)"
-                               v-on="handlers"
-                               v-validate="'required|min:6'"
-                               data-vv-validate-on="input"
-                               v-model="form.password">
-                    </PasswordInput>
+                    <PasswordInput
+                            slot-scope="{bindings}"
+                            v-bind="bindings"
+                            v-model="form.password"
+                            validation="required|min:6"
+                    />
                 </form-group>
 
                 <form-group name="terms" :has-label="false">

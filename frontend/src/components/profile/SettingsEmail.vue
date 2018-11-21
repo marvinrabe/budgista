@@ -20,14 +20,12 @@
         </form-group>
 
         <form-group name="password">
-            <PasswordInput :disable-strength="true" slot-scope="group">
-                <input class="form-control"
-                       slot-scope="{bindings, handlers}"
-                       v-bind="Object.assign(bindings, group.bindings)"
-                       v-on="handlers"
-                       v-validate="'required'"
-                       v-model="form.password">
-            </PasswordInput>
+            <PasswordInput
+                    slot-scope="{bindings}"
+                    v-bind="bindings"
+                    v-model="form.password"
+                    :disable-strength="true"
+            />
         </form-group>
 
         <div slot="actions">

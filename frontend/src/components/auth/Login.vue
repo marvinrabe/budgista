@@ -17,22 +17,18 @@
                 </form-group>
 
                 <form-group name="password">
-                    <template slot-scope="group">
+                    <template slot-scope="{bindings}">
                         <div class="float-right">
                             <router-link class="text-muted small"
                                          :to="{name: 'send_reset'}"
                                          v-t="'message.forgotPassword'">
                             </router-link>
                         </div>
-                        <PasswordInput :disable-strength="true">
-                            <input class="form-control"
-                                   slot-scope="{bindings, handlers}"
-                                   v-bind="Object.assign(bindings, group.bindings)"
-                                   v-on="handlers"
-                                   v-validate="'required'"
-                                   data-vv-validate-on="input"
-                                   v-model="form.password">
-                        </PasswordInput>
+                        <PasswordInput
+                                v-bind="bindings"
+                                v-model="form.password"
+                                :disable-strength="true"
+                        />
                     </template>
                 </form-group>
 

@@ -17,14 +17,12 @@
                     </form-group>
 
                     <form-group name="password">
-                        <PasswordInput :disable-strength="true" slot-scope="group">
-                            <input class="form-control"
-                                   slot-scope="{bindings, handlers}"
-                                   v-bind="Object.assign(bindings, group.bindings)"
-                                   v-on="handlers"
-                                   v-validate="'required'"
-                                   v-model="password">
-                        </PasswordInput>
+                        <PasswordInput
+                                slot-scope="{bindings}"
+                                v-bind="bindings"
+                                v-model="password"
+                                :disable-strength="true"
+                        />
                     </form-group>
 
                     <div slot="actions">
@@ -66,7 +64,7 @@
                         }
                     })
                     .then(() => {
-                        this.$snotify.success(this.$t('message.userDeleted'));
+                        this.$snotify.success(this.$t('message.userDeleted'))
                         this.$auth.logout({
                             makeRequest: true,
                             success: function () {
