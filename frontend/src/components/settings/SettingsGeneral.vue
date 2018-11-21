@@ -7,7 +7,12 @@
                     v-bind="bindings"
                     v-model="form.language"
                     v-validate="'required'">
-                <option v-for="language in languages" :value="language" v-html="$t('language.'+language)"></option>
+                <option
+                        v-for="language in languages"
+                        :key="language"
+                        :value="language"
+                        v-t="'language.'+language"
+                ></option>
             </select>
         </form-group>
 
@@ -17,7 +22,12 @@
                     v-bind="bindings"
                     v-model="form.locale"
                     v-validate="'required'">
-                <option v-for="locale in locales" :value="locale" v-html="$t('language.'+locale)"></option>
+                <option
+                        v-for="locale in locales"
+                        :key="locale"
+                        :value="locale"
+                        v-t="'language.'+locale"
+                ></option>
             </select>
         </form-group>
 
@@ -27,7 +37,12 @@
                     v-bind="bindings"
                     v-model="form.currency"
                     v-validate="'required'">
-                <option v-for="currency in currencies" :value="currency" v-html="$t('currency.'+currency)"></option>
+                <option
+                        v-for="currency in currencies"
+                        :key="currency"
+                        :value="currency"
+                        v-t="'currency.'+currency">
+                </option>
             </select>
         </form-group>
 

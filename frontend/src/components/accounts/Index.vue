@@ -44,8 +44,7 @@
                     </a>
                 </div>
                 <transaction-row
-                        v-for="transaction of transactions"
-                        v-if="!transaction.isFuture() || showFutureTransactions"
+                        v-for="transaction of filteredTransactions"
                         :key="transaction.id"
                         :transaction="transaction">
                 </transaction-row>
@@ -130,6 +129,12 @@
             },
             account() {
                 return this.$store.getters.findAccountById(this.account_id)
+            },
+            filteredTransactions() {
+                if (this.showFutureTransactions) {
+                    return this.transactions
+                }
+                return this.transactions.filter(x => !x.isFuture())
             },
             transactions() {
                 return this.$store.getters.findTransactionsByAccountId(this.account_id)
