@@ -11,6 +11,7 @@
                 type: String
             }
         },
+        inject: ['$validator'],
         computed: {
             visible() {
                 return this.errors.has(this.name)
