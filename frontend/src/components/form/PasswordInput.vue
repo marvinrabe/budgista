@@ -1,7 +1,12 @@
 <template>
     <div class="VuePassword">
         <div class="VuePassword__Input">
-            <slot :bindings="bindings" :handlers="handlers"></slot>
+            <input class="form-control"
+                   :type="type"
+                   :value="value"
+                   @input="emitInput"
+                   v-bind="$attrs"
+                   v-validate="validation">
 
             <a href="#" class="VuePassword__Toggle text-darker-light" role="button" @click.prevent="togglePassword">
                 <span v-show="type === 'password'">
@@ -80,6 +85,14 @@
     export default {
         inheritAttrs: false,
         props: {
+            value: {
+                type: String,
+                default: ""
+            },
+            validation: {
+                type: String,
+                default: 'required'
+            },
             strengthClasses: {
                 type: Array,
                 default() {
@@ -136,6 +149,7 @@
                 import(/* webpackChunkName: "zxcvbn" */ 'zxcvbn').then(x => {
                     this.strength = x.default(event.target.value)
                 })
+                this.$emit('input', event.target.value)
             },
             togglePassword() {
                 this.type = this.type === 'password' ? 'text' : 'password'

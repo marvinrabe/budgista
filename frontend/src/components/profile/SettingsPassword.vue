@@ -2,25 +2,19 @@
     <app-form @submit="save" ref="form">
 
         <form-group name="password" label="oldPassword">
-            <PasswordInput :disable-strength="true" slot-scope="group">
-                <input class="form-control"
-                       slot-scope="{bindings, handlers}"
-                       v-bind="Object.assign(bindings, group.bindings)"
-                       v-on="handlers"
-                       v-validate="'required'"
-                       v-model="form.password">
-            </PasswordInput>
+            <PasswordInput
+                    v-model="form.password"
+                    :disable-strength="true"
+            />
         </form-group>
 
         <form-group name="newPassword">
-            <PasswordInput slot-scope="group">
-                <input class="form-control"
-                       slot-scope="{bindings, handlers}"
-                       v-bind="Object.assign(bindings, group.bindings)"
-                       v-on="handlers"
-                       v-validate="'required|min:6'"
-                       v-model="form.new_password">
-            </PasswordInput>
+            <PasswordInput
+                    slot-scope="{bindings}"
+                    v-bind="bindings"
+                    v-model="form.new_password"
+                    validation="required|min:6"
+            />
         </form-group>
 
         <div slot="actions">
@@ -48,24 +42,24 @@
             }
         },
         mounted() {
-            this.reset();
+            this.reset()
         },
         methods: {
             reset() {
-                this.saving = false;
-                this.form.password = '';
-                this.form.new_password = '';
+                this.saving = false
+                this.form.password = ''
+                this.form.new_password = ''
             },
             save() {
-                this.saving = true;
+                this.saving = true
                 this.$store.dispatch('updatePassword', this.form)
                     .then(() => {
-                        this.$snotify.success(this.$t('message.updatePassword'));
+                        this.$snotify.success(this.$t('message.updatePassword'))
                     })
                     .catch(this.$refs.form.error)
                     .finally(() => {
-                        this.saving = false;
-                    });
+                        this.saving = false
+                    })
             }
         }
     }
