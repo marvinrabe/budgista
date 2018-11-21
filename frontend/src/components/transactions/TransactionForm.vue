@@ -1,36 +1,40 @@
 <template>
     <app-form @submit="saveTransaction" ref="form">
+
         <form-group name="amount">
-            <amount-input v-model="amount"></amount-input>
+            <AmountInput
+                    slot-scope="{bindings}"
+                    v-bind="bindings"
+                    v-model="amount"
+            />
         </form-group>
 
         <form-group name="payee">
-            <payee-input slot-scope="{bindings}"
-                         v-bind="bindings"
-                         v-model="payee">
-            </payee-input>
+            <PayeeInput
+                    slot-scope="{bindings}"
+                    v-bind="bindings"
+                    v-model="payee"
+            />
         </form-group>
 
         <div class="form-row">
             <div class="col-sm-6">
                 <form-group name="category">
-                    <category-select slot-scope="{bindings}"
-                                     v-bind="bindings"
-                                     v-model="category_id">
-                    </category-select>
+                    <CategorySelect
+                            slot-scope="{bindings}"
+                            v-bind="bindings"
+                            v-model="category_id"
+                    />
                 </form-group>
             </div>
             <div class="col-sm-6">
                 <form-group name="date">
                     <template slot-scope="{bindings}">
                         <div class="input-group">
-                            <input class="form-control"
-                                   type="date"
-                                   v-if="hasHTML5DateInput"
-                                   v-bind="bindings"
-                                   v-model="date"
-                                   v-validate="'required'">
-                            <date-input v-else v-bind="bindings" v-model="date"></date-input>
+                            <DateInput
+                                    v-bind="bindings"
+                                    v-model="date"
+                            />
                             <div class="input-group-append">
                                 <button class="btn btn-outline-light"
                                         type="button"
@@ -44,8 +48,10 @@
                     </template>
                 </form-group>
 
-                <recurring-input v-if="recurring"
-                                 v-model="rrule"></recurring-input>
+                <RecurringInput
+                        v-if="recurring"
+                        v-model="rrule"
+                />
             </div>
         </div>
 
@@ -64,21 +70,30 @@
 </template>
 
 <script>
-    import Modernizr from 'modernizr'
-    import {mapGetters} from 'vuex'
+    import _ from 'lodash'
+    import AppForm from '@/components/form/AppForm.vue'
+    import FormGroup from '@/components/form/FormGroup.vue'
     import {faSync} from '@fortawesome/free-solid-svg-icons'
     import AmountInput from './AmountInput'
     import RecurringInput from './RecurringInput'
     import CategorySelect from '../categories/CategorySelect'
-    import _ from 'lodash'
     import PayeeInput from './PayeeInput'
+    import DateInput from '../form/DateInput'
 
     export default {
-        props: ['transaction'],
+        props: {
+            transaction: {
+                type: Object,
+                default: {}
+            }
+        },
         components: {
-            PayeeInput,
+            AppForm,
+            FormGroup,
             AmountInput,
             CategorySelect,
+            PayeeInput,
+            DateInput,
             RecurringInput
         },
         data() {
@@ -97,16 +112,9 @@
         computed: {
             recurringIcon() {
                 return faSync
-            },
-            hasHTML5DateInput() {
-                return Modernizr.inputtypes.date
-            },
-            ...mapGetters([
-                'sortedCategories'
-            ])
+            }
         },
         methods: {
-
             getResult() {
                 return {
                     id: this.id,
@@ -118,8 +126,9 @@
                     account_id: this.account_id
                 }
             },
-
             saveTransaction() {
+                this.$emit('save')
+
                 let transaction = this.getResult()
                 this.saving = true
 

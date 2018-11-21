@@ -4,7 +4,6 @@ import messages from '../lang/index'
 import axios from 'axios'
 import browserLocale from 'browser-locale'
 import {languages} from '../config.js'
-import DateInput from './DateInput'
 import MoneyFormat from './MoneyFormat'
 import IntegerMoneyFormatter from './IntegerMoneyFormatter'
 import _ from 'lodash'
@@ -45,8 +44,6 @@ export const intl = {
     install(Vue) {
 
         Vue.component('money-format', MoneyFormat)
-
-        Vue.component('date-input', DateInput)
 
         let integerMoneyFormatter = _.memoize(
             (locale, currency) => {

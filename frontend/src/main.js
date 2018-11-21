@@ -61,7 +61,7 @@ Vue.component(
 
 Vue.component(
     'form-group',
-    require('./components/form/AppFormGroup.vue').default
+    require('./components/form/FormGroup.vue').default
 )
 
 Vue.component(
