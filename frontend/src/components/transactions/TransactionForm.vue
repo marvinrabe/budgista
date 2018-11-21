@@ -84,7 +84,7 @@
         props: {
             transaction: {
                 type: Object,
-                default: {}
+                default: () => {}
             }
         },
         components: {

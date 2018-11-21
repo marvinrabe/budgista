@@ -41,7 +41,7 @@ const actions = {
             })
     },
 
-    updatePassword({}, data) {
+    updatePassword(store, data) {
         return axios.post('/user/password', data)
     }
 
