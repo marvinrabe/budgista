@@ -49,6 +49,7 @@
 </template>
 
 <script>
+    import {termsUrl} from '../../config'
     import PasswordInput from '@/components/form/PasswordInput'
 
     export default {

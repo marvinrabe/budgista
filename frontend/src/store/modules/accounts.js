@@ -59,7 +59,7 @@ const actions = {
     deleteAccount({commit}, account) {
         return axios
             .delete('/accounts/' + account.id)
-            .then(({data}) => {
+            .then(() => {
                 commit('REMOVE_ACCOUNT', account);
             });
     }
