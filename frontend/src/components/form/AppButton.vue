@@ -1,5 +1,7 @@
 <template>
-    <button :class="styling"
+    <button
+            type="submit"
+            :class="styling"
             :disabled="busy || disabled"
             @click="$emit('click')">
         <font-awesome-icon :icon="icon" spin v-if="busy"/>

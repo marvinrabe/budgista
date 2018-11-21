@@ -1,14 +1,14 @@
 <template>
     <div class="form-group">
-        <label :for="name" v-if="hasLabel">{{ $t(labelTranslation)}}</label>
+        <label :for="name" v-if="hasLabel" v-t="labelTranslation"></label>
         <slot :bindings="bindings" :id="name"></slot>
-        <span class="invalid-feedback" v-if="hasError">
-            {{ errors.first(name) }}
-        </span>
+        <FormGroupError :name="name"/>
     </div>
 </template>
 
 <script>
+    import FormGroupError from './FormGroupError'
+
     export default {
         props: {
             name: {
@@ -23,13 +23,12 @@
                 default: true
             }
         },
-        inject: ['$validator'],
+        components: {
+            FormGroupError
+        },
         computed: {
             labelTranslation() {
                 return 'form.' + (this.label || this.name)
-            },
-            hasError() {
-                return this.errors.has(this.name)
             },
             bindings() {
                 let bindings = {
@@ -46,10 +45,3 @@
         }
     }
 </script>
-
-<style>
-    /* Invalid Feedback is always displayed as block, because we use vue to hide message if there is no error. */
-    .invalid-feedback {
-        display: block;
-    }
-</style>
