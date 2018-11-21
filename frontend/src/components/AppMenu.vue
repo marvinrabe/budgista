@@ -89,7 +89,7 @@
                 this.$auth.logout({
                     makeRequest: true,
                     success: function () {
-                        this.$store.dispatch('RESET')
+                        this.$store.commit('RESET')
                     },
                     redirect: {name: 'login'}
                 })
