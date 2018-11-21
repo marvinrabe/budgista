@@ -26,6 +26,7 @@
         components: {
             FormGroupError
         },
+        inject: ['$validator'],
         computed: {
             labelTranslation() {
                 return 'form.' + (this.label || this.name)
