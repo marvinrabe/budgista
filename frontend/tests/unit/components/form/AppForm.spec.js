@@ -3,7 +3,7 @@ import {assert} from 'chai'
 import AppForm from '@/components/form/AppForm.vue'
 import {Validator} from 'vee-validate'
 
-const validator = new Validator({}, {});
+const validator = new Validator({}, {})
 
 describe('AppForm', () => {
 
