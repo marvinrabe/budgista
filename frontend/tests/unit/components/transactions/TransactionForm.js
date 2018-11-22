@@ -10,7 +10,7 @@ const localVue = createLocalVue()
 
 localVue.use(Vuex)
 
-describe.only('TransactionForm', () => {
+describe.skip('TransactionForm', () => {
     let actions
     let store
 
