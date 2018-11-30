@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Resources\User as UserResource;
 use App\Models\Account;
 use App\Models\Category;
-use App\Models\DeletedUser;
 use App\Models\User;
 use App\Rules\ValidPassword;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Propaganistas\LaravelIntl\Facades\Currency;
@@ -47,8 +46,6 @@ class UserController extends Controller
 
     public function destroy()
     {
-        $user = Auth()->user();
-
         request()->validate([
             'password' => [
                 'required',
@@ -58,23 +55,18 @@ class UserController extends Controller
             'feedback' => 'nullable|string'
         ]);
 
-        DeletedUser::create([
-            'feedback' => request('feedback'),
-            'created_at' => $user->created_at
-        ]);
-
-        $user->delete();
+        Auth()->user()->terminate(request('feedback'));
     }
 
     public function reset()
     {
         request()->validate([
-            'password' => 'required'
+            'password' => [
+                'required',
+                'string',
+                new ValidPassword()
+            ]
         ]);
-
-        if (!Hash::check(request('password'), Auth()->user()->password)) {
-            abort(403);
-        }
 
         Auth()->user()->accounts->each(function (Account $account) {
             $account->transactions()->delete();
@@ -118,8 +110,6 @@ class UserController extends Controller
 
     public function password()
     {
-        $user = Auth()->user();
-
         request()->validate([
             'password' => [
                 'required',
@@ -129,7 +119,7 @@ class UserController extends Controller
             'new_password' => 'required|string|min:6'
         ]);
 
-        $user->update([
+        Auth()->user()->update([
             'password' => bcrypt(request('new_password'))
         ]);
     }

@@ -11,8 +11,8 @@
 |
 */
 
-Route::view('/', 'app')->name('app');
-Route::view('/login', 'app')->name('login');
-Route::get('/verify/{id}', 'VerificationController@verify')->name('verification.verify');
-Route::view('/reset-password/{token}', 'app')->name('password.reset');
-Route::view('{any}', 'app')->where('any', '.*');
+Route::view('/', 'index')->name('app');
+Route::view('/login', 'index')->name('login');
+Route::view('/verify/{token}', 'index')->name('email.verify');
+Route::view('/reset-password/{token}', 'index')->name('password.reset');
+Route::view('{any}', 'index')->where('any', '^(?!api).*$');

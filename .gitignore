@@ -1,15 +1,12 @@
 /node_modules
 /public/hot
 /public/storage
-/public/test.php
+
 /storage/*.key
 /vendor
 /.idea
 /.vagrant
 Homestead.json
 Homestead.yaml
-npm-debug.log
-yarn-error.log
 .env
 .env.testing
-_ide_helper.php

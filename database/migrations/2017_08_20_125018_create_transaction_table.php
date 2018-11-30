@@ -8,31 +8,35 @@ class CreateTransactionTable extends Migration
 {
     /**
      * Run the migrations.
-     *
      * @return void
      */
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id');
-            $table->date('date');
-            $table->string('payee');
-            $table->string('memo');
-            $table->decimal('amount', 14, 2);
-            $table->uuid('budget_id');
-            $table->foreign('budget_id')->references('id')->on('budgets');
-            $table->uuid('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->uuid('account_id');
-            $table->foreign('account_id')->references('id')->on('accounts');
+            $table->uuid('category_id')->nullable();
+            $table->string('payee');
+            $table->integer('amount');
+            $table->boolean('cleared')->default(false);
+            $table->date('date');
+            $table->boolean('recurring')->default(false);
+            $table->text('rrule')->nullable();
             $table->timestamps();
+
             $table->primary('id');
+            $table->foreign('category_id')
+                ->references('id')->on('categories')
+                ->onDelete('set null');
+            $table->foreign('account_id')
+                ->references('id')->on('accounts')
+                ->onDelete('cascade');
+            $table->index(['account_id', 'date', 'created_at']);
         });
     }
 
     /**
      * Reverse the migrations.
-     *
      * @return void
      */
     public function down()
