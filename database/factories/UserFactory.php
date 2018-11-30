@@ -13,3 +13,7 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->state(User::class, 'verified', [
+    'email_verified_at' => \Carbon\Carbon::now(),
+]);

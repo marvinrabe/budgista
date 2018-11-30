@@ -24,32 +24,7 @@ jobs:
           name: Setup configuration
           command: cp ./.circleci/.env.testing ./.env
 
-      # Yarn
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - yarn-packages-{{ .Branch }}
-            - yarn-packages-master
-            - yarn-packages-
-      - run:
-          name: Install Yarn Dependencies
-          command: |
-            yarn install
-            yarn add full-icu
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules/
-
-      - run:
-          name: Test Mocha
-          command: |
-            export NODE_ICU_DATA=node_modules/full-icu
-            npm run test
-
-      # Composer
+    # Composer
       - restore_cache:
           name: Restore Composer Package Cache
           keys:
@@ -63,7 +38,7 @@ jobs:
           name: Save Composer Package Cache
           key: v1-dependencies-{{ checksum "composer.lock" }}
           paths:
-            - ./vendor
+          - ./vendor
 
       - run:
           name: Setup keys
@@ -72,19 +47,52 @@ jobs:
             php artisan jwt:secret --force
 
       - run:
-         name: Compile assets
-         command: |
-           npm run deployment
-           if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              git config --global user.name "Circle CI"
-              git config --global user.email "support@budgista.com"
-              git add public/.
-              git commit -m "Assets"
-           fi
-
-      - run:
           name: Test PHPUnit
           command: vendor/bin/phpunit
+
+      # Yarn
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ .Branch }}-{{ checksum "frontend/yarn.lock" }}
+            - yarn-packages-{{ .Branch }}
+            - yarn-packages-master
+            - yarn-packages-
+      - run:
+          name: Install Yarn Dependencies
+          command: |
+            cd frontend
+            yarn install
+            yarn add full-icu
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ .Branch }}-{{ checksum "frontend/yarn.lock" }}
+          paths:
+            - frontend/node_modules/
+
+      - run:
+          name: Test Mocha
+          command: |
+            cd frontend
+            export NODE_ICU_DATA=node_modules/full-icu
+            yarn run test:unit
+
+      - run:
+         name: Compile assets
+         command: |
+            cd frontend
+            yarn run build
+
+      - run:
+          name: Commit assets
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+               git config --global user.name "Circle CI"
+               git config --global user.email "support@budgista.com"
+               git add public/.
+               git add resources/.
+               git commit -m "Assets"
+            fi
 
       - deploy:
           name: Deploy

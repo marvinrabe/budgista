@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Auth\EmailTokenRepository;
 use App\Budget\Month;
 use App\Budget\Sheet;
-use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,7 +21,6 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
     /**
      * The attributes that are mass assignable.
-     *
      * @var array
      */
     protected $fillable = [
@@ -36,7 +35,6 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
     /**
      * The attributes that should be hidden for arrays.
-     *
      * @var array
      */
     protected $hidden = [
@@ -44,9 +42,9 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'remember_token'
     ];
 
-    public function accounts()
+    public function groups()
     {
-        return $this->hasMany(Account::class);
+        return $this->hasMany(Group::class);
     }
 
     public function categories()
@@ -54,14 +52,9 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         return $this->hasMany(Category::class);
     }
 
-    public function groups()
+    public function accounts()
     {
-        return $this->hasMany(Group::class);
-    }
-
-    public function budget(Month $month)
-    {
-        return new Sheet($this, $month);
+        return $this->hasMany(Account::class);
     }
 
     public function transactions()
@@ -69,24 +62,33 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         return $this->hasManyThrough(Transaction::class, Account::class);
     }
 
-    public function isActive()
+    public function budget(Month $month)
     {
-        $oldTransactionCount = $this
-            ->transactions()
-            ->whereBetween('date', [Carbon::now()->subDays(31), Carbon::now()])
-            ->count();
+        return new Sheet($this, $month);
+    }
 
-        $futureTransactionCount = $this
-            ->transactions()
-            ->where('date', '>', Carbon::now())
-            ->count();
+    public function terminate($reason = null)
+    {
+        DeletedUser::create([
+            'feedback' => $reason,
+            'created_at' => $this->created_at
+        ]);
 
-        return ($oldTransactionCount - $futureTransactionCount) > 0;
+        $this->delete();
+    }
+
+    /**
+     * Sends verification email.
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $token = resolve(EmailTokenRepository::class)->get($this->email);
+
+        $this->notify(new \App\Notifications\VerifyEmail($token));
     }
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
-     *
      * @return mixed
      */
     public function getJWTIdentifier()
@@ -96,7 +98,6 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
-     *
      * @return array
      */
     public function getJWTCustomClaims()

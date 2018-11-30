@@ -3,20 +3,15 @@
 namespace Tests\Feature;
 
 use App\Http\Middleware\DetectLocale;
-use App\Http\Middleware\LoadUserLocale;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
     use RefreshDatabase;
-
-    public function setUp() {
-        parent::setUp();
-        Notification::fake();
-    }
 
     protected function registerUser()
     {
@@ -41,15 +36,15 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    public function it_sends_verify_email()
+    public function it_dispatches_registered_event()
     {
-        $this->registerUser();
+        Event::fake();
 
-        $user = User::where('email', 'john.doe@example.com')->first();
+        $user = $this->registerUser();
 
-        Notification::assertSentTo(
-            $user, \Illuminate\Auth\Notifications\VerifyEmail::class
-        );
+        Event::assertDispatched(Registered::class, function ($e) use ($user) {
+            return $e->user->email === $user->email;
+        });
     }
 
     /** @test */

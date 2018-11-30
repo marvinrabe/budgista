@@ -1,0 +1,68 @@
+<template>
+    <form @submit.prevent="submit"
+          novalidate>
+        <slot></slot>
+
+        <div class="d-flex justify-content-end align-items-baseline">
+            <slot name="actions"></slot>
+        </div>
+    </form>
+</template>
+
+<script>
+    import _ from 'lodash'
+
+    export default {
+        inject: ['$validator'],
+        data() {
+            return {
+                validated: false
+            }
+        },
+        methods: {
+            submit() {
+                this.$validator.validateAll().then(isValid => {
+                    this.validated = true
+
+                    if (isValid) {
+                        this.$emit('submit')
+                    }
+                })
+            },
+            clearErrors() {
+                this.errors.clear()
+                this.$validator.reset()
+            },
+            addError(field, message) {
+                if (_.has(this.fields, field)) {
+                    this.errors.add({
+                        field: field,
+                        msg: message
+                    })
+                    this.$validator.flag(field, {
+                        invalid: true,
+                        valid: false,
+                        dirty: true
+                    })
+                } else {
+                    this.$snotify.error(message)
+                }
+            },
+            error(exception) {
+                if (exception.response && exception.response.data && exception.response.data.errors) {
+                    let serverErrors = exception.response.data.errors
+                    const keys = _.keys(serverErrors)
+                    keys.forEach((key) => {
+                        let message = _.head(serverErrors[key])
+                        this.addError(key, message)
+                    })
+                } else if (exception.response && exception.response.data && exception.response.data.error) {
+                    this.$snotify.error(exception.response.data.error)
+                } else {
+                    this.$snotify.error(this.$t('message.unexpectedError'))
+                    throw exception
+                }
+            }
+        }
+    }
+</script>

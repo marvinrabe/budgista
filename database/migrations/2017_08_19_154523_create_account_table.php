@@ -15,11 +15,16 @@ class CreateAccountTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->uuid('id');
+            $table->unsignedInteger('user_id');
             $table->string('name');
-            $table->uuid('budget_id');
-            $table->foreign('budget_id')->references('id')->on('budgets');
+            $table->string('icon')->default('credit-card');
+            $table->boolean('tracking')->default(false);
             $table->timestamps();
+
             $table->primary('id');
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
         });
     }
 

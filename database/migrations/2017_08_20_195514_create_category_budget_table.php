@@ -8,29 +8,28 @@ class CreateCategoryBudgetTable extends Migration
 {
     /**
      * Run the migrations.
-     *
      * @return void
      */
     public function up()
     {
-        Schema::create('category_budgets', function (Blueprint $table) {
+        Schema::create('budgets', function (Blueprint $table) {
             $table->uuid('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('month', 7);
-            $table->decimal('amount', 14, 2)->default(0);
-            $table->uuid('budget_id');
-            $table->foreign('budget_id')->references('id')->on('budgets');
+            $table->integer('amount')->default(0);
+
             $table->primary(['category_id', 'month']);
+            $table->foreign('category_id')
+                ->references('id')->on('categories')
+                ->onDelete('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
-     *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('category_budgets');
+        Schema::dropIfExists('budgets');
     }
 }
