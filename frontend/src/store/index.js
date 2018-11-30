@@ -14,7 +14,6 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export const store = new Vuex.Store({
     state: {
-        initialized: false,
         loading: true
     },
     actions: {
@@ -22,7 +21,6 @@ export const store = new Vuex.Store({
             Promise
                 .all([
                     dispatch('loadUser'),
-                    dispatch('loadAccounts'),
                     dispatch('loadCategories'),
                     dispatch('loadGroups')
                 ])
