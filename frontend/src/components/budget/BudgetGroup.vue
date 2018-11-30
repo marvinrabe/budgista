@@ -47,8 +47,7 @@
                     :key="category.id"
                     :loading="loading"
                     :category="category"
-                    :budget="budgetForCategory(category)"
-                    @update:budget="updateBudget">
+                    :month="month">
             </budget-category>
         </draggable>
     </div>
@@ -64,7 +63,7 @@
     import AppSkeleton from '../AppSkeleton'
 
     export default {
-        props: ['group', 'value', 'month', 'loading'],
+        props: ['group', 'month', 'loading'],
         components: {
             BudgetCategory,
             GroupSettings,
@@ -78,10 +77,6 @@
             },
             collapsedIcon() {
                 return this.categoriesVisible ? faChevronDown : faChevronRight
-            },
-            sheet() {
-                let categories = this.categories.map(x => x.id)
-                return collect(this.value).filter(x => categories.includes(x.id))
             },
             groupId() {
                 return this.group ? this.group.id : null
@@ -97,6 +92,13 @@
                     })
                 }
             },
+            rows() {
+                return this.$store.getters['budgets/getRows'](this.month)
+            },
+            sheet() {
+                let categories = this.categories.map(x => x.id)
+                return collect(this.rows).filter(x => categories.includes(x.id))
+            },
             budget() {
                 return this.sheet.sum('budget')
             },
@@ -108,26 +110,6 @@
             }
         },
         methods: {
-            budgetForCategory(category) {
-                let budget = this.value.find(x => category.id === x.id)
-                if (budget) {
-                    budget.month = this.month
-                    return budget
-                }
-                return {
-                    month: this.month,
-                    budget: 0,
-                    previousMonth: 0,
-                    recommendedBudget: 0,
-                    activity: 0
-                }
-            },
-            updateBudget(value) {
-                let result = this.value.filter(x => x.id !== value.id)
-                result.push(value)
-
-                this.$emit('input', result)
-            },
             collapse() {
                 this.$store
                     .dispatch('toggleGroupCollapsed', {

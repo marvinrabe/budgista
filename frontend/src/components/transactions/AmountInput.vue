@@ -43,6 +43,11 @@
                 amount: Math.abs(this.value)
             }
         },
+        watch: {
+            value() {
+                this.amount = Math.abs(this.value)
+            }
+        },
         methods: {
             input() {
                 this.$emit('input', this.type * this.amount)
