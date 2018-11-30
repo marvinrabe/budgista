@@ -37,7 +37,7 @@ class StatisticTest extends TestCase
     {
         $months = [];
         for ($i = 0; $i <= 11; $i++) {
-            $months[] = Carbon::now()->subMonth(11 - $i);
+            $months[] = Carbon::now()->subMonthNoOverflow(11 - $i);
         }
         return $months;
     }
@@ -76,6 +76,28 @@ class StatisticTest extends TestCase
                 'worth' => $key * 100 + 100,
                 'income' => 200,
                 'expense' => 100
+            ];
+        }
+
+        $this->get('/api/statistics/monthly')
+            ->assertJson([
+                'data' => $expectedData
+            ]);
+    }
+
+    /** @test */
+    public function it_returns_last_twelve_months_by_default()
+    {
+        $knownDate = Carbon::create(2018, 11, 30); // create testing date
+        Carbon::setTestNow($knownDate);
+        $this->prepareTransactions();
+
+        $expectedData = [
+            ['month' => '2017-12'],
+        ];
+        for ($month = 1; $month <= 11; $month++) {
+            $expectedData[] = [
+                'month' => '2018-' . str_pad($month, 2, '0', STR_PAD_LEFT)
             ];
         }
 
