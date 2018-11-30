@@ -7,8 +7,8 @@
 </template>
 
 <script>
-    import AppToolbar from '../AppToolbar'
-    import NetWorth from './NetWorth'
+    import AppToolbar from '@/components/AppToolbar'
+    import NetWorth from '@/components/statistics/NetWorth'
 
     export default {
         components: {
