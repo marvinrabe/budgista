@@ -26,21 +26,15 @@
             </span>
         </router-link>
         <div class="transaction-clear">
-            <a href="#"
-               v-if="!transaction.isFuture()"
-               :class="[{ 'text-success': transaction.cleared }, {'text-darker-light': !transaction.cleared}]"
-               @click.prevent="toggleCleared">
-                <font-awesome-icon :icon="clearIcon"/>
-            </a>
+            <ClearInput :transaction="transaction"/>
         </div>
     </div>
 </template>
 
 <script>
     import Transaction from '../../models/Transaction'
-    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
-    import {faCheckCircle} from '@fortawesome/free-solid-svg-icons'
     import AppEllipsis from '../AppEllipsis'
+    import ClearInput from './ClearInput'
     import RecurringIcon from './RecurringIcon'
 
     export default {
@@ -52,20 +46,12 @@
         },
         components: {
             AppEllipsis,
-            FontAwesomeIcon,
-            RecurringIcon,
+            ClearInput,
+            RecurringIcon
         },
         computed: {
-            clearIcon() {
-                return faCheckCircle
-            },
             category() {
                 return this.$store.getters.findCategoryById(this.transaction.category_id)
-            }
-        },
-        methods: {
-            toggleCleared() {
-                this.$store.dispatch('clearTransaction', this.transaction)
             }
         }
     }

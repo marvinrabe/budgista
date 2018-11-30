@@ -50,6 +50,7 @@ export const guestRoutes = {
     ]
 }
 
+import Statistics from '@/views/statistics'
 import Transactions from '@/views/transactions'
 
 export const userRoutes = {
@@ -79,11 +80,6 @@ export const userRoutes = {
             props: true
         },
         {
-            path: 'statistics',
-            name: 'statistics',
-            component: () => import(/* webpackChunkName: "statistics" */ './components/statistics/Index.vue')
-        },
-        {
             path: 'settings',
             name: 'settings',
             component: require('./components/settings/Index.vue').default
@@ -104,6 +100,7 @@ export const userRoutes = {
             component: require('./components/accounts/Index.vue').default,
             props: true
         },
+        ...Statistics,
         ...Transactions
     ]
 }

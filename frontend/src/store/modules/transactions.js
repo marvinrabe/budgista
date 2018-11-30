@@ -19,13 +19,13 @@ export const getters = {
     areAccountTransactionsLoaded: (state) => (id) => {
         return state.loaded.includes(id)
     },
-    findTransactionsByAccountId: (state) => (id) => {
-        let transactions = state.transactions.filter(x => x.account_id === id).slice()
+    findTransactionsByAccountId: (state) => (account_id) => {
+        let transactions = state.transactions.filter(x => x.account_id === account_id).slice()
         return _.sortBy(transactions, ['date', 'created_at', 'payee']).reverse()
     },
-    countFutureTransactions: (state, getters) => ({id}) => {
+    countFutureTransactions: (state, getters) => (account_id) => {
         return getters
-            .findTransactionsByAccountId(id)
+            .findTransactionsByAccountId(account_id)
             .filter(x => x.isFuture())
             .length
     },
@@ -105,13 +105,17 @@ const actions = {
             })
     },
 
-    clearTransaction({commit}, transaction) {
+    ['transactions/clear']({commit}, transaction) {
+        commit('transactions/onClear', transaction)
         return axios
             .put('/transactions/' + transaction.id + '/clear')
             .then(({data}) => {
                 let transaction = Object.assign(new Transaction, data.data)
-                commit('ADD_TRANSACTION', transaction)
-                commit('CLEAR_ACCOUNT_BALANCE', transaction)
+                commit('transactions/onClearSuccess', transaction)
+                return transaction
+            })
+            .catch(() => {
+                commit('transactions/onClearFailure', transaction)
             })
     },
 
@@ -131,6 +135,17 @@ const mutations = {
     RESET(state) {
         state.transactions = []
         state.nextUrls = {}
+    },
+    ['transactions/onClear'](state, transaction) {
+        transaction.clear()
+    },
+    ['transactions/onClearSuccess'](state, transaction) {
+        // Update transaction
+        state.transactions = state.transactions.filter(x => x.id !== transaction.id)
+        state.transactions.push(transaction)
+    },
+    ['transactions/onClearFailure'](state, transaction) {
+        transaction.clear()
     },
     ADD_TRANSACTION(state, transaction) {
         state.transactions = state.transactions.filter(x => x.id !== transaction.id)

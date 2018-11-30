@@ -5,25 +5,25 @@ import axios from 'axios'
 const state = {
     initialized: false,
     accounts: []
-};
+}
 
 // getters
 const getters = {
     sortedAccounts(state) {
         return state.accounts.slice().sort(function (a, b) {
-            return a.name.localeCompare(b.name);
+            return a.name.localeCompare(b.name)
         })
     },
     spendingAccounts(state) {
-        return getters.sortedAccounts(state).filter(x => x.tracking === false);
+        return getters.sortedAccounts(state).filter(x => x.tracking === false)
     },
     trackingAccounts(state) {
-        return getters.sortedAccounts(state).filter(x => x.tracking === true);
+        return getters.sortedAccounts(state).filter(x => x.tracking === true)
     },
     findAccountById: (state) => (id) => {
         return state.accounts.find(x => x.id === id)
     }
-};
+}
 
 // actions
 const actions = {
@@ -33,8 +33,8 @@ const actions = {
             .get('/accounts')
             .then(({data}) => {
                 commit('accounts/fetchSuccess', data.data)
-                return data.data;
-            });
+                return data.data
+            })
 
         if (state.initialized === true) {
             return Promise.resolve(state.accounts)
@@ -47,8 +47,8 @@ const actions = {
         return axios
             .post('/accounts/', account)
             .then(({data}) => {
-                commit('ADD_ACCOUNT', data.data);
-            });
+                commit('ADD_ACCOUNT', data.data)
+            })
     },
 
     updateAccount({commit}, account) {
@@ -59,72 +59,75 @@ const actions = {
                 'icon': account.icon
             })
             .then(({data}) => {
-                commit('ADD_ACCOUNT', data.data);
-            });
+                commit('ADD_ACCOUNT', data.data)
+            })
     },
 
     deleteAccount({commit}, account) {
         return axios
             .delete('/accounts/' + account.id)
             .then(() => {
-                commit('REMOVE_ACCOUNT', account);
-            });
+                commit('REMOVE_ACCOUNT', account)
+            })
     }
 
-};
+}
+
+let clearAccountBalance = (state, {account_id, amount, cleared}) => {
+    const account = state.accounts.find(x => x.id === account_id)
+    const value = (cleared ? -1 : 1) * amount
+    account.clearedBalance += value
+    account.unclearedBalance -= value
+}
 
 // mutations
 const mutations = {
     RESET(state) {
         state.accounts = []
-        state.initialized = false;
+        state.initialized = false
     },
     ['accounts/fetchSuccess'](state, accounts) {
-        state.accounts = [... accounts];
-        state.initialized = true;
+        state.accounts = [...accounts]
+        state.initialized = true
     },
+    'transactions/onClear': clearAccountBalance,
+    'transactions/onClearFailure': clearAccountBalance,
     ADD_ACCOUNT(state, account) {
-        state.accounts = state.accounts.filter(x => x.id !== account.id);
-        state.accounts.push(account);
+        state.accounts = state.accounts.filter(x => x.id !== account.id)
+        state.accounts.push(account)
     },
     REMOVE_ACCOUNT(state, {id}) {
-        state.accounts = state.accounts.filter(x => x.id !== id);
-    },
-    CLEAR_ACCOUNT_BALANCE(state, {account_id, amount, cleared}) {
-        const account = state.accounts.find(x => x.id === account_id);
-        const value = (cleared ? 1 : -1) * amount;
-        account.clearedBalance += value;
-        account.unclearedBalance -= value;
+        state.accounts = state.accounts.filter(x => x.id !== id)
     },
     ADD_BALANCE(state, transaction) {
-        let account = state.accounts.find(x => x.id === transaction.account_id);
+        let account = state.accounts.find(x => x.id === transaction.account_id)
 
         if (transaction.isFuture()) {
-            return;
+            return
         }
 
         if (transaction.cleared) {
-            account.clearedBalance += transaction.amount;
+            account.clearedBalance += transaction.amount
         } else {
-            account.unclearedBalance += transaction.amount;
+            account.unclearedBalance += transaction.amount
         }
-        account.workingBalance += transaction.amount;
+        account.workingBalance += transaction.amount
     },
     REMOVE_BALANCE(state, transaction) {
-        let account = state.accounts.find(x => x.id === transaction.account_id);
+        let account = state.accounts.find(x => x.id === transaction.account_id)
 
         if (transaction.isFuture()) {
-            return;
+            return
         }
 
         if (transaction.cleared) {
-            account.clearedBalance -= transaction.amount;
+            account.clearedBalance -= transaction.amount
         } else {
-            account.unclearedBalance -= transaction.amount;
+            account.unclearedBalance -= transaction.amount
         }
-        account.workingBalance -= transaction.amount;
+        account.workingBalance -= transaction.amount
     }
-};
+}
 
 export default {
     state,
