@@ -64,16 +64,6 @@ Vue.component(
     require('./components/form/FormGroup.vue').default
 )
 
-Vue.component(
-    'app-toolbar',
-    require('./components/AppToolbar.vue').default
-)
-
-Vue.component(
-    'ellipsis',
-    require('./components/AppEllipsis.vue').default
-)
-
 new Vue({
     i18n,
     router,

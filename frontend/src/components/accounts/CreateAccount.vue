@@ -12,7 +12,7 @@
 
 <script>
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
-    import { faPlus } from '@fortawesome/free-solid-svg-icons'
+    import {faPlus} from '@fortawesome/free-solid-svg-icons'
     import CreateAccountForm from './CreateAccountForm'
 
     export default {
@@ -22,7 +22,7 @@
         },
         data() {
             return {
-                visible: false,
+                visible: false
             }
         },
         computed: {

@@ -7,7 +7,7 @@
         </div>
         <div class="data" @click.stop="$refs.budgetInput.focus()">
             <div class="budget-column-name">
-                <ellipsis>{{ category.name }}</ellipsis>
+                <AppEllipsis>{{ category.name }}</AppEllipsis>
             </div>
             <div class="budget-column-budget" @click.stop="">
                 <app-skeleton :busy="loading">
@@ -44,13 +44,15 @@
 </style>
 
 <script>
-    import CategorySettings from '../categories/CategorySettings'
+    import AppEllipsis from '../AppEllipsis'
     import AppMoneyInput from '../form/AppMoneyInput'
     import AppSkeleton from '../AppSkeleton'
+    import CategorySettings from '../categories/CategorySettings'
 
     export default {
         props: ['category', 'month', 'loading'],
         components: {
+            AppEllipsis,
             AppMoneyInput,
             AppSkeleton,
             CategorySettings

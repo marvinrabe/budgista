@@ -6,7 +6,7 @@ const defaultState = {
     language: 'en',
     locale: 'en',
     currency: 'EUR',
-    verified: false
+    verified: undefined
 }
 
 const state = defaultState

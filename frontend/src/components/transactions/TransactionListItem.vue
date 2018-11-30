@@ -10,12 +10,12 @@
                     <recurring-icon :rrule="transaction.rrule"></recurring-icon>
                 </span>
                 <span class="transaction-payee">
-                    <ellipsis>{{ transaction.payee }}</ellipsis>
+                    <AppEllipsis>{{ transaction.payee }}</AppEllipsis>
                 </span>
             </span>
             <span class="transaction-column-2">
                 <span class="transaction-category">
-                    <category-name :id="transaction.category_id"></category-name>
+                    <AppEllipsis v-if="category">{{ category.name }}</AppEllipsis>
                 </span>
                 <span class="transaction-amount">
                     <money-format
@@ -26,42 +26,32 @@
             </span>
         </router-link>
         <div class="transaction-clear">
-            <a href="#"
-               v-if="!transaction.isFuture()"
-               :class="[{ 'text-success': transaction.cleared }, {'text-darker-light': !transaction.cleared}]"
-               @click.prevent="toggleCleared">
-                <font-awesome-icon :icon="clearIcon"/>
-            </a>
+            <ClearInput :transaction="transaction"/>
         </div>
     </div>
 </template>
 
 <script>
     import Transaction from '../../models/Transaction'
-    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
-    import {faCheckCircle} from '@fortawesome/free-solid-svg-icons'
-    import CategoryName from './CategoryName'
+    import AppEllipsis from '../AppEllipsis'
+    import ClearInput from './ClearInput'
     import RecurringIcon from './RecurringIcon'
 
     export default {
         props: {
             transaction: {
-                type: Transaction
+                type: Transaction,
+                required: true
             }
         },
         components: {
-            CategoryName,
-            FontAwesomeIcon,
+            AppEllipsis,
+            ClearInput,
             RecurringIcon
         },
         computed: {
-            clearIcon() {
-                return faCheckCircle
-            }
-        },
-        methods: {
-            toggleCleared() {
-                this.$store.dispatch('clearTransaction', this.transaction)
+            category() {
+                return this.$store.getters.findCategoryById(this.transaction.category_id)
             }
         }
     }

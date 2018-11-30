@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <app-toolbar :title="$t('action.create.transaction')"/>
+        <AppToolbar :title="$t('action.create.transaction')"/>
 
         <div class="card">
             <div class="card-body">
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+    import AppToolbar from '@/components/AppToolbar'
     import TransactionForm from '@/components/transactions/TransactionForm'
 
     export default {
@@ -22,6 +23,7 @@
             account_id: String
         },
         components: {
+            AppToolbar,
             TransactionForm
         },
         computed: {
