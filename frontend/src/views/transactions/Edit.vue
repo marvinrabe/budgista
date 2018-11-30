@@ -1,7 +1,7 @@
 <template>
     <div v-if="transaction" class="main">
 
-        <app-toolbar :title="$t('action.edit.transaction')">
+        <AppToolbar :title="$t('action.edit.transaction')">
             <template slot="submenu">
                 <button class="btn btn-light btn-sm"
                         type="button"
@@ -10,7 +10,7 @@
                     <font-awesome-icon :icon="['far', 'trash-alt']"/>
                 </button>
             </template>
-        </app-toolbar>
+        </AppToolbar>
 
         <div class="card">
             <div class="card-body">
@@ -25,12 +25,14 @@
 </template>
 
 <script>
+    import AppToolbar from '@/components/AppToolbar'
     import TransactionForm from '@/components/transactions/TransactionForm'
     import store from '@/store/index'
 
     export default {
         props: ['transaction_id'],
         components: {
+            AppToolbar,
             TransactionForm
         },
         computed: {

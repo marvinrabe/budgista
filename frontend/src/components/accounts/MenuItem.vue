@@ -3,7 +3,7 @@
                  active-class="active"
                  class="menu__item">
         <font-awesome-icon :icon="icon" fixed-width class="mr-1"/>
-        <ellipsis style="flex: 1;">{{ account.name }}</ellipsis>
+        <AppEllipsis style="flex: 1;">{{ account.name }}</AppEllipsis>
         <money-format
                 class="ml-auto badge"
                 :class="[{ 'text-danger': account.workingBalance < 0, 'text-success': account.workingBalance >= 0 }]"
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+    import AppEllipsis from '../AppEllipsis'
     import {accountIcons} from '../../config'
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
     import {faCreditCard} from '@fortawesome/free-solid-svg-icons'
@@ -20,6 +21,7 @@
     export default {
         props: ['account'],
         components: {
+            AppEllipsis,
             FontAwesomeIcon
         },
         computed: {

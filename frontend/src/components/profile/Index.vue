@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <app-toolbar :title="$t('title.profile')"/>
+        <AppToolbar :title="$t('title.profile')"/>
 
         <div class="card mb-3">
             <div class="card-body">
@@ -27,11 +27,13 @@
 </template>
 
 <script>
+    import AppToolbar from '../AppToolbar'
     import SettingsEmail from './SettingsEmail.vue'
     import SettingsPassword from './SettingsPassword.vue'
 
     export default {
         components: {
+            AppToolbar,
             SettingsEmail,
             SettingsPassword
         }
