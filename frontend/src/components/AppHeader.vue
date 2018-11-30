@@ -52,9 +52,9 @@
             bDropdownDivider,
             FontAwesomeIcon
         },
-        data() {
-            return {
-                menu: [
+        computed: {
+            menu() {
+                return [
                     {
                         click: this.profile,
                         label: 'title.profile',
@@ -79,9 +79,7 @@
                         label: 'action.logout'
                     }
                 ]
-            }
-        },
-        computed: {
+            },
             iconPlus() {
                 return faPlus
             },

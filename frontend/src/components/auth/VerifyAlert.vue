@@ -37,7 +37,7 @@
                 return this.$store.state.user.email
             },
             notVerified() {
-                return !this.$store.state.user.verified
+                return this.$store.state.user.verified === false
             }
         }
     }

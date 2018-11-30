@@ -3,6 +3,7 @@ import axios from 'axios'
 // initial state
 // accounts: [{ id, name, workingBalance, clearedBalance, unclearedBalance }]
 const state = {
+    initialized: false,
     accounts: []
 };
 
@@ -27,13 +28,19 @@ const getters = {
 // actions
 const actions = {
 
-    loadAccounts({commit}) {
-        return axios
+    ['accounts/fetch']({commit, state}) {
+        let apiRequest = axios
             .get('/accounts')
             .then(({data}) => {
-                let accounts = data.data;
-                accounts.forEach(account => commit('ADD_ACCOUNT', account))
+                commit('accounts/fetchSuccess', data.data)
+                return data.data;
             });
+
+        if (state.initialized === true) {
+            return Promise.resolve(state.accounts)
+        }
+
+        return apiRequest
     },
 
     createAccount({commit}, account) {
@@ -70,6 +77,11 @@ const actions = {
 const mutations = {
     RESET(state) {
         state.accounts = []
+        state.initialized = false;
+    },
+    ['accounts/fetchSuccess'](state, accounts) {
+        state.accounts = [... accounts];
+        state.initialized = true;
     },
     ADD_ACCOUNT(state, account) {
         state.accounts = state.accounts.filter(x => x.id !== account.id);
