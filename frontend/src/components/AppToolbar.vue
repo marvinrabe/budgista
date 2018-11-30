@@ -4,7 +4,7 @@
 
         <div class="title">
             <slot name="title">
-                <ellipsis>{{ title }}</ellipsis>
+                <AppEllipsis>{{ title }}</AppEllipsis>
             </slot>
         </div>
 
@@ -17,11 +17,13 @@
 </template>
 
 <script>
+    import AppEllipsis from './AppEllipsis'
     import AppWindow from './AppWindow'
 
     export default {
         props: ['title'],
         components: {
+            AppEllipsis,
             AppWindow
         }
     }

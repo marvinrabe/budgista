@@ -1,16 +1,16 @@
 <template>
     <div v-if="transaction" class="main">
 
-        <app-toolbar :title="$t('action.edit.transaction')">
+        <AppToolbar :title="$t('action.edit.transaction')">
             <template slot="submenu">
                 <button class="btn btn-light btn-sm"
                         type="button"
                         :title="$t('action.delete.transaction')"
                         @click="deleteTransaction">
-                    <font-awesome-icon :icon="['far', 'trash-alt']"/>
+                    <font-awesome-icon :icon="deleteIcon"/>
                 </button>
             </template>
-        </app-toolbar>
+        </AppToolbar>
 
         <div class="card">
             <div class="card-body">
@@ -25,15 +25,23 @@
 </template>
 
 <script>
+    import AppToolbar from '@/components/AppToolbar'
     import TransactionForm from '@/components/transactions/TransactionForm'
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faTrashAlt} from '@fortawesome/free-regular-svg-icons'
     import store from '@/store/index'
 
     export default {
         props: ['transaction_id'],
         components: {
+            AppToolbar,
+            FontAwesomeIcon,
             TransactionForm
         },
         computed: {
+            deleteIcon() {
+                return faTrashAlt
+            },
             transaction() {
                 return this.$store.getters.findTransactionById(this.transaction_id)
             }

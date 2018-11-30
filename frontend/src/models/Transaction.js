@@ -1,11 +1,15 @@
-
-import moment from 'moment';
+import moment from 'moment'
 
 //{ id, date, payee, amount, cleared, rrule, recurring, category: {id, name}, account_id }
 export default class Transaction {
 
     constructor() {
-        this.date = moment();
+        this.date = moment()
+        this.cleared = false
+    }
+
+    clear() {
+        this.cleared = !this.cleared
     }
 
     isFuture() {

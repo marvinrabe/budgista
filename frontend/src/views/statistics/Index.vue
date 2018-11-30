@@ -1,16 +1,18 @@
 <template>
     <div class="main">
-        <app-toolbar :title="$t('title.statistics')"/>
+        <AppToolbar :title="$t('title.statistics')"/>
 
         <net-worth></net-worth>
     </div>
 </template>
 
 <script>
-    import NetWorth from './NetWorth'
+    import AppToolbar from '@/components/AppToolbar'
+    import NetWorth from '@/components/statistics/NetWorth'
 
     export default {
         components: {
+            AppToolbar,
             NetWorth
         }
     }

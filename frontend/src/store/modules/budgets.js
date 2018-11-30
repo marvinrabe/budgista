@@ -50,7 +50,7 @@ const actions = {
         return apiRequest
     },
 
-    update({commit, getters, actions}, row) {
+    update({commit, getters}, row) {
         let previous = getters.getRow(row.month, row.id)
 
         commit('onUpdate', row)

@@ -7,7 +7,7 @@
                         <div class="modal-header">
                             <h5 class="modal-title" v-html="title"></h5>
                             <button type="button" class="close" @click="$emit('close')" aria-label="Close">
-                                <font-awesome-icon icon="times"/>
+                                <font-awesome-icon :icon="closeIcon"/>
                             </button>
                         </div>
                         <div class="modal-body">
@@ -69,8 +69,19 @@
 </style>
 
 <script>
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+    import {faTimes} from '@fortawesome/free-solid-svg-icons'
+
     export default {
         props: ['title'],
-        inject: ['$validator']
+        inject: ['$validator'],
+        components: {
+            FontAwesomeIcon
+        },
+        computed: {
+            closeIcon() {
+                return faTimes
+            }
+        }
     }
 </script>

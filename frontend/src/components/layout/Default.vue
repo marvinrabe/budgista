@@ -1,9 +1,6 @@
 <template>
     <div id="wrapper">
-        <div id="loading" v-if="loading">
-            <app-spinner></app-spinner>
-        </div>
-        <div id="layout" v-else>
+        <div id="layout">
             <app-header></app-header>
 
             <div class="container py-3">
@@ -14,7 +11,10 @@
                         <app-sidebar></app-sidebar>
                     </div>
                     <div class="col-12 col-md-8 col-xl-9">
-                        <router-view :key="$router.fullPath"></router-view>
+                        <div id="loading" v-if="loading">
+                            <app-spinner></app-spinner>
+                        </div>
+                        <router-view v-else :key="$router.fullPath"></router-view>
                     </div>
                 </div>
             </div>
