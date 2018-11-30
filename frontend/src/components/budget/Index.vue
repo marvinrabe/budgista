@@ -1,7 +1,7 @@
 <template>
     <div class="main">
 
-        <app-toolbar :title="$t('title.budget')">
+        <AppToolbar :title="$t('title.budget')">
             <month-picker :month="monthObject" slot="title"></month-picker>
 
             <BudgetOverview :month="monthObject" :loading="loading"/>
@@ -9,7 +9,7 @@
             <template slot="submenu">
                 <budget-settings :month="monthObject"></budget-settings>
             </template>
-        </app-toolbar>
+        </AppToolbar>
 
         <Budget :month="monthObject" :loading="loading"/>
 
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+    import AppToolbar from '../AppToolbar'
     import Month from '../../models/Month.js'
     import MonthPicker from './MonthPicker'
     import Budget from './Budget'
@@ -26,6 +27,7 @@
     export default {
         props: ['month'],
         components: {
+            AppToolbar,
             Budget,
             BudgetOverview,
             BudgetSettings,

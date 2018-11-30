@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <app-toolbar :title="$t('title.deleteUser')"/>
+        <AppToolbar :title="$t('title.deleteUser')"/>
 
         <div class="card mb-3">
             <div class="card-body">
@@ -39,10 +39,12 @@
 
 <script>
     import axios from 'axios'
+    import AppToolbar from '../AppToolbar'
     import PasswordInput from '@/components/form/PasswordInput'
 
     export default {
         components: {
+            AppToolbar,
             PasswordInput
         },
         data() {

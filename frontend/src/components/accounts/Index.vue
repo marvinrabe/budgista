@@ -1,6 +1,6 @@
 <template>
     <div v-if="account" class="main">
-        <app-toolbar :title="account.name">
+        <AppToolbar :title="account.name">
             <AccountBalance :account="account"/>
 
             <template slot="submenu">
@@ -14,7 +14,7 @@
                     {{ $t('word.transaction') }}
                 </router-link>
             </template>
-        </app-toolbar>
+        </AppToolbar>
 
         <div class="transactions-header">
             <div class="transaction-item">&nbsp;
@@ -96,6 +96,7 @@
 
 <script>
     import AppSpinner from '../AppSpinner'
+    import AppToolbar from '../AppToolbar'
     import AccountBalance from './AccountBalance.vue'
     import InfiniteLoading from 'vue-infinite-loading'
     import AccountSettings from './AccountSettings'
@@ -107,6 +108,7 @@
         props: ['account_id'],
         components: {
             AppSpinner,
+            AppToolbar,
             AccountSettings,
             AccountBalance,
             InfiniteLoading,

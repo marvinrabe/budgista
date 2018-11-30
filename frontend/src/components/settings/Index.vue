@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <app-toolbar :title="$t('title.settings')"/>
+        <AppToolbar :title="$t('title.settings')"/>
 
         <div class="card">
             <div class="card-body">
@@ -11,10 +11,12 @@
 </template>
 
 <script>
+    import AppToolbar from '../AppToolbar'
     import SettingsGeneral from './SettingsGeneral.vue'
 
     export default {
         components: {
+            AppToolbar,
             SettingsGeneral
         }
     }
