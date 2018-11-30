@@ -3,7 +3,7 @@
         <tb-skeleton shape="circle" height="1em" width="1em"
                      style="margin-right: .5em; margin-left: .125em;"></tb-skeleton>
         <tb-skeleton shape="radius" height="1em" width="33%" style="margin: .25em 0;"></tb-skeleton>
-        <tb-skeleton shape="radius" height="1em" width="22%" style="margin-left: auto;"></tb-skeleton>
+        <tb-skeleton shape="radius" height=".8em" width="22%" style="margin-left: auto;"></tb-skeleton>
     </skeleton>
 </template>
 
