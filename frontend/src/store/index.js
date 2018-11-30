@@ -6,6 +6,7 @@ import budgets from './modules/budgets'
 import categories from './modules/categories'
 import groups from './modules/groups'
 import transactions from './modules/transactions'
+import statistics from './modules/statistics'
 import user from './modules/user'
 
 Vue.use(Vuex)
@@ -40,6 +41,7 @@ export const store = new Vuex.Store({
         categories,
         groups,
         transactions,
+        statistics,
         user
     },
     strict: debug
