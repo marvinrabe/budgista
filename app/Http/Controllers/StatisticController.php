@@ -41,7 +41,7 @@ class StatisticController extends Controller
     {
         $months = [];
         for ($i = 0; $i <= 11; $i++) {
-            $months[] = Month::fromString(Carbon::now()->subMonth(11 - $i)->format('Y-m'));
+            $months[] = Month::fromString(Carbon::now()->subMonthNoOverflow(11 - $i)->format('Y-m'));
         }
         return $months;
     }
