@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import accounts from './modules/accounts'
+import budgets from './modules/budgets'
 import categories from './modules/categories'
 import groups from './modules/groups'
 import transactions from './modules/transactions'
@@ -13,11 +14,11 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export const store = new Vuex.Store({
     state: {
-        loading: false
+        initialized: false,
+        loading: true
     },
     actions: {
         initialize({dispatch, commit}) {
-            commit('IS_LOADING')
             Promise
                 .all([
                     dispatch('loadUser'),
@@ -33,13 +34,11 @@ export const store = new Vuex.Store({
     mutations: {
         HAS_LOADED(state) {
             state.loading = false
-        },
-        IS_LOADING(state) {
-            state.loading = true
         }
     },
     modules: {
         accounts,
+        budgets,
         categories,
         groups,
         transactions,

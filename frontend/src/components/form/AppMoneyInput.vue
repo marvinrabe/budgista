@@ -14,6 +14,7 @@
         props: ['value'],
         data() {
             return {
+                hasFocus: false,
                 number: this.value
             }
         },
@@ -24,6 +25,14 @@
         },
         mounted() {
             this.unprepareValue()
+        },
+        watch: {
+            value() {
+                if (!this.hasFocus) {
+                    this.number = this.value;
+                    this.unprepareValue()
+                }
+            }
         },
         methods: {
             formatValue(value) {
@@ -53,6 +62,7 @@
                 this.$refs.input.focus()
             },
             onFocus() {
+                this.hasFocus = true
                 this.prepareValue()
                 this.selectAll(this.$el)
             },
@@ -61,6 +71,8 @@
                 this.$emit('input', this.number)
             },
             onBlur(value) {
+                this.hasFocus = false
+                this.$emit('change', this.number)
                 this.onInput(value)
                 this.unprepareValue()
             },

@@ -14,7 +14,7 @@
                     <app-money-input ref="budgetInput"
                                      :value="budgeted"
                                      :title="$t('form.recommendedBudget')+': '+$moneyFormatter().format(recommendedBudget)"
-                                     @input="val => updateBudget(val)"></app-money-input>
+                                     @change="val => updateBudget(val)"></app-money-input>
                 </app-skeleton>
             </div>
             <div class="budget-column-activity">
@@ -44,46 +44,43 @@
 </style>
 
 <script>
-    import axios from 'axios'
     import CategorySettings from '../categories/CategorySettings'
     import AppMoneyInput from '../form/AppMoneyInput'
     import AppSkeleton from '../AppSkeleton'
 
     export default {
-        props: ['category', 'budget', 'loading'],
+        props: ['category', 'month', 'loading'],
         components: {
             AppMoneyInput,
             AppSkeleton,
             CategorySettings
         },
         computed: {
+            row() {
+                return this.$store.getters['budgets/getRow'](this.month, this.category.id)
+            },
             previousMonth() {
-                return this.budget.previousMonth
+                return this.row.previousMonth
             },
             budgeted() {
-                return this.budget.budget
+                return this.row.budget
             },
             recommendedBudget() {
-                return this.budget.recommendedBudget
+                return this.row.recommendedBudget
             },
             activity() {
-                return this.budget.activity
+                return this.row.activity
             },
             available() {
-                return this.previousMonth + this.budgeted + this.activity
+                return this.row.available
             }
         },
         methods: {
             updateBudget: function (value) {
-                axios
-                    .put('/categories/' + this.category.id + '/budget', {
-                        'month': this.budget.month,
-                        'amount': value
-                    })
-                    .then(response => {
-                        this.budgeted = value
-                        this.$emit('update:budget', response.data)
-                    })
+                this.$store.dispatch('budgets/update', {
+                    ...this.row,
+                    budget: value
+                })
             }
         }
     }

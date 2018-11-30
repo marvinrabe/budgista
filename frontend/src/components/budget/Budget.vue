@@ -28,8 +28,6 @@
             <budget-group
                     v-for="group in groups"
                     :loading="loading"
-                    :value="value"
-                    @input="value => $emit('input', value)"
                     :key="group.id"
                     :group="group"
                     :month="month">
@@ -39,8 +37,6 @@
         <budget-group
                 v-if="hasUngroupedCategories"
                 :loading="loading"
-                :value="value"
-                @input="value => $emit('input', value)"
                 :month="month">
         </budget-group>
     </div>
@@ -58,7 +54,7 @@
     import {mapGetters} from 'vuex'
 
     export default {
-        props: ['value', 'month', 'loading'],
+        props: ['month', 'loading'],
         components: {
             BudgetGroup,
             draggable

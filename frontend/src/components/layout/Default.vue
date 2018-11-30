@@ -3,24 +3,22 @@
         <div id="loading" v-if="loading">
             <app-spinner></app-spinner>
         </div>
-        <template v-else>
-            <div id="layout">
-                <app-header></app-header>
+        <div id="layout" v-else>
+            <app-header></app-header>
 
-                <div class="container py-3">
-                    <verify-alert></verify-alert>
+            <div class="container py-3">
+                <verify-alert></verify-alert>
 
-                    <div class="form-row">
-                        <div class="col-md-4 col-xl-3">
-                            <app-sidebar></app-sidebar>
-                        </div>
-                        <div class="col-12 col-md-8 col-xl-9">
-                            <router-view :key="$router.fullPath"></router-view>
-                        </div>
+                <div class="form-row">
+                    <div class="col-md-4 col-xl-3">
+                        <app-sidebar></app-sidebar>
+                    </div>
+                    <div class="col-12 col-md-8 col-xl-9">
+                        <router-view :key="$router.fullPath"></router-view>
                     </div>
                 </div>
             </div>
-        </template>
+        </div>
     </div>
 </template>
 
@@ -55,10 +53,10 @@
         },
         computed: {
             loading() {
-                return this.$store.state.loading || !this.$auth.ready()
+                return !this.$auth.ready() || this.$store.state.loading
             }
         },
-        mounted() {
+        created() {
             this.$store.dispatch('initialize')
         }
     }
