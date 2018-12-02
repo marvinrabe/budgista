@@ -6,7 +6,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" v-html="title"></h5>
-                            <button type="button" class="close" @click="$emit('close')" aria-label="Close">
+                            <button type="button" class="close" @click="dismiss" aria-label="Close">
                                 <font-awesome-icon :icon="closeIcon"/>
                             </button>
                         </div>
@@ -81,6 +81,22 @@
         computed: {
             closeIcon() {
                 return faTimes
+            }
+        },
+        created() {
+            const escapeHandler = e => {
+                if (e.key === 'Escape') {
+                    this.dismiss()
+                }
+            }
+            document.addEventListener('keydown', escapeHandler)
+            this.$once('hook:destroyed', () => {
+                document.removeEventListener('keydown', escapeHandler)
+            })
+        },
+        methods: {
+            dismiss() {
+                this.$emit('close')
             }
         }
     }
