@@ -19,6 +19,7 @@
         },
         methods: {
             showMenu() {
+                document.body.style.setProperty('overflow', 'hidden')
                 let menu = document.querySelector('[rel=\'sidebar\']')
                 menu.classList.add('sidebar--animatable')
                 menu.classList.add('sidebar--visible')
