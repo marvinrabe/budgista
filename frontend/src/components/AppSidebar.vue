@@ -23,6 +23,7 @@
         },
         methods: {
             hide() {
+                document.body.style.removeProperty('overflow')
                 let classes = this.$el.classList
                 if (classes.contains('sidebar--visible')) {
                     classes.add('sidebar--animatable')
