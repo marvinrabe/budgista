@@ -8,6 +8,17 @@ module.exports = {
         proxy: 'http://budgista.test'
     },
 
+    pwa: {
+        themeColor: '#2196f3',
+        iconPaths: {
+            favicon32: 'img/favicon-32x32.png',
+            favicon16: 'img/favicon-16x16.png',
+            appleTouchIcon: 'img/apple-touch-icon-152x152.png',
+            maskIcon: 'img/safari-pinned-tab.svg',
+            msTileImage: 'img/mstile-144x144.png'
+        }
+    },
+
     outputDir: '../public',
 
     indexPath: process.env.NODE_ENV === 'production'

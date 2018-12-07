@@ -15,6 +15,7 @@
                     defaultFontFamily: 'Roboto, sans-serif',
                     responsive: true,
                     maintainAspectRatio: false,
+                    animation: false,
                     legend: {
                         position: 'bottom'
                     },
