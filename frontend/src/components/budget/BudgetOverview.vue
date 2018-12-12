@@ -39,8 +39,13 @@
             income() {
                 return this.budget ? this.budget.income : 0
             },
+            budgeted() {
+                return this.budget ? this.budget.rows
+                    .map(row => row.budget)
+                    .reduce((x, y) => x + y) : 0
+            },
             unallocated() {
-                return this.budget ? this.budget.unallocated : 0
+                return this.previousMonth + this.income - this.budgeted
             }
         }
     }
