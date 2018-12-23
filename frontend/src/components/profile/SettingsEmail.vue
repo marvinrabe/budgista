@@ -1,36 +1,43 @@
 <template>
     <app-form @submit="save" ref="form">
 
-        <form-group name="currentEmail">
-            <div class="form-text">
-                {{ email }}
-                <span class="badge badge-success" v-if="verified" v-t="'word.verified'"></span>
-                <span class="badge badge-warning" v-else v-t="'word.unverified'"></span>
-                <resend-verification class="btn-sm" v-if="!verified"></resend-verification>
+        <div class="form-row align-items-baseline">
+            <div class="col-lg-4">
+                <h2 class="h5" v-t="'title.updateEmail'"></h2>
             </div>
-        </form-group>
+            <div class="col-lg-8">
+                <form-group name="currentEmail">
+                    <div class="form-text">
+                        {{ email }}
+                        <span class="badge badge-success" v-if="verified" v-t="'word.verified'"></span>
+                        <span class="badge badge-warning" v-else v-t="'word.unverified'"></span>
+                        <resend-verification class="btn-sm" v-if="!verified"></resend-verification>
+                    </div>
+                </form-group>
 
-        <form-group name="newEmail">
-            <input type="email"
-                   class="form-control"
-                   slot-scope="{bindings}"
-                   v-bind="bindings"
-                   v-validate="'required|email'"
-                   v-model="form.email">
-        </form-group>
+                <form-group name="newEmail">
+                    <input class="form-control"
+                           slot-scope="{bindings}"
+                           type="email"
+                           v-bind="bindings"
+                           v-model="form.email"
+                           v-validate="'required|email'">
+                </form-group>
 
-        <form-group name="password">
-            <PasswordInput
-                    slot-scope="{bindings}"
-                    v-bind="bindings"
-                    v-model="form.password"
-                    :disable-strength="true"
-            />
-        </form-group>
+                <form-group name="password">
+                    <PasswordInput
+                            :disable-strength="true"
+                            slot-scope="{bindings}"
+                            v-bind="bindings"
+                            v-model="form.password"
+                    />
+                </form-group>
+            </div>
+        </div>
 
         <div slot="actions">
-            <app-button :label="$t('action.settings.email')"
-                        :busy="saving">
+            <app-button :busy="saving"
+                        :label="$t('action.settings.email')">
             </app-button>
         </div>
     </app-form>
