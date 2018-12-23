@@ -1,25 +1,33 @@
 <template>
     <app-form @submit="save" ref="form">
 
-        <form-group name="password" label="oldPassword">
-            <PasswordInput
-                    v-model="form.password"
-                    :disable-strength="true"
-            />
-        </form-group>
-
-        <form-group name="newPassword">
-            <PasswordInput
-                    slot-scope="{bindings}"
-                    v-bind="bindings"
-                    v-model="form.new_password"
-                    validation="required|min:6"
-            />
-        </form-group>
+        <div class="form-row align-items-baseline">
+            <div class="col-lg-4">
+                <h2 class="h5" v-t="'title.updatePassword'"></h2>
+            </div>
+            <div class="col-lg-4">
+                <form-group label="oldPassword" name="password">
+                    <PasswordInput
+                            :disable-strength="true"
+                            v-model="form.password"
+                    />
+                </form-group>
+            </div>
+            <div class="col-lg-4">
+                <form-group name="newPassword">
+                    <PasswordInput
+                            slot-scope="{bindings}"
+                            v-bind="bindings"
+                            v-model="form.new_password"
+                            validation="required|min:6"
+                    />
+                </form-group>
+            </div>
+        </div>
 
         <div slot="actions">
-            <app-button :label="$t('action.settings.password')"
-                        :busy="saving">
+            <app-button :busy="saving"
+                        :label="$t('action.settings.password')">
             </app-button>
         </div>
     </app-form>
