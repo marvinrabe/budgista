@@ -1,50 +1,57 @@
 <template>
     <app-form @submit="save" ref="form">
 
-        <form-group name="language">
-            <select class="form-control"
-                    slot-scope="{bindings}"
-                    v-bind="bindings"
-                    v-model="form.language"
-                    v-validate="'required'">
-                <option
-                        v-for="language in languages"
-                        :key="language"
-                        :value="language"
-                        v-t="'language.'+language"
-                ></option>
-            </select>
-        </form-group>
+        <div class="form-row align-items-baseline">
+            <div class="col-lg-4">
+                <h2 class="h5" v-t="'title.localisation'"></h2>
+            </div>
+            <div class="col-lg-8">
+                <form-group name="language">
+                    <select class="form-control w-75"
+                            slot-scope="{bindings}"
+                            v-bind="bindings"
+                            v-model="form.language"
+                            v-validate="'required'">
+                        <option
+                                v-for="language in languages"
+                                :key="language"
+                                :value="language"
+                                v-t="'language.'+language"
+                        ></option>
+                    </select>
+                </form-group>
 
-        <form-group name="locale">
-            <select class="form-control"
-                    slot-scope="{bindings}"
-                    v-bind="bindings"
-                    v-model="form.locale"
-                    v-validate="'required'">
-                <option
-                        v-for="locale in locales"
-                        :key="locale"
-                        :value="locale"
-                        v-t="'language.'+locale"
-                ></option>
-            </select>
-        </form-group>
+                <form-group name="locale">
+                    <select class="form-control w-75"
+                            slot-scope="{bindings}"
+                            v-bind="bindings"
+                            v-model="form.locale"
+                            v-validate="'required'">
+                        <option
+                                v-for="locale in locales"
+                                :key="locale"
+                                :value="locale"
+                                v-t="'language.'+locale"
+                        ></option>
+                    </select>
+                </form-group>
 
-        <form-group name="currency">
-            <select class="form-control"
-                    slot-scope="{bindings}"
-                    v-bind="bindings"
-                    v-model="form.currency"
-                    v-validate="'required'">
-                <option
-                        v-for="currency in currencies"
-                        :key="currency"
-                        :value="currency"
-                        v-t="'currency.'+currency">
-                </option>
-            </select>
-        </form-group>
+                <form-group name="currency">
+                    <select class="form-control w-75"
+                            slot-scope="{bindings}"
+                            v-bind="bindings"
+                            v-model="form.currency"
+                            v-validate="'required'">
+                        <option
+                                v-for="currency in currencies"
+                                :key="currency"
+                                :value="currency"
+                                v-t="'currency.'+currency">
+                        </option>
+                    </select>
+                </form-group>
+            </div>
+        </div>
 
         <div slot="actions">
             <app-button :label="$t('action.save')"

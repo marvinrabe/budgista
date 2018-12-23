@@ -114,6 +114,7 @@ export default {
         unverified: 'Unverified'
     },
     title: {
+        localisation: 'Localisation',
         success: 'Success',
         error: 'Error',
         deleteUser: 'Delete user account',
