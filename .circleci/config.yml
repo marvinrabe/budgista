@@ -76,9 +76,3 @@ jobs:
             cd frontend
             export NODE_ICU_DATA=node_modules/full-icu
             yarn run test:unit
-
-      - run:
-         name: Compile assets
-         command: |
-            cd frontend
-            yarn run build
