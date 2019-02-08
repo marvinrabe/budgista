@@ -1,6 +1,6 @@
 import * as Dinero from 'dinero.js'
 
-export default class IntegerMoneyFormatter {
+export default class MoneyFormatter {
 
   constructor (locale, currency) {
     this.locale = locale

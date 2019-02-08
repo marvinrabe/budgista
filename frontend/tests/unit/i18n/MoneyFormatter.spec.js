@@ -1,12 +1,12 @@
 import {expect} from 'chai'
-import IntegerMoneyFormatter from '@/i18n/IntegerMoneyFormatter';
+import MoneyFormatter from '@/i18n/MoneyFormatter';
 
-describe('IntegerMoneyFormatter', () => {
+describe('MoneyFormatter', () => {
 
     let formatter;
 
     beforeEach(() => {
-        formatter = new IntegerMoneyFormatter('de-DE', 'EUR');
+        formatter = new MoneyFormatter('de-DE', 'EUR');
     });
 
     it('returns a formatted currency value', () => {

@@ -4,8 +4,7 @@ import messages from '../lang/index'
 import axios from 'axios'
 import browserLocale from 'browser-locale'
 import {languages} from '../config.js'
-import MoneyFormat from './MoneyFormat'
-import IntegerMoneyFormatter from './IntegerMoneyFormatter'
+import MoneyFormatter from './MoneyFormatter'
 import _ from 'lodash'
 
 Vue.use(VueI18n)
@@ -43,11 +42,9 @@ export function sanitizeLanguage(languageCode) {
 export const intl = {
     install(Vue) {
 
-        Vue.component('money-format', MoneyFormat)
-
         let integerMoneyFormatter = _.memoize(
             (locale, currency) => {
-                return new IntegerMoneyFormatter(locale, currency)
+                return new MoneyFormatter(locale, currency)
             },
             (locale, currency) => {
                 return locale + '/' + currency
