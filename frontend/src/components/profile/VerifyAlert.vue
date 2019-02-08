@@ -18,7 +18,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '../../sass/_variables.scss';
+    @import '../../sass/variables';
 
     .btn-link {
         color: $black;
@@ -26,7 +26,7 @@
 </style>
 
 <script>
-    import ResendVerification from '../profile/ResendVerification'
+    import ResendVerification from './ResendVerification'
 
     export default {
         components: {

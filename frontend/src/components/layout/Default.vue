@@ -42,7 +42,7 @@
     import AppHeader from '../AppHeader'
     import AppSidebar from '../AppSidebar'
     import AppSpinner from '../AppSpinner'
-    import VerifyAlert from '../auth/VerifyAlert'
+    import VerifyAlert from '../profile/VerifyAlert'
 
     export default {
         components: {

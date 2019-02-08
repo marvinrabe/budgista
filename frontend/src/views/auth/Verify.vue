@@ -19,7 +19,7 @@
 </template>
 
 <style lang="scss" scoped>
-    @import '../../sass/_variables.scss';
+    @import '../../sass/variables';
 
     .verify {
         text-align: center;
@@ -44,7 +44,7 @@
     import axios from 'axios'
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
     import {faExclamationCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons'
-    import AppSpinner from '../AppSpinner'
+    import AppSpinner from '../../components/AppSpinner'
 
     export default {
         props: ['token'],
