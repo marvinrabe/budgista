@@ -6,15 +6,15 @@ describe('IntegerMoneyFormatter', () => {
     let formatter;
 
     beforeEach(() => {
-        formatter = new IntegerMoneyFormatter('de', 'EUR');
+        formatter = new IntegerMoneyFormatter('de-DE', 'EUR');
     });
 
     it('returns a formatted currency value', () => {
-        expect(formatter.format(123456)).to.equal('1.234,56\xa0€');
+        expect(formatter.format('123456')).to.equal('1.234,56\xa0€');
     });
 
     it('returns an unformatted currency value', () => {
-        expect(formatter.unformat('1.234,56\xa0€')).to.equal(123456);
+        expect(formatter.unformat('1.234,56\xa0€')).to.equal('123456');
     });
 
 });
