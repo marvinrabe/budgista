@@ -64,6 +64,11 @@ Vue.component(
     require('./components/form/FormGroup.vue').default
 )
 
+Vue.component(
+  'money-format',
+  require('./components/AppMoney.vue').default
+)
+
 new Vue({
     i18n,
     router,
