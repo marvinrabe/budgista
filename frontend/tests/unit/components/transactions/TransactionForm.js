@@ -3,8 +3,8 @@ import Vuex from 'vuex'
 import {assert} from 'chai'
 import sinon from 'sinon'
 import AppForm from '@/components/form/AppForm.vue'
-import Transaction from '@/models/Transaction'
-import TransactionForm from '@/components/transactions/TransactionForm.vue'
+//import Transaction from '@/models/Transaction'
+//import TransactionForm from '@/components/transactions/TransactionForm.vue'
 
 const localVue = createLocalVue()
 
