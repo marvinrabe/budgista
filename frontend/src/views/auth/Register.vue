@@ -47,7 +47,7 @@
 
 <script>
     import {termsUrl} from '../../config'
-    import PasswordInput from '@/components/form/PasswordInput'
+    import PasswordInput from '../../components/form/PasswordInput'
 
     export default {
         components: {

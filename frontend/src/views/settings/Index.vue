@@ -11,8 +11,8 @@
 </template>
 
 <script>
-    import AppToolbar from '../AppToolbar'
-    import SettingsGeneral from './SettingsGeneral.vue'
+    import AppToolbar from '../../components/AppToolbar'
+    import SettingsGeneral from '../../components/settings/SettingsGeneral.vue'
 
     export default {
         components: {

@@ -20,28 +20,28 @@ export const guestRoutes = {
         {
             path: 'login',
             name: 'login',
-            component: require('./components/auth/Login.vue').default
+            component: require('./views/auth/Login.vue').default
         },
         {
             path: 'register',
             name: 'register',
-            component: require('./components/auth/Register.vue').default
+            component: require('./views/auth/Register.vue').default
         },
         {
             path: 'reset-password',
             name: 'send_reset',
-            component: require('./components/auth/Email.vue').default
+            component: require('./views/auth/Email.vue').default
         },
         {
             path: 'reset-password/:token',
             name: 'reset',
-            component: require('./components/auth/Reset.vue').default,
+            component: require('./views/auth/Reset.vue').default,
             props: true
         },
         {
             path: 'verify/:token',
             name: 'verify',
-            component: require('./components/auth/Verify.vue').default,
+            component: require('./views/auth/Verify.vue').default,
             props: true,
             meta: {
                 auth: undefined
@@ -76,23 +76,23 @@ export const userRoutes = {
         {
             path: 'budget/:month',
             name: 'budget',
-            component: require('./components/budget/Index.vue').default,
+            component: require('./views/budget/Index.vue').default,
             props: true
         },
         {
             path: 'settings',
             name: 'settings',
-            component: require('./components/settings/Index.vue').default
+            component: require('./views/settings/Index.vue').default
         },
         {
             path: 'profile',
             name: 'profile',
-            component: require('./components/profile/Index.vue').default
+            component: require('./views/profile/Index.vue').default
         },
         {
             path: 'leave',
             name: 'leave',
-            component: require('./components/profile/Delete.vue').default
+            component: require('./views/profile/Delete.vue').default
         },
         {
             path: 'account/:account_id',

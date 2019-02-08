@@ -61,7 +61,7 @@
 </template>
 
 <script>
-    import PasswordInput from '@/components/form/PasswordInput'
+    import PasswordInput from '../../components/form/PasswordInput'
 
     export default {
         components: {

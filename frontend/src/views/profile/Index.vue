@@ -23,9 +23,9 @@
 </template>
 
 <script>
-    import AppToolbar from '../AppToolbar'
-    import SettingsEmail from './SettingsEmail.vue'
-    import SettingsPassword from './SettingsPassword.vue'
+    import AppToolbar from '../../components/AppToolbar'
+    import SettingsEmail from '../../components/profile/SettingsEmail.vue'
+    import SettingsPassword from '../../components/profile/SettingsPassword.vue'
 
     export default {
         components: {

@@ -39,8 +39,8 @@
 
 <script>
     import axios from 'axios'
-    import AppToolbar from '../AppToolbar'
-    import PasswordInput from '@/components/form/PasswordInput'
+    import AppToolbar from '../../components/AppToolbar'
+    import PasswordInput from '../../components/form/PasswordInput'
 
     export default {
         components: {
