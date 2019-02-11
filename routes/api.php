@@ -21,7 +21,6 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('verify', 'VerificationController@resend');
     Route::put('verify/{token}', 'VerificationController@verify');
     Route::get('refresh', 'AuthenticationController@refresh');
-    Route::get('user', 'UserController@show');
 
 });
 
@@ -30,6 +29,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     /*
      * User
      */
+    Route::get('auth/user', 'UserController@show');
     Route::get('user', 'UserController@show')->name('user');
     Route::put('user', 'UserController@update')->name('user.update');
     Route::delete('user', 'UserController@destroy')->name('user.destroy');
