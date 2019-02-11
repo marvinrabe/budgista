@@ -185,12 +185,6 @@ return [
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
 
         /*
-         * Intl
-         */
-        Propaganistas\LaravelIntl\IntlServiceProvider::class,
-        Approached\LaravelDateInternational\ServiceProvider::class,
-
-        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
