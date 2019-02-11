@@ -5,7 +5,7 @@ jobs:
     working_directory: ~/repo
 
     docker:
-      - image: circleci/php:7.3-cli-node-browsers
+      - image: circleci/php:7.3-cli
       - image: circleci/mysql:5.7
 
     steps:
@@ -24,16 +24,16 @@ jobs:
           name: Setup configuration
           command: cp ./.circleci/.env.testing ./.env
 
-    # Composer
       - restore_cache:
           name: Restore Composer Package Cache
           keys:
           - v1-dependencies-{{ checksum "composer.lock" }}
-          # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+
       - run:
           name: Install Composer Dependencies
           command: composer install -n --prefer-dist
+
       - save_cache:
           name: Save Composer Package Cache
           key: v1-dependencies-{{ checksum "composer.lock" }}
@@ -50,29 +50,3 @@ jobs:
           name: Test PHPUnit
           command: vendor/bin/phpunit
 
-      # Yarn
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ .Branch }}-{{ checksum "frontend/yarn.lock" }}
-            - yarn-packages-{{ .Branch }}
-            - yarn-packages-master
-            - yarn-packages-
-      - run:
-          name: Install Yarn Dependencies
-          command: |
-            cd frontend
-            yarn install
-            yarn add full-icu
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ .Branch }}-{{ checksum "frontend/yarn.lock" }}
-          paths:
-            - frontend/node_modules/
-
-      - run:
-          name: Test Mocha
-          command: |
-            cd frontend
-            export NODE_ICU_DATA=node_modules/full-icu
-            yarn run test:unit
