@@ -2,8 +2,6 @@ version: 2
 
 jobs:
   build:
-    working_directory: ~/repo
-
     docker:
       - image: circleci/php:7.3-cli
       - image: circleci/mysql:5.7
@@ -49,24 +47,6 @@ jobs:
       - run:
           name: Test PHPUnit
           command: vendor/bin/phpunit
-
-
-      - run:
-         name: Compile assets
-         command: |
-            cd frontend
-            yarn run build
-
-      - run:
-          name: Commit assets
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-               git config --global user.name "Circle CI"
-               git config --global user.email "support@budgista.com"
-               git add public/.
-               git add resources/.
-               git commit -m "Assets"
-            fi
 
       - deploy:
           name: Deploy
