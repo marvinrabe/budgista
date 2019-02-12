@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "967c8b1c0b6287e36da6306992f0458f",
+    "content-hash": "62876223f51b0cdf9e277fbb1363d734",
     "packages": [
         {
             "name": "alsofronie/eloquent-uuid",
@@ -3978,16 +3978,16 @@
         },
         {
             "name": "tymon/jwt-auth",
-            "version": "dev-develop",
+            "version": "1.0.0-rc.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tymondesigns/jwt-auth.git",
-                "reference": "ef07317a33f5b5269f8f4e6db11d879223134646"
+                "reference": "e190b6a75372e7e5e3a6d2cf0e4456313412299f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tymondesigns/jwt-auth/zipball/ef07317a33f5b5269f8f4e6db11d879223134646",
-                "reference": "ef07317a33f5b5269f8f4e6db11d879223134646",
+                "url": "https://api.github.com/repos/tymondesigns/jwt-auth/zipball/e190b6a75372e7e5e3a6d2cf0e4456313412299f",
+                "reference": "e190b6a75372e7e5e3a6d2cf0e4456313412299f",
                 "shasum": ""
             },
             "require": {
@@ -4049,7 +4049,7 @@
                 "jwt",
                 "laravel"
             ],
-            "time": "2018-12-08T23:39:50+00:00"
+            "time": "2018-09-04T19:48:02+00:00"
         },
         {
             "name": "umpirsky/country-list",
@@ -5936,7 +5936,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "tymon/jwt-auth": 20
+        "tymon/jwt-auth": 5
     },
     "prefer-stable": false,
     "prefer-lowest": false,
