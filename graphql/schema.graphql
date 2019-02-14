@@ -1,0 +1,12 @@
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
+
+type Query @middleware(checks: ["auth:api"]) {
+    accounts: [Account!]! @all
+}
+
+type Account {
+    id: ID!
+    name: String!
+}

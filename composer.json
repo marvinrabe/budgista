@@ -12,6 +12,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "~1.0",
+        "nuwave/lighthouse": "dev-master",
         "propaganistas/laravel-intl": "^2.1",
         "rlanvin/php-rrule": "1.*",
         "sentry/sentry": "^1.7",
@@ -22,6 +23,7 @@
     "require-dev": {
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
+        "mll-lab/laravel-graphql-playground": "^0.3.3",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~7.0"
     },

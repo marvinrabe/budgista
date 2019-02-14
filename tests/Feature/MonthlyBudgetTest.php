@@ -61,6 +61,10 @@ class MonthlyBudgetTest extends TestCase
             'user_id' => Auth()->id()
         ]);
 
+        $account = factory(Account::class)->create([
+            'user_id' => Auth()->id()
+        ]);
+
         $dates = [
             $month->firstDay(),
             $month->lastDay(),
@@ -72,7 +76,8 @@ class MonthlyBudgetTest extends TestCase
             factory(Transaction::class)->create([
                 'amount' => -10,
                 'date' => $date,
-                'category_id' => $category->id
+                'category_id' => $category->id,
+                'account_id' => $account->id
             ]);
         }
 

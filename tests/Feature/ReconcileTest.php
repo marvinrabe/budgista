@@ -35,7 +35,7 @@ class ReconcileTest extends TestCase
             ->post("/api/accounts/{$this->account->id}/reconcile", [
                 'amount' => 12345
             ])
-            ->assertStatus(403);
+            ->assertStatus(404);
     }
 
     /** @test */

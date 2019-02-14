@@ -5,6 +5,7 @@ namespace App\Models;
 use Alsofronie\Uuid\UuidModelTrait;
 use App\Models\Traits\BelongsToUserTrait;
 use App\Budget\Month;
+use App\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -66,6 +67,6 @@ class Category extends Model
      */
     public function determineSort()
     {
-        $this->sort = $this->where('user_id', '=', $this->user_id)->max('sort') + 1;
+        $this->sort = Category::withoutGlobalScope(UserScope::class)->where('user_id', '=', $this->user_id)->max('sort') + 1;
     }
 }

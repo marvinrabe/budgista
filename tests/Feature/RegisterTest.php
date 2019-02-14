@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Http\Middleware\DetectLocale;
 use App\Models\User;
+use App\Scopes\UserScope;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
@@ -52,11 +53,11 @@ class RegisterTest extends TestCase
     {
         $user = $this->registerUser();
 
-        $this->assertGreaterThan(0, $user->categories()->count());
-        $this->assertEquals('Groceries', $user->categories()->first()->name);
+        $this->assertGreaterThan(0, $user->categories()->withoutGlobalScope(UserScope::class)->count());
+        $this->assertEquals('Groceries', $user->categories()->withoutGlobalScope(UserScope::class)->first()->name);
 
-        $this->assertGreaterThan(0, $user->accounts()->count());
-        $this->assertEquals('Cash', $user->accounts()->first()->name);
+        $this->assertGreaterThan(0, $user->accounts()->withoutGlobalScope(UserScope::class)->count());
+        $this->assertEquals('Cash', $user->accounts()->withoutGlobalScope(UserScope::class)->first()->name);
     }
 
     /** @test */
@@ -70,11 +71,11 @@ class RegisterTest extends TestCase
 
         $this->assertEquals('de', $user->language);
 
-        $this->assertGreaterThan(0, $user->categories()->count());
-        $this->assertEquals('Lebensmittel', $user->categories()->first()->name);
+        $this->assertGreaterThan(0, $user->categories()->withoutGlobalScope(UserScope::class)->count());
+        $this->assertEquals('Lebensmittel', $user->categories()->withoutGlobalScope(UserScope::class)->first()->name);
 
-        $this->assertGreaterThan(0, $user->accounts()->count());
-        $this->assertEquals('Bargeld', $user->accounts()->first()->name);
+        $this->assertGreaterThan(0, $user->accounts()->withoutGlobalScope(UserScope::class)->count());
+        $this->assertEquals('Bargeld', $user->accounts()->withoutGlobalScope(UserScope::class)->first()->name);
     }
 
     /** @test */
@@ -95,7 +96,7 @@ class RegisterTest extends TestCase
     {
         $user = $this->registerUser();
 
-        $account = $user->accounts()->where('name', 'Cash')->first();
+        $account = $user->accounts()->withoutGlobalScope(UserScope::class)->where('name', 'Cash')->first();
 
         $this->assertEquals('wallet', $account->icon);
     }

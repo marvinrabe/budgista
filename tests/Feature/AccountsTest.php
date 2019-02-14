@@ -6,7 +6,7 @@ use App\Models\Account;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ManageAccountsTest extends TestCase
+class AccountsTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -93,6 +93,48 @@ class ManageAccountsTest extends TestCase
 
         $this->get($response->json()['links']['transactions'])
             ->assertSuccessful();
+    }
+
+    /** @test */
+    public function it_lists_accounts()
+    {
+        $account = factory(Account::class)->create([
+            'user_id' => Auth()->id()
+        ]);
+
+        $gql = <<<GQL
+query {
+  accounts {
+    id
+    name
+  }
+}
+GQL;
+
+        $this->query($gql)
+            ->assertJsonFragment([
+                'id' => $account->id,
+                'name' => $account->name
+            ]);
+    }
+
+    /** @test */
+    public function it_only_lists_accounts_of_current_user()
+    {
+        $account = factory(Account::class)->create();
+
+        $gql = <<<GQL
+query {
+  accounts {
+    id
+  }
+}
+GQL;
+
+        $this->query($gql)
+            ->assertJsonMissing([
+                'id' => $account->id
+            ]);
     }
 
 }

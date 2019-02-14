@@ -59,7 +59,7 @@ class ManageCategoriesTest extends TestCase
         $this
             ->signIn()
             ->delete("/api/categories/{$category->id}", [])
-            ->assertStatus(403);
+            ->assertStatus(404);
     }
 
     /** @test */
