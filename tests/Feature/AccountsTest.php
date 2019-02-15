@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Account;
+use App\Models\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -134,6 +135,32 @@ GQL;
         $this->query($gql)
             ->assertJsonMissing([
                 'id' => $account->id
+            ]);
+    }
+
+    /** @test */
+    public function it_returns_account_balance()
+    {
+        $account = factory(Account::class)->create([
+            'user_id' => Auth()->id()
+        ]);
+        $transaction = factory(Transaction::class)->create([
+            'account_id' => $account->id
+        ]);
+
+        $gql = <<<GQL
+query {
+  accounts {
+    id
+    balance
+  }
+}
+GQL;
+
+        $this->query($gql)
+            ->assertJsonFragment([
+                'id' => $account->id,
+                'balance' => $transaction->amount
             ]);
     }
 

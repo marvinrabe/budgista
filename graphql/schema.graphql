@@ -9,4 +9,5 @@ type Query @middleware(checks: ["auth:api"]) {
 type Account {
     id: ID!
     name: String!
+    balance: Int!
 }

@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use Alsofronie\Uuid\UuidModelTrait;
 use App\Models\Traits\BelongsToUserTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Alsofronie\Uuid\UuidModelTrait;
 
 /**
  * @property Transaction[] $transactions
@@ -39,6 +39,11 @@ class Account extends Model
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function getBalanceAttribute()
+    {
+        return $this->unclearedBalance();
     }
 
     public function clearedBalance()
