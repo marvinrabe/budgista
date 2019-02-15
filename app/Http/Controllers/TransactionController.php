@@ -46,6 +46,8 @@ class TransactionController extends Controller
 
         $transaction->save();
 
+        \Nuwave\Lighthouse\Execution\Utils\Subscription::broadcast('balanceUpdated', $transaction->account);
+
         return new TransactionResource($transaction);
     }
 
@@ -78,6 +80,8 @@ class TransactionController extends Controller
             ])
         );
 
+        \Nuwave\Lighthouse\Execution\Utils\Subscription::broadcast('balanceUpdated', $transaction->account);
+
         return new TransactionResource($transaction);
     }
 
@@ -95,6 +99,8 @@ class TransactionController extends Controller
         $transaction->update([
             'cleared' => !$transaction->cleared
         ]);
+
+        \Nuwave\Lighthouse\Execution\Utils\Subscription::broadcast('balanceUpdated', $transaction->account);
 
         return new TransactionResource($transaction);
     }

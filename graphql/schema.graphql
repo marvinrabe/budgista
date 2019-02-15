@@ -3,11 +3,19 @@ scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date
 scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
 type Query @middleware(checks: ["auth:api"]) {
-    accounts: [Account!]! @all
+  account(id: ID! @eq): Account @find
+  accounts: [Account!]! @all
 }
 
 type Account {
-    id: ID!
-    name: String!
-    balance: Int!
+  id: ID!
+  name: String!
+  balance: Int!
+  balance_cleared: Int!
+  icon: String
+  is_tracking: Boolean
+}
+
+type Subscription {
+  balanceUpdated: Account
 }

@@ -14,6 +14,7 @@
         "laravel/tinker": "~1.0",
         "nuwave/lighthouse": "dev-master",
         "propaganistas/laravel-intl": "^2.1",
+        "pusher/pusher-php-server": "^3.3",
         "rlanvin/php-rrule": "1.*",
         "sentry/sentry": "^1.7",
         "sentry/sentry-laravel": "^0.8.0",

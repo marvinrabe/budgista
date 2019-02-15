@@ -43,7 +43,16 @@ class Account extends Model
 
     public function getBalanceAttribute()
     {
-        return $this->unclearedBalance();
+        return $this->workingBalance();
+    }
+
+    public function getBalanceClearedAttribute()
+    {
+        return $this->clearedBalance();
+    }
+
+    public function getIsTrackingAttribute() {
+        return $this->tracking;
     }
 
     public function clearedBalance()
