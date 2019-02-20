@@ -8,9 +8,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * @property Transaction[] $transactions
- */
 class Account extends Model
 {
 
@@ -49,10 +46,6 @@ class Account extends Model
     public function getBalanceClearedAttribute()
     {
         return $this->clearedBalance();
-    }
-
-    public function getIsTrackingAttribute() {
-        return $this->tracking;
     }
 
     public function clearedBalance()

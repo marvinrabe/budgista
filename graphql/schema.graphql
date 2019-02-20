@@ -11,9 +11,9 @@ type Account {
   id: ID!
   name: String!
   balance: Int!
-  balance_cleared: Int!
-  icon: String
-  is_tracking: Boolean
+  balanceCleared: Int! @rename(attribute: "balance_cleared")
+  icon: String!
+  isTracking: Boolean! @rename(attribute: "tracking")
 }
 
 type Subscription {
