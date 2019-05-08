@@ -178,11 +178,8 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-
-        /*
-         * Proxy
-         */
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
+        Nuwave\Lighthouse\Subscriptions\SubscriptionServiceProvider::class,
 
         /*
          * Application Service Providers...

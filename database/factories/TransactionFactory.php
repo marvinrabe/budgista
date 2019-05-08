@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Transaction::class, function (Faker $faker) {
     return [
         'payee' => $faker->company,
-        'amount' => $faker->randomFloat(2, -100, 100),
+        'amount' => $faker->randomNumber(),
         'date' => $faker->dateTimeThisMonth(),
         'account_id' => factory(Account::class),
         'category_id' => null
