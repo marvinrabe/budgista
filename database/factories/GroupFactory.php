@@ -1,14 +1,13 @@
 <?php
 
+use App\Models\Group;
 use App\Models\User;
 use Faker\Generator as Faker;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(\App\Models\Group::class, function (Faker $faker) {
+$factory->define(Group::class, function (Faker $faker) {
     return [
         'name' => $faker->word,
-        'user_id' => function () {
-            return factory(User::class)->create()->id;
-        }
+        'user_id' => factory(User::class)
     ];
 });

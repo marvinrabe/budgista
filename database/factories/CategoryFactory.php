@@ -8,8 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(Category::class, function (Faker $faker) {
     return [
         'name' => $faker->word,
-        'user_id' => function () {
-            return factory(User::class)->create()->id;
-        }
+        'user_id' => factory(User::class)
     ];
 });

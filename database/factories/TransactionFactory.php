@@ -10,9 +10,7 @@ $factory->define(Transaction::class, function (Faker $faker) {
         'payee' => $faker->company,
         'amount' => $faker->randomFloat(2, -100, 100),
         'date' => $faker->dateTimeThisMonth(),
-        'account_id' => function () {
-            return factory(Account::class)->create()->id;
-        },
+        'account_id' => factory(Account::class),
         'category_id' => null
     ];
 });
