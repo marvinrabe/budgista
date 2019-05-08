@@ -14,7 +14,7 @@ class ReconcileTest extends TestCase
 
     protected $account;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->account = factory(Account::class)->create();

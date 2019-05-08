@@ -245,7 +245,6 @@ return [
          */
         'Carbon' => Propaganistas\LaravelIntl\Facades\Carbon::class,
         'Currency' => Propaganistas\LaravelIntl\Facades\Currency::class,
-        'DateIntl'=> Approached\LaravelDateInternational\DateIntlFacade::class,
         'Language' => Propaganistas\LaravelIntl\Facades\Language::class,
     ],
 
