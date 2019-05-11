@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Account;
 use App\Models\Transaction;
+use GraphQL\RawObject;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -62,7 +63,6 @@ class AccountsTest extends TestCase
             ->assertSessionHasErrors('name');
     }
 
-
     /** @test */
     public function it_should_update_accounts()
     {
@@ -70,17 +70,56 @@ class AccountsTest extends TestCase
             'user_id' => Auth()->id()
         ]);
 
-        $newName = 'Changed Name';
-
-        $this->put('/api/accounts/' . $account->id, ['name' => $newName])
-            ->assertSuccessful()
-            ->assertJson([
+        $this->mutation('accountUpdate')
+            ->setArguments([
+                'id' => $account->id,
+                'input' => new RawObject('{name: "New Name", icon: "wallet", isTracking: true}')
+            ])
+            ->setSelectionSet([
+                'id', 'name', 'icon', 'isTracking'
+            ])
+            ->getData()
+            ->assertJsonFragment([
                 'data' => [
-                    'name' => $newName
+                    'accountUpdate' => [
+                        'id' => $account->id,
+                        'name' => 'New Name',
+                        'icon' => 'wallet',
+                        'isTracking' => true
+                    ]
                 ]
             ]);
 
-        $this->assertEquals($newName, $account->fresh()->name);
+        $account = $account->fresh();
+
+        $this->assertEquals('New Name', $account->name);
+        $this->assertEquals('wallet', $account->icon);
+        $this->assertTrue($account->tracking);
+    }
+
+    /** @test */
+    public function it_can_not_update_other_user_accounts()
+    {
+        $otherAccount = factory(Account::class)->create();
+
+        $nameBefore = $otherAccount->name;
+
+        $this->mutation('accountUpdate')
+            ->setArguments([
+                'id' => $otherAccount->id,
+                'input' => new RawObject('{name: "New Name", icon: "wallet", isTracking: true}')
+            ])
+            ->setSelectionSet([
+                'id'
+            ])
+            ->getData()
+            ->assertJsonFragment([
+                'data' => [
+                    'accountUpdate' => null
+                ]
+            ]);
+
+        $this->assertEquals($nameBefore, $otherAccount->fresh()->name);
     }
 
     /** @test */
@@ -90,7 +129,7 @@ class AccountsTest extends TestCase
             'user_id' => Auth()->id()
         ]);
 
-        $response = $this->getJson('/api/accounts/' . $account->id);
+        $response = $this->getJson('/api/accounts/'.$account->id);
 
         $this->get($response->json()['links']['transactions'])
             ->assertSuccessful();
@@ -103,16 +142,9 @@ class AccountsTest extends TestCase
             'user_id' => Auth()->id()
         ]);
 
-        $gql = <<<GQL
-query {
-  accounts {
-    id
-    name
-  }
-}
-GQL;
-
-        $this->query($gql)
+        $this->query('accounts')
+            ->setSelectionSet(['id', 'name'])
+            ->getData()
             ->assertJsonFragment([
                 'id' => $account->id,
                 'name' => $account->name
@@ -124,15 +156,9 @@ GQL;
     {
         $account = factory(Account::class)->create();
 
-        $gql = <<<GQL
-query {
-  accounts {
-    id
-  }
-}
-GQL;
-
-        $this->query($gql)
+        $this->query('accounts')
+            ->setSelectionSet(['id'])
+            ->getData()
             ->assertJsonMissing([
                 'id' => $account->id
             ]);
@@ -148,16 +174,9 @@ GQL;
             'account_id' => $account->id
         ]);
 
-        $gql = <<<GQL
-query {
-  accounts {
-    id
-    balance
-  }
-}
-GQL;
-
-        $this->query($gql)
+        $this->query('accounts')
+            ->setSelectionSet(['id', 'balance'])
+            ->getData()
             ->assertJsonFragment([
                 'id' => $account->id,
                 'balance' => $transaction->amount

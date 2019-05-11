@@ -3,8 +3,12 @@ scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date
 scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
 type Query @middleware(checks: ["auth:api"]) {
-  account(id: ID! @eq): Account @find
+  account(id: ID!): Account @find
   accounts: [Account!]! @all
+}
+
+type Mutation @middleware(checks: ["auth:api"]) {
+  accountUpdate(id: ID!, input: AccountSettings!): Account
 }
 
 type Account {
@@ -14,6 +18,12 @@ type Account {
   balanceCleared: Int! @rename(attribute: "balance_cleared")
   icon: String!
   isTracking: Boolean! @rename(attribute: "tracking")
+}
+
+input AccountSettings {
+  name: String!
+  icon: String!
+  isTracking: Boolean!
 }
 
 type Subscription {
