@@ -10,6 +10,7 @@ type Query @middleware(checks: ["auth:api"]) {
 type Mutation @middleware(checks: ["auth:api"]) {
   accountCreate(input: AccountSettings!, initialBalance: Int!): Account
   accountUpdate(id: ID!, input: AccountSettings!): Account
+  accountDelete(id: ID!): Account
 }
 
 type Account {

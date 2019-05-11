@@ -198,4 +198,53 @@ class AccountsTest extends TestCase
             ]);
     }
 
+    /** @test */
+    public function it_deletes_account()
+    {
+        $account = factory(Account::class)->create([
+            'user_id' => Auth()->id()
+        ]);
+
+        $this->mutation('accountDelete')
+            ->setArguments([
+                'id' => $account->id
+            ])
+            ->setSelectionSet(['id'])
+            ->getData()
+            ->assertJsonFragment([
+                'data' => [
+                    'accountDelete' => [
+                        'id' => $account->id
+                    ]
+                ]
+            ]);
+
+        $this->assertDatabaseMissing('accounts', [
+            'id' => $account->id
+        ]);
+    }
+
+
+    /** @test */
+    public function it_does_not_delete_other_users_account()
+    {
+        $otherAccount = factory(Account::class)->create();
+
+        $this->mutation('accountDelete')
+            ->setArguments([
+                'id' => $otherAccount->id
+            ])
+            ->setSelectionSet(['id'])
+            ->getData()
+            ->assertJsonFragment([
+                'data' => [
+                    'accountDelete' => null
+                ]
+            ]);
+
+        $this->assertDatabaseHas('accounts', [
+            'id' => $otherAccount->id
+        ]);
+    }
+
 }
