@@ -20,20 +20,31 @@ class AccountsTest extends TestCase
     }
 
     /** @test */
-    public function it_should_save_accounts()
+    public function it_creates_accounts()
     {
-        $account = factory(Account::class)->raw();
-
-        $this->post("/api/accounts", $account)
-            ->assertSuccessful()
+        $this->mutation('accountCreate')
+            ->setArguments([
+                'initialBalance' => 0,
+                'input' => new RawObject('{name: "New Account", icon: "wallet", isTracking: true}')
+            ])
+            ->setSelectionSet([
+                'name', 'icon', 'isTracking'
+            ])
+            ->getData()
             ->assertJson([
                 'data' => [
-                    'name' => $account['name']
+                    'accountCreate' => [
+                        'name' => "New Account",
+                        'icon' => "wallet",
+                        'isTracking' => true
+                    ]
                 ]
             ]);
 
         $this->assertDatabaseHas('accounts', [
-            'name' => $account['name'],
+            'name' => 'New Account',
+            'icon' => 'wallet',
+            'tracking' => true,
             'user_id' => Auth()->id()
         ]);
     }
@@ -41,17 +52,21 @@ class AccountsTest extends TestCase
     /** @test */
     public function it_initialises_account_balance()
     {
-        $this
-            ->post("/api/accounts", [
-                'name' => 'Test Account',
-                'initial_balance' => 1234
+        $this->mutation('accountCreate')
+            ->setArguments([
+                'initialBalance' => 1234,
+                'input' => new RawObject('{name: "New Account", icon: "wallet", isTracking: true}')
             ])
-            ->assertSuccessful()
+            ->setSelectionSet([
+                'balance', 'balanceCleared'
+            ])
+            ->getData()
             ->assertJson([
                 'data' => [
-                    'workingBalance' => 1234,
-                    'clearedBalance' => 1234,
-                    'unclearedBalance' => 0
+                    'accountCreate' => [
+                        'balance' => 1234,
+                        'balanceCleared' => 1234
+                    ]
                 ]
             ]);
     }
