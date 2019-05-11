@@ -19,7 +19,7 @@ return [
      */
     'default_profile' => [
 
-        'allow_credentials' => false,
+        'allow_credentials' => true,
 
         'allow_origins' => [env('APP_CORS_URL')],
 
@@ -34,7 +34,6 @@ return [
 
         'allow_headers' => [
             'Content-Type',
-            'X-Auth-Token',
             'Origin',
             'Authorization',
             'Accept-Language'
