@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Budget\Foresight;
-use App\Models\Traits\HasCompositePrimaryKeyTrait;
 use App\Budget\Month;
+use App\Models\Traits\HasCompositePrimaryKeyTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -29,7 +29,7 @@ class Budget extends Model implements \JsonSerializable
 
     public function setMonthAttribute($value)
     {
-        $this->attributes['month'] = (string)$value;
+        $this->attributes['month'] = (string) $value;
     }
 
     protected $casts = [
@@ -38,7 +38,7 @@ class Budget extends Model implements \JsonSerializable
 
     public function category()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo(Category::class);
     }
 
     private function previousMonthBudget()
@@ -46,7 +46,7 @@ class Budget extends Model implements \JsonSerializable
         return DB::table('budgets')
             ->join('categories', 'categories.id', '=', 'budgets.category_id')
             ->where([
-                ['month', '<', (string)$this->month],
+                ['month', '<', (string) $this->month],
                 ['category_id', '=', $this->category_id]
             ])
             ->sum('amount');
@@ -85,7 +85,7 @@ class Budget extends Model implements \JsonSerializable
 
     public function recommendedBudget()
     {
-        $upcomingTransactions = $this ->category
+        $upcomingTransactions = $this->category
             ->transactions()
             ->whereHas('account', function ($query) {
                 $query->where('tracking', false);
@@ -105,12 +105,12 @@ class Budget extends Model implements \JsonSerializable
         return [
             'id' => $this->category->id,
             'name' => $this->category->name,
-            'month' => (string)$this->month,
-            'previousMonth' => (int)$this->previousMonthAvailable(),
-            'budget' => (int)$this->amount,
-            'activity' => (int)$this->activity(),
-            'available' => (int)$this->available(),
-            'recommendedBudget' => (int)$this->recommendedBudget()
+            'month' => (string) $this->month,
+            'previousMonth' => (int) $this->previousMonthAvailable(),
+            'budget' => (int) $this->amount,
+            'activity' => (int) $this->activity(),
+            'available' => (int) $this->available(),
+            'recommendedBudget' => (int) $this->recommendedBudget()
         ];
     }
 

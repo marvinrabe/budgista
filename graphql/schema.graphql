@@ -5,12 +5,26 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 type Query @middleware(checks: ["auth:api"]) {
   account(id: ID! @eq): Account @find
   accounts: [Account!]! @all
+  groups: [Group!]!
 }
 
 type Mutation @middleware(checks: ["auth:api"]) {
   accountCreate(input: AccountSettings!, initialBalance: Int!): Account
   accountUpdate(id: ID!, input: AccountSettings!): Account
   accountDelete(id: ID!): Account
+}
+
+type Group {
+  id: ID
+  name: String!
+  sort: Int!
+  categories: [Category!]!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  sort: Int!
 }
 
 type Account {

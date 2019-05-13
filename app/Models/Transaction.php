@@ -50,7 +50,7 @@ class Transaction extends Model
          */
         if ($value instanceof RRule) {
             $this->attributes['recurring'] = true;
-            $this->attributes['rrule'] = (string)$value;
+            $this->attributes['rrule'] = (string) $value;
             return;
         }
 
@@ -60,12 +60,12 @@ class Transaction extends Model
 
     public function account()
     {
-        return $this->belongsTo('App\Models\Account');
+        return $this->belongsTo(Account::class);
     }
 
     public function category()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo(Category::class);
     }
 
 }

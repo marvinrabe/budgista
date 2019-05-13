@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-
     use UuidModelTrait,
         BelongsToUserTrait;
 
@@ -40,6 +39,11 @@ class Group extends Model
     public function determineSort()
     {
         $this->sort = $this->where('user_id', '=', $this->user_id)->max('sort') + 1;
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
     }
 
 }
