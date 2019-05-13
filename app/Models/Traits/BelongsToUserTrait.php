@@ -11,6 +11,10 @@ trait BelongsToUserTrait
     protected static function bootBelongsToUserTrait()
     {
         static::addGlobalScope(new UserScope());
+
+        static::creating(function ($model) {
+            $model->user_id = $model->user_id ?: auth()->id();
+        });
     }
 
     public function user()

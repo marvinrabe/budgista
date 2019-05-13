@@ -84,13 +84,67 @@ class GroupsTest extends TestCase
     public function it_creates_groups()
     {
         $this->signIn()
-            ->post('/api/groups', [
+            ->mutation('groupCreate')
+            ->setArguments([
+                'name' => 'New Group'
+            ])
+            ->setSelectionSet(['name'])
+            ->getData()
+            ->assertJsonFragment([
                 'name' => 'New Group'
             ]);
 
         $this->assertDatabaseHas('groups', [
             'user_id' => Auth::id(),
             'name' => 'New Group'
+        ]);
+    }
+
+    /** @test */
+    public function it_renames_groups()
+    {
+        $group = factory(Group::class)->create();
+
+        $this->signIn($group->user)
+            ->mutation('groupUpdate')
+            ->setArguments([
+                'id' => $group->id,
+                'name' => 'New Name'
+            ])
+            ->setSelectionSet(['name'])
+            ->getData()
+            ->assertJsonFragment([
+                'name' => 'New Name'
+            ]);
+
+        $this->assertDatabaseHas('groups', [
+            'id' => $group->id,
+            'user_id' => $group->user_id,
+            'name' => 'New Name'
+        ]);
+    }
+
+    /** @test */
+    public function it_can_not_rename_other_users_group()
+    {
+        $group = factory(Group::class)->create();
+
+        $this->signIn()
+            ->mutation('groupUpdate')
+            ->setArguments([
+                'id' => $group->id,
+                'name' => 'New Name'
+            ])
+            ->setSelectionSet(['name'])
+            ->getData()
+            ->assertJsonFragment([
+                'groupUpdate' => null
+            ]);
+
+        $this->assertDatabaseHas('groups', [
+            'id' => $group->id,
+            'user_id' => $group->user_id,
+            'name' => $group->name
         ]);
     }
 
@@ -106,7 +160,15 @@ class GroupsTest extends TestCase
         ]);
 
         $this->signIn($group->user)
-            ->delete('/api/groups/'.$group->id);
+            ->mutation('groupDelete')
+            ->setArguments([
+                'id' => $group->id
+            ])
+            ->setSelectionSet(['id'])
+            ->getData()
+            ->assertJsonFragment([
+                'id' => $group->id
+            ]);
 
         $this->assertDatabaseMissing('groups', [
             'id' => $group->id,
@@ -116,19 +178,26 @@ class GroupsTest extends TestCase
     }
 
     /** @test */
-    public function it_renames_groups()
+    public function it_can_not_delete_other_users_groups()
     {
+
         $group = factory(Group::class)->create();
 
-        $this->signIn($group->user)
-            ->put('/api/groups/'.$group->id, [
-                'name' => 'New Name'
+        $this->signIn()
+            ->mutation('groupDelete')
+            ->setArguments([
+                'id' => $group->id
+            ])
+            ->setSelectionSet(['id'])
+            ->getData()
+            ->assertJsonFragment([
+                'groupDelete' => null
             ]);
 
         $this->assertDatabaseHas('groups', [
             'id' => $group->id,
             'user_id' => $group->user_id,
-            'name' => 'New Name'
+            'name' => $group->name
         ]);
     }
 

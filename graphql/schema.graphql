@@ -12,7 +12,10 @@ type Query @middleware(checks: ["auth:api"]) {
 type Mutation @middleware(checks: ["auth:api"]) {
   accountCreate(input: AccountSettings!, initialBalance: Int!): Account
   accountUpdate(id: ID!, input: AccountSettings!): Account
-  accountDelete(id: ID!): Account
+  accountDelete(id: ID!): Account @delete
+  groupCreate(name: String!): Group @create
+  groupUpdate(id: ID!, name: String!): Group @update
+  groupDelete(id: ID!): Group @delete
 }
 
 type Group {
