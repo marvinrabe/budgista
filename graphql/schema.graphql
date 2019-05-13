@@ -5,6 +5,7 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 type Query @middleware(checks: ["auth:api"]) {
   account(id: ID! @eq): Account @find
   accounts: [Account!]! @all
+  category(id: ID! @eq): Category @find
   groups: [Group!]!
 }
 

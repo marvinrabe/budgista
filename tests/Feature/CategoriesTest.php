@@ -2,17 +2,62 @@
 
 namespace Tests\Feature;
 
+use App\Budget\Month;
 use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
-use App\Budget\Month;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ManageCategoriesTest extends TestCase
+class CategoriesTest extends TestCase
 {
 
     use RefreshDatabase;
+
+    /** @test */
+    public function it_finds_categories()
+    {
+        $category = factory(Category::class)->create();
+
+        $this->signIn($category->user)
+            ->query('category')
+            ->setArguments(['id' => $category->id])
+            ->setSelectionSet(['id', 'name'])
+            ->getData()
+            ->assertJsonFragment([
+                'data' => [
+                    'category' => [
+                        'id' => $category->id,
+                        'name' => $category->name
+                    ]
+                ]
+            ]);
+    }
+
+    /** @test */
+    public function it_does_not_find_other_users_categories()
+    {
+        $category = factory(Category::class)->create();
+
+        $this->signIn()
+            ->query('category')
+            ->setArguments(['id' => $category->id])
+            ->setSelectionSet(['id', 'name'])
+            ->getData()
+            ->assertJsonFragment([
+                'data' => [
+                    'category' => null
+                ]
+            ])
+            ->assertJsonMissing([
+                'data' => [
+                    'category' => [
+                        'id' => $category->id,
+                        'name' => $category->name
+                    ]
+                ]
+            ]);
+    }
 
     /** @test */
     public function it_doesnt_need_a_new_category_for_deletion()
