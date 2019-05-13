@@ -7,6 +7,7 @@ use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class CategoriesTest extends TestCase
@@ -32,6 +33,127 @@ class CategoriesTest extends TestCase
                     ]
                 ]
             ]);
+    }
+
+    /** @test */
+    public function it_creates_categories()
+    {
+        $this->signIn()
+            ->mutation('categoryCreate')
+            ->setArguments([
+                'name' => 'New category'
+            ])
+            ->setSelectionSet(['name'])
+            ->getData()
+            ->assertJsonFragment([
+                'name' => 'New category'
+            ]);
+
+        $this->assertDatabaseHas('categories', [
+            'user_id' => Auth::id(),
+            'name' => 'New category'
+        ]);
+    }
+
+    /** @test */
+    public function it_renames_categories()
+    {
+        $category = factory(Category::class)->create();
+
+        $this->signIn($category->user)
+            ->mutation('categoryUpdate')
+            ->setArguments([
+                'id' => $category->id,
+                'name' => 'New Name'
+            ])
+            ->setSelectionSet(['name'])
+            ->getData()
+            ->assertJsonFragment([
+                'name' => 'New Name'
+            ]);
+
+        $this->assertDatabaseHas('categories', [
+            'id' => $category->id,
+            'user_id' => $category->user_id,
+            'name' => 'New Name'
+        ]);
+    }
+
+    /** @test */
+    public function it_can_not_rename_other_users_category()
+    {
+        $category = factory(Category::class)->create();
+
+        $this->signIn()
+            ->mutation('categoryUpdate')
+            ->setArguments([
+                'id' => $category->id,
+                'name' => 'New Name'
+            ])
+            ->setSelectionSet(['name'])
+            ->getData()
+            ->assertJsonFragment([
+                'categoryUpdate' => null
+            ]);
+
+        $this->assertDatabaseHas('categories', [
+            'id' => $category->id,
+            'user_id' => $category->user_id,
+            'name' => $category->name
+        ]);
+    }
+
+    /** @test */
+    public function it_deletes_categories()
+    {
+        $category = factory(Category::class)->create();
+
+        $this->assertDatabaseHas('categories', [
+            'id' => $category->id,
+            'user_id' => $category->user_id,
+            'name' => $category->name
+        ]);
+
+        $this->signIn($category->user)
+            ->mutation('categoryDelete')
+            ->setArguments([
+                'id' => $category->id
+            ])
+            ->setSelectionSet(['id'])
+            ->getData()
+            ->assertJsonFragment([
+                'id' => $category->id
+            ]);
+
+        $this->assertDatabaseMissing('categories', [
+            'id' => $category->id,
+            'user_id' => $category->user_id,
+            'name' => $category->name
+        ]);
+    }
+
+    /** @test */
+    public function it_can_not_delete_other_users_categories()
+    {
+
+        $category = factory(Category::class)->create();
+
+        $this->signIn()
+            ->mutation('categoryDelete')
+            ->setArguments([
+                'id' => $category->id
+            ])
+            ->setSelectionSet(['id'])
+            ->getData()
+            ->assertJsonFragment([
+                'categoryDelete' => null
+            ]);
+
+        $this->assertDatabaseHas('categories', [
+            'id' => $category->id,
+            'user_id' => $category->user_id,
+            'name' => $category->name
+        ]);
     }
 
     /** @test */
@@ -94,17 +216,6 @@ class CategoriesTest extends TestCase
             ->delete("/api/categories/{$category->id}", []);
 
         $this->assertNull($transaction->refresh()->category_id);
-    }
-
-    /** @test */
-    public function it_only_deletes_transactions_from_the_right_owner()
-    {
-        $category = factory(Category::class)->create();
-
-        $this
-            ->signIn()
-            ->delete("/api/categories/{$category->id}", [])
-            ->assertStatus(404);
     }
 
     /** @test */
