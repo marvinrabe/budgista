@@ -6,7 +6,6 @@ use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Routing\UrlRoutable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Routing\RouteDependencyResolverTrait;
 use Illuminate\Support\Str;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 use ReflectionMethod;
@@ -15,8 +14,6 @@ use RuntimeException;
 
 abstract class Resolver
 {
-
-    use RouteDependencyResolverTrait;
 
     /**
      * The container instance.
