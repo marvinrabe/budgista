@@ -24,7 +24,6 @@ class AccountsTest extends TestCase
     {
         $this->mutation('accountCreate')
             ->setArguments([
-                'initialBalance' => 0,
                 'input' => new RawObject('{name: "New Account", icon: "wallet", isTracking: true}')
             ])
             ->setSelectionSet([
