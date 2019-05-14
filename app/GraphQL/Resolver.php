@@ -31,7 +31,6 @@ abstract class Resolver
         $this->container = $container;
     }
 
-
     public function resolve($rootValue, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
         $request = new Request($rootValue, $args, $context, $resolveInfo);
@@ -54,7 +53,7 @@ abstract class Resolver
 
     protected function resolveDependency(Request $request, ReflectionParameter $parameter)
     {
-        $parameters = $request->parametersWithoutNulls();
+        $parameters = $request->argumentsWithoutNulls();
 
         if ($parameter->getClass()) {
             if ($parameter->getClass()->name == Request::class) {
@@ -87,7 +86,7 @@ abstract class Resolver
             return null;
         }
 
-        $parameters = $request->parametersWithoutNulls();
+        $parameters = $request->argumentsWithoutNulls();
 
         if (!$parameterName = static::getEloquentParameterName($name, $parameters)) {
             return null;

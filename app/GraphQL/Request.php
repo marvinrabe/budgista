@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\GraphQL;
 
 use GraphQL\Type\Definition\ResolveInfo;
@@ -12,7 +11,7 @@ class Request
 
     protected $rootValue;
 
-    protected $parameters;
+    protected $arguments;
 
     protected $context;
 
@@ -27,7 +26,7 @@ class Request
     public function __construct($rootValue, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
         $this->rootValue = $rootValue;
-        $this->parameters = $args;
+        $this->arguments = $args;
         $this->context = $context;
         $this->resolveInfo = $resolveInfo;
     }
@@ -63,22 +62,18 @@ class Request
      * Return array of parameters to be used in dependency resolving.
      * @return array
      */
-    public function parameters()
+    public function arguments()
     {
-        return $this->parameters; /*+ [
-                $this->resolveInfo,
-                $this->context,
-                $this
-            ];*/
+        return $this->arguments;
     }
 
     /**
      * Get the key / value list of parameters without null values.
      * @return array
      */
-    public function parametersWithoutNulls()
+    public function argumentsWithoutNulls()
     {
-        return array_filter($this->parameters(), function ($p) {
+        return array_filter($this->arguments(), function ($p) {
             return !is_null($p);
         });
     }
@@ -89,6 +84,6 @@ class Request
      */
     public function validate($rules)
     {
-        Validator::make($this->parameters, $rules)->validate();
+        Validator::make($this->arguments, $rules)->validate();
     }
 }
