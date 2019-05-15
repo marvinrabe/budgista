@@ -14,6 +14,51 @@ class GroupsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
+    public function it_finds_groups()
+    {
+        $group = factory(Group::class)->create();
+
+        $this->signIn($group->user)
+            ->query('group')
+            ->setArguments(['id' => $group->id])
+            ->setSelectionSet(['id', 'name'])
+            ->getData()
+            ->assertJsonFragment([
+                'data' => [
+                    'group' => [
+                        'id' => $group->id,
+                        'name' => $group->name
+                    ]
+                ]
+            ]);
+    }
+
+    /** @test */
+    public function it_does_not_find_other_users_groups()
+    {
+        $group = factory(Group::class)->create();
+
+        $this->signIn()
+            ->query('group')
+            ->setArguments(['id' => $group->id])
+            ->setSelectionSet(['id', 'name'])
+            ->getData()
+            ->assertJsonFragment([
+                'data' => [
+                    'group' => null
+                ]
+            ])
+            ->assertJsonMissing([
+                'data' => [
+                    'group' => [
+                        'id' => $group->id,
+                        'name' => $group->name
+                    ]
+                ]
+            ]);
+    }
+
+    /** @test */
     public function it_lists_groups()
     {
         $ownGroup = factory(Group::class)->create();

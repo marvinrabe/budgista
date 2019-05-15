@@ -6,6 +6,7 @@ type Query @middleware(checks: ["auth:api"]) {
   account(id: ID! @eq): Account @find
   accounts: [Account!]! @all
   category(id: ID! @eq): Category @find
+  group(id: ID! @eq): Group @find
   groups: [Group!]!
 }
 
