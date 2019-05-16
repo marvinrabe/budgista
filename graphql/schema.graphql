@@ -20,6 +20,7 @@ type Mutation @middleware(checks: ["auth:api"]) {
   groupCreate(name: String!): Group @create
   groupUpdate(id: ID!, name: String!): Group @update
   groupDelete(id: ID!): Group @delete
+  groupSort(ids: [ID!]!): [Group!]!
 }
 
 type Group {

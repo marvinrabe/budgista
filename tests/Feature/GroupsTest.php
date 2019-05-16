@@ -301,4 +301,36 @@ class GroupsTest extends TestCase
             ]);
     }
 
+    /** @test */
+    public function it_sorts_groups()
+    {
+        $this->signIn();
+
+        $groups = factory(Group::class, 3)->create([
+            'user_id' => auth()->id()
+        ]);
+
+        $ids = $groups
+            ->map(function ($group) {
+                return $group->id;
+            })
+            ->reverse()
+            ->values();
+
+        $this->mutation('groupSort')
+            ->setArguments([
+                'ids' => $ids
+            ])
+            ->setSelectionSet(['id', 'sort'])
+            ->getData()
+            ->assertJsonFragment([
+                'groupSort' => collect($ids)->map(function ($id, $sort) {
+                    return [
+                        'id' => $id,
+                        'sort' => $sort
+                    ];
+                })
+            ]);
+
+    }
 }
