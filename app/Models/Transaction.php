@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Alsofronie\Uuid\UuidModelTrait;
+use App\Models\Traits\BelongsToUserTrait;
 use Illuminate\Database\Eloquent\Model;
 use RRule\RRule;
 
@@ -13,7 +14,7 @@ use RRule\RRule;
 class Transaction extends Model
 {
 
-    use UuidModelTrait;
+    use UuidModelTrait, BelongsToUserTrait;
 
     protected $fillable = [
         'date',
@@ -35,7 +36,7 @@ class Transaction extends Model
     public function getRruleAttribute($value)
     {
         if (!$this->attributes['recurring']) {
-            return false;
+            return null;
         }
 
         $dbRule = new RRule($value);
@@ -66,6 +67,61 @@ class Transaction extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function getAmount()
+    {
+        return abs($this->amount);
+    }
+
+    public function getCategories()
+    {
+        return [
+            [
+                'category' => $this->category,
+                'amount' => $this->getAmount()
+            ]
+        ];
+    }
+
+    public function getFromSubject()
+    {
+        if ($this->amount < 0) {
+            return $this->getAccountSubject();
+        }
+        return $this->getPayeeSubject();
+    }
+
+    public function getToSubject()
+    {
+        if ($this->amount >= 0) {
+            return $this->getAccountSubject();
+        }
+        return $this->getPayeeSubject();
+    }
+
+    protected function getPayeeSubject()
+    {
+        return $this->getSubject(
+            new Payee($this->payee),
+            true
+        );
+    }
+
+    protected function getAccountSubject()
+    {
+        return $this->getSubject(
+            $this->account,
+            $this->cleared
+        );
+    }
+
+    protected function getSubject($subject, $cleared)
+    {
+        return [
+            'subject' => $subject,
+            'cleared' => $cleared
+        ];
     }
 
 }

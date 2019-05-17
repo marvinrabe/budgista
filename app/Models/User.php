@@ -59,7 +59,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
     public function transactions()
     {
-        return $this->hasManyThrough(Transaction::class, Account::class);
+        return $this->hasMany(Transaction::class);
     }
 
     public function budget(Month $month)

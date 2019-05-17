@@ -2,15 +2,21 @@
 
 use App\Models\Account;
 use App\Models\Transaction;
+use App\Models\User;
 use Faker\Generator as Faker;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(Transaction::class, function (Faker $faker) {
     return [
+        'user_id' => factory(User::class),
         'payee' => $faker->company,
         'amount' => $faker->randomNumber(),
         'date' => $faker->dateTimeThisMonth(),
-        'account_id' => factory(Account::class),
+        'account_id' => function ($data) {
+            return factory(Account::class)->create([
+                'user_id' => $data['user_id']
+            ]);
+        },
         'category_id' => null
     ];
 });

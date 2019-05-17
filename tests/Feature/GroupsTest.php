@@ -317,20 +317,22 @@ class GroupsTest extends TestCase
             ->reverse()
             ->values();
 
+        $result = collect($ids)->map(function ($id, $sort) {
+            return [
+                'id' => $id,
+                'sort' => $sort
+            ];
+        });
+
         $this->mutation('groupSort')
             ->setArguments([
                 'ids' => $ids
             ])
             ->setSelectionSet(['id', 'sort'])
             ->getData()
-            ->assertJsonFragment([
-                'groupSort' => collect($ids)->map(function ($id, $sort) {
-                    return [
-                        'id' => $id,
-                        'sort' => $sort
-                    ];
-                })
-            ]);
+            ->assertJsonFragment($result[0])
+            ->assertJsonFragment($result[1])
+            ->assertJsonFragment($result[2]);
 
     }
 }

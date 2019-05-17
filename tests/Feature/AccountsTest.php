@@ -12,17 +12,11 @@ class AccountsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->signIn();
-    }
-
     /** @test */
     public function it_creates_accounts()
     {
-        $this->mutation('accountCreate')
+        $this->signIn()
+            ->mutation('accountCreate')
             ->setArguments([
                 'input' => new RawObject('{name: "New Account", icon: "wallet", isTracking: true}')
             ])
@@ -51,7 +45,8 @@ class AccountsTest extends TestCase
     /** @test */
     public function it_initialises_account_balance()
     {
-        $this->mutation('accountCreate')
+        $this->signIn()
+            ->mutation('accountCreate')
             ->setArguments([
                 'initialBalance' => 1234,
                 'input' => new RawObject('{name: "New Account", icon: "wallet", isTracking: true}')
@@ -73,18 +68,18 @@ class AccountsTest extends TestCase
     /** @test */
     public function accounts_should_have_a_name()
     {
-        $this->post("/api/accounts", [])
+        $this->signIn()
+            ->post("/api/accounts", [])
             ->assertSessionHasErrors('name');
     }
 
     /** @test */
     public function it_should_update_accounts()
     {
-        $account = factory(Account::class)->create([
-            'user_id' => Auth()->id()
-        ]);
+        $account = factory(Account::class)->create();
 
-        $this->mutation('accountUpdate')
+        $this->signIn($account->user)
+            ->mutation('accountUpdate')
             ->setArguments([
                 'id' => $account->id,
                 'input' => new RawObject('{name: "New Name", icon: "wallet", isTracking: true}')
@@ -118,7 +113,8 @@ class AccountsTest extends TestCase
 
         $nameBefore = $otherAccount->name;
 
-        $this->mutation('accountUpdate')
+        $this->signIn()
+            ->mutation('accountUpdate')
             ->setArguments([
                 'id' => $otherAccount->id,
                 'input' => new RawObject('{name: "New Name", icon: "wallet", isTracking: true}')
@@ -139,9 +135,9 @@ class AccountsTest extends TestCase
     /** @test */
     public function accounts_have_transaction_links()
     {
-        $account = factory(Account::class)->create([
-            'user_id' => Auth()->id()
-        ]);
+        $account = factory(Account::class)->create();
+
+        $this->signIn($account->user);
 
         $response = $this->getJson('/api/accounts/'.$account->id);
 
@@ -152,9 +148,9 @@ class AccountsTest extends TestCase
     /** @test */
     public function it_lists_accounts()
     {
-        $account = factory(Account::class)->create([
-            'user_id' => Auth()->id()
-        ]);
+        $account = factory(Account::class)->create();
+
+        $this->signIn($account->user);
 
         $this->query('accounts')
             ->setSelectionSet(['id', 'name'])
@@ -166,7 +162,7 @@ class AccountsTest extends TestCase
     }
 
     /** @test */
-    public function it_only_lists_accounts_of_current_user()
+    public function it_does_not_list_accounts_of_other_users()
     {
         $account = factory(Account::class)->create();
 
@@ -181,18 +177,14 @@ class AccountsTest extends TestCase
     /** @test */
     public function it_returns_account_balance()
     {
-        $account = factory(Account::class)->create([
-            'user_id' => Auth()->id()
-        ]);
-        $transaction = factory(Transaction::class)->create([
-            'account_id' => $account->id
-        ]);
+        $transaction = factory(Transaction::class)->create();
 
-        $this->query('accounts')
+        $this->signIn($transaction->user)
+            ->query('accounts')
             ->setSelectionSet(['id', 'balance'])
             ->getData()
             ->assertJsonFragment([
-                'id' => $account->id,
+                'id' => $transaction->account_id,
                 'balance' => $transaction->amount
             ]);
     }
@@ -200,11 +192,10 @@ class AccountsTest extends TestCase
     /** @test */
     public function it_deletes_account()
     {
-        $account = factory(Account::class)->create([
-            'user_id' => Auth()->id()
-        ]);
+        $account = factory(Account::class)->create();
 
-        $this->mutation('accountDelete')
+        $this->signIn($account->user)
+            ->mutation('accountDelete')
             ->setArguments([
                 'id' => $account->id
             ])

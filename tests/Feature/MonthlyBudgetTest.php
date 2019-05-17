@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Budget\Month;
 use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
-use App\Budget\Month;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -37,11 +37,12 @@ class MonthlyBudgetTest extends TestCase
             factory(Transaction::class)->create([
                 'amount' => 10,
                 'date' => $date,
-                'account_id' => $account->id,
+                'user_id' => Auth()->id(),
+                'account_id' => $account->id
             ]);
         }
 
-        $this->get('/api/month/' . $month)
+        $this->get('/api/month/'.$month)
             ->assertSuccessful()
             ->assertJson([
                 'data' => [
@@ -77,11 +78,12 @@ class MonthlyBudgetTest extends TestCase
                 'amount' => -10,
                 'date' => $date,
                 'category_id' => $category->id,
-                'account_id' => $account->id
+                'account_id' => $account->id,
+                'user_id' => Auth()->id(),
             ]);
         }
 
-        $this->get('/api/month/' . $month)
+        $this->get('/api/month/'.$month)
             ->assertSuccessful()
             ->assertJson([
                 'data' => [
@@ -121,10 +123,11 @@ class MonthlyBudgetTest extends TestCase
             'amount' => -30,
             'date' => $month->next()->firstDay(),
             'account_id' => $account->id,
-            'category_id' => $category->id
+            'category_id' => $category->id,
+            'user_id' => Auth()->id()
         ]);
 
-        $this->get('/api/month/' . $month)
+        $this->get('/api/month/'.$month)
             ->assertSuccessful()
             ->assertJson([
                 'data' => [
@@ -147,15 +150,15 @@ class MonthlyBudgetTest extends TestCase
 
         $this
             ->signIn($category->user)
-            ->put('/api/categories/' . $category->id . '/budget', [
-                'month' => (string)$month,
+            ->put('/api/categories/'.$category->id.'/budget', [
+                'month' => (string) $month,
                 'amount' => 123456
             ])
             ->assertSuccessful();
 
         $this->assertDatabaseHas('budgets', [
             'category_id' => $category->id,
-            'month' => (string)$month,
+            'month' => (string) $month,
             'amount' => 123456
         ]);
     }

@@ -112,12 +112,14 @@ class TrackingAccountTest extends TestCase
             'amount' => 20,
             'date' => $month->firstDay(),
             'account_id' => $trackingAccount->id,
+            'user_id' => Auth()->id()
         ]);
 
         factory(Transaction::class)->create([
             'amount' => 30,
             'date' => $month->firstDay(),
             'account_id' => $normalAccount->id,
+            'user_id' => Auth()->id()
         ]);
 
         $this->get('/api/month/' . $month)
@@ -153,14 +155,16 @@ class TrackingAccountTest extends TestCase
             'amount' => 20,
             'date' => $month->firstDay(),
             'category_id' => $category->id,
-            'account_id' => $trackingAccount->id
+            'account_id' => $trackingAccount->id,
+            'user_id' => Auth()->id()
         ]);
 
         factory(Transaction::class)->create([
             'amount' => 30,
             'date' => $month->firstDay(),
             'category_id' => $category->id,
-            'account_id' => $normalAccount->id
+            'account_id' => $normalAccount->id,
+            'user_id' => Auth()->id()
         ]);
 
         $this->get('/api/month/' . $month)

@@ -14,6 +14,44 @@ class TransactionTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
+    public function it_finds_transaction()
+    {
+        $transaction = factory(Transaction::class)->create();
+
+        $this->signIn($transaction->user)
+            ->query('transaction')
+            ->setArguments([
+                'id' => $transaction->id
+            ])
+            ->setSelectionSet(['id', 'amount', 'date'])
+            ->getData()
+            ->assertJsonFragment([
+                'transaction' => [
+                    'id' => $transaction->id,
+                    'amount' => abs($transaction->amount),
+                    'date' => $transaction->date->format('Y-m-d'),
+                ]
+            ]);
+    }
+
+    /** @test */
+    public function it_does_not_find_other_users_transaction()
+    {
+        $transaction = factory(Transaction::class)->create();
+
+        $this->signIn()
+            ->query('transaction')
+            ->setArguments([
+                'id' => $transaction->id
+            ])
+            ->setSelectionSet(['id', 'amount', 'date'])
+            ->getData()
+            ->assertJsonFragment([
+                'transaction' => null
+            ]);
+    }
+
+    /** @test */
     public function it_saves_a_transaction_successfully()
     {
         $this->signIn();
@@ -58,6 +96,7 @@ class TransactionTest extends TestCase
         ]);
         $transaction = factory(Transaction::class)->create([
             'account_id' => $account->id,
+            'user_id' => Auth()->id()
         ]);
 
         $data = $transaction->toArray();

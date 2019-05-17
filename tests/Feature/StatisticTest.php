@@ -24,6 +24,7 @@ class StatisticTest extends TestCase
         foreach ($this->lastYearMonths() as $date) {
             foreach ([-100, 200] as $amount) {
                 factory(Transaction::class)->create([
+                    'user_id' => Auth()->id(),
                     'account_id' => $account->id,
                     'category_id' => $amount < 0 ? $category->id : null,
                     'date' => $date,

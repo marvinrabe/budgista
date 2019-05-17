@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Alsofronie\Uuid\UuidModelTrait;
-use App\Models\Traits\BelongsToUserTrait;
 use App\Budget\Month;
+use App\Models\Traits\BelongsToUserTrait;
 use App\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -40,18 +40,22 @@ class Category extends Model
 
     public function transactions()
     {
-        return $this->hasMany('App\Models\Transaction');
+        return $this->hasMany(Transaction::class);
     }
 
     public function budgets()
     {
-        return $this->hasMany('App\Models\Budget');
+        return $this->hasMany(Budget::class);
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
     }
 
     /**
      * Returns the budget of this category for a specific month.
-     *
-     * @param Month $month
+     * @param  Month  $month
      * @return Budget
      */
     public function budget(Month $month)
@@ -67,6 +71,8 @@ class Category extends Model
      */
     public function determineSort()
     {
-        $this->sort = Category::withoutGlobalScope(UserScope::class)->where('user_id', '=', $this->user_id)->max('sort') + 1;
+        $this->sort = Category::withoutGlobalScope(UserScope::class)
+                ->where('user_id', '=', $this->user_id)
+                ->max('sort') + 1;
     }
 }

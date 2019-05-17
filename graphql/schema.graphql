@@ -8,6 +8,8 @@ type Query @middleware(checks: ["auth:api"]) {
   category(id: ID! @eq): Category @find
   group(id: ID! @eq): Group @find
   groups: [Group!]!
+  transaction(id: ID! @eq): Transaction @find
+  transactions(account: ID!): [Transaction!]! @paginate
 }
 
 type Mutation @middleware(checks: ["auth:api"]) {
@@ -34,9 +36,44 @@ type Category {
   id: ID!
   name: String!
   sort: Int!
+  group: Group @belongsTo
 }
 
-type Account {
+type Transaction {
+  id: ID!
+  date: Date!
+  amount: Int! @method(name: "getAmount")
+  from: TransactionSubject
+  @with(relation: "account")
+  @method(name: "getFromSubject")
+  to: TransactionSubject
+  @with(relation: "account")
+  @method(name: "getToSubject")
+  categories: [CategoryAllocation!]!
+  @with(relation: "category")
+  @method(name: "getCategories")
+  recurrence: String @rename(attribute: "rrule")
+}
+
+type TransactionSubject {
+  subject: Subject
+  cleared: Boolean!
+}
+
+type CategoryAllocation {
+  category: Category
+  amount: Int!
+}
+
+interface Subject {
+  name: String!
+}
+
+type Payee implements Subject {
+  name: String!
+}
+
+type Account implements Subject {
   id: ID!
   name: String!
   balance: Int!

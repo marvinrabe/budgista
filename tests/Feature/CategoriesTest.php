@@ -220,9 +220,7 @@ class CategoriesTest extends TestCase
 
         $transaction = factory(Transaction::class)->create([
             'category_id' => $categories->first()->id,
-            'account_id' => factory(Account::class)->create([
-                'user_id' => Auth()->id()
-            ])->id
+            'user_id' => Auth()->id()
         ]);
 
         $this

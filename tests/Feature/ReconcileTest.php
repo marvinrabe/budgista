@@ -104,7 +104,8 @@ class ReconcileTest extends TestCase
     public function it_marks_old_transactions_as_cleared()
     {
         $transaction = factory(Transaction::class)->create([
-            'account_id' => $this->account->id
+            'account_id' => $this->account->id,
+            'user_id' => $this->account->user_id
         ]);
 
         $this->reconcileBalance(['amount' => 12345]);
