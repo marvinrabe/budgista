@@ -9,7 +9,7 @@ type Query @middleware(checks: ["auth:api"]) {
   group(id: ID! @eq): Group @find
   groups: [Group!]!
   transaction(id: ID! @eq): Transaction @find
-  transactions(account: ID!): [Transaction!]! @paginate
+  transactions(account: ID! @where(key: "account_id")): [Transaction!]! @paginate
 }
 
 type Mutation @middleware(checks: ["auth:api"]) {
