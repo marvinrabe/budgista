@@ -8,6 +8,7 @@ type Query @middleware(checks: ["auth:api"]) {
   category(id: ID! @eq): Category @find
   group(id: ID! @eq): Group @find
   groups: [Group!]!
+  me: User @auth
   transaction(id: ID! @eq): Transaction @find
   transactions(account: ID! @where(key: "account_id")): [Transaction!]! @paginate
 }
@@ -86,6 +87,14 @@ input AccountSettings {
   name: String!
   icon: String!
   isTracking: Boolean!
+}
+
+type User {
+  email: String!
+  locale: String!
+  language: String!
+  currency: String!
+  isVerified: Boolean! @method(name: "hasVerifiedEmail")
 }
 
 type Subscription {

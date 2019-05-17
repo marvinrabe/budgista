@@ -11,6 +11,26 @@ class AuthenticationTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
+    public function it_returns_user()
+    {
+        $user = factory(User::class)->create();
+
+        $this->signIn($user)
+            ->query('me')
+            ->setSelectionSet(['email', 'language', 'locale', 'currency', 'isVerified'])
+            ->getData()
+            ->assertJsonFragment([
+                'me' => [
+                    'email' => $user->email,
+                    'language' => $user->language,
+                    'locale' => $user->locale,
+                    'currency' => $user->currency,
+                    'isVerified' => $user->hasVerifiedEmail()
+                ]
+            ]);
+    }
+
+    /** @test */
     public function it_returns_a_token()
     {
         $user = factory(User::class)->create();
