@@ -2,7 +2,7 @@ scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date
 
 scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 
-type Query @middleware(checks: ["auth:api"]) {
+type Query @middleware(checks: ["graphql"]) {
   account(id: ID! @eq): Account @find
   accounts: [Account!]! @all
   category(id: ID! @eq): Category @find
@@ -13,7 +13,7 @@ type Query @middleware(checks: ["auth:api"]) {
   transactions(account: ID! @where(key: "account_id")): [Transaction!]! @paginate
 }
 
-type Mutation @middleware(checks: ["auth:api"]) {
+type Mutation @middleware(checks: ["graphql"]) {
   accountCreate(input: AccountSettings!, initialBalance: Int): Account
   accountUpdate(id: ID!, input: AccountSettings!): Account
   accountDelete(id: ID!): Account @delete

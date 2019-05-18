@@ -16,7 +16,7 @@ class Groups extends Resolver
         if (Category::whereNull('group_id')->count()) {
             $groups->add([
                 'id' => null,
-                'name' => 'Ungrouped',
+                'name' => trans('title.ungrouped'),
                 'sort' => $groups->max('sort') + 1,
                 'categories' => Category::whereNull('group_id')->get()
             ]);

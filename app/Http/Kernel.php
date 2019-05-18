@@ -40,6 +40,11 @@ class Kernel extends HttpKernel
             'bindings',
             \App\Http\Middleware\DetectLocale::class,
         ],
+
+        'graphql' => [
+            'auth:api',
+            \App\Http\Middleware\DetectLocale::class,
+        ],
     ];
 
     /**
