@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Alsofronie\Uuid\UuidModelTrait;
 use App\Models\Traits\BelongsToUserTrait;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use RRule\RRule;
 
@@ -32,6 +33,15 @@ class Transaction extends Model
         'recurring' => 'bool',
         'cleared' => 'bool'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('sort', function (Builder $builder) {
+            $builder->orderBy('date', 'desc');
+        });
+    }
 
     public function getRruleAttribute($value)
     {
