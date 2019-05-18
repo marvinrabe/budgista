@@ -10,7 +10,7 @@ $factory->define(Transaction::class, function (Faker $faker) {
     return [
         'user_id' => factory(User::class),
         'payee' => $faker->company,
-        'amount' => $faker->randomNumber(),
+        'amount' => $faker->numberBetween(-999999, 999999),
         'date' => $faker->dateTimeThisMonth(),
         'account_id' => function ($data) {
             return factory(Account::class)->create([
