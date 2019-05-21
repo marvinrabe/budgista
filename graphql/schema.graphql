@@ -17,7 +17,7 @@ type Mutation @middleware(checks: ["graphql"]) {
   accountCreate(input: AccountSettings!, initialBalance: Int): Account
   accountUpdate(id: ID!, input: AccountSettings!): Account
   accountDelete(id: ID!): Account @delete
-  categoryCreate(name: String!): Category @create
+  categoryCreate(name: String!, groupId: ID): Category
   categoryUpdate(id: ID!, name: String!): Category @update
   categoryDelete(id: ID!, transferToCategoryId: ID): Category
   groupCreate(name: String!): Group @create

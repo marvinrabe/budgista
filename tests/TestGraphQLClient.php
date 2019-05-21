@@ -13,7 +13,7 @@ class TestGraphQLClient
 
     /**
      * GraphQLClient constructor.
-     * @param Query|Mutation $builder
+     * @param  Query|Mutation  $builder
      * @param $fun
      */
     protected function __construct($builder, $fun)
@@ -40,8 +40,21 @@ class TestGraphQLClient
 
     public function setSelectionSet($selectionSet)
     {
-        $this->builder->setSelectionSet($selectionSet);
+        $this->builder->setSelectionSet($this->translateSelection($selectionSet));
         return $this;
+    }
+
+    protected function translateSelection($arguments)
+    {
+        return collect($arguments)
+            ->map(function ($value, $key) {
+                if (is_array($value)) {
+                    return (new Query($key))->setSelectionSet($this->translateSelection($value));
+                }
+                return $value;
+            })
+            ->values()
+            ->toArray();
     }
 
     /**
@@ -58,7 +71,7 @@ class TestGraphQLClient
      */
     public function getGql()
     {
-        return (string)$this->builder;
+        return (string) $this->builder;
     }
 
 }

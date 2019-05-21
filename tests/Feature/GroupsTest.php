@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Category;
 use App\Models\Group;
-use GraphQL\Query;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
@@ -105,7 +104,7 @@ class GroupsTest extends TestCase
             ->query('groups')
             ->setSelectionSet([
                 'id',
-                (new Query('categories'))->setSelectionSet(['id', 'name'])
+                'categories' => ['id', 'name']
             ])
             ->getData()
             ->assertJson([

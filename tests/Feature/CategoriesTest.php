@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Budget\Month;
 use App\Models\Account;
 use App\Models\Category;
+use App\Models\Group;
 use App\Models\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
@@ -77,6 +78,30 @@ class CategoriesTest extends TestCase
         $this->assertDatabaseHas('categories', [
             'user_id' => Auth::id(),
             'name' => 'New category'
+        ]);
+    }
+
+    /** @test */
+    public function it_creates_categories_in_a_group()
+    {
+        $group = factory(Group::class)->create();
+
+        $this->signIn($group->user)
+            ->mutation('categoryCreate')
+            ->setArguments([
+                'name' => 'New category',
+                'groupId' => $group->id
+            ])
+            ->setSelectionSet(['group' => ['name']])
+            ->getData()
+            ->assertJsonFragment([
+                'name' => $group->name
+            ]);
+
+        $this->assertDatabaseHas('categories', [
+            'user_id' => Auth::id(),
+            'name' => 'New category',
+            'group_id' => $group->id
         ]);
     }
 
