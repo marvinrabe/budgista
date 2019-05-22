@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Transaction;
+use App\Scopes\UserScope;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -12,21 +13,18 @@ class ProcessRecurringTransactions extends Command
 {
     /**
      * The name and signature of the console command.
-     *
      * @var string
      */
     protected $signature = 'app:process-recurring';
 
     /**
      * The console command description.
-     *
      * @var string
      */
     protected $description = 'Process due recurring transactions';
 
     /**
      * Create a new command instance.
-     *
      * @return void
      */
     public function __construct()
@@ -36,14 +34,16 @@ class ProcessRecurringTransactions extends Command
 
     /**
      * Execute the console command.
-     *
      * @return mixed
      */
     public function handle()
     {
         $this->info('Processing...');
 
-        $transactions = Transaction::where('date', '<=', Carbon::now())->where('recurring', '=', true)->cursor();
+        $transactions = Transaction::withoutGlobalScope(UserScope::class)
+            ->where('date', '<=', Carbon::now())
+            ->where('recurring', '=', true)
+            ->cursor();
 
         foreach ($transactions as $transaction) {
 
@@ -57,6 +57,7 @@ class ProcessRecurringTransactions extends Command
              */
             $newTransaction = $transaction->replicate(['id', 'date', 'cleared']);
             $newTransaction->date = $occurences[1];
+            $newTransaction->family = $transaction->family ?? $transaction->id;
             $newTransaction->cleared = false;
 
             $transaction->rrule = null;
@@ -66,7 +67,7 @@ class ProcessRecurringTransactions extends Command
                 $transaction->save();
             });
 
-            $this->info('Transaction: ' . $transaction->id);
+            $this->info('Transaction: '.$transaction->id);
         }
 
         $this->info('Done');

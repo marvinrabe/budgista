@@ -72,12 +72,13 @@ class ForesightTest extends TestCase
         $this->assertEquals(10, $foresight->recommendedBudget());
     }
 
-    /* TODO solve this problem */
+    /** @test */
     public function already_occured_recurring_transaction_wont_be_covered()
     {
         $transaction1 = new Transaction();
         $transaction1->date = Carbon::now();
         $transaction1->amount = -20;
+        $transaction1->family = 'test';
 
         $transaction2 = new Transaction();
         $transaction2->date = Carbon::now()->addMonth();
@@ -86,6 +87,7 @@ class ForesightTest extends TestCase
             'INTERVAL' => 1
         ]);
         $transaction2->amount = -20;
+        $transaction2->family = 'test';
 
         $transactions = collect([$transaction1, $transaction2]);
 
