@@ -2,8 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
+use App\Mail\UserDeleted;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -68,6 +69,45 @@ class UserTest extends TestCase
             'created_at' => $user->created_at,
             'feedback' => 'my feedback',
         ]);
+    }
+
+    /** @test */
+    public function it_sends_an_email_with_user_feedback()
+    {
+        Mail::fake();
+
+        $this->signIn();
+
+        $user = Auth()->user();
+
+        $this
+            ->delete('/api/user', [
+                'feedback' => 'my feedback',
+                'password' => 'secret'
+            ]);
+
+        $this->assertDatabaseHas('deleted_users', [
+            'created_at' => $user->created_at,
+            'feedback' => 'my feedback',
+        ]);
+
+        Mail::assertSent(UserDeleted::class);
+    }
+
+    /** @test */
+    public function it_does_not_send_an_email_when_feedback_is_empty()
+    {
+        Mail::fake();
+
+        $this->signIn();
+
+        $this
+            ->delete('/api/user', [
+                'feedback' => '',
+                'password' => 'secret'
+            ]);
+
+        Mail::assertNothingSent();
     }
 
 }

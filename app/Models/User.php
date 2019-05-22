@@ -5,9 +5,11 @@ namespace App\Models;
 use App\Auth\EmailTokenRepository;
 use App\Budget\Month;
 use App\Budget\Sheet;
+use App\Mail\UserDeleted;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -69,12 +71,16 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
     public function terminate($reason = null)
     {
-        DeletedUser::create([
+        $deletedUserLog = DeletedUser::create([
             'feedback' => $reason,
             'created_at' => $this->created_at
         ]);
 
         $this->delete();
+
+        if (!empty($reason)) {
+            Mail::to(config('app.email'))->send(new UserDeleted($deletedUserLog));
+        }
     }
 
     /**

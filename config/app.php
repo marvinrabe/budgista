@@ -14,6 +14,8 @@ return [
 
     'name' => env('APP_NAME', 'Budgista'),
 
+    'email' => env('APP_EMAIL', 'support@budgista.com'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
