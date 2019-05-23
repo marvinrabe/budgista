@@ -51,7 +51,7 @@ class Transaction extends Model
 
         $dbRule = new RRule($value);
 
-        return new RRule(array_merge($dbRule->getRule(), ['dtstart' => $this->attributes['date']]));
+        return new \App\RRule(array_merge($dbRule->getRule(), ['dtstart' => $this->attributes['date']]));
     }
 
     public function setRruleAttribute($value)
@@ -66,7 +66,7 @@ class Transaction extends Model
         }
 
         $this->attributes['recurring'] = false;
-        $this->attributes['rrule'] = true;
+        $this->attributes['rrule'] = null;
     }
 
     public function account()
@@ -132,6 +132,15 @@ class Transaction extends Model
             'subject' => $subject,
             'cleared' => $cleared
         ];
+    }
+
+    public function getRecurrence()
+    {
+        if (!$this->recurring) {
+            return null;
+        }
+
+        return $this->rrule;
     }
 
 }

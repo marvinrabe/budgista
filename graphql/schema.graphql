@@ -53,7 +53,19 @@ type Transaction {
   categories: [CategoryAllocation!]!
   @with(relation: "category")
   @method(name: "getCategories")
-  recurrence: String @rename(attribute: "rrule")
+  recurrence: Recurrence @method(name: "getRecurrence")
+}
+
+type Recurrence {
+  interval: Int! @method
+  frequency: Frequency! @method
+}
+
+enum Frequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
 }
 
 type TransactionSubject {

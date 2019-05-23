@@ -71,4 +71,26 @@ class RecurringTransactionsTest extends TestCase
         ]);
     }
 
+    /** @test */
+    public function it_formats_the_recurrence()
+    {
+        $transaction = factory(Transaction::class)->make();
+        $transaction->rrule = new RRule('FREQ=DAILY;INTERVAL=5');
+        $transaction->save();
+
+        $this->signIn($transaction->user)
+            ->query('transaction')
+            ->setArguments([
+                'id' => $transaction->id
+            ])
+            ->setSelectionSet(['recurrence' => ['interval', 'frequency']])
+            ->getData()
+            ->assertJsonFragment([
+                'recurrence' => [
+                    'interval' => 5,
+                    'frequency' => 'DAILY'
+                ]
+            ]);
+    }
+
 }
