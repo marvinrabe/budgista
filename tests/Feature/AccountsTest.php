@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Account;
 use App\Models\Transaction;
-use GraphQL\RawObject;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,7 +17,11 @@ class AccountsTest extends TestCase
         $this->signIn()
             ->mutation('accountCreate')
             ->setArguments([
-                'input' => new RawObject('{name: "New Account", icon: "wallet", isTracking: true}')
+                'input' => [
+                    'name' => 'New Account',
+                    'icon' => 'wallet',
+                    'isTracking' => true
+                ]
             ])
             ->setSelectionSet([
                 'name', 'icon', 'isTracking'
@@ -49,7 +52,11 @@ class AccountsTest extends TestCase
             ->mutation('accountCreate')
             ->setArguments([
                 'initialBalance' => 1234,
-                'input' => new RawObject('{name: "New Account", icon: "wallet", isTracking: true}')
+                'input' => [
+                    'name' => 'New Account',
+                    'icon' => 'wallet',
+                    'isTracking' => true
+                ]
             ])
             ->setSelectionSet([
                 'balance', 'balanceCleared'
@@ -82,7 +89,11 @@ class AccountsTest extends TestCase
             ->mutation('accountUpdate')
             ->setArguments([
                 'id' => $account->id,
-                'input' => new RawObject('{name: "New Name", icon: "wallet", isTracking: true}')
+                'input' => [
+                    'name' => 'New Name',
+                    'icon' => 'wallet',
+                    'isTracking' => true
+                ]
             ])
             ->setSelectionSet([
                 'id', 'name', 'icon', 'isTracking'
@@ -117,7 +128,7 @@ class AccountsTest extends TestCase
             ->mutation('accountUpdate')
             ->setArguments([
                 'id' => $otherAccount->id,
-                'input' => new RawObject('{name: "New Name", icon: "wallet", isTracking: true}')
+                'input' => ['name' => "New Name", 'icon' => 'wallet', 'isTracking' => true]
             ])
             ->setSelectionSet([
                 'id'
@@ -152,9 +163,7 @@ class AccountsTest extends TestCase
 
         $this->signIn($account->user);
 
-        $this->query('accounts')
-            ->setSelectionSet(['id', 'name'])
-            ->getData()
+        $this->query('accounts', ['id', 'name'])
             ->assertJsonFragment([
                 'id' => $account->id,
                 'name' => $account->name
@@ -166,9 +175,8 @@ class AccountsTest extends TestCase
     {
         $account = factory(Account::class)->create();
 
-        $this->query('accounts')
-            ->setSelectionSet(['id'])
-            ->getData()
+        $this->signIn()
+            ->query('accounts', ['id'])
             ->assertJsonMissing([
                 'id' => $account->id
             ]);
@@ -180,9 +188,7 @@ class AccountsTest extends TestCase
         $transaction = factory(Transaction::class)->create();
 
         $this->signIn($transaction->user)
-            ->query('accounts')
-            ->setSelectionSet(['id', 'balance'])
-            ->getData()
+            ->query('accounts', ['id', 'balance'])
             ->assertJsonFragment([
                 'id' => $transaction->account_id,
                 'balance' => $transaction->amount
@@ -195,12 +201,11 @@ class AccountsTest extends TestCase
         $account = factory(Account::class)->create();
 
         $this->signIn($account->user)
-            ->mutation('accountDelete')
-            ->setArguments([
-                'id' => $account->id
-            ])
-            ->setSelectionSet(['id'])
-            ->getData()
+            ->mutation(
+                'accountDelete',
+                ['id' => $account->id],
+                ['id']
+            )
             ->assertJsonFragment([
                 'data' => [
                     'accountDelete' => [
@@ -220,12 +225,12 @@ class AccountsTest extends TestCase
     {
         $otherAccount = factory(Account::class)->create();
 
-        $this->mutation('accountDelete')
-            ->setArguments([
-                'id' => $otherAccount->id
-            ])
-            ->setSelectionSet(['id'])
-            ->getData()
+        $this->signIn()
+            ->mutation(
+                'accountDelete',
+                ['id' => $otherAccount->id],
+                ['id']
+            )
             ->assertJsonFragment([
                 'data' => [
                     'accountDelete' => null

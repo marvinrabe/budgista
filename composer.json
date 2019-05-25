@@ -25,8 +25,8 @@
     "require-dev": {
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
-        "gmostafa/php-graphql-client": "^1.1",
         "mll-lab/laravel-graphql-playground": "^1.0",
+        "marvinrabe/laravel-graphql-test": "^0.1",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~7.0"
     },
