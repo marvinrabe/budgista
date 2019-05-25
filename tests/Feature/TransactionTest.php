@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -66,6 +67,206 @@ class TransactionTest extends TestCase
         $this
             ->post('/api/transactions', $transaction->toArray())
             ->assertSuccessful();
+    }
+
+    /** @test */
+    public function it_creates_expenses()
+    {
+        $account = factory(Account::class)->create();
+        $category = factory(Category::class)->create([
+            'user_id' => $account->user_id
+        ]);
+
+        $this->signIn($account->user);
+
+        $this->mutation(
+            'transactionCreate',
+            [
+                'input' => [
+                    'date' => Carbon::now()->format('Y-m-d'),
+                    'amount' => 1234,
+                    'from' => [
+                        'accountId' => $account->id
+                    ],
+                    'to' => [
+                        'payeeName' => 'Acme Co.'
+                    ],
+                    'categories' => [
+                        [
+                            'id' => $category->id,
+                            'amount' => 1234
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'amount',
+                'from' => ['subject' => ['name'], 'cleared'],
+                'to' => ['subject' => ['name'], 'cleared'],
+                'categories' => ['category' => ['id'], 'amount']
+            ]
+        )->assertJsonFragment([
+            'transactionCreate' => [
+                [
+                    'amount' => 1234,
+                    'from' => [
+                        'subject' => ['name' => $account->name],
+                        'cleared' => false,
+                    ],
+                    'to' => [
+                        'subject' => ['name' => 'Acme Co.'],
+                        'cleared' => true
+                    ],
+                    'categories' => [
+                        [
+                            'category' => [
+                                'id' => $category->id
+                            ],
+                            'amount' => 1234
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+
+        $this->assertDatabaseHas('transactions', [
+            'amount' => -1234,
+            'account_id' => $account->id,
+            'category_id' => $category->id,
+            'payee' => 'Acme Co.'
+        ]);
+    }
+
+    /** @test */
+    public function it_creates_income()
+    {
+        $account = factory(Account::class)->create();
+
+        $this->signIn($account->user);
+
+        $this->mutation(
+            'transactionCreate',
+            [
+                'input' => [
+                    'date' => Carbon::now()->format('Y-m-d'),
+                    'amount' => 1234,
+                    'from' => [
+                        'payeeName' => 'Acme Co.'
+                    ],
+                    'to' => [
+                        'accountId' => $account->id
+                    ],
+                    'categories' => []
+                ]
+            ],
+            [
+                'amount',
+                'from' => ['subject' => ['name'], 'cleared'],
+                'to' => ['subject' => ['name'], 'cleared'],
+                'categories' => ['category' => ['id'], 'amount']
+            ]
+        )->assertJsonFragment([
+            'transactionCreate' => [
+                [
+                    'amount' => 1234,
+                    'from' => [
+                        'subject' => ['name' => 'Acme Co.'],
+                        'cleared' => true
+                    ],
+                    'to' => [
+                        'subject' => ['name' => $account->name],
+                        'cleared' => false,
+                    ],
+                    'categories' => [
+                        [
+                            'category' => null,
+                            'amount' => 1234
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+
+        $this->assertDatabaseHas('transactions', [
+            'amount' => 1234,
+            'account_id' => $account->id,
+            'payee' => 'Acme Co.'
+        ]);
+    }
+
+    /** @test */
+    public function it_updates_transactions()
+    {
+        $transaction = factory(Transaction::class)->create();
+        $account = factory(Account::class)->create([
+            'user_id' => $transaction->user_id
+        ]);
+        $category = factory(Category::class)->create([
+            'user_id' => $transaction->user_id
+        ]);
+
+        $this->signIn($transaction->user);
+
+        $this->mutation(
+            'transactionUpdate',
+            [
+                'id' => $transaction->id,
+                'input' => [
+                    'date' => Carbon::now()->format('Y-m-d'),
+                    'amount' => 1234,
+                    'from' => [
+                        'accountId' => $account->id
+                    ],
+                    'to' => [
+                        'payeeName' => 'Acme Co.'
+                    ],
+                    'categories' => [
+                        [
+                            'id' => $category->id,
+                            'amount' => 1234
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'id',
+                'amount',
+                'from' => ['subject' => ['name'], 'cleared'],
+                'to' => ['subject' => ['name'], 'cleared'],
+                'categories' => ['category' => ['id'], 'amount']
+            ]
+        )->assertJsonFragment([
+            'transactionUpdate' => [
+                [
+                    'id' => $transaction->id,
+                    'amount' => 1234,
+                    'from' => [
+                        'subject' => ['name' => $account->name],
+                        'cleared' => false,
+                    ],
+                    'to' => [
+                        'subject' => ['name' => 'Acme Co.'],
+                        'cleared' => true
+                    ],
+                    'categories' => [
+                        [
+                            'category' => [
+                                'id' => $category->id
+                            ],
+                            'amount' => 1234
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+
+        $this->assertDatabaseHas('transactions', [
+            'id' => $transaction->id,
+            'amount' => -1234,
+            'account_id' => $account->id,
+            'category_id' => $category->id,
+            'payee' => 'Acme Co.'
+        ]);
     }
 
     /** @test */

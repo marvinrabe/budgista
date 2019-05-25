@@ -24,6 +24,8 @@ type Mutation @middleware(checks: ["graphql"]) {
   groupUpdate(id: ID!, name: String!): Group @update
   groupDelete(id: ID!): Group @delete
   groupSort(ids: [ID!]!): [Group!]!
+  transactionCreate(input: TransactionInput!): [Transaction!]!
+  transactionUpdate(id: ID!, input: TransactionInput!): [Transaction!]!
 }
 
 type Group {
@@ -54,6 +56,30 @@ type Transaction {
   @with(relation: "category")
   @method(name: "getCategories")
   recurrence: Recurrence @method(name: "getRecurrence")
+}
+
+input TransactionInput {
+  date: Date!
+  amount: Int!
+  from: TransactionSubjectInput!
+  to: TransactionSubjectInput!
+  categories: [CategoryAllocationInput!]!
+  recurrence: RecurrenceInput
+}
+
+input TransactionSubjectInput {
+  accountId: ID
+  payeeName: String
+}
+
+input CategoryAllocationInput {
+  id: ID!
+  amount: Int!
+}
+
+input RecurrenceInput {
+  interval: Int!
+  frequency: Frequency!
 }
 
 type Recurrence {

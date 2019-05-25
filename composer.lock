@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba574209401c13ca155eaad842656c14",
+    "content-hash": "a1a30b580d7439a8725906fc108f3ca7",
     "packages": [
         {
             "name": "alsofronie/eloquent-uuid",
@@ -5336,16 +5336,16 @@
         },
         {
             "name": "marvinrabe/laravel-graphql-test",
-            "version": "0.1.1",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/marvinrabe/laravel-graphql-test.git",
-                "reference": "fc7b8fdbe7c23cd26111fd6e3bfd637e956239dc"
+                "reference": "f4130c46bd4ba609274a4416c6a244b5bd92c55c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/marvinrabe/laravel-graphql-test/zipball/fc7b8fdbe7c23cd26111fd6e3bfd637e956239dc",
-                "reference": "fc7b8fdbe7c23cd26111fd6e3bfd637e956239dc",
+                "url": "https://api.github.com/repos/marvinrabe/laravel-graphql-test/zipball/f4130c46bd4ba609274a4416c6a244b5bd92c55c",
+                "reference": "f4130c46bd4ba609274a4416c6a244b5bd92c55c",
                 "shasum": ""
             },
             "require": {
@@ -5378,7 +5378,7 @@
                 "php",
                 "testing"
             ],
-            "time": "2019-05-24T20:26:44+00:00"
+            "time": "2019-05-25T10:25:32+00:00"
         },
         {
             "name": "mll-lab/laravel-graphql-playground",
