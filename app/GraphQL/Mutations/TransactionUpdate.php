@@ -13,9 +13,13 @@ class TransactionUpdate extends Resolver
     {
         $transaction->update(TransactionInputTransformer::transform($input)->toArray());
 
-        return [
-            $transaction->fresh()
-        ];
+        $transactions = Transaction::processRecurring($transaction->fresh());
+
+        $result = [];
+        foreach ($transactions as $record) {
+            $result[] = $record->fresh();
+        }
+        return $result;
     }
 
 }

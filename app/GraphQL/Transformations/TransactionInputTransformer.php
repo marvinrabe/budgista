@@ -2,6 +2,7 @@
 
 namespace App\GraphQL\Transformations;
 
+use App\RRule;
 use Illuminate\Contracts\Support\Arrayable;
 
 class TransactionInputTransformer implements Arrayable
@@ -26,7 +27,8 @@ class TransactionInputTransformer implements Arrayable
             'amount' => $this->isExpense() ? (-1 * $this->input['amount']) : $this->input['amount'],
             'payee' => $this->isExpense() ? $this->input['to']['payeeName'] : $this->input['from']['payeeName'],
             'account_id' => $this->isExpense() ? $this->input['from']['accountId'] : $this->input['to']['accountId'],
-            'category_id' => $this->getCategory()
+            'category_id' => $this->getCategory(),
+            'rrule' => $this->getRRule()
         ];
     }
 
@@ -38,6 +40,14 @@ class TransactionInputTransformer implements Arrayable
     protected function getCategory()
     {
         return isset($this->input['categories'][0]) ? $this->input['categories'][0]['id'] : null;
+    }
+
+    protected function getRRule()
+    {
+        if (!isset($this->input['recurrence'])) {
+            return null;
+        }
+        return new RRule("FREQ={$this->input['recurrence']['frequency']};INTERVAL={$this->input['recurrence']['interval']}");
     }
 
 }

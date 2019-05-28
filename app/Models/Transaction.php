@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Alsofronie\Uuid\UuidModelTrait;
 use App\Models\Traits\BelongsToUserTrait;
+use App\RecurringGenerator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use RRule\RRule;
 
 /**
@@ -23,7 +25,8 @@ class Transaction extends Model
         'account_id',
         'payee',
         'amount',
-        'cleared'
+        'cleared',
+        'rrule'
     ];
 
     protected $dates = ['date'];
@@ -33,6 +36,21 @@ class Transaction extends Model
         'recurring' => 'bool',
         'cleared' => 'bool'
     ];
+
+    public static function processRecurring($transaction)
+    {
+        $generator = new RecurringGenerator();
+
+        $transactions = collect($generator->generateOccurrences($transaction));
+
+        DB::transaction(function () use ($transactions) {
+            foreach($transactions as &$transaction) {
+                $transaction->save();
+            }
+        });
+
+        return $transactions;
+    }
 
     protected static function boot()
     {

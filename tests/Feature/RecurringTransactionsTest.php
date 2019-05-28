@@ -5,10 +5,12 @@ namespace Tests\Feature;
 
 
 use App\Console\Commands\ProcessRecurringTransactions;
+use App\Models\Account;
 use App\Models\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use RRule\RRule;
+use Tests\Enum;
 use Tests\TestCase;
 
 class RecurringTransactionsTest extends TestCase
@@ -29,7 +31,6 @@ class RecurringTransactionsTest extends TestCase
 
         $this->assertDatabaseHas('transactions', [
             'amount' => $transaction->amount,
-            'rrule' => 'FREQ=DAILY',
             'cleared' => false,
             'recurring' => 1,
             'date' => Carbon::now()->addDay()->format('Y-m-d')
@@ -91,6 +92,59 @@ class RecurringTransactionsTest extends TestCase
                     'frequency' => 'DAILY'
                 ]
             ]);
+    }
+
+    /** @test */
+    public function it_runs_recurring_on_creation()
+    {
+        $account = factory(Account::class)->create();
+
+        $this->signIn($account->user);
+
+        $this->mutation(
+            'transactionCreate',
+            [
+                'input' => [
+                    'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+                    'amount' => 1234,
+                    'from' => [
+                        'payeeName' => 'Acme Co.'
+                    ],
+                    'to' => [
+                        'accountId' => $account->id
+                    ],
+                    'categories' => [],
+                    'recurrence' => [
+                        'interval' => 1,
+                        'frequency' => new Enum('DAILY')
+                    ]
+                ]
+            ],
+            [
+                'amount',
+                'date',
+                'recurrence' => [
+                    'interval',
+                    'frequency'
+                ]
+            ]
+        )->assertJsonFragment([
+            'transactionCreate' => [
+                [
+                    'amount' => 1234,
+                    'date' => \Carbon\Carbon::now()->format('Y-m-d'),
+                    'recurrence' => null
+                ],
+                [
+                    'amount' => 1234,
+                    'date' => \Carbon\Carbon::now()->addDay()->format('Y-m-d'),
+                    'recurrence' => [
+                        'interval' => 1,
+                        'frequency' => 'DAILY'
+                    ]
+                ]
+            ]
+        ]);
     }
 
 }

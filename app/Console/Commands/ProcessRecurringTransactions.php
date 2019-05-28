@@ -6,8 +6,6 @@ use App\Models\Transaction;
 use App\Scopes\UserScope;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
-use RRule\RRule;
 
 class ProcessRecurringTransactions extends Command
 {
@@ -46,26 +44,7 @@ class ProcessRecurringTransactions extends Command
             ->cursor();
 
         foreach ($transactions as $transaction) {
-
-            /**
-             * @var RRule $rrule
-             */
-            $occurences = $transaction->rrule->getOccurrences(2);
-
-            /**
-             * @var Transaction $transaction
-             */
-            $newTransaction = $transaction->replicate(['id', 'date', 'cleared']);
-            $newTransaction->date = $occurences[1];
-            $newTransaction->family = $transaction->family ?? $transaction->id;
-            $newTransaction->cleared = false;
-
-            $transaction->rrule = null;
-
-            DB::transaction(function () use ($transaction, $newTransaction) {
-                $newTransaction->save();
-                $transaction->save();
-            });
+            Transaction::processRecurring($transaction);
 
             $this->info('Transaction: '.$transaction->id);
         }
