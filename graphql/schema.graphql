@@ -134,7 +134,3 @@ type User {
   currency: String!
   isVerified: Boolean! @method(name: "hasVerifiedEmail")
 }
-
-type Subscription {
-  balanceUpdated: Account
-}

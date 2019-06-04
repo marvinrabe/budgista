@@ -46,8 +46,6 @@ class TransactionController extends Controller
 
         $transaction->save();
 
-        \Nuwave\Lighthouse\Execution\Utils\Subscription::broadcast('balanceUpdated', $transaction->account);
-
         return new TransactionResource($transaction);
     }
 

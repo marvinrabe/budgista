@@ -181,7 +181,6 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
-        Nuwave\Lighthouse\Subscriptions\SubscriptionServiceProvider::class,
 
         /*
          * Application Service Providers...
