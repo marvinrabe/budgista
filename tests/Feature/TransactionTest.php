@@ -322,4 +322,61 @@ class TransactionTest extends TestCase
             ->assertSessionHasErrors('account_id');
     }
 
+    /** @test */
+    public function it_deletes_a_transaction()
+    {
+        $transaction = factory(Transaction::class)->create();;
+
+        $this->assertDatabaseHas('transactions', [
+            'id' => $transaction->id,
+            'amount' => $transaction->amount,
+            'account_id' => $transaction->account_id,
+            'payee' => $transaction->payee
+        ]);
+
+        $this->signIn($transaction->user)
+            ->mutation(
+                'transactionDelete',
+                ['id' => $transaction->id],
+                ['id', 'amount']
+            )
+            ->assertJsonFragment([
+                'transactionDelete' => [
+                    'id' => $transaction->id,
+                    'amount' => abs($transaction->amount)
+                ]
+
+            ]);
+
+        $this->assertDatabaseMissing('transactions', [
+            'id' => $transaction->id,
+            'amount' => $transaction->amount,
+            'account_id' => $transaction->account_id,
+            'payee' => $transaction->payee
+        ]);
+    }
+
+    /** @test */
+    public function it_does_not_delete_other_users_transaction()
+    {
+        $transaction = factory(Transaction::class)->create();
+
+        $this->signIn()
+            ->mutation(
+                'transactionDelete',
+                ['id' => $transaction->id],
+                ['id', 'amount']
+            )
+            ->assertJsonFragment([
+                'transactionDelete' => null
+            ]);
+
+        $this->assertDatabaseHas('transactions', [
+            'id' => $transaction->id,
+            'amount' => $transaction->amount,
+            'account_id' => $transaction->account_id,
+            'payee' => $transaction->payee
+        ]);
+    }
+
 }

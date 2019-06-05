@@ -26,6 +26,7 @@ type Mutation @middleware(checks: ["graphql"]) {
   groupSort(ids: [ID!]!): [Group!]!
   transactionCreate(input: TransactionInput!): [Transaction!]!
   transactionUpdate(id: ID!, input: TransactionInput!): [Transaction!]!
+  transactionDelete(id: ID!): Transaction @delete
 }
 
 type Group {
