@@ -7,21 +7,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Installing PHP
-        uses: shivammathur/setup-php@master
+      - uses: shivammathur/setup-php@master
         with:
           php-version: 7.2
           extension-csv: mbstring, bcmath, intl
+      - uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql version: 5.7
+          host port: 3800
+          container port: 3800
+          mysql root password: secret
       - name: Copy ENV Laravel Configuration for CI
         run: php -r "file_exists('.env') || copy('.github/.env.testing', '.env');"
       - name: Install Dependencies (PHP vendors)
-        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress
       - name: Generate key
         run: php artisan key:generate
       - name: Create DB and schemas
-        run: |
-          mkdir -p database
-          touch database/database.sqlite
-          php artisan migrate
+        run: php artisan migrate
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         run: vendor/bin/phpunit
