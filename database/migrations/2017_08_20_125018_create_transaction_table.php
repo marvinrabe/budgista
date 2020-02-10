@@ -6,10 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTransactionTable extends Migration
 {
-    /**
-     * Run the migrations.
-     * @return void
-     */
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
@@ -33,14 +29,5 @@ class CreateTransactionTable extends Migration
                 ->onDelete('cascade');
             $table->index(['account_id', 'date', 'created_at']);
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('transactions');
     }
 }

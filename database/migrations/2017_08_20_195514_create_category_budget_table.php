@@ -6,10 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateCategoryBudgetTable extends Migration
 {
-    /**
-     * Run the migrations.
-     * @return void
-     */
     public function up()
     {
         Schema::create('budgets', function (Blueprint $table) {
@@ -22,14 +18,5 @@ class CreateCategoryBudgetTable extends Migration
                 ->references('id')->on('categories')
                 ->onDelete('cascade');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('budgets');
     }
 }

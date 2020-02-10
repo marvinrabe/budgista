@@ -6,25 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 class AddFamilyToTransactions extends Migration
 {
-    /**
-     * Run the migrations.
-     * @return void
-     */
     public function up()
     {
         Schema::table('transactions', function (Blueprint $table) {
             $table->uuid('family')->nullable();
-        });
-    }
-
-    /**
-     * Reverse the migrations.
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->dropColumn(['family']);
         });
     }
 }
