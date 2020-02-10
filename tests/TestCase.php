@@ -4,12 +4,10 @@ namespace Tests;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use MarvinRabe\LaravelGraphQLTest\TestGraphQL;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
-    use TestGraphQL;
 
     public function signIn($user = null)
     {

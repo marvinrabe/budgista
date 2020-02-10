@@ -10,13 +10,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Mail;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * @property Account[] $accounts
  * @property Category[] $categories
  */
-class User extends Authenticatable implements JWTSubject, MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail
 {
 
     use Notifiable;
@@ -83,31 +82,10 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         }
     }
 
-    /**
-     * Sends verification email.
-     */
     public function sendEmailVerificationNotification()
     {
         $token = resolve(EmailTokenRepository::class)->get($this->email);
 
         $this->notify(new \App\Notifications\VerifyEmail($token));
-    }
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
     }
 }
