@@ -11,8 +11,10 @@
 |
 */
 
-Route::redirect('/', env('APP_URL'))->name('app');
-Route::redirect('/login', env('APP_URL'))->name('login');
-Route::redirect('/verify/{token}', env('APP_URL'))->name('email.verify');
-Route::redirect('/reset-password/{token}', env('APP_URL'))->name('password.reset');
-Route::redirect('{any}', env('APP_URL'))->where('any', '^(?!api).*$');
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+Auth::routes(['verify' => true]);
+
+Route::inertia('/', 'Welcome');

@@ -11,19 +11,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Mail;
 
-/**
- * @property Account[] $accounts
- * @property Category[] $categories
- */
 class User extends Authenticatable implements MustVerifyEmail
 {
 
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     * @var array
-     */
     protected $fillable = [
         'name',
         'email',
@@ -34,10 +26,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'last_login_at'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     * @var array
-     */
     protected $hidden = [
         'password',
         'remember_token'
@@ -80,12 +68,5 @@ class User extends Authenticatable implements MustVerifyEmail
         if (!empty($reason)) {
             Mail::to(config('app.email'))->send(new UserDeleted($deletedUserLog));
         }
-    }
-
-    public function sendEmailVerificationNotification()
-    {
-        $token = resolve(EmailTokenRepository::class)->get($this->email);
-
-        $this->notify(new \App\Notifications\VerifyEmail($token));
     }
 }

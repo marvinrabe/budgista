@@ -1,11 +1,23 @@
-import { InertiaApp } from '@inertiajs/inertia-svelte'
+import Vue from 'vue'
+import { InertiaApp } from '@inertiajs/inertia-vue'
+
+import i18n from './Plugins/i18n'
+
+import './Plugins/analytics'
+import './Plugins/axios'
+import './Plugins/meta'
+import './Plugins/portal'
+
+Vue.use(InertiaApp)
 
 const app = document.getElementById('app')
 
-new InertiaApp({
-  target: app,
-  props: {
-    initialPage: JSON.parse(app.dataset.page),
-    resolveComponent: name => import(`./Pages/${name}.svelte`).then(module => module.default),
-  },
-})
+new Vue({
+  i18n,
+  render: h => h(InertiaApp, {
+    props: {
+      initialPage: JSON.parse(app.dataset.page),
+      resolveComponent: name => import(`./Pages/${name}`).then(module => module.default),
+    },
+  }),
+}).$mount(app)

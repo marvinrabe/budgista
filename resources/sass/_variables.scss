@@ -1,0 +1,81 @@
+$enable-transitions: false;
+
+$font-family-sans-serif: 'Inter', sans-serif;
+
+$table-cell-padding: .5em;
+$list-group-item-padding-y: .5em;
+$list-group-item-padding-x: .5em;
+
+@function match-hue($color, $root) {
+  $root-hue: hue($root);
+  $color-saturation: 13%;
+  $color-lightness: lightness($color);
+  @return hsl($root-hue, $color-saturation, $color-lightness);
+}
+
+$black: #22292f;
+$white: #fff;
+$blue: #3490dc;
+$indigo: #3F51B5;
+$purple: #9C27B0;
+$pink: #E91E63;
+$red: #F44336;
+$orange: #FF9800;
+$yellow: #FFC107;
+$green: #4CAF50;
+$teal: #009688;
+$cyan: #00BCD4;
+
+$gray-50: match-hue(#FAFAFA, $blue);
+$gray-100: match-hue(#F5F5F5, $blue);
+$gray-200: match-hue(#EEEEEE, $blue);
+$gray-300: match-hue(#E0E0E0, $blue);
+$gray-400: match-hue(#BDBDBD, $blue);
+$gray-500: match-hue(#9E9E9E, $blue);
+$gray-600: match-hue(#757575, $blue);
+$gray-650: match-hue(#6b6b6b, $blue);
+$gray-700: match-hue(#616161, $blue);
+$gray-750: match-hue(#575757, $blue);
+$gray-800: match-hue(#424242, $blue);
+$gray-850: match-hue(#383838, $blue);
+$gray-900: match-hue(#212121, $blue);
+
+$theme-colors: (
+  primary: $blue,
+  secondary: $gray-800,
+  success: $green,
+  info: $cyan,
+  warning: $yellow,
+  danger: $red,
+  light: $gray-100,
+  dark: $gray-600
+);
+
+$container-max-widths: (
+  lg: 960px,
+  xl: 1140px
+);
+
+$body-color: $black;
+$border-radius: .2rem;
+$input-border-color: $gray-300;
+
+// Fade
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0
+}
+
+// Slide
+.slide-enter-active,
+.slide-leave-active {
+  transition: max-height .3s ease;
+  max-height: 36px;
+}
+
+.slide-enter, .slide-leave-to {
+  max-height: 0;
+}

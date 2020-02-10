@@ -6,6 +6,7 @@ use App\Auth\EmailTokenRepository;
 use App\Models\User;
 use App\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -13,34 +14,160 @@ class EmailVerificationTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function it_sends_email_verification_notifications()
+    protected $verificationVerifyRouteName = 'verification.verify';
+
+    protected function verificationNoticeRoute()
     {
-        /**
-         * @var User $user
-         */
-        $user = factory(User::class)->create();
-
-        Notification::fake();
-
-        $user->sendEmailVerificationNotification();
-
-        Notification::assertSentTo($user, VerifyEmail::class);
+        return route('verification.notice');
     }
 
-    /** @test */
-    public function it_verifies_user()
+    protected function validVerificationVerifyRoute($user)
     {
-        /**
-         * @var User $user
-         */
-        $user = factory(User::class)->create();
+        return URL::signedRoute($this->verificationVerifyRouteName, [
+            'id' => $user->id,
+            'hash' => sha1($user->getEmailForVerification()),
+        ]);
+    }
 
-        $repository = new EmailTokenRepository();
-        $token = $repository->get($user->email);
+    protected function invalidVerificationVerifyRoute($user)
+    {
+        return route($this->verificationVerifyRouteName, [
+            'id' => $user->id,
+            'hash' => 'invalid-hash',
+        ]);
+    }
 
-        $this->put('/api/auth/verify/' . $token)->assertSuccessful();
+    protected function verificationResendRoute()
+    {
+        return route('verification.resend');
+    }
 
-        $this->assertTrue($user->fresh()->hasVerifiedEmail());
+    protected function loginRoute()
+    {
+        return route('login');
+    }
+
+    public function testGuestCannotSeeTheVerificationNotice()
+    {
+        $response = $this->get($this->verificationNoticeRoute());
+
+        $response->assertRedirect($this->loginRoute());
+    }
+
+    public function testUserSeesTheVerificationNoticeWhenNotVerified()
+    {
+        $user = factory(User::class)->create([
+            'email_verified_at' => null,
+        ]);
+
+        $response = $this->actingAs($user)->get($this->verificationNoticeRoute());
+
+        $response->assertStatus(200);
+        $response->assertViewIs('auth.verify');
+    }
+
+    public function testVerifiedUserIsRedirectedHomeWhenVisitingVerificationNoticeRoute()
+    {
+        $user = factory(User::class)->create([
+            'email_verified_at' => now(),
+        ]);
+
+        $response = $this->actingAs($user)->get($this->verificationNoticeRoute());
+
+        $response->assertRedirect('/');
+    }
+
+    public function testGuestCannotSeeTheVerificationVerifyRoute()
+    {
+        $user = factory(User::class)->create([
+            'id' => 1,
+            'email_verified_at' => null,
+        ]);
+
+        $response = $this->get($this->validVerificationVerifyRoute($user));
+
+        $response->assertRedirect($this->loginRoute());
+    }
+
+    public function testUserCannotVerifyOthers()
+    {
+        $user = factory(User::class)->create([
+            'id' => 1,
+            'email_verified_at' => null,
+        ]);
+
+        $user2 = factory(User::class)->create(['id' => 2, 'email_verified_at' => null]);
+
+        $response = $this->actingAs($user)->get($this->validVerificationVerifyRoute($user2));
+
+        $response->assertForbidden();
+        $this->assertFalse($user2->fresh()->hasVerifiedEmail());
+    }
+
+    public function testUserIsRedirectedToCorrectRouteWhenAlreadyVerified()
+    {
+        $user = factory(User::class)->create([
+            'email_verified_at' => now(),
+        ]);
+
+        $response = $this->actingAs($user)->get($this->validVerificationVerifyRoute($user));
+
+        $response->assertRedirect('/');
+    }
+
+    public function testForbiddenIsReturnedWhenSignatureIsInvalidInVerificationVerifyRoute()
+    {
+        $user = factory(User::class)->create([
+            'email_verified_at' => now(),
+        ]);
+
+        $response = $this->actingAs($user)->get($this->invalidVerificationVerifyRoute($user));
+
+        $response->assertStatus(403);
+    }
+
+    public function testUserCanVerifyThemselves()
+    {
+        $user = factory(User::class)->create([
+            'email_verified_at' => null,
+        ]);
+
+        $response = $this->actingAs($user)->get($this->validVerificationVerifyRoute($user));
+
+        $response->assertRedirect('/');
+        $this->assertNotNull($user->fresh()->email_verified_at);
+    }
+
+    public function testGuestCannotResendAVerificationEmail()
+    {
+        $response = $this->post($this->verificationResendRoute());
+
+        $response->assertRedirect($this->loginRoute());
+    }
+
+    public function testUserIsRedirectedToCorrectRouteIfAlreadyVerified()
+    {
+        $user = factory(User::class)->create([
+            'email_verified_at' => now(),
+        ]);
+
+        $response = $this->actingAs($user)->post($this->verificationResendRoute());
+
+        $response->assertRedirect('/');
+    }
+
+    public function testUserCanResendAVerificationEmail()
+    {
+        Notification::fake();
+        $user = factory(User::class)->create([
+            'email_verified_at' => null,
+        ]);
+
+        $response = $this->actingAs($user)
+            ->from($this->verificationNoticeRoute())
+            ->post($this->verificationResendRoute());
+
+        Notification::assertSentTo($user, VerifyEmail::class);
+        $response->assertRedirect($this->verificationNoticeRoute());
     }
 }

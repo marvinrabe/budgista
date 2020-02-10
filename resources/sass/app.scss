@@ -1,0 +1,57 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@import "bootstrap";
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  background: $gray-100;
+}
+
+.link-action {
+  cursor: pointer;
+}
+
+.toolbar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0;
+  margin-bottom: .5em;
+
+  .title {
+    @extend .h4;
+    margin: 0;
+    line-height: 2.5rem;
+    flex: 1;
+    position: relative;
+  }
+
+  p, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0;
+  }
+
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@import "sidebar";
+@import "menu";
+@import "budget";
+@import "transactions";
+@import "spinner";

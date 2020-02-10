@@ -1,11 +1,13 @@
 const mix = require('laravel-mix')
+const tailwind = require('tailwindcss')
 const webpack = require('./webpack.config')
-
-require('laravel-mix-postcss-config')
 
 mix
   .js('resources/js/app.js', 'public/js')
-  .postCss('resources/css/app.css', 'public/css')
-  .postCssConfig()
+  .sass('resources/sass/app.scss', 'public/css')
+  .options({
+    processCssUrls: false,
+    postCss: [tailwind('tailwind.config.js')],
+  })
   .webpackConfig(webpack)
   .version()

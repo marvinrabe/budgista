@@ -181,6 +181,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
+        App\Providers\InertiaServiceProvider::class,
 
         /*
          * Application Service Providers...

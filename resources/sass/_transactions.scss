@@ -1,0 +1,147 @@
+
+.transactions {
+
+  &-header,
+  &-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    & > div {
+      padding: $table-cell-padding;
+    }
+  }
+
+  &-header {
+    color: $text-muted;
+    font-family: $headings-font-family;
+    font-size: $small-font-size;
+    cursor: default;
+  }
+
+  &-row,
+  &-row-dummy {
+    border-bottom: 1px solid $gray-200;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  &-row-dummy {
+    background: $gray-50;
+
+    a {
+      font-weight: 500;
+      color: $text-muted;
+    }
+  }
+
+  &-row {
+    background: $white;
+
+    &-future, &-future span {
+      color: $gray-600 !important;
+    }
+
+    &:hover {
+      background: $gray-50;
+    }
+
+    @media (hover: none) {
+      &:hover {
+        background: transparent;
+      }
+    }
+
+    .transaction-amount {
+      font-weight: 500;
+    }
+  }
+}
+
+.transaction-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: $table-cell-padding;
+  overflow: hidden;
+  flex-wrap: nowrap;
+}
+
+.card .transaction-item {
+  color: $body-color;
+
+  &:hover {
+    color: $body-color;
+    text-decoration: none;
+  }
+}
+
+.transaction-date,
+.transaction-payee,
+.transaction-category,
+.transaction-amount {
+  flex: 1;
+  padding: 0 $table-cell-padding;
+}
+
+.transaction-date {
+  max-width: 130px;
+}
+
+
+.transaction-amount {
+  white-space: nowrap;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.transaction-clear {
+  text-align: center;
+  flex-basis: 48px;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.transaction-clear {
+  .btn {
+    transition: background-color .2s ease-in, color .2s ease-in, border-color .2s ease-in;
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .transaction-item {
+    flex-wrap: wrap;
+  }
+
+  .transaction-date,
+  .transaction-payee,
+  .transaction-category,
+  .transaction-amount {
+    flex: 50%;
+  }
+
+  .transaction-category,
+  .transaction-date {
+    font-size: 80%;
+    order: 2;
+    opacity: .5;
+  }
+
+  .transaction-category {
+    text-align: right !important;
+
+    .tb-skeleton {
+      margin-left: auto !important;
+    }
+  }
+
+  .transactions-header {
+    display: none;
+  }
+}

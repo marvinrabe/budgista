@@ -19,11 +19,11 @@ class AppServiceProvider extends ServiceProvider
             return $carbon->toW3cString();
         });
 
-        \Blade::if('track', function () {
+        Blade::if('track', function () {
             return !(isset($_SERVER['HTTP_DNT']) && $_SERVER['HTTP_DNT'] == 1);
         });
 
-        \Blade::if('donottrack', function () {
+        Blade::if('donottrack', function () {
             return (isset($_SERVER['HTTP_DNT']) && $_SERVER['HTTP_DNT'] == 1);
         });
     }

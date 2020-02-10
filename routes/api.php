@@ -11,18 +11,7 @@
 |
 */
 
-Route::group(['prefix' => 'auth'], function () {
-
-    Route::post('register', 'AuthenticationController@register');
-    Route::post('login', 'AuthenticationController@login');
-    Route::post('logout', 'AuthenticationController@logout');
-    Route::post('reset-password', 'PasswordResetController@store');
-    Route::put('reset-password/{token}', 'PasswordResetController@update');
-    Route::post('verify', 'VerificationController@resend');
-    Route::put('verify/{token}', 'VerificationController@verify');
-    Route::get('refresh', 'AuthenticationController@refresh');
-
-});
+use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth:api']], function () {
 
