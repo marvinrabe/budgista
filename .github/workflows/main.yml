@@ -5,18 +5,25 @@ on: [push]
 jobs:
   laravel-tests:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - uses: actions/checkout@v1
       - uses: shivammathur/setup-php@master
         with:
-          php-version: 7.2
+          php-version: 7.4
           extension-csv: mbstring, bcmath, intl
-      - uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql version: 5.7
-          host port: 3800
-          container port: 3800
-          mysql root password: secret
       - name: Copy ENV Laravel Configuration for CI
         run: php -r "file_exists('.env') || copy('.github/.env.testing', '.env');"
       - name: Install Dependencies (PHP vendors)
