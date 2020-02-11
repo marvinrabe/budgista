@@ -21,7 +21,7 @@
           class="form-check-input"
           id="tracking"
           type="checkbox"
-          v-model="form.isTracking"
+          v-model="form.tracking"
         >
         <label
           class="form-check-label"
@@ -64,7 +64,7 @@
         form: {
           name: this.account.name,
           icon: this.account.icon,
-          isTracking: this.account.isTracking
+          tracking: this.account.tracking
         },
         saving: false
       }
