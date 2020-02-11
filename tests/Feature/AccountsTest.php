@@ -32,6 +32,21 @@ class AccountsTest extends TestCase
         ]);
     }
 
+    public function testDefaultIcon()
+    {
+        $account = factory(Account::class)->raw();
+
+        $this
+            ->signIn()
+            ->post("/accounts", $account);
+
+        $this->assertDatabaseHas('accounts', [
+            'name' => $account['name'],
+            'icon' => 'credit-card',
+            'user_id' => Auth()->id()
+        ]);
+    }
+
     public function testInitialBalance()
     {
         $this
@@ -50,13 +65,26 @@ class AccountsTest extends TestCase
         $this->assertEquals(1234, $account->balance);
     }
 
-    public function testAccountsRequireName()
+    public function testRequireName()
     {
         $this
             ->signIn()
             ->from('/accounts/create')
             ->post('/accounts', [])
             ->assertSessionHasErrors('name');
+    }
+
+    public function testRequireValidIcon()
+    {
+        $account = factory(Account::class)->create();
+
+        $this
+            ->signIn($account->user)
+            ->put("/accounts/{$account->id}", [
+                'name' => $account->name,
+                'icon' => 'invalid-icon-name'
+            ])
+            ->assertSessionHasErrors('icon');
     }
 
     public function testUpdateAccount()
