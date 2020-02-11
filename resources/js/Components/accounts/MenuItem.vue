@@ -1,6 +1,6 @@
 <template>
   <inertia-link
-    :href="'/accounts/' + account.id"
+    :href="account.links.show"
     active-class="active"
     class="menu__item"
   >

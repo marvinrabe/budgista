@@ -7,6 +7,7 @@ use App\Models\Traits\BelongsToUserTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\URL;
 
 class Account extends Model
 {
@@ -20,7 +21,7 @@ class Account extends Model
     ];
 
     protected $appends = [
-        'balance', 'balance_cleared'
+        'balance', 'balance_cleared', 'links'
     ];
 
     protected $casts = [
@@ -41,6 +42,16 @@ class Account extends Model
         return $this->hasMany(Transaction::class);
     }
 
+    public function getLinksAttribute()
+    {
+        return [
+            'show' => URL::route('accounts.show', [$this]),
+            'edit' => URL::route('accounts.edit', [$this]),
+            'update' => URL::route('accounts.update', [$this]),
+            'destroy' => URL::route('accounts.destroy', [$this])
+        ];
+    }
+
     public function getBalanceAttribute()
     {
         return $this->workingBalance();
@@ -53,7 +64,7 @@ class Account extends Model
 
     public function clearedBalance()
     {
-        return (int)$this
+        return (int) $this
             ->transactions()
             ->where('cleared', '=', true)
             ->sum('amount');
@@ -61,7 +72,7 @@ class Account extends Model
 
     public function unclearedBalance()
     {
-        return (int)$this
+        return (int) $this
             ->transactions()
             ->where([
                 ['cleared', '=', false],
@@ -72,7 +83,7 @@ class Account extends Model
 
     public function workingBalance()
     {
-        return (int)$this
+        return (int) $this
             ->transactions()
             ->where('date', '<=', Carbon::now())
             ->sum('amount');

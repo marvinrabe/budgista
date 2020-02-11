@@ -74,7 +74,7 @@
         this.saving = true
 
         this.$inertia
-          .put(`/accounts/${this.account.id}`, this.form)
+          .put(this.account.links.update, this.form)
           .finally(() => {
             this.saving = false
           })

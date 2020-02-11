@@ -8,13 +8,13 @@
       <AccountBalance :account="account" :loading="!account"/>
 
       <template slot="submenu">
-        <inertia-link :href="'/accounts/'+account.id+'/edit'">
+        <inertia-link :href="account.links.edit">
           <CogIcon />
         </inertia-link>
 
         <AppButton
           :title="$t('action.create.transaction')"
-          :to="{ name: 'transaction.new', query: { account: accountId }}"
+          :to="{ name: 'transaction.new', query: { account: account.id }}"
           variant="primary"
         >
           <PlusIcon/>
@@ -68,7 +68,7 @@
     },
     metaInfo () {
       return {
-        title: this.account ? this.account.name : undefined
+        title: this.account.name
       }
     },
     data () {
