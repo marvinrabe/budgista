@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
-
     use UuidModelTrait,
         BelongsToUserTrait;
 
@@ -18,6 +17,10 @@ class Account extends Model
         'name',
         'tracking',
         'icon'
+    ];
+
+    protected $appends = [
+        'balance', 'balance_cleared'
     ];
 
     protected $casts = [

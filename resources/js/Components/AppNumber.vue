@@ -1,31 +1,23 @@
 <script>
   import AppMoney from './AppMoney'
-  import AppSkeleton from './AppSkeleton'
 
   export default {
     functional: true,
-    components: {
-      AppMoney,
-      AppSkeleton
-    },
     props: {
       value: Number,
       label: String,
       color: Boolean,
-      loading: Boolean
     },
     render (createElement, context) {
       return createElement('div', { class: 'numeric' }, [
-        createElement(AppSkeleton, { props: { loading: context.props.loading } }, [
-          createElement(AppMoney, {
-            props: {
-              value: context.props.value,
-              color: context.props.color
-            },
-            class: 'numeric-value'
-          })
-        ]),
-        createElement('p', { staticClass: 'numeric-label' }, [context.props.label])
+        createElement(AppMoney, {
+          props: {
+            value: context.props.value,
+            color: context.props.color
+          },
+          class: 'numeric__value'
+        }),
+        createElement('p', { staticClass: 'numeric__label' }, [context.props.label])
       ])
     }
   }
@@ -42,19 +34,19 @@
     align-items: flex-end;
     border-right: 1px solid $gray-300;
 
-    &-label,
-    &-value {
+    &__label,
+    &__value {
       flex: 1;
       flex-grow: 0;
       font-size: 1em;
       white-space: nowrap;
     }
 
-    &-value {
+    &__value {
       font-weight: 500;
     }
 
-    &-label {
+    &__label {
       font-size: .8em;
       color: $gray-600;
     }
