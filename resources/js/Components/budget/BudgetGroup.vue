@@ -28,19 +28,13 @@
           {{ $t('title.ungrouped') }}
         </div>
         <div class="budget-column-budget">
-          <app-skeleton :loading="loading">
             <AppMoney :value="budget"/>
-          </app-skeleton>
         </div>
         <div class="budget-column-activity">
-          <app-skeleton :loading="loading">
             <AppMoney :value="activity"/>
-          </app-skeleton>
         </div>
         <div class="budget-column-available">
-          <app-skeleton :loading="loading">
             <AppMoney :value="available"/>
-          </app-skeleton>
         </div>
       </div>
       <div class="actions">
@@ -59,7 +53,6 @@
   import { faChevronDown, faChevronRight, faGripLinesVertical } from '@fortawesome/free-solid-svg-icons'
   import { iconComponent } from '../../helpers'
   import AppMoney from '../AppMoney'
-  import AppSkeleton from '../AppSkeleton'
   import GroupSettings from '../groups/GroupSettings'
 
   export default {
@@ -68,8 +61,7 @@
       ChevronRightIcon: iconComponent({ icon: faChevronRight, fixedWidth: true }),
       GripIcon: iconComponent({ icon: faGripLinesVertical, fixedWidth: true }),
       AppMoney,
-      GroupSettings,
-      AppSkeleton
+      GroupSettings
     },
     props: {
       group: {

@@ -5,14 +5,9 @@
         <GripIcon/>
       </span>
     </div>
-    <BudgetCategoryLoading
-      :category="category"
-      v-if="loading"
-    />
     <BudgetCategoryData
       :category="category"
       :month="month"
-      v-else
     />
     <div class="actions">
       <CategorySettings :category-id="category.id"/>
@@ -25,7 +20,6 @@
   import { iconComponent } from '../../helpers'
   import CategorySettings from '../categories/CategorySettings'
   import BudgetCategoryData from './BudgetCategoryData'
-  import BudgetCategoryLoading from './BudgetCategoryLoading'
 
   export default {
     components: {
@@ -42,10 +36,6 @@
       month: {
         type: Object,
         required: true
-      },
-      loading: {
-        type: Boolean,
-        default: true
       }
     }
   }

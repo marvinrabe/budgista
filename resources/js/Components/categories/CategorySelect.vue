@@ -1,10 +1,8 @@
 <template>
-  <AppSkeleton :loading="true" height="2.35em" margin="0" v-if="$apollo.loading" width="100%"/>
   <select
     :value="value"
     @input="e => $emit('input', e.target.value)"
     class="form-control"
-    v-else
   >
     <option :value="null">
       {{ $t('form.uncategorized') }}
@@ -26,10 +24,7 @@
 </template>
 
 <script>
-  import AppSkeleton from '../AppSkeleton'
-
   export default {
-    components: { AppSkeleton },
     props: {
       value: {
         type: String,

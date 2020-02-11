@@ -41,8 +41,7 @@
 <script>
   import { faPlus, faCog } from '@fortawesome/free-solid-svg-icons'
   import InfiniteLoading from 'vue-infinite-loading'
-  import AccountBalance from '@/Components/accounts/AccountBalance.vue'
-  import AppSkeleton from '@/Components/AppSkeleton'
+  import AccountBalance from '@/Components/accounts/AccountBalance'
   import AppSpinner from '@/Components/AppSpinner'
   import AppToolbar from '@/Components/AppToolbar'
   import AppButton from '@/Components/form/AppButton'
@@ -60,7 +59,6 @@
       AppButton,
       AppSpinner,
       InfiniteLoading,
-      AppSkeleton,
       AppToolbar,
       AccountBalance,
       TransactionList

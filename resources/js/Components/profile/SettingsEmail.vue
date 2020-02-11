@@ -9,7 +9,7 @@
       </div>
       <div class="col-lg-8">
         <FormGroup name="currentEmail">
-          <div class="form-text" v-if="me">
+          <div class="form-text">
             {{ me.email }}
             <span
               class="badge badge-success"
@@ -26,9 +26,6 @@
               v-if="!me.isVerified"
             />
           </div>
-          <div class="form-text">
-            <AppSkeleton/>
-          </div>
         </FormGroup>
 
         <FormGroup name="newEmail">
@@ -38,7 +35,6 @@
             type="email"
             v-bind="bindings"
             v-model="form.email"
-            v-validate="'required|email'"
           >
         </FormGroup>
 
@@ -66,7 +62,6 @@
 <script>
   import PasswordInput from '@/components/form/PasswordInput'
   import axios from 'axios'
-  import AppSkeleton from '../AppSkeleton'
   import AppButton from '../form/AppButton'
   import AppForm from '../form/AppForm'
   import ResendVerification from '../profile/ResendVerification'
@@ -74,7 +69,6 @@
 
   export default {
     components: {
-      AppSkeleton,
       PasswordInput,
       ResendVerification,
       AppForm,
