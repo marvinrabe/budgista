@@ -47,6 +47,60 @@ class AccountsTest extends TestCase
         ]);
     }
 
+    public function testDefaultNotTrackingAccount()
+    {
+        $account = factory(Account::class)->raw();
+
+        $this
+            ->signIn()
+            ->post("/accounts", $account)
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('accounts', [
+            'name' => $account['name'],
+            'tracking' => false,
+            'user_id' => Auth()->id()
+        ]);
+    }
+
+    public function testCreateTrackingAccount()
+    {
+        $account = factory(Account::class)
+            ->states('tracking')
+            ->raw();
+
+        $this
+            ->signIn()
+            ->post("/accounts", $account)
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('accounts', [
+            'name' => $account['name'],
+            'tracking' => true,
+            'user_id' => Auth()->id()
+        ]);
+    }
+
+    public function testUpdateToTrackingAccount()
+    {
+        $account = factory(Account::class)->create();
+
+        $newName = 'Changed Name';
+
+        $this
+            ->signIn($account->user)
+            ->put('/accounts/' . $account->id, [
+                'name' => $newName,
+                'tracking' => true
+            ])
+            ->assertRedirect("/accounts/{$account->id}");
+
+        $account->refresh();
+
+        $this->assertEquals($newName, $account->name);
+        $this->assertTrue($account->tracking);
+    }
+
     public function testInitialBalance()
     {
         $this
