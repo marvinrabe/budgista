@@ -22,8 +22,8 @@ export default {
     userDeleted: 'User account deleted. Thank you for using Budgista.',
     verifyEmail: 'Please verify your email address {email}.',
     verificationSent: 'Sent!',
-    verificationFailed: 'Verification link is invalid. Please request a new one.',
-    verificationSuccessful: 'Your email address has been verified.'
+    verificationCheckEmail: 'Before proceeding, please check your email for a verification link.',
+    verificationNotReceived: 'If you did not receive the email, '
   },
   action: {
     returnToApp: 'Return to App',
@@ -64,7 +64,8 @@ export default {
     reset: 'Reset Password',
     sendReset: 'Send Password Reset Link',
     sendVerification: 'Send Verfication Link',
-    changeEmail: 'Change email address'
+    changeEmail: 'Change email address',
+    verificationResend: 'click here to request another.'
   },
   form: {
     newEmail: 'New Email address',
@@ -137,49 +138,8 @@ export default {
     reset: 'Reset Password',
     statistics: 'Statistics',
     statisticNetWorth: 'Net Worth',
-    statisticIncomeVsExpense: 'Income vs. Expense'
-  },
-  validation: {
-    messages: {
-      '_default': 'The {0} value is not valid.',
-      'after': 'The {0} must be after or equal to {1}.',
-      'alpha_dash': 'The {0} field may contain alpha-numeric characters as well as dashes and underscores.',
-      'alpha_num': 'The {0} field may only contain alpha-numeric characters.',
-      'alpha_spaces': 'The {0} field may only contain alphabetic characters as well as spaces.',
-      'alpha': 'The {0} field may only contain alphabetic characters.',
-      'before': 'The {0} must be before or equal to {1}.',
-      'between': 'The {0} field must be between {1} and {2}.',
-      'confirmed': 'The {0} confirmation does not match.',
-      'credit_card': 'The {0} field is invalid.',
-      'date_between': 'The {0} must be between {1} and {2}.',
-      'date_format': 'The {0} must be in the format {1}.',
-      'decimal': 'The {0} field must be numeric and may contain {1} decimal points.',
-      'digits': 'The {0} field must be numeric and exactly contain {1} digits.',
-      'dimensions': 'The {0} field must be {1} pixels by {2} pixels.',
-      'email': 'The {0} field must be a valid email.',
-      'ext': 'The {0} field must be a valid file.',
-      'image': 'The {0} field must be an image.',
-      'in': 'The {0} field must be a valid value.',
-      'integer': 'The {0} field must be an integer.',
-      'ip': 'The {0} field must be a valid ip address.',
-      'length': 'The {0} length must be between {1} and {2}.',
-      'max': 'The {0} field may not be greater than {1} characters.',
-      'max_value': 'The {0} field must be {1} or less.',
-      'mimes': 'The {0} field must have a valid file type.',
-      'min': 'The {0} field must be at least {1} characters.',
-      'min_value': 'The {0} field must be {1} or more.',
-      'not_in': 'The {0} field must be a valid value.',
-      'numeric': 'The {0} field may only contain numeric characters.',
-      'regex': 'The {0} field format is invalid.',
-      'required': 'The {0} field is required.',
-      'size': 'The {0} size must be less than NaN undefined.',
-      'url': 'The {0} field is not a valid URL.'
-    },
-    custom: {
-      terms: {
-        required: 'You must agree to the Terms of Service.'
-      }
-    }
+    statisticIncomeVsExpense: 'Income vs. Expense',
+    verify: 'Verify Your Email Address'
   },
   recurrence: {
     DAILY: 'No Recurrence | Every Day Tag | Every {n} days',

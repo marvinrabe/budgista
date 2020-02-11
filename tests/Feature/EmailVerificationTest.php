@@ -2,9 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Auth\EmailTokenRepository;
 use App\Models\User;
-use App\Notifications\VerifyEmail;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
@@ -63,7 +62,7 @@ class EmailVerificationTest extends TestCase
         $response = $this->actingAs($user)->get($this->verificationNoticeRoute());
 
         $response->assertStatus(200);
-        $response->assertViewIs('auth.verify');
+        $response->assertInertiaViewIs('Auth/Verify');
     }
 
     public function testVerifiedUserIsRedirectedHomeWhenVisitingVerificationNoticeRoute()

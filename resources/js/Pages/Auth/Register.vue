@@ -76,7 +76,7 @@
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import PasswordInput from '@/Components/form/PasswordInput'
-  import FormGroup from '@/Components/form/FormGroup.vue'
+  import FormGroup from '@/Components/form/FormGroup'
 
   const termsUrl = 'TODO'
 

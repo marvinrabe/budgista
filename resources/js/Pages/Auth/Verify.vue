@@ -1,109 +1,57 @@
 <template>
-  <div class="card">
-    <div class="card-body">
-      <div
-        class="text-center p-5"
-        style="min-height: 230px;"
-        v-if="loading"
-      >
-        <app-spinner/>
-      </div>
-      <div
-        class="verify"
-        v-else
-      >
-        <font-awesome-icon
-          :icon="icon"
-          size="5x"
-        />
+  <Layout>
+    <div class="card">
+      <div class="card-header" v-t="'title.verify'"></div>
 
-        <h1 v-t="title"/>
-        <p v-t="message"/>
-
-        <AppButton
-          :label="$t('action.returnToApp')"
-          to="/"
-        />
+      <div class="card-body">
+        {{ $t('message.verificationCheckEmail') }}
+        {{ $t('message.verificationNotReceived') }}
+        <a href="#"
+           @click.prevent="resend"
+           type="submit"
+           class="btn btn-link p-0 m-0 align-baseline"
+           v-t="'action.verificationResend'"></a>
       </div>
     </div>
-  </div>
+  </Layout>
 </template>
 
-<style lang="scss" scoped>
-  @import '../../../sass/variables';
-
-  .verify {
-    text-align: center;
-
-    svg {
-      margin-bottom: .2em;
-    }
-
-    .fa {
-      &-exclamation-circle {
-        color: $yellow;
-      }
-
-      &-check-circle {
-        color: $green;
-      }
-    }
-  }
-</style>
 
 <script>
-  import { faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
-  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-  import axios from 'axios'
-  import AppSpinner from '../../Components/AppSpinner'
-  import AppButton from '../../Components/form/AppButton'
+  import Layout from '@/Layouts/Auth'
+  import AppButton from '@/Components/form/AppButton'
+  import AppForm from '@/Components/form/AppForm'
+  import PasswordInput from '@/Components/form/PasswordInput'
+  import FormGroup from '@/Components/form/FormGroup.vue'
 
   export default {
     components: {
+      Layout,
+      PasswordInput,
       AppButton,
-      AppSpinner,
-      FontAwesomeIcon
+      AppForm,
+      FormGroup
     },
-    props: {
-      token: {
-        type: String,
-        required: true
+    metaInfo () {
+      return {
+        title: this.$t('title.login')
       }
     },
     data () {
       return {
-        loading: true,
-        verified: false
+        loading: false
       }
     },
-    computed: {
-      icon () {
-        if (this.verified) {
-          return faCheckCircle
-        }
-        return faExclamationCircle
-      },
-      title () {
-        if (this.verified) {
-          return 'title.success'
-        }
-        return 'title.error'
-      },
-      message () {
-        if (this.verified) {
-          return 'message.verificationSuccessful'
-        }
-        return 'message.verificationFailed'
+    methods: {
+      resend () {
+        this.loading = true
+
+        this.$inertia
+          .post('/email/resend', this.form)
+          .finally(() => {
+            this.loading = false
+          })
       }
-    },
-    created () {
-      axios.put('/auth/verify/' + this.token)
-        .then(() => {
-          this.verified = true
-        })
-        .finally(() => {
-          this.loading = false
-        })
     }
   }
 </script>
