@@ -2,8 +2,6 @@
 
 @tailwind components;
 
-@tailwind utilities;
-
 @import "bootstrap";
 
 html,
@@ -55,3 +53,5 @@ body {
 @import "budget";
 @import "transactions";
 @import "spinner";
+
+@tailwind utilities;

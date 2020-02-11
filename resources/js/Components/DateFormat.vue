@@ -1,6 +1,4 @@
 <script>
-  import { fallbackLocale } from '../i18n'
-
   export default {
     props: {
       value: {
@@ -8,20 +6,9 @@
         required: true
       }
     },
-    apollo: {
-      me: {
-        query: require('../gql/query/me.gql')
-      }
-    },
     computed: {
-      locale () {
-        if (!this.me) {
-          return fallbackLocale
-        }
-        return this.me.locale
-      },
       formatter () {
-        return Intl.DateTimeFormat(this.locale, {
+        return Intl.DateTimeFormat(this.$page.user.locale, {
           year: 'numeric',
           month: '2-digit',
           day: '2-digit'

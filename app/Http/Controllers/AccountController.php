@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Account as AccountResource;
 use App\Models\Account;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AccountController extends Controller
 {
@@ -16,14 +18,21 @@ class AccountController extends Controller
         return AccountResource::collection(Auth::user()->accounts);
     }
 
+    public function create()
+    {
+        $this->authorize('create', Account::class);
+
+        return Inertia::render('Accounts/Create');
+    }
+
     public function store(Request $request)
     {
         $this->authorize('create', Account::class);
 
         $request->validate([
             'name' => 'required',
-            'initial_balance' => 'nullable|integer',
-            'tracking' => 'nullable|boolean',
+            'initial_balance' => ['nullable', 'integer'],
+            'tracking' => ['nullable', 'boolean'],
             'icon' => [
                 'nullable',
                 'string',
@@ -35,29 +44,39 @@ class AccountController extends Controller
             $request->only(['name', 'tracking', 'icon'])
         );
 
-        $initialBalance = $request->input('initial_balance');
-        if($initialBalance) {
+        if ($initialBalance = $request->input('initial_balance')) {
             $account->reconcile($initialBalance);
         }
 
-        return new AccountResource($account->refresh());
+        return Redirect::route('accounts.show', [$account]);
     }
 
     public function show(Account $account)
     {
         $this->authorize('view', $account);
 
-        return new AccountResource($account);
+        return Inertia::render('Accounts/Show', [
+            'account' => $account
+        ]);
     }
 
-    public function update(Account $account)
+    public function edit(Account $account)
+    {
+        $this->authorize('update', $account);
+
+        return Inertia::render('Accounts/Edit', [
+            'account' => $account
+        ]);
+    }
+
+    public function update(Request $request, Account $account)
     {
         $this->authorize('update', $account);
 
         $account->update(
-            request()->validate([
+            $request->validate([
                 'name' => 'required',
-                'tracking' => 'nullable|boolean',
+                'tracking' => ['nullable', 'boolean'],
                 'icon' => [
                     'nullable',
                     'string',
@@ -66,7 +85,14 @@ class AccountController extends Controller
             ])
         );
 
-        return new AccountResource($account);
+        return Redirect::route('accounts.show', [$account]);
+    }
+
+    public function destroy(Account $account)
+    {
+        $this->authorize('delete', $account);
+
+        $account->delete();
     }
 
     public function reconcile(Account $account)
@@ -80,13 +106,6 @@ class AccountController extends Controller
         $account->reconcile(request('amount'));
 
         return new AccountResource($account);
-    }
-
-    public function destroy(Account $account)
-    {
-        $this->authorize('delete', $account);
-
-        $account->delete();
     }
 
 }

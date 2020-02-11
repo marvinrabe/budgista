@@ -12,10 +12,9 @@
 </template>
 
 <script>
-  import moneyFormat from '../../mixins/moneyFormat'
+  import { formatter } from '@/helpers'
 
   export default {
-    mixins: [moneyFormat],
     props: ['value'],
     data () {
       return {
@@ -25,7 +24,7 @@
     },
     computed: {
       placeholder () {
-        return this.moneyFormat(0)
+        return formatter.format(0)
       }
     },
     watch: {
@@ -40,25 +39,16 @@
       this.unprepareValue()
     },
     methods: {
-      formatValue (value) {
-        return this.moneyFormat(value)
-      },
-      formatSimpleValue (value) {
-        return this.moneyFormatter.formatSimple(value)
-      },
-      unformatValue (value) {
-        return this.moneyFormatter.unformat(value)
-      },
       prepareValue () {
         if (this.number !== 0) {
-          this.$el.value = this.formatSimpleValue(this.number)
+          this.$el.value = formatter.formatSimple(this.number)
         } else {
           this.$el.value = ''
         }
       },
       unprepareValue () {
         if (this.number !== 0) {
-          this.$el.value = this.formatValue(this.number)
+          this.$el.value = formatter.format(this.number)
         } else {
           this.$el.value = ''
         }
@@ -72,7 +62,7 @@
         this.selectAll(this.$el)
       },
       onInput (value) {
-        this.number = this.unformatValue(value)
+        this.number = formatter.unformat(value)
         this.$emit('input', this.number)
       },
       onBlur (value) {

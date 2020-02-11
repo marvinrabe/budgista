@@ -7,10 +7,9 @@
 </template>
 
 <script>
-  import moneyFormat from '../mixins/moneyFormat'
+  import { formatter } from '@/helpers'
 
   export default {
-    mixins: [moneyFormat],
     props: {
       value: Number,
       color: {
@@ -26,7 +25,7 @@
         return ''
       },
       text () {
-        return this.moneyFormat(this.value)
+        return formatter.format(this.value)
       }
     }
   }
@@ -38,10 +37,10 @@
   }
 
   .money--positive {
-    @apply text-green-dark;
+    @apply text-green-700;
   }
 
   .money--negative {
-    @apply text-red-dark;
+    @apply text-red-700;
   }
 </style>

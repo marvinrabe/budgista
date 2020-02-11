@@ -8,6 +8,9 @@ import './Plugins/axios'
 import './Plugins/meta'
 import './Plugins/portal'
 
+import { DropdownPlugin } from 'bootstrap-vue'
+Vue.use(DropdownPlugin)
+
 Vue.use(InertiaApp)
 
 const app = document.getElementById('app')

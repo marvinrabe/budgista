@@ -7,11 +7,11 @@
         @navigate="$emit('navigate')"
         v-if="item.accounts"
       />
-      <router-link
+      <inertia-link
         :class="item.class"
         :exact="!!item.exact"
         :key="index"
-        :to="item.route"
+        :href="item.route"
         @click.native="$emit('navigate')"
         active-class="active"
         class="menu__item"
@@ -29,7 +29,7 @@
           v-else
         />
         <span>{{ $t(item.label) }}</span>
-      </router-link>
+      </inertia-link>
       <a
         :class="item.class"
         :key="index"
@@ -78,7 +78,7 @@
 <script>
   import { faChartBar, faCog, faEnvelope, faLifeRing, faUserCircle } from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-  import AccountMenu from '../views/accounts/IndexSidebar'
+  import AccountMenu from '@/Pages/Accounts/Index'
 
   export default {
     components: {
@@ -89,13 +89,13 @@
       menu () {
         return [
           {
-            route: { name: 'budget' },
+            route: '/budget',
             exact: false,
             icon: faEnvelope,
             label: 'title.budget'
           },
           {
-            route: { name: 'statistics' },
+            route: '/statistics',
             icon: faChartBar,
             label: 'title.statistics'
           },
@@ -103,27 +103,27 @@
             accounts: true
           },
           {
-            route: { name: 'profile' },
+            route: '/profile',
             label: 'title.profile',
             icon: faUserCircle,
-            class: 'd-md-none'
+            class: 'md:hidden'
           },
           {
-            route: { name: 'settings' },
+            route: '/settings',
             label: 'title.settings',
             icon: faCog,
-            class: 'd-md-none'
+            class: 'md:hidden'
           },
           {
             href: 'mailto:support@budgista.com',
             label: 'title.help',
             icon: faLifeRing,
-            class: 'd-md-none'
+            class: 'md:hidden'
           },
           {
             click: this.logout,
             label: 'action.logout',
-            class: 'd-md-none'
+            class: 'md:hidden'
           }
         ]
       }

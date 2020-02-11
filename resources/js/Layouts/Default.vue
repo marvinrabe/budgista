@@ -8,9 +8,7 @@
       <div class="container-fluid py-3" id="content">
         <verify-alert/>
 
-        <ZoomCenterTransition :duration="250" mode="out-in">
-          <router-view :key="$route.fullPath"/>
-        </ZoomCenterTransition>
+        <slot></slot>
       </div>
     </div>
   </div>
@@ -30,14 +28,12 @@
   import AppHeader from '@/Components/AppHeader'
   import AppSidebar from '@/Components/AppSidebar'
   import VerifyAlert from '@/Components/profile/TheVerifyAlert'
-  import ZoomCenterTransition from '@/Components/transition/ZoomCenterTransition'
 
   export default {
     components: {
       AppHeader,
       AppSidebar,
-      VerifyAlert,
-      ZoomCenterTransition
+      VerifyAlert
     }
   }
 </script>

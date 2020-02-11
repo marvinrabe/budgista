@@ -29,21 +29,10 @@
 <script>
   import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-  import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
-  import bDropdownDivider from 'bootstrap-vue/es/components/dropdown/dropdown-divider'
-  import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
 
   export default {
     components: {
-      bDropdown,
-      bDropdownItem,
-      bDropdownDivider,
       FontAwesomeIcon
-    },
-    apollo: {
-      me: {
-        query: require('../gql/query/me.gql')
-      }
     },
     computed: {
       menu () {
@@ -51,7 +40,7 @@
           {
             click: this.profile,
             label: 'title.profile',
-            sublabel: this.me ? this.me.email : undefined
+            sublabel: this.$page.user.email
           },
           {
             divider: true
@@ -79,13 +68,7 @@
     },
     methods: {
       logout () {
-        this.$auth.logout({
-          makeRequest: true,
-          success: function () {
-            this.$store.commit('RESET')
-          },
-          redirect: { name: 'login' }
-        })
+        this.$inertia.post('logout')
       },
       settings () {
         this.$router.push({ name: 'settings' })

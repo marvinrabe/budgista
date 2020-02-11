@@ -1,6 +1,6 @@
 <template>
-  <router-link
-    :to="{ name: 'account', params: { accountId: account.id }}"
+  <inertia-link
+    :href="'/accounts/' + account.id"
     active-class="active"
     class="menu__item"
   >
@@ -17,7 +17,7 @@
       class="ml-auto badge"
       color
     />
-  </router-link>
+  </inertia-link>
 </template>
 
 <script>

@@ -5,37 +5,24 @@ namespace Tests\Feature;
 use App\Models\Account;
 use App\Models\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class AccountsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function it_creates_accounts()
+    public function testStoreAccount()
     {
-        $this->signIn()
-            ->mutation('accountCreate')
-            ->setArguments([
-                'input' => [
-                    'name' => 'New Account',
-                    'icon' => 'wallet',
-                    'isTracking' => true
-                ]
+        $this
+            ->signIn()
+            ->from('/accounts/create')
+            ->post('/accounts', [
+                'name' => 'New Account',
+                'icon' => 'wallet',
+                'tracking' => true
             ])
-            ->setSelectionSet([
-                'name', 'icon', 'isTracking'
-            ])
-            ->getData()
-            ->assertJson([
-                'data' => [
-                    'accountCreate' => [
-                        'name' => "New Account",
-                        'icon' => "wallet",
-                        'isTracking' => true
-                    ]
-                ]
-            ]);
+            ->assertRedirect();
 
         $this->assertDatabaseHas('accounts', [
             'name' => 'New Account',
@@ -45,174 +32,82 @@ class AccountsTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_initialises_account_balance()
+    public function testInitialBalance()
     {
-        $this->signIn()
-            ->mutation('accountCreate')
-            ->setArguments([
-                'initialBalance' => 1234,
-                'input' => [
-                    'name' => 'New Account',
-                    'icon' => 'wallet',
-                    'isTracking' => true
-                ]
+        $this
+            ->signIn()
+            ->from('/accounts/create')
+            ->post('/accounts', [
+                'name' => 'New Account',
+                'icon' => 'wallet',
+                'tracking' => true,
+                'initial_balance' => 1234
             ])
-            ->setSelectionSet([
-                'balance', 'balanceCleared'
-            ])
-            ->getData()
-            ->assertJson([
-                'data' => [
-                    'accountCreate' => [
-                        'balance' => 1234,
-                        'balanceCleared' => 1234
-                    ]
-                ]
-            ]);
+            ->assertRedirect();
+
+        $account = Auth::user()->accounts()->latest()->first();
+
+        $this->assertEquals(1234, $account->balance);
     }
 
-    /** @test */
-    public function accounts_should_have_a_name()
+    public function testAccountsRequireName()
     {
-        $this->signIn()
-            ->post("/api/accounts", [])
+        $this
+            ->signIn()
+            ->from('/accounts/create')
+            ->post('/accounts', [])
             ->assertSessionHasErrors('name');
     }
 
-    /** @test */
-    public function it_should_update_accounts()
+    public function testUpdateAccount()
     {
         $account = factory(Account::class)->create();
 
-        $this->signIn($account->user)
-            ->mutation('accountUpdate')
-            ->setArguments([
-                'id' => $account->id,
-                'input' => [
-                    'name' => 'New Name',
-                    'icon' => 'wallet',
-                    'isTracking' => true
-                ]
+        $this
+            ->signIn($account->user)
+            ->from("/accounts/{$account->id}/edit")
+            ->put("/accounts/{$account->id}", [
+                'name' => 'New Name',
+                'icon' => 'wallet',
+                'tracking' => true
             ])
-            ->setSelectionSet([
-                'id', 'name', 'icon', 'isTracking'
-            ])
-            ->getData()
-            ->assertJsonFragment([
-                'data' => [
-                    'accountUpdate' => [
-                        'id' => $account->id,
-                        'name' => 'New Name',
-                        'icon' => 'wallet',
-                        'isTracking' => true
-                    ]
-                ]
-            ]);
+            ->assertRedirect();
 
-        $account = $account->fresh();
+        $account->refresh();
 
         $this->assertEquals('New Name', $account->name);
         $this->assertEquals('wallet', $account->icon);
         $this->assertTrue($account->tracking);
     }
 
-    /** @test */
-    public function it_can_not_update_other_user_accounts()
+    public function testCanNotUpdateOtherUsersAccounts()
     {
         $otherAccount = factory(Account::class)->create();
 
         $nameBefore = $otherAccount->name;
 
-        $this->signIn()
-            ->mutation('accountUpdate')
-            ->setArguments([
-                'id' => $otherAccount->id,
-                'input' => ['name' => "New Name", 'icon' => 'wallet', 'isTracking' => true]
+        $this
+            ->signIn()
+            ->from("/accounts/{$otherAccount->id}/edit")
+            ->put("/accounts/{$otherAccount->id}", [
+                'name' => 'New Name',
+                'icon' => 'wallet',
+                'tracking' => true
             ])
-            ->setSelectionSet([
-                'id'
-            ])
-            ->getData()
-            ->assertJsonFragment([
-                'data' => [
-                    'accountUpdate' => null
-                ]
-            ]);
+            ->assertNotFound();
 
         $this->assertEquals($nameBefore, $otherAccount->fresh()->name);
     }
 
     /** @test */
-    public function accounts_have_transaction_links()
+    public function testDeleteAccount()
     {
         $account = factory(Account::class)->create();
 
-        $this->signIn($account->user);
-
-        $response = $this->getJson('/api/accounts/'.$account->id);
-
-        $this->get($response->json()['links']['transactions'])
-            ->assertSuccessful();
-    }
-
-    /** @test */
-    public function it_lists_accounts()
-    {
-        $account = factory(Account::class)->create();
-
-        $this->signIn($account->user);
-
-        $this->query('accounts', ['id', 'name'])
-            ->assertJsonFragment([
-                'id' => $account->id,
-                'name' => $account->name
-            ]);
-    }
-
-    /** @test */
-    public function it_does_not_list_accounts_of_other_users()
-    {
-        $account = factory(Account::class)->create();
-
-        $this->signIn()
-            ->query('accounts', ['id'])
-            ->assertJsonMissing([
-                'id' => $account->id
-            ]);
-    }
-
-    /** @test */
-    public function it_returns_account_balance()
-    {
-        $transaction = factory(Transaction::class)->create();
-
-        $this->signIn($transaction->user)
-            ->query('accounts', ['id', 'balance'])
-            ->assertJsonFragment([
-                'id' => $transaction->account_id,
-                'balance' => $transaction->amount
-            ]);
-    }
-
-    /** @test */
-    public function it_deletes_account()
-    {
-        $account = factory(Account::class)->create();
-
-        $this->signIn($account->user)
-            ->mutation(
-                'accountDelete',
-                ['id' => $account->id],
-                ['id']
-            )
-            ->assertJsonFragment([
-                'data' => [
-                    'accountDelete' => [
-                        'id' => $account->id
-                    ]
-                ]
-            ]);
+        $this
+            ->signIn($account->user)
+            ->from("/accounts/{$account->id}/edit")
+            ->delete("/accounts/{$account->id}");
 
         $this->assertDatabaseMissing('accounts', [
             'id' => $account->id
@@ -221,25 +116,28 @@ class AccountsTest extends TestCase
 
 
     /** @test */
-    public function it_does_not_delete_other_users_account()
+    public function testCanNotDeleteOtherUsersAccounts()
     {
         $otherAccount = factory(Account::class)->create();
 
-        $this->signIn()
-            ->mutation(
-                'accountDelete',
-                ['id' => $otherAccount->id],
-                ['id']
-            )
-            ->assertJsonFragment([
-                'data' => [
-                    'accountDelete' => null
-                ]
-            ]);
+        $this
+            ->signIn()
+            ->from("/accounts/{$otherAccount->id}/edit")
+            ->delete("/accounts/{$otherAccount->id}")
+            ->assertNotFound();
 
         $this->assertDatabaseHas('accounts', [
             'id' => $otherAccount->id
         ]);
+    }
+
+    public function testAccountBalance()
+    {
+        $transaction = factory(Transaction::class)->create();
+
+        $this->signIn($transaction->user);
+
+        $this->assertEquals($transaction->amount, $transaction->account->balance);
     }
 
 }

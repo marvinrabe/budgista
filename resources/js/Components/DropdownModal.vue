@@ -8,8 +8,6 @@
 </template>
 
 <script>
-  import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
-
   export default {
     name: 'DropdownModal',
     props: {
@@ -27,9 +25,6 @@
           return {}
         }
       }
-    },
-    components: {
-      bDropdownItem
     },
     data () {
       return {

@@ -18,8 +18,6 @@
 
 <script>
   import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
-  import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
-  import bDropdownDivider from 'bootstrap-vue/es/components/dropdown/dropdown-divider'
   import { iconComponent, prepareComponent } from '../../helpers'
   import CreateCategory from '../../views/categories/Create'
   import DeleteGroup from '../../views/groups/Delete'
@@ -28,8 +26,6 @@
 
   export default {
     components: {
-      bDropdown,
-      bDropdownDivider,
       EllipsisIcon: iconComponent({ icon: faEllipsisH }),
       DeleteGroup: prepareComponent(DropdownModal, { component: DeleteGroup, label: 'action.delete.group' }),
       UpdateGroup: prepareComponent(DropdownModal, { component: UpdateGroup, label: 'action.edit.group' }),

@@ -21,46 +21,39 @@
       </div>
     </div>
 
-    <FadeTransition :duration="250" mode="out-in">
-      <TransactionListSkeleton v-if="loading"/>
-      <TransactionListEmpty v-else-if="isEmpty"/>
-      <div class="card" v-else>
-        <div
-          class="text-center p-1 transactions-row-dummy"
-          v-if="countFutureTransactions > 0 && !showFutureTransactions"
+    <TransactionListEmpty v-if="isEmpty"/>
+    <div class="card" v-else>
+      <div
+        class="text-center p-1 transactions-row-dummy"
+        v-if="countFutureTransactions > 0 && !showFutureTransactions"
+      >
+        <a
+          @click.prevent="showFutureTransactions = true"
+          class="small"
+          href="#"
         >
-          <a
-            @click.prevent="showFutureTransactions = true"
-            class="small"
-            href="#"
-          >
-            {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions }) }}
-          </a>
-        </div>
-        <TransactionListItem
-          :account-id="accountId"
-          :key="transaction.id"
-          :transaction="transaction"
-          v-for="transaction of filteredTransactions"
-        />
+          {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions }) }}
+        </a>
       </div>
-    </FadeTransition>
+      <TransactionListItem
+        :account-id="accountId"
+        :key="transaction.id"
+        :transaction="transaction"
+        v-for="transaction of filteredTransactions"
+      />
+    </div>
   </div>
 </template>
 
 <script>
   import dayjs from 'dayjs'
-  import FadeTransition from 'vue2-transitions/src/Fade/FadeTransition'
   import TransactionListEmpty from './TransactionListEmpty'
   import TransactionListItem from './TransactionListItem'
-  import TransactionListSkeleton from './TransactionListSkeleton'
 
   export default {
     components: {
-      FadeTransition,
       TransactionListEmpty,
-      TransactionListItem,
-      TransactionListSkeleton
+      TransactionListItem
     },
     props: {
       transactions: {

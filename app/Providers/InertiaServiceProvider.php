@@ -13,10 +13,10 @@ class InertiaServiceProvider extends ServiceProvider
     public function boot()
     {
         Inertia::share([
-            'auth' => function () {
-                return [
-                    'user' => Auth::user() ?: null
-                ];
+            'user' => function () {
+                return Auth::check()
+                    ? Auth::user()->load('accounts')
+                    : null;
             },
             'flash' => function () {
                 return Session::get('flash_notification') ?? [];
@@ -24,7 +24,7 @@ class InertiaServiceProvider extends ServiceProvider
             'errors' => function () {
                 return Session::get('errors')
                     ? Session::get('errors')->getBag('default')->getMessages()
-                    : (object)[];
+                    : (object) [];
             },
         ]);
     }

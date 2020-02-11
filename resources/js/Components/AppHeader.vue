@@ -1,18 +1,19 @@
 <template>
-  <nav class="navbar navbar-light fixed-top bg-white">
+  <nav class="navbar navbar-light fixed top-0 bg-white w-full">
     <div class="container-fluid">
-      <div class="d-lg-none mr-auto">
-        <AppSidebarToggle />
+      <div class="lg:hidden mr-auto">
+        <AppSidebarToggle/>
       </div>
 
       <AppLogo
         class="navbar-brand"
+        style="height: 40px;"
         :height="40"
       />
 
       <ul class="nav ml-auto">
         <li class="nav-item dropdown d-none d-md-block">
-          <TheUserMenu />
+          <TheUserMenu/>
         </li>
       </ul>
     </div>

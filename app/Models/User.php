@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Auth\EmailTokenRepository;
 use App\Budget\Month;
 use App\Budget\Sheet;
 use App\Mail\UserDeleted;
@@ -13,7 +12,6 @@ use Illuminate\Support\Facades\Mail;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-
     use Notifiable;
 
     protected $fillable = [

@@ -19,13 +19,11 @@
 
 <script>
   import AppModal from '../AppModal'
-  import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
   import DeleteAccountForm from './DeleteAccountForm'
 
   export default {
     components: {
       AppModal,
-      bDropdownItem,
       DeleteAccountForm
     },
     props: ['account'],

@@ -26,8 +26,6 @@
 </template>
 
 <script>
-  import bDropdown from 'bootstrap-vue/es/components/dropdown/dropdown'
-  import bDropdownItem from 'bootstrap-vue/es/components/dropdown/dropdown-item'
   import AppMoneyInput from '../form/AppMoneyInput'
 
   const EXPENSE = -1
@@ -36,9 +34,7 @@
   export default {
     inheritAttrs: false,
     components: {
-      AppMoneyInput,
-      bDropdown,
-      bDropdownItem
+      AppMoneyInput
     },
     props: ['value'],
     data () {

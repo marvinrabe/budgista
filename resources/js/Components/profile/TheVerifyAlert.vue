@@ -1,5 +1,5 @@
 <template>
-  <div class="alert" v-if="me && !me.isVerified">
+  <div class="alert" v-if="!$page.user.email_verified_at">
     <div class="d-md-flex align-items-center">
       <i18n path="message.verifyEmail" tag="div">
         <strong place="email">{{ me.email }}</strong>
@@ -27,17 +27,12 @@
     components: {
       AppButton,
       ResendVerification
-    },
-    apollo: {
-      me: {
-        query: require('../../gql/query/me.gql')
-      }
     }
   }
 </script>
 
 <style scoped>
   .alert {
-    @apply bg-yellow-lightest border-yellow-light text-black border-solid border-0 border-l-4 p-4 mb-4 shadow;
+    @apply bg-yellow-100 border-yellow-200 text-black border-solid border-0 border-l-4 p-4 mb-4 shadow;
   }
 </style>

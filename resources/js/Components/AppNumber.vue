@@ -32,7 +32,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../sass/_variables.scss";
+  @import "../../sass/_variables.scss";
 
   .numeric {
     padding: 0 1em;

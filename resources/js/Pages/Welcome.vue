@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="!$page.auth.user">
+    <template v-if="!$page.user">
       <inertia-link href="/login">Login</inertia-link>
       <inertia-link href="/register">Register</inertia-link>
     </template>
