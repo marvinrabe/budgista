@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -43,8 +45,15 @@ class StatisticTest extends TestCase
         return $months;
     }
 
-    /** @test */
-    public function it_returns_monthly_statistics()
+    public function testDisplayStatistics()
+    {
+        $this->signIn()
+            ->get('/statistics')
+            ->assertInertiaViewIs('Statistics')
+            ->assertHasProp('data');
+    }
+
+    public function testMonthlyStatistics()
     {
         $this->prepareTransactions();
 
@@ -58,14 +67,12 @@ class StatisticTest extends TestCase
             ];
         }
 
-        $this->get('/api/statistics/monthly')
-            ->assertJson([
-                'data' => $expectedData
-            ]);
+        $response = $this->get('/statistics');
+
+        $this->assertEquals($expectedData, $response->props()['data']);
     }
 
-    /** @test */
-    public function it_returns_only_values_of_current_user()
+    public function testBasedOnlyOnUserData()
     {
         $this->prepareTransactions();
         $this->prepareTransactions(factory(User::class)->create());
@@ -80,31 +87,30 @@ class StatisticTest extends TestCase
             ];
         }
 
-        $this->get('/api/statistics/monthly')
-            ->assertJson([
-                'data' => $expectedData
-            ]);
+        $response = $this->get('/statistics');
+
+        $this->assertEquals($expectedData, $response->props()['data']);
     }
 
-    /** @test */
-    public function it_returns_last_twelve_months_by_default()
+    public function testReturnsLastTwelveMonths()
     {
         $knownDate = Carbon::create(2018, 11, 30); // create testing date
         Carbon::setTestNow($knownDate);
         $this->prepareTransactions();
 
-        $expectedData = [
-            ['month' => '2017-12'],
-        ];
+        $expected = ['2017-12'];
         for ($month = 1; $month <= 11; $month++) {
-            $expectedData[] = [
-                'month' => '2018-' . str_pad($month, 2, '0', STR_PAD_LEFT)
-            ];
+            $expected[] = '2018-'.str_pad($month, 2, '0', STR_PAD_LEFT);
         }
 
-        $this->get('/api/statistics/monthly')
-            ->assertJson([
-                'data' => $expectedData
-            ]);
+        $response = $this->get('/statistics');
+
+        $result = Collection::make($response->props()['data'])
+            ->map(function ($item) {
+                return $item['month'];
+            })
+            ->toArray();
+
+        $this->assertTrue(array_diff($expected, $result) == []);
     }
 }

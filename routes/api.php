@@ -33,11 +33,6 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('month/{month?}', 'MonthlyBudgetController@show')->name('month');
 
     /*
-     * Statistic
-     */
-    Route::get('statistics/monthly', 'StatisticController@monthly');
-
-    /*
      * Categories
      */
     Route::put('categories/sort', 'CategoryController@sort')->name('categories.sort');
@@ -57,17 +52,6 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('accounts/{account}/transactions', 'TransactionController@index')->name('accounts.transactions');
     Route::post('accounts/{account}/reconcile', 'AccountController@reconcile')->name('accounts.reconcile');
     Route::apiResource('accounts', 'AccountController');
-
-    /*
-     * Transactions
-     */
-    Route::put('transactions/{transaction}/clear', 'TransactionController@clear')->name('transactions.clear');
-    Route::apiResource('transactions', 'TransactionController', [
-        'except' => [
-            'index'
-        ]
-    ]);
-
 });
 
 Route::fallback(function() {

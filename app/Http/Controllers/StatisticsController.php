@@ -5,20 +5,21 @@ namespace App\Http\Controllers;
 
 use App\Budget\Month;
 use Carbon\Carbon;
+use Inertia\Inertia;
 
-class StatisticController extends Controller
+class StatisticsController extends Controller
 {
 
-    public function monthly()
+    public function __invoke()
     {
         $data = [];
         foreach ($this->months() as $month) {
             $data[] = [
-                'month' => (string)$month,
-                'worth' => (int)Auth()->user()->transactions()
+                'month' => (string) $month,
+                'worth' => (int) Auth()->user()->transactions()
                     ->where('date', '<=', $month->lastDay())
                     ->sum('amount'),
-                'income' => (int)Auth()->user()->transactions()
+                'income' => (int) Auth()->user()->transactions()
                     ->whereBetween('date', [$month->firstDay(), $month->lastDay()])
                     ->whereNull('category_id')
                     ->sum('amount'),
@@ -29,9 +30,9 @@ class StatisticController extends Controller
             ];
         }
 
-        return [
+        return Inertia::render('Statistics', [
             'data' => $data
-        ];
+        ]);
     }
 
     /**

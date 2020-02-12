@@ -6,11 +6,7 @@
     />
     <div class="card-body">
       <div class="flex flex-column justify-content-center align-items-stretch text-muted">
-        <AppSpinner v-if="loading"/>
-        <LinearChart
-          :chart-data="chartData"
-          v-else
-        />
+        <LinearChart :chart-data="chartData"/>
       </div>
     </div>
   </div>
@@ -18,19 +14,13 @@
 
 <script>
   import Month from '@/Utils/Month'
-  import AppSpinner from '../AppSpinner'
   import LinearChart from './LinearChart'
 
   export default {
     components: {
-      AppSpinner,
       LinearChart
     },
     props: {
-      loading: {
-        type: Boolean,
-        default: false
-      },
       statistics: {
         type: Array,
         required: true
