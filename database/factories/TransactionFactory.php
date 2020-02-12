@@ -20,3 +20,15 @@ $factory->define(Transaction::class, function (Faker $faker) {
         'category_id' => null
     ];
 });
+
+$factory->state(Transaction::class, 'cleared', function () {
+    return [
+        'cleared' => true,
+    ];
+});
+
+$factory->state(Transaction::class, 'uncleared', function () {
+    return [
+        'cleared' => false,
+    ];
+});

@@ -10,7 +10,6 @@
 
 <script>
   import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
-  import axios from 'axios'
   import { iconComponent } from '../../helpers'
 
   export default {
@@ -27,7 +26,19 @@
     },
     methods: {
       toggle () {
-        axios.put('/transactions/' + this.transaction.id + '/clear')
+        if (this.transaction.cleared) {
+          this.unclear()
+        } else {
+          this.clear()
+        }
+      },
+      clear () {
+        this.$inertia.post('/clearedTransactions', {
+          id: this.transaction.id
+        })
+      },
+      unclear () {
+        this.$inertia.delete(`/clearedTransactions/${this.transaction.id}`)
       }
     }
   }

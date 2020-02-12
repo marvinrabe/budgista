@@ -10,5 +10,6 @@ Route::inertia('/', 'Welcome');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('accounts', AccountController::class)->except('index');
     Route::resource('transactions', TransactionController::class)->except(['index', 'show']);
+    Route::resource('clearedTransactions', ClearedTransactionController::class)->only(['store', 'destroy']);
 });
 
