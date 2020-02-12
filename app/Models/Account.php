@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use Alsofronie\Uuid\UuidModelTrait;
-use App\Models\Traits\BelongsToUserTrait;
+use App\Models\Traits\HasUuidKey;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\BelongsToUser;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
 
 class Account extends Model
 {
-    use UuidModelTrait,
-        BelongsToUserTrait;
+    use HasUuidKey,
+        BelongsToUser;
 
     protected $fillable = [
         'name',
@@ -45,10 +45,13 @@ class Account extends Model
     public function getLinksAttribute()
     {
         return [
-            'show' => URL::route('accounts.show', [$this]),
-            'edit' => URL::route('accounts.edit', [$this]),
-            'update' => URL::route('accounts.update', [$this]),
-            'destroy' => URL::route('accounts.destroy', [$this])
+            'show' => URL::route('accounts.show', $this),
+            'edit' => URL::route('accounts.edit', $this),
+            'update' => URL::route('accounts.update', $this),
+            'destroy' => URL::route('accounts.destroy', $this),
+            'transactions' => [
+                'create' => URL::route('transactions.create', ['account' => $this])
+            ]
         ];
     }
 

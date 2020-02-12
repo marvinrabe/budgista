@@ -4,17 +4,23 @@ namespace App\Models\Traits;
 
 use App\Models\User;
 use App\Scopes\UserScope;
+use Illuminate\Support\Facades\Auth;
 
-trait BelongsToUserTrait
+trait BelongsToUser
 {
 
-    protected static function bootBelongsToUserTrait()
+    protected static function bootBelongsToUser()
     {
         static::addGlobalScope(new UserScope());
 
         static::creating(function ($model) {
-            $model->user_id = $model->user_id ?: auth()->id();
+            $model->user_id = $model->user_id ?: Auth::id();
         });
+    }
+
+    public function initializeBelongsToUser()
+    {
+        $this->guarded[] = ['user_id'];
     }
 
     public function user()

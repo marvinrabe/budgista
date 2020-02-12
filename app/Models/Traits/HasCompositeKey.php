@@ -4,17 +4,13 @@ namespace App\Models\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 
-trait HasCompositePrimaryKeyTrait
+trait HasCompositeKey
 {
-
     /**
-     * Get the value indicating whether the IDs are incrementing.
-     *
-     * @return bool
+     * Overwrite default parameter values.
      */
-    public function getIncrementing()
-    {
-        return false;
+    public function initializeHasCompositeKey() {
+        $this->incrementing = false;
     }
 
     /**
@@ -49,7 +45,7 @@ trait HasCompositePrimaryKeyTrait
         $me = new self;
         $query = $me->newQuery();
         foreach ($me->getKeyName() as $key) {
-            $query->where($key, '=', $id[$key]);
+            $query->where($key, '=', $ids[$key]);
         }
         return $query->first($columns);
     }

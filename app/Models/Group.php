@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use Alsofronie\Uuid\UuidModelTrait;
-use App\Models\Traits\BelongsToUserTrait;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\Traits\BelongsToUser;
+use App\Models\Traits\HasUuidKey;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Group extends Model
 {
-    use UuidModelTrait,
-        BelongsToUserTrait;
+    use HasUuidKey,
+        BelongsToUser;
 
     public $timestamps = false;
 
@@ -19,6 +19,8 @@ class Group extends Model
         'sort',
         'collapsed'
     ];
+
+    protected $with = ['categories'];
 
     protected static function boot()
     {
@@ -33,6 +35,11 @@ class Group extends Model
         });
     }
 
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
     /**
      * Sets sort to highest available + 1
      */
@@ -40,10 +47,4 @@ class Group extends Model
     {
         $this->sort = $this->where('user_id', '=', $this->user_id)->max('sort') + 1;
     }
-
-    public function categories()
-    {
-        return $this->hasMany(Category::class);
-    }
-
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Budget\Foresight;
 use App\Budget\Month;
-use App\Models\Traits\HasCompositePrimaryKeyTrait;
+use App\Models\Traits\HasCompositeKey;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 class Budget extends Model implements \JsonSerializable
 {
 
-    use HasCompositePrimaryKeyTrait;
+    use HasCompositeKey;
 
     public $timestamps = false;
 

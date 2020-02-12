@@ -2,22 +2,17 @@
 
 namespace App\Models;
 
-use Alsofronie\Uuid\UuidModelTrait;
+use App\Models\Traits\HasUuidKey;
+use Illuminate\Database\Eloquent\Model;
 use App\Budget\Month;
-use App\Models\Traits\BelongsToUserTrait;
+use App\Models\Traits\BelongsToUser;
 use App\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 
-/**
- * @property Budget[] $budgets
- * @property Transaction[] $transactions
- */
 class Category extends Model
 {
-
-    use UuidModelTrait,
-        BelongsToUserTrait;
+    use HasUuidKey,
+        BelongsToUser;
 
     protected $fillable = [
         'name',

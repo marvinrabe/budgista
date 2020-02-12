@@ -2,22 +2,21 @@
 
 namespace App\Models;
 
-use Alsofronie\Uuid\UuidModelTrait;
-use App\Models\Traits\BelongsToUserTrait;
+use App\Models\Traits\HasUuidKey;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\BelongsToUser;
 use App\RecurringGenerator;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 use RRule\RRule;
 
-/**
- * @property Account $account
- * @property Category $category
- */
 class Transaction extends Model
 {
+    use HasUuidKey,
+        BelongsToUser;
 
-    use UuidModelTrait, BelongsToUserTrait;
+    protected $appends = ['links'];
 
     protected $fillable = [
         'date',
@@ -29,28 +28,12 @@ class Transaction extends Model
         'rrule'
     ];
 
-    protected $dates = ['date'];
-
     protected $casts = [
         'amount' => 'int',
         'recurring' => 'bool',
-        'cleared' => 'bool'
+        'cleared' => 'bool',
+        'date' => 'date'
     ];
-
-    public static function processRecurring($transaction)
-    {
-        $generator = new RecurringGenerator();
-
-        $transactions = collect($generator->generateOccurrences($transaction));
-
-        DB::transaction(function () use ($transactions) {
-            foreach($transactions as &$transaction) {
-                $transaction->save();
-            }
-        });
-
-        return $transactions;
-    }
 
     protected static function boot()
     {
@@ -59,6 +42,25 @@ class Transaction extends Model
         static::addGlobalScope('sort', function (Builder $builder) {
             $builder->orderBy('date', 'desc');
         });
+    }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function getLinksAttribute()
+    {
+        return [
+            'edit' => URL::route('transactions.edit', $this),
+            'update' => URL::route('transactions.update', $this),
+            'destroy' => URL::route('transactions.destroy', $this)
+        ];
     }
 
     public function getRruleAttribute($value)
@@ -87,14 +89,19 @@ class Transaction extends Model
         $this->attributes['rrule'] = null;
     }
 
-    public function account()
+    public static function processRecurring($transaction)
     {
-        return $this->belongsTo(Account::class);
-    }
+        $generator = new RecurringGenerator();
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
+        $transactions = collect($generator->generateOccurrences($transaction));
+
+        DB::transaction(function () use ($transactions) {
+            foreach ($transactions as &$transaction) {
+                $transaction->save();
+            }
+        });
+
+        return $transactions;
     }
 
     public function getAmount()
