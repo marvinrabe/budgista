@@ -18,9 +18,7 @@
       @input="input"
       ref="amount"
       v-bind="$attrs"
-      v-focus
       v-model="amount"
-      v-validate="'required'"
     />
   </div>
 </template>

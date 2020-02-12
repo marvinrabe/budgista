@@ -14,7 +14,7 @@
 
         <AppButton
           :title="$t('action.create.transaction')"
-          :to="{ name: 'transaction.new', query: { account: account.id }}"
+          :to="account.links.transactions.create"
           variant="primary"
         >
           <PlusIcon/>
@@ -23,11 +23,7 @@
       </template>
     </AppToolbar>
 
-    <TransactionList
-      :account-id="accountId"
-      :loading="!transactions"
-      :transactions="transactionList"
-    />
+    <TransactionList :transactions="transactions.data"/>
 
     <InfiniteLoading @infinite="showMore" v-if="transactions">
       <span slot="no-more"/>
@@ -64,7 +60,8 @@
       TransactionList
     },
     props: {
-      account: Object
+      account: Object,
+      transactions: Object
     },
     metaInfo () {
       return {
@@ -74,8 +71,7 @@
     data () {
       return {
         page: 1,
-        showMoreEnabled: true,
-        transactions: []
+        showMoreEnabled: true
       }
     },
     computed: {

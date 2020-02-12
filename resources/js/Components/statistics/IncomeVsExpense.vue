@@ -19,7 +19,7 @@
 <script>
   import AppSpinner from '../AppSpinner'
   import LinearChart from './LinearChart'
-  import Month from '../../models/Month'
+  import Month from '@/Utils/Month'
 
   export default {
     components: {

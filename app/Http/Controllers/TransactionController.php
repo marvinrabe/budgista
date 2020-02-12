@@ -5,19 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Transaction;
 use App\Rules\Own;
-use App\Http\Resources\Transaction as TransactionResource;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 use RRule\RRule;
 
 class TransactionController extends Controller
 {
 
-    public function index(Account $account)
+    public function create(Request $request)
     {
-        $this->authorize('view', $account);
+        $this->authorize('create', Transaction::class);
 
-        return TransactionResource::collection(
-            $account->transactions()->with(['category', 'account'])->orderBy('date', 'desc')->paginate(25)
-        );
+        return Inertia::render('Transactions/Create', [
+            'account' => $request->has('account')
+                ? Account::find($request->get('account'))
+                : null
+        ]);
     }
 
     public function store()
@@ -46,14 +50,16 @@ class TransactionController extends Controller
 
         $transaction->save();
 
-        return new TransactionResource($transaction);
+        return Redirect::route('accounts.show', [$transaction->account]);
     }
 
-    public function show(Transaction $transaction)
+    public function edit(Transaction $transaction)
     {
         $this->authorize('view', $transaction);
 
-        return new TransactionResource($transaction);
+        return Inertia::render('Transactions/Edit', [
+            'transaction' => $transaction
+        ]);
     }
 
     public function update(Transaction $transaction)
@@ -71,6 +77,10 @@ class TransactionController extends Controller
                 'payee' => 'required',
                 'amount' => 'required|integer',
                 'date' => 'required|date',
+                'account_id' => [
+                    'required',
+                    new Own('accounts')
+                ],
                 'category_id' => [
                     'nullable',
                     new Own('categories')
@@ -78,9 +88,7 @@ class TransactionController extends Controller
             ])
         );
 
-        \Nuwave\Lighthouse\Execution\Utils\Subscription::broadcast('balanceUpdated', $transaction->account);
-
-        return new TransactionResource($transaction);
+        return Redirect::route('accounts.show', [$transaction->account]);
     }
 
     public function destroy(Transaction $transaction)
@@ -88,6 +96,8 @@ class TransactionController extends Controller
         $this->authorize('delete', $transaction);
 
         $transaction->delete();
+
+        return Redirect::route('accounts.show', [$transaction->account]);
     }
 
     public function clear(Transaction $transaction)
@@ -98,9 +108,7 @@ class TransactionController extends Controller
             'cleared' => !$transaction->cleared
         ]);
 
-        \Nuwave\Lighthouse\Execution\Utils\Subscription::broadcast('balanceUpdated', $transaction->account);
-
-        return new TransactionResource($transaction);
+        return Redirect::back();
     }
 
 }

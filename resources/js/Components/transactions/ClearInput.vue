@@ -3,7 +3,6 @@
     :class="classes"
     @click.prevent="toggle"
     href="#"
-    v-if="subject"
   >
     <CheckIcon/>
   </a>
@@ -19,23 +18,16 @@
       CheckIcon: iconComponent({ icon: faCheckCircle })
     },
     props: {
-      subject: {
-        type: Object,
-        required: true
-      },
-      transactionId: {
-        type: String,
-        required: true
-      }
+      transaction: Object
     },
     computed: {
       classes () {
-        return this.subject.cleared ? 'text-success' : 'text-darker-light'
+        return this.transaction.cleared ? 'text-success' : 'text-darker-light'
       }
     },
     methods: {
       toggle () {
-        axios.put('/transactions/' + this.transactionId + '/clear')
+        axios.put('/transactions/' + this.transaction.id + '/clear')
       }
     }
   }

@@ -3,8 +3,8 @@
     :class="[{ 'transactions-row-future': isFuture }]"
     class="transactions-row"
   >
-    <router-link
-      :to="{ name: 'transaction.edit', params: { transactionId: transaction.id }}"
+    <inertia-link
+      :href="transaction.links.edit"
       class="transaction-item"
     >
       <span class="transaction-date">
@@ -12,21 +12,20 @@
         <RecurringIcon :value="transaction.recurrence" class="ml-1"/>
       </span>
       <span class="transaction-payee ellipsis">
-        {{ payee.name }}
+        {{ transaction.payee }}
       </span>
-      <span class="transaction-category ellipsis">
-        {{ categories }}
+      <span class="transaction-category ellipsis" v-if="transaction.category">
+        {{ transaction.category.name }}
+      </span>
+      <span class="transaction-category ellipsis" v-else>
+        {{ $t('form.uncategorized') }}
       </span>
       <span class="transaction-amount">
-        <AppMoney :value="amount" color/>
+        <AppMoney :value="transaction.amount" color/>
       </span>
-    </router-link>
+    </inertia-link>
     <div class="transaction-clear">
-      <ClearInput
-        :subject="accountSubject"
-        :transaction-id="transaction.id"
-        v-if="!isFuture"
-      />
+      <ClearInput :transaction="transaction" v-if="!isFuture"/>
     </div>
   </div>
 </template>
@@ -49,39 +48,11 @@
       transaction: {
         type: Object,
         required: true
-      },
-      accountId: {
-        type: String,
-        required: true
       }
     },
     computed: {
       isFuture () {
         return dayjs(this.transaction.date).isAfter()
-      },
-      accountKey () {
-        if (this.transaction.from.subject.__typename === 'Account' && this.transaction.from.subject.id === this.accountId) {
-          return 'from'
-        }
-        if (this.transaction.to.subject.__typename === 'Account' && this.transaction.to.subject.id === this.accountId) {
-          return 'to'
-        }
-        return undefined
-      },
-      payee () {
-        return this.transaction[this.accountKey === 'to' ? 'from' : 'to'].subject
-      },
-      accountSubject () {
-        return this.transaction[this.accountKey]
-      },
-      categories () {
-        return this.transaction.categories.filter(c => c.category).map(c => c.category.name).join(', ')
-      },
-      amount () {
-        if (this.accountKey === 'from') {
-          return this.transaction.amount * -1
-        }
-        return this.transaction.amount
       }
     }
   }

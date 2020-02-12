@@ -36,7 +36,6 @@
         </a>
       </div>
       <TransactionListItem
-        :account-id="accountId"
         :key="transaction.id"
         :transaction="transaction"
         v-for="transaction of filteredTransactions"
@@ -59,14 +58,6 @@
       transactions: {
         type: Array,
         required: true
-      },
-      loading: {
-        type: Boolean,
-        default: false
-      },
-      accountId: {
-        type: String,
-        required: true
       }
     },
     data () {
@@ -76,7 +67,7 @@
     },
     computed: {
       isEmpty () {
-        return this.transactions.length === 0 && !this.loading
+        return this.transactions.length === 0
       },
       filteredTransactions () {
         if (this.showFutureTransactions) {

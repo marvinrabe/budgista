@@ -6,7 +6,6 @@
         "php": "^7.4",
         "ext-bcmath": "*",
         "ext-intl": "*",
-        "alsofronie/eloquent-uuid": "^1.0",
         "doctrine/dbal": "^2.5",
         "fideloper/proxy": "~4.0",
         "guzzlehttp/guzzle": "^6.3",

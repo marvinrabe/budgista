@@ -35,14 +35,9 @@
         default: null
       }
     },
-    apollo: {
-      groups: {
-        query: require('../../gql/query/groups.gql')
-      }
-    },
     computed: {
       sortedGroups () {
-        const groups = this.groups
+        const groups = this.$page.user.groups
         groups.sort((a, b) => a.sort - b.sort)
         return groups
       }

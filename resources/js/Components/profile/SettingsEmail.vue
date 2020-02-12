@@ -60,7 +60,7 @@
 </template>
 
 <script>
-  import PasswordInput from '@/components/form/PasswordInput'
+  import PasswordInput from '@/Components/form/PasswordInput'
   import axios from 'axios'
   import AppButton from '../form/AppButton'
   import AppForm from '../form/AppForm'

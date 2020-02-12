@@ -45,7 +45,7 @@
         type: Boolean
       },
       to: {
-        type: Object,
+        type: String,
         default: null
       }
     },
@@ -77,7 +77,7 @@
           return
         }
         if (this.to) {
-          this.$router.push(this.to)
+          this.$inertia.visit(this.to)
         }
         this.$emit('click')
       }

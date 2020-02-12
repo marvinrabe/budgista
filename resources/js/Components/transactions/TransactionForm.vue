@@ -1,8 +1,5 @@
 <template>
-  <AppForm
-    @submit="saveTransaction"
-    ref="form"
-  >
+  <div>
     <FormGroup name="amount">
       <AmountInput
         slot-scope="{bindings}"
@@ -29,6 +26,7 @@
           />
         </FormGroup>
       </div>
+
       <div class="col-sm-6">
         <FormGroup name="date">
           <template slot-scope="{bindings}">
@@ -58,25 +56,11 @@
         />
       </div>
     </div>
-
-    <template slot="actions">
-      <AppButton
-        :label="$t('action.cancel')"
-        @click="$emit('cancel')"
-        subtle
-      />
-
-      <AppButton
-        :label="$t('action.save')"
-        :loading="saving"
-        variant="primary"
-      />
-    </template>
-  </AppForm>
+  </div>
 </template>
 
 <script>
-  import FormGroup from '@/components/form/FormGroup.vue'
+  import FormGroup from '@/Components/form/FormGroup.vue'
   import { faSync } from '@fortawesome/free-solid-svg-icons'
   import dayjs from 'dayjs'
   import { iconComponent } from '../../helpers'
@@ -104,10 +88,6 @@
       value: {
         type: Object,
         default: null
-      },
-      saving: {
-        type: Boolean,
-        default: false
       }
     },
     data () {
@@ -119,24 +99,17 @@
           recurrence: null,
           payee: '',
           category_id: null,
-          account_id: null
+          account_id: null,
+          ...this.value
         }
       }
     },
     watch: {
-      value: {
+      form: {
         handler () {
-          if (!this.value) {
-            return
-          }
-          Object.assign(this.form, this.value)
+          this.$emit('input', this.form)
         },
-        immediate: true
-      }
-    },
-    methods: {
-      saveTransaction () {
-        this.$emit('input', this.form)
+        deep: true
       }
     }
   }

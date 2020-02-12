@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Account as AccountResource;
+use App\Http\Resources\Transaction as TransactionResource;
 use App\Models\Account;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -56,7 +57,12 @@ class AccountController extends Controller
         $this->authorize('view', $account);
 
         return Inertia::render('Accounts/Show', [
-            'account' => $account
+            'account' => $account,
+            'transactions' => $account
+                ->transactions()
+                ->with('category')
+                ->orderBy('date', 'desc')
+                ->paginate(25)
         ]);
     }
 

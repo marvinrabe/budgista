@@ -12,7 +12,7 @@
         :exact="!!item.exact"
         :key="index"
         :href="item.route"
-        @click.native="$emit('navigate')"
+        @click="$emit('navigate')"
         active-class="active"
         class="menu__item"
         v-else-if="item.route"
