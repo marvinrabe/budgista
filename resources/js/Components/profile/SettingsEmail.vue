@@ -84,16 +84,6 @@
         }
       }
     },
-    apollo: {
-      me: {
-        query: require('../../gql/query/me.gql')
-      }
-    },
-    computed: {
-      email () {
-        return this.$store.state.user.email
-      }
-    },
     methods: {
       save () {
         this.saving = true
