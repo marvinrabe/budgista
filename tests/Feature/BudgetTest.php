@@ -7,16 +7,27 @@ use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
-class MonthlyBudgetTest extends TestCase
+class BudgetTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function it_calculates_funds()
+    public function testDisplayBudget()
+    {
+        $this->signIn()
+            ->get('/budget')
+            ->assertInertiaViewIs('Budget')
+            ->assertHasProp('budget')
+            ->assertHasProp('groups')
+            ->assertHasProp('links')
+            ->assertHasProp('month');
+    }
+
+    public function testIncome()
     {
         $this->signIn();
 
@@ -42,17 +53,13 @@ class MonthlyBudgetTest extends TestCase
             ]);
         }
 
-        $this->get('/api/month/'.$month)
-            ->assertSuccessful()
-            ->assertJson([
-                'data' => [
-                    'income' => 20
-                ]
-            ]);
+        $response = $this->get('/budget/'.$month)
+            ->assertSuccessful();
+
+        $this->assertEquals(20, $response->props('budget')['income']);
     }
 
-    /** @test */
-    public function it_calculates_activity()
+    public function testActivity()
     {
         $this->signIn();
 
@@ -83,22 +90,17 @@ class MonthlyBudgetTest extends TestCase
             ]);
         }
 
-        $this->get('/api/month/'.$month)
-            ->assertSuccessful()
-            ->assertJson([
-                'data' => [
-                    'rows' => [
-                        [
-                            'id' => $category->id,
-                            'activity' => -20
-                        ]
-                    ]
-                ]
-            ]);
+        $response = $this->get('/budget/'.$month)
+            ->assertSuccessful();
+
+        $row = Collection::make($response->props('budget')['rows'])
+            ->where('id', $category->id)
+            ->first();
+
+        $this->assertEquals(-20, $row['activity']);
     }
 
-    /** @test */
-    public function it_calculates_recommended_budget()
+    public function testRecommendedBudget()
     {
         $this->signIn();
 
@@ -127,19 +129,15 @@ class MonthlyBudgetTest extends TestCase
             'user_id' => Auth()->id()
         ]);
 
-        $this->get('/api/month/'.$month)
-            ->assertSuccessful()
-            ->assertJson([
-                'data' => [
-                    'rows' => [
-                        [
-                            'id' => $category->id,
-                            'previousMonth' => 10,
-                            'recommendedBudget' => 10
-                        ]
-                    ]
-                ]
-            ]);
+        $response = $this->get('/budget/'.$month)
+            ->assertSuccessful();
+
+        $row = Collection::make($response->props('budget')['rows'])
+            ->where('id', $category->id)
+            ->first();
+
+        $this->assertEquals(10, $row['previousMonth']);
+        $this->assertEquals(10, $row['recommendedBudget']);
     }
 
     /** @test */
