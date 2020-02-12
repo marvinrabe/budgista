@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white flex border rounded p-1 flex-wrap">
     <div
-      :class="{'bg-blue-600 text-white': icon.name === value, 'text-gray-900': icon.name !== value}"
+      :class="{'bg-blue-6 text-white': icon.name === value, 'text-gray-9': icon.name !== value}"
       :key="icon.name"
       @click="$emit('input', icon.name)"
       class="icon p-1 rounded"

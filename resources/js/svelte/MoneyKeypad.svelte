@@ -70,7 +70,7 @@
   }
 
   .keypad__button:active {
-    @apply bg-gray-200 outline-none;
+    @apply bg-gray-2 outline-none;
     transition: background 0s;
   }
 </style>
@@ -85,7 +85,7 @@
     bind:this={display}
     readonly
     aria-readonly="false"
-    class="keypad__display w-full text-4xl text-right focus:outline-none focus:shadow-outline bg-gray-200 mb-4 p-4 rounded-sm"
+    class="keypad__display w-full text-4xl text-right focus:outline-none focus:shadow-outline bg-gray-2 mb-4 p-4 rounded-sm"
     on:keydown={handleKeydown}
     on:paste|preventDefault={handlePaste}
     value={formatter.format(input)}

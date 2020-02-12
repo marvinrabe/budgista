@@ -87,7 +87,7 @@
 
 <style scoped>
   .btn {
-    @apply mx-1 py-2 px-4 rounded bg-white border-gray-100 text-gray-600 bg-white cursor-pointer outline-none;
+    @apply mx-1 py-2 px-4 rounded bg-white border-gray-1 text-gray-6 bg-white cursor-pointer outline-none;
     transition: all 0.2s ease 0s;
   }
 
@@ -104,27 +104,27 @@
   }
 
   .btn--primary {
-    @apply border-blue-600 text-white bg-blue-600;
+    @apply border-blue-6 text-white bg-blue-6;
   }
 
   .btn--subtle.btn--primary {
-    @apply text-blue-600;
+    @apply text-blue-6;
   }
 
   .btn--primary:hover {
-    @apply bg-white text-blue-600 border-blue-600;
+    @apply bg-white text-blue-6 border-blue-6;
   }
 
   .btn--danger {
-    @apply border-red-600 text-white bg-red-600;
+    @apply border-red-6 text-white bg-red-6;
   }
 
   .btn--subtle.btn--danger {
-    @apply text-red-600;
+    @apply text-red-6;
   }
 
   .btn--danger:hover {
-    @apply bg-white text-red-600 border-red-600;
+    @apply bg-white text-red-6 border-red-6;
   }
 
   .btn--subtle, .btn--subtle:hover, .btn--subtle:active {

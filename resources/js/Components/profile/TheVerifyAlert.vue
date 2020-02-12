@@ -33,6 +33,6 @@
 
 <style scoped>
   .alert {
-    @apply bg-yellow-100 border-yellow-200 text-black border-solid border-0 border-l-4 p-4 mb-4 shadow;
+    @apply bg-yellow-1 border-yellow-2 text-black border-solid border-0 border-l-4 p-4 mb-4 shadow;
   }
 </style>

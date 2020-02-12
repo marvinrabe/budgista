@@ -44,7 +44,7 @@
   </div>
 
   <div
-    class="absolute w-full h-full bg-gray-900 opacity-50"
+    class="absolute w-full h-full bg-gray-9 opacity-50"
     transition:fade>
     <div
       class="active:outline-none absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50"

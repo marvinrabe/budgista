@@ -29,6 +29,7 @@
     "focus-trap": "^5.1.0",
     "laravel-mix": "^4.1.0",
     "lodash": "^4.17.13",
+    "open-color": "^1.7.0",
     "portal-vue": "^2.1.7",
     "postcss": "^7.0.21",
     "postcss-load-config": "^2.1.0",

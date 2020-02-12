@@ -20,7 +20,7 @@
     computed: {
       colorClass () {
         if (this.color) {
-          return this.value >= 0 ? 'money--positive' : 'money--negative'
+          return this.value >= 0 ? 'text-green-7' : 'text-red-7'
         }
         return ''
       },
@@ -30,17 +30,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .money {
-
-  }
-
-  .money--positive {
-    @apply text-green-700;
-  }
-
-  .money--negative {
-    @apply text-red-700;
-  }
-</style>
