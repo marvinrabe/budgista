@@ -9,17 +9,14 @@
       :id="name"
       :bindings="bindings"
     />
-    <FormGroupError :name="name" />
+    <span v-if="hasError" class="invalid-feedback">
+      {{ errorMessage }}
+    </span>
   </div>
 </template>
 
 <script>
-  import FormGroupError from './FormGroupError'
-
   export default {
-    components: {
-      FormGroupError
-    },
     props: {
       name: {
         type: String
@@ -42,7 +39,20 @@
           id: this.name,
           name: this.name
         }
+      },
+      hasError () {
+        return this.name in this.$page.errors
+      },
+      errorMessage () {
+        return this.$page.errors[this.name][0]
       }
     }
   }
 </script>
+
+<style>
+  /* Invalid Feedback is always displayed as block, because we use vue to hide message if there is no error. */
+  .invalid-feedback {
+    display: block;
+  }
+</style>
