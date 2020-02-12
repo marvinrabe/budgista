@@ -18,7 +18,8 @@
     <Budget>
       <draggable
         :class="{'budget-groups--drag': drag}"
-        :options="{handle:'.budget-group-handle', group: 'groups'}"
+        handle=".budget-group-handle"
+        group="groups"
         :value="this.groups"
         @end="drag=false"
         @input="sortGroups"
@@ -32,7 +33,8 @@
           v-for="group in this.groups"
         >
           <draggable
-            :options="{handle:'.budget-row-handle', group: 'categories'}"
+            handle=".budget-row-handle"
+            group="categories"
             class="budget-categories"
           >
             <BudgetCategory
