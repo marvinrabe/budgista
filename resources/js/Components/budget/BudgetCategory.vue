@@ -5,10 +5,34 @@
         <GripIcon/>
       </span>
     </div>
-    <BudgetCategoryData
-      :category="category"
-      :month="month"
-    />
+    <div
+      @click.stop="$refs.input.focus()"
+      class="data"
+    >
+      <div class="budget-column-name ellipsis">
+        {{ category.name }}
+      </div>
+      <div
+        @click.stop
+        class="budget-column-budget"
+      >
+        <AppMoneyInput
+          :title="recommendedTitle"
+          :value="row.budget"
+          @change="val => updateBudget(val)"
+          ref="input"
+        />
+      </div>
+      <div class="budget-column-activity">
+        <AppMoney :value="row.activity"/>
+      </div>
+      <div class="budget-column-available">
+        <AppMoney
+          :value="row.available"
+          color
+        />
+      </div>
+    </div>
     <div class="actions">
       <CategorySettings :category-id="category.id"/>
     </div>
@@ -16,27 +40,44 @@
 </template>
 
 <script>
+  import AppMoney from '../AppMoney'
+  import AppMoneyInput from '../form/AppMoneyInput'
   import { faGripLinesVertical } from '@fortawesome/free-solid-svg-icons'
-  import { iconComponent } from '../../helpers'
+  import { formatter, iconComponent } from '../../helpers'
   import CategorySettings from '../categories/CategorySettings'
-  import BudgetCategoryData from './BudgetCategoryData'
 
   export default {
     components: {
+      AppMoney,
+      AppMoneyInput,
       GripIcon: iconComponent({ icon: faGripLinesVertical, fixedWidth: true }),
-      BudgetCategoryLoading,
-      BudgetCategoryData,
       CategorySettings
     },
     props: {
-      category: {
-        type: Object,
-        required: true
+      category: Object,
+      budget: Object
+    },
+    computed: {
+      row () {
+        return this.budget.rows.filter(x => x.id === this.category.id)[0] || {}
       },
-      month: {
-        type: Object,
-        required: true
+      recommendedTitle () {
+        return this.$t('form.recommendedBudget') + ': ' + formatter.format(this.row.recommendedBudget)
+      }
+    },
+    methods: {
+      updateBudget: function (value) {
+        /* this.$store.dispatch('budgets/update', {
+          ...this.row,
+          budget: value
+        }) */
       }
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .data {
+    cursor: pointer;
+  }
+</style>

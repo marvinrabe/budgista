@@ -18,7 +18,6 @@ Route::group(['middleware' => ['auth:api']], function () {
     /*
      * User
      */
-    Route::get('auth/user', 'UserController@show');
     Route::get('user', 'UserController@show')->name('user');
     Route::put('user', 'UserController@update')->name('user.update');
     Route::delete('user', 'UserController@destroy')->name('user.destroy');
@@ -26,11 +25,6 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('user/email', 'UserController@email')->name('user.email');
     Route::post('user/password', 'UserController@password')->name('user.password');
     Route::post('user/reset', 'UserController@reset')->name('user.reset');
-
-    /*
-     * Budget
-     */
-    Route::get('month/{month?}', 'MonthlyBudgetController@show')->name('month');
 
     /*
      * Categories
@@ -45,13 +39,6 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::put('groups/sort', 'GroupController@sort');
     Route::put('groups/{group}/collapse', 'GroupController@collapse');
     Route::apiResource('groups', 'GroupController');
-
-    /*
-     * Accounts
-     */
-    Route::get('accounts/{account}/transactions', 'TransactionController@index')->name('accounts.transactions');
-    Route::post('accounts/{account}/reconcile', 'AccountController@reconcile')->name('accounts.reconcile');
-    Route::apiResource('accounts', 'AccountController');
 });
 
 Route::fallback(function() {

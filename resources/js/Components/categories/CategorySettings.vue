@@ -17,8 +17,8 @@
 <script>
   import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
   import { iconComponent, prepareComponent } from '../../helpers'
-  import UpdateCategory from '../../views/categories/Update'
-  import DeleteCategory from '../../views/categories/Delete'
+  import UpdateCategory from '@/Components/categories/Update'
+  import DeleteCategory from '@/Components/categories/Delete'
   import DropdownModal from '../DropdownModal'
 
   export default {

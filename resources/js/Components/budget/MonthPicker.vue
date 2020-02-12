@@ -1,39 +1,38 @@
 <template>
   <div class="d-flex">
-    <router-link
+    <inertia-link
       :title="$t('action.previousMonth')"
-      :to="{ name: 'budget.month', params: {month: month.previous().toString()} }"
+      :href="prev"
       class="text-dark align-self-center small"
     >
       <font-awesome-icon :icon="previousIcon"/>
-    </router-link>
+    </inertia-link>
     <span class="mx-1">
       {{ month.format() }}
     </span>
-    <router-link
+    <inertia-link
       :title="$t('action.nextMonth')"
-      :to="{ name: 'budget.month', params: {month: month.next().toString()} }"
+      :href="next"
       class="text-dark align-self-center small"
     >
       <font-awesome-icon :icon="nextIcon"/>
-    </router-link>
+    </inertia-link>
   </div>
 </template>
 
 <script>
   import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-  import Month from '../../models/Month'
+  import Month from '@/Utils/Month'
 
   export default {
     components: {
       FontAwesomeIcon
     },
     props: {
-      month: {
-        type: Month,
-        required: true
-      }
+      month: Month,
+      next: String,
+      prev: String
     },
     computed: {
       previousIcon () {

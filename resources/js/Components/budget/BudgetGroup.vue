@@ -28,7 +28,7 @@
           {{ $t('title.ungrouped') }}
         </div>
         <div class="budget-column-budget">
-            <AppMoney :value="budget"/>
+            <AppMoney :value="budgeted"/>
         </div>
         <div class="budget-column-activity">
             <AppMoney :value="activity"/>
@@ -64,31 +64,18 @@
       GroupSettings
     },
     props: {
-      group: {
-        type: Object,
-        required: true
-      },
-      month: {
-        type: Object,
-        required: true
-      },
-      loading: {
-        type: Boolean,
-        default: false
-      }
+      group: Object,
+      budget: Object
     },
     computed: {
       collapsed () {
-        return this.$store.getters['groups/isCollapsed'](this.group.id)
-      },
-      rows () {
-        return this.$store.getters['budgets/getRows'](this.month)
+        return false; // TODO
       },
       sheet () {
         let categories = this.group.categories.map(x => x.id)
-        return this.rows.filter(x => categories.includes(x.id))
+        return this.budget.rows.filter(x => categories.includes(x.id))
       },
-      budget () {
+      budgeted () {
         return this.sheet.reduce((acc, x) => x.budget, 0)
       },
       activity () {
@@ -100,7 +87,7 @@
     },
     methods: {
       collapse () {
-        this.$store.commit('groups/toggleCollapsed', this.group.id)
+        //this.$store.commit('groups/toggleCollapsed', this.group.id)
       }
     }
   }
