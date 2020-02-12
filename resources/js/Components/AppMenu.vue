@@ -130,13 +130,7 @@
     },
     methods: {
       logout () {
-        this.$auth.logout({
-          makeRequest: true,
-          success: function () {
-            this.$store.commit('RESET')
-          },
-          redirect: { name: 'login' }
-        })
+        this.$inertia.post('/logout')
       }
     }
   }

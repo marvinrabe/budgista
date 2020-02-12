@@ -68,7 +68,7 @@
     },
     methods: {
       logout () {
-        this.$inertia.post('logout')
+        this.$inertia.post('/logout')
       },
       settings () {
         this.$router.push({ name: 'settings' })
