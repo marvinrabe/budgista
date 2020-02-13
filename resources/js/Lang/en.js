@@ -12,7 +12,7 @@ export default {
     updateEmail: 'Email Address has been updated.',
     updatePassword: 'Password has been updated.',
     updateSettings: 'Settings have been saved.',
-    addTransaction: 'Add a transactions now.',
+    addTransaction: 'Add a transaction now.',
     forgotPassword: 'Forgot Your Password?',
     noAccount: 'Don\'t have an account?',
     noAccountSignUp: 'Sign up now',
