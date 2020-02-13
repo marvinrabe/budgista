@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body">
         <h1
-          class="card-title h4 mb-3"
+          class="card-title h4"
           v-t="'title.register'"
         />
 

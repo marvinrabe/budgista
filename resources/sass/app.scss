@@ -1,21 +1,37 @@
 @tailwind base;
 
-@tailwind components;
-
 @import "bootstrap";
 
 html,
 body,
 #app {
-  height: 100%;
+  @apply h-full;
 }
 
 body {
-  background: $gray-100;
+  @apply bg-gray-1;
 }
 
-.link-action {
-  cursor: pointer;
+@tailwind components;
+
+.card {
+  @apply shadow rounded bg-white;
+
+  &-body {
+    @apply p-4;
+  }
+
+  &-title {
+    @apply mb-3;
+  }
+
+  > *:first-child {
+    @apply rounded-t;
+  }
+
+  > *:last-child {
+    @apply rounded-b;
+  }
 }
 
 .toolbar {

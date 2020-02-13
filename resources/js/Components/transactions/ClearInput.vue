@@ -21,7 +21,7 @@
     },
     computed: {
       classes () {
-        return this.transaction.cleared ? 'text-success' : 'text-darker-light'
+        return this.transaction.cleared ? 'text-green-7' : 'text-gray-5 hover:text-gray-6'
       }
     },
     methods: {

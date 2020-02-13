@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body">
         <h1
-          class="card-title h4 mb-3"
+          class="card-title h4"
           v-t="'title.login'"
         />
 
@@ -69,7 +69,7 @@
         </AppForm>
       </div>
 
-      <div class="card-body card-body-secondary text-center">
+      <div class="card-body text-center text-gray-7 bg-gray-0 border-t-2 border-gray-3">
         <span class="mr-1" v-t="'message.noAccount'"/>
         <inertia-link
           href="/register"

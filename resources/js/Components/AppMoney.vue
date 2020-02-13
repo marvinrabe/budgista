@@ -20,7 +20,7 @@
     computed: {
       colorClass () {
         if (this.color) {
-          return this.value >= 0 ? 'text-green-7' : 'text-red-7'
+          return this.value >= 0 ? 'text-green-9' : 'text-red-9'
         }
         return ''
       },

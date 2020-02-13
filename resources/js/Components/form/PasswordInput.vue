@@ -10,7 +10,7 @@
       >
 
       <a
-        class="VuePassword__Toggle text-darker-light"
+        class="VuePassword__Toggle text-gray-5 hover:text-gray-6"
         href="#"
         role="button"
         tabindex="-1"
@@ -70,7 +70,6 @@
     }
 
     .VuePassword__Toggle {
-        color: gray;
         display: inline-block;
         height: 100%;
         position: absolute;
@@ -99,10 +98,6 @@
         stroke-width: 1;
         border-radius: 5px;
     }
-
-    .VuePassword__Meter path:hover {
-        color: inherit;
-    }
 </style>
 
 <script>
@@ -123,12 +118,12 @@
         type: Array,
         default () {
           return [
-            'text-darker-light',
-            'text-danger',
-            'text-danger',
-            'text-warning',
-            'text-success',
-            'text-success'
+            'text-gray-4',
+            'text-red-7',
+            'text-red-7',
+            'text-yellow-7',
+            'text-green-7',
+            'text-green-7'
           ]
         }
       },

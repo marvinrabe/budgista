@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-light fixed top-0 bg-white w-full z-10">
+  <nav class="navbar navbar-light shadow-sm fixed top-0 bg-white w-full z-10">
     <div class="container-fluid">
       <div class="lg:hidden mr-auto">
         <AppSidebarToggle/>
