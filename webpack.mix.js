@@ -11,6 +11,8 @@ mix
     processCssUrls: false,
     postCss: [tailwind('tailwind.config.js')],
   })
-  .purgeCss()
+  .purgeCss({
+    whitelistPatternsChildren: [/dropdown/]
+  })
   .webpackConfig(webpack)
   .version()

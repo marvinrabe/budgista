@@ -35,7 +35,7 @@ body {
     @apply mx-1 py-1 px-2;
   }
 
-  &--primary {
+  &.primary {
     @apply border-blue-6 text-white bg-blue-8;
 
     &:hover {
@@ -43,11 +43,11 @@ body {
     }
   }
 
-  &--subtle.btn--primary {
+  &--subtle.primary {
     @apply text-blue-9;
   }
 
-  &--danger {
+  &.danger {
     @apply border-red-6 text-white bg-red-8;
 
     &:hover {
@@ -55,7 +55,7 @@ body {
     }
   }
 
-  &--subtle.btn--danger {
+  &--subtle.danger {
     @apply text-red-9;
   }
 

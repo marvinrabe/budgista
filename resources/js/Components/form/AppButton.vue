@@ -64,7 +64,7 @@
         if (this.subtle) {
           classes.push('btn--subtle')
         }
-        classes.push('btn--' + this.variant)
+        classes.push(this.variant)
         return classes.join(' ')
       },
       text () {
