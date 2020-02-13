@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import i18n from '@/Plugins/i18n'
 
 export default class Month {
   constructor (year, month) {
@@ -35,7 +36,6 @@ export default class Month {
   }
 
   format () {
-    return 'TODO'
-    // return i18n.messages[i18n.locale].month[this.month] + ' ' + this.year
+    return i18n.t(`month.${this.month}`) + ' ' + this.year
   }
 }
