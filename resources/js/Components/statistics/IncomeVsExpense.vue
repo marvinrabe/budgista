@@ -4,10 +4,8 @@
       class="card-header"
       v-t="'title.statisticIncomeVsExpense'"
     />
-    <div class="card-body">
-      <div class="flex flex-column justify-content-center align-items-stretch text-muted">
-        <LinearChart :chart-data="chartData"/>
-      </div>
+    <div class="flex justify-center p-4">
+      <LinearChart :chart-data="chartData" class="w-full"/>
     </div>
   </div>
 </template>
