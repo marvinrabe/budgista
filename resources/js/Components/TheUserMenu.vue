@@ -71,10 +71,10 @@
         this.$inertia.post('/logout')
       },
       settings () {
-        this.$router.push({ name: 'settings' })
+        this.$inertia.visit('/settings')
       },
       profile () {
-        this.$router.push({ name: 'profile' })
+        this.$inertia.visit('/profile')
       },
       email () {
         window.location = 'mailto:support@budgista.com'

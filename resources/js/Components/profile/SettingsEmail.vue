@@ -1,19 +1,19 @@
 <template>
   <AppForm @submit="save" ref="form">
-    <div class="flex flex-wrap items-baseline">
-      <div class="w-full lg:w-4/12">
+    <div class="flex -mx-1 flex-wrap items-baseline">
+      <div class="px-1 w-full lg:w-4/12">
         <h2
           class="h5"
           v-t="'title.updateEmail'"
         />
       </div>
-      <div class="w-full lg:w-8/12">
+      <div class="px-1 w-full lg:w-8/12">
         <FormGroup name="currentEmail">
           <div class="form-text">
-            {{ me.email }}
+            {{ $page.user.email }}
             <span
               class="badge badge-success"
-              v-if="me.isVerified"
+              v-if="$page.user.email_verified_at"
               v-t="'word.verified'"
             />
             <span
@@ -23,7 +23,7 @@
             />
             <resend-verification
               class="btn-sm"
-              v-if="!me.isVerified"
+              v-if="!$page.user.email_verified_at"
             />
           </div>
         </FormGroup>
@@ -77,21 +77,20 @@
     },
     data () {
       return {
-        saving: false,
         form: {
           email: '',
           password: ''
-        }
+        },
+        saving: false
       }
     },
     methods: {
       save () {
         this.saving = true
+
         axios
           .post('/user/email', this.form)
           .then(() => {
-            this.$apollo.queries.me.refetch()
-            this.$snotify.success(this.$t('message.updateEmail'))
             this.form.email = ''
             this.form.password = ''
             this.$validator.reset()

@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <Layout>
     <AppToolbar :title="$t('title.deleteUser')"/>
 
     <div class="card mb-3">
@@ -39,10 +39,11 @@
         </AppForm>
       </div>
     </div>
-  </div>
+  </Layout>
 </template>
 
 <script>
+  import Layout from '@/Layouts/Default'
   import axios from 'axios'
   import AppToolbar from '@/Components/AppToolbar'
   import AppButton from '@/Components/form/AppButton'
@@ -52,6 +53,7 @@
 
   export default {
     components: {
+      Layout,
       AppButton,
       AppForm,
       AppToolbar,

@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <Layout>
     <AppToolbar :title="$t('title.profile')"/>
 
     <div class="card mb-3">
@@ -7,7 +7,7 @@
         <SettingsEmail/>
       </div>
 
-      <div class="card-body border-top">
+      <div class="card-body border-t border-gray-3">
         <SettingsPassword/>
       </div>
     </div>
@@ -19,10 +19,11 @@
         subtle
       />
     </div>
-  </div>
+  </Layout>
 </template>
 
 <script>
+  import Layout from '@/Layouts/Default'
   import AppToolbar from '@/Components/AppToolbar'
   import AppButton from '@/Components/form/AppButton'
   import SettingsEmail from '@/Components/profile/SettingsEmail.vue'
@@ -30,6 +31,7 @@
 
   export default {
     components: {
+      Layout,
       AppButton,
       AppToolbar,
       SettingsEmail,

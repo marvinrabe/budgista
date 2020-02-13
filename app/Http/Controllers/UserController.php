@@ -10,6 +10,7 @@ use App\Rules\ValidPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Inertia\Inertia;
 use Propaganistas\LaravelIntl\Facades\Currency;
 use Propaganistas\LaravelIntl\Facades\Language;
 
@@ -21,6 +22,9 @@ class UserController extends Controller
         return new UserResource(Auth::user());
     }
 
+    public function edit () {
+        return Inertia::render('User/Edit');
+    }
 
     public function update()
     {
@@ -44,6 +48,10 @@ class UserController extends Controller
         return new UserResource(Auth::user());
     }
 
+    public function delete () {
+        return Inertia::render('User/Delete');
+    }
+
     public function destroy()
     {
         request()->validate([
@@ -56,26 +64,6 @@ class UserController extends Controller
         ]);
 
         Auth()->user()->terminate(request('feedback'));
-    }
-
-    public function reset()
-    {
-        request()->validate([
-            'password' => [
-                'required',
-                'string',
-                new ValidPassword()
-            ]
-        ]);
-
-        Auth()->user()->accounts->each(function (Account $account) {
-            $account->transactions()->delete();
-        });
-        Auth()->user()->categories->each(function (Category $category) {
-            $category->budgets()->delete();
-        });
-
-        return new UserResource(Auth::user());
     }
 
     public function email()
