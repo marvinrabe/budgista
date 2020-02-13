@@ -9,7 +9,7 @@
       :id="name"
       :bindings="bindings"
     />
-    <span v-if="hasError" class="invalid-feedback">
+    <span v-if="hasError" class="invalid-feedback block">
       {{ errorMessage }}
     </span>
   </div>
@@ -49,10 +49,3 @@
     }
   }
 </script>
-
-<style>
-  /* Invalid Feedback is always displayed as block, because we use vue to hide message if there is no error. */
-  .invalid-feedback {
-    display: block;
-  }
-</style>

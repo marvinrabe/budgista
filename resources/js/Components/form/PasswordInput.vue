@@ -1,10 +1,10 @@
 <template>
-  <div class="VuePassword">
-    <div class="VuePassword__Input">
+  <div>
+    <div class="relative">
       <input
         :type="type"
         :value="value"
-        class="form-control"
+        class="form-control w-full pr-10"
         v-bind="$attrs"
         @input="emitInput"
       >
@@ -56,19 +56,6 @@
 </template>
 
 <style>
-    .VuePassword {
-        position: relative;
-    }
-
-    .VuePassword__Input {
-        position: relative;
-    }
-
-    .VuePassword input {
-        padding-right: 3em;
-        width: 100%;
-    }
-
     .VuePassword__Toggle {
         display: inline-block;
         height: 100%;

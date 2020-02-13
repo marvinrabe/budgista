@@ -1,10 +1,10 @@
-<template>
+<template functional>
   <div class="card">
-    <div class="d-flex text-muted flex-column justify-content-center">
+    <div class="flex flex-column opacity-75 justify-center">
       <div class="my-5 text-center">
         <img
           alt=""
-          class="img-fluid mb-3"
+          class="mb-5"
           src="../../assets/undraw_credit_card.svg"
           style="max-width: 250px;"
         >
@@ -18,7 +18,3 @@
     </div>
   </div>
 </template>
-
-<script>
-  export default {}
-</script>

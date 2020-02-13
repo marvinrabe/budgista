@@ -7,7 +7,7 @@
     </div>
     <div
       @click.stop="$refs.input.focus()"
-      class="data"
+      class="data cursor-pointer"
     >
       <div class="budget-column-name ellipsis">
         {{ category.name }}
@@ -75,9 +75,3 @@
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  .data {
-    cursor: pointer;
-  }
-</style>

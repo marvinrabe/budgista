@@ -16,8 +16,8 @@
       />
     </FormGroup>
 
-    <div class="form-row">
-      <div class="col-sm-6">
+    <div class="flex">
+      <div class="w-1/2">
         <FormGroup name="category">
           <CategorySelect
             slot-scope="{bindings}"
@@ -27,7 +27,7 @@
         </FormGroup>
       </div>
 
-      <div class="col-sm-6">
+      <div class="w-1/2">
         <FormGroup name="date">
           <template slot-scope="{bindings}">
             <div class="input-group">
@@ -40,7 +40,7 @@
                   :class="{'text-primary': form.recurring}"
                   :title="$t('form.recurring')"
                   @click="form.recurring = !form.recurring"
-                  class="btn btn-light date__recurring"
+                  class="btn btn-light border-gray-4"
                   type="button"
                 >
                   <RecurringIcon/>
@@ -114,9 +114,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .date__recurring {
-    border-color: #dce0e4;
-  }
-</style>

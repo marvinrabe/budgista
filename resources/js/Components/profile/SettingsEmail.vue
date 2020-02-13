@@ -1,13 +1,13 @@
 <template>
   <AppForm @submit="save" ref="form">
-    <div class="form-row align-items-baseline">
-      <div class="col-lg-4">
+    <div class="flex flex-wrap items-baseline">
+      <div class="w-full lg:w-4/12">
         <h2
           class="h5"
           v-t="'title.updateEmail'"
         />
       </div>
-      <div class="col-lg-8">
+      <div class="w-full lg:w-8/12">
         <FormGroup name="currentEmail">
           <div class="form-text">
             {{ me.email }}

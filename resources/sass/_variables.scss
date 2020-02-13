@@ -59,23 +59,3 @@ $container-max-widths: (
 $body-color: $black;
 $border-radius: .2rem;
 $input-border-color: $gray-300;
-
-// Fade
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .3s
-}
-
-.fade-enter, .fade-leave-to {
-  opacity: 0
-}
-
-// Slide
-.slide-enter-active,
-.slide-leave-active {
-  transition: max-height .3s ease;
-  max-height: 36px;
-}
-
-.slide-enter, .slide-leave-to {
-  max-height: 0;
-}

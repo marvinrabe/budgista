@@ -5,14 +5,14 @@
     <div class="card">
       <div class="card-body">
         <AppForm @submit="save" ref="form">
-          <div class="form-row align-items-baseline">
-            <div class="col-lg-4">
+          <div class="flex flex-wrap items-baseline">
+            <div class="w-full lg:w-4/12">
               <h2
                 class="h5"
                 v-t="'title.localisation'"
               />
             </div>
-            <div class="col-lg-8">
+            <div class="w-full lg:w-8/12">
               <FormGroup name="language">
                 <select
                   class="form-control w-75"

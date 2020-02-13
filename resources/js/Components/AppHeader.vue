@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-light shadow-sm fixed top-0 bg-white w-full z-10">
-    <div class="container-fluid">
+    <div class="w-full flex items-center justify-around">
       <div class="lg:hidden mr-auto">
         <AppSidebarToggle/>
       </div>

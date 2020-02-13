@@ -6,6 +6,9 @@ module.exports = {
       ...colors,
       transparent: 'transparent'
     },
+    container: {
+      center: true,
+    },
     extend: {}
   },
   variants: {},

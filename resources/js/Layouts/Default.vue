@@ -1,28 +1,16 @@
 <template>
-  <div id="wrapper">
-    <div id="layout">
-      <AppHeader/>
+  <div class="h-full" style="padding-top: 56px;">
+    <AppHeader/>
 
-      <AppSidebar/>
+    <AppSidebar/>
 
-      <div class="container-fluid py-3" id="content">
-        <verify-alert/>
+    <div class="container-fluid py-3" id="content">
+      <verify-alert/>
 
-        <slot></slot>
-      </div>
+      <slot></slot>
     </div>
   </div>
 </template>
-
-<style scoped>
-  #wrapper, #layout {
-    height: 100%;
-  }
-
-  #layout {
-    padding-top: 56px;
-  }
-</style>
 
 <script>
   import AppHeader from '@/Components/AppHeader'

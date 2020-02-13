@@ -1,10 +1,12 @@
 <template>
-  <div class="alert" v-if="!$page.user.email_verified_at">
-    <div class="d-md-flex align-items-center">
+  <div v-if="notVerified"
+       class="bg-yellow-0 border-yellow-2 border-0 border-l-4 p-3 mb-3 shadow">
+    <div class="md:flex items-center">
       <i18n path="message.verifyEmail" tag="div">
-        <strong place="email">{{ me.email }}</strong>
+        <strong place="email">{{ $page.user.email }}</strong>
       </i18n>
-      <div class="mt-2 mt-md-0 ml-auto text-right">
+
+      <div class="mt-2 md:mt-0 ml-auto text-right">
         <div class="btn-group">
           <ResendVerification/>
           <AppButton
@@ -27,12 +29,11 @@
     components: {
       AppButton,
       ResendVerification
+    },
+    computed: {
+      notVerified () {
+        return !this.$page.user.email_verified_at
+      }
     }
   }
 </script>
-
-<style scoped>
-  .alert {
-    @apply bg-yellow-1 border-yellow-2 text-black border-solid border-0 border-l-4 p-4 mb-4 shadow;
-  }
-</style>

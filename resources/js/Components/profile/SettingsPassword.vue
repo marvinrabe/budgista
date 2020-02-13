@@ -3,14 +3,14 @@
     @submit="save"
     ref="form"
   >
-    <div class="form-row align-items-baseline">
-      <div class="col-lg-4">
+    <div class="flex flex-wrap items-baseline">
+      <div class="w-full lg:w-4/12">
         <h2
           class="h5"
           v-t="'title.updatePassword'"
         />
       </div>
-      <div class="col-lg-4">
+      <div class="w-full lg:w-4/12">
         <FormGroup
           label="oldPassword"
           name="password"
@@ -21,7 +21,7 @@
           />
         </FormGroup>
       </div>
-      <div class="col-lg-4">
+      <div class="w-full lg:w-4/12">
         <FormGroup name="newPassword">
           <PasswordInput
             slot-scope="{bindings}"

@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-white flex border rounded p-1 flex-wrap">
+  <div class="bg-white flex border border-gray-4 rounded p-1 flex-wrap">
     <div
       :class="{'bg-blue-6 text-white': icon.name === value, 'text-gray-9': icon.name !== value}"
       :key="icon.name"
       @click="$emit('input', icon.name)"
-      class="icon p-1 rounded"
+      class="cursor-pointer p-1 rounded"
       v-for="icon in icons"
     >
       <font-awesome-icon
@@ -14,12 +14,6 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-  .icon {
-    cursor: pointer;
-  }
-</style>
 
 <script>
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

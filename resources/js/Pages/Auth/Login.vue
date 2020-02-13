@@ -69,7 +69,7 @@
         </AppForm>
       </div>
 
-      <div class="card-body text-center text-gray-7 bg-gray-0 border-t-2 border-gray-3">
+      <div class="card-footer text-center">
         <span class="mr-1" v-t="'message.noAccount'"/>
         <inertia-link
           href="/register"
