@@ -17,7 +17,7 @@
       >
         {{ $t(item.label) }}
         <span
-          class="d-block text-muted"
+          class="block text-gray-6"
           v-if="item.sublabel"
           v-text="item.sublabel"
         />
