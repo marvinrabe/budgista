@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import i18n from '@/Plugins/i18n'
+import { i18n } from '@/Plugins/i18n'
 
 export default class Month {
   constructor (year, month) {

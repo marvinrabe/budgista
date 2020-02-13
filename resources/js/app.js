@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { InertiaApp } from '@inertiajs/inertia-vue'
 
-import i18n from './Plugins/i18n'
+import { i18n } from './Plugins/i18n'
 
 import './Plugins/analytics'
 import './Plugins/axios'
@@ -20,8 +20,7 @@ new Vue({
   render: h => h(InertiaApp, {
     props: {
       initialPage: JSON.parse(app.dataset.page),
-      resolveComponent: name => require(`./Pages/${name}`).default,
-      //resolveComponent: name => import(`./Pages/${name}`).then(module => module.default), TODO
+      resolveComponent: name => import(`./Pages/${name}`).then(module => module.default)
     },
   }),
 }).$mount(app)
