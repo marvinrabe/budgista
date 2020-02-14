@@ -8,7 +8,9 @@ Vue.use(VueI18n)
 export const i18n = new VueI18n({
   locale: 'en',
   fallbackLocale: 'en',
-  messages
+  messages: {
+    en: messages
+  }
 })
 
 const loadedLanguages = ['en'] // our default language that is preloaded
@@ -20,10 +22,10 @@ function setI18nLanguage (lang) {
   return lang
 }
 
-export function loadLanguageAsync(lang) {
+export function loadLanguageAsync (lang) {
   // If the same language
   if (i18n.locale === lang) {
-    return Promise.resolve(setI18nLanguage(lang))
+    return
   }
 
   // If the language was already loaded
@@ -39,4 +41,12 @@ export function loadLanguageAsync(lang) {
       return setI18nLanguage(lang)
     }
   )
+}
+
+export function loadLanguage (user = null) {
+  if (user) {
+    return loadLanguageAsync(user.language)
+  }
+
+  return loadLanguageAsync(document.querySelector('html').getAttribute('lang'))
 }

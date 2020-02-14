@@ -11,7 +11,7 @@
           <ResendVerification/>
           <AppButton
             :label="$t('action.changeEmail')"
-            :to="{name: 'profile'}"
+            to="/profile"
             small
             subtle
           />
