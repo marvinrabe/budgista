@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Http\Middleware\DetectLocale;
 use App\Models\Account;
 use App\Models\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\App;
 use Tests\TestCase;
 
 class ReconcileTest extends TestCase
@@ -12,47 +14,37 @@ class ReconcileTest extends TestCase
 
     use RefreshDatabase;
 
-    protected $account;
-
-    public function setUp(): void
+    public function testReconcileOnlyOwnAccounts()
     {
-        parent::setUp();
-        $this->account = factory(Account::class)->create();
-    }
+        $account = factory(Account::class)->create();
 
-    public function reconcileBalance($data = [], $headers = [])
-    {
-        return $this
-            ->signIn($this->account->user)
-            ->post("/api/accounts/{$this->account->id}/reconcile", $data, $headers);
-    }
-
-    /** @test */
-    public function it_can_only_be_done_by_the_account_owner()
-    {
         $this
             ->signIn()
-            ->post("/api/accounts/{$this->account->id}/reconcile", [
+            ->post("/accounts/{$account->id}/reconcile", [
                 'amount' => 12345
             ])
             ->assertStatus(404);
     }
 
-    /** @test */
-    public function it_requires_an_amount()
+    public function testRequiresAmount()
     {
+        $account = factory(Account::class)->create();
+
         $this
-            ->reconcileBalance([])
+            ->signIn($account->user)
+            ->post("/accounts/{$account->id}/reconcile", [])
             ->assertSessionHasErrors([
                 'amount'
             ]);
     }
 
-    /** @test */
-    public function it_should_fail_if_amount_is_not_an_integer()
+    public function testRequiresInteger()
     {
+        $account = factory(Account::class)->create();
+
         $this
-            ->reconcileBalance([
+            ->signIn($account->user)
+            ->post("/accounts/{$account->id}/reconcile", [
                 'amount' => 'Hello World'
             ])
             ->assertSessionHasErrors([
@@ -60,28 +52,32 @@ class ReconcileTest extends TestCase
             ]);
     }
 
-    /** @test */
-    public function it_sets_current_balance()
+    public function testUpdatesBalance()
     {
+        $account = factory(Account::class)->create();
+
         $this
-            ->reconcileBalance([
+            ->signIn($account->user)
+            ->post("/accounts/{$account->id}/reconcile", [
                 'amount' => 12345
-            ])
-            ->assertJson([
-                'data' => [
-                    'workingBalance' => 12345
-                ]
             ]);
+
+        $this->assertEquals(12345, $account->balance);
     }
 
-    /** @test */
-    public function it_has_a_localized_payee()
+    public function testLocalizePayee()
     {
-        $this->account->user->update([
-            'language' => 'de'
-        ]);
+        App::setLocale('de');
 
-        $this->reconcileBalance(['amount' => 12345], ['Accept-Language' => 'de']);
+        $this->withoutMiddleware(DetectLocale::class);
+
+        $account = factory(Account::class)->create();
+
+        $this
+            ->signIn($account->user)
+            ->post("/accounts/{$account->id}/reconcile", [
+                'amount' => 12345
+            ]);
 
         $this->assertDatabaseHas('transactions', [
             'amount' => 12345,
@@ -89,10 +85,15 @@ class ReconcileTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_should_clear_the_reconciliation_transaction()
+    public function testClearReconciliationTransaction()
     {
-        $this->reconcileBalance(['amount' => 12345]);
+        $account = factory(Account::class)->create();
+
+        $this
+            ->signIn($account->user)
+            ->post("/accounts/{$account->id}/reconcile", [
+                'amount' => 12345
+            ]);
 
         $this->assertDatabaseHas('transactions', [
             'amount' => 12345,
@@ -100,15 +101,20 @@ class ReconcileTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_marks_old_transactions_as_cleared()
+    public function testMarkTransactionsCleared()
     {
+        $account = factory(Account::class)->create();
+
         $transaction = factory(Transaction::class)->create([
-            'account_id' => $this->account->id,
-            'user_id' => $this->account->user_id
+            'account_id' => $account->id,
+            'user_id' => $account->user_id
         ]);
 
-        $this->reconcileBalance(['amount' => 12345]);
+        $this
+            ->signIn($account->user)
+            ->post("/accounts/{$account->id}/reconcile", [
+                'amount' => 12345
+            ]);
 
         $this->assertTrue($transaction->refresh()->cleared);
     }

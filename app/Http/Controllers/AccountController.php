@@ -13,12 +13,6 @@ use Inertia\Inertia;
 
 class AccountController extends Controller
 {
-
-    public function index()
-    {
-        return AccountResource::collection(Auth::user()->accounts);
-    }
-
     public function create()
     {
         $this->authorize('create', Account::class);
@@ -111,7 +105,7 @@ class AccountController extends Controller
 
         $account->reconcile(request('amount'));
 
-        return new AccountResource($account);
+        return Redirect::back();
     }
 
 }

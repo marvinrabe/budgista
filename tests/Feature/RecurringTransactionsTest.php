@@ -9,6 +9,7 @@ use App\Models\Account;
 use App\Models\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Ramsey\Uuid\Uuid;
 use RRule\RRule;
 use Tests\Enum;
 use Tests\TestCase;
@@ -18,8 +19,7 @@ class RecurringTransactionsTest extends TestCase
 
     use RefreshDatabase;
 
-    /** @test */
-    public function it_recurs_transactions()
+    public function testRecursTransactions()
     {
         $transaction = factory(Transaction::class)->make();
         $transaction->cleared = true;
@@ -37,8 +37,7 @@ class RecurringTransactionsTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_assigns_id_to_recurred_transaction()
+    public function testAddFamilyId()
     {
         $transaction = factory(Transaction::class)->make();
         $transaction->date = Carbon::now()->format('Y-m-d');
@@ -54,12 +53,11 @@ class RecurringTransactionsTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_assigns_family_to_recurred_transaction()
+    public function testKeepsFamilyId()
     {
         $transaction = factory(Transaction::class)->make();
         $transaction->date = Carbon::now()->format('Y-m-d');
-        $transaction->family = uniqid();
+        $transaction->family = Uuid::uuid4();
         $transaction->rrule = new RRule('FREQ=DAILY');
         $transaction->save();
 
@@ -71,80 +69,4 @@ class RecurringTransactionsTest extends TestCase
             'date' => Carbon::now()->addDay()->format('Y-m-d')
         ]);
     }
-
-    /** @test */
-    public function it_formats_the_recurrence()
-    {
-        $transaction = factory(Transaction::class)->make();
-        $transaction->rrule = new RRule('FREQ=DAILY;INTERVAL=5');
-        $transaction->save();
-
-        $this->signIn($transaction->user)
-            ->query('transaction')
-            ->setArguments([
-                'id' => $transaction->id
-            ])
-            ->setSelectionSet(['recurrence' => ['interval', 'frequency']])
-            ->getData()
-            ->assertJsonFragment([
-                'recurrence' => [
-                    'interval' => 5,
-                    'frequency' => 'DAILY'
-                ]
-            ]);
-    }
-
-    /** @test */
-    public function it_runs_recurring_on_creation()
-    {
-        $account = factory(Account::class)->create();
-
-        $this->signIn($account->user);
-
-        $this->mutation(
-            'transactionCreate',
-            [
-                'input' => [
-                    'date' => \Carbon\Carbon::now()->format('Y-m-d'),
-                    'amount' => 1234,
-                    'from' => [
-                        'payeeName' => 'Acme Co.'
-                    ],
-                    'to' => [
-                        'accountId' => $account->id
-                    ],
-                    'categories' => [],
-                    'recurrence' => [
-                        'interval' => 1,
-                        'frequency' => new Enum('DAILY')
-                    ]
-                ]
-            ],
-            [
-                'amount',
-                'date',
-                'recurrence' => [
-                    'interval',
-                    'frequency'
-                ]
-            ]
-        )->assertJsonFragment([
-            'transactionCreate' => [
-                [
-                    'amount' => 1234,
-                    'date' => \Carbon\Carbon::now()->format('Y-m-d'),
-                    'recurrence' => null
-                ],
-                [
-                    'amount' => 1234,
-                    'date' => \Carbon\Carbon::now()->addDay()->format('Y-m-d'),
-                    'recurrence' => [
-                        'interval' => 1,
-                        'frequency' => 'DAILY'
-                    ]
-                ]
-            ]
-        ]);
-    }
-
 }
