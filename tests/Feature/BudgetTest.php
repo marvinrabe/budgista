@@ -100,6 +100,88 @@ class BudgetTest extends TestCase
         $this->assertEquals(-20, $row['activity']);
     }
 
+    public function testBudgetWithoutTrackingAccounts()
+    {
+        $this->signIn();
+
+        $month = Month::current();
+
+        $trackingAccount = factory(Account::class)
+            ->states('tracking')
+            ->create([
+                'user_id' => Auth()->id()
+            ]);
+
+        $normalAccount = factory(Account::class)
+            ->create([
+                'user_id' => Auth()->id()
+            ]);
+
+        factory(Transaction::class)->create([
+            'amount' => 20,
+            'date' => $month->firstDay(),
+            'account_id' => $trackingAccount->id,
+            'user_id' => Auth()->id()
+        ]);
+
+        factory(Transaction::class)->create([
+            'amount' => 30,
+            'date' => $month->firstDay(),
+            'account_id' => $normalAccount->id,
+            'user_id' => Auth()->id()
+        ]);
+
+        $response = $this->get('/budget/'.$month)->assertSuccessful();
+
+        $this->assertEquals(30, $response->props('budget')['income']);
+    }
+
+    public function testActivityWithoutTrackingAccounts()
+    {
+        $this->signIn();
+
+        $month = Month::current();
+
+        $category = factory(Category::class)->create([
+            'user_id' => Auth()->id()
+        ]);
+
+        $trackingAccount = factory(Account::class)
+            ->states('tracking')
+            ->create([
+                'user_id' => Auth()->id()
+            ]);
+
+        $normalAccount = factory(Account::class)
+            ->create([
+                'user_id' => Auth()->id()
+            ]);
+
+        factory(Transaction::class)->create([
+            'amount' => 20,
+            'date' => $month->firstDay(),
+            'category_id' => $category->id,
+            'account_id' => $trackingAccount->id,
+            'user_id' => Auth()->id()
+        ]);
+
+        factory(Transaction::class)->create([
+            'amount' => 30,
+            'date' => $month->firstDay(),
+            'category_id' => $category->id,
+            'account_id' => $normalAccount->id,
+            'user_id' => Auth()->id()
+        ]);
+
+        $response = $this->get('/budget/' . $month)->assertSuccessful();
+
+        $row = Collection::make($response->props('budget')['rows'])
+            ->where('id', $category->id)
+            ->first();
+
+        $this->assertEquals(30, $row['activity']);
+    }
+
     public function testRecommendedBudget()
     {
         $this->signIn();
