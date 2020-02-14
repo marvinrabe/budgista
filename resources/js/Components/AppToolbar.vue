@@ -8,7 +8,7 @@
 
     <slot/>
 
-    <div class="button-right">
+    <div class="btn-group">
       <slot name="submenu">
         &nbsp;
       </slot>

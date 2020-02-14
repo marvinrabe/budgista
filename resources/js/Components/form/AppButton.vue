@@ -5,20 +5,14 @@
     :type="type"
     @click="click"
   >
-    <AppSpinner v-if="loading"/>
-    <slot v-else>
+    <slot>
       {{ text }}
     </slot>
   </button>
 </template>
 
 <script>
-  import AppSpinner from '../AppSpinner'
-
   export default {
-    components: {
-      AppSpinner
-    },
     props: {
       label: {
         type: String,

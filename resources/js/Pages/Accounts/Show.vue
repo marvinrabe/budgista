@@ -8,9 +8,9 @@
       <AccountBalance :account="account" :loading="!account"/>
 
       <template slot="submenu">
-        <inertia-link :href="account.links.edit">
+        <AppButton :to="account.links.edit">
           <CogIcon />
-        </inertia-link>
+        </AppButton>
 
         <AppButton
           :title="$t('action.create.transaction')"
@@ -42,7 +42,7 @@
   import AppToolbar from '@/Components/AppToolbar'
   import AppButton from '@/Components/form/AppButton'
   import TransactionList from '@/Components/transactions/TransactionList'
-  import { iconComponent } from '../../helpers'
+  import { iconComponent } from '@/helpers'
   import Layout from '@/Layouts/Default'
 
   const pageSize = 25
@@ -109,7 +109,7 @@
       order: 1;
     }
 
-    .toolbar .button-right {
+    .toolbar .btn-group {
       order: 2;
     }
 

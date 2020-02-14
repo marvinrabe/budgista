@@ -1,0 +1,27 @@
+.card {
+  @apply shadow rounded bg-white;
+
+  &-body, &-header, &-footer {
+    @apply p-4;
+  }
+
+  &-header {
+    @apply text-gray-7 bg-gray-0 border-b-2 border-gray-3;
+  }
+
+  &-footer {
+    @apply text-gray-7 bg-gray-0 border-t-2 border-gray-3;
+  }
+
+  &-title {
+    @apply mb-3;
+  }
+
+  > *:first-child {
+    @apply rounded-t;
+  }
+
+  > *:last-child {
+    @apply rounded-b;
+  }
+}

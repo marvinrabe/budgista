@@ -14,84 +14,6 @@ body {
 
 @tailwind components;
 
-.btn {
-  @apply font-bold py-2 px-4 rounded text-gray-8 bg-white cursor-pointer;
-
-  transition: all 0.2s ease 0s;
-
-  svg {
-    @apply mr-2;
-  }
-
-  &:disabled {
-    @apply opacity-50 cursor-not-allowed;
-  }
-
-  &:hover {
-    @apply shadow bg-gray-0;
-  }
-
-  &--small {
-    @apply mx-1 py-1 px-2;
-  }
-
-  &.primary {
-    @apply border-blue-6 text-white bg-blue-8;
-
-    &:hover {
-      @apply bg-blue-9;
-    }
-  }
-
-  &--subtle.primary {
-    @apply text-blue-9;
-  }
-
-  &.danger {
-    @apply border-red-6 text-white bg-red-8;
-
-    &:hover {
-      @apply bg-red-9;
-    }
-  }
-
-  &--subtle.danger {
-    @apply text-red-9;
-  }
-
-  &--subtle, &--subtle:hover, &--subtle:active {
-    @apply shadow-none border-none bg-transparent;
-  }
-}
-
-.card {
-  @apply shadow rounded bg-white;
-
-  &-body, &-header, &-footer {
-    @apply p-4;
-  }
-
-  &-header {
-    @apply text-gray-7 bg-gray-0 border-b-2 border-gray-3;
-  }
-
-  &-footer {
-    @apply text-gray-7 bg-gray-0 border-t-2 border-gray-3;
-  }
-
-  &-title {
-    @apply mb-3;
-  }
-
-  > *:first-child {
-    @apply rounded-t;
-  }
-
-  > *:last-child {
-    @apply rounded-b;
-  }
-}
-
 .toolbar {
   display: flex;
   flex-shrink: 0;
@@ -122,6 +44,8 @@ body {
   text-overflow: ellipsis;
 }
 
+@import "button";
+@import "card";
 @import "sidebar";
 @import "menu";
 @import "budget";
