@@ -45,10 +45,9 @@
 
 <script>
   import PasswordInput from '@/Components/form/PasswordInput'
-  import axios from 'axios'
-  import AppButton from '../form/AppButton'
-  import AppForm from '../form/AppForm'
-  import FormGroup from '../form/FormGroup'
+  import AppButton from '@/Components/form/AppButton'
+  import AppForm from '@/Components/form/AppForm'
+  import FormGroup from '@/Components/form/FormGroup'
 
   export default {
     components: {
@@ -59,30 +58,19 @@
     },
     data () {
       return {
-        saving: false,
         form: {
           password: '',
           new_password: ''
-        }
+        },
+        saving: false
       }
     },
-    mounted () {
-      this.reset()
-    },
     methods: {
-      reset () {
-        this.saving = false
-        this.form.password = ''
-        this.form.new_password = ''
-      },
       save () {
         this.saving = true
 
-        axios.post('/user/password', this.form)
-          .then(() => {
-            this.$snotify.success(this.$t('message.updatePassword'))
-          })
-          .catch(this.$refs.form.error)
+        this.$inertia
+          .post('/profile/password', this.form)
           .finally(() => {
             this.saving = false
           })

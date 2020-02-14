@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
@@ -11,26 +12,27 @@ class ChangePasswordTest extends TestCase
 
     use RefreshDatabase;
 
-    /** @test */
-    public function it_can_update_the_password()
+    public function testUpdatePassword()
     {
+        $user = factory(User::class)->create();
+
         $this
-            ->signIn()
-            ->post('/api/user/password', [
-                'password' => 'secret',
+            ->signIn($user)
+            ->from('/profile')
+            ->post('/profile/password', [
+                'password' => 'password',
                 'new_password' => 'newpassword123'
             ])
-            ->assertSuccessful();
+            ->assertRedirect('/profile');
 
-        $this->assertTrue(Hash::check('newpassword123', Auth()->user()->password));
+        $this->assertTrue(Hash::check('newpassword123', $user->fresh()->password));
     }
 
-    /** @test */
-    public function it_requires_the_old_password_when_updating_the_password()
+    public function testRequiresOldPassword()
     {
         $this
             ->signIn()
-            ->post('/api/user/password', [
+            ->post('/profile/password', [
                 'password' => 'wrongpassword',
                 'new_password' => 'newpassword123'
             ])
@@ -38,13 +40,13 @@ class ChangePasswordTest extends TestCase
     }
 
     /** @test */
-    public function it_should_have_atleast_6_characters()
+    public function testRequires8Characters()
     {
         $this
             ->signIn()
-            ->post('/api/user/password', [
-                'password' => 'wrongpassword',
-                'new_password' => 'short'
+            ->post('/profile/password', [
+                'password' => 'password',
+                'new_password' => 'secret1'
             ])
             ->assertSessionHasErrors('new_password');
     }

@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Mail\UserDeleted;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
@@ -11,8 +12,7 @@ class UserTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function it_deletes_user()
+    public function testDeleteUser()
     {
         $this->signIn();
 
@@ -23,8 +23,8 @@ class UserTest extends TestCase
             'email' => $user->email,
         ]);
 
-        $this->delete('/api/user', [
-            'password' => 'secret'
+        $this->post('/profile/terminate', [
+            'password' => 'password'
         ]);
 
         $this->assertDatabaseMissing('users', [
@@ -33,15 +33,14 @@ class UserTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_requires_password_for_account_deletion()
+    public function testRequiresPassword()
     {
         $this->signIn();
 
         $user = Auth()->user();
 
         $this
-            ->delete('/api/user', [
+            ->post('/profile/terminate', [
                 'password' => 'thisisthewrongpassword'
             ])
             ->assertSessionHasErrors('password');
@@ -52,17 +51,16 @@ class UserTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_logs_deleted_accounts()
+    public function testLogsDeletions()
     {
         $this->signIn();
 
         $user = Auth()->user();
 
         $this
-            ->delete('/api/user', [
+            ->post('/profile/terminate', [
                 'feedback' => 'my feedback',
-                'password' => 'secret'
+                'password' => 'password'
             ]);
 
         $this->assertDatabaseHas('deleted_users', [
@@ -71,8 +69,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_sends_an_email_with_user_feedback()
+    public function testEmailUserFeedback()
     {
         Mail::fake();
 
@@ -81,9 +78,9 @@ class UserTest extends TestCase
         $user = Auth()->user();
 
         $this
-            ->delete('/api/user', [
+            ->post('/profile/terminate', [
                 'feedback' => 'my feedback',
-                'password' => 'secret'
+                'password' => 'password'
             ]);
 
         $this->assertDatabaseHas('deleted_users', [
@@ -94,18 +91,21 @@ class UserTest extends TestCase
         Mail::assertSent(UserDeleted::class);
     }
 
-    /** @test */
-    public function it_does_not_send_an_email_when_feedback_is_empty()
+    public function testNoEmailWithoutFeedback()
     {
         Mail::fake();
 
         $this->signIn();
 
         $this
-            ->delete('/api/user', [
+            ->post('/profile/terminate', [
                 'feedback' => '',
-                'password' => 'secret'
+                'password' => 'password'
             ]);
+
+        $this->assertDatabaseMissing('users', [
+            'id' => Auth::id(),
+        ]);
 
         Mail::assertNothingSent();
     }

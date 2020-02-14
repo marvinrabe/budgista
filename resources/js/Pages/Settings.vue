@@ -13,13 +13,28 @@
               />
             </div>
             <div class="w-full lg:w-8/12">
+              <FormGroup name="currency">
+                <select
+                  class="form-control w-75"
+                  slot-scope="{bindings}"
+                  v-bind="bindings"
+                  v-model="form.currency"
+                >
+                  <option
+                    :key="currency"
+                    :value="currency"
+                    v-for="currency in currencies"
+                    v-t="'currency.'+currency"
+                  />
+                </select>
+              </FormGroup>
+
               <FormGroup name="language">
                 <select
                   class="form-control w-75"
                   slot-scope="{bindings}"
                   v-bind="bindings"
                   v-model="form.language"
-                  v-validate="'required'"
                 >
                   <option
                     :key="language"
@@ -36,30 +51,12 @@
                   slot-scope="{bindings}"
                   v-bind="bindings"
                   v-model="form.locale"
-                  v-validate="'required'"
                 >
                   <option
                     :key="locale"
                     :value="locale"
                     v-for="locale in locales"
                     v-t="'language.'+locale"
-                  />
-                </select>
-              </FormGroup>
-
-              <FormGroup name="currency">
-                <select
-                  class="form-control w-75"
-                  slot-scope="{bindings}"
-                  v-bind="bindings"
-                  v-model="form.currency"
-                  v-validate="'required'"
-                >
-                  <option
-                    :key="currency"
-                    :value="currency"
-                    v-for="currency in currencies"
-                    v-t="'currency.'+currency"
                   />
                 </select>
               </FormGroup>
@@ -80,14 +77,13 @@
 </template>
 
 <script>
-  import axios from 'axios'
   import Layout from '@/Layouts/Default'
   import AppToolbar from '@/Components/AppToolbar'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import FormGroup from '@/Components/form/FormGroup.vue'
 
-  const languages = [] // TODO
+  const languages = ['en', 'de'] // TODO
 
   export default {
     components: {
@@ -104,12 +100,12 @@
     },
     data () {
       return {
-        saving: false,
         form: {
-          language: 'en',
-          locale: 'en',
-          currency: 'EUR'
-        }
+          language: this.$page.user.language,
+          locale: this.$page.user.locale,
+          currency: this.$page.user.currency
+        },
+        saving: false
       }
     },
     computed: {
@@ -127,14 +123,8 @@
       save () {
         this.saving = true
 
-        axios
-          .put('/user', this.form)
-          .then(({ data }) => {
-            /*changeLanguage(data.data.language)
-            this.$apollo.queries.me.refetch()
-            this.$snotify.success(this.$t('message.updateSettings'))*/
-          })
-          .catch(this.$refs.form.error)
+        this.$inertia
+          .post('/settings', this.form)
           .finally(() => {
             this.saving = false
           })

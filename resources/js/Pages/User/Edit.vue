@@ -15,7 +15,7 @@
     <div class="text-right">
       <AppButton
         :label="$t('title.deleteUser')"
-        :to="{name: 'leave'}"
+        to="/profile/terminate"
         subtle
       />
     </div>

@@ -10,7 +10,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
   import AppButton from '../form/AppButton'
 
   export default {
@@ -35,11 +34,8 @@
       send () {
         this.loading = true
 
-        axios
-          .post('/auth/verify')
-          .then(() => {
-            this.sent = true
-          })
+        this.$inertia
+          .post('/email/resend', this.form)
           .finally(() => {
             this.loading = false
           })

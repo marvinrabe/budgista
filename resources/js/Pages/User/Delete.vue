@@ -6,16 +6,13 @@
       <div class="card-body">
         <p v-t="'message.deleteUser'"/>
 
-        <AppForm
-          @submit="deleteUser"
-          ref="form"
-        >
+        <AppForm@submit="deleteUser">
           <FormGroup name="feedback">
             <textarea
               class="form-control"
               slot-scope="{bindings}"
               v-bind="bindings"
-              v-model="feedback"
+              v-model="form.feedback"
             />
           </FormGroup>
 
@@ -24,7 +21,7 @@
               :disable-strength="true"
               slot-scope="{bindings}"
               v-bind="bindings"
-              v-model="password"
+              v-model="form.password"
             />
           </FormGroup>
 
@@ -44,7 +41,6 @@
 
 <script>
   import Layout from '@/Layouts/Default'
-  import axios from 'axios'
   import AppToolbar from '@/Components/AppToolbar'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
@@ -67,8 +63,10 @@
     },
     data () {
       return {
-        feedback: '',
-        password: '',
+        form: {
+          feedback: '',
+          password: '',
+        },
         deleting: false
       }
     },
@@ -76,27 +74,7 @@
       deleteUser () {
         this.deleting = true
 
-        axios
-          .delete('/user', {
-            data: {
-              password: this.password,
-              feedback: this.feedback
-            }
-          })
-          .then(() => {
-            this.$snotify.success(this.$t('message.userDeleted'))
-            this.$auth.logout({
-              makeRequest: true,
-              success: function () {
-                this.$store.dispatch('RESET')
-              },
-              redirect: { name: 'login' }
-            })
-          })
-          .catch(this.$refs.form.error)
-          .finally(() => {
-            this.deleting = false
-          })
+        this.$inertia.post('/profile', this.form)
       }
     }
   }

@@ -61,11 +61,10 @@
 
 <script>
   import PasswordInput from '@/Components/form/PasswordInput'
-  import axios from 'axios'
-  import AppButton from '../form/AppButton'
-  import AppForm from '../form/AppForm'
-  import ResendVerification from '../profile/ResendVerification'
-  import FormGroup from '../form/FormGroup'
+  import AppButton from '@/Components/form/AppButton'
+  import AppForm from '@/Components/form/AppForm'
+  import ResendVerification from '@/Components/profile/ResendVerification'
+  import FormGroup from '@/Components/form/FormGroup'
 
   export default {
     components: {
@@ -88,14 +87,8 @@
       save () {
         this.saving = true
 
-        axios
-          .post('/user/email', this.form)
-          .then(() => {
-            this.form.email = ''
-            this.form.password = ''
-            this.$validator.reset()
-          })
-          .catch(this.$refs.form.error)
+        this.$inertia
+          .post('/profile/email', this.form)
           .finally(() => {
             this.saving = false
           })

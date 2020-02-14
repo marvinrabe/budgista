@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use App\Notifications\VerifyEmail;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
@@ -13,78 +13,75 @@ class ChangeEmailTest extends TestCase
 
     use RefreshDatabase;
 
-    public function setUp(): void
+    public function testUpdateEmailAddress()
     {
-        parent::setUp();
         Notification::fake();
-    }
 
-    /** @test */
-    public function it_can_update_the_email_address()
-    {
         $this
             ->signIn()
-            ->post('/api/user/email', [
-                'password' => 'secret',
+            ->from('/profile')
+            ->post('/profile/email', [
+                'password' => 'password',
                 'email' => 'something_new@example.com'
             ])
-            ->assertSuccessful();
+            ->assertRedirect('/profile');
 
         $this->assertEquals('something_new@example.com', Auth()->user()->email);
     }
 
-    /** @test */
-    public function it_sends_verify_email()
+    public function testEmailVerification()
     {
+        Notification::fake();
+
         $this
             ->signIn()
-            ->post('/api/user/email', [
-                'password' => 'secret',
+            ->from('/profile')
+            ->post('/profile/email', [
+                'password' => 'password',
                 'email' => 'something_new@example.com'
             ])
-            ->assertSuccessful();
+            ->assertRedirect('/profile');
 
         $this->assertEquals('something_new@example.com', Auth()->user()->email);
 
         Notification::assertSentTo(Auth()->user(), VerifyEmail::class);
     }
 
-    /** @test */
-    public function it_requires_the_valid_password_when_updating_the_email_address()
+    public function testRequiresValidPassword()
     {
         $this
             ->signIn()
-            ->post('/api/user/email', [
+            ->post('/profile/email', [
                 'password' => 'NOTAPASSWORD',
                 'email' => 'something_new@example.com'
             ])
             ->assertSessionHasErrors('password');
     }
 
-    /** @test */
-    public function it_should_fail_when_email_is_taken()
+    public function testUniqueEmailAddress()
     {
         $otherUser = factory(User::class)->create();
 
         $this
             ->signIn()
-            ->post('/api/user/email', [
+            ->post('/profile/email', [
                 'password' => 'secret',
                 'email' => $otherUser->email
             ])
             ->assertSessionHasErrors('email');
     }
 
-    /** @test */
-    public function it_should_allow_no_changes_to_email()
+    public function testAllowsNoChange()
     {
+        Notification::fake();
+
         $this
             ->signIn()
-            ->post('/api/user/email', [
-                'password' => 'secret',
+            ->post('/profile/email', [
+                'password' => 'password',
                 'email' => Auth()->user()->email
             ])
-            ->assertSuccessful();
+            ->assertRedirect();
     }
 
 }

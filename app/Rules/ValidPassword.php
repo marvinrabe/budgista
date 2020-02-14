@@ -2,8 +2,8 @@
 
 namespace App\Rules;
 
-use Hash;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 
 class ValidPassword implements Rule
 {
