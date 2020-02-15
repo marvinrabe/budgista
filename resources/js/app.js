@@ -4,7 +4,6 @@ import { InertiaApp } from '@inertiajs/inertia-vue'
 import { i18n, loadLanguage } from './Plugins/i18n'
 
 import './Plugins/analytics'
-import './Plugins/axios'
 import './Plugins/meta'
 import './Plugins/portal'
 
