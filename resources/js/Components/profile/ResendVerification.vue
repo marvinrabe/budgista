@@ -1,16 +1,16 @@
 <template>
   <AppButton
-    :disabled="sent"
-    :label="text"
     :loading="loading"
     @click="send"
     subtle
     small
-  />
+  >
+    {{ $t('action.sendVerification') }}
+  </AppButton>
 </template>
 
 <script>
-  import AppButton from '../form/AppButton'
+  import AppButton from '@/Components/form/AppButton'
 
   export default {
     components: {
@@ -18,16 +18,7 @@
     },
     data () {
       return {
-        loading: false,
-        sent: false
-      }
-    },
-    computed: {
-      text () {
-        if (this.sent) {
-          return this.$t('message.verificationSent')
-        }
-        return this.$t('action.sendVerification')
+        loading: false
       }
     },
     methods: {

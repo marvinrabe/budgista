@@ -21,7 +21,6 @@ export default {
     resetPasswordSuccessful: 'Passwort wurde erfolgreich zurückgesetzt.',
     userDeleted: 'Benutzerkonto wurde gelöscht. Vielen Dank dass du Budgista ausprobiert hast.',
     verifyEmail: 'Bitte bestätige deine E-Mail Adresse {email}.',
-    verificationSent: 'Versandt!',
     verificationCheckEmail: 'Bevor du fortfährst, bitte überprüfe deine E-Mail Postfach für einen Verifizierungs Link.',
     verificationNotReceived: 'Falls du die E-Mail nicht erhalten haben solltest,'
   },
