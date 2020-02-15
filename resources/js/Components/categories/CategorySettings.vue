@@ -9,29 +9,22 @@
     <template slot="button-content">
       <EllipsisIcon/>
     </template>
-    <UpdateCategory :bind="{categoryId}"/>
-    <DeleteCategory :bind="{categoryId}"/>
+    <b-dropdown-item @click="$inertia.visit(category.links.edit)">
+      {{ $t('action.edit.category') }}
+    </b-dropdown-item>
   </b-dropdown>
 </template>
 
 <script>
   import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
   import { iconComponent, prepareComponent } from '../../helpers'
-  import UpdateCategory from '@/Components/categories/Update'
-  import DeleteCategory from '@/Components/categories/Delete'
-  import DropdownModal from '../DropdownModal'
 
   export default {
     components: {
-      EllipsisIcon: iconComponent({ icon: faEllipsisH }),
-      DeleteCategory: prepareComponent(DropdownModal, { component: DeleteCategory, label: 'action.delete.category' }),
-      UpdateCategory: prepareComponent(DropdownModal, { component: UpdateCategory, label: 'action.edit.category' })
+      EllipsisIcon: iconComponent({ icon: faEllipsisH })
     },
     props: {
-      categoryId: {
-        type: String,
-        required: true
-      }
+      category: Object
     }
   }
 </script>

@@ -10,7 +10,7 @@
     <optgroup
       :key="group.id"
       :label="group.name"
-      v-for="group in sortedGroups"
+      v-for="group in $page.user.groups"
     >
       <option
         :key="category.id"
@@ -33,13 +33,6 @@
       exclude: { // TODO exclude category
         type: String,
         default: null
-      }
-    },
-    computed: {
-      sortedGroups () {
-        const groups = this.$page.user.groups
-        groups.sort((a, b) => a.sort - b.sort)
-        return groups
       }
     }
   }

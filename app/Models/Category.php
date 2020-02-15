@@ -8,11 +8,16 @@ use App\Budget\Month;
 use App\Models\Traits\BelongsToUser;
 use App\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\URL;
 
 class Category extends Model
 {
     use HasUuidKey,
         BelongsToUser;
+
+    protected $appends = [
+        'links'
+    ];
 
     protected $fillable = [
         'name',
@@ -46,6 +51,15 @@ class Category extends Model
     public function group()
     {
         return $this->belongsTo(Group::class);
+    }
+
+    public function getLinksAttribute()
+    {
+        return [
+            'edit' => URL::route('categories.edit', $this),
+            'update' => URL::route('categories.update', $this),
+            'destroy' => URL::route('categories.destroy', $this)
+        ];
     }
 
     /**

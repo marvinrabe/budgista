@@ -6,33 +6,36 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\Group as GroupResource;
 use App\Models\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class GroupController extends Controller
 {
 
-    public function index()
-    {
-        return GroupResource::collection(Auth::user()->groups);
+    public function create() {
+        return Inertia::render('Groups/Create');
     }
 
     public function store(Request $request)
     {
         $this->authorize('create', Group::class);
 
-        $group = Auth::user()->groups()->create(
+        Auth::user()->groups()->create(
             $request->validate([
                 'name' => 'required'
             ])
         );
 
-        return new GroupResource($group);
+        return Redirect::route('budget');
     }
 
-    public function show(Group $group)
+    public function edit(Group $group)
     {
         $this->authorize('view', $group);
 
-        return new GroupResource($group);
+        return Inertia::render('Groups/Edit', [
+            'group' => $group
+        ]);
     }
 
     public function update(Request $request, Group $group)
@@ -45,7 +48,7 @@ class GroupController extends Controller
             ])
         );
 
-        return new GroupResource($group);
+        return Redirect::route('budget');
     }
 
     public function collapse(Request $request, Group $group)
@@ -67,7 +70,7 @@ class GroupController extends Controller
 
         $group->delete();
 
-        return [];
+        return Redirect::route('budget');
     }
 
     public function sort(Request $request)

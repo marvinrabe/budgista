@@ -39,7 +39,7 @@
       </div>
       <div class="actions">
         <GroupSettings
-          :group-id="group.id"
+          :group="group"
           v-if="group.id"
         />
       </div>

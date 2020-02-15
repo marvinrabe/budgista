@@ -6,6 +6,7 @@ use App\Models\Traits\BelongsToUser;
 use App\Models\Traits\HasUuidKey;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\URL;
 
 class Group extends Model
 {
@@ -13,6 +14,10 @@ class Group extends Model
         BelongsToUser;
 
     public $timestamps = false;
+
+    protected $appends = [
+        'links'
+    ];
 
     protected $fillable = [
         'name',
@@ -38,6 +43,18 @@ class Group extends Model
     public function categories()
     {
         return $this->hasMany(Category::class);
+    }
+
+    public function getLinksAttribute()
+    {
+        return [
+            'edit' => URL::route('groups.edit', $this),
+            'update' => URL::route('groups.update', $this),
+            'destroy' => URL::route('groups.destroy', $this),
+            'categories' => [
+                'create' => URL::route('categories.create', ['group' => $this])
+            ]
+        ];
     }
 
     /**

@@ -45,16 +45,16 @@ export default {
       'transaction': 'Kontobewegung hinzufügen'
     },
     'edit': {
-      'category': 'Kategorie bearbeiten',
-      'account': 'Konto bearbeiten',
+      category: 'Kategorie bearbeiten',
+      account: 'Konto bearbeiten',
       group: 'Gruppe bearbeiten',
-      'transaction': 'Kontobewegung bearbeiten'
+      transaction: 'Kontobewegung bearbeiten'
     },
     'delete': {
-      'category': 'Kategorie löschen',
-      'account': 'Konto löschen',
+      category: 'Kategorie löschen',
+      account: 'Konto löschen',
       group: 'Gruppe löschen',
-      'transaction': 'Kontobewegung löschen'
+      transaction: 'Kontobewegung löschen'
     },
     'settings': {
       'password': 'Passwort ändern',
@@ -76,6 +76,7 @@ export default {
     'recurringFrequency': 'Wiederholung',
     'recurringInterval': 'Wiederholt sich alle',
     'category': 'Kategorie',
+    group_id: 'Gruppe',
     'budget': 'Budget',
     'activity': 'Aktivität',
     'uncategorized': 'Ohne Kategorie',

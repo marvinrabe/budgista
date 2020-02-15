@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="actions">
-      <CategorySettings :category-id="category.id"/>
+      <CategorySettings :category="category"/>
     </div>
   </div>
 </template>

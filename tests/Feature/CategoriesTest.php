@@ -16,64 +16,26 @@ class CategoriesTest extends TestCase
 
     use RefreshDatabase;
 
-    /** @test */
-    public function it_finds_categories()
+    public function testPreselectGroup()
     {
-        $category = factory(Category::class)->create();
+        $group = factory(Group::class)->create();
 
-        $this->signIn($category->user)
-            ->query('category')
-            ->setArguments(['id' => $category->id])
-            ->setSelectionSet(['id', 'name'])
-            ->getData()
-            ->assertJsonFragment([
-                'data' => [
-                    'category' => [
-                        'id' => $category->id,
-                        'name' => $category->name
-                    ]
-                ]
-            ]);
+        $response = $this
+            ->signIn($group->user)
+            ->get("/categories/create?group={$group->id}");
+
+        $response->assertHasProp('group');
+        $this->assertEquals($group->id, $response->props()['group']['id']);
     }
 
-    /** @test */
-    public function it_does_not_find_other_users_categories()
+    public function testCreateCategories()
     {
-        $category = factory(Category::class)->create();
-
-        $this->signIn()
-            ->query('category')
-            ->setArguments(['id' => $category->id])
-            ->setSelectionSet(['id', 'name'])
-            ->getData()
-            ->assertJsonFragment([
-                'data' => [
-                    'category' => null
-                ]
-            ])
-            ->assertJsonMissing([
-                'data' => [
-                    'category' => [
-                        'id' => $category->id,
-                        'name' => $category->name
-                    ]
-                ]
-            ]);
-    }
-
-    /** @test */
-    public function it_creates_categories()
-    {
-        $this->signIn()
-            ->mutation('categoryCreate')
-            ->setArguments([
+        $this
+            ->signIn()
+            ->post('/categories', [
                 'name' => 'New category'
             ])
-            ->setSelectionSet(['name'])
-            ->getData()
-            ->assertJsonFragment([
-                'name' => 'New category'
-            ]);
+            ->assertRedirect('/budget');
 
         $this->assertDatabaseHas('categories', [
             'user_id' => Auth::id(),
@@ -81,22 +43,17 @@ class CategoriesTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_creates_categories_in_a_group()
+    public function testCreateCategoriesInGroup()
     {
         $group = factory(Group::class)->create();
 
-        $this->signIn($group->user)
-            ->mutation('categoryCreate')
-            ->setArguments([
+        $this
+            ->signIn($group->user)
+            ->post('/categories', [
                 'name' => 'New category',
-                'groupId' => $group->id
+                'group_id' => $group->id
             ])
-            ->setSelectionSet(['group' => ['name']])
-            ->getData()
-            ->assertJsonFragment([
-                'name' => $group->name
-            ]);
+            ->assertRedirect('/budget');
 
         $this->assertDatabaseHas('categories', [
             'user_id' => Auth::id(),
@@ -105,22 +62,16 @@ class CategoriesTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_renames_categories()
+    public function testUpdateCategory()
     {
         $category = factory(Category::class)->create();
 
-        $this->signIn($category->user)
-            ->mutation('categoryUpdate')
-            ->setArguments([
-                'id' => $category->id,
+        $this
+            ->signIn($category->user)
+            ->put("/categories/{$category->id}", [
                 'name' => 'New Name'
             ])
-            ->setSelectionSet(['name'])
-            ->getData()
-            ->assertJsonFragment([
-                'name' => 'New Name'
-            ]);
+            ->assertRedirect('/budget');
 
         $this->assertDatabaseHas('categories', [
             'id' => $category->id,
@@ -129,22 +80,39 @@ class CategoriesTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_can_not_rename_other_users_category()
+    public function testUpdateCategoryGroup()
     {
         $category = factory(Category::class)->create();
 
-        $this->signIn()
-            ->mutation('categoryUpdate')
-            ->setArguments([
-                'id' => $category->id,
+        $group = factory(Group::class)->create([
+            'user_id' => $category->user_id
+        ]);
+
+        $this
+            ->signIn($category->user)
+            ->put("/categories/{$category->id}", [
+                'group_id' => $group->id,
+                'name' => $category->name
+            ])
+            ->assertRedirect('/budget');
+
+        $this->assertDatabaseHas('categories', [
+            'id' => $category->id,
+            'user_id' => $category->user_id,
+            'group_id' => $group->id
+        ]);
+    }
+
+    public function testCanNotUpdateOtherUsersCategories()
+    {
+        $category = factory(Category::class)->create();
+
+        $this
+            ->signIn()
+            ->put("/categories/{$category->id}", [
                 'name' => 'New Name'
             ])
-            ->setSelectionSet(['name'])
-            ->getData()
-            ->assertJsonFragment([
-                'categoryUpdate' => null
-            ]);
+            ->assertNotFound();
 
         $this->assertDatabaseHas('categories', [
             'id' => $category->id,
@@ -153,8 +121,7 @@ class CategoriesTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_deletes_categories()
+    public function testDeleteCategory()
     {
         $category = factory(Category::class)->create();
 
@@ -164,16 +131,10 @@ class CategoriesTest extends TestCase
             'name' => $category->name
         ]);
 
-        $this->signIn($category->user)
-            ->mutation('categoryDelete')
-            ->setArguments([
-                'id' => $category->id
-            ])
-            ->setSelectionSet(['id'])
-            ->getData()
-            ->assertJsonFragment([
-                'id' => $category->id
-            ]);
+        $this
+            ->signIn($category->user)
+            ->delete("/categories/{$category->id}")
+            ->assertRedirect('/budget');
 
         $this->assertDatabaseMissing('categories', [
             'id' => $category->id,
@@ -182,22 +143,14 @@ class CategoriesTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_can_not_delete_other_users_categories()
+    public function testCanNotDeleteOtherUsersCategory()
     {
-
         $category = factory(Category::class)->create();
 
-        $this->signIn()
-            ->mutation('categoryDelete')
-            ->setArguments([
-                'id' => $category->id
-            ])
-            ->setSelectionSet(['id'])
-            ->getData()
-            ->assertJsonFragment([
-                'categoryDelete' => null
-            ]);
+        $this
+            ->signIn()
+            ->delete("/categories/{$category->id}")
+            ->assertNotFound();
 
         $this->assertDatabaseHas('categories', [
             'id' => $category->id,
@@ -206,8 +159,7 @@ class CategoriesTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_sets_existing_transactions_categories_to_null_if_deleted()
+    public function testRemoveTransactionRelationshipsOnDelete()
     {
 
         $category = factory(Category::class)->create();
@@ -221,21 +173,12 @@ class CategoriesTest extends TestCase
 
         $this
             ->signIn($category->user)
-            ->mutation('categoryDelete')
-            ->setArguments([
-                'id' => $category->id
-            ])
-            ->setSelectionSet(['id'])
-            ->getData()
-            ->assertJsonFragment([
-                'id' => $category->id
-            ]);
+            ->delete("/categories/{$category->id}");
 
         $this->assertNull($transaction->refresh()->category_id);
     }
 
-    /** @test */
-    public function it_sets_a_new_category_if_specified_on_deletion()
+    public function testTransferTransactionsToNewCategory()
     {
         $this->signIn();
 
@@ -248,46 +191,30 @@ class CategoriesTest extends TestCase
             'user_id' => Auth()->id()
         ]);
 
-        $this
-            ->mutation('categoryDelete')
-            ->setArguments([
-                'id' => $categories->first()->id,
-                'transferToCategoryId' => $categories->last()->id
-            ])
-            ->setSelectionSet(['id'])
-            ->getData()
-            ->assertJsonFragment([
-                'id' => $categories->first()->id
-            ]);
+        $this->delete("/categories/{$categories->first()->id}", [
+            'category_id' => $categories->last()->id
+        ]);
 
         $this->assertEquals($categories->last()->id, $transaction->refresh()->category_id);
     }
 
-    /** @test */
-    public function it_sets_only_categories_by_the_user_as_new_category()
+    public function testOnlyTransfersToUsersCategories()
     {
         $category = factory(Category::class)->create();
 
         $this
             ->signIn($category->user)
-            ->mutation('categoryDelete')
-            ->setArguments([
-                'id' => $category->id,
-                'transferToCategoryId' => factory(Category::class)->create()->id
+            ->delete("/categories/{$category->id}", [
+                'category_id' => factory(Category::class)->create()->id
             ])
-            ->setSelectionSet(['id'])
-            ->getData()
-            ->assertJsonFragment([
-                "message" => "Internal server error"
-            ]);
+            ->assertSessionHasErrors('category_id');
 
         $this->assertDatabaseHas('categories', [
             'id' => $category->id
         ]);
     }
 
-    /** @test */
-    public function it_should_transfer_budgets_to_new_category()
+    public function testTransferBudgetsOnDelete()
     {
         $this->signIn();
 
@@ -300,15 +227,8 @@ class CategoriesTest extends TestCase
         $budget->save();
 
         $this
-            ->mutation('categoryDelete')
-            ->setArguments([
-                'id' => $categories->first()->id,
-                'transferToCategoryId' => $categories->last()->id
-            ])
-            ->setSelectionSet(['id'])
-            ->getData()
-            ->assertJsonFragment([
-                'id' => $categories->first()->id
+            ->delete("/categories/{$categories->first()->id}", [
+                'category_id' => $categories->last()->id
             ]);
 
         $this->assertEquals(12345, $categories->last()->budget(Month::current())->amount);

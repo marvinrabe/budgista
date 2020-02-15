@@ -45,16 +45,16 @@ export default {
       'transaction': 'Add Transaction'
     },
     'edit': {
-      'category': 'Edit Category',
-      'account': 'Edit Account',
+      category: 'Edit Category',
+      account: 'Edit Account',
       group: 'Edit Group',
-      'transaction': 'Edit Transaction'
+      transaction: 'Edit Transaction'
     },
     'delete': {
-      'category': 'Delete Category',
-      'account': 'Delete Account',
+      category: 'Delete Category',
+      account: 'Delete Account',
       group: 'Delete Group',
-      'transaction': 'Delete Transaction'
+      transaction: 'Delete Transaction'
     },
     'settings': {
       'password': 'Change Password',
@@ -76,6 +76,7 @@ export default {
     'recurringFrequency': 'Repeats',
     'recurringInterval': 'Repeat every',
     'category': 'Category',
+    group_id: 'Group',
     'budget': 'Budget',
     'activity': 'Activity',
     uncategorized: 'Uncategorized',

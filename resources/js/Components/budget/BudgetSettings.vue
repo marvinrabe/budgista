@@ -7,23 +7,22 @@
     <template slot="button-content">
       <EllipsisIcon/>
     </template>
-    <CreateGroup/>
-    <CreateCategory/>
+    <b-dropdown-item @click="$inertia.visit('/groups/create')">
+      {{ $t('action.create.group') }}
+    </b-dropdown-item>
+    <b-dropdown-item @click="$inertia.visit('/categories/create')">
+      {{ $t('action.create.category') }}
+    </b-dropdown-item>
   </b-dropdown>
 </template>
 
 <script>
   import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
-  import { iconComponent, prepareComponent } from '../../helpers'
-  import CreateCategory from '@/Components/categories/Create'
-  import CreateGroup from '@/Components/groups/Create'
-  import DropdownModal from '../DropdownModal'
+  import { iconComponent } from '@/helpers'
 
   export default {
     components: {
-      EllipsisIcon: iconComponent({ icon: faEllipsisH }),
-      CreateGroup: prepareComponent(DropdownModal, { component: CreateGroup, label: 'action.create.group' }),
-      CreateCategory: prepareComponent(DropdownModal, { component: CreateCategory, label: 'action.create.category' })
+      EllipsisIcon: iconComponent({ icon: faEllipsisH })
     }
   }
 </script>

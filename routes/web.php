@@ -11,7 +11,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('accounts', AccountController::class)->except('index');
     Route::post('accounts/{account}/reconcile', [Controllers\AccountController::class, 'reconcile'])->name('accounts.reconcile');
     Route::get('budget/{month?}', BudgetController::class)->name('budget');
+    Route::resource('categories', CategoryController::class)->except(['index', 'show']);
     Route::resource('clearedTransactions', ClearedTransactionController::class)->only(['store', 'destroy']);
+    Route::resource('groups', GroupController::class)->except(['index', 'show']);
     Route::resource('transactions', TransactionController::class)->except(['index', 'show']);
     Route::get('profile', [Controllers\UserController::class, 'edit'])->name('user.edit');
     Route::post('profile/email', [Controllers\UserController::class, 'email'])->name('user.email');

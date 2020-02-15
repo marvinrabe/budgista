@@ -9,33 +9,26 @@
     <template slot="button-content">
       <EllipsisIcon/>
     </template>
-    <CreateCategory :bind="{groupId}"/>
+    <b-dropdown-item @click="$inertia.visit(group.links.categories.create)">
+      {{ $t('action.create.category') }}
+    </b-dropdown-item>
     <b-dropdown-divider/>
-    <UpdateGroup :bind="{groupId}"/>
-    <DeleteGroup :bind="{groupId}"/>
+    <b-dropdown-item @click="$inertia.visit(group.links.edit)">
+      {{ $t('action.edit.group') }}
+    </b-dropdown-item>
   </b-dropdown>
 </template>
 
 <script>
   import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
   import { iconComponent, prepareComponent } from '../../helpers'
-  import CreateCategory from '@/Components/categories/Create'
-  import DeleteGroup from '@/Components/groups/Delete'
-  import UpdateGroup from '@/Components/groups/Update'
-  import DropdownModal from '../DropdownModal'
 
   export default {
     components: {
-      EllipsisIcon: iconComponent({ icon: faEllipsisH }),
-      DeleteGroup: prepareComponent(DropdownModal, { component: DeleteGroup, label: 'action.delete.group' }),
-      UpdateGroup: prepareComponent(DropdownModal, { component: UpdateGroup, label: 'action.edit.group' }),
-      CreateCategory: prepareComponent(DropdownModal, { component: CreateCategory, label: 'action.create.category' })
+      EllipsisIcon: iconComponent({ icon: faEllipsisH })
     },
     props: {
-      groupId: {
-        type: String,
-        required: true
-      }
+      group: Object
     }
   }
 </script>
