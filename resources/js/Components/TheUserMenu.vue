@@ -50,7 +50,7 @@
             label: 'title.settings'
           },
           {
-            click: this.email,
+            click: this.help,
             label: 'title.help'
           },
           {
@@ -76,7 +76,7 @@
       profile () {
         this.$inertia.visit('/profile')
       },
-      email () {
+      help () {
         window.location = 'mailto:support@budgista.com'
       }
     }

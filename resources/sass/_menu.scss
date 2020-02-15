@@ -20,13 +20,12 @@
     }
 
     &:hover {
-      @apply no-underline;
+      @apply no-underline bg-gray-0;
       color: $body-color;
-      background: rgba(255, 255, 255, 0.5);
     }
 
     &.active {
-      background: rgba(255, 255, 255, 0.5);
+      @apply bg-gray-0;
       border-left: 2px solid theme-color('primary');
       margin-left: -2px;
       font-weight: 500;

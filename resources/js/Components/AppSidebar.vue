@@ -5,7 +5,7 @@
     @click="hide"
   >
     <div
-      class="sidebar__content py-3 px-2"
+      class="sidebar__content py-3 lg:py-0 px-2 lg:pr-2"
       @click.stop
     >
       <app-menu @navigate="hide" />

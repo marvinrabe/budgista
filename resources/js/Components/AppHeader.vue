@@ -1,15 +1,15 @@
 <template>
-  <nav class="shadow-md px-4 py-2 fixed top-0 bg-white w-full z-10">
-    <div class="w-full flex items-center justify-between">
+  <nav class="shadow-md fixed top-0 bg-white w-full z-10">
+    <div class="container px-4 py-2 flex items-center justify-between">
+      <AppSidebarToggle class="lg:hidden"/>
+
       <AppLogo
-        class="navbar-brand"
+        class="navbar-brand mr-auto lg:ml-4"
         style="height: 40px;"
         :height="40"
       />
 
-      <TheUserMenu class="hidden lg:block ml-auto"/>
-
-      <AppSidebarToggle class="lg:hidden"/>
+      <TheUserMenu class="hidden lg:block"/>
     </div>
   </nav>
 </template>
