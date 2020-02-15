@@ -1,17 +1,15 @@
 <template>
-  <Layout>
-    <AppToolbar :title="$t('action.edit.account')">
-      <template slot="submenu">
-        <AppButton
-          :title="$t('action.delete.account')"
-          @click="deleteAccount"
-          subtle
-          variant="danger"
-        >
-          <DeleteIcon/>
-        </AppButton>
-      </template>
-    </AppToolbar>
+  <Layout :title="$t('action.edit.account')">
+    <template v-slot:actions>
+      <AppButton
+        :title="$t('action.delete.account')"
+        @click="deleteAccount"
+        subtle
+        variant="danger"
+      >
+        <DeleteIcon/>
+      </AppButton>
+    </template>
 
     <div class="card">
       <div class="card-body">
@@ -60,7 +58,6 @@
 
 <script>
   import Layout from '@/Layouts/Default'
-  import AppToolbar from '@/Components/AppToolbar'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import AccountIconPicker from '@/Components/accounts/AccountIconPicker'
@@ -71,7 +68,6 @@
   export default {
     components: {
       Layout,
-      AppToolbar,
       AccountIconPicker,
       AppButton,
       AppForm,

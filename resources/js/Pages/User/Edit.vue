@@ -1,7 +1,5 @@
 <template>
-  <Layout>
-    <AppToolbar :title="$t('title.profile')"/>
-
+  <Layout :title="$t('title.profile')">
     <div class="card mb-3">
       <div class="card-body">
         <SettingsEmail/>
@@ -24,7 +22,6 @@
 
 <script>
   import Layout from '@/Layouts/Default'
-  import AppToolbar from '@/Components/AppToolbar'
   import AppButton from '@/Components/form/AppButton'
   import SettingsEmail from '@/Components/profile/SettingsEmail.vue'
   import SettingsPassword from '@/Components/profile/SettingsPassword.vue'
@@ -33,14 +30,8 @@
     components: {
       Layout,
       AppButton,
-      AppToolbar,
       SettingsEmail,
       SettingsPassword
-    },
-    metaInfo () {
-      return {
-        title: this.$t('title.profile')
-      }
     }
   }
 </script>

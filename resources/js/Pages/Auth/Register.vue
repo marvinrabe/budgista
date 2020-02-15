@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <Layout :title="$t('title.register')">
     <div class="card">
       <div class="card-body">
         <h1
@@ -87,11 +87,6 @@
       AppButton,
       AppForm,
       FormGroup
-    },
-    metaInfo () {
-      return {
-        title: this.$t('title.register')
-      }
     },
     data () {
       return {

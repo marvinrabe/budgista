@@ -1,7 +1,5 @@
 <template>
-  <Layout>
-    <AppToolbar :title="$t('action.create.account')"/>
-
+  <Layout :title="$t('action.create.account')">
     <div class="card">
       <div class="card-body">
         <AppForm @submit="save">
@@ -57,7 +55,6 @@
 
 <script>
   import Layout from '@/Layouts/Default'
-  import AppToolbar from '@/Components/AppToolbar'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import FormGroup from '@/Components/form/FormGroup'
@@ -67,7 +64,6 @@
   export default {
     components: {
       Layout,
-      AppToolbar,
       AppButton,
       AppForm,
       AccountIconPicker,

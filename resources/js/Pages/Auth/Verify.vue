@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <Layout :title="$t('title.verify')">
     <div class="card">
       <div class="card-header" v-t="'title.verify'"></div>
 
@@ -31,11 +31,6 @@
       AppButton,
       AppForm,
       FormGroup
-    },
-    metaInfo () {
-      return {
-        title: this.$t('title.login')
-      }
     },
     data () {
       return {

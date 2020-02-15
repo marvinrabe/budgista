@@ -1,27 +1,36 @@
 <template>
-  <Layout>
-    <AppToolbar>
-      <template slot="title">
-        {{ account.name }}
-      </template>
+  <Layout :title="account.name">
+    <template v-slot:header>
+      <div class="flex px-4 -mx-2 mt-4 w-full lg:mt-0 lg:w-auto lg:ml-auto">
+        <AppNumber
+          class="lg:items-end"
+          :color="true"
+          :label="$t('form.balance.cleared')"
+          :value="account.balance_cleared"
+        />
+        <AppNumber
+          class="items-end"
+          :color="true"
+          :label="$t('form.balance.working')"
+          :value="account.balance"
+        />
+      </div>
+    </template>
 
-      <AccountBalance :account="account" :loading="!account"/>
+    <template v-slot:actions>
+      <AppButton :to="account.links.edit">
+        <CogIcon/>
+      </AppButton>
 
-      <template slot="submenu">
-        <AppButton :to="account.links.edit">
-          <CogIcon />
-        </AppButton>
-
-        <AppButton
-          :title="$t('action.create.transaction')"
-          :to="account.links.transactions.create"
-          variant="primary"
-        >
-          <PlusIcon/>
-          {{ $t('word.transaction') }}
-        </AppButton>
-      </template>
-    </AppToolbar>
+      <AppButton
+        :title="$t('action.create.transaction')"
+        :to="account.links.transactions.create"
+        variant="primary"
+      >
+        <PlusIcon/>
+        {{ $t('word.transaction') }}
+      </AppButton>
+    </template>
 
     <TransactionList :transactions="transactions.data"/>
 
@@ -37,9 +46,8 @@
 <script>
   import { faPlus, faCog } from '@fortawesome/free-solid-svg-icons'
   import InfiniteLoading from 'vue-infinite-loading'
-  import AccountBalance from '@/Components/accounts/AccountBalance'
   import AppSpinner from '@/Components/AppSpinner'
-  import AppToolbar from '@/Components/AppToolbar'
+  import AppNumber from '@/Components/AppNumber'
   import AppButton from '@/Components/form/AppButton'
   import TransactionList from '@/Components/transactions/TransactionList'
   import { iconComponent } from '@/helpers'
@@ -53,20 +61,14 @@
       PlusIcon: iconComponent({ icon: faPlus }),
       CogIcon: iconComponent({ icon: faCog }),
       AppButton,
+      AppNumber,
       AppSpinner,
       InfiniteLoading,
-      AppToolbar,
-      AccountBalance,
       TransactionList
     },
     props: {
       account: Object,
       transactions: Object
-    },
-    metaInfo () {
-      return {
-        title: this.account.name
-      }
     },
     data () {
       return {
@@ -94,35 +96,3 @@
     }
   }
 </script>
-
-<style>
-  @media (max-width: 575.98px) {
-    .toolbar .balance .numeric:first-child {
-      align-items: flex-start !important;
-    }
-  }
-</style>
-
-<style scoped>
-  @media (max-width: 575.98px) {
-    .toolbar .title {
-      order: 1;
-    }
-
-    .toolbar .btn-group {
-      order: 2;
-    }
-
-    .toolbar .balance {
-      order: 3;
-      flex: 100%;
-      padding: 0;
-      margin-top: .5em;
-    }
-
-    .toolbar .balance .numeric {
-      text-align: center !important;
-    }
-  }
-</style>
-

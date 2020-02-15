@@ -1,19 +1,38 @@
 <template>
-  <Layout>
-    <AppToolbar :title="$t('title.budget')">
+  <Layout :title="$t('title.budget') + ': ' + monthObject.format()">
+    <template v-slot:title>
       <MonthPicker
         :month="monthObject"
         :next="links.next"
         :prev="links.prev"
         slot="title"
       />
+    </template>
 
-      <BudgetOverview :budget="budget"/>
+    <template v-slot:header>
+      <div class="flex px-4 -mx-2 mt-4 w-full lg:mt-0 lg:w-auto lg:ml-auto">
+        <AppNumber
+          :label="$t('form.previousMonth')"
+          :value="budget.previousMonth"
+          class="items-start lg:items-end"
+        />
+        <AppNumber
+          :label="$t('form.income')"
+          :value="budget.income"
+          class="items-center lg:items-end"
+        />
+        <AppNumber
+          :label="$t('form.unallocated')"
+          :value="budget.unallocated"
+          class="items-end"
+          color
+        />
+      </div>
+    </template>
 
-      <template slot="submenu">
-        <BudgetSettings/>
-      </template>
-    </AppToolbar>
+    <template v-slot:actions>
+      <BudgetSettings/>
+    </template>
 
     <Budget>
       <draggable
@@ -53,11 +72,10 @@
 <script>
   import draggable from 'vuedraggable'
   import Layout from '@/Layouts/Default'
-  import AppToolbar from '@/Components/AppToolbar'
+  import AppNumber from '@/Components/AppNumber'
   import Budget from '@/Components/budget/Budget'
   import BudgetCategory from '@/Components/budget/BudgetCategory'
   import BudgetGroup from '@/Components/budget/BudgetGroup'
-  import BudgetOverview from '@/Components/budget/BudgetOverview'
   import BudgetSettings from '@/Components/budget/BudgetSettings'
   import MonthPicker from '@/Components/budget/MonthPicker'
   import Month from '@/Utils/Month.js'
@@ -65,11 +83,10 @@
   export default {
     components: {
       Layout,
-      AppToolbar,
+      AppNumber,
       Budget,
       BudgetCategory,
       BudgetGroup,
-      BudgetOverview,
       BudgetSettings,
       MonthPicker,
       draggable
@@ -79,11 +96,6 @@
       budget: Object,
       links: Object,
       groups: Array
-    },
-    metaInfo () {
-      return {
-        title: this.$t('title.budget')
-      }
     },
     data () {
       return {

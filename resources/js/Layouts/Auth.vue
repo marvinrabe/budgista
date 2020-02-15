@@ -19,6 +19,14 @@
   export default {
     components: {
       AppLogo
+    },
+    props: {
+      title: String
+    },
+    metaInfo () {
+      return {
+        title: this.title
+      }
     }
   }
 </script>

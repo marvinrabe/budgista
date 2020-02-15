@@ -1,19 +1,19 @@
 <template>
-  <div class="d-flex">
+  <div class="flex items-center">
     <inertia-link
       :title="$t('action.previousMonth')"
       :href="prev"
-      class="text-dark align-self-center small"
+      class="text-gray-6 hover:text-gray-8"
     >
       <font-awesome-icon :icon="previousIcon"/>
     </inertia-link>
-    <span class="mx-1">
+    <span class="text-2xl mx-1">
       {{ month.format() }}
     </span>
     <inertia-link
       :title="$t('action.nextMonth')"
       :href="next"
-      class="text-dark align-self-center small"
+      class="text-gray-6 hover:text-gray-8"
     >
       <font-awesome-icon :icon="nextIcon"/>
     </inertia-link>

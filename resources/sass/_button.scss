@@ -52,7 +52,7 @@
   }
 
   &--subtle, &--subtle:hover, &--subtle:active {
-    @apply shadow-none;
+    @apply shadow-none font-normal;
     background: transparent !important;
   }
 }

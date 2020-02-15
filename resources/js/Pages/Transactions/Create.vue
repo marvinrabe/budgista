@@ -1,7 +1,5 @@
 <template>
-  <Layout>
-    <AppToolbar :title="$t('action.create.transaction')"/>
-
+  <Layout :title="$t('action.create.transaction')">
     <div class="card">
       <div class="card-body">
         <AppForm @submit="save">
@@ -22,7 +20,6 @@
 
 <script>
   import Layout from '@/Layouts/Default'
-  import AppToolbar from '@/Components/AppToolbar'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import TransactionForm from '@/Components/transactions/TransactionForm'
@@ -32,7 +29,6 @@
       Layout,
       AppButton,
       AppForm,
-      AppToolbar,
       TransactionForm
     },
     props: {
@@ -40,11 +36,6 @@
         type: Object,
         required: false,
         default: null
-      }
-    },
-    metaInfo () {
-      return {
-        title: this.$t('action.create.transaction')
       }
     },
     data () {

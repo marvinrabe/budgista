@@ -1,17 +1,15 @@
 <template>
-  <Layout>
-    <AppToolbar :title="$t('action.edit.transaction')">
-      <template slot="submenu">
-        <AppButton
-          :title="$t('action.delete.transaction')"
-          @click="deleteTransaction"
-          subtle
-          variant="danger"
-        >
-          <DeleteIcon/>
-        </AppButton>
-      </template>
-    </AppToolbar>
+  <Layout :title="$t('action.edit.transaction')">
+    <template v-slot:actions>
+      <AppButton
+        :title="$t('action.delete.transaction')"
+        @click="deleteTransaction"
+        subtle
+        variant="danger"
+      >
+        <DeleteIcon/>
+      </AppButton>
+    </template>
 
     <div class="card" v-if="transaction">
       <div class="card-body">
@@ -33,7 +31,6 @@
 
 <script>
   import Layout from '@/Layouts/Default'
-  import AppToolbar from '@/Components/AppToolbar'
   import TransactionForm from '@/Components/transactions/TransactionForm'
   import { faTrashAlt } from '@fortawesome/free-regular-svg-icons'
   import AppButton from '@/Components/form/AppButton'
@@ -45,17 +42,11 @@
       AppButton,
       AppForm,
       Layout,
-      AppToolbar,
       DeleteIcon: iconComponent({ icon: faTrashAlt }),
       TransactionForm
     },
     props: {
       transaction: Object
-    },
-    metaInfo () {
-      return {
-        title: this.$t('action.edit.transaction')
-      }
     },
     data () {
       return {

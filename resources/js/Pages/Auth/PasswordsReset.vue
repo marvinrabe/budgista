@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <Layout :title="$t('title.reset')">
     <div class="card">
       <div class="card-body">
         <h1
@@ -69,11 +69,6 @@
       email: {
         type: String,
         required: true
-      }
-    },
-    metaInfo () {
-      return {
-        title: this.$t('title.reset')
       }
     },
     data () {

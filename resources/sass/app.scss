@@ -12,31 +12,16 @@ body {
   @apply bg-gray-1;
 }
 
-@tailwind components;
 
-.toolbar {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 0;
-  margin-bottom: .5em;
-
-  .title {
-    @extend .h4;
-    margin: 0;
-    line-height: 2.5rem;
-    flex: 1;
-    position: relative;
-  }
-
-  p, h1, h2, h3, h4, h5, h6 {
-    margin-bottom: 0;
-  }
-
+a {
+  @apply text-blue-8 no-underline;
 }
+
+a:hover {
+  @apply text-blue-9 underline;
+}
+
+@tailwind components;
 
 .ellipsis {
   white-space: nowrap;

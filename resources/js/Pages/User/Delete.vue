@@ -1,7 +1,5 @@
 <template>
-  <Layout>
-    <AppToolbar :title="$t('title.deleteUser')"/>
-
+  <Layout :title="$t('title.deleteUser')">
     <div class="card mb-3">
       <div class="card-body">
         <p v-t="'message.deleteUser'"/>
@@ -41,7 +39,6 @@
 
 <script>
   import Layout from '@/Layouts/Default'
-  import AppToolbar from '@/Components/AppToolbar'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import PasswordInput from '@/Components/form/PasswordInput'
@@ -52,14 +49,8 @@
       Layout,
       AppButton,
       AppForm,
-      AppToolbar,
       FormGroup,
       PasswordInput
-    },
-    metaInfo () {
-      return {
-        title: this.$t('title.deleteUser')
-      }
     },
     data () {
       return {

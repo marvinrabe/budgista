@@ -1,7 +1,5 @@
 <template>
-  <Layout>
-    <AppToolbar :title="$t('title.settings')"/>
-
+  <Layout :title="$t('title.settings')">
     <div class="card">
       <div class="card-body">
         <AppForm @submit="save" ref="form">
@@ -78,7 +76,6 @@
 
 <script>
   import Layout from '@/Layouts/Default'
-  import AppToolbar from '@/Components/AppToolbar'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import FormGroup from '@/Components/form/FormGroup.vue'
@@ -90,13 +87,7 @@
       AppButton,
       AppForm,
       Layout,
-      AppToolbar,
       FormGroup
-    },
-    metaInfo () {
-      return {
-        title: this.$t('title.settings')
-      }
     },
     data () {
       return {

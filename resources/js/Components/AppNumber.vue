@@ -1,24 +1,25 @@
+<template>
+  <div class="numeric">
+    <AppMoney
+      :value="value"
+      :color="color"
+      class="numeric__value"
+    />
+    <p class="numeric__label">
+      {{ label }}
+    </p>
+  </div>
+</template>
+
 <script>
-  import AppMoney from './AppMoney'
+  import AppMoney from '@/Components/AppMoney'
 
   export default {
-    functional: true,
+    components: { AppMoney },
     props: {
       value: Number,
       label: String,
       color: Boolean,
-    },
-    render (createElement, context) {
-      return createElement('div', { class: 'numeric' }, [
-        createElement(AppMoney, {
-          props: {
-            value: context.props.value,
-            color: context.props.color
-          },
-          class: 'numeric__value'
-        }),
-        createElement('p', { staticClass: 'numeric__label' }, [context.props.label])
-      ])
     }
   }
 </script>
@@ -31,7 +32,6 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    align-items: flex-end;
     border-right: 1px solid $gray-300;
 
     &__label,
