@@ -14,7 +14,7 @@
     </span>
     <AppMoney
       :value="account.balance"
-      class="ml-auto badge"
+      class="ml-auto text-xs"
       color
     />
   </inertia-link>

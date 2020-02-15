@@ -41,3 +41,7 @@ a:hover {
 @import "spinner";
 
 @tailwind utilities;
+
+.font-numeric {
+  font-variant-numeric: tabular-nums;
+}

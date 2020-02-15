@@ -12,12 +12,12 @@
           <div class="form-text">
             {{ $page.user.email }}
             <span
-              class="badge badge-success"
+              class="bg-green-0 rounded p-1 text-xs"
               v-if="$page.user.email_verified_at"
               v-t="'word.verified'"
             />
             <span
-              class="badge badge-warning"
+              class="bg-yellow-0 rounded p-1 text-xs"
               v-else
               v-t="'word.unverified'"
             />

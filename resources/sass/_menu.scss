@@ -1,6 +1,5 @@
 .menu {
-  @extend .nav;
-  @apply flex-col flex-no-wrap;
+  @apply flex flex-wrap flex-col flex-no-wrap;
 
   &__header {
     @extend .dropdown-header;
@@ -9,7 +8,7 @@
   }
 
   &__item {
-    @extend .nav-link;
+    @apply py-2 px-4;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -21,6 +20,7 @@
     }
 
     &:hover {
+      @apply no-underline;
       color: $body-color;
       background: rgba(255, 255, 255, 0.5);
     }
