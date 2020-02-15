@@ -1,6 +1,17 @@
 <template>
   <Layout>
-    <AppToolbar :title="$t('action.edit.account')"/>
+    <AppToolbar :title="$t('action.edit.account')">
+      <template slot="submenu">
+        <AppButton
+          :title="$t('action.delete.account')"
+          @click="deleteAccount"
+          subtle
+          variant="danger"
+        >
+          <DeleteIcon/>
+        </AppButton>
+      </template>
+    </AppToolbar>
 
     <div class="card">
       <div class="card-body">
@@ -54,6 +65,8 @@
   import AppForm from '@/Components/form/AppForm'
   import AccountIconPicker from '@/Components/accounts/AccountIconPicker'
   import FormGroup from '@/Components/form/FormGroup'
+  import { iconComponent } from '@/helpers'
+  import { faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 
   export default {
     components: {
@@ -62,7 +75,8 @@
       AccountIconPicker,
       AppButton,
       AppForm,
-      FormGroup
+      FormGroup,
+      DeleteIcon: iconComponent({ icon: faTrashAlt }),
     },
     props: {
       account: Object
@@ -72,7 +86,7 @@
         form: {
           name: this.account.name,
           icon: this.account.icon,
-          tracking: this.account.tracking
+          tracking: this.account.tracking,
         },
         saving: false
       }
@@ -86,6 +100,9 @@
           .finally(() => {
             this.saving = false
           })
+      },
+      deleteAccount() {
+        this.$inertia.delete(this.account.links.destroy)
       }
     }
   }

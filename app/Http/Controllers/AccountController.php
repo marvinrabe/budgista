@@ -93,6 +93,8 @@ class AccountController extends Controller
         $this->authorize('delete', $account);
 
         $account->delete();
+
+        return Redirect::route('budget');
     }
 
     public function reconcile(Account $account)
