@@ -26,9 +26,3 @@
     <slot />
   </div>
 </template>
-
-<style>
-  .budget-groups--drag .budget-categories {
-    display: none;
-  }
-</style>

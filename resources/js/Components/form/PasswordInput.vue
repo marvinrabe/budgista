@@ -17,10 +17,10 @@
         @click.prevent="togglePassword"
       >
         <span v-show="type === 'password'">
-          <font-awesome-icon :icon="passwordIcon" />
+          <font-awesome-icon :icon="passwordIcon"/>
         </span>
         <span v-show="type === 'text'">
-          <font-awesome-icon :icon="textIcon" />
+          <font-awesome-icon :icon="textIcon"/>
         </span>
       </a>
     </div>
@@ -54,38 +54,6 @@
     </svg>
   </div>
 </template>
-
-<style>
-    .VuePassword__Toggle {
-        display: inline-block;
-        height: 100%;
-        position: absolute;
-        right: 0;
-        top: 0;
-        z-index: 1;
-    }
-
-    .VuePassword__Toggle svg {
-        fill: currentColor;
-        height: 100%;
-        width: 1.5em;
-        margin-right: 0.75rem;
-        user-select: none;
-    }
-
-    .VuePassword__Meter {
-        display: block;
-        height: .5rem;
-        margin-top: .2rem;
-        width: 100%;
-    }
-
-    .VuePassword__Meter path {
-        stroke: currentColor;
-        stroke-width: 1;
-        border-radius: 5px;
-    }
-</style>
 
 <script>
   import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'

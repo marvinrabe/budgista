@@ -1,0 +1,32 @@
+.numeric {
+  padding: 0 1em;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border-right: 1px solid $gray-300;
+
+  &__label,
+  &__value {
+    flex: 1;
+    flex-grow: 0;
+    font-size: 1em;
+    white-space: nowrap;
+  }
+
+  &__value {
+    font-weight: 500;
+  }
+
+  &__label {
+    font-size: .8em;
+    color: $gray-600;
+  }
+
+  &:last-child {
+    border-right: 0;
+  }
+
+  &:first-child {
+    border-left: 0;
+  }
+}

@@ -21,7 +21,7 @@ new Vue({
   render: h => h(InertiaApp, {
     props: {
       initialPage: JSON.parse(app.dataset.page),
-      resolveComponent: name => require(`./Pages/${name}`).default,
+      resolveComponent: name => import(`./Pages/${name}`).then(module => module.default),
       transformProps: props => {
         loadLanguage(props.user)
         return props
