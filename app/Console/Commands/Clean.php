@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Auth\EmailTokenRepository;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -38,7 +37,6 @@ class Clean extends Command
         $this->info('Processing...');
 
         DB::table('budgets')->where('amount', '=', 0)->delete();
-        resolve(EmailTokenRepository::class)->deleteExpired();
 
         $this->info('Done');
     }
