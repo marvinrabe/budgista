@@ -5,7 +5,7 @@
         <img
           alt=""
           class="mb-5"
-          src="../../assets/undraw_credit_card.svg"
+          src="../../Assets/undraw_credit_card.svg"
           style="max-width: 250px;"
         >
         <h5 v-t="'title.emptyAccount'"/>
