@@ -45,6 +45,26 @@ class GroupsTest extends TestCase
         ]);
     }
 
+    public function testCollapseGroup()
+    {
+        $group = factory(Group::class)->create();
+
+        $this
+            ->signIn($group->user)
+            ->from('/budget/2019-01')
+            ->post("/groups/{$group->id}/collapse", [
+                'collapsed' => true
+            ])
+            ->assertRedirect('/budget/2019-01');
+
+        $this->assertDatabaseHas('groups', [
+            'id' => $group->id,
+            'user_id' => $group->user_id,
+            'name' => $group->name,
+            'collapsed' => true
+        ]);
+    }
+
     public function testCanNotUpdateOtherUsersGroups()
     {
         $group = factory(Group::class)->create();

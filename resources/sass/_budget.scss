@@ -51,8 +51,8 @@
   }
 
   &-row {
+    @apply bg-white items-start;
     border-bottom: 1px solid $gray-200;
-    align-items: start;
 
     &:last-child {
       border-bottom: 0;
@@ -74,8 +74,7 @@
   }
 
   &-group {
-    color: $text-muted;
-    background: $gray-50;
+    @apply bg-gray-0 text-gray-6;
     font-weight: 500;
     border-bottom: 1px solid $gray-200;
 
@@ -162,6 +161,6 @@
 
 }
 
-.budget-groups--drag .budget-categories {
-  display: none;
+.sortable-chosen {
+  @apply shadow-lg -mx-2;
 }

@@ -32,7 +32,7 @@ class Group extends Model
         parent::boot();
 
         static::addGlobalScope('sort', function (Builder $builder) {
-            $builder->orderBy('sort', 'asc');
+            $builder->orderBy('sort');
         });
 
         static::creating(function (Group $model) {
@@ -51,6 +51,7 @@ class Group extends Model
             'edit' => URL::route('groups.edit', $this),
             'update' => URL::route('groups.update', $this),
             'destroy' => URL::route('groups.destroy', $this),
+            'collapse' => URL::route('groups.collapse', $this),
             'categories' => [
                 'create' => URL::route('categories.create', ['group' => $this])
             ]

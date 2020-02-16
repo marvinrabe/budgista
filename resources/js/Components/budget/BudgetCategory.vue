@@ -55,6 +55,7 @@
     },
     props: {
       category: Object,
+      month: Object,
       budget: Object
     },
     computed: {
@@ -67,10 +68,9 @@
     },
     methods: {
       updateBudget: function (value) {
-        /* this.$store.dispatch('budgets/update', {
-          ...this.row,
-          budget: value
-        }) */
+        this.$inertia.post(`/budget/${this.month.toString()}/categories/${this.category.id}`, {
+          amount: value
+        })
       }
     }
   }

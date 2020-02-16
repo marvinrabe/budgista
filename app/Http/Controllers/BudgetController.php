@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Budget\Month;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Inertia\Inertia;
 
 class BudgetController extends Controller
 {
 
-    public function __invoke($month = null)
+    public function show($month = null)
     {
         $month = $this->getMonth($month);
 
@@ -23,6 +25,25 @@ class BudgetController extends Controller
                 'next' => URL::route('budget', ['month' => $month->next()])
             ]
         ]);
+    }
+
+    public function store($month, Category $category)
+    {
+        $month = $this->getMonth($month);
+
+        $this->authorize('update', $category);
+
+        request()->validate([
+            'amount' => 'required'
+        ]);
+
+        $category
+            ->budget($month)
+            ->update(
+                request(['amount'])
+            );
+
+        return Redirect::back();
     }
 
     private function getMonth($string): Month

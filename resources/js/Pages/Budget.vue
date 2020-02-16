@@ -36,27 +36,27 @@
 
     <Budget>
       <draggable
-        :class="{'budget-groups--drag': drag}"
         handle=".budget-group-handle"
         group="groups"
-        :value="this.groups"
-        @end="drag=false"
-        @input="sortGroups"
-        @start="drag=true"
         class="budget-groups"
+        v-model="groups"
+        @input="sortGroups"
       >
         <BudgetGroup
           :budget="budget"
           :group="group"
           :key="group.id"
-          v-for="group in this.groups"
+          v-for="group in groups"
         >
           <draggable
             handle=".budget-row-handle"
-            group="categories"
+            :group="'categories-'+group.id"
             class="budget-categories"
+            v-model="group.categories"
+            @input="(l) => sortCategories(group.id, l)"
           >
             <BudgetCategory
+              :month="monthObject"
               :category="category"
               :budget="budget"
               :key="category.id"
@@ -97,12 +97,6 @@
       links: Object,
       groups: Array
     },
-    data () {
-      return {
-        loading: true,
-        drag: false
-      }
-    },
     computed: {
       monthObject () {
         return Month.fromString(this.month)
@@ -112,26 +106,17 @@
       sortGroups (result) {
         const ids = result.map(group => group.id).filter(x => x)
 
-        /*this.$apollo
-          .mutate({
-            mutation: require('../../gql/mutation/groupSort.gql'),
-            variables: { ids },
-            optimisticResponse: {
-              __typename: 'Mutation',
-              groupSort: this.groups.map(group => {
-                if (group.id === null) {
-                  return {
-                    ...group,
-                    sort: ids.length
-                  }
-                }
-                return {
-                  ...group,
-                  sort: ids.findIndex(id => id === group.id)
-                }
-              }).sort(group => group.sort)
-            }
-          })*/
+        this.$inertia.post("/groups/sort", {
+          groups: ids
+        })
+      },
+      sortCategories (group, result) {
+        const ids = result.map(category => category.id).filter(x => x)
+
+        this.$inertia.post("/categories/sort", {
+          group_id: group,
+          categories: ids
+        })
       }
     }
   }

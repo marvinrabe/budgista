@@ -1,40 +1,27 @@
 <template>
   <div class="card mb-3">
     <div class="budget-group">
-      <div class="handle budget-group-handle" v-if="group.id">
+      <div class="handle budget-group-handle">
         <span class="small text-dark">
           <GripIcon/>
         </span>
       </div>
-      <div class="budget-group-handle" style="width: 26px;" v-else></div>
       <div class="data">
-        <div
-          class="budget-column-name ellipsis"
-          v-if="group"
-        >
-          <ChevronRightIcon v-if="collapsed"/>
-          <ChevronDownIcon @click.prevent="collapse" v-else/>
-          <a
-            @click.prevent="collapse"
-            class="text-dark ml-1"
-            href="#"
-            v-text="group.name"
-          ></a>
-        </div>
-        <div
-          class="budget-column-name"
-          v-else
-        >
-          {{ $t('title.ungrouped') }}
+        <div class="budget-column-name cursor-pointer ellipsis hover:text-gray-7" @click="toggleCollapse">
+          <ChevronRightIcon v-if="group.collapsed"/>
+          <ChevronDownIcon v-else/>
+          <span class="font-bold">
+          {{ group.name }}
+          </span>
         </div>
         <div class="budget-column-budget">
-            <AppMoney :value="budgeted"/>
+          <AppMoney :value="budgeted"/>
         </div>
         <div class="budget-column-activity">
-            <AppMoney :value="activity"/>
+          <AppMoney :value="activity"/>
         </div>
         <div class="budget-column-available">
-            <AppMoney :value="available"/>
+          <AppMoney :value="available"/>
         </div>
       </div>
       <div class="actions">
@@ -45,7 +32,7 @@
       </div>
     </div>
 
-    <slot v-if="!collapsed"/>
+    <slot v-if="!group.collapsed"/>
   </div>
 </template>
 
@@ -68,9 +55,6 @@
       budget: Object
     },
     computed: {
-      collapsed () {
-        return false; // TODO
-      },
       sheet () {
         let categories = this.group.categories.map(x => x.id)
         return this.budget.rows.filter(x => categories.includes(x.id))
@@ -86,8 +70,10 @@
       }
     },
     methods: {
-      collapse () {
-        //this.$store.commit('groups/toggleCollapsed', this.group.id)
+      toggleCollapse () {
+        this.$inertia.post(this.group.links.collapse, {
+          collapsed: !this.group.collapsed
+        })
       }
     }
   }

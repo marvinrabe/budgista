@@ -102,26 +102,6 @@ class CategoryController extends Controller
         return Redirect::route('budget');
     }
 
-    public function budget(Category $category)
-    {
-        $this->authorize('update', $category);
-
-        request()->validate([
-            'month' => 'required',
-            'amount' => 'required'
-        ]);
-
-        $month = Month::fromString(request('month'));
-
-        $budget = $category->budget($month);
-
-        $budget->update(
-            request(['amount'])
-        );
-
-        return Redirect::back();
-    }
-
     public function sort()
     {
         request()->validate([

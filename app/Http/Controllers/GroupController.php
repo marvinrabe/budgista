@@ -12,7 +12,8 @@ use Inertia\Inertia;
 class GroupController extends Controller
 {
 
-    public function create() {
+    public function create()
+    {
         return Inertia::render('Groups/Create');
     }
 
@@ -44,7 +45,7 @@ class GroupController extends Controller
 
         $group->update(
             $request->validate([
-                'name' => 'required'
+                'name' => ['required', 'string']
             ])
         );
 
@@ -57,11 +58,11 @@ class GroupController extends Controller
 
         $group->update(
             $request->validate([
-                'collapsed' => 'required|boolean'
+                'collapsed' => ['required', 'boolean']
             ])
         );
 
-        return new GroupResource($group);
+        return Redirect::back();
     }
 
     public function destroy(Group $group)
@@ -86,7 +87,7 @@ class GroupController extends Controller
             $group->save();
         }
 
-        return [];
+        return Redirect::back();
     }
 
 }

@@ -173,7 +173,7 @@ class BudgetTest extends TestCase
             'user_id' => Auth()->id()
         ]);
 
-        $response = $this->get('/budget/' . $month)->assertSuccessful();
+        $response = $this->get('/budget/'.$month)->assertSuccessful();
 
         $row = Collection::make($response->props('budget')['rows'])
             ->where('id', $category->id)
@@ -222,19 +222,18 @@ class BudgetTest extends TestCase
         $this->assertEquals(10, $row['recommendedBudget']);
     }
 
-    /** @test */
-    public function it_saves_budget()
+    public function testStoreBudget()
     {
         $category = factory(Category::class)->create();
         $month = Month::current();
 
         $this
             ->signIn($category->user)
-            ->put('/api/categories/'.$category->id.'/budget', [
-                'month' => (string) $month,
+            ->from("/budget/{$month}")
+            ->post("/budget/{$month}/categories/{$category->id}", [
                 'amount' => 123456
             ])
-            ->assertSuccessful();
+            ->assertRedirect("/budget/{$month}");
 
         $this->assertDatabaseHas('budgets', [
             'category_id' => $category->id,
@@ -243,8 +242,7 @@ class BudgetTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_cleans_the_database()
+    public function testCleanDatabase()
     {
         $category = factory(Category::class)->create();
         $month = Month::current();
