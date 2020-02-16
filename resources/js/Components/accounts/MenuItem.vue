@@ -1,23 +1,15 @@
 <template>
-  <inertia-link
+  <AppMenuItem
     :href="account.links.show"
-    active-class="active"
-    class="menu__item"
+    :icon="icon"
+    :label="account.name"
   >
-    <font-awesome-icon
-      :icon="icon"
-      class="mr-1"
-      fixed-width
-    />
-    <span class="ellipsis" style="flex: 1;">
-      {{ account.name }}
-    </span>
     <AppMoney
       :value="account.balance"
       class="ml-auto text-xs"
       color
     />
-  </inertia-link>
+  </AppMenuItem>
 </template>
 
 <script>
@@ -25,9 +17,11 @@
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
   import AppMoney from '../AppMoney'
   import accountIcons from './accountIcons'
+  import AppMenuItem from '@/Components/AppMenuItem'
 
   export default {
     components: {
+      AppMenuItem,
       AppMoney,
       FontAwesomeIcon
     },

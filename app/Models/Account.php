@@ -45,7 +45,7 @@ class Account extends Model
     public function getLinksAttribute()
     {
         return [
-            'show' => URL::route('accounts.show', $this),
+            'show' => URL::route('accounts.show', $this, false),
             'edit' => URL::route('accounts.edit', $this),
             'update' => URL::route('accounts.update', $this),
             'destroy' => URL::route('accounts.destroy', $this),

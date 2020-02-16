@@ -1,53 +1,20 @@
 <template>
   <div class="menu">
     <template v-for="(item, index) in menu">
-      <account-menu
+      <AccountMenu
         :key="index"
         @navigate="$emit('navigate')"
         v-if="item.accounts"
       />
-      <inertia-link
-        :class="item.class"
-        :key="index"
-        :href="item.route"
-        @click="$emit('navigate')"
-        class="menu__item"
-        v-else-if="item.route"
-      >
-        <font-awesome-icon
-          :icon="item.icon"
-          class="mr-1"
-          fixed-width
-          v-if="item.icon"
-        />
-        <span
-          class="d-block mr-1"
-          style="width: 1.25em"
-          v-else
-        />
-        <span>{{ $t(item.label) }}</span>
-      </inertia-link>
-      <a
-        :class="item.class"
-        :key="index"
-        @click.prevent="item.click"
-        class="menu__item"
-        href="#"
+      <AppMenuItem
         v-else
-      >
-        <font-awesome-icon
-          :icon="item.icon"
-          class="mr-1"
-          fixed-width
-          v-if="item.icon"
-        />
-        <span
-          class="d-block mr-1"
-          style="width: 1.25em"
-          v-else
-        />
-        <span>{{ $t(item.label) }}</span>
-      </a>
+        :key="index"
+        :class="item.class"
+        :icon="item.icon"
+        :href="item.route"
+        :label="$t(item.label)"
+        @click="() => navigate(item)"
+      />
     </template>
   </div>
 </template>
@@ -56,9 +23,11 @@
   import { faChartBar, faCog, faEnvelope, faLifeRing, faUserCircle } from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
   import AccountMenu from '@/Pages/Accounts/Index'
+  import AppMenuItem from '@/Components/AppMenuItem'
 
   export default {
     components: {
+      AppMenuItem,
       AccountMenu,
       FontAwesomeIcon
     },
@@ -106,6 +75,12 @@
       }
     },
     methods: {
+      navigate (item) {
+        if (item.click) {
+          item.click()
+        }
+        this.$emit('navigate')
+      },
       logout () {
         this.$inertia.post('/logout')
       },
