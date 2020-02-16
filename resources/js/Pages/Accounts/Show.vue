@@ -18,7 +18,7 @@
     </template>
 
     <template v-slot:actions>
-      <AppButton :to="account.links.edit">
+      <AppButton :to="account.links.edit" icon>
         <CogIcon/>
       </AppButton>
 

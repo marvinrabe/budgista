@@ -1,6 +1,6 @@
 <template>
   <Layout :title="$t('title.profile')">
-    <div class="card mb-3">
+    <div class="card">
       <div class="card-body">
         <SettingsEmail/>
       </div>

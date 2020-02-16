@@ -1,6 +1,6 @@
 <template>
   <Layout :title="$t('title.deleteUser')">
-    <div class="card mb-3">
+    <div class="card">
       <div class="card-body">
         <p v-t="'message.deleteUser'"/>
 

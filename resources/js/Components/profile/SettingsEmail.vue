@@ -3,7 +3,7 @@
     <div class="flex -mx-1 flex-wrap items-baseline">
       <div class="px-1 w-full lg:w-4/12">
         <h2
-          class="h5"
+          class="text-xl"
           v-t="'title.updateEmail'"
         />
       </div>

@@ -6,6 +6,7 @@
         @click="deleteTransaction"
         subtle
         variant="danger"
+        icon
       >
         <DeleteIcon/>
       </AppButton>

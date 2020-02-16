@@ -6,6 +6,7 @@
         @click="deleteAccount"
         subtle
         variant="danger"
+        icon
       >
         <DeleteIcon/>
       </AppButton>

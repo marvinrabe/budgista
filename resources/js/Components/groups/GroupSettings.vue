@@ -1,12 +1,6 @@
 <template>
-  <b-dropdown
-    no-caret
-    right
-    size="sm"
-    toggle-class="p-0"
-    variant="text-dark"
-  >
-    <template slot="button-content">
+  <b-dropdown no-caret right toggle-class="p-2 -my-2">
+    <template v-slot:button-content>
       <EllipsisIcon/>
     </template>
     <b-dropdown-item @click="$inertia.visit(group.links.categories.create)">

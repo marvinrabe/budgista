@@ -1,8 +1,8 @@
 <template>
   <Layout :title="$t('title.statistics')">
-    <NetWorth :statistics="data" class="mb-3"/>
+    <NetWorth :statistics="data" />
 
-    <IncomeVsExpense :statistics="data"/>
+    <IncomeVsExpense :statistics="data" />
   </Layout>
 </template>
 

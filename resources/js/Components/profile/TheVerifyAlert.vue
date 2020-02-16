@@ -1,6 +1,6 @@
 <template>
   <div v-if="notVerified"
-       class="bg-yellow-0 border-yellow-2 border-0 border-l-4 p-3 mb-3 shadow">
+       class="bg-yellow-0 border-yellow-2 border-0 border-l-4 p-3 mb-4 shadow">
     <div class="md:flex items-center">
       <i18n path="message.verifyEmail" tag="div">
         <template v-slot:email>
@@ -9,7 +9,7 @@
       </i18n>
 
       <div class="mt-2 md:mt-0 ml-auto text-right">
-        <div class="btn-group">
+        <div class="flex">
           <ResendVerification />
           <AppButton
             class="hover:underline"

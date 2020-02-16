@@ -1,22 +1,24 @@
 <template>
   <div class="flex items-center">
-    <inertia-link
-      :title="$t('action.previousMonth')"
-      :href="prev"
-      class="text-gray-6 hover:text-gray-8"
-    >
-      <font-awesome-icon :icon="previousIcon"/>
-    </inertia-link>
+    <div class="flex mr-2">
+      <inertia-link
+        :title="$t('action.previousMonth')"
+        :href="prev"
+        class="btn btn--icon"
+      >
+        <font-awesome-icon :icon="previousIcon"/>
+      </inertia-link>
+      <inertia-link
+        :title="$t('action.nextMonth')"
+        :href="next"
+        class="btn btn--icon"
+      >
+        <font-awesome-icon :icon="nextIcon"/>
+      </inertia-link>
+    </div>
     <span class="text-2xl mx-1">
       {{ month.format() }}
     </span>
-    <inertia-link
-      :title="$t('action.nextMonth')"
-      :href="next"
-      class="text-gray-6 hover:text-gray-8"
-    >
-      <font-awesome-icon :icon="nextIcon"/>
-    </inertia-link>
   </div>
 </template>
 

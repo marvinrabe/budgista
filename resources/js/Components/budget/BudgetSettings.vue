@@ -1,10 +1,6 @@
 <template>
-  <b-dropdown
-    no-caret
-    right
-    variant="light"
-  >
-    <template slot="button-content">
+  <b-dropdown no-caret right>
+    <template v-slot:button-content>
       <EllipsisIcon/>
     </template>
     <b-dropdown-item @click="$inertia.visit('/groups/create')">

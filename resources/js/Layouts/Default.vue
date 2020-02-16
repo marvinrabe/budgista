@@ -15,7 +15,7 @@
             </h1>
           </slot>
 
-          <div class="lg:order-last btn-group">
+          <div class="lg:order-last flex">
             <slot name="actions"/>
           </div>
 

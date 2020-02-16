@@ -38,15 +38,16 @@
         default: false,
         type: Boolean
       },
+      icon: {
+        default: false,
+        type: Boolean
+      },
       to: {
         type: String,
         default: null
       }
     },
     computed: {
-      icon () {
-        return faSpinner
-      },
       type () {
         return this.variant === 'primary' ? 'submit' : 'button'
       },
@@ -57,6 +58,9 @@
         }
         if (this.subtle) {
           classes.push('btn--subtle')
+        }
+        if (this.icon) {
+          classes.push('btn--icon')
         }
         classes.push(this.variant)
         return classes.join(' ')

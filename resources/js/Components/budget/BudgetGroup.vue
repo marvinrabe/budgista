@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-3">
+  <div class="card">
     <div class="budget-group">
       <div class="handle budget-group-handle">
         <span class="small text-dark">

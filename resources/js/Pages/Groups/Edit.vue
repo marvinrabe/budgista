@@ -6,6 +6,7 @@
         @click="deleteGroup"
         subtle
         variant="danger"
+        icon
       >
         <DeleteIcon/>
       </AppButton>

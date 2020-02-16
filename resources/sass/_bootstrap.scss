@@ -6,3 +6,11 @@
 @import "~bootstrap/scss/forms";
 @import "~bootstrap/scss/dropdown";
 @import "~bootstrap/scss/input-group";
+
+.dropdown-toggle-no-caret:after {
+  @apply hidden;
+}
+
+.dropdown-menu {
+  @apply -mx-2 shadow-lg outline-none rounded;
+}

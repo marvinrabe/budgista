@@ -6,6 +6,7 @@
         @click="deleteCategory"
         subtle
         variant="danger"
+        icon
       >
         <DeleteIcon/>
       </AppButton>

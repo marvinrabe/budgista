@@ -74,9 +74,7 @@
   }
 
   &-group {
-    @apply bg-gray-0 text-gray-6;
-    font-weight: 500;
-    border-bottom: 1px solid $gray-200;
+    @apply bg-gray-0 text-gray-7 border-b-2 border-gray-3 font-bold;
 
     .budget-column-budget,
     .budget-column-activity,
@@ -99,8 +97,6 @@
 
   &-categories {
     min-height: 42px;
-    margin-top: 1px;
-    border-top: 1px solid $gray-200;
   }
 
   &-column {

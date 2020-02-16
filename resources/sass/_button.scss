@@ -1,9 +1,15 @@
 .btn {
-  @apply font-bold py-2 px-4 rounded text-gray-8 bg-white cursor-pointer;
+  @apply font-bold py-2 px-4 rounded text-gray-6 cursor-pointer;
   transition: all 0.2s ease 0s;
 
   svg {
     @apply mr-2;
+  }
+
+  &.dropdown-toggle, &--icon {
+    svg {
+      @apply m-0;
+    }
   }
 
   &:disabled {
@@ -11,7 +17,7 @@
   }
 
   &:hover {
-    @apply shadow bg-gray-0;
+    @apply text-gray-8;
   }
 
   &--small {
@@ -22,7 +28,7 @@
     @apply text-white bg-blue-8;
 
     &:hover {
-      @apply bg-blue-9;
+      @apply shadow bg-blue-9;
     }
   }
 
@@ -34,11 +40,27 @@
     }
   }
 
+  &.light {
+    @apply text-gray-8 bg-white;
+
+    &:hover {
+      @apply shadow bg-gray-0;
+    }
+  }
+
+  &--subtle.light {
+    @apply text-gray-8;
+
+    &:hover {
+      @apply text-gray-9;
+    }
+  }
+
   &.danger {
     @apply text-white bg-red-8;
 
     &:hover {
-      @apply bg-red-9;
+      @apply shadow bg-red-9;
     }
   }
 
@@ -53,21 +75,5 @@
   &--subtle, &--subtle:hover, &--subtle:active {
     @apply shadow-none font-normal;
     background: transparent !important;
-  }
-}
-
-.btn-group {
-  @apply flex;
-
-  .btn {
-    @apply rounded-none;
-  }
-
-  .btn:first-child {
-    @apply rounded-l;
-  }
-
-  .btn:last-child {
-    @apply rounded-r;
   }
 }
