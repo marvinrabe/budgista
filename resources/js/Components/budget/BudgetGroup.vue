@@ -60,13 +60,13 @@
         return this.budget.rows.filter(x => categories.includes(x.id))
       },
       budgeted () {
-        return this.sheet.reduce((acc, x) => x.budget, 0)
+        return this.sheet.reduce((acc, x) => acc + x.budget, 0)
       },
       activity () {
-        return this.sheet.reduce((acc, x) => x.activity, 0)
+        return this.sheet.reduce((acc, x) => acc + x.activity, 0)
       },
       available () {
-        return this.sheet.reduce((acc, x) => x.available, 0)
+        return this.sheet.reduce((acc, x) => acc + x.available, 0)
       }
     },
     methods: {
