@@ -139,7 +139,7 @@ export default {
     statistics: 'Statistiken',
     statisticNetWorth: 'Vermögen',
     statisticIncomeVsExpense: 'Einnahmen vs. Ausgaben',
-    verify: 'Verify Your Email Address'
+    verify: 'Verifiziere deine E-Mail Adresse'
   },
   recurrence: {
     DAILY: 'Keine Wiederholung | Jeden Tag | Alle {n} Tage',

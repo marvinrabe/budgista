@@ -2,9 +2,7 @@
   @apply flex flex-wrap flex-col flex-no-wrap;
 
   &__header {
-    @extend .dropdown-header;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    @apply text-sm text-gray-6 px-4 font-bold;
   }
 
   &__item {

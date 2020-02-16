@@ -1,9 +1,12 @@
 <template>
   <div class="my-2">
-    <div class="d-flex align-items-center" style="margin-right: -.25rem">
+    <div class="flex items-center justify-between">
       <p class="menu__header">
         {{ $t('title.accounts') }}
       </p>
+      <AppButton to="/accounts/create" small :title="$t('action.create.account')">
+        <PlusIcon />
+      </AppButton>
     </div>
 
     <menu-item
@@ -30,10 +33,15 @@
 
 <script>
   import MenuItem from '@/Components/accounts/MenuItem'
+  import AppButton from '@/Components/form/AppButton'
+  import { iconComponent } from '@/helpers'
+  import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
   export default {
     components: {
-      MenuItem
+      AppButton,
+      MenuItem,
+      PlusIcon: iconComponent({ icon: faPlus }),
     },
     computed: {
       spendingAccounts () {

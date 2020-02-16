@@ -15,8 +15,9 @@
             class="hover:underline"
             :label="$t('action.changeEmail')"
             to="/profile"
-            small
+            variant="light"
             subtle
+            small
           />
         </div>
       </div>

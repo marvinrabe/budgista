@@ -21,7 +21,7 @@
   }
 
   &--small {
-    @apply mx-1 py-1 px-2;
+    @apply mx-1 py-1 px-2 text-sm;
   }
 
   &.primary {
@@ -73,7 +73,8 @@
   }
 
   &--subtle, &--subtle:hover, &--subtle:active {
-    @apply shadow-none font-normal;
+    @apply font-normal;
+    box-shadow: none !important;
     background: transparent !important;
   }
 }
