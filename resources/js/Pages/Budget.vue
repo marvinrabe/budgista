@@ -14,12 +14,12 @@
         <AppNumber
           :label="$t('form.previousMonth')"
           :value="budget.previousMonth"
-          class="items-start lg:items-end"
+          class="hidden md:flex items-start lg:items-end"
         />
         <AppNumber
           :label="$t('form.income')"
           :value="budget.income"
-          class="items-center lg:items-end"
+          class="items-start md:items-center lg:items-end"
         />
         <AppNumber
           :label="$t('form.unallocated')"
