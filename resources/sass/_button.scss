@@ -1,6 +1,5 @@
 .btn {
   @apply font-bold py-2 px-4 rounded text-gray-8 bg-white cursor-pointer;
-
   transition: all 0.2s ease 0s;
 
   svg {
@@ -20,7 +19,7 @@
   }
 
   &.primary {
-    @apply border-blue-6 text-white bg-blue-8;
+    @apply text-white bg-blue-8;
 
     &:hover {
       @apply bg-blue-9;
@@ -36,7 +35,7 @@
   }
 
   &.danger {
-    @apply border-red-6 text-white bg-red-8;
+    @apply text-white bg-red-8;
 
     &:hover {
       @apply bg-red-9;

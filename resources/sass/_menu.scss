@@ -8,30 +8,27 @@
   }
 
   &__item {
-    @apply py-2 px-4;
+    @apply py-2 px-4 text-gray-7;
     flex-shrink: 0;
     display: flex;
     align-items: center;
-    color: $body-color;
     transition: background-color .2s ease-in, color .2s ease-in, font-weight .2s;
 
     svg {
-      color: $gray-600;
+      @apply text-gray-6;
     }
 
     &:hover {
-      @apply no-underline bg-gray-0;
-      color: $body-color;
+      @apply no-underline bg-gray-0 text-gray-7;
     }
 
     &.active {
-      @apply bg-gray-0;
-      border-left: 2px solid theme-color('primary');
+      @apply bg-gray-0 border-l-2 border-blue-6;
       margin-left: -2px;
       font-weight: 500;
 
       svg {
-        color: theme-color('primary');
+        @apply text-blue-7;
       }
     }
   }
