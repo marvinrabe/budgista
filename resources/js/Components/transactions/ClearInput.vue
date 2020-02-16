@@ -38,7 +38,7 @@
         })
       },
       unclear () {
-        this.$inertia.delete(`/clearedTransactions/${this.transaction.id}`)
+        this.$inertia.delete(`/clearedTransactions/${this.transaction.id}`, { preserveScroll: true })
       }
     }
   }

@@ -70,7 +70,7 @@
       updateBudget: function (value) {
         this.$inertia.post(`/budget/${this.month.toString()}/categories/${this.category.id}`, {
           amount: value
-        })
+        }, { preserveScroll: true })
       }
     }
   }

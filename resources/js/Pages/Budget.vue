@@ -108,7 +108,7 @@
 
         this.$inertia.post("/groups/sort", {
           groups: ids
-        })
+        }, { preserveScroll: true })
       },
       sortCategories (group, result) {
         const ids = result.map(category => category.id).filter(x => x)
@@ -116,7 +116,7 @@
         this.$inertia.post("/categories/sort", {
           group_id: group,
           categories: ids
-        })
+        }, { preserveScroll: true })
       }
     }
   }

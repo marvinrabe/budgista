@@ -73,7 +73,7 @@
       toggleCollapse () {
         this.$inertia.post(this.group.links.collapse, {
           collapsed: !this.group.collapsed
-        })
+        }, { preserveScroll: true })
       }
     }
   }
