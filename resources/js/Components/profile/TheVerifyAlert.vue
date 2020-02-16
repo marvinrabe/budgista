@@ -10,11 +10,11 @@
 
       <div class="mt-2 md:mt-0 ml-auto text-right">
         <div class="btn-group">
-          <ResendVerification class="hover:underline"/>
+          <ResendVerification />
           <AppButton
+            class="hover:underline"
             :label="$t('action.changeEmail')"
             to="/profile"
-            class="hover:underline"
             small
             subtle
           />

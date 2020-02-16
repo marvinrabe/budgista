@@ -2,6 +2,7 @@
   <AppButton
     :loading="loading"
     @click="send"
+    class="hover:underline"
     subtle
     small
   >
