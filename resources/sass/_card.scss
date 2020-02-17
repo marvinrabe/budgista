@@ -2,15 +2,15 @@
   @apply shadow rounded bg-white mb-4;
 
   &-body, &-header, &-footer {
-    @apply px-4 py-2;
+    @apply p-4;
   }
 
   &-header {
-    @apply text-gray-7 bg-gray-0 border-b-2 border-gray-3 font-bold;
+    @apply py-2 text-gray-7 bg-gray-0 border-b-2 border-gray-3 font-bold;
   }
 
   &-footer {
-    @apply text-gray-7 bg-gray-0 border-t-2 border-gray-3;
+    @apply py-2 text-gray-7 bg-gray-0 border-t-2 border-gray-3;
   }
 
   &-title {
