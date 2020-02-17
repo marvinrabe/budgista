@@ -39,10 +39,10 @@ jobs:
         with:
           name: frontend-files
           path: public
-      - uses: shivammathur/setup-php@master
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: 7.4
-          extension-csv: mbstring, bcmath, intl
+          extensions: mbstring, bcmath, intl
       - name: Copy ENV Laravel Configuration for CI
         run: php -r "file_exists('.env') || copy('.github/.env.testing', '.env');"
       - name: Install Dependencies (PHP vendors)
