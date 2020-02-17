@@ -52,5 +52,10 @@
   "You are receiving this email because we received a password reset request for your account.": "Du erhältst diese E-Mail, weil wir einen Antrag auf eine Zurücksetzung deines Passworts bekommen haben.",
   "Your email address is not verified.": "Deine E-Mail Adresse wurde noch nicht bestätigt.",
   "Whoops!": "Ups!",
-  "Whoops, something went wrong on our servers.": "Ups, etwas ist schief gelaufen."
+  "Whoops, something went wrong on our servers.": "Ups, etwas ist schief gelaufen.",
+  "Email Address has been updated.": "E-Mail Adresse wurde geändert.",
+  "Password has been updated.": "Passwort wurde geändert.",
+  "Settings have been saved.": "Einstellungen wurden gespeichert.",
+  "User account deleted. Thank you for using Budgista.": "Benutzerkonto wurde gelöscht. Vielen Dank dass du Budgista ausprobiert hast.",
+  "An email with a password reset link has been sent.": "Eine E-Mail zum zurücksetzen des Passworts wurde verschickt."
 }

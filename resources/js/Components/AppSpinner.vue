@@ -2,7 +2,6 @@
   <div
     class="spinner"
     role="progressbar"
-    :aria-label="$t('action.loading')"
   >
     <div class="bounce1" />
     <div class="bounce2" />

@@ -6,6 +6,7 @@ import { i18n, loadLanguage } from './Plugins/i18n'
 import './Plugins/analytics'
 import './Plugins/meta'
 import './Plugins/portal'
+import { flashMessages } from './Plugins/toasted'
 
 import { DropdownPlugin } from 'bootstrap-vue'
 
@@ -23,6 +24,7 @@ new Vue({
       resolveComponent: name => import(`./Pages/${name}`).then(module => module.default),
       transformProps: props => {
         loadLanguage(props.user)
+        flashMessages(props.flash)
         return props
       },
     },

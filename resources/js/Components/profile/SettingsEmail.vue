@@ -84,11 +84,20 @@
       }
     },
     methods: {
+      reset () {
+        this.form = {
+          email: '',
+          password: ''
+        }
+      },
       save () {
         this.saving = true
 
         this.$inertia
           .post('/profile/email', this.form)
+          .then(() => {
+            this.reset()
+          })
           .finally(() => {
             this.saving = false
           })

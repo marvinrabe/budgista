@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Laracasts\Flash\Flash;
 
 class UserController extends Controller
 {
@@ -45,6 +46,8 @@ class UserController extends Controller
 
         $user->sendEmailVerificationNotification();
 
+        Flash::success(__('Email Address has been updated.'));
+
         return Redirect::back();
     }
 
@@ -62,6 +65,8 @@ class UserController extends Controller
         Auth()->user()->update([
             'password' => Hash::make(request('new_password'))
         ]);
+
+        Flash::success(__('Password has been updated.'));
 
         return Redirect::back();
     }
@@ -83,6 +88,10 @@ class UserController extends Controller
         ]);
 
         Auth()->user()->terminate(request('feedback'));
+
+        Flash::success(__('User account deleted. Thank you for using Budgista.'));
+
+        return Redirect::route('login');
     }
 
 }

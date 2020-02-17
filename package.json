@@ -47,5 +47,8 @@
     "vue-template-compiler": "^2.6.10",
     "vuedraggable": "^2.23.2",
     "zxcvbn": "^4.4.2"
+  },
+  "dependencies": {
+    "vue-toasted": "^1.1.27"
   }
 }

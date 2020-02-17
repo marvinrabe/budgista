@@ -66,11 +66,20 @@
       }
     },
     methods: {
+      reset () {
+        this.form = {
+          password: '',
+          new_password: ''
+        }
+      },
       save () {
         this.saving = true
 
         this.$inertia
           .post('/profile/password', this.form)
+          .then(() => {
+            this.reset()
+          })
           .finally(() => {
             this.saving = false
           })

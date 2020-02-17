@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Laracasts\Flash\Flash;
 use Propaganistas\LaravelIntl\Facades\Currency;
 use Propaganistas\LaravelIntl\Facades\Language;
 
@@ -35,6 +36,8 @@ class SettingsController extends Controller
                 ],
             ])
         );
+
+        Flash::success(__('Settings have been saved.'));
 
         return Redirect::back();
     }
