@@ -1,38 +1,36 @@
 <template>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
+  <div class="flex items-stretch mb-3">
+    <div class="rounded-l bg-gray-1 border border-gray-4 flex px-1 items-center whitespace-no-wrap">
       <span
-        class="input-group-text"
         v-t="'form.recurringInterval'"
       />
     </div>
     <input
-      class="form-control"
+      class="form-control border-gray-4 flex-1 w-auto min-w-0 rounded-none border-l-0 border-r-0"
       max="50"
+      style="width: initial;"
       min="1"
       step="1"
       type="number"
       v-model="interval"
     >
-    <div class="input-group-append">
-      <select
-        class="form-control"
-        v-model="frequency"
-      >
-        <option value="DAILY">
-          {{ $t('frequencyUnit.days') }}
-        </option>
-        <option value="WEEKLY">
-          {{ $t('frequencyUnit.weeks') }}
-        </option>
-        <option value="MONTHLY">
-          {{ $t('frequencyUnit.months') }}
-        </option>
-        <option value="YEARLY">
-          {{ $t('frequencyUnit.years') }}
-        </option>
-      </select>
-    </div>
+    <select
+      class="form-control w-auto rounded-l-none"
+      v-model="frequency"
+    >
+      <option value="DAILY">
+        {{ $t('frequencyUnit.days') }}
+      </option>
+      <option value="WEEKLY">
+        {{ $t('frequencyUnit.weeks') }}
+      </option>
+      <option value="MONTHLY">
+        {{ $t('frequencyUnit.months') }}
+      </option>
+      <option value="YEARLY">
+        {{ $t('frequencyUnit.years') }}
+      </option>
+    </select>
   </div>
 </template>
 

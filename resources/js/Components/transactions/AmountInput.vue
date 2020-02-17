@@ -1,9 +1,9 @@
 <template>
-  <div class="input-group">
-    <div class="input-group-prepend">
+  <div class="flex items-stretch">
+    <div class="border border-r-0 border-gray-4 flex items-center rounded-l">
       <b-dropdown
         :text="(type === 1) ? $t('form.income') : $t('form.expense')"
-        :variant="(type === 1) ? 'outline-success':'outline-danger'"
+        :toggle-class="'py-1 ' + ((type === 1) ? 'text-green-8 hover:text-green-9':'text-red-8 hover:text-red-9')"
       >
         <b-dropdown-item @click="setToExpense">
           {{ $t('form.expense') }}
@@ -17,6 +17,7 @@
     <app-money-input
       @input="input"
       ref="amount"
+      class="rounded-l-none"
       v-bind="$attrs"
       v-model="amount"
     />

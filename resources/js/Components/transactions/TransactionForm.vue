@@ -16,8 +16,8 @@
       />
     </FormGroup>
 
-    <div class="flex">
-      <div class="w-1/2">
+    <div class="flex -mx-1">
+      <div class="w-1/2 px-1">
         <FormGroup name="category">
           <CategorySelect
             slot-scope="{bindings}"
@@ -27,20 +27,21 @@
         </FormGroup>
       </div>
 
-      <div class="w-1/2">
+      <div class="w-1/2 px-1">
         <FormGroup name="date">
           <template slot-scope="{bindings}">
-            <div class="input-group">
+            <div class="flex items-stretch">
               <DateInput
                 v-bind="bindings"
                 v-model="form.date"
+                class="rounded-r-none"
               />
-              <div class="input-group-append">
+              <div class="border border-l-0 border-gray-4 rounded-r flex items-center">
                 <button
-                  :class="{'text-primary': form.recurring}"
                   :title="$t('form.recurring')"
                   @click="form.recurring = !form.recurring"
-                  class="btn btn-light border-gray-4"
+                  class="btn btn--icon py-1"
+                  :class="{'text-blue-7': form.recurring}"
                   type="button"
                 >
                   <RecurringIcon/>
