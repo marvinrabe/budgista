@@ -6,6 +6,7 @@ use App\Http\Resources\User as UserResource;
 use App\Models\User;
 use App\Rules\ValidPassword;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -59,7 +60,7 @@ class UserController extends Controller
         ]);
 
         Auth()->user()->update([
-            'password' => bcrypt(request('new_password'))
+            'password' => Hash::make(request('new_password'))
         ]);
 
         return Redirect::back();

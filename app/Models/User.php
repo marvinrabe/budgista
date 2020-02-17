@@ -14,6 +14,10 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
+    protected $casts = [
+        'email_verified_at' => 'datetime'
+    ];
+
     protected $fillable = [
         'name',
         'email',

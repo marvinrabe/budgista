@@ -9,6 +9,16 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+
+    /**
      * Bootstrap any application services.
      *
      * @return void
@@ -26,15 +36,5 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('donottrack', function () {
             return (isset($_SERVER['HTTP_DNT']) && $_SERVER['HTTP_DNT'] == 1);
         });
-    }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
     }
 }
