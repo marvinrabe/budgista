@@ -15,18 +15,12 @@
 
 <script>
   import AppLogo from '@/Components/AppLogo.vue'
+  import base from '@/Layouts/base'
 
   export default {
     components: {
       AppLogo
     },
-    props: {
-      title: String
-    },
-    metaInfo () {
-      return {
-        title: this.title
-      }
-    }
+    mixins: [base]
   }
 </script>

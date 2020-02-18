@@ -32,6 +32,7 @@
   import AppHeader from '@/Components/AppHeader'
   import AppSidebar from '@/Components/AppSidebar'
   import VerifyAlert from '@/Components/profile/TheVerifyAlert'
+  import base from '@/Layouts/base'
 
   export default {
     components: {
@@ -39,13 +40,6 @@
       AppSidebar,
       VerifyAlert
     },
-    props: {
-      title: String
-    },
-    metaInfo () {
-      return {
-        title: this.title
-      }
-    }
+    mixins: [base]
   }
 </script>

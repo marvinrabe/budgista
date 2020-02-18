@@ -5,8 +5,7 @@ module.exports = {
   output: { chunkFilename: 'js/[name].js?id=[chunkhash]' },
   resolve: {
     alias: {
-      '@': path.resolve('resources/js'),
-      'chart.js': 'chart.js/dist/Chart.js'
+      '@': path.resolve('resources/js')
     },
   },
   externals: {

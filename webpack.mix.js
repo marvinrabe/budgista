@@ -12,7 +12,7 @@ mix
     postCss: [tailwind('tailwind.config.js')],
   })
   .purgeCss({
-    whitelistPatternsChildren: [/dropdown/]
+    whitelistPatternsChildren: [/dropdown/,/notyf/]
   })
   .webpackConfig(webpack)
   .version()

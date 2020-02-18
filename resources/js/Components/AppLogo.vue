@@ -1,8 +1,8 @@
 <template>
   <img
     src="../Assets/logo.svg"
+    alt="Budgista"
     :height="height"
-    :alt="$t('app.name')"
   >
 </template>
 

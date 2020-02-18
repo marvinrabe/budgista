@@ -1,7 +1,4 @@
 export default {
-  app: {
-    name: 'Budgista'
-  },
   pagination: {
     next: 'Older',
     previous: 'Newer',
