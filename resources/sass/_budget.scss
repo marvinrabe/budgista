@@ -16,14 +16,13 @@
   }
 
   .handle {
-    text-align: center;
+    @apply p-2 px-3 -m-1 text-center;
     flex: 26px;
     flex-shrink: 0;
     flex-grow: 0;
     cursor: move;
     cursor: -webkit-grab;
     cursor: -moz-grab;
-    padding: .5em .3em;
   }
 
   .actions,
