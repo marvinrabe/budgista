@@ -7,6 +7,8 @@
   }
 
   &.dropdown-toggle, &--icon {
+    @apply p-2 mx-1;
+
     svg {
       @apply m-0;
     }
