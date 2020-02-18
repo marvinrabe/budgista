@@ -34,65 +34,34 @@
 
     <TransactionList :transactions="transactions.data"/>
 
-    <InfiniteLoading @infinite="showMore" v-if="transactions">
-      <span slot="no-more"/>
-      <div class="m-3 text-muted" slot="spinner">
-        <AppSpinner/>
-      </div>
-    </InfiniteLoading>
+    <div class="flex items-center justify-end">
+      <AppPagination :paginator="transactions"/>
+    </div>
   </Layout>
 </template>
 
 <script>
   import { faPlus, faCog } from '@fortawesome/free-solid-svg-icons'
-  import InfiniteLoading from 'vue-infinite-loading'
-  import AppSpinner from '@/Components/AppSpinner'
   import AppNumber from '@/Components/AppNumber'
   import AppButton from '@/Components/form/AppButton'
   import TransactionList from '@/Components/transactions/TransactionList'
   import { iconComponent } from '@/helpers'
   import Layout from '@/Layouts/Default'
-
-  const pageSize = 25
+  import AppPagination from '@/Components/AppPagination'
 
   export default {
     components: {
+      AppPagination,
       Layout,
       PlusIcon: iconComponent({ icon: faPlus }),
       CogIcon: iconComponent({ icon: faCog }),
       AppButton,
       AppNumber,
-      AppSpinner,
-      InfiniteLoading,
       TransactionList
     },
     props: {
       account: Object,
       transactions: Object
-    },
-    data () {
-      return {
-        page: 1,
-        showMoreEnabled: true
-      }
-    },
-    computed: {
-      transactionList () {
-        if (this.transactions) {
-          return this.transactions.data
-        }
-        return []
-      }
-    },
-    methods: {
-      showMore (loader) {
-        if (!this.showMoreEnabled && loader) {
-          loader.complete()
-          return
-        }
-
-        this.page++
-      }
     }
   }
 </script>

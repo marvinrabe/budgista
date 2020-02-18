@@ -6,14 +6,14 @@
         :href="prev"
         class="btn btn--icon"
       >
-        <font-awesome-icon :icon="previousIcon"/>
+        <PrevIcon />
       </inertia-link>
       <inertia-link
         :title="$t('action.nextMonth')"
         :href="next"
         class="btn btn--icon"
       >
-        <font-awesome-icon :icon="nextIcon"/>
+        <NextIcon />
       </inertia-link>
     </div>
     <span class="text-2xl mx-1">
@@ -24,25 +24,18 @@
 
 <script>
   import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
   import Month from '@/Utils/Month'
+  import { iconComponent } from '@/helpers'
 
   export default {
     components: {
-      FontAwesomeIcon
+      NextIcon: iconComponent({ icon: faChevronRight, fixedWidth: true }),
+      PrevIcon: iconComponent({ icon: faChevronRight, fixedWidth: true })
     },
     props: {
       month: Month,
       next: String,
       prev: String
-    },
-    computed: {
-      previousIcon () {
-        return faChevronLeft
-      },
-      nextIcon () {
-        return faChevronRight
-      }
     }
   }
 </script>

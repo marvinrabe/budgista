@@ -2,6 +2,11 @@ export default {
   app: {
     name: 'Budgista'
   },
+  pagination: {
+    next: 'Older',
+    previous: 'Newer',
+    info: '{from}-{to} of {total}'
+  },
   message: {
     deleteUser: 'If you delete your user account all your data will be immediately, completely and irrevocably lost. Please enter your password to confirm the deletion.',
     deleteAccount: 'Do you really want to delete {name}? All transactions will be lost. This action can\'t be reversed.',

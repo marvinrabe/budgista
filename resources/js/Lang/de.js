@@ -2,6 +2,11 @@ export default {
   app: {
     name: 'Budgista'
   },
+  pagination: {
+    next: 'Ältere',
+    previous: 'Neuere',
+    info: '{from}-{to} von {total}'
+  },
   message: {
     deleteUser: 'Wenn du dein Benutzerkonto löscht, dann werden deine Daten sofort, vollständig und unwiderruflich entfernt. Bitte gib dein Passwort ein um die Löschung zu bestätigen.',
     deleteAccount: 'Möchtest du {name} wirklich löschen? Alle Kontobewegungen werden entfernt. Dies kann nicht rückgängig gemacht werden.',
