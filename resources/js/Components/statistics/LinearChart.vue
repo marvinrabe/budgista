@@ -8,6 +8,8 @@
     extends: Bar,
     mixins: [reactiveProp, moneyMixin],
     mounted () {
+      const self = this;
+
       this.renderChart(
         this.chartData,
         {
@@ -21,7 +23,7 @@
           tooltips: {
             callbacks: {
               label: function (item) {
-                return this.moneyFormat.format(item.yLabel)
+                return self.moneyFormat.format(item.yLabel)
               }
             }
           },
@@ -30,7 +32,7 @@
               ticks: {
                 beginAtZero: true,
                 callback: function (value) {
-                  return this.moneyFormat.format(value)
+                  return self.moneyFormat.format(value)
                 }
               }
             }]
