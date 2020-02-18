@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Password Reminder Language Lines
+    | Password Reset Language Lines
     |--------------------------------------------------------------------------
     |
     | The following language lines are the default lines which match reasons
@@ -13,11 +13,10 @@ return [
     |
     */
 
-    'password'  => 'Passwörter müssen mindestens 8 Zeichen lang sein und korrekt bestätigt werden.',
-    'reset'     => 'Das Passwort wurde zurückgesetzt!',
-    'sent'      => 'Passworterinnerung wurde gesendet!',
+    'reset' => 'Your password has been reset!',
+    'sent' => 'We have e-mailed your password reset link!',
     'throttled' => 'Please wait before retrying.',
-    'token'     => 'Der Passwort-Wiederherstellungs-Schlüssel ist ungültig oder abgelaufen.',
-    'user'      => 'Es konnte leider kein Nutzer mit dieser E-Mail-Adresse gefunden werden.',
+    'token' => 'This password reset token is invalid.',
+    'user' => "We can't find a user with that e-mail address.",
 
 ];
