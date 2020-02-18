@@ -6,7 +6,7 @@
           <div class="flex flex-wrap items-baseline">
             <div class="w-full lg:w-4/12">
               <h2
-                class="text-xl"
+                class="text-xl mb-2"
                 v-t="'title.localisation'"
               />
             </div>

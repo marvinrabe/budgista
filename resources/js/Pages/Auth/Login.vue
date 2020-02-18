@@ -52,7 +52,7 @@
                   v-model="form.remember"
                 >
                 <label
-                  class="form-check-label"
+                  class="form-check-label" ^
                   for="remember"
                   v-t="'form.remember'"
                 />
@@ -69,7 +69,7 @@
         </AppForm>
       </div>
 
-      <div class="card-footer text-center">
+      <div class="card-footer p-4 text-center">
         <span class="mr-1" v-t="'message.noAccount'"/>
         <inertia-link
           href="/register"

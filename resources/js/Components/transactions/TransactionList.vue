@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <div class="transactions-header">
+  <TransactionListEmpty v-if="isEmpty"/>
+  <div class="card" v-else>
+    <div class="card-header p-0 hidden sm:flex">
       <div class="transaction-item">
         &nbsp;
         <div class="transaction-date">
@@ -21,26 +22,23 @@
       </div>
     </div>
 
-    <TransactionListEmpty v-if="isEmpty"/>
-    <div class="card" v-else>
-      <div
-        class="text-center p-1 transactions-row-dummy"
-        v-if="countFutureTransactions > 0 && !showFutureTransactions"
+    <div
+      class="text-center p-1 transactions-row-dummy"
+      v-if="countFutureTransactions > 0 && !showFutureTransactions"
+    >
+      <a
+        @click.prevent="showFutureTransactions = true"
+        class="small"
+        href="#"
       >
-        <a
-          @click.prevent="showFutureTransactions = true"
-          class="small"
-          href="#"
-        >
-          {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions }) }}
-        </a>
-      </div>
-      <TransactionListItem
-        :key="transaction.id"
-        :transaction="transaction"
-        v-for="transaction of filteredTransactions"
-      />
+        {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions }) }}
+      </a>
     </div>
+    <TransactionListItem
+      :key="transaction.id"
+      :transaction="transaction"
+      v-for="transaction of filteredTransactions"
+    />
   </div>
 </template>
 

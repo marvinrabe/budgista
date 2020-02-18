@@ -6,7 +6,7 @@
     <div class="-mx-1 flex flex-wrap items-baseline">
       <div class="px-1 w-full lg:w-4/12">
         <h2
-          class="text-xl"
+          class="text-xl mb-2"
           v-t="'title.updatePassword'"
         />
       </div>

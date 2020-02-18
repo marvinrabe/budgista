@@ -1,7 +1,6 @@
 
 .transactions {
 
-  &-header,
   &-row {
     display: flex;
     flex-direction: row;
@@ -11,13 +10,6 @@
     & > div {
       padding: $table-cell-padding;
     }
-  }
-
-  &-header {
-    color: $text-muted;
-    font-family: $headings-font-family;
-    font-size: $small-font-size;
-    cursor: default;
   }
 
   &-row,
@@ -114,7 +106,7 @@
   }
 }
 
-@include media-breakpoint-down(xs) {
+@media (max-width: 639px) {
   .transaction-item {
     flex-wrap: wrap;
   }
@@ -139,9 +131,5 @@
     .tb-skeleton {
       margin-left: auto !important;
     }
-  }
-
-  .transactions-header {
-    display: none;
   }
 }
