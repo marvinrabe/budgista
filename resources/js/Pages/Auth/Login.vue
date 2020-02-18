@@ -52,7 +52,7 @@
                   v-model="form.remember"
                 >
                 <label
-                  class="form-check-label" ^
+                  class="form-check-label"
                   for="remember"
                   v-t="'form.remember'"
                 />
