@@ -23,12 +23,12 @@
     </div>
 
     <div
-      class="text-center p-1 transactions-row-dummy"
+      class="text-center p-1 border-b border-gray-3 bg-blue-0"
       v-if="countFutureTransactions > 0 && !showFutureTransactions"
     >
       <a
         @click.prevent="showFutureTransactions = true"
-        class="small"
+        class="text-sm text-blue-9"
         href="#"
       >
         {{ $tc('action.futureTransactions', countFutureTransactions, { count: countFutureTransactions }) }}

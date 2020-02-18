@@ -12,21 +12,11 @@
     }
   }
 
-  &-row,
-  &-row-dummy {
-    border-bottom: 1px solid $gray-200;
+  &-row {
+    @apply border-b border-gray-3;
 
     &:last-child {
-      border-bottom: 0;
-    }
-  }
-
-  &-row-dummy {
-    background: $gray-50;
-
-    a {
-      font-weight: 500;
-      color: $text-muted;
+      @apply border-0;
     }
   }
 
