@@ -1,6 +1,20 @@
 import Dinero from 'dinero.js'
 
-export default class {
+export const mixin = {
+  computed: {
+    moneyFormat() {
+      if(this.$page.user) {
+        return new Formatter(
+          this.$page.user.locale,
+          this.$page.user.currency
+        )
+      }
+      return new Formatter('en', 'USD');
+    }
+  }
+}
+
+export default class Formatter {
   constructor (locale, currency) {
     this.locale = locale
     this.currency = currency

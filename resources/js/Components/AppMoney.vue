@@ -7,9 +7,10 @@
 </template>
 
 <script>
-  import { formatter } from '@/helpers'
+  import { mixin as moneyMixin } from '@/Utils/Money'
 
   export default {
+    mixins: [moneyMixin],
     props: {
       value: Number,
       color: {
@@ -25,7 +26,7 @@
         return ''
       },
       text () {
-        return formatter.format(this.value)
+        return this.moneyFormat.format(this.value)
       }
     }
   }

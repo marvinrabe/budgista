@@ -43,7 +43,7 @@
   import AppMoney from '../AppMoney'
   import AppMoneyInput from '../form/AppMoneyInput'
   import { faGripLinesVertical } from '@fortawesome/free-solid-svg-icons'
-  import { formatter } from '@/helpers'
+  import { mixin as moneyMixin } from '@/Utils/Money'
   import { iconComponent } from '@/Utils/Icons'
   import CategorySettings from '../categories/CategorySettings'
 
@@ -54,6 +54,7 @@
       GripIcon: iconComponent({ icon: faGripLinesVertical, fixedWidth: true }),
       CategorySettings
     },
+    mixins: [moneyMixin],
     props: {
       category: Object,
       month: Object,
@@ -64,7 +65,7 @@
         return this.budget.rows.filter(x => x.id === this.category.id)[0] || {}
       },
       recommendedTitle () {
-        return this.$t('form.recommendedBudget') + ': ' + formatter.format(this.row.recommendedBudget)
+        return this.$t('form.recommendedBudget') + ': ' + this.moneyFormat.format(this.row.recommendedBudget)
       }
     },
     methods: {

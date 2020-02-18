@@ -1,12 +1,12 @@
 <script>
   import { Bar, mixins } from 'vue-chartjs'
-  import { formatter } from '@/helpers'
+  import { mixin as moneyMixin } from '@/Utils/Money'
 
   const { reactiveProp } = mixins
 
   export default {
     extends: Bar,
-    mixins: [reactiveProp],
+    mixins: [reactiveProp, moneyMixin],
     mounted () {
       this.renderChart(
         this.chartData,
@@ -21,7 +21,7 @@
           tooltips: {
             callbacks: {
               label: function (item) {
-                return formatter.format(item.yLabel)
+                return this.moneyFormat.format(item.yLabel)
               }
             }
           },
@@ -30,7 +30,7 @@
               ticks: {
                 beginAtZero: true,
                 callback: function (value) {
-                  return formatter.format(value)
+                  return this.moneyFormat.format(value)
                 }
               }
             }]
