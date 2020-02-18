@@ -6,7 +6,7 @@ import { i18n, loadLanguage } from './Plugins/i18n'
 import './Plugins/analytics'
 import './Plugins/meta'
 import './Plugins/portal'
-import { flashMessages } from './Plugins/toasted'
+import { flashMessages } from './Plugins/toasts'
 
 import { DropdownPlugin } from 'bootstrap-vue'
 

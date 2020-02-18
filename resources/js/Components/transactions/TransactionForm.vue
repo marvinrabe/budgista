@@ -64,7 +64,7 @@
   import FormGroup from '@/Components/form/FormGroup.vue'
   import { faSync } from '@fortawesome/free-solid-svg-icons'
   import dayjs from 'dayjs'
-  import { iconComponent } from '../../helpers'
+  import { iconComponent } from '@/Utils/Icons'
   import CategorySelect from '../categories/CategorySelect'
   import AppButton from '../form/AppButton'
   import AppForm from '../form/AppForm'

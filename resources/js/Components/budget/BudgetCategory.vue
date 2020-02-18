@@ -43,7 +43,8 @@
   import AppMoney from '../AppMoney'
   import AppMoneyInput from '../form/AppMoneyInput'
   import { faGripLinesVertical } from '@fortawesome/free-solid-svg-icons'
-  import { formatter, iconComponent } from '../../helpers'
+  import { formatter } from '@/helpers'
+  import { iconComponent } from '@/Utils/Icons'
   import CategorySettings from '../categories/CategorySettings'
 
   export default {

@@ -11,7 +11,7 @@
 
 <script>
   import { faBars } from '@fortawesome/free-solid-svg-icons'
-  import { iconComponent } from '../helpers'
+  import { iconComponent } from '@/Utils/Icons'
   import AppButton from './form/AppButton'
 
   export default {

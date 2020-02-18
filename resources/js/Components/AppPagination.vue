@@ -24,7 +24,7 @@
 
 <script>
   import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-  import { iconComponent } from '@/helpers'
+  import { iconComponent } from '@/Utils/Icons'
   import AppButton from '@/Components/form/AppButton'
 
   export default {

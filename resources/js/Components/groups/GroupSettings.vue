@@ -15,7 +15,7 @@
 
 <script>
   import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
-  import { iconComponent, prepareComponent } from '../../helpers'
+  import { iconComponent } from '@/Utils/Icons'
 
   export default {
     components: {

@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Formatter from '@/Utils/Money'
 
 export const formatter = new Formatter('de', 'EUR')
@@ -17,8 +16,4 @@ export function prepareComponent (component, props = {}) {
         context.children)
     }
   })
-}
-
-export function iconComponent (props = {}) {
-  return prepareComponent(FontAwesomeIcon, props)
 }

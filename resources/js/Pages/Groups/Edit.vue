@@ -43,7 +43,7 @@
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import FormGroup from '@/Components/form/FormGroup'
-  import { iconComponent } from '@/helpers'
+  import { iconComponent } from '@/Utils/Icons'
   import { faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 
   export default {

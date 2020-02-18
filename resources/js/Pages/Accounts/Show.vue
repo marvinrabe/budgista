@@ -45,7 +45,7 @@
   import AppNumber from '@/Components/AppNumber'
   import AppButton from '@/Components/form/AppButton'
   import TransactionList from '@/Components/transactions/TransactionList'
-  import { iconComponent } from '@/helpers'
+  import { iconComponent } from '@/Utils/Icons'
   import Layout from '@/Layouts/Default'
   import AppPagination from '@/Components/AppPagination'
 

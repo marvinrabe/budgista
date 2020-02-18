@@ -38,7 +38,7 @@
 
 <script>
   import { faChevronDown, faChevronRight, faGripLinesVertical } from '@fortawesome/free-solid-svg-icons'
-  import { iconComponent } from '../../helpers'
+  import { iconComponent } from '@/Utils/Icons'
   import AppMoney from '../AppMoney'
   import GroupSettings from '../groups/GroupSettings'
 

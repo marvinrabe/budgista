@@ -10,7 +10,7 @@
 
 <script>
   import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
-  import { iconComponent } from '../../helpers'
+  import { iconComponent } from '@/Utils/Icons'
 
   export default {
     components: {

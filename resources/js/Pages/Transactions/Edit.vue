@@ -36,7 +36,7 @@
   import { faTrashAlt } from '@fortawesome/free-regular-svg-icons'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
-  import { iconComponent } from '@/helpers'
+  import { iconComponent } from '@/Utils/Icons'
 
   export default {
     components: {

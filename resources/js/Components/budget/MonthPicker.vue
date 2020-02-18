@@ -25,12 +25,12 @@
 <script>
   import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
   import Month from '@/Utils/Month'
-  import { iconComponent } from '@/helpers'
+  import { iconComponent } from '@/Utils/Icons'
 
   export default {
     components: {
       NextIcon: iconComponent({ icon: faChevronRight, fixedWidth: true }),
-      PrevIcon: iconComponent({ icon: faChevronRight, fixedWidth: true })
+      PrevIcon: iconComponent({ icon: faChevronLeft, fixedWidth: true })
     },
     props: {
       month: Month,

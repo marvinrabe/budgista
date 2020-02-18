@@ -34,7 +34,7 @@
 <script>
   import MenuItem from '@/Components/accounts/MenuItem'
   import AppButton from '@/Components/form/AppButton'
-  import { iconComponent } from '@/helpers'
+  import { iconComponent } from '@/Utils/Icons'
   import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
   export default {
