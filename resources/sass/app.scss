@@ -24,9 +24,16 @@ a:hover {
 @tailwind components;
 
 .ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+
+  span, h1, h2, h3 {
+    display: block;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }
 
 @import "button";

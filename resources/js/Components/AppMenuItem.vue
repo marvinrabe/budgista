@@ -11,12 +11,14 @@
       fixed-width
       v-if="icon"
     />
-    <span
+    <div
       class="d-block mr-1"
       style="width: 1.25em"
       v-else
     />
-    <span class="ellipsis">{{ label }}</span>
+    <div class="ellipsis">
+      <span>{{ label }}</span>
+    </div>
     <slot></slot>
   </a>
 </template>

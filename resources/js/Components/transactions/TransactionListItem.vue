@@ -7,22 +7,22 @@
       :href="transaction.links.edit"
       class="transaction-item"
     >
-      <span class="transaction-date">
+      <div class="transaction-date">
         <DateFormat :value="transaction.date"/>
         <RecurringIcon :value="transaction.recurrence" class="ml-1"/>
-      </span>
-      <span class="transaction-payee ellipsis">
-        {{ transaction.payee }}
-      </span>
-      <span class="transaction-category ellipsis" v-if="transaction.category">
-        {{ transaction.category.name }}
-      </span>
-      <span class="transaction-category ellipsis" v-else>
-        {{ $t('form.uncategorized') }}
-      </span>
-      <span class="transaction-amount">
+      </div>
+      <div class="transaction-payee ellipsis">
+        <span>{{ transaction.payee }}</span>
+      </div>
+      <div class="transaction-category ellipsis" v-if="transaction.category">
+        <span>{{ transaction.category.name }}</span>
+      </div>
+      <div class="transaction-category ellipsis" v-else>
+        <span>{{ $t('form.uncategorized') }}</span>
+      </div>
+      <div class="transaction-amount">
         <AppMoney :value="transaction.amount" color/>
-      </span>
+      </div>
     </inertia-link>
     <div class="transaction-clear">
       <ClearInput :transaction="transaction" v-if="!isFuture"/>

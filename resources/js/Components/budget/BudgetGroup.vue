@@ -8,10 +8,10 @@
       </div>
       <div class="data">
         <div class="budget-column-name cursor-pointer ellipsis hover:text-gray-7" @click="toggleCollapse">
-          <ChevronRightIcon v-if="group.collapsed"/>
-          <ChevronDownIcon v-else/>
-          <span class="font-bold">
-          {{ group.name }}
+          <span>
+            <ChevronRightIcon v-if="group.collapsed"/>
+            <ChevronDownIcon v-else/>
+            {{ group.name }}
           </span>
         </div>
         <div class="budget-column-budget">

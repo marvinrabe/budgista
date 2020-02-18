@@ -10,7 +10,7 @@
       class="data cursor-pointer"
     >
       <div class="budget-column-name ellipsis">
-        {{ category.name }}
+        <span>{{ category.name }}</span>
       </div>
       <div
         @click.stop

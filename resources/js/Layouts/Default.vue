@@ -10,9 +10,11 @@
 
         <div class="flex items-center flex-wrap justify-between mb-4">
           <slot name="title">
-            <h1 class="lg:order-first text-2xl ellipsis">
-              {{ title }}
-            </h1>
+            <div class="ellipsis lg:order-first">
+              <h1 class="text-2xl">
+                {{ title }}
+              </h1>
+            </div>
           </slot>
 
           <div class="lg:order-last flex">
