@@ -1,5 +1,5 @@
 const path = require('path')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   output: { chunkFilename: 'js/[name].js?id=[chunkhash]' },
@@ -12,7 +12,7 @@ module.exports = {
   externals: {
     moment: 'moment'
   },
-  plugins: [
-    new BundleAnalyzerPlugin()
-  ]
+  // plugins: [
+  //   new BundleAnalyzerPlugin()
+  // ]
 }
