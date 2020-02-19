@@ -101,7 +101,7 @@ class RegisterTest extends TestCase
             'terms' => true,
         ]);
 
-        $response->assertRedirect('/email/verify');
+        $response->assertRedirect('/');
         $this->assertCount(1, $users = User::all());
         $this->assertAuthenticatedAs($user = $users->first());
         $this->assertEquals('john@example.com', $user->email);
