@@ -15,7 +15,16 @@
   import { mixin as moneyMixin } from '@/Utils/Money'
 
   export default {
-    props: ['value'],
+    props: {
+      value: {
+        type: Number,
+        default: null
+      },
+      allowNegative: {
+        type: Boolean,
+        default: false
+      }
+    },
     mixins: [moneyMixin],
     data () {
       return {
@@ -63,7 +72,7 @@
         this.selectAll(this.$el)
       },
       onInput (value) {
-        this.number = this.moneyFormat.unformat(value)
+        this.number = this.moneyFormat.unformat(value, this.allowNegative)
         this.$emit('input', this.number)
       },
       onBlur (value) {

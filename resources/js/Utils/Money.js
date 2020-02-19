@@ -2,14 +2,14 @@ import Dinero from 'dinero.js'
 
 export const mixin = {
   computed: {
-    moneyFormat() {
-      if(this.$page.user) {
+    moneyFormat () {
+      if (this.$page.user) {
         return new Formatter(
           this.$page.user.locale,
           this.$page.user.currency
         )
       }
-      return new Formatter('en', 'USD');
+      return new Formatter('en', 'USD')
     }
   }
 }
@@ -32,7 +32,7 @@ export default class Formatter {
       .toFormat('0,0.00')
   }
 
-  unformat (value) {
+  unformat (value, allowNegative = false) {
     let separator = value.indexOf(this.decimalSeparator())
 
     let numberParts = [value]
@@ -42,7 +42,10 @@ export default class Formatter {
         value.slice(separator + 1)
       ]
     }
-    numberParts = numberParts.map(v => v.replace(/\D/g, ''))
+
+    const regex = allowNegative ? /[^-\d]/g : /\D/g
+    numberParts = numberParts.map(v => v.replace(regex, ''))
+
     if (numberParts[1]) {
       numberParts[1] = numberParts[1].slice(0, 2).padEnd(2, '0')
     } else {

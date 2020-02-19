@@ -21,6 +21,7 @@
           :value="row.budget"
           @change="val => updateBudget(val)"
           ref="input"
+          allow-negative
         />
       </div>
       <div class="budget-column-activity">
