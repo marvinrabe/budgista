@@ -67,7 +67,7 @@
     },
     methods: {
       save () {
-        this.saving = true;
+        this.saving = true
 
         this.$inertia
           .put(this.group.links.update, this.form)
@@ -75,8 +75,10 @@
             this.saving = false
           })
       },
-      deleteGroup() {
-        this.$inertia.delete(this.group.links.destroy)
+      deleteGroup () {
+        if (window.confirm(this.$t('message.deleteGroup', { name: this.group.name }))) {
+          this.$inertia.delete(this.group.links.destroy)
+        }
       }
     }
   }

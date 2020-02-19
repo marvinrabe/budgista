@@ -9,6 +9,7 @@ export default {
     deleteAccount: 'Möchtest du {name} wirklich löschen? Alle Kontobewegungen werden entfernt. Dies kann nicht rückgängig gemacht werden.',
     deleteCategory: 'Möchtest du {name} wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
     deleteGroup: 'Möchtest du {name} wirklich löschen? Die Kategorien werden nicht gelöscht. Dies kann nicht rückgängig gemacht werden.',
+    deleteTransaction: 'Möchtest diese Kontobewegung wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
     addTransaction: 'Füge jetzt Kontobewegungen hinzu.',
     forgotPassword: 'Passwort vergessen?',
     noAccount: 'Kein Konto vorhanden?',
@@ -20,7 +21,6 @@ export default {
   action: {
     save: 'Speichern',
     'futureTransactions': 'Keine zukünftigen Transaktionen | Zeige 1 zukünftige Transaktion | Zeige {count} zukünftige Transaktionen',
-    'back': 'Zurück',
     'cancel': 'Abbrechen',
     'nextMonth': 'Nächster Monat',
     'previousMonth': 'Vorheriger Monat',

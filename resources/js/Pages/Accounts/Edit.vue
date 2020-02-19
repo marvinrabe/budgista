@@ -98,8 +98,10 @@
             this.saving = false
           })
       },
-      deleteAccount() {
-        this.$inertia.delete(this.account.links.destroy)
+      deleteAccount () {
+        if (window.confirm(this.$t('message.deleteAccount', {name: this.account.name}))) {
+          this.$inertia.delete(this.account.links.destroy)
+        }
       }
     }
   }

@@ -9,6 +9,7 @@ export default {
     deleteAccount: 'Do you really want to delete {name}? All transactions will be lost. This action can\'t be reversed.',
     deleteCategory: 'Do you really want to delete {name}? This action can\'t be reversed.',
     deleteGroup: 'Do you really want to delete {name}? The categories won\'t get deleted. This action can\'t be reversed.',
+    deleteTransaction: 'Do you really want to delete this transaction? This action can\'t be reversed.',
     addTransaction: 'Add a transaction now.',
     forgotPassword: 'Forgot Your Password?',
     noAccount: 'Don\'t have an account?',
@@ -19,7 +20,6 @@ export default {
   },
   action: {
     save: 'Save',
-    'back': 'Back',
     'cancel': 'Cancel',
     'nextMonth': 'Next Month',
     'previousMonth': 'Previous Month',

@@ -87,7 +87,9 @@
           })
       },
       deleteCategory () {
-        this.$inertia.delete(this.category.links.destroy)
+        if (window.confirm(this.$t('message.deleteCategory', { name: this.category.name }))) {
+          this.$inertia.delete(this.category.links.destroy)
+        }
       }
     }
   }

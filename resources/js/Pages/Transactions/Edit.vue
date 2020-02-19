@@ -66,7 +66,9 @@
           })
       },
       deleteTransaction () {
-        this.$inertia.delete(this.transaction.links.destroy)
+        if (window.confirm(this.$t('message.deleteTransaction'))) {
+          this.$inertia.delete(this.transaction.links.destroy)
+        }
       }
     }
   }
