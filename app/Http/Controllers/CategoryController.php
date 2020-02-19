@@ -35,7 +35,7 @@ class CategoryController extends Controller
             ->create(request()->validate([
                 'name' => 'required',
                 'group_id' => [
-                    'nullable',
+                    'required',
                     new Own('groups')
                 ]
             ]));
@@ -60,7 +60,7 @@ class CategoryController extends Controller
             request()->validate([
                 'name' => 'required',
                 'group_id' => [
-                    'nullable',
+                    'required',
                     new Own('groups')
                 ]
             ])

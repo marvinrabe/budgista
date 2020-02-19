@@ -58,6 +58,7 @@ export default {
     verificationResend: 'click here to request another.'
   },
   form: {
+    pleaseSelect: 'Please Choose...',
     newEmail: 'New Email address',
     currentEmail: 'Current Email address',
     feedback: 'Why are you leaving?',
@@ -123,7 +124,6 @@ export default {
     register: 'Sign up',
     trackingAccounts: 'Tracking Accounts',
     pageNotFound: 'Not Found',
-    ungrouped: 'Ungrouped',
     reset: 'Reset Password',
     statistics: 'Statistics',
     statisticNetWorth: 'Net Worth',

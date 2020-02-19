@@ -58,6 +58,7 @@ export default {
     verificationResend: 'klicke hier um eine neue zu bekommen.'
   },
   form: {
+    pleaseSelect: 'Bitte Auswählen...',
     newEmail: 'Neue E-Mail Adresse',
     currentEmail: 'Aktuelle E-Mail Adresse',
     feedback: 'Wieso möchtest du dein Benutzerkonto löschen?',
@@ -123,7 +124,6 @@ export default {
     register: 'Registrieren',
     trackingAccounts: 'Tracking Konten',
     pageNotFound: 'Nicht gefunden',
-    ungrouped: 'Ungruppiert',
     reset: 'Passwort zurücksetzen',
     statistics: 'Statistiken',
     statisticNetWorth: 'Vermögen',

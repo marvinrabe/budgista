@@ -4,8 +4,8 @@
     @input="e => $emit('input', e.target.value)"
     class="form-control"
   >
-    <option :value="null">
-      {{ $t('title.ungrouped') }}
+    <option :value="null" disabled selected hidden>
+      {{ $t('form.pleaseSelect') }}
     </option>
     <option
       :key="group.id"

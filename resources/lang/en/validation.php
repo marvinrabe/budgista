@@ -148,6 +148,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'group_id' => 'Group'
+    ],
 
 ];

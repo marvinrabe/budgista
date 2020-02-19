@@ -2,6 +2,7 @@
 
 return [
 
-    'reconciliation' => 'Reconciliation'
+    'reconciliation' => 'Reconciliation',
+    'ungrouped' => 'Unnamed Group'
 
 ];
