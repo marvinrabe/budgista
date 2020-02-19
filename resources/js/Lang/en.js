@@ -19,6 +19,7 @@ export default {
     verificationNotReceived: 'If you did not receive the email, '
   },
   action: {
+    current: 'Current',
     save: 'Save',
     'cancel': 'Cancel',
     'nextMonth': 'Next Month',
@@ -28,7 +29,7 @@ export default {
     login: 'Login',
     deleteUser: 'Delete my user account permanently',
     'logout': 'Logout',
-    'futureTransactions': 'No future transactions | Display 1 future transaction | Display {count} future transactions',
+    'futureTransactions': 'No upcoming | 1 upcoming | {count} upcoming',
     'create': {
       'account': 'Add Account',
       'category': 'Create Category',

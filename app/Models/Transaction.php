@@ -54,6 +54,16 @@ class Transaction extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function scopeFuture($query)
+    {
+        return $query->where('date', '>', now());
+    }
+
+    public function scopeCurrent($query)
+    {
+        return $query->where('date', '<=', now());
+    }
+
     public function getLinksAttribute()
     {
         return [

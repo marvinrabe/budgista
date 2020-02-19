@@ -19,8 +19,9 @@ export default {
     verificationNotReceived: 'Falls du die E-Mail nicht erhalten haben solltest,'
   },
   action: {
+    current: 'Vorliegend',
     save: 'Speichern',
-    'futureTransactions': 'Keine zukünftigen Transaktionen | Zeige 1 zukünftige Transaktion | Zeige {count} zukünftige Transaktionen',
+    'futureTransactions': 'Keine ukünftigen | 1 vorgemerkt | {count} vorgemerkt',
     'cancel': 'Abbrechen',
     'nextMonth': 'Nächster Monat',
     'previousMonth': 'Vorheriger Monat',

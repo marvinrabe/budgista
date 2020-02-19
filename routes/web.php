@@ -9,6 +9,7 @@ Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth']], function () {
     Route::redirect('/', '/budget');
     Route::resource('accounts', AccountController::class)->except('index');
+    Route::get('accounts/{account}/future', [Controllers\AccountController::class, 'future'])->name('accounts.future');
     Route::post('accounts/{account}/reconcile',
         [Controllers\AccountController::class, 'reconcile'])->name('accounts.reconcile');
     Route::get('budget/{month?}', [Controllers\BudgetController::class, 'show'])->name('budget');

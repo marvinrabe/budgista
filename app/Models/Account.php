@@ -46,6 +46,7 @@ class Account extends Model
     {
         return [
             'show' => URL::route('accounts.show', $this, false),
+            'future' => URL::route('accounts.future', $this, false),
             'edit' => URL::route('accounts.edit', $this),
             'update' => URL::route('accounts.update', $this),
             'destroy' => URL::route('accounts.destroy', $this),

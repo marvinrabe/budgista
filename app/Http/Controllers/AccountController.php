@@ -54,9 +54,27 @@ class AccountController extends Controller
             'account' => $account,
             'transactions' => $account
                 ->transactions()
+                ->current()
                 ->with('category')
                 ->orderBy('date', 'desc')
-                ->paginate(25)
+                ->paginate(25),
+            'futureCount' => $account->transactions()->future()->count()
+        ]);
+    }
+
+    public function future(Account $account)
+    {
+        $this->authorize('view', $account);
+
+        return Inertia::render('Accounts/Show', [
+            'account' => $account,
+            'transactions' => $account
+                ->transactions()
+                ->future()
+                ->with('category')
+                ->orderBy('date', 'desc')
+                ->paginate(25),
+            'futureCount' => $account->transactions()->future()->count()
         ]);
     }
 

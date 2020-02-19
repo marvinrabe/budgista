@@ -3,9 +3,9 @@
     <AppHeader/>
 
     <div class="container container p-4 flex flex-no-wrap" id="content">
-      <AppSidebar class="lg:w-1/3 xl:w-1/4"/>
+      <AppSidebar class="lg:w-3/12 xl:w-1/4"/>
 
-      <main class="w-full lg:w-2/3 xl:w-3/4">
+      <main class="w-full lg:w-9/12 xl:w-3/4">
         <VerifyAlert/>
 
         <div class="flex items-center flex-wrap justify-between mb-4">

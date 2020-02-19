@@ -32,6 +32,26 @@
       </AppButton>
     </template>
 
+    <div class="flex -mx-1 mb-4 justify-center sm:justify-start" v-if="futureCount">
+      <div class="px-1">
+        <inertia-link
+          class="pill"
+          :class="{'pill--active': !showFuture}"
+          :href="account.links.show">
+          {{ $t('action.current') }}
+        </inertia-link>
+      </div>
+
+      <div class="px-1">
+        <inertia-link
+          class="pill"
+          :href="account.links.future"
+          :class="{'pill--active': showFuture}">
+          {{ $tc('action.futureTransactions', futureCount, { count: futureCount }) }}
+        </inertia-link>
+      </div>
+    </div>
+
     <TransactionList :transactions="transactions.data"/>
 
     <div class="flex items-center justify-end">
@@ -61,7 +81,13 @@
     },
     props: {
       account: Object,
-      transactions: Object
+      transactions: Object,
+      futureCount: Number
+    },
+    computed: {
+      showFuture () {
+        return this.$inertia.page.url.startsWith(this.account.links.future)
+      }
     }
   }
 </script>
