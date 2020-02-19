@@ -8,7 +8,7 @@ export default {
     deleteUser: 'Wenn du dein Benutzerkonto löscht, dann werden deine Daten sofort, vollständig und unwiderruflich entfernt. Bitte gib dein Passwort ein um die Löschung zu bestätigen.',
     deleteAccount: 'Möchtest du {name} wirklich löschen? Alle Kontobewegungen werden entfernt. Dies kann nicht rückgängig gemacht werden.',
     deleteCategory: 'Möchtest du {name} wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
-    deleteGroup: 'Möchtest du {name} wirklich löschen? Die Kategorien werden nicht gelöscht. Dies kann nicht rückgängig gemacht werden.',
+    deleteGroup: 'Möchtest du {name} wirklich löschen? Alle zugehörigen Kategorien werden gelöscht. Dies kann nicht rückgängig gemacht werden.',
     deleteTransaction: 'Möchtest diese Kontobewegung wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
     addTransaction: 'Füge jetzt Kontobewegungen hinzu.',
     forgotPassword: 'Passwort vergessen?',

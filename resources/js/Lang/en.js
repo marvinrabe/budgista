@@ -8,7 +8,7 @@ export default {
     deleteUser: 'If you delete your user account all your data will be immediately, completely and irrevocably lost. Please enter your password to confirm the deletion.',
     deleteAccount: 'Do you really want to delete {name}? All transactions will be lost. This action can\'t be reversed.',
     deleteCategory: 'Do you really want to delete {name}? This action can\'t be reversed.',
-    deleteGroup: 'Do you really want to delete {name}? The categories won\'t get deleted. This action can\'t be reversed.',
+    deleteGroup: 'Do you really want to delete {name}? All related categories will be deleted. This action can\'t be reversed.',
     deleteTransaction: 'Do you really want to delete this transaction? This action can\'t be reversed.',
     addTransaction: 'Add a transaction now.',
     forgotPassword: 'Forgot Your Password?',

@@ -24,5 +24,12 @@ class RequireGroupOnCategories extends Migration
                 ->whereNull('group_id')
                 ->update(['group_id' => $group->id]);
         });
+
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropForeign(['group_id']);
+            $table->foreign('group_id')
+                ->references('id')->on('groups')
+                ->onDelete('cascade');
+        });
     }
 }

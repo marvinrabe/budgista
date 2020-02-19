@@ -82,42 +82,4 @@ class GroupsTest extends TestCase
             'name' => $group->name
         ]);
     }
-
-    public function testDeleteGroups()
-    {
-        $group = factory(Group::class)->create();
-
-        $this->assertDatabaseHas('groups', [
-            'id' => $group->id,
-            'user_id' => $group->user_id,
-            'name' => $group->name
-        ]);
-
-        $this
-            ->signIn($group->user)
-            ->delete("/groups/{$group->id}")
-            ->assertRedirect('/budget');
-
-        $this->assertDatabaseMissing('groups', [
-            'id' => $group->id,
-            'user_id' => $group->user_id,
-            'name' => $group->name
-        ]);
-    }
-
-    public function testCanNotDeleteOtherUsersGroups()
-    {
-        $group = factory(Group::class)->create();
-
-        $this
-            ->signIn()
-            ->delete("/groups/{$group->id}")
-            ->assertNotFound();
-
-        $this->assertDatabaseHas('groups', [
-            'id' => $group->id,
-            'user_id' => $group->user_id,
-            'name' => $group->name
-        ]);
-    }
 }
