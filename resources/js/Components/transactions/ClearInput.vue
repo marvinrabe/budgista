@@ -21,7 +21,7 @@
     },
     computed: {
       classes () {
-        return this.transaction.cleared ? 'text-green-7' : 'text-gray-5 hover:text-gray-6'
+        return this.transaction.cleared ? 'text-green-7 hover:text-green-9' : 'text-gray-5 hover:text-gray-6'
       }
     },
     methods: {
