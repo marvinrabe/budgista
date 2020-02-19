@@ -72,7 +72,7 @@ class AccountController extends Controller
                 ->transactions()
                 ->future()
                 ->with('category')
-                ->orderBy('date', 'desc')
+                ->orderBy('date', 'asc')
                 ->paginate(25),
             'futureCount' => $account->transactions()->future()->count()
         ]);
