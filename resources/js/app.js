@@ -2,12 +2,9 @@ import Vue from 'vue'
 import { InertiaApp } from '@inertiajs/inertia-vue'
 
 import { i18n, loadLanguage } from './Plugins/i18n'
-
-import './Plugins/portal'
 import { flashMessages } from './Plugins/toasts'
 
 import { DropdownPlugin } from 'bootstrap-vue'
-
 Vue.use(DropdownPlugin)
 
 Vue.use(InertiaApp)
