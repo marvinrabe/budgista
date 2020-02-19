@@ -15,6 +15,7 @@
       <option
         :key="category.id"
         :value="category.id"
+        v-if="exclude !== category.id"
         v-for="category in group.categories"
       >
         {{ category.name }}
@@ -30,7 +31,7 @@
         type: String,
         default: null
       },
-      exclude: { // TODO exclude category
+      exclude: {
         type: String,
         default: null
       }

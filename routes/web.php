@@ -14,7 +14,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('budget/{month?}', [Controllers\BudgetController::class, 'show'])->name('budget');
     Route::post('budget/{month}/categories/{category}',
         [Controllers\BudgetController::class, 'store'])->name('budget.store');
-    Route::resource('categories', CategoryController::class)->except(['index', 'show']);
+    Route::resource('categories', CategoryController::class)->except(['index', 'show', 'destroy']);
+    Route::post('categories/{category}/delete', [Controllers\CategoryController::class, 'destroy'])->name('categories.destroy');
     Route::post('categories/sort', [Controllers\CategoryController::class, 'sort'])->name('categories.sort');
     Route::resource('clearedTransactions', ClearedTransactionController::class)->only(['store', 'destroy']);
     Route::resource('groups', GroupController::class)->except(['index', 'show']);

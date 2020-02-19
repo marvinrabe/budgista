@@ -4,7 +4,7 @@
       <p class="menu__header">
         {{ $t('title.accounts') }}
       </p>
-      <AppButton to="/accounts/create" small :title="$t('action.create.account')">
+      <AppButton to="/accounts/create" icon small :title="$t('action.create.account')">
         <PlusIcon />
       </AppButton>
     </div>

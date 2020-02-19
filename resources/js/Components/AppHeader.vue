@@ -1,5 +1,5 @@
 <template>
-  <nav class="shadow-sm fixed top-0 bg-white w-full z-10">
+  <nav class="shadow fixed top-0 bg-white w-full z-10">
     <div class="container px-4 py-2 flex items-center justify-between">
       <AppSidebarToggle class="lg:hidden"/>
 

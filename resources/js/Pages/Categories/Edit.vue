@@ -1,17 +1,5 @@
 <template>
   <Layout :title="$t('action.edit.category')">
-    <template v-slot:actions>
-      <AppButton
-        :title="$t('action.delete.category')"
-        @click="deleteCategory"
-        subtle
-        variant="danger"
-        icon
-      >
-        <DeleteIcon/>
-      </AppButton>
-    </template>
-
     <div class="card">
       <div class="card-body">
         <AppForm @submit="save">
@@ -43,6 +31,33 @@
         </AppForm>
       </div>
     </div>
+
+    <div class="card">
+      <div class="card-header">
+        {{ $t('action.delete.category') }}
+      </div>
+      <div class="card-body">
+        <AppForm @submit="deleteCategory">
+          <FormGroup name="category_id" label="transferTransactions">
+            <CategorySelect
+              :exclude="category.id"
+              slot-scope="{bindings}"
+              v-bind="bindings"
+              v-model="deleteForm.category_id"
+            />
+          </FormGroup>
+
+          <template slot="actions">
+            <AppButton
+              type="submit"
+              :label="$t('action.delete.category')"
+              :loading="saving"
+              variant="danger"
+            />
+          </template>
+        </AppForm>
+      </div>
+    </div>
   </Layout>
 </template>
 
@@ -54,9 +69,11 @@
   import { iconComponent } from '@/Utils/Icons'
   import { faTrashAlt } from '@fortawesome/free-regular-svg-icons'
   import GroupSelect from '@/Components/groups/GroupSelect'
+  import CategorySelect from '@/Components/categories/CategorySelect'
 
   export default {
     components: {
+      CategorySelect,
       GroupSelect,
       Layout,
       AppButton,
@@ -73,6 +90,9 @@
           name: this.category.name,
           group_id: this.category.group_id
         },
+        deleteForm: {
+          category_id: null
+        },
         saving: false
       }
     },
@@ -88,7 +108,13 @@
       },
       deleteCategory () {
         if (window.confirm(this.$t('message.deleteCategory', { name: this.category.name }))) {
-          this.$inertia.delete(this.category.links.destroy)
+          this.saving = true
+
+          this.$inertia
+            .post(this.category.links.destroy, this.deleteForm)
+            .finally(() => {
+              this.saving = false
+            })
         }
       }
     }

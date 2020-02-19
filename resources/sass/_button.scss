@@ -1,5 +1,5 @@
 .btn {
-  @apply font-bold py-2 px-4 rounded text-gray-6 cursor-pointer;
+  @apply font-bold py-2 px-4 rounded text-gray-7 cursor-pointer shadow-sm;
   transition: background-color 0.2s ease 0s, color 0.2s ease 0s;
 
   svg {
@@ -19,7 +19,7 @@
   }
 
   &:hover:not(:disabled) {
-    @apply text-gray-8;
+    @apply text-gray-9;
   }
 
   &--small {
@@ -42,27 +42,11 @@
     }
   }
 
-  &.light {
-    @apply text-gray-8 bg-white;
-
-    &:hover:not(:disabled) {
-      @apply text-gray-8 shadow bg-gray-0;
-    }
-  }
-
-  &--subtle.light {
-    @apply text-gray-8;
-
-    &:hover:not(:disabled) {
-      @apply text-gray-9;
-    }
-  }
-
   &.danger {
-    @apply text-white bg-red-8;
+    @apply text-red-8 bg-white border border-gray-3;
 
     &:hover:not(:disabled) {
-      @apply text-white shadow bg-red-9;
+      @apply text-red-9 bg-gray-0;
     }
   }
 
@@ -74,8 +58,9 @@
     }
   }
 
-  &--subtle, &--subtle:hover, &--subtle:active {
+  &--icon, &.dropdown-toggle, &--subtle, &--subtle:hover, &--subtle:active {
     @apply font-normal;
+    border: 0 !important;
     box-shadow: none !important;
     background: transparent !important;
   }

@@ -26,7 +26,7 @@ class CategoryDeleteTest extends TestCase
 
         $this
             ->signIn($category->user)
-            ->delete("/categories/{$category->id}")
+            ->post("/categories/{$category->id}/delete")
             ->assertRedirect('/budget');
 
         $this->assertDatabaseMissing('categories', [
@@ -42,7 +42,7 @@ class CategoryDeleteTest extends TestCase
 
         $this
             ->signIn()
-            ->delete("/categories/{$category->id}")
+            ->post("/categories/{$category->id}/delete")
             ->assertNotFound();
 
         $this->assertDatabaseHas('categories', [
@@ -66,7 +66,7 @@ class CategoryDeleteTest extends TestCase
 
         $this
             ->signIn($category->user)
-            ->delete("/categories/{$category->id}");
+            ->post("/categories/{$category->id}/delete");
 
         $this->assertNull($transaction->refresh()->category_id);
     }
@@ -84,7 +84,7 @@ class CategoryDeleteTest extends TestCase
             'user_id' => Auth()->id()
         ]);
 
-        $this->delete("/categories/{$categories->first()->id}", [
+        $this->post("/categories/{$categories->first()->id}/delete", [
             'category_id' => $categories->last()->id
         ]);
 
@@ -97,7 +97,7 @@ class CategoryDeleteTest extends TestCase
 
         $this
             ->signIn($category->user)
-            ->delete("/categories/{$category->id}", [
+            ->post("/categories/{$category->id}/delete", [
                 'category_id' => factory(Category::class)->create()->id
             ])
             ->assertSessionHasErrors('category_id');
@@ -120,7 +120,7 @@ class CategoryDeleteTest extends TestCase
         $budget->save();
 
         $this
-            ->delete("/categories/{$categories->first()->id}", [
+            ->post("/categories/{$categories->first()->id}/delete", [
                 'category_id' => $categories->last()->id
             ]);
 

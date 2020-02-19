@@ -2,7 +2,7 @@
   <button
     :class="styling"
     :disabled="loading || disabled"
-    :type="type"
+    :type="buttonType"
     @click="click"
   >
     <slot>
@@ -20,6 +20,10 @@
       },
       variant: {
         default: 'default',
+        type: String
+      },
+      type: {
+        default: 'button',
         type: String
       },
       loading: {
@@ -48,8 +52,8 @@
       }
     },
     computed: {
-      type () {
-        return this.variant === 'primary' ? 'submit' : 'button'
+      buttonType () {
+        return this.variant === 'primary' ? 'submit' : this.type
       },
       styling () {
         let classes = ['btn']
