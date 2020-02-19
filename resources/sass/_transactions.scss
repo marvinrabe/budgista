@@ -23,10 +23,6 @@
   &-row {
     background: $white;
 
-    &-future, &-future span {
-      color: $gray-600 !important;
-    }
-
     &:hover {
       background: $gray-50;
     }

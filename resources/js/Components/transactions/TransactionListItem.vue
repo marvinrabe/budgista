@@ -1,8 +1,5 @@
 <template>
-  <div
-    :class="[{ 'transactions-row-future': isFuture }]"
-    class="transactions-row"
-  >
+  <div class="transactions-row">
     <inertia-link
       :href="transaction.links.edit"
       class="transaction-item"
