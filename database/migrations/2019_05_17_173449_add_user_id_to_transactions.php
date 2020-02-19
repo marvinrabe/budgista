@@ -16,7 +16,8 @@ class AddUserIdToTransactions extends Migration
         DB::table('transactions')
             ->join('accounts', 'transactions.account_id', '=', 'accounts.id')
             ->select('transactions.id', 'accounts.user_id')
-            ->chunkById(100, function ($rows) {
+            ->orderBy('transactions.created_at')
+            ->chunk(100, function ($rows) {
                 foreach ($rows as $row) {
                     DB::table('transactions')
                         ->where('id', $row->id)
