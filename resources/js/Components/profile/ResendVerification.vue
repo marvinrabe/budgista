@@ -3,7 +3,6 @@
     :loading="loading"
     @click="send"
     class="hover:underline"
-    variant="light"
     subtle
     small
   >

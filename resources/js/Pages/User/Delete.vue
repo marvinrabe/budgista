@@ -2,9 +2,9 @@
   <Layout :title="$t('title.deleteUser')">
     <div class="card">
       <div class="card-body">
-        <p v-t="'message.deleteUser'"/>
+        <p class="mb-4" v-t="'message.deleteUser'"/>
 
-        <AppForm@submit="deleteUser">
+        <AppForm @submit="deleteUser">
           <FormGroup name="feedback">
             <textarea
               class="form-control"
@@ -25,9 +25,9 @@
 
           <div slot="actions">
             <AppButton
+              type="submit"
               :label="$t('action.deleteUser')"
               :loading="deleting"
-              @click="deleteUser"
               variant="danger"
             />
           </div>
@@ -65,7 +65,11 @@
       deleteUser () {
         this.deleting = true
 
-        this.$inertia.post('/profile', this.form)
+        this.$inertia
+          .post('/profile/terminate', this.form)
+          .finally(() => {
+            this.deleting = false
+          })
       }
     }
   }
