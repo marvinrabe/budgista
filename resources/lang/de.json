@@ -57,5 +57,7 @@
   "Password has been updated.": "Passwort wurde geändert.",
   "Settings have been saved.": "Einstellungen wurden gespeichert.",
   "User account deleted. Thank you for using Budgista.": "Benutzerkonto wurde gelöscht. Vielen Dank dass du Budgista ausprobiert hast.",
-  "An email with a password reset link has been sent.": "Eine E-Mail zum zurücksetzen des Passworts wurde verschickt."
+  "An email with a password reset link has been sent.": "Eine E-Mail zum zurücksetzen des Passworts wurde verschickt.",
+  "JavaScript is disabled.": "JavaScript ist deaktiviert.",
+  "Please enable JavaScript to use Budgista.": "Bitte aktiviere JavaScript um Budgista nutzen zu können."
 }

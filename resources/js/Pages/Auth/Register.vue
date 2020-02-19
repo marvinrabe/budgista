@@ -7,10 +7,7 @@
           v-t="'title.register'"
         />
 
-        <AppForm
-          @submit="register"
-          ref="form"
-        >
+        <AppForm @submit="register">
           <FormGroup name="email">
             <input
               class="form-control"
@@ -105,6 +102,11 @@
 
         this.$inertia
           .post('/register', this.form)
+          .then(() => {
+            if (window.gtag) {
+              window.gtag('event', 'registration')
+            }
+          })
           .finally(() => {
             this.loading = false
           })
