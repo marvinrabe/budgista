@@ -79,8 +79,7 @@
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import FormGroup from '@/Components/form/FormGroup.vue'
-
-  const languages = ['en', 'de'] // TODO
+  import { availableLanguages } from '@/Utils/Language'
 
   export default {
     components: {
@@ -101,7 +100,7 @@
     },
     computed: {
       languages () {
-        return languages
+        return availableLanguages
       },
       locales () {
         return Object.keys(this.$i18n.messages[this.$i18n.locale].language)

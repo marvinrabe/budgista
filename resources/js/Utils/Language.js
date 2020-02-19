@@ -13,6 +13,8 @@ export const i18n = new VueI18n({
   }
 })
 
+export const availableLanguages = ['en', 'de']
+
 const loadedLanguages = ['en'] // our default language that is preloaded
 
 function setI18nLanguage (lang) {
