@@ -67,7 +67,7 @@ class TransactionTest extends TestCase
                 'account_id' => $account->id,
                 'category_id' => $category->id
             ])
-            ->assertRedirect("/accounts/{$transaction->account_id}");
+            ->assertRedirect("/accounts/{$account->id}");
 
         $this->assertDatabaseHas('transactions', [
             'id' => $transaction->id,
