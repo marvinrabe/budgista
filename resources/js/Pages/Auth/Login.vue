@@ -24,14 +24,15 @@
           </FormGroup>
 
           <FormGroup name="password">
+            <template v-slot:additional>
+              <inertia-link
+                href="/password/reset"
+                class="text-sm ml-auto text-gray-6 hover:text-gray-8"
+                v-t="'message.forgotPassword'"
+              />
+            </template>
+
             <template slot-scope="{bindings}">
-              <div class="float-right">
-                <inertia-link
-                  href="/password/reset"
-                  class="text-muted small"
-                  v-t="'message.forgotPassword'"
-                />
-              </div>
               <PasswordInput
                 :disable-strength="true"
                 tabindex="2"
@@ -42,7 +43,7 @@
           </FormGroup>
 
           <template slot="actions">
-            <div class="form-group mr-auto">
+            <div class="mb-4 mr-auto">
               <div class="form-check">
                 <input
                   class="form-check-input"

@@ -179,7 +179,8 @@ return [
         'available' => 'verfügbar',
         'size' => 'Größe',
         'group_id' => 'Gruppe',
-        'payee' => 'Empfänger'
+        'payee' => 'Empfänger',
+        'amount' => 'Betrag'
     ],
 
 ];

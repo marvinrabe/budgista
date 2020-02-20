@@ -1,15 +1,19 @@
 <template>
-  <div class="form-group">
-    <label
-      v-if="hasLabel"
-      v-t="labelTranslation"
-      :for="name"
-    />
+  <div class="mb-4">
+    <div class="flex items-center mb-2">
+      <label
+        v-if="hasLabel"
+        v-t="labelTranslation"
+        :for="name"
+      />
+
+      <slot name="additional" />
+    </div>
     <slot
       :id="name"
       :bindings="bindings"
     />
-    <span v-if="hasError" class="invalid-feedback block">
+    <span v-if="hasError" class="text-red-9 text-sm block">
       {{ errorMessage }}
     </span>
   </div>
