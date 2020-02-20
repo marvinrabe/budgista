@@ -1,3 +1,5 @@
+@import url('https://rsms.me/inter/inter.css');
+
 @tailwind base;
 
 @import "bootstrap";
@@ -7,10 +9,19 @@ body {
   @apply h-full;
 }
 
+html {
+  font-family: 'Inter', sans-serif;
+}
+
+@supports (font-variation-settings: normal) {
+  html {
+    font-family: 'Inter var', sans-serif;
+  }
+}
+
 body {
   @apply bg-gray-1;
 }
-
 
 a {
   @apply text-blue-8 no-underline;
