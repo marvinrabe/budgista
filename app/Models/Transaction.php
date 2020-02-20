@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use App\Models\Traits\HasUuidKey;
+use App\Recurring;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\BelongsToUser;
-use App\RecurringGenerator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
-use RRule\RRule;
 
 class Transaction extends Model
 {
@@ -75,22 +74,20 @@ class Transaction extends Model
         ];
     }
 
-    public function getRecurrenceAttribute()
+    public function getRecurrenceAttribute(): ?Recurring
     {
         if (!$this->recurring) {
             return null;
         }
 
-        $dbRule = new RRule($this->rrule);
-
-        return new \App\RRule(array_merge($dbRule->getRule(), ['dtstart' => $this->date]));
+        return Recurring::fromString($this->rrule);
     }
 
     public function setRecurrenceAttribute($value)
     {
         if (Arr::has($value, ['frequency', 'interval'])) {
             $this->recurring = true;
-            $this->rrule = (string) \App\RRule::fromRequest($value);
+            $this->rrule = (string) Recurring::fromRequest($value);
             return;
         }
 
@@ -98,83 +95,17 @@ class Transaction extends Model
         $this->rrule = null;
     }
 
-    public static function processRecurring($transaction)
+    public function processRecurring()
     {
-        $generator = new RecurringGenerator();
-
-        $transactions = collect($generator->generateOccurrences($transaction));
+        $transactions = optional($this->recurrence)->generateOccurrences($this);
 
         DB::transaction(function () use ($transactions) {
-            foreach ($transactions as &$transaction) {
+            foreach ($transactions as $transaction) {
                 $transaction->save();
             }
         });
 
         return $transactions;
-    }
-
-    public function getAmount()
-    {
-        return abs($this->amount);
-    }
-
-    public function getCategories()
-    {
-        return [
-            [
-                'category' => $this->category,
-                'amount' => $this->getAmount()
-            ]
-        ];
-    }
-
-    public function getFromSubject()
-    {
-        if ($this->amount < 0) {
-            return $this->getAccountSubject();
-        }
-        return $this->getPayeeSubject();
-    }
-
-    public function getToSubject()
-    {
-        if ($this->amount >= 0) {
-            return $this->getAccountSubject();
-        }
-        return $this->getPayeeSubject();
-    }
-
-    protected function getPayeeSubject()
-    {
-        return $this->getSubject(
-            new Payee($this->payee),
-            true
-        );
-    }
-
-    protected function getAccountSubject()
-    {
-        return $this->getSubject(
-            $this->account,
-            $this->cleared
-        );
-    }
-
-    protected function getSubject($subject, $cleared)
-    {
-        return [
-            'subject' => $subject,
-            'cleared' => $cleared
-        ];
-    }
-
-    public function getRecurrence()
-    {
-        if (!$this->recurring) {
-            return null;
-        }
-
-        return $this->rrule;
     }
 
 }
