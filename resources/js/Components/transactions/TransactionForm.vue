@@ -16,8 +16,8 @@
       />
     </FormGroup>
 
-    <div class="flex -mx-1">
-      <div class="w-1/2 px-1">
+    <div class="flex flex-wrap -mx-1">
+      <div class="w-full md:w-1/2 px-1">
         <FormGroup name="category">
           <CategorySelect
             slot-scope="{bindings}"
@@ -27,7 +27,7 @@
         </FormGroup>
       </div>
 
-      <div class="w-1/2 px-1">
+      <div class="w-full md:w-1/2 px-1">
         <FormGroup name="date">
           <template slot-scope="{bindings}">
             <div class="flex items-stretch">
