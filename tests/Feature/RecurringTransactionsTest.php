@@ -11,7 +11,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Ramsey\Uuid\Uuid;
 use RRule\RRule;
-use Tests\Enum;
 use Tests\TestCase;
 
 class RecurringTransactionsTest extends TestCase
@@ -24,7 +23,8 @@ class RecurringTransactionsTest extends TestCase
         $transaction = factory(Transaction::class)->make();
         $transaction->cleared = true;
         $transaction->date = Carbon::now()->format('Y-m-d');
-        $transaction->rrule = new RRule('FREQ=DAILY');
+        $transaction->recurring = true;
+        $transaction->rrule = (string) new RRule('FREQ=DAILY');
         $transaction->save();
 
         $this->artisan(ProcessRecurringTransactions::class);
@@ -41,7 +41,8 @@ class RecurringTransactionsTest extends TestCase
     {
         $transaction = factory(Transaction::class)->make();
         $transaction->date = Carbon::now()->format('Y-m-d');
-        $transaction->rrule = new RRule('FREQ=DAILY;INTERVAL=1');
+        $transaction->recurring = true;
+        $transaction->rrule = (string) new RRule('FREQ=DAILY;INTERVAL=1');
         $transaction->save();
 
         $this->artisan(ProcessRecurringTransactions::class);
@@ -58,7 +59,8 @@ class RecurringTransactionsTest extends TestCase
         $transaction = factory(Transaction::class)->make();
         $transaction->date = Carbon::now()->format('Y-m-d');
         $transaction->family = Uuid::uuid4();
-        $transaction->rrule = new RRule('FREQ=DAILY');
+        $transaction->recurring = true;
+        $transaction->rrule = (string) new RRule('FREQ=DAILY');
         $transaction->save();
 
         $this->artisan(ProcessRecurringTransactions::class);

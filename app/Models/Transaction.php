@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\BelongsToUser;
 use App\RecurringGenerator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use RRule\RRule;
@@ -16,7 +17,7 @@ class Transaction extends Model
     use HasUuidKey,
         BelongsToUser;
 
-    protected $appends = ['links'];
+    protected $appends = ['links', 'recurrence'];
 
     protected $fillable = [
         'date',
@@ -24,9 +25,10 @@ class Transaction extends Model
         'account_id',
         'payee',
         'amount',
-        'cleared',
-        'rrule'
+        'cleared'
     ];
+
+    protected $hidden = ['rrule'];
 
     protected $casts = [
         'amount' => 'int',
@@ -73,30 +75,27 @@ class Transaction extends Model
         ];
     }
 
-    public function getRruleAttribute($value)
+    public function getRecurrenceAttribute()
     {
-        if (!$this->attributes['recurring']) {
+        if (!$this->recurring) {
             return null;
         }
 
-        $dbRule = new RRule($value);
+        $dbRule = new RRule($this->rrule);
 
-        return new \App\RRule(array_merge($dbRule->getRule(), ['dtstart' => $this->attributes['date']]));
+        return new \App\RRule(array_merge($dbRule->getRule(), ['dtstart' => $this->date]));
     }
 
-    public function setRruleAttribute($value)
+    public function setRecurrenceAttribute($value)
     {
-        /**
-         * @var RRule $value ;
-         */
-        if ($value instanceof RRule) {
-            $this->attributes['recurring'] = true;
-            $this->attributes['rrule'] = (string) $value;
+        if (Arr::has($value, ['frequency', 'interval'])) {
+            $this->recurring = true;
+            $this->rrule = (string) \App\RRule::fromRequest($value);
             return;
         }
 
-        $this->attributes['recurring'] = false;
-        $this->attributes['rrule'] = null;
+        $this->recurring = false;
+        $this->rrule = null;
     }
 
     public static function processRecurring($transaction)

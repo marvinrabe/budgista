@@ -2,8 +2,18 @@
 
 namespace App;
 
-class RRule extends \RRule\RRule
+use Illuminate\Contracts\Support\Arrayable;
+
+class RRule extends \RRule\RRule implements Arrayable
 {
+
+    public static function fromRequest($request)
+    {
+        return new static([
+            'FREQ' => $request['frequency'],
+            'INTERVAL' => $request['interval']
+        ]);
+    }
 
     public function interval()
     {
@@ -21,4 +31,11 @@ class RRule extends \RRule\RRule
         return $frequencies[$this->freq];
     }
 
+    public function toArray()
+    {
+        return [
+            'frequency' => $this->frequency(),
+            'interval' => $this->interval()
+        ];
+    }
 }

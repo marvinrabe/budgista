@@ -28,7 +28,8 @@ class RecurringGeneratorTest extends \Tests\TestCase
     {
         $transaction = new Transaction();
         $transaction->date = Carbon::now()->subDay();
-        $transaction->rrule = new RRule('FREQ=DAILY;INTERVAL=1');
+        $transaction->recurring = true;
+        $transaction->rrule = (string) new RRule('FREQ=DAILY;INTERVAL=1');
 
         $generator = new RecurringGenerator();
         $results = $generator->getPendingOccurrences($transaction);
@@ -58,7 +59,8 @@ class RecurringGeneratorTest extends \Tests\TestCase
         $transaction = new Transaction();
         $transaction->id = 123;
         $transaction->date = Carbon::now()->subDay();
-        $transaction->rrule = new RRule('FREQ=DAILY;INTERVAL=1');
+        $transaction->recurring = true;
+        $transaction->rrule = (string) new RRule('FREQ=DAILY;INTERVAL=1');
 
         $generator = new RecurringGenerator();
         $results = $generator->generateOccurrences($transaction);

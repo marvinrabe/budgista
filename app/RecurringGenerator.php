@@ -18,9 +18,9 @@ class RecurringGenerator
         /**
          * @var RRule $rrule
          */
-        $rrule = $transaction->rrule;
+        $rrule = $transaction->recurrence;
 
-        $transaction->rrule = null;
+        $transaction->recurrence = null;
 
         $results = collect($occurrences)
             ->map(function ($date) use ($transaction) {
@@ -33,7 +33,7 @@ class RecurringGenerator
             ->prepend($transaction);
 
         $last = $results->pop();
-        $last->rrule = $rrule;
+        $last->recurrence = $rrule->toArray();
 
         return $results->push($last);
     }
@@ -47,7 +47,7 @@ class RecurringGenerator
         /**
          * @var RRule $rrule
          */
-        $rrule = $transaction->rrule;
+        $rrule = $transaction->recurrence;
 
         $previous = $rrule->getOccurrencesBetween($transaction->date->endofDay(), Carbon::now()->endofDay());
         $next = $rrule->getOccurrencesBetween(Carbon::now()->addDay()->startOfDay(), null, 1);

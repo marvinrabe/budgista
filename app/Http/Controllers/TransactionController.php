@@ -8,7 +8,6 @@ use App\Rules\Own;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
-use RRule\RRule;
 
 class TransactionController extends Controller
 {
@@ -44,8 +43,8 @@ class TransactionController extends Controller
             ])
         );
 
-        if (!empty(request('rrule'))) {
-            $transaction->rrule = new RRule(request('rrule'));
+        if (!empty(request('recurrence'))) {
+            $transaction->recurrence = request('recurrence');
         }
 
         $transaction->save();
@@ -66,10 +65,10 @@ class TransactionController extends Controller
     {
         $this->authorize('update', $transaction);
 
-        if (!empty(request('rrule'))) {
-            $transaction->rrule = new RRule(request('rrule'));
+        if (!empty(request('recurrence'))) {
+            $transaction->recurrence = request('recurrence');
         } else {
-            $transaction->rrule = null;
+            $transaction->recurrence = null;
         }
 
         $transaction->update(
