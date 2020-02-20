@@ -37,15 +37,14 @@
                 class="rounded-r-none"
               />
               <div class="border border-l-0 border-gray-4 rounded-r flex items-center">
-                <button
+                <AppButton
                   :title="$t('form.recurring')"
                   @click="form.recurring = !form.recurring"
-                  class="btn btn--icon py-1"
-                  :class="{'text-blue-7': form.recurring}"
-                  type="button"
+                  :class="{'text-blue-7 hover:text-blue-9': form.recurring}"
+                  icon
                 >
                   <RecurringIcon/>
-                </button>
+                </AppButton>
               </div>
             </div>
           </template>

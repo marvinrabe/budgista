@@ -16,7 +16,7 @@
         <NextIcon />
       </inertia-link>
     </div>
-    <span class="text-2xl mx-1">
+    <span class="text-gray-8 text-2xl mx-1">
       {{ month.format() }}
     </span>
   </div>

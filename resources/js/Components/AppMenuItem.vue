@@ -1,7 +1,7 @@
 <template>
   <a
     @click.prevent="navigate"
-    class="menu__item"
+    class="menu__item rounded"
     :class="{active: active}"
     :href="href || '#'"
   >
