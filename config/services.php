@@ -32,9 +32,6 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'sentry' => [
-        'browser' => env('SENTRY_BROWSER'),
-        'php' => env('SENTRY_PHP'),
-    ],
+    'sentry' => env('SENTRY_DSN'),
 
 ];
