@@ -1,7 +1,7 @@
 <template>
   <div v-if="notVerified"
-       class="bg-yellow-0 border-yellow-2 border-0 border-l-4 p-3 mb-4 shadow">
-    <div class="md:flex items-center">
+       class="bg-yellow-0 border-yellow-3 border rounded p-3 mb-4">
+    <div class="md:flex items-center text-black-75">
       <i18n path="message.verifyEmail" tag="div">
         <template v-slot:email>
           <strong>{{ $page.user.email }}</strong>

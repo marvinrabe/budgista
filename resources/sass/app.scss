@@ -61,6 +61,18 @@ a:hover {
 
 @tailwind utilities;
 
+.text-black-24 {
+  color: rgba(0,0,0,.24);
+}
+
+.text-black-50 {
+  color: rgba(0,0,0,.5);
+}
+
+.text-black-75 {
+  color: rgba(0,0,0,.75);
+}
+
 .font-numeric {
   font-variant-numeric: tabular-nums;
 }
