@@ -96,12 +96,12 @@
         form: {
           recurring: false,
           amount: 0,
-          date: dayjs().format('YYYY-MM-DD'),
           recurrence: null,
           payee: '',
           category_id: null,
           account_id: null,
-          ...this.value
+          ...this.value,
+          date: dayjs(this.value.date || undefined).format('YYYY-MM-DD'),
         }
       }
     },
