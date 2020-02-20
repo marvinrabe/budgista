@@ -21,12 +21,12 @@
     }
 
     &.active {
-      @apply bg-gray-0 border-l-2 border-blue-6;
+      @apply bg-gray-0 border-l-2 border-blue-5;
       margin-left: -2px;
       font-weight: 500;
 
       svg {
-        @apply text-blue-7;
+        @apply text-blue-6;
       }
     }
   }

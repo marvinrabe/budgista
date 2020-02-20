@@ -20,11 +20,11 @@ html {
 }
 
 body {
-  @apply bg-gray-1;
+  @apply bg-gray-1 text-gray-7;
 }
 
 a {
-  @apply text-blue-8 no-underline;
+  @apply text-blue-7 no-underline;
 }
 
 a:hover {

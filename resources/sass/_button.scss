@@ -27,15 +27,15 @@
   }
 
   &.primary {
-    @apply text-white bg-blue-8;
+    @apply text-white bg-blue-6;
 
     &:hover:not(:disabled) {
-      @apply text-white shadow bg-blue-9;
+      @apply text-white shadow bg-blue-8;
     }
   }
 
   &--subtle.primary {
-    @apply text-blue-8;
+    @apply text-blue-7;
 
     &:hover:not(:disabled) {
       @apply text-blue-9;

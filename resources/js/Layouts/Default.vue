@@ -11,7 +11,7 @@
         <div class="flex items-center flex-wrap justify-between mb-4">
           <slot name="title">
             <div class="ellipsis lg:order-first">
-              <h1 class="text-2xl">
+              <h1 class="text-gray-8 text-2xl">
                 {{ title }}
               </h1>
             </div>
