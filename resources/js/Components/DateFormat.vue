@@ -1,4 +1,6 @@
 <script>
+  import dayjs from 'dayjs'
+
   export default {
     props: {
       value: {
@@ -16,7 +18,8 @@
       }
     },
     render () {
-      const date = new Date(this.value)
+      const rawDate = dayjs(this.value).format('YYYY-MM-DD')
+      const date = new Date(rawDate)
 
       return this._v(this.formatter.format(date))
     }
