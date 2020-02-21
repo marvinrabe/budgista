@@ -1,8 +1,7 @@
 <template>
   <div class="mb-4">
-    <div class="flex items-center mb-2">
+    <div class="flex items-center mb-2" v-if="hasLabel">
       <label
-        v-if="hasLabel"
         v-t="labelTranslation"
         :for="name"
       />
