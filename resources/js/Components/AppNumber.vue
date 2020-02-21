@@ -1,13 +1,13 @@
 <template>
   <div class="numeric">
+    <span class="numeric__label">
+      {{ label }}
+    </span>
     <AppMoney
       :value="value"
       :color="color"
       class="numeric__value"
     />
-    <p class="numeric__label">
-      {{ label }}
-    </p>
   </div>
 </template>
 

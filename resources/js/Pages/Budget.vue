@@ -10,23 +10,25 @@
     </template>
 
     <template v-slot:header>
-      <div class="flex px-4 -mx-2 mt-4 w-full lg:mt-0 lg:w-auto lg:ml-auto">
-        <AppNumber
-          :label="$t('form.previousMonth')"
-          :value="budget.previousMonth"
-          class="hidden md:flex items-start lg:items-end"
-        />
-        <AppNumber
-          :label="$t('form.income')"
-          :value="budget.income"
-          class="items-start md:items-center lg:items-end"
-        />
-        <AppNumber
-          :label="$t('form.unallocated')"
-          :value="budget.unallocated"
-          class="items-end"
-          color
-        />
+      <div class="mt-4 w-full lg:mt-0 lg:w-auto lg:ml-auto">
+        <div class="flex -mx-2">
+          <AppNumber
+            :label="$t('form.previousMonth')"
+            :value="budget.previousMonth"
+            class="hidden md:flex items-start lg:items-end"
+          />
+          <AppNumber
+            :label="$t('form.income')"
+            :value="budget.income"
+            class="items-start md:items-center lg:items-end"
+          />
+          <AppNumber
+            :label="$t('form.unallocated')"
+            :value="budget.unallocated"
+            class="items-end"
+            color
+          />
+        </div>
       </div>
     </template>
 
@@ -106,14 +108,14 @@
       sortGroups (result) {
         const ids = result.map(group => group.id).filter(x => x)
 
-        this.$inertia.post("/groups/sort", {
+        this.$inertia.post('/groups/sort', {
           groups: ids
         }, { preserveScroll: true })
       },
       sortCategories (group, result) {
         const ids = result.map(category => category.id).filter(x => x)
 
-        this.$inertia.post("/categories/sort", {
+        this.$inertia.post('/categories/sort', {
           group_id: group,
           categories: ids
         }, { preserveScroll: true })

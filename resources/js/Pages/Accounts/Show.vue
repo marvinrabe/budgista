@@ -1,19 +1,21 @@
 <template>
   <Layout :title="account.name">
     <template v-slot:header>
-      <div class="flex px-4 -mx-2 mt-4 w-full lg:mt-0 lg:w-auto lg:ml-auto">
-        <AppNumber
-          class="lg:items-end"
-          :color="true"
-          :label="$t('form.balance.cleared')"
-          :value="account.balance_cleared"
-        />
-        <AppNumber
-          class="items-end"
-          :color="true"
-          :label="$t('form.balance.working')"
-          :value="account.balance"
-        />
+      <div class="mt-4 w-full lg:mt-0 lg:w-auto lg:ml-auto">
+        <div class="flex -mx-2">
+          <AppNumber
+            class="lg:items-end"
+            :color="true"
+            :label="$t('form.balance.cleared')"
+            :value="account.balance_cleared"
+          />
+          <AppNumber
+            class="items-end"
+            :color="true"
+            :label="$t('form.balance.working')"
+            :value="account.balance"
+          />
+        </div>
       </div>
     </template>
 

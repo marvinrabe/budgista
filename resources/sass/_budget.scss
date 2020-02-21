@@ -1,10 +1,7 @@
 .budget {
 
   .data {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    overflow: hidden;
+    @apply flex flex-wrap flex-1 items-center -mx-1;
   }
 
   .actions {
@@ -32,8 +29,7 @@
   &-header,
   &-group,
   &-row {
-    display: flex;
-    align-items: center;
+    @apply flex items-center;
 
     &:hover .dropdown-toggle,
     &:hover .handle {
@@ -42,12 +38,14 @@
   }
 
   &-header {
-    @apply text-sm text-gray-6;
-    cursor: default !important;
+    @apply text-xs  text-gray-6 uppercase tracking-wide;
+    * {
+      cursor: default !important;
+    }
   }
 
   &-row {
-    @apply bg-white items-start border-b border-gray-3;
+    @apply bg-white border-b border-gray-3;
 
     &:last-child {
       @apply border-0;
@@ -62,10 +60,6 @@
         @apply bg-transparent;
       }
     }
-
-    .budget-column-available {
-      font-weight: 500;
-    }
   }
 
   &-group {
@@ -75,9 +69,7 @@
     .budget-column-activity,
     .budget-column-available {
       span {
-        padding-right: 0.1em;
-        font-weight: 500;
-        font-size: $small-font-size;
+        @apply text-sm font-medium;
       }
     }
 
@@ -91,31 +83,27 @@
 
     &-name {
       flex: 2;
-      padding: $table-cell-padding;
-      padding-left: 0;
+      @apply p-1;
     }
 
     &-budget,
     &-activity,
     &-available {
+      @apply p-1 text-right;
       flex: 1;
       white-space: nowrap;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      justify-content: center;
-      padding: $table-cell-padding;
     }
 
     &-budget {
+      @apply p-0;
+
       input {
-        text-align: right;
+        @apply w-full p-2 -m-2 rounded-none text-right ml-auto;
         border-color: transparent;
         border-style: dotted;
         background-color: transparent;
         border-bottom-color: $oc-gray-4;
         height: 1.5em;
-        @apply p-2 -m-2 rounded-none;
 
         &:hover,
         &:focus {
@@ -138,9 +126,17 @@
 
     &-group,
     &-row {
+      .data {
+        @apply py-1;
+      }
       .budget-column-name {
-        padding-bottom: 0 !important;
         flex: 100%;
+      }
+
+      .budget-column-budget,
+      .budget-column-activity,
+      .budget-column-available {
+        @apply text-sm font-medium;
       }
     }
 

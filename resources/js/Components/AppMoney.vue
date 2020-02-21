@@ -1,7 +1,7 @@
 <template>
   <span
     :class="colorClass"
-    class="font-semibold font-numeric"
+    class="font-numeric"
     v-text="text"
   />
 </template>

@@ -6,7 +6,7 @@
   >
     <AppMoney
       :value="account.balance"
-      class="ml-auto pl-2 text-xs"
+      class="ml-auto pl-2 text-xs font-medium"
       color
     />
   </AppMenuItem>

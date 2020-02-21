@@ -1,11 +1,11 @@
 .pill {
-  @apply px-4 py-1 border border-gray-3 rounded-full font-semibold text-gray-7;
+  @apply px-4 py-1 border border-gray-3 rounded-full font-medium text-gray-7 tracking-wide;
 
   &:hover {
     @apply no-underline bg-gray-3 text-gray-8;
   }
 
   &--active {
-    @apply bg-gray-3 text-gray-8;
+    @apply bg-gray-3 text-gray-8 font-bold tracking-normal;
   }
 }
