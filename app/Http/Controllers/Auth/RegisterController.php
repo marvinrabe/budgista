@@ -37,6 +37,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'language' => App::getLocale(),
             'locale' => App::getLocale(),
+            'currency' => App::getLocale() == 'en' ? 'USD' : 'EUR'
         ]);
     }
 

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
-class RegisterTest extends TestCase
+class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -198,6 +198,37 @@ class RegisterTest extends TestCase
         Event::assertDispatched(Registered::class, function ($e) use ($user) {
             return $e->user->email === $user->email;
         });
+    }
+
+    /**
+     * @dataProvider locales
+     */
+    public function testSetsLocale($locale, $currency)
+    {
+        App::setLocale($locale);
+
+        $this->withoutMiddleware(DetectLocale::class);
+
+        $this
+            ->post('/register', [
+                'email' => 'john.doe@example.com',
+                'password' => 'password',
+                'terms' => true
+            ]);
+
+        $user = User::where('email', 'john.doe@example.com')->first();
+
+        $this->assertEquals($locale, $user->language);
+        $this->assertEquals($locale, $user->locale);
+        $this->assertEquals($currency, $user->currency);
+    }
+
+    public function locales()
+    {
+        return [
+            ['de', 'EUR'],
+            ['en', 'USD']
+        ];
     }
 
 }
