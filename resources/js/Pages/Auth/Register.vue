@@ -7,6 +7,15 @@
           v-t="'title.register'"
         />
 
+        <FormGroup name="google" :has-label="false">
+          <GoogleConnect
+            :label="$t('action.googleRegister')"
+            class="block w-full"
+          />
+        </FormGroup>
+
+        <hr class="hr-text" :data-content="$t('word.or')">
+
         <AppForm @submit="register">
           <FormGroup name="email">
             <input
@@ -74,6 +83,7 @@
   import AppForm from '@/Components/form/AppForm'
   import PasswordInput from '@/Components/form/PasswordInput'
   import FormGroup from '@/Components/form/FormGroup'
+  import GoogleConnect from '@/Components/GoogleConnect'
 
   const termsUrl = 'TODO'
 
@@ -81,6 +91,7 @@
     components: {
       Layout,
       PasswordInput,
+      GoogleConnect,
       AppButton,
       AppForm,
       FormGroup

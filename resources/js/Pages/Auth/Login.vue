@@ -7,6 +7,15 @@
           v-t="'title.login'"
         />
 
+        <FormGroup name="google" :has-label="false">
+          <GoogleConnect
+            :label="$t('action.googleLogin')"
+            class="block w-full"
+          />
+        </FormGroup>
+
+        <hr class="hr-text" :data-content="$t('word.or')">
+
         <AppForm
           @submit="login"
           ref="form"
@@ -83,6 +92,7 @@
 
 <script>
   import Layout from '@/Layouts/Auth'
+  import GoogleConnect from '@/Components/GoogleConnect'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import PasswordInput from '@/Components/form/PasswordInput'
@@ -91,6 +101,7 @@
   export default {
     components: {
       Layout,
+      GoogleConnect,
       PasswordInput,
       AppButton,
       AppForm,

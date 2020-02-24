@@ -6,8 +6,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
+Route::get('login/google', [Controllers\Auth\GoogleController::class, 'redirectToProvider']);
+Route::get('login/google/callback', [Controllers\Auth\GoogleController::class, 'handleProviderCallback']);
+
 Route::group(['middleware' => ['auth']], function () {
-    Route::redirect('/', '/budget');
+    Route::redirect('/', '/budget')->name('home');
     Route::resource('accounts', AccountController::class)->except('index');
     Route::get('accounts/{account}/future', [Controllers\AccountController::class, 'future'])->name('accounts.future');
     Route::post('accounts/{account}/reconcile',
@@ -25,6 +28,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('transactions', TransactionController::class)->except(['index', 'show']);
     Route::get('profile', [Controllers\UserController::class, 'edit'])->name('user.edit');
     Route::post('profile/email', [Controllers\UserController::class, 'email'])->name('user.email');
+    Route::delete('profile/google', [Controllers\Auth\GoogleController::class, 'destroy'])->name('google.destroy');
     Route::post('profile/password', [Controllers\UserController::class, 'password'])->name('user.password');
     Route::get('profile/terminate', [Controllers\UserController::class, 'delete'])->name('user.delete');
     Route::post('profile/terminate', [Controllers\UserController::class, 'destroy'])->name('user.destroy');

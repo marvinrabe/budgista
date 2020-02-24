@@ -16,7 +16,9 @@ export default {
     noAccountSignUp: 'Jetzt registrieren',
     verifyEmail: 'Bitte bestätige deine E-Mail Adresse {email}.',
     verificationCheckEmail: 'Bevor du fortfährst, bitte überprüfe deine E-Mail Postfach für einen Verifizierungs Link.',
-    verificationNotReceived: 'Falls du die E-Mail nicht erhalten haben solltest,'
+    verificationNotReceived: 'Falls du die E-Mail nicht erhalten haben solltest,',
+    googleConnected: 'Mit deinem Google-Konto verbunden.',
+    googleNotConnected: 'Nicht mit deinem Google-Konto verbunden.'
   },
   action: {
     current: 'Vorliegend',
@@ -28,6 +30,10 @@ export default {
     'navigation': 'Navigation hin- und herschalten',
     register: 'Kostenlos registrieren',
     login: 'Login',
+    googleLink: 'Mit Google-Konto verknüfpen',
+    googleLogin: 'Mit Google-Konto anmelden',
+    googleRegister: 'Mit Google-Konto registrieren',
+    googleRemove: 'Trennen',
     deleteUser: 'Mein Benutzerkonto dauerhaft löschen',
     'logout': 'Abmelden',
     'create': {
@@ -101,6 +107,7 @@ export default {
     newPassword: 'Neues Passwort'
   },
   word: {
+    or: 'oder',
     termsOfService: 'Nutzungsbedingungen',
     transaction: 'Kontobewegung',
     verified: 'Verifiziert',
@@ -129,7 +136,8 @@ export default {
     statistics: 'Statistiken',
     statisticNetWorth: 'Vermögen',
     statisticIncomeVsExpense: 'Einnahmen vs. Ausgaben',
-    verify: 'Verifiziere deine E-Mail Adresse'
+    verify: 'Verifiziere deine E-Mail Adresse',
+    googleAccount: 'Verknüpfe dein Google-Konto'
   },
   recurrence: {
     DAILY: 'Keine Wiederholung | Jeden Tag | Alle {n} Tage',

@@ -73,6 +73,21 @@ class LoginTest extends TestCase
         $this->assertAuthenticatedAs($user);
     }
 
+    public function testUserCannotLoginWithout()
+    {
+        $user = factory(User::class)->create([
+            'password' => null,
+        ]);
+
+        $response = $this->from('/login')->post('/login', [
+            'email' => $user->email,
+        ]);
+
+        $response->assertRedirect('/login');
+        $response->assertSessionHasErrors('password');
+        $this->assertGuest();
+    }
+
     public function testUserCannotLoginWithIncorrectPassword()
     {
         $user = factory(User::class)->create([

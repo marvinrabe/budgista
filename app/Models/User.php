@@ -14,6 +14,8 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
+    protected $appends = ['has_password'];
+
     protected $casts = [
         'email_verified_at' => 'datetime'
     ];
@@ -21,11 +23,13 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
+        'google_id',
         'password',
         'language',
         'locale',
         'currency',
-        'last_login_at'
+        'last_login_at',
+        'email_verified_at'
     ];
 
     protected $hidden = [
@@ -51,6 +55,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function getHasPasswordAttribute() {
+        return $this->password !== null;
     }
 
     public function budget(Month $month)

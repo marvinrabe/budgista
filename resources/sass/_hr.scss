@@ -1,0 +1,20 @@
+.hr-text {
+  @apply border-0 my-4 relative text-center;
+  height: 1.25rem;
+  line-height: 1.25rem;
+
+  &::before {
+    @apply absolute bg-gray-3;
+    content: ' ';
+    height: 1px;
+    left: 0;
+    top: 50%;
+    width: 100%;
+  }
+
+  &::after {
+    @apply inline-block relative text-gray-6 uppercase font-medium bg-white px-2;
+    content: attr(data-content);
+    line-height: 1.25em;
+  }
+}

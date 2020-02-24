@@ -16,7 +16,9 @@ export default {
     noAccountSignUp: 'Sign up now',
     verifyEmail: 'Please verify your email address {email}.',
     verificationCheckEmail: 'Before proceeding, please check your email for a verification link.',
-    verificationNotReceived: 'If you did not receive the email, '
+    verificationNotReceived: 'If you did not receive the email, ',
+    googleConnected: 'Connected with your Google Account.',
+    googleNotConnected: 'Not connected with your Google Account.'
   },
   action: {
     current: 'Current',
@@ -26,7 +28,11 @@ export default {
     'previousMonth': 'Previous Month',
     'navigation': 'Toggle navigation',
     register: 'Sign up for free',
-    login: 'Login',
+    login: 'Log in',
+    googleLink: 'Connect with Google Account',
+    googleLogin: 'Log in with Google Account',
+    googleRegister: 'Sign up with Google Account',
+    googleRemove: 'Disconnect',
     deleteUser: 'Delete my user account permanently',
     'logout': 'Logout',
     'futureTransactions': 'No upcoming | 1 upcoming | {count} upcoming',
@@ -101,6 +107,7 @@ export default {
     newPassword: 'New Password'
   },
   word: {
+    or: 'or',
     termsOfService: 'Terms of Service',
     transaction: 'Transaction',
     verified: 'Verified',
@@ -129,7 +136,8 @@ export default {
     statistics: 'Statistics',
     statisticNetWorth: 'Net Worth',
     statisticIncomeVsExpense: 'Income vs. Expense',
-    verify: 'Verify Your Email Address'
+    verify: 'Verify Your Email Address',
+    googleAccount: 'Connect Your Google Account'
   },
   recurrence: {
     DAILY: 'No Recurrence | Every Day Tag | Every {n} days',

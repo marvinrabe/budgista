@@ -8,6 +8,10 @@
       <div class="card-body border-t border-gray-3">
         <SettingsPassword/>
       </div>
+
+      <div class="card-body border-t border-gray-3">
+        <SettingsGoogle/>
+      </div>
     </div>
 
     <div class="text-right">
@@ -24,6 +28,7 @@
   import Layout from '@/Layouts/Default'
   import AppButton from '@/Components/form/AppButton'
   import SettingsEmail from '@/Components/profile/SettingsEmail.vue'
+  import SettingsGoogle from '@/Components/profile/SettingsGoogle.vue'
   import SettingsPassword from '@/Components/profile/SettingsPassword.vue'
 
   export default {
@@ -31,6 +36,7 @@
       Layout,
       AppButton,
       SettingsEmail,
+      SettingsGoogle,
       SettingsPassword
     }
   }

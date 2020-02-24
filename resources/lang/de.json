@@ -59,5 +59,8 @@
   "User account deleted. Thank you for using Budgista.": "Benutzerkonto wurde gelöscht. Vielen Dank dass du Budgista ausprobiert hast.",
   "An email with a password reset link has been sent.": "Eine E-Mail zum zurücksetzen des Passworts wurde verschickt.",
   "JavaScript is disabled.": "JavaScript ist deaktiviert.",
-  "Please enable JavaScript to use Budgista.": "Bitte aktiviere JavaScript um Budgista nutzen zu können."
+  "Please enable JavaScript to use Budgista.": "Bitte aktiviere JavaScript um Budgista nutzen zu können.",
+  "There is already an user with this Google account.": "Es existiert bereits ein Benutzer mit diesem Google Account.",
+  "There is already an user with your email address. Please login using your password..": "Es existiert bereits ein Benutzer mit deiner E-Mail Adresse. Bitte melde dich mit deinem Passwort an.",
+  "Your account has no password. Please add a password before removing your Google account.": "Dein Konto hat kein Passwort. Bitte erstelle ein Passwort bevor du dein Google-Konte entfernst."
 }

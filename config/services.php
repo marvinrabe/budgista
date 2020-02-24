@@ -32,6 +32,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_KEY'),
+        'redirect' => '/login/google/callback'
+    ],
+
     'sentry' => env('SENTRY_DSN'),
 
 ];
