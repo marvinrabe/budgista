@@ -3,7 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
@@ -167,6 +169,61 @@ class LoginTest extends TestCase
         $this->assertTrue(session()->hasOldInput('email'));
         $this->assertFalse(session()->hasOldInput('password'));
         $this->assertGuest();
+    }
+
+    public function testSaveLastLogin()
+    {
+        $user = factory(User::class)->create([
+            'last_login_at' => null
+        ]);
+
+        $now = Carbon::now();
+
+        Carbon::setTestNow($now);
+
+        $this
+            ->signIn($user)
+            ->get('/budget');
+
+        $this->assertEquals(0, $user->fresh()->last_login_at->diffInSeconds($now));
+    }
+
+    public function testDontChangeUpdatedAtWhenLogging()
+    {
+        $now = Carbon::now();
+        $yesterday = Carbon::yesterday();
+
+        Carbon::setTestNow($yesterday);
+
+        $user = factory(User::class)->create([
+            'updated_at' => $yesterday
+        ]);
+
+        Carbon::setTestNow($now);
+
+        $this
+            ->signIn($user)
+            ->get('/budget');
+
+        $this->assertEquals($yesterday, $user->fresh()->updated_at);
+    }
+
+    public function testDontUpdateWhenAlreadyLoggedInToday()
+    {
+        $today = CarbonImmutable::today()->startOfDay()->addMinute(1);
+        $later = $today->addHour(1);
+
+        Carbon::setTestNow($later);
+
+        $user = factory(User::class)->create([
+            'last_login_at' => $today
+        ]);
+
+        $this
+            ->signIn($user)
+            ->get('/budget');
+
+        $this->assertEquals($today, $user->fresh()->last_login_at);
     }
 
 }
