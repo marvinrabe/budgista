@@ -3,6 +3,7 @@
 namespace App\Budget;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use JsonSerializable;
 
@@ -22,29 +23,24 @@ class Sheet implements JsonSerializable
         $this->user = $user;
         $this->month = $month;
 
-        $this->rows = $user->categories->map(function($category) use ($month) {
+        $this->rows = $user->categories->map(function ($category) use ($month) {
             return $category->budget($month);
         });
-    }
-
-    public function getMonth()
-    {
-        return $this->month;
-    }
-
-    public function getRows()
-    {
-        return $this->rows;
     }
 
     public function getPreviousMonthAvailable()
     {
         $budgeted = $this->getCategoryBudgetSum();
-        $funds = 0;
-        $accounts = $this->user->accounts()->where('tracking', false)->get();
-        foreach ($accounts as $account) {
-            $funds += $account->transactions()->where('date', '<=', $this->month->previous()->lastDay())->whereNull('category_id')->sum('amount');
-        }
+
+        $funds = $this->user
+            ->transactions()
+            ->whereHas('account', function (Builder $query) {
+                $query->where('tracking', false);
+            })
+            ->where('date', '<=', $this->month->previous()->lastDay())
+            ->whereNull('category_id')
+            ->sum('amount');
+
         return $funds - $budgeted;
     }
 
@@ -53,7 +49,7 @@ class Sheet implements JsonSerializable
         return DB::table('budgets')
             ->join('categories', 'categories.id', '=', 'budgets.category_id')
             ->where([
-                ['month', '<', (string)$this->month],
+                ['month', '<', (string) $this->month],
                 ['user_id', '=', $this->user->id]
             ])
             ->sum('amount');
@@ -83,21 +79,13 @@ class Sheet implements JsonSerializable
         return $this->getPreviousMonthAvailable() + $this->getFunds() - $this->getBudgeted();
     }
 
-    /**
-     * Specify data which should be serialized to JSON
-     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
-     * @since 5.4.0
-     */
     function jsonSerialize()
     {
         return [
-            'month' => (string)$this->month,
-            'previousMonth' => (int)$this->getPreviousMonthAvailable(),
-            'allocated' => (int)$this->getBudgeted(),
-            'income' => (int)$this->getFunds(),
-            'unallocated' => (int)$this->getAvailable(),
+            'previousMonth' => (int) $this->getPreviousMonthAvailable(),
+            'allocated' => (int) $this->getBudgeted(),
+            'income' => (int) $this->getFunds(),
+            'unallocated' => (int) $this->getAvailable(),
             'rows' => $this->rows
         ];
     }
