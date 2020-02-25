@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\Account;
-use App\Models\Transaction;
+use App\Account;
+use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;

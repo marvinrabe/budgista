@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
-use App\Models\Transaction;
+use App\Account;
+use App\Transaction;
 use App\Rules\Own;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;

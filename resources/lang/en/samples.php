@@ -11,24 +11,18 @@ return [
     ],
 
     'categories' => [
-        'Variable Costs' => [
-            'Groceries',
-            'Restaurants',
-            'Recreation',
-            'Fuel',
-            'Education',
-            'Domestic needs'
-        ],
-        'Fixed Costs' => [
-            'Rent',
-            'Utilities',
-            'Internet, Cable & Telephone',
-            'Memberships & Subscriptions',
-            'Insurances',
-        ],
-        'Savings' => [
-            'Retirement',
-            'Emergency Fund'
-        ]
+        'Groceries',
+        'Restaurants',
+        'Recreation',
+        'Fuel',
+        'Education',
+        'Domestic needs',
+        'Rent',
+        'Utilities',
+        'Internet, Cable & Telephone',
+        'Memberships & Subscriptions',
+        'Insurances',
+        'Retirement',
+        'Emergency Fund'
     ]
 ];

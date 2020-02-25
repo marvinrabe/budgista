@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Budget\Month;
-use App\Models\Account;
-use App\Models\Category;
-use App\Models\Transaction;
+use App\Month;
+use App\Account;
+use App\Category;
+use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
@@ -20,11 +20,8 @@ class BudgetTest extends TestCase
     {
         $this->signIn()
             ->get('/budget')
-            ->assertInertiaViewIs('Budget')
-            ->assertHasProp('budget')
-            ->assertHasProp('groups')
-            ->assertHasProp('links')
-            ->assertHasProp('month');
+            ->assertInertiaViewIs('Budget/Index')
+            ->assertHasProp('budget');
     }
 
     public function testIncome()
@@ -93,7 +90,7 @@ class BudgetTest extends TestCase
         $response = $this->get('/budget/'.$month)
             ->assertSuccessful();
 
-        $row = Collection::make($response->props('budget')['rows'])
+        $row = Collection::make($response->props('budget')['categories'])
             ->where('id', $category->id)
             ->first();
 
@@ -175,7 +172,7 @@ class BudgetTest extends TestCase
 
         $response = $this->get('/budget/'.$month)->assertSuccessful();
 
-        $row = Collection::make($response->props('budget')['rows'])
+        $row = Collection::make($response->props('budget')['categories'])
             ->where('id', $category->id)
             ->first();
 
@@ -214,7 +211,7 @@ class BudgetTest extends TestCase
         $response = $this->get('/budget/'.$month)
             ->assertSuccessful();
 
-        $row = Collection::make($response->props('budget')['rows'])
+        $row = Collection::make($response->props('budget')['categories'])
             ->where('id', $category->id)
             ->first();
 

@@ -6,7 +6,7 @@
     <AppMoney
       :value="value"
       :color="color"
-      class="numeric__value"
+      class="numeric__value text-xl"
     />
   </div>
 </template>

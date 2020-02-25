@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Budget\Month;
+use App\Month;
 use Carbon\Carbon;
 use Tests\TestCase;
 

@@ -4,7 +4,7 @@
 namespace Tests\Feature;
 
 
-use App\Models\User;
+use App\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;

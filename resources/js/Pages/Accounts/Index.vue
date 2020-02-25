@@ -1,47 +1,73 @@
 <template>
-  <div class="my-2">
-    <div class="flex items-center justify-between">
-      <p class="menu__header">
-        {{ $t('title.accounts') }}
-      </p>
-      <AppButton to="/accounts/create" class="text-gray-6" icon small :title="$t('action.create.account')">
-        <PlusIcon />
-      </AppButton>
-    </div>
+  <Layout :title="$t('title.accounts')">
+    <AppContainer>
+      <template v-slot:menu>
+        <h2 class="text-xl text-gray-8 mb-4 px-4">
+          {{ $t('title.accounts') }}
+        </h2>
 
-    <menu-item
-      :account="account"
-      :key="account.id"
-      @click.native="$emit('navigate')"
-      v-for="account in spendingAccounts"
-    />
+        <AppMenu>
+          <menu-item
+            :account="account"
+            :key="account.id"
+            @click.native="$emit('navigate')"
+            v-for="account in spendingAccounts"
+          />
+        </AppMenu>
 
-    <div v-if="trackingAccounts.length">
-      <p class="menu__header mt-2">
-        {{ $t('title.trackingAccounts') }}
-      </p>
-      <menu-item
-        :account="account"
-        :key="account.id"
-        @click.native="$emit('navigate')"
-        v-for="account in trackingAccounts"
-      />
-    </div>
+        <AppMenu
+          v-if="trackingAccounts.length"
+          :title="$t('title.trackingAccounts')">
+          <menu-item
+            :account="account"
+            :key="account.id"
+            @click.native="$emit('navigate')"
+            v-for="account in trackingAccounts"
+          />
+        </AppMenu>
 
-  </div>
+        <div class="py-2 flex justify-center">
+          <inertia-link
+            class="pill"
+            href="/accounts/create">
+            <PlusIcon class="text-gray-6" />
+            {{ $t('action.create.account') }}
+          </inertia-link>
+        </div>
+
+      </template>
+
+      <template v-slot:content>
+        <slot/>
+      </template>
+    </AppContainer>
+  </Layout>
 </template>
 
 <script>
+  import Layout from '@/Layouts/Default'
   import MenuItem from '@/Components/accounts/MenuItem'
   import AppButton from '@/Components/form/AppButton'
+  import AppMenu from '@/Components/AppMenu'
   import { iconComponent } from '@/Utils/Icons'
   import { faPlus } from '@fortawesome/free-solid-svg-icons'
+  import AppContainer from '@/Components/AppContainer'
+  import AppMenuItem from '@/Components/AppMenuItem'
 
   export default {
     components: {
+      AppMenuItem,
+      AppContainer,
       AppButton,
+      AppMenu,
+      Layout,
       MenuItem,
       PlusIcon: iconComponent({ icon: faPlus }),
+    },
+    mounted() {
+      if(window.innerWidth >= 768 && !this.$slots.default && this.spendingAccounts.length) {
+        this.$inertia.visit(this.spendingAccounts[0].links.show, {replace: true});
+      }
     },
     computed: {
       spendingAccounts () {

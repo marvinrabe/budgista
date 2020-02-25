@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Budget;
-use App\Models\Category;
-use App\Budget\Month;
-use App\Models\Group;
+use App\Budget;
+use App\Category;
 use App\Rules\Own;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -15,29 +12,17 @@ use Inertia\Inertia;
 class CategoryController extends Controller
 {
 
-    public function create(Request $request)
+    public function create()
     {
-        $this->authorize('create', Category::class);
-
-        return Inertia::render('Categories/Create', [
-            'group' => $request->has('group')
-                ? Group::find($request->get('group'))
-                : null
-        ]);
+        return Inertia::render('Categories/Create');
     }
 
     public function store()
     {
-        $this->authorize('create', Category::class);
-
         Auth::user()
             ->categories()
             ->create(request()->validate([
-                'name' => 'required',
-                'group_id' => [
-                    'required',
-                    new Own('groups')
-                ]
+                'name' => 'required'
             ]));
 
         return Redirect::route('budget');
@@ -58,11 +43,7 @@ class CategoryController extends Controller
 
         $category->update(
             request()->validate([
-                'name' => 'required',
-                'group_id' => [
-                    'required',
-                    new Own('groups')
-                ]
+                'name' => 'required'
             ])
         );
 
@@ -105,12 +86,7 @@ class CategoryController extends Controller
     public function sort()
     {
         request()->validate([
-            'group_id' => [
-                'nullable',
-                'string',
-                new Own('groups'),
-            ],
-            'categories' => 'required'
+            'categories' => ['required', 'array']
         ]);
 
         $categories = request('categories');
@@ -119,9 +95,9 @@ class CategoryController extends Controller
 
         foreach (Auth::user()->categories as $category) {
             if (in_array($category->id, $categories)) {
-                $category->sort = $sorting[$category->id];
-                $category->group_id = request('group_id');
-                $category->save();
+                $category->update([
+                    'sort' => $sorting[$category->id]
+                ]);
             }
         }
 

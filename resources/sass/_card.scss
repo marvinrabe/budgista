@@ -1,5 +1,5 @@
 .card {
-  @apply shadow rounded bg-white mb-4;
+  @apply border border-gray-3 rounded shadow-sm bg-white mb-4;
 
   &-body, &-header, &-footer {
     @apply p-6;
@@ -17,11 +17,11 @@
     @apply text-2xl mb-3;
   }
 
-  > *:first-child {
+  *:first-child {
     @apply rounded-t;
   }
 
-  > *:last-child {
+  *:last-child {
     @apply rounded-b;
   }
 }

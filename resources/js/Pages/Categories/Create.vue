@@ -13,14 +13,6 @@
             >
           </FormGroup>
 
-          <FormGroup name="group_id">
-            <GroupSelect
-              slot-scope="{bindings}"
-              v-bind="bindings"
-              v-model="form.group_id"
-            />
-          </FormGroup>
-
           <template slot="actions">
             <AppButton
               :label="$t('action.save')"
@@ -39,11 +31,9 @@
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import FormGroup from '@/Components/form/FormGroup'
-  import GroupSelect from '@/Components/groups/GroupSelect'
 
   export default {
     components: {
-      GroupSelect,
       Layout,
       AppButton,
       AppForm,
@@ -58,8 +48,7 @@
     data () {
       return {
         form: {
-          name: '',
-          group_id: this.group ? this.group.id : null
+          name: ''
         },
         saving: false
       }

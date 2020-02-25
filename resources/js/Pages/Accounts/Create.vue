@@ -1,6 +1,9 @@
 <template>
   <Layout :title="$t('action.create.account')">
     <div class="card">
+      <div class="card-header">
+        {{ $t('action.create.account') }}
+      </div>
       <div class="card-body">
         <AppForm @submit="save">
           <FormGroup name="name">
@@ -54,7 +57,7 @@
 </template>
 
 <script>
-  import Layout from '@/Layouts/Default'
+  import Layout from '@/Pages/Accounts/Index'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import FormGroup from '@/Components/form/FormGroup'

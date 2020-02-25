@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Budget\Month;
-use App\Models\Category;
+use App\Month;
+use App\Category;
+use App\ViewModels\Budget;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
@@ -12,18 +13,32 @@ use Inertia\Inertia;
 class BudgetController extends Controller
 {
 
-    public function show($month = null)
+    public function index($month = null)
     {
         $month = $this->getMonth($month);
 
-        return Inertia::render('Budget', [
-            'month' => (string) $month,
-            'budget' => Auth::user()->budget($month),
-            'groups' => Auth::user()->groups()->with('categories')->get(),
-            'links' => [
-                'prev' => URL::route('budget', ['month' => $month->previous()]),
-                'next' => URL::route('budget', ['month' => $month->next()])
-            ]
+        return Inertia::render('Budget/Index', [
+            'budget' => (new Budget($month))->toArray()
+        ]);
+    }
+
+    public function show($month, Category $category)
+    {
+        $month = $this->getMonth($month);
+
+        return Inertia::render('Budget/Show', [
+            'budget' => (new Budget($month))->toArray(),
+            'category' => $category,
+            'categoryBudget' => $category->budget($month),
+            'transactions' => $category
+                ->transactions()
+                ->whereBetween('date', [
+                    $month->firstDay(),
+                    $month->lastDay()
+                ])
+                ->with(['category', 'account'])
+                ->orderBy('date', 'desc')
+                ->paginate(25),
         ]);
     }
 
@@ -49,11 +64,7 @@ class BudgetController extends Controller
     private function getMonth($string): Month
     {
         try {
-            if (!empty($string)) {
-                return Month::fromString($string);
-            }
-
-            return Month::current();
+            return Month::fromString($string);
         } catch (\InvalidArgumentException $exception) {
             abort(404);
         }

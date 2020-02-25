@@ -1,6 +1,9 @@
 <template>
   <div class="flex items-center">
-    <div class="flex mr-2">
+    <span class="text-gray-8 text-xl px-4">
+      {{ month.format() }}
+    </span>
+    <div class="flex">
       <inertia-link
         :title="$t('action.previousMonth')"
         :href="prev"
@@ -16,9 +19,6 @@
         <NextIcon />
       </inertia-link>
     </div>
-    <span class="text-gray-8 text-2xl mx-1">
-      {{ month.format() }}
-    </span>
   </div>
 </template>
 

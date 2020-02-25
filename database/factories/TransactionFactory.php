@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Account;
-use App\Models\Transaction;
-use App\Models\User;
+use App\Account;
+use App\Transaction;
+use App\User;
 use Faker\Generator as Faker;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */

@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Traits;
 
-use App\Models\Account;
-use App\Models\User;
+use App\Account;
+use App\User;
 use Tests\TestCase;
 
 class BelongsToUserTraitTest extends TestCase

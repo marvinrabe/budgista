@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Budget\Month;
-use App\Models\Account;
-use App\Models\Category;
-use App\Models\Transaction;
+use App\Month;
+use App\Account;
+use App\Category;
+use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

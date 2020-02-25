@@ -2,16 +2,13 @@
 
 namespace App\Providers;
 
-use App\Models\Account;
-use App\Models\Category;
-use App\Models\Group;
-use App\Models\Transaction;
+use App\Account;
+use App\Category;
+use App\Transaction;
 use App\Policies\AccountPolicy;
 use App\Policies\CategoryPolicy;
-use App\Policies\GroupPolicy;
 use App\Policies\TransactionPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -24,7 +21,6 @@ class AuthServiceProvider extends ServiceProvider
         Account::class => AccountPolicy::class,
         Category::class => CategoryPolicy::class,
         Transaction::class => TransactionPolicy::class,
-        Group::class => GroupPolicy::class,
     ];
 
     /**

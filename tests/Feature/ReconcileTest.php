@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Http\Middleware\DetectLocale;
-use App\Models\Account;
-use App\Models\Transaction;
+use App\Account;
+use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\App;
 use Tests\TestCase;

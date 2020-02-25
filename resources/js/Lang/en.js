@@ -21,7 +21,7 @@ export default {
     googleNotConnected: 'Not connected with your Google Account.'
   },
   action: {
-    current: 'Current',
+    current: 'Recent',
     save: 'Save',
     'cancel': 'Cancel',
     'nextMonth': 'Next Month',
@@ -114,6 +114,7 @@ export default {
     unverified: 'Unverified'
   },
   title: {
+    transactions: 'Transactions',
     localisation: 'Localisation',
     success: 'Success',
     error: 'Error',

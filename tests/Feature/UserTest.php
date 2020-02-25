@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Mail\UserDeleted;
+use App\Mails\UserDeleted;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;

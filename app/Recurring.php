@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Models\Transaction;
+use App\Transaction;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
 use RRule\RRule;

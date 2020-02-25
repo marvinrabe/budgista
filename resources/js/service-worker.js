@@ -5,11 +5,6 @@ workbox.setConfig({
 })
 
 workbox.routing.registerRoute(
-  new RegExp('.*(?:googleapis|gstatic)\.com.*$'),
-  new workbox.strategies.StaleWhileRevalidate(),
-)
-
-workbox.routing.registerRoute(
   new RegExp('.*rsms\.me.*$'),
   new workbox.strategies.CacheFirst(),
 )

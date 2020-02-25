@@ -13,14 +13,6 @@
             >
           </FormGroup>
 
-          <FormGroup name="group_id">
-            <GroupSelect
-              slot-scope="{bindings}"
-              v-bind="bindings"
-              v-model="form.group_id"
-            />
-          </FormGroup>
-
           <template slot="actions">
             <AppButton
               :label="$t('action.save')"
@@ -68,13 +60,11 @@
   import FormGroup from '@/Components/form/FormGroup'
   import { iconComponent } from '@/Utils/Icons'
   import { faTrashAlt } from '@fortawesome/free-regular-svg-icons'
-  import GroupSelect from '@/Components/groups/GroupSelect'
   import CategorySelect from '@/Components/categories/CategorySelect'
 
   export default {
     components: {
       CategorySelect,
-      GroupSelect,
       Layout,
       AppButton,
       AppForm,
@@ -87,8 +77,7 @@
     data () {
       return {
         form: {
-          name: this.category.name,
-          group_id: this.category.group_id
+          name: this.category.name
         },
         deleteForm: {
           category_id: null

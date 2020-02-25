@@ -1,40 +1,43 @@
 <template>
   <Layout :title="account.name">
-    <template v-slot:header>
-      <div class="mt-4 w-full lg:mt-0 lg:w-auto lg:ml-auto">
-        <div class="flex -mx-2">
-          <AppNumber
-            class="lg:items-end"
-            :color="true"
-            :label="$t('form.balance.cleared')"
-            :value="account.balance_cleared"
-          />
-          <AppNumber
-            class="items-end"
-            :color="true"
-            :label="$t('form.balance.working')"
-            :value="account.balance"
-          />
+    <div class="card ">
+      <div class="card-header flex items-center">
+        <h2 class="text-xl text-gray-8">
+          {{ account.name }}
+        </h2>
+
+        <div class="ml-auto flex">
+          <AppButton :to="account.links.edit" icon>
+            <CogIcon/>
+          </AppButton>
+
+          <AppButton
+            :title="$t('action.create.transaction')"
+            :to="account.links.transactions.create"
+            variant="primary"
+          >
+            <PlusIcon/>
+            {{ $t('word.transaction') }}
+          </AppButton>
         </div>
       </div>
-    </template>
 
-    <template v-slot:actions>
-      <AppButton :to="account.links.edit" icon>
-        <CogIcon/>
-      </AppButton>
+      <div class="card-body flex -mx-4">
+        <AppNumber
+          :color="true"
+          :label="$t('form.balance.cleared')"
+          :value="account.balance_cleared"
+        />
+        <AppNumber
+          class="items-end"
+          :color="true"
+          :label="$t('form.balance.working')"
+          :value="account.balance"
+        />
+      </div>
+    </div>
 
-      <AppButton
-        :title="$t('action.create.transaction')"
-        :to="account.links.transactions.create"
-        variant="primary"
-      >
-        <PlusIcon/>
-        {{ $t('word.transaction') }}
-      </AppButton>
-    </template>
-
-    <div class="flex -mx-1 mb-4 justify-center sm:justify-start" v-if="futureCount">
+    <div class="flex justify-center sm:justify-start py-4" v-if="futureCount">
       <div class="px-1">
         <inertia-link
           class="pill"
@@ -54,7 +57,10 @@
       </div>
     </div>
 
-    <TransactionList :transactions="transactions.data"/>
+
+    <div class="card">
+      <TransactionList :transactions="transactions.data"/>
+    </div>
 
     <div class="flex items-center justify-end">
       <AppPagination :paginator="transactions"/>
@@ -68,21 +74,22 @@
   import AppButton from '@/Components/form/AppButton'
   import TransactionList from '@/Components/transactions/TransactionList'
   import { iconComponent } from '@/Utils/Icons'
-  import Layout from '@/Layouts/Default'
   import AppPagination from '@/Components/AppPagination'
+  import Layout from '@/Pages/Accounts/Index'
 
   export default {
     components: {
-      AppPagination,
       Layout,
       PlusIcon: iconComponent({ icon: faPlus }),
       CogIcon: iconComponent({ icon: faCog }),
       AppButton,
       AppNumber,
+      AppPagination,
       TransactionList
     },
     props: {
       account: Object,
+      accounts: Array,
       transactions: Object,
       futureCount: Number
     },

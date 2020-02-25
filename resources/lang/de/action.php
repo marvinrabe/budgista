@@ -2,7 +2,6 @@
 
 return [
 
-    'reconciliation' => 'Abstimmung',
-    'ungrouped' => 'Unbenannte Gruppe'
+    'reconciliation' => 'Abstimmung'
 
 ];

@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\FollowUpEmail;
-use App\Models\User;
+use App\Mails\FollowUpEmail;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;

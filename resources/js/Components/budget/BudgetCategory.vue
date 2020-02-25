@@ -17,19 +17,18 @@
         class="budget-column-budget"
       >
         <AppMoneyInput
-          :title="recommendedTitle"
-          :value="row.budget"
+          :value="category.budget"
           @change="val => updateBudget(val)"
           ref="input"
           allow-negative
         />
       </div>
       <div class="budget-column-activity">
-        <AppMoney :value="row.activity"/>
+        <AppMoney :value="category.activity"/>
       </div>
       <div class="budget-column-available">
         <AppMoney
-          :value="row.available"
+          :value="category.available"
           color
         />
       </div>
@@ -58,16 +57,7 @@
     mixins: [moneyMixin],
     props: {
       category: Object,
-      month: Object,
-      budget: Object
-    },
-    computed: {
-      row () {
-        return this.budget.rows.filter(x => x.id === this.category.id)[0] || {}
-      },
-      recommendedTitle () {
-        return this.$t('form.recommendedBudget') + ': ' + this.moneyFormat.format(this.row.recommendedBudget)
-      }
+      month: Object
     },
     methods: {
       updateBudget: function (value) {

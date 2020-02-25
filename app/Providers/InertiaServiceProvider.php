@@ -19,7 +19,7 @@ class InertiaServiceProvider extends ServiceProvider
         Inertia::share([
             'user' => function () {
                 return Auth::check()
-                    ? Auth::user()->load(['accounts', 'categories', 'groups'])
+                    ? Auth::user()->load(['accounts', 'categories'])
                     : null;
             },
             'flash' => function () {

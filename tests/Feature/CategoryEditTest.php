@@ -2,8 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Category;
-use App\Models\Group;
+use App\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,14 +15,9 @@ class CategoryEditTest extends TestCase
     {
         $category = factory(Category::class)->create();
 
-        $group = factory(Group::class)->create([
-            'user_id' => $category->user_id
-        ]);
-
         $this
             ->signIn($category->user)
             ->put("/categories/{$category->id}", [
-                'group_id' => $group->id,
                 'name' => 'New Name'
             ])
             ->assertRedirect('/budget');
@@ -31,7 +25,6 @@ class CategoryEditTest extends TestCase
         $this->assertDatabaseHas('categories', [
             'id' => $category->id,
             'user_id' => $category->user_id,
-            'group_id' => $group->id,
             'name' => 'New Name'
         ]);
     }
@@ -40,28 +33,10 @@ class CategoryEditTest extends TestCase
     {
         $category = factory(Category::class)->create();
 
-        $group = factory(Group::class)->create([
-            'user_id' => $category->user_id
-        ]);
-
         $this
             ->signIn($category->user)
-            ->put("/categories/{$category->id}", [
-                'group_id' => $group->id,
-            ])
+            ->put("/categories/{$category->id}", [])
             ->assertSessionHasErrors('name');
-    }
-
-    public function testRequireGroup()
-    {
-        $category = factory(Category::class)->create();
-
-        $this
-            ->signIn($category->user)
-            ->put("/categories/{$category->id}", [
-                'name' => 'New Name'
-            ])
-            ->assertSessionHasErrors('group_id');
     }
 
     public function testCanNotUpdateOtherUsersCategories()

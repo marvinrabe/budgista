@@ -3,7 +3,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Budget\Month;
+use App\Month;
 use Carbon\Carbon;
 use Inertia\Inertia;
 

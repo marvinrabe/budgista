@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\User;
 use App\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Migrations\Migration;

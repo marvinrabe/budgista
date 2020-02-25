@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
+use App\Transaction;
 use App\Rules\Own;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;

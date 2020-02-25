@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\Account;
-use App\Models\Category;
-use App\Models\Transaction;
+use App\Account;
+use App\Category;
+use App\Transaction;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

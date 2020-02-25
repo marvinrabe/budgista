@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\DeletedUser;
-use App\Models\User;
+use App\DeletedUser;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;

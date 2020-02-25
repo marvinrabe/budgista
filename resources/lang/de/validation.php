@@ -178,7 +178,6 @@ return [
         'time' => 'Uhrzeit',
         'available' => 'verfügbar',
         'size' => 'Größe',
-        'group_id' => 'Gruppe',
         'payee' => 'Empfänger',
         'amount' => 'Betrag'
     ],

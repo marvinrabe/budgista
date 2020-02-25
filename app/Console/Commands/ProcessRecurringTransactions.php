@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Transaction;
+use App\Transaction;
 use App\Scopes\UserScope;
 use Carbon\Carbon;
 use Illuminate\Console\Command;

@@ -27,7 +27,6 @@
   }
 
   &-header,
-  &-group,
   &-row {
     @apply flex items-center;
 
@@ -38,7 +37,16 @@
   }
 
   &-header {
-    @apply text-xs  text-gray-6 uppercase tracking-wide;
+    @apply bg-gray-0 text-gray-7 border-b-2 border-gray-3 font-bold;
+
+    .budget-column-budget,
+    .budget-column-activity,
+    .budget-column-available {
+      span {
+        @apply text-sm font-medium;
+      }
+    }
+
     * {
       cursor: default !important;
     }
@@ -60,19 +68,6 @@
         @apply bg-transparent;
       }
     }
-  }
-
-  &-group {
-    @apply bg-gray-0 text-gray-7 border-b-2 border-gray-3 font-bold;
-
-    .budget-column-budget,
-    .budget-column-activity,
-    .budget-column-available {
-      span {
-        @apply text-sm font-medium;
-      }
-    }
-
   }
 
   &-categories {
@@ -124,7 +119,7 @@
       }
     }
 
-    &-group,
+    &-header,
     &-row {
       .data {
         @apply py-1;

@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use App\Budget\Foresight;
-use App\Budget\Month;
-use App\Models\Transaction;
+use App\Forecast;
+use App\Month;
+use App\Transaction;
 use Carbon\Carbon;
 use RRule\RRule;
 use Tests\TestCase;
@@ -21,7 +21,7 @@ class ForesightTest extends TestCase
 
         $transactions = collect([$transaction]);
 
-        $foresight = new Foresight(Month::current(), $transactions);
+        $foresight = new Forecast(Month::current(), $transactions);
 
         $this->assertEquals(6000, $foresight->recommendedBudget());
     }
@@ -35,7 +35,7 @@ class ForesightTest extends TestCase
 
         $transactions = collect([$transaction]);
 
-        $foresight = new Foresight(Month::current(), $transactions, 10);
+        $foresight = new Forecast(Month::current(), $transactions, 10);
 
         $this->assertEquals(10, $foresight->recommendedBudget());
     }
@@ -49,7 +49,7 @@ class ForesightTest extends TestCase
 
         $transactions = collect([$transaction]);
 
-        $foresight = new Foresight(Month::current(), $transactions, 60);
+        $foresight = new Forecast(Month::current(), $transactions, 60);
 
         $this->assertEquals(60, $foresight->recommendedBudget());
     }
@@ -67,7 +67,7 @@ class ForesightTest extends TestCase
 
         $transactions = collect([$transaction]);
 
-        $foresight = new Foresight(Month::current(), $transactions);
+        $foresight = new Forecast(Month::current(), $transactions);
 
         $this->assertEquals(10, $foresight->recommendedBudget());
     }
@@ -91,7 +91,7 @@ class ForesightTest extends TestCase
 
         $transactions = collect([$transaction1, $transaction2]);
 
-        $foresight = new Foresight(Month::current(), $transactions);
+        $foresight = new Forecast(Month::current(), $transactions);
 
         $this->assertEquals(20, $foresight->recommendedBudget());
     }

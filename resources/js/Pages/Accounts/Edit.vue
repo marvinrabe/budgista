@@ -1,18 +1,9 @@
 <template>
   <Layout :title="$t('action.edit.account')">
-    <template v-slot:actions>
-      <AppButton
-        :title="$t('action.delete.account')"
-        @click="deleteAccount"
-        subtle
-        variant="danger"
-        icon
-      >
-        <DeleteIcon/>
-      </AppButton>
-    </template>
-
     <div class="card">
+      <div class="card-header">
+        {{ $t('action.edit.account') }}
+      </div>
       <div class="card-body">
         <AppForm @submit="save">
           <FormGroup name="name">
@@ -46,9 +37,20 @@
 
           <template slot="actions">
             <AppButton
+              :title="$t('action.delete.account')"
+              @click="deleteAccount"
+              subtle
+              variant="danger"
+              icon
+            >
+              <DeleteIcon/>
+            </AppButton>
+
+            <AppButton
               :label="$t('action.save')"
               :loading="saving"
               variant="primary"
+              class="ml-auto"
             />
           </template>
         </AppForm>
@@ -58,7 +60,7 @@
 </template>
 
 <script>
-  import Layout from '@/Layouts/Default'
+  import Layout from '@/Pages/Accounts/Index'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import AccountIconPicker from '@/Components/accounts/AccountIconPicker'

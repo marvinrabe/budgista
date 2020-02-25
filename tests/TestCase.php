@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use App\Models\User;
+use App\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\TestResponse;
 use Illuminate\Support\Arr;

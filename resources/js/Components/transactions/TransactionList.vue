@@ -1,6 +1,6 @@
 <template>
   <TransactionListEmpty v-if="isEmpty"/>
-  <div class="card" v-else>
+  <div v-else>
     <div class="card-header p-0 hidden sm:flex">
       <div class="transaction-item">
         &nbsp;

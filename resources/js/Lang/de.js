@@ -21,9 +21,9 @@ export default {
     googleNotConnected: 'Nicht mit deinem Google-Konto verbunden.'
   },
   action: {
-    current: 'Vorliegend',
+    current: 'Kürzlich',
     save: 'Speichern',
-    'futureTransactions': 'Keine ukünftigen | 1 vorgemerkt | {count} vorgemerkt',
+    'futureTransactions': 'Keine vorgemerkt | 1 vorgemerkt | {count} vorgemerkt',
     'cancel': 'Abbrechen',
     'nextMonth': 'Nächster Monat',
     'previousMonth': 'Vorheriger Monat',
@@ -114,6 +114,7 @@ export default {
     unverified: 'Unverifiziert'
   },
   title: {
+    transactions: 'Kontobewegungen',
     localisation: 'Lokalisierung',
     success: 'Erfolg',
     error: 'Fehler',

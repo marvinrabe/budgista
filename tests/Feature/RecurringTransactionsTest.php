@@ -5,8 +5,8 @@ namespace Tests\Feature;
 
 
 use App\Console\Commands\ProcessRecurringTransactions;
-use App\Models\Account;
-use App\Models\Transaction;
+use App\Account;
+use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Ramsey\Uuid\Uuid;

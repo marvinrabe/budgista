@@ -1,3 +1,7 @@
+.form-group {
+  @apply mb-4;
+}
+
 label {
   @apply block uppercase tracking-wide text-gray-7 text-xs font-bold;
 }

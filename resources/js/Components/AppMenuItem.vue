@@ -1,26 +1,20 @@
 <template>
-  <a
-    @click.prevent="navigate"
-    class="menu__item rounded"
-    :class="{active: active}"
-    :href="href || '#'"
+  <inertia-link
+    class="menu__item hover:no-underline hover:bg-gray-0"
+    :class="{'menu__item--active': active}"
+    :href="href"
   >
-    <font-awesome-icon
+    <FontAwesomeIcon
       :icon="icon"
-      class="mr-1"
+      class="mr-2"
       fixed-width
       v-if="icon"
     />
-    <div
-      class="d-block mr-1"
-      style="width: 1.25em"
-      v-else
-    />
-    <div class="ellipsis">
+    <div class="text-gray-8 font-medium ellipsis">
       <span>{{ label }}</span>
     </div>
     <slot></slot>
-  </a>
+  </inertia-link>
 </template>
 
 <script>
@@ -44,14 +38,6 @@
     computed: {
       active () {
         return this.$inertia.page.url.startsWith(this.href)
-      }
-    },
-    methods: {
-      navigate () {
-        if (this.href) {
-          this.$inertia.visit(this.href)
-        }
-        this.$emit('click')
       }
     }
   }

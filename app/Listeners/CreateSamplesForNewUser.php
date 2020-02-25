@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Models\Account;
-use App\Models\Category;
-use App\Models\User;
+use App\Account;
+use App\Category;
+use App\User;
 use Illuminate\Auth\Events\Registered;
 
 class CreateSamplesForNewUser
@@ -17,7 +17,7 @@ class CreateSamplesForNewUser
     /**
      * Create sample content for newly registered users.
      *
-     * @param  Registered $event
+     * @param  Registered  $event
      * @return void
      */
     public function handle($event)
@@ -27,22 +27,14 @@ class CreateSamplesForNewUser
          */
         $user = $event->user;
 
-        foreach (trans("samples.categories") as $groupName => $categories) {
-            $group = $user->groups()->create([
-                'name' => $groupName
+        foreach (trans("samples.categories") as $categoryName) {
+            $user->categories()->create([
+                'name' => $categoryName
             ]);
-
-            foreach($categories as $categoryName) {
-                $category = $user->categories()->make([
-                    'name' => $categoryName
-                ]);
-                $category->group_id = $group->id;
-                $category->save();
-            }
         }
 
         foreach (trans("samples.accounts") as $accountData) {
-            $user->accounts()->save(new Account($accountData));
+            $user->accounts()->create($accountData);
         }
     }
 

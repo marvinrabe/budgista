@@ -1,6 +1,6 @@
 <?php
 
-use App\Budget\Month;
+use App\Month;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $user = factory(\App\Models\User::class)->create([
+        $user = factory(\App\User::class)->create([
             'email' => 'developer@budgista.com',
             'language' => 'en',
             'locale' => 'en',
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
         $months->each(function (CarbonImmutable $month) use ($user) {
             $income = $this->randomize(254983);
 
-            factory(\App\Models\Transaction::class)->create([
+            factory(\App\Transaction::class)->create([
                 'user_id' => $user->id,
                 'date' => $month,
                 'account_id' => $user->accounts[2]->id,
@@ -102,7 +102,7 @@ class DatabaseSeeder extends Seeder
 
             $part = $expense * $this->categories[$key];
 
-            factory(\App\Models\Transaction::class)->create([
+            factory(\App\Transaction::class)->create([
                 'user_id' => $user->id,
                 'category_id' => $user->categories[$key]->id,
                 'date' => $month,
@@ -110,7 +110,7 @@ class DatabaseSeeder extends Seeder
                 'amount' => (int) (-$part * $accountShare[0])
             ]);
 
-            factory(\App\Models\Transaction::class)->create([
+            factory(\App\Transaction::class)->create([
                 'user_id' => $user->id,
                 'category_id' => $user->categories[$key]->id,
                 'date' => $month,
@@ -118,7 +118,7 @@ class DatabaseSeeder extends Seeder
                 'amount' => (int) (-$part * $accountShare[1])
             ]);
 
-            factory(\App\Models\Transaction::class)->create([
+            factory(\App\Transaction::class)->create([
                 'user_id' => $user->id,
                 'category_id' => $user->categories[$key]->id,
                 'date' => $month,
@@ -139,7 +139,7 @@ class DatabaseSeeder extends Seeder
 
     public function transfer($amount, $a, $b, $month)
     {
-        factory(\App\Models\Transaction::class)->create([
+        factory(\App\Transaction::class)->create([
             'user_id' => $a->user_id,
             'date' => $month,
             'account_id' => $a->id,
@@ -147,7 +147,7 @@ class DatabaseSeeder extends Seeder
             'amount' => (int) -$amount
         ]);
 
-        factory(\App\Models\Transaction::class)->create([
+        factory(\App\Transaction::class)->create([
             'user_id' => $b->user_id,
             'date' => $month,
             'account_id' => $b->id,

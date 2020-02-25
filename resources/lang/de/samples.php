@@ -11,24 +11,18 @@ return [
     ],
 
     'categories' => [
-        'Variable Kosten' => [
-            'Lebensmittel',
-            'Restaurants',
-            'Freizeit',
-            'Benzin',
-            'Weiterbildung',
-            'Haushaltsbedarf'
-        ],
-        'Fixkosten' => [
-            'Miete',
-            'Wasser & Strom',
-            'Internet, Fernsehen & Telefon',
-            'Mitgliedschaften & Abos',
-            'Versicherungen',
-        ],
-        'Sparen' => [
-            'Altersvorsorge',
-            'Notfallrücklagen'
-        ]
+        'Lebensmittel',
+        'Restaurants',
+        'Freizeit',
+        'Benzin',
+        'Weiterbildung',
+        'Haushaltsbedarf',
+        'Miete',
+        'Wasser & Strom',
+        'Internet, Fernsehen & Telefon',
+        'Mitgliedschaften & Abos',
+        'Versicherungen',
+        'Altersvorsorge',
+        'Notfallrücklagen'
     ]
 ];

@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Models\Transaction;
+use App\Transaction;
 use App\Recurring;
 use Carbon\Carbon;
 use Tests\TestCase;

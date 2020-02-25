@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
+use App\Account;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
@@ -11,17 +11,18 @@ use Inertia\Inertia;
 
 class AccountController extends Controller
 {
+    public function index()
+    {
+        return Inertia::render('Accounts/Index');
+    }
+
     public function create()
     {
-        $this->authorize('create', Account::class);
-
         return Inertia::render('Accounts/Create');
     }
 
     public function store(Request $request)
     {
-        $this->authorize('create', Account::class);
-
         $request->validate([
             'name' => 'required',
             'initial_balance' => ['nullable', 'integer'],
@@ -49,6 +50,7 @@ class AccountController extends Controller
         $this->authorize('view', $account);
 
         return Inertia::render('Accounts/Show', [
+            'accounts' => Account::all(),
             'account' => $account,
             'transactions' => $account
                 ->transactions()

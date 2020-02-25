@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Http\Middleware\DetectLocale;
-use App\Models\User;
+use App\User;
 use App\Scopes\UserScope;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
