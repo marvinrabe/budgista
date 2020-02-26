@@ -11,6 +11,12 @@ Vue.use(InertiaApp)
 
 const app = document.getElementById('app')
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js');
+  });
+}
+
 new Vue({
   i18n,
   render: h => h(InertiaApp, {
