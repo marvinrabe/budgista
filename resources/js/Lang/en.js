@@ -9,7 +9,6 @@ export default {
     deleteAccount: 'Do you really want to delete {name}? All transactions will be lost. This action can\'t be reversed.',
     deleteCategory: 'Do you really want to delete {name}? This action can\'t be reversed.',
     deleteTransaction: 'Do you really want to delete this transaction? This action can\'t be reversed.',
-    addTransaction: 'Add a transaction now.',
     forgotPassword: 'Forgot Your Password?',
     noAccount: 'Don\'t have an account?',
     noAccountSignUp: 'Sign up now',
@@ -17,7 +16,10 @@ export default {
     verificationCheckEmail: 'Before proceeding, please check your email for a verification link.',
     verificationNotReceived: 'If you did not receive the email, ',
     googleConnected: 'Connected with your Google Account.',
-    googleNotConnected: 'Not connected with your Google Account.'
+    googleNotConnected: 'Not connected with your Google Account.',
+    addAccount: 'Add an Account now.',
+    addCategory: 'Add some Categories now.',
+    addTransaction: 'Add a Transaction now.'
   },
   action: {
     current: 'Recent',
@@ -58,7 +60,8 @@ export default {
     sendReset: 'Send Password Reset Link',
     sendVerification: 'Send Verfication Link',
     changeEmail: 'Change email address',
-    verificationResend: 'click here to request another.'
+    verificationResend: 'click here to request another.',
+    manageCategories: 'Manage Categories'
   },
   form: {
     pleaseSelect: 'Please Choose...',
@@ -112,10 +115,8 @@ export default {
   title: {
     transactions: 'Transactions',
     localisation: 'Localisation',
-    success: 'Success',
-    error: 'Error',
     deleteUser: 'Delete user account',
-    profile: 'User account',
+    profile: 'User Account',
     accounts: 'Accounts',
     budget: 'Budget',
     categories: 'Categories',
@@ -125,7 +126,6 @@ export default {
     account: 'Account',
     updatePassword: 'Change Password',
     updateEmail: 'Change Email Address',
-    emptyAccount: 'This account is empty.',
     register: 'Sign up',
     trackingAccounts: 'Tracking Accounts',
     pageNotFound: 'Not Found',
@@ -134,7 +134,10 @@ export default {
     statisticNetWorth: 'Net Worth',
     statisticIncomeVsExpense: 'Income vs. Expense',
     verify: 'Verify Your Email Address',
-    googleAccount: 'Connect Your Google Account'
+    googleAccount: 'Connect Your Google Account',
+    noAccounts: 'No Accounts present.',
+    noCategories: 'No Categories present.',
+    noTransactions: 'No Transactions present.',
   },
   recurrence: {
     DAILY: 'No Recurrence | Every Day Tag | Every {n} days',

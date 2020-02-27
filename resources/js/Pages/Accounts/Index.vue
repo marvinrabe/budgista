@@ -5,34 +5,39 @@
         {{ $t('title.accounts') }}
       </h2>
 
-      <AppMenu>
-        <menu-item
-          :account="account"
-          :key="account.id"
-          @click.native="$emit('navigate')"
-          v-for="account in spendingAccounts"
-        />
-      </AppMenu>
 
-      <AppMenu
-        v-if="trackingAccounts.length"
-        :title="$t('title.trackingAccounts')">
-        <menu-item
-          :account="account"
-          :key="account.id"
-          @click.native="$emit('navigate')"
-          v-for="account in trackingAccounts"
-        />
-      </AppMenu>
+      <template v-if="$page.user.accounts.length">
+        <AppMenu>
+          <menu-item
+            :account="account"
+            :key="account.id"
+            @click.native="$emit('navigate')"
+            v-for="account in spendingAccounts"
+          />
+        </AppMenu>
 
-      <div class="py-2 flex justify-center">
-        <inertia-link
-          class="pill"
-          href="/accounts/create">
-          <PlusIcon class="text-gray-6"/>
-          {{ $t('action.create.account') }}
-        </inertia-link>
-      </div>
+        <AppMenu
+          v-if="trackingAccounts.length"
+          :title="$t('title.trackingAccounts')">
+          <menu-item
+            :account="account"
+            :key="account.id"
+            @click.native="$emit('navigate')"
+            v-for="account in trackingAccounts"
+          />
+        </AppMenu>
+
+        <div class="py-2 flex justify-center">
+          <inertia-link
+            class="pill"
+            href="/accounts/create">
+            <PlusIcon class="text-gray-6"/>
+            {{ $t('action.create.account') }}
+          </inertia-link>
+        </div>
+      </template>
+      <AccountListEmpty v-else/>
+
     </template>
 
     <slot/>
@@ -47,9 +52,11 @@
   import { iconComponent } from '@/Utils/Icons'
   import { faPlus } from '@fortawesome/free-solid-svg-icons'
   import AppMenuItem from '@/Components/AppMenuItem'
+  import AccountListEmpty from '@/Components/accounts/AccountListEmpty'
 
   export default {
     components: {
+      AccountListEmpty,
       AppMenuItem,
       AppButton,
       AppMenu,

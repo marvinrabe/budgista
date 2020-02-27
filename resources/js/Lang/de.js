@@ -9,7 +9,6 @@ export default {
     deleteAccount: 'Möchtest du {name} wirklich löschen? Alle Kontobewegungen werden entfernt. Dies kann nicht rückgängig gemacht werden.',
     deleteCategory: 'Möchtest du {name} wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
     deleteTransaction: 'Möchtest diese Kontobewegung wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
-    addTransaction: 'Füge jetzt Kontobewegungen hinzu.',
     forgotPassword: 'Passwort vergessen?',
     noAccount: 'Kein Konto vorhanden?',
     noAccountSignUp: 'Jetzt registrieren',
@@ -17,7 +16,10 @@ export default {
     verificationCheckEmail: 'Bevor du fortfährst, bitte überprüfe deine E-Mail Postfach für einen Verifizierungs Link.',
     verificationNotReceived: 'Falls du die E-Mail nicht erhalten haben solltest,',
     googleConnected: 'Mit deinem Google-Konto verbunden.',
-    googleNotConnected: 'Nicht mit deinem Google-Konto verbunden.'
+    googleNotConnected: 'Nicht mit deinem Google-Konto verbunden.',
+    addAccount: 'Füge jetzt ein Konto hinzu.',
+    addCategory: 'Erstelle jetzt Kategorien.',
+    addTransaction: 'Füge jetzt Kontobewegungen hinzu.'
   },
   action: {
     current: 'Kürzlich',
@@ -58,7 +60,8 @@ export default {
     sendReset: 'E-Mail versenden',
     sendVerification: 'Verifizierungs Link versenden',
     changeEmail: 'E-Mail Adresse ändern',
-    verificationResend: 'klicke hier um eine neue zu bekommen.'
+    verificationResend: 'klicke hier um eine neue zu bekommen.',
+    manageCategories: 'Kategorien verwalten'
   },
   form: {
     pleaseSelect: 'Bitte Auswählen...',
@@ -112,8 +115,6 @@ export default {
   title: {
     transactions: 'Kontobewegungen',
     localisation: 'Lokalisierung',
-    success: 'Erfolg',
-    error: 'Fehler',
     deleteUser: 'Benutzerkonto löschen',
     profile: 'Benutzerkonto',
     accounts: 'Konten',
@@ -125,7 +126,6 @@ export default {
     account: 'Benutzerkonto',
     updatePassword: 'Passwort ändern',
     updateEmail: 'E-Mail Adresse ändern',
-    emptyAccount: 'Dieses Konto ist leer.',
     register: 'Registrieren',
     trackingAccounts: 'Tracking Konten',
     pageNotFound: 'Nicht gefunden',
@@ -134,7 +134,10 @@ export default {
     statisticNetWorth: 'Vermögen',
     statisticIncomeVsExpense: 'Einnahmen vs. Ausgaben',
     verify: 'Verifiziere deine E-Mail Adresse',
-    googleAccount: 'Verknüpfe dein Google-Konto'
+    googleAccount: 'Verknüpfe dein Google-Konto',
+    noAccounts: 'Keine Konten vorhanden.',
+    noCategories: 'Keine Kategorien vorhanden.',
+    noTransactions: 'Keine Kontobewegungen vorhanden.',
   },
   recurrence: {
     DAILY: 'Keine Wiederholung | Jeden Tag | Alle {n} Tage',

@@ -41,25 +41,38 @@
         />
       </div>
 
-      <AppMenu>
-        <AppMenuItem
-          v-for="category in $page.budget.categories"
-          :key="category.id"
-          :label="category.name"
-          :href="category.links.show">
-          <AppMoney
-            :value="category.available"
-            class="ml-auto pl-2 text-xs font-medium"
-            color
-          />
-          <div class="w-full flex justify-end">
-            <BudgetProgress
-              class="w-1/4"
-              :activity="-category.activity"
-              :total="category.budget"/>
-          </div>
-        </AppMenuItem>
-      </AppMenu>
+      <template v-if="$page.budget.categories.length">
+        <AppMenu>
+          <AppMenuItem
+            v-for="category in $page.budget.categories"
+            :key="category.id"
+            :label="category.name"
+            :href="category.links.show">
+            <AppMoney
+              :value="category.available"
+              class="ml-auto pl-2 text-xs font-medium"
+              color
+            />
+            <div class="w-full flex justify-end">
+              <BudgetProgress
+                class="w-1/4"
+                :activity="-category.activity"
+                :total="category.budget"/>
+            </div>
+          </AppMenuItem>
+        </AppMenu>
+
+        <div class="py-2 flex justify-center">
+          <inertia-link
+            class="pill"
+            href="/categories">
+            <CogIcon class="text-gray-6"/>
+            {{ $t('action.manageCategories') }}
+          </inertia-link>
+        </div>
+      </template>
+      <CategoryListEmpty v-else />
+
     </template>
 
     <slot/>
@@ -78,10 +91,12 @@
   import AppMenuItem from '@/Components/AppMenuItem'
   import AppButton from '@/Components/form/AppButton'
   import { iconComponent } from '@/Utils/Icons'
-  import { faChevronLeft, faChevronRight, faTable } from '@fortawesome/free-solid-svg-icons'
+  import { faChevronLeft, faChevronRight, faCog, faTable } from '@fortawesome/free-solid-svg-icons'
+  import CategoryListEmpty from '@/Components/categories/CategoryListEmpty'
 
   export default {
     components: {
+      CategoryListEmpty,
       AppButton,
       AppMenuItem,
       AppMenu,
@@ -93,7 +108,8 @@
       draggable,
       TableIcon: iconComponent({ icon: faTable }),
       NextIcon: iconComponent({ icon: faChevronRight, fixedWidth: true }),
-      PrevIcon: iconComponent({ icon: faChevronLeft, fixedWidth: true })
+      PrevIcon: iconComponent({ icon: faChevronLeft, fixedWidth: true }),
+      CogIcon: iconComponent({ icon: faCog }),
     },
     mounted () {
       if (window.innerWidth >= 768 && !this.$slots.default && this.$page.budget.categories.length) {
