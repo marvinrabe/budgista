@@ -1,32 +1,35 @@
 <template>
-  <TransactionListEmpty v-if="isEmpty"/>
-  <div v-else>
-    <div class="card-header p-0 hidden sm:flex">
-      <div class="transaction-item">
-        &nbsp;
-        <div class="transaction-date">
-          {{ $t('form.date') }}
+  <div class="card">
+    <TransactionListEmpty v-if="isEmpty"/>
+    <div v-else>
+      <div class="card-header p-0 hidden sm:flex">
+        <div class="transaction-item">
+          &nbsp;
+          <div class="transaction-date">
+            {{ $t('form.date') }}
+          </div>
+          <div class="transaction-payee">
+            {{ $t('form.payee') }}
+          </div>
+          <div class="transaction-category">
+            {{ $t('form.' + column) }}
+          </div>
+          <div class="transaction-amount">
+            {{ $t('form.amount') }}
+          </div>
         </div>
-        <div class="transaction-payee">
-          {{ $t('form.payee') }}
-        </div>
-        <div class="transaction-category">
-          {{ $t('form.category') }}
-        </div>
-        <div class="transaction-amount">
-          {{ $t('form.amount') }}
+        <div class="transaction-clear">
+          &nbsp;
         </div>
       </div>
-      <div class="transaction-clear">
-        &nbsp;
-      </div>
-    </div>
 
-    <TransactionListItem
-      :key="transaction.id"
-      :transaction="transaction"
-      v-for="transaction of transactions"
-    />
+      <TransactionListItem
+        :key="transaction.id"
+        :column="column"
+        :transaction="transaction"
+        v-for="transaction of transactions"
+      />
+    </div>
   </div>
 </template>
 
@@ -40,10 +43,8 @@
       TransactionListItem
     },
     props: {
-      transactions: {
-        type: Array,
-        required: true
-      }
+      transactions: Array,
+      column: String
     },
     computed: {
       isEmpty () {

@@ -57,10 +57,10 @@
       </div>
     </div>
 
-
-    <div class="card">
-      <TransactionList :transactions="transactions.data"/>
-    </div>
+    <TransactionList
+      :transactions="transactions.data"
+      column="category"
+    />
 
     <div class="flex items-center justify-end">
       <AppPagination :paginator="transactions"/>

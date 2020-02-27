@@ -11,8 +11,8 @@
       <div class="transaction-payee ellipsis">
         <span>{{ transaction.payee }}</span>
       </div>
-      <div class="transaction-category ellipsis" v-if="transaction.category">
-        <span>{{ transaction.category.name }}</span>
+      <div class="transaction-category ellipsis" v-if="transaction[column]">
+        <span>{{ transaction[column].name }}</span>
       </div>
       <div class="transaction-category ellipsis" v-else>
         <span>{{ $t('form.uncategorized') }}</span>
@@ -42,10 +42,8 @@
       RecurringIcon
     },
     props: {
-      transaction: {
-        type: Object,
-        required: true
-      }
+      transaction: Object,
+      column: String
     },
     computed: {
       isFuture () {

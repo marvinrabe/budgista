@@ -8,7 +8,6 @@ export default {
     deleteUser: 'If you delete your user account all your data will be immediately, completely and irrevocably lost. Please enter your password to confirm the deletion.',
     deleteAccount: 'Do you really want to delete {name}? All transactions will be lost. This action can\'t be reversed.',
     deleteCategory: 'Do you really want to delete {name}? This action can\'t be reversed.',
-    deleteGroup: 'Do you really want to delete {name}? All related categories will be deleted. This action can\'t be reversed.',
     deleteTransaction: 'Do you really want to delete this transaction? This action can\'t be reversed.',
     addTransaction: 'Add a transaction now.',
     forgotPassword: 'Forgot Your Password?',
@@ -39,19 +38,16 @@ export default {
     'create': {
       'account': 'Add Account',
       'category': 'Create Category',
-      group: 'Create Group',
       'transaction': 'Add Transaction'
     },
     'edit': {
       category: 'Edit Category',
       account: 'Edit Account',
-      group: 'Edit Group',
       transaction: 'Edit Transaction'
     },
     'delete': {
       category: 'Delete Category',
       account: 'Delete Account',
-      group: 'Delete Group',
       transaction: 'Delete Transaction'
     },
     'settings': {
@@ -74,7 +70,7 @@ export default {
     'recurring': 'Recurring?',
     'recurringInterval': 'Repeat every',
     'category': 'Category',
-    group_id: 'Group',
+    account: 'Account',
     'budget': 'Budget',
     'activity': 'Activity',
     uncategorized: 'Uncategorized',

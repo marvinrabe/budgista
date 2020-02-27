@@ -36,7 +36,7 @@ class BudgetController extends Controller
                     $month->firstDay(),
                     $month->lastDay()
                 ])
-                ->with(['category', 'account'])
+                ->with('account')
                 ->orderBy('date', 'desc')
                 ->paginate(25),
         ]);
