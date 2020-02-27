@@ -3,6 +3,7 @@ import { InertiaApp } from '@inertiajs/inertia-vue'
 
 import { i18n, loadLanguage } from './Utils/Language'
 import { flashMessages } from './Utils/Flash'
+import './Utils/ServiceWorker'
 
 import { DropdownPlugin } from 'bootstrap-vue'
 Vue.use(DropdownPlugin)
@@ -10,12 +11,6 @@ Vue.use(DropdownPlugin)
 Vue.use(InertiaApp)
 
 const app = document.getElementById('app')
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js');
-  });
-}
 
 new Vue({
   i18n,

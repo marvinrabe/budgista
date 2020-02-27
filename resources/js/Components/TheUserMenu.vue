@@ -29,6 +29,7 @@
 <script>
   import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import { clearCache } from '@/Utils/ServiceWorker'
 
   export default {
     components: {
@@ -68,7 +69,9 @@
     },
     methods: {
       logout () {
-        this.$inertia.post('/logout')
+        this.$inertia
+          .post('/logout')
+          .then(() => clearCache())
       },
       settings () {
         this.$inertia.visit('/settings')
