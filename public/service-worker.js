@@ -15,8 +15,8 @@ workbox.routing.registerRoute(
 )
 
 workbox.routing.registerRoute(
-  new RegExp('.*\.(png|jpg|svg)'),
-  new workbox.strategies.StaleWhileRevalidate({
+  /\.(?:png|gif|jpg|jpeg|svg)/,
+  new workbox.strategies.CacheFirst({
     cacheName: 'images',
     plugins: [
       new workbox.expiration.ExpirationPlugin({
@@ -28,19 +28,29 @@ workbox.routing.registerRoute(
 )
 
 workbox.routing.registerRoute(
-  new RegExp('.*\.(js|css)'),
-  new workbox.strategies.NetworkFirst({
-    cacheName: 'static-cache',
-  })
+  /\.(?:js|css)/,
+  new workbox.strategies.NetworkFirst()
 )
+
+const inertiaStrategy = new workbox.strategies.NetworkFirst({
+  cacheName: 'inertia',
+  plugins: [
+    new workbox.cacheableResponse.CacheableResponsePlugin({
+      headers: {
+        'x-inertia': 'true',
+      },
+    })
+  ]
+})
+
+const defaultStrategy = new workbox.strategies.NetworkFirst()
 
 workbox.routing.registerRoute(
-  new RegExp('^.*$'),
-  new workbox.strategies.NetworkFirst({
-    cacheName: 'page'
-  })
+  /(.*)/,
+  async (params) => {
+    if (params.request.headers.has('x-inertia')) {
+      return await inertiaStrategy.handle(params)
+    }
+    return await defaultStrategy.handle(params)
+  }
 )
-
-workbox.routing.setCatchHandler(({ url, event, params }) => {
-  return caches.match('/offline/')
-})
