@@ -1,28 +1,29 @@
 <template>
-  <div class="card">
-    <div
-      class="card-header"
-      v-t="'title.statisticNetWorth'"
-    />
-    <div class="flex justify-center p-4">
-      <LinearChart :chart-data="chartData" class="w-full"/>
+  <Layout :title="$t('title.statisticNetWorth')">
+    <div class="card">
+      <div
+        class="card-header"
+        v-t="'title.statisticNetWorth'"
+      />
+      <div class="flex justify-center p-4">
+        <LinearChart :chart-data="chartData" class="w-full"/>
+      </div>
     </div>
-  </div>
+  </Layout>
 </template>
 
 <script>
+  import Layout from '@/Pages/Statistics/Index'
+  import LinearChart from '@/Components/statistics/LinearChart'
   import Month from '@/Utils/Month'
-  import LinearChart from './LinearChart'
 
   export default {
     components: {
+      Layout,
       LinearChart
     },
     props: {
-      statistics: {
-        type: Array,
-        required: true
-      }
+      data: Array
     },
     computed: {
       chartData () {
@@ -32,7 +33,7 @@
         }
       },
       labels () {
-        return this.statistics.map((x) => Month.fromString(x.month).format())
+        return this.data.map((x) => Month.fromString(x.month).format())
       },
       datasets () {
         return [
@@ -42,7 +43,7 @@
             pointBackgroundColor: '#2196F3',
             backgroundColor: 'transparent',
             type: 'line',
-            data: this.statistics.map(x => x.worth)
+            data: this.data.map(x => x.worth)
           }
         ]
       }

@@ -59,5 +59,11 @@ Route::group(['middleware' => ['auth']], function () {
      */
     Route::get('settings', [Controllers\SettingsController::class, 'edit'])->name('settings.edit');
     Route::post('settings', [Controllers\SettingsController::class, 'update'])->name('settings.update');
-    Route::get('statistics', StatisticsController::class)->name('statistics');
+
+    /*
+     * Statistics
+     */
+    Route::get('statistics', [Controllers\StatisticsController::class, 'index'])->name('statistics.index');
+    Route::get('statistics/netWorth', [Controllers\StatisticsController::class, 'netWorth'])->name('statistics.netWorth');
+    Route::get('statistics/incomeVsExpense', [Controllers\StatisticsController::class, 'incomeVsExpense'])->name('statistics.incomeVsExpense');
 });

@@ -4,35 +4,33 @@
 namespace App\Http\Controllers;
 
 use App\Month;
+use App\ViewModels\IncomeVsExpenseChart;
+use App\ViewModels\NetWorthChart;
 use Carbon\Carbon;
 use Inertia\Inertia;
 
 class StatisticsController extends Controller
 {
 
-    public function __invoke()
+    public function index()
     {
-        $data = [];
-        foreach ($this->months() as $month) {
-            $data[] = [
-                'month' => (string) $month,
-                'worth' => (int) Auth()->user()->transactions()
-                    ->where('date', '<=', $month->lastDay())
-                    ->sum('amount'),
-                'income' => (int) Auth()->user()->transactions()
-                    ->whereBetween('date', [$month->firstDay(), $month->lastDay()])
-                    ->whereNull('category_id')
-                    ->sum('amount'),
-                'expense' => abs(Auth()->user()->transactions()
-                    ->whereBetween('date', [$month->firstDay(), $month->lastDay()])
-                    ->whereNotNull('category_id')
-                    ->sum('amount'))
-            ];
-        }
+        return Inertia::render('Statistics/Index');
+    }
 
-        return Inertia::render('Statistics', [
-            'data' => $data
-        ]);
+    public function netWorth()
+    {
+        return Inertia::render(
+            'Statistics/NetWorth',
+            new NetWorthChart($this->months())
+        );
+    }
+
+    public function incomeVsExpense()
+    {
+        return Inertia::render(
+            'Statistics/IncomeVsExpense',
+            new IncomeVsExpenseChart($this->months())
+        );
     }
 
     /**

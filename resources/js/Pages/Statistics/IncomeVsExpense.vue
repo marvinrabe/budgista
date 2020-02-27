@@ -1,28 +1,29 @@
 <template>
-  <div class="card">
-    <div
-      class="card-header"
-      v-t="'title.statisticIncomeVsExpense'"
-    />
-    <div class="flex justify-center p-4">
-      <LinearChart :chart-data="chartData" class="w-full"/>
+  <Layout :title="$t('title.statisticIncomeVsExpense')">
+    <div class="card">
+      <div
+        class="card-header"
+        v-t="'title.statisticIncomeVsExpense'"
+      />
+      <div class="flex justify-center p-4">
+        <LinearChart :chart-data="chartData" class="w-full"/>
+      </div>
     </div>
-  </div>
+  </Layout>
 </template>
 
 <script>
-  import LinearChart from './LinearChart'
+  import Layout from '@/Pages/Statistics/Index'
+  import LinearChart from '@/Components/statistics/LinearChart'
   import Month from '@/Utils/Month'
 
   export default {
     components: {
+      Layout,
       LinearChart
     },
     props: {
-      statistics: {
-        type: Array,
-        required: true
-      }
+      data: Array
     },
     computed: {
       chartData () {
@@ -32,7 +33,7 @@
         }
       },
       labels () {
-        return this.statistics.map((x) => Month.fromString(x.month).format())
+        return this.data.map((x) => Month.fromString(x.month).format())
       },
       datasets () {
         return [
@@ -41,14 +42,14 @@
             borderColor: '#4CAF50',
             backgroundColor: 'rgba(76, 173, 80, 0.5)',
             borderWidth: 1,
-            data: this.statistics.map(x => x.income)
+            data: this.data.map(x => x.income)
           },
           {
             label: this.$t('form.expense'),
             borderColor: '#F44336',
             backgroundColor: 'rgba(244, 67, 54, 0.5)',
             borderWidth: 1,
-            data: this.statistics.map(x => x.expense)
+            data: this.data.map(x => x.expense)
           }
         ]
       }

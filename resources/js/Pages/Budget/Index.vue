@@ -1,72 +1,68 @@
 <template>
   <Layout :title="$t('title.budget') + ': ' + monthObject.format()">
-    <AppContainer>
-      <template v-slot:menu>
+    <template v-slot:menu>
 
-        <div class="flex items-center mb-4">
+      <div class="flex items-center mb-4">
           <span class="text-gray-8 text-xl px-4">
             {{ monthObject.format() }}
           </span>
-          <div class="flex ml-auto">
-            <inertia-link
-              :title="$t('action.previousMonth')"
-              :href="$page.budget.month.links.prev"
-              class="btn btn--icon"
-            >
-              <PrevIcon/>
-            </inertia-link>
-            <inertia-link
-              :title="$t('action.nextMonth')"
-              :href="$page.budget.month.links.next"
-              class="btn btn--icon"
-            >
-              <NextIcon/>
-            </inertia-link>
-            <AppButton
-              :to="'/tabularBudget/'+monthObject.toString()"
-              class="hidden md:block"
-              icon>
-              <TableIcon/>
-            </AppButton>
-          </div>
+        <div class="flex ml-auto">
+          <inertia-link
+            :title="$t('action.previousMonth')"
+            :href="$page.budget.month.links.prev"
+            class="btn btn--icon"
+          >
+            <PrevIcon/>
+          </inertia-link>
+          <inertia-link
+            :title="$t('action.nextMonth')"
+            :href="$page.budget.month.links.next"
+            class="btn btn--icon"
+          >
+            <NextIcon/>
+          </inertia-link>
+          <AppButton
+            :to="'/tabularBudget/'+monthObject.toString()"
+            class="hidden md:block"
+            icon>
+            <TableIcon/>
+          </AppButton>
         </div>
+      </div>
 
-        <div class="border-b-2 border-gray-3 px-4 py-2 flex items-center justify-between mb-2">
+      <div class="border-b-2 border-gray-3 px-4 py-2 flex items-center justify-between mb-2">
           <span class="text-xs tracking-wide font-bold uppercase ">
             {{ $t('form.unallocated')}}
           </span>
 
+        <AppMoney
+          :value="$page.budget.unallocated"
+          :color="$page.budget.unallocated !== 0"
+        />
+      </div>
+
+      <AppMenu>
+        <AppMenuItem
+          v-for="category in $page.budget.categories"
+          :key="category.id"
+          :label="category.name"
+          :href="category.links.show">
           <AppMoney
-            :value="$page.budget.unallocated"
-            :color="$page.budget.unallocated !== 0"
+            :value="category.available"
+            class="ml-auto pl-2 text-xs font-medium"
+            color
           />
-        </div>
+          <div class="w-full flex justify-end">
+            <BudgetProgress
+              class="w-1/4"
+              :activity="-category.activity"
+              :total="category.budget"/>
+          </div>
+        </AppMenuItem>
+      </AppMenu>
+    </template>
 
-        <AppMenu>
-          <AppMenuItem
-            v-for="category in $page.budget.categories"
-            :key="category.id"
-            :label="category.name"
-            :href="category.links.show">
-            <AppMoney
-              :value="category.available"
-              class="ml-auto pl-2 text-xs font-medium"
-              color
-            />
-            <div class="w-full flex justify-end">
-              <BudgetProgress
-                class="w-1/4"
-                :activity="-category.activity"
-                :total="category.budget"/>
-            </div>
-          </AppMenuItem>
-        </AppMenu>
-      </template>
-
-      <template v-slot:content>
-        <slot/>
-      </template>
-    </AppContainer>
+    <slot/>
   </Layout>
 </template>
 
@@ -77,7 +73,6 @@
   import AppMoney from '@/Components/AppMoney'
   import MonthPicker from '@/Components/budget/MonthPicker'
   import Month from '@/Utils/Month.js'
-  import AppContainer from '@/Components/AppContainer'
   import BudgetProgress from '@/Components/budget/BudgetProgress'
   import AppMenu from '@/Components/AppMenu'
   import AppMenuItem from '@/Components/AppMenuItem'
@@ -91,7 +86,6 @@
       AppMenuItem,
       AppMenu,
       BudgetProgress,
-      AppContainer,
       Layout,
       AppNumber,
       AppMoney,
@@ -101,9 +95,9 @@
       NextIcon: iconComponent({ icon: faChevronRight, fixedWidth: true }),
       PrevIcon: iconComponent({ icon: faChevronLeft, fixedWidth: true })
     },
-    mounted() {
-      if(window.innerWidth >= 768 && !this.$slots.default && this.$page.budget.categories.length) {
-        this.$inertia.visit(this.$page.budget.categories[0].links.show, {replace: true});
+    mounted () {
+      if (window.innerWidth >= 768 && !this.$slots.default && this.$page.budget.categories.length) {
+        this.$inertia.visit(this.$page.budget.categories[0].links.show, { replace: true })
       }
     },
     computed: {
