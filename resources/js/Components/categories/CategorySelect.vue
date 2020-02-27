@@ -4,19 +4,18 @@
     @input="e => $emit('input', e.target.value)"
     class="form-control"
   >
-    <option :value="null">
+    <option :value="null" v-if="income">
+      {{ $t('form.income') }} ({{ $t('form.unallocated')}})
+    </option>
+    <option :value="null" v-else>
       {{ $t('form.uncategorized') }}
     </option>
-    <optgroup
-      :key="group.id"
-      :label="group.name"
-      v-for="group in $page.user.groups"
-    >
+    <optgroup :label="$t('title.categories')">
       <option
         :key="category.id"
         :value="category.id"
         v-if="exclude !== category.id"
-        v-for="category in group.categories"
+        v-for="category in $page.user.categories"
       >
         {{ category.name }}
       </option>
@@ -34,6 +33,10 @@
       exclude: {
         type: String,
         default: null
+      },
+      income: {
+        type: Boolean,
+        default: false
       }
     }
   }

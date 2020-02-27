@@ -23,6 +23,7 @@
             slot-scope="{bindings}"
             v-bind="bindings"
             v-model="form.category_id"
+            :income="form.amount > 0"
           />
         </FormGroup>
       </div>
