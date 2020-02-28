@@ -37,23 +37,30 @@
 
           <template slot="actions">
             <AppButton
-              :title="$t('action.delete.account')"
-              @click="deleteAccount"
-              subtle
-              variant="danger"
-              icon
-            >
-              <DeleteIcon/>
-            </AppButton>
-
-            <AppButton
               :label="$t('action.save')"
               :loading="saving"
               variant="primary"
-              class="ml-auto"
             />
           </template>
         </AppForm>
+      </div>
+      <div class="card-body border-t border-gray-3">
+        <form @submit.prevent="deleteAccount" class="flex -mx-1 flex-wrap items-end justify-between">
+          <div class="flex-1 px-1">
+            <h2 class="text-xl mb-2">
+              {{ $t('action.delete.account') }}
+            </h2>
+            <p>{{ $t('hint.deleteAccount') }}</p>
+          </div>
+          <div class="lg:ml-4 mt-4 w-full lg:w-auto flex justify-end">
+            <AppButton
+              type="submit"
+              :label="$t('action.delete.account')"
+              :loading="saving"
+              variant="danger"
+            />
+          </div>
+        </form>
       </div>
     </div>
   </Layout>

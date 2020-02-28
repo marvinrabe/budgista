@@ -1,6 +1,9 @@
 <template>
   <Layout :title="$t('action.edit.category')">
     <div class="card">
+      <div class="card-header">
+        {{ $t('action.edit.category') }}
+      </div>
       <div class="card-body">
         <AppForm @submit="save">
           <FormGroup name="name">
@@ -22,39 +25,38 @@
           </template>
         </AppForm>
       </div>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        {{ $t('action.delete.category') }}
-      </div>
-      <div class="card-body">
-        <AppForm @submit="deleteCategory">
-          <FormGroup name="category_id" label="transferTransactions">
-            <CategorySelect
-              :exclude="category.id"
-              slot-scope="{bindings}"
-              v-bind="bindings"
-              v-model="deleteForm.category_id"
-            />
-          </FormGroup>
-
-          <template slot="actions">
+      <div class="card-body border-t border-gray-3">
+        <form @submit.prevent="deleteCategory" class="flex -mx-1 flex-wrap items-end justify-between">
+          <div class="flex-1 px-1">
+            <h2 class="text-xl mb-2">
+              {{ $t('action.delete.category') }}
+            </h2>
+            <p class="mb-4">{{ $t('hint.deleteCategory') }}</p>
+            <FormGroup name="category_id" label="transferTransactions" class="mb-0">
+              <CategorySelect
+                :exclude="category.id"
+                slot-scope="{bindings}"
+                v-bind="bindings"
+                v-model="deleteForm.category_id"
+              />
+            </FormGroup>
+          </div>
+          <div class="lg:ml-4 mt-4 w-full lg:w-auto flex justify-end">
             <AppButton
               type="submit"
               :label="$t('action.delete.category')"
               :loading="saving"
               variant="danger"
             />
-          </template>
-        </AppForm>
+          </div>
+        </form>
       </div>
     </div>
   </Layout>
 </template>
 
 <script>
-  import Layout from '@/Layouts/Default'
+  import Layout from '@/Pages/Settings/Index'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import FormGroup from '@/Components/form/FormGroup'

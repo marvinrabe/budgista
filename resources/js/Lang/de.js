@@ -21,6 +21,10 @@ export default {
     addCategory: 'Erstelle jetzt Kategorien.',
     addTransaction: 'Füge jetzt Kontobewegungen hinzu.'
   },
+  hint: {
+    deleteAccount: 'Lösche dieses Konto mit allen Kontobewegungen. Diese Aktion ist unwiderruflich.',
+    deleteCategory: 'Lösche diese Kategorie. Zugewiesene Kontobewegungen werden zur angegebenen Kategorie übertragen.',
+  },
   action: {
     current: 'Kürzlich',
     save: 'Speichern',
