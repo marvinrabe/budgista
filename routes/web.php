@@ -45,20 +45,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('clearedTransactions', ClearedTransactionController::class)->only(['store', 'destroy']);
 
     /*
-     * Profile
-     */
-    Route::get('profile', [Controllers\UserController::class, 'edit'])->name('user.edit');
-    Route::post('profile/email', [Controllers\UserController::class, 'email'])->name('user.email');
-    Route::delete('profile/google', [Controllers\Auth\GoogleController::class, 'destroy'])->name('google.destroy');
-    Route::post('profile/password', [Controllers\UserController::class, 'password'])->name('user.password');
-    Route::get('profile/terminate', [Controllers\UserController::class, 'delete'])->name('user.delete');
-    Route::post('profile/terminate', [Controllers\UserController::class, 'destroy'])->name('user.destroy');
-
-    /*
      * Settings
      */
-    Route::get('settings', [Controllers\SettingsController::class, 'edit'])->name('settings.edit');
+    Route::get('settings', [Controllers\SettingsController::class, 'index'])->name('settings.index');
+    Route::get('settings/edit', [Controllers\SettingsController::class, 'edit'])->name('settings.edit');
     Route::post('settings', [Controllers\SettingsController::class, 'update'])->name('settings.update');
+    Route::get('settings/profile', [Controllers\UserController::class, 'edit'])->name('user.edit');
+    Route::post('settings/email', [Controllers\UserController::class, 'email'])->name('user.email');
+    Route::delete('settings/google', [Controllers\Auth\GoogleController::class, 'destroy'])->name('google.destroy');
+    Route::post('settings/password', [Controllers\UserController::class, 'password'])->name('user.password');
+    Route::get('settings/terminate', [Controllers\UserController::class, 'delete'])->name('user.delete');
+    Route::post('settings/terminate', [Controllers\UserController::class, 'destroy'])->name('user.destroy');
 
     /*
      * Statistics

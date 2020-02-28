@@ -74,10 +74,10 @@
           .then(() => clearCache())
       },
       settings () {
-        this.$inertia.visit('/settings')
+        this.$inertia.visit('/settings/edit')
       },
       profile () {
-        this.$inertia.visit('/profile')
+        this.$inertia.visit('/settings/profile')
       },
       help () {
         window.location = 'mailto:support@budgista.com'

@@ -94,7 +94,7 @@
         this.saving = true
 
         this.$inertia
-          .post('/profile/email', this.form)
+          .post('/settings/email', this.form)
           .then(() => {
             this.reset()
           })

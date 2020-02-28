@@ -1,6 +1,9 @@
 <template>
   <Layout :title="$t('title.profile')">
     <div class="card">
+      <div class="card-header">
+        {{ $t('title.profile') }}
+      </div>
       <div class="card-body">
         <SettingsEmail/>
       </div>
@@ -17,7 +20,7 @@
     <div class="text-right">
       <AppButton
         :label="$t('title.deleteUser')"
-        to="/profile/terminate"
+        to="/settings/terminate"
         subtle
       />
     </div>
@@ -25,7 +28,7 @@
 </template>
 
 <script>
-  import Layout from '@/Layouts/Default'
+  import Layout from '@/Pages/Settings/Index'
   import AppButton from '@/Components/form/AppButton'
   import SettingsEmail from '@/Components/profile/SettingsEmail.vue'
   import SettingsGoogle from '@/Components/profile/SettingsGoogle.vue'

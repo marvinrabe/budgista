@@ -76,7 +76,7 @@
         this.saving = true
 
         this.$inertia
-          .post('/profile/password', this.form)
+          .post('/settings/password', this.form)
           .then(() => {
             this.reset()
           })

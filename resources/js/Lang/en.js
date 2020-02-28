@@ -121,6 +121,7 @@ export default {
     budget: 'Budget',
     categories: 'Categories',
     settings: 'Settings',
+    general: 'General',
     help: 'Help',
     login: 'Login',
     account: 'Account',

@@ -1,6 +1,9 @@
 <template>
-  <Layout :title="$t('title.settings')">
+  <Layout :title="$t('title.general')">
     <div class="card">
+      <div class="card-header">
+        {{ $t('title.general') }}
+      </div>
       <div class="card-body">
         <AppForm @submit="save" ref="form">
           <div class="flex flex-wrap items-baseline">
@@ -75,7 +78,7 @@
 </template>
 
 <script>
-  import Layout from '@/Layouts/Default'
+  import Layout from '@/Pages/Settings/Index'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import FormGroup from '@/Components/form/FormGroup.vue'

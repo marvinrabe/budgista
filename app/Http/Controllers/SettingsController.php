@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\User as UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
@@ -13,9 +12,14 @@ use Propaganistas\LaravelIntl\Facades\Language;
 
 class SettingsController extends Controller
 {
+    public function index()
+    {
+        return Inertia::render('Settings/Index');
+    }
+
     public function edit()
     {
-        return Inertia::render('Settings');
+        return Inertia::render('Settings/Edit');
     }
 
     public function update()
