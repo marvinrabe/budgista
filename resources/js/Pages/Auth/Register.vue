@@ -84,6 +84,7 @@
   import PasswordInput from '@/Components/form/PasswordInput'
   import FormGroup from '@/Components/form/FormGroup'
   import GoogleConnect from '@/Components/GoogleConnect'
+  import _ from 'lodash'
 
   const termsUrl = 'TODO'
 
@@ -114,7 +115,7 @@
         this.$inertia
           .post('/register', this.form)
           .then(() => {
-            if (window.gtag) {
+            if (_.isFunction(window.gtag)) {
               window.gtag('event', 'registration')
             }
           })
