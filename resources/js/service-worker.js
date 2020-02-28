@@ -15,9 +15,9 @@ workbox.routing.registerRoute(
 )
 
 workbox.routing.registerRoute(
-  /\.(?:png|gif|jpg|jpeg|svg)/,
+  /\.(?:png|gif|jpg|jpeg|svg|js|css)/,
   new workbox.strategies.CacheFirst({
-    cacheName: 'images',
+    cacheName: 'static',
     plugins: [
       new workbox.expiration.ExpirationPlugin({
         maxEntries: 60,
@@ -25,11 +25,6 @@ workbox.routing.registerRoute(
       }),
     ],
   })
-)
-
-workbox.routing.registerRoute(
-  /\.(?:js|css)/,
-  new workbox.strategies.NetworkFirst()
 )
 
 const inertiaStrategy = new workbox.strategies.NetworkFirst({
