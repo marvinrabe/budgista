@@ -4,13 +4,13 @@
     ref="form"
   >
     <div class="-mx-1 flex flex-wrap items-baseline">
-      <div class="px-1 w-full lg:w-4/12">
+      <div class="px-1 w-full xl:w-4/12">
         <h3
           class="text-xl mb-2"
           v-t="'title.updatePassword'"
         />
       </div>
-      <div class="px-1 w-full lg:w-4/12">
+      <div class="px-1 w-full xl:w-4/12">
         <FormGroup
           label="oldPassword"
           name="password"
@@ -21,7 +21,7 @@
           />
         </FormGroup>
       </div>
-      <div class="px-1 w-full lg:w-4/12">
+      <div class="px-1 w-full xl:w-4/12">
         <FormGroup name="newPassword">
           <PasswordInput
             slot-scope="{bindings}"

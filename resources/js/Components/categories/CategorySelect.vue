@@ -1,8 +1,7 @@
 <template>
-  <select
+  <AppSelect
     :value="value"
     @input="e => $emit('input', e.target.value)"
-    class="form-control"
   >
     <option :value="null" v-if="income">
       {{ $t('form.income') }} ({{ $t('form.unallocated')}})
@@ -20,11 +19,14 @@
         {{ category.name }}
       </option>
     </optgroup>
-  </select>
+  </AppSelect>
 </template>
 
 <script>
+  import AppSelect from '@/Components/AppSelect'
+
   export default {
+    components: { AppSelect },
     props: {
       value: {
         type: String,

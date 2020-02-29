@@ -7,7 +7,7 @@
           <button
             type="button"
             class="rounded-t py-2 px-4 text-gray-6 text-sm"
-            :class="{'bg-gray-0 border border-b-0 border-gray-4 text-gray-8 order-first': type === -1}"
+            :class="{'bg-white border border-b-0 border-gray-4 text-gray-8 order-first': type === -1}"
             @click="setToExpense">
             <ExpenseIcon
               class="text-gray-5 mr-1 "
@@ -20,7 +20,7 @@
           <button
             type="button"
             class="rounded-t py-2 px-4 text-gray-6 text-sm"
-            :class="{'bg-gray-0 border border-b-0 border-gray-4 text-gray-8 order-first': type === 1}"
+            :class="{'bg-white border border-b-0 border-gray-4 text-gray-8 order-first': type === 1}"
             @click="setToIncome">
             <IncomeIcon
               class="text-gray-5 mr-1"
@@ -32,7 +32,7 @@
           </button>
         </div>
         <AmountInput
-          class="bg-gray-0 focus:bg-gray-0 text-4xl text-right rounded-tl-none"
+          class="text-4xl text-right rounded-tl-none"
           v-bind="bindings"
           v-model="form.amount"
         />

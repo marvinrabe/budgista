@@ -7,7 +7,7 @@ label {
 }
 
 .form-control {
-  @apply block w-full bg-white text-gray-7 border border-gray-4 rounded py-3 px-4 leading-tight;
+  @apply block appearance-none w-full bg-white text-gray-7 border border-gray-4 rounded py-3 px-4 leading-tight;
 
   &:focus {
     @apply outline-none shadow-outline bg-white border-blue-5;

@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="border-t md:border-t-0 md:border-b border-gray-3 fixed bottom-0 md:bottom-auto md:top-0 bg-white w-full z-10">
+    class="border-t md:border-t-0 md:border-b border-gray-3 fixed bottom-0 md:bottom-auto md:top-0 bg-white w-full z-20">
     <div class="container p-1 md:px-4 md:py-2 flex items-center">
       <AppLogo
         class="hidden md:block"

@@ -1,8 +1,7 @@
 <template>
-  <select
+  <AppSelect
     :value="value"
     @input="e => $emit('input', e.target.value)"
-    class="form-control"
   >
     <option :value="null" disabled hidden>
       {{ $t('form.pleaseSelect')}}
@@ -15,11 +14,14 @@
     >
       {{ account.name }}
     </option>
-  </select>
+  </AppSelect>
 </template>
 
 <script>
+  import AppSelect from '@/Components/AppSelect'
+
   export default {
+    components: { AppSelect },
     props: {
       value: {
         type: String,

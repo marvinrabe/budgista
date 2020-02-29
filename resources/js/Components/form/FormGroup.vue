@@ -12,7 +12,7 @@
       :id="name"
       :bindings="bindings"
     />
-    <span v-if="hasError" class="text-red-9 text-sm block">
+    <span v-if="hasError" class="text-red-9 text-sm block mt-1">
       {{ errorMessage }}
     </span>
   </div>

@@ -74,7 +74,7 @@ export default {
     feedback: 'Why are you leaving?',
     'name': 'Name',
     'amount': 'Amount',
-    'recurring': 'Recurring?',
+    'recurring': 'Repeat',
     'recurringInterval': 'Repeat every',
     category_id: 'Category',
     account_id: 'Account',

@@ -9,16 +9,15 @@
       <div class="card-body">
         <AppForm @submit="save" ref="form">
           <div class="flex flex-wrap items-baseline">
-            <div class="w-full lg:w-4/12">
+            <div class="w-full xl:w-4/12">
               <h3
                 class="text-xl mb-2"
                 v-t="'title.localisation'"
               />
             </div>
-            <div class="w-full lg:w-8/12">
+            <div class="w-full xl:w-8/12">
               <FormGroup name="currency">
-                <select
-                  class="form-control w-75"
+                <AppSelect
                   slot-scope="{bindings}"
                   v-bind="bindings"
                   v-model="form.currency"
@@ -29,12 +28,11 @@
                     v-for="currency in currencies"
                     v-t="'currency.'+currency"
                   />
-                </select>
+                </AppSelect>
               </FormGroup>
 
               <FormGroup name="language">
-                <select
-                  class="form-control w-75"
+                <AppSelect
                   slot-scope="{bindings}"
                   v-bind="bindings"
                   v-model="form.language"
@@ -45,12 +43,11 @@
                     v-for="language in languages"
                     v-t="'language.'+language"
                   />
-                </select>
+                </AppSelect>
               </FormGroup>
 
               <FormGroup name="locale">
-                <select
-                  class="form-control w-75"
+                <AppSelect
                   slot-scope="{bindings}"
                   v-bind="bindings"
                   v-model="form.locale"
@@ -61,7 +58,7 @@
                     v-for="locale in locales"
                     v-t="'language.'+locale"
                   />
-                </select>
+                </AppSelect>
               </FormGroup>
             </div>
           </div>
@@ -85,9 +82,11 @@
   import AppForm from '@/Components/form/AppForm'
   import FormGroup from '@/Components/form/FormGroup.vue'
   import { availableLanguages } from '@/Utils/Language'
+  import AppSelect from '@/Components/AppSelect'
 
   export default {
     components: {
+      AppSelect,
       AppButton,
       AppForm,
       Layout,

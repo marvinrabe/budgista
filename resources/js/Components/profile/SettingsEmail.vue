@@ -1,13 +1,13 @@
 <template>
   <AppForm @submit="save" ref="form">
     <div class="flex -mx-1 flex-wrap items-baseline">
-      <div class="px-1 w-full lg:w-4/12">
+      <div class="px-1 w-full xl:w-4/12">
         <h3
           class="text-xl mb-2"
           v-t="'title.updateEmail'"
         />
       </div>
-      <div class="px-1 w-full lg:w-8/12">
+      <div class="px-1 w-full xl:w-8/12">
         <FormGroup name="currentEmail">
           <div class="form-text">
             {{ $page.user.email }}
