@@ -1,8 +1,9 @@
 <template>
-  <nav class="border-t md:border-t-0 md:border-b border-gray-3 fixed bottom-0 md:bottom-auto md:top-0 bg-white w-full z-10">
+  <nav
+    class="border-t md:border-t-0 md:border-b border-gray-3 fixed bottom-0 md:bottom-auto md:top-0 bg-white w-full z-10">
     <div class="container px-4 py-2 flex items-center">
       <AppLogo
-        class="hidden md:block md:ml-4"
+        class="hidden md:block"
         style="height: 40px;"
         :height="40"
       />
@@ -24,32 +25,45 @@
             :icon="icons.statistics"
             href="/statistics"
           />
+          <AppNavigationItem
+            :label="$t('title.settings')"
+            :icon="icons.settings"
+            href="/settings"
+            class="md:hidden"
+          />
         </ul>
       </nav>
 
-      <TheUserMenu class="ml-auto hidden lg:block"/>
+      <inertia-link
+        class="ml-auto hidden lg:block text-gray-6 hover:text-gray-8"
+        href="/settings"
+        :title="$t('title.settings')"
+      >
+        <CogIcon/>
+      </inertia-link>
     </div>
   </nav>
 </template>
 
 <script>
   import AppLogo from './AppLogo'
-  import TheUserMenu from './TheUserMenu'
   import AppNavigationItem from '@/Components/AppNavigationItem'
-  import { faEnvelope, faUniversity, faChartBar } from '@fortawesome/free-solid-svg-icons'
+  import { faEnvelope, faUniversity, faChartBar, faCog } from '@fortawesome/free-solid-svg-icons'
+  import { iconComponent } from '@/Utils/Icons'
 
   export default {
     components: {
       AppNavigationItem,
       AppLogo,
-      TheUserMenu
+      CogIcon: iconComponent({ icon: faCog, fixedWidth: true }),
     },
-    data() {
+    data () {
       return {
         icons: {
           budget: faEnvelope,
           transactions: faUniversity,
-          statistics: faChartBar
+          statistics: faChartBar,
+          settings: faCog
         }
       }
     }

@@ -8,9 +8,11 @@
       <AppMenu>
         <AppMenuItem
           :label="$t('title.statisticNetWorth')"
+          :icon="icons.netWorth"
           href="/statistics/netWorth"/>
         <AppMenuItem
           :label="$t('title.statisticIncomeVsExpense')"
+          :icon="icons.incomeVsExpense"
           href="/statistics/incomeVsExpense"/>
       </AppMenu>
     </template>
@@ -23,12 +25,21 @@
   import Layout from '@/Layouts/Container'
   import AppMenu from '@/Components/AppMenu'
   import AppMenuItem from '@/Components/AppMenuItem'
+  import { faChartLine, faChartBar } from '@fortawesome/free-solid-svg-icons'
 
   export default {
     components: {
       AppMenu,
       AppMenuItem,
       Layout,
-    }
+    },
+    data() {
+      return {
+        icons: {
+          netWorth: faChartLine,
+          incomeVsExpense: faChartBar
+        }
+      }
+    },
   }
 </script>
