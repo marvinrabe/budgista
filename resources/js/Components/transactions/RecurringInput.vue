@@ -1,5 +1,5 @@
 <template>
-  <FormGroup name="date" label="recurringInterval">
+  <FormGroup name="recurring" label="recurringInterval">
     <div class="flex items-stretch mb-3">
       <input
         class="form-control border-gray-4 flex-1 w-auto min-w-0 rounded-r-none border-r-0 text-right font-numeric"

@@ -179,7 +179,9 @@ return [
         'available' => 'verfügbar',
         'size' => 'Größe',
         'payee' => 'Empfänger',
-        'amount' => 'Betrag'
+        'amount' => 'Betrag',
+        'account_id' => 'Konto',
+        'category_id' => 'Kategorie',
     ],
 
 ];

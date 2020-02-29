@@ -33,7 +33,7 @@ class Transaction extends Model
         'amount' => 'int',
         'recurring' => 'bool',
         'cleared' => 'bool',
-        'date' => 'date'
+        'date' => 'date:Y-m-d'
     ];
 
     protected static function boot()

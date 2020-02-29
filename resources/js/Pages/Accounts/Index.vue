@@ -5,7 +5,6 @@
         {{ $t('title.accounts') }}
       </h2>
 
-
       <template v-if="$page.user.accounts.length">
         <AppMenu>
           <menu-item

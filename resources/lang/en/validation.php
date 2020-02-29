@@ -149,7 +149,9 @@ return [
     */
 
     'attributes' => [
-        'password' => 'Password'
+        'password' => 'password',
+        'account_id' => 'account',
+        'category_id' => 'category',
     ],
 
 ];

@@ -1,5 +1,9 @@
 <template>
   <Layout :title="$t('action.create.transaction')">
+    <h2 class="text-xl mb-4 px-4">
+      {{ $t('action.create.transaction') }}
+    </h2>
+
     <div class="card">
       <div class="card-body">
         <AppForm @submit="save">

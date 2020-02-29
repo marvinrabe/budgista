@@ -29,11 +29,11 @@
     @apply text-2xl mb-3;
   }
 
-  *:first-child {
+  > *:first-child {
     @apply rounded-t;
   }
 
-  *:last-child {
+  > *:last-child {
     @apply rounded-b;
   }
 }

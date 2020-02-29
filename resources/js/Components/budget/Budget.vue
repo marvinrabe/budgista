@@ -3,7 +3,7 @@
     <div class="budget-header">
       <div class="data">
         <div class="budget-column-name">
-          {{ $t('form.category') }}
+          {{ $t('form.category_id') }}
         </div>
         <div class="budget-column-budget">
           <span>{{ $t('form.budget') }}</span>

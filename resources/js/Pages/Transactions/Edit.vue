@@ -12,6 +12,10 @@
       </AppButton>
     </template>
 
+    <h2 class="text-xl mb-4 px-4">
+      {{ $t('action.edit.transaction') }}
+    </h2>
+
     <div class="card" v-if="transaction">
       <div class="card-body">
         <AppForm @submit="saveTransaction">

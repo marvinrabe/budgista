@@ -7,17 +7,8 @@
         </h2>
 
         <div class="ml-auto flex">
-          <AppButton :to="account.links.edit" icon>
+          <AppButton :to="account.links.edit" icon :title="$t('action.edit.account')">
             <CogIcon/>
-          </AppButton>
-
-          <AppButton
-            :title="$t('action.create.transaction')"
-            :to="account.links.transactions.create"
-            variant="primary"
-          >
-            <PlusIcon/>
-            {{ $t('word.transaction') }}
           </AppButton>
         </div>
       </div>

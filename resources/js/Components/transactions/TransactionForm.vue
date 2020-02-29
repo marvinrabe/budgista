@@ -1,29 +1,74 @@
 <template>
   <div>
-    <FormGroup name="amount">
-      <AmountInput
-        slot-scope="{bindings}"
-        v-bind="bindings"
-        v-model="form.amount"
-      />
-    </FormGroup>
 
-    <FormGroup name="payee">
-      <PayeeInput
-        slot-scope="{bindings}"
-        v-bind="bindings"
-        v-model="form.payee"
-      />
+    <FormGroup name="amount" :has-label="false">
+      <div class="flex flex-col" slot-scope="{bindings}">
+        <div class="flex z-10" style="margin-bottom: -1px;">
+          <button
+            type="button"
+            class="rounded-t py-2 px-4 text-gray-6 text-sm"
+            :class="{'bg-gray-0 border border-b-0 border-gray-4 text-gray-8 order-first': type === -1}"
+            @click="setToExpense">
+            <ExpenseIcon
+              class="text-gray-5 mr-1 "
+              :class="{'text-red-6': type === -1}"
+            />
+            <span class="font-medium">
+              {{ $t('form.expense')}}
+            </span>
+          </button>
+          <button
+            type="button"
+            class="rounded-t py-2 px-4 text-gray-6 text-sm"
+            :class="{'bg-gray-0 border border-b-0 border-gray-4 text-gray-8 order-first': type === 1}"
+            @click="setToIncome">
+            <IncomeIcon
+              class="text-gray-5 mr-1"
+              :class="{'text-green-6': type === 1}"
+            />
+            <span class="font-medium">
+              {{ $t('form.income')}}
+            </span>
+          </button>
+        </div>
+        <AmountInput
+          class="bg-gray-0 focus:bg-gray-0 text-4xl text-right rounded-tl-none"
+          v-bind="bindings"
+          v-model="form.amount"
+        />
+      </div>
     </FormGroup>
 
     <div class="flex flex-wrap -mx-1">
       <div class="w-full md:w-1/2 px-1">
-        <FormGroup name="category">
+        <FormGroup name="payee">
+          <PayeeInput
+            slot-scope="{bindings}"
+            v-bind="bindings"
+            v-model="form.payee"
+          />
+        </FormGroup>
+      </div>
+
+      <div class="w-full md:w-1/2 px-1">
+        <FormGroup name="category_id">
           <CategorySelect
             slot-scope="{bindings}"
             v-bind="bindings"
             v-model="form.category_id"
-            :income="form.amount > 0"
+            :income="type === 1"
+          />
+        </FormGroup>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap -mx-1 justify-end">
+      <div class="w-full md:w-1/2 px-1">
+        <FormGroup name="account_id">
+          <AccountSelect
+            slot-scope="{bindings}"
+            v-bind="bindings"
+            v-model="form.account_id"
           />
         </FormGroup>
       </div>
@@ -57,12 +102,13 @@
         />
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
   import FormGroup from '@/Components/form/FormGroup.vue'
-  import { faSync } from '@fortawesome/free-solid-svg-icons'
+  import { faHistory, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
   import dayjs from 'dayjs'
   import { iconComponent } from '@/Utils/Icons'
   import CategorySelect from '../categories/CategorySelect'
@@ -72,10 +118,18 @@
   import AmountInput from './AmountInput'
   import PayeeInput from './PayeeInput'
   import RecurringInput from './RecurringInput'
+  import AccountSelect from '@/Components/accounts/AccountSelect'
+  import _ from 'lodash'
+
+  const EXPENSE = -1
+  const INCOME = 1
 
   export default {
     components: {
-      RecurringIcon: iconComponent({ icon: faSync }),
+      AccountSelect,
+      RecurringIcon: iconComponent({ icon: faHistory }),
+      IncomeIcon: iconComponent({ icon: faSignInAlt }),
+      ExpenseIcon: iconComponent({ icon: faSignOutAlt }),
       AppForm,
       AppButton,
       FormGroup,
@@ -93,6 +147,7 @@
     },
     data () {
       return {
+        type: _.get(this.value, 'amount', 0) <= 0 ? EXPENSE : INCOME,
         form: {
           recurring: false,
           amount: 0,
@@ -100,8 +155,8 @@
           payee: '',
           category_id: null,
           account_id: null,
+          date: dayjs().format('YYYY-MM-DD'),
           ...this.value,
-          date: dayjs(this.value.date || undefined).format('YYYY-MM-DD'),
         }
       }
     },
@@ -111,6 +166,16 @@
           this.$emit('input', this.form)
         },
         deep: true
+      }
+    },
+    methods: {
+      setToExpense () {
+        this.type = EXPENSE
+        this.input()
+      },
+      setToIncome () {
+        this.type = INCOME
+        this.input()
       }
     }
   }

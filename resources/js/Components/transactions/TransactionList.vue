@@ -12,7 +12,7 @@
             {{ $t('form.payee') }}
           </div>
           <div class="transaction-category">
-            {{ $t('form.' + column) }}
+            {{ $t('form.' + column + '_id') }}
           </div>
           <div class="transaction-amount">
             {{ $t('form.amount') }}
