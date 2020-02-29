@@ -2,7 +2,7 @@
   @apply border border-gray-3 rounded shadow-sm bg-white mb-4;
 
   &-body, &-header, &-footer {
-    @apply p-6;
+    @apply px-6 py-4;
   }
 
   &-item {
@@ -18,11 +18,11 @@
   }
 
   &-header {
-    @apply py-4 text-gray-8 border-b-2 border-gray-3 font-medium;
+    @apply text-gray-8 border-b-2 border-gray-3 font-medium;
   }
 
   &-footer {
-    @apply py-4 text-gray-7 bg-gray-0 border-t-2 border-gray-3;
+    @apply text-gray-7 bg-gray-0 border-t-2 border-gray-3;
   }
 
   &-title {

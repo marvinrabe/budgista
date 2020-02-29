@@ -2,23 +2,69 @@
   <Layout>
 
     <div class="card">
-      <div class="card-header">
+      <div class="card-header flex justify-between items-center">
         <h2 class="text-xl">
           {{ category.name }}
         </h2>
+
+        <AppMoney
+          :value="categoryBudget.available"
+          class="ml-auto badge text-xl"
+          :class="{'badge--red': categoryBudget.available < 0, 'badge--green': categoryBudget.available > 0, 'badge--gray': categoryBudget.available === 0, }"
+        />
       </div>
 
-      <div class="card-body border-b border-gray-3 flex flex-wrap">
+      <div class="card-body border-b border-gray-3 flex flex-wrap items-baseline -mx-2">
         <FormGroup
           name="amount"
           label="budget"
-          class="mb-0">
+          class="w-full lg:w-1/2 px-2">
+          <template v-slot:additional v-if="categoryBudget.recommendedBudget > 0">
+            <div class="ml-auto text-gray-6 text-sm px-1 font-medium">
+              {{ $t('word.recommended')}}:
+              <AppMoney
+                :value="categoryBudget.recommendedBudget"
+                class="cursor-pointer hover:text-gray-8"
+                @click.native="() => updateBudget(categoryBudget.recommendedBudget)"
+              />
+            </div>
+          </template>
           <AppMoneyInput
             :value="categoryBudget.budget"
             @change="val => updateBudget(val)"
             allow-negative
           />
         </FormGroup>
+        <div class="flex flex-1 flex-col px-2">
+          <div class="px-4 py-1 flex items-center justify-between">
+            <span class="text-xs tracking-wide font-bold uppercase ">
+              {{ $t('form.previousMonth')}}
+            </span>
+
+            <AppMoney :value="categoryBudget.previousMonth"/>
+          </div>
+          <div class="px-4 py-1 flex items-center justify-between">
+            <span class="text-xs tracking-wide font-bold uppercase ">
+              {{ $t('form.budget')}}
+            </span>
+
+            <AppMoney :value="categoryBudget.budget"/>
+          </div>
+          <div class="border-b-2 border-gray-3 px-4 py-1 flex items-center justify-between">
+            <span class="text-xs tracking-wide font-bold uppercase ">
+              {{ $t('form.activity')}}
+            </span>
+
+            <AppMoney :value="categoryBudget.activity"/>
+          </div>
+          <div class="px-4 py-1 flex items-center justify-between">
+            <span class="text-xs tracking-wide font-bold uppercase ">
+              {{ $t('form.available')}}
+            </span>
+
+            <AppMoney :value="categoryBudget.available"/>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -38,6 +84,7 @@
   import TransactionList from '@/Components/transactions/TransactionList'
   import AppMoneyInput from '@/Components/form/AppMoneyInput'
   import AppPagination from '@/Components/AppPagination'
+  import AppMoney from '@/Components/AppMoney'
 
   export default {
     props: {
@@ -46,6 +93,7 @@
       transactions: Object
     },
     components: {
+      AppMoney,
       AppMoneyInput,
       AppPagination,
       FormGroup,

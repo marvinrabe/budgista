@@ -32,7 +32,7 @@
           </button>
         </div>
         <AmountInput
-          class="text-4xl text-right rounded-tl-none"
+          class="text-4xl rounded-tl-none"
           v-bind="bindings"
           v-model="form.amount"
         />

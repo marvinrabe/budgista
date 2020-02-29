@@ -5,7 +5,7 @@
     @focus="onFocus"
     @input="onInput($event.target.value)"
     @keyup.enter="onBlur($event.target.value)"
-    class="form-control"
+    class="form-control text-right"
     ref="input"
     type="text"
   >

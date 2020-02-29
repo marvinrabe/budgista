@@ -86,7 +86,7 @@ export default {
     icon: 'Symbol',
     trackingAccount: 'Tracking Konto',
     remember: 'Angemeldet bleiben',
-    previousMonth: 'Vorheriger Monat',
+    previousMonth: 'Übertrag Vormonat',
     allocated: 'Budgetiert',
     unallocated: 'Nicht Budgetiert',
     termsOfService: 'Ich akzeptiere die {0}.',
@@ -115,7 +115,8 @@ export default {
     transaction: 'Kontobewegung',
     category: 'Kategorie',
     verified: 'Verifiziert',
-    unverified: 'Unverifiziert'
+    unverified: 'Unverifiziert',
+    recommended: 'Empfohlen'
   },
   title: {
     transactions: 'Kontobewegungen',

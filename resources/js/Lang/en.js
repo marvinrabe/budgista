@@ -115,7 +115,8 @@ export default {
     transaction: 'Transaction',
     category: 'Category',
     verified: 'Verified',
-    unverified: 'Unverified'
+    unverified: 'Unverified',
+    recommended: 'Recommended'
   },
   title: {
     transactions: 'Transactions',
