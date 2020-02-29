@@ -31,6 +31,17 @@
         </AppForm>
       </div>
     </div>
+
+    <div class="text-right">
+      <AppButton
+        type="button"
+        class="hover:text-red-9"
+        :label="$t('action.delete.transaction')"
+        @click="deleteTransaction"
+        subtle
+      />
+    </div>
+
   </Layout>
 </template>
 

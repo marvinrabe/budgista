@@ -22,8 +22,8 @@ export default {
     addTransaction: 'Add a Transaction now.'
   },
   hint: {
-    deleteAccount: 'Delete this Account with all its transactions. This action is permanent and can not be reversed.',
-    deleteCategory: 'Delete this Category. Related Transactions will be transferred to the specified category.',
+    deleteAccount: 'Delete this account with ALL transactions.',
+    deleteCategory: 'Delete this category. Related Transactions will be transferred to the specified category.',
   },
   action: {
     current: 'Recent',

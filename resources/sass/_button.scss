@@ -19,7 +19,7 @@
     @apply opacity-50 cursor-not-allowed;
   }
 
-  &:hover:not(:disabled) {
+  &:hover {
     @apply text-gray-8 no-underline;
   }
 
@@ -30,7 +30,7 @@
   &.primary {
     @apply text-white bg-blue-6;
 
-    &:hover:not(:disabled) {
+    &:hover {
       @apply text-white shadow bg-blue-8;
     }
   }
@@ -38,7 +38,7 @@
   &--subtle.primary {
     @apply text-blue-7;
 
-    &:hover:not(:disabled) {
+    &:hover {
       @apply text-blue-9;
     }
   }
@@ -46,7 +46,7 @@
   &.light {
     @apply text-gray-7 bg-white border border-gray-3;
 
-    &:hover:not(:disabled) {
+    &:hover {
       @apply text-gray-9 bg-gray-0;
     }
   }
@@ -54,7 +54,7 @@
   &.danger {
     @apply text-red-8 bg-white border border-gray-3;
 
-    &:hover:not(:disabled) {
+    &:hover {
       @apply text-red-9 bg-gray-0;
     }
   }
@@ -62,7 +62,7 @@
   &--subtle.danger {
     @apply text-red-8;
 
-    &:hover:not(:disabled) {
+    &:hover {
       @apply text-red-9;
     }
   }

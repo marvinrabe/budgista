@@ -22,7 +22,7 @@ export default {
     addTransaction: 'Füge jetzt Kontobewegungen hinzu.'
   },
   hint: {
-    deleteAccount: 'Lösche dieses Konto mit allen Kontobewegungen. Diese Aktion ist unwiderruflich.',
+    deleteAccount: 'Lösche dieses Konto mit ALLEN Kontobewegungen.',
     deleteCategory: 'Lösche diese Kategorie. Zugewiesene Kontobewegungen werden zur angegebenen Kategorie übertragen.',
   },
   action: {
