@@ -1,5 +1,5 @@
 <template>
-  <Layout :title="$t('title.budget') + ': ' + monthObject.format()">
+  <Layout :title="$t('title.budget') + ': ' + monthObject.format()" :redirect="links">
     <template v-slot:menu>
 
       <div class="flex items-center mb-4">
@@ -81,7 +81,7 @@
 
 <script>
   import draggable from 'vuedraggable'
-  import Layout from '@/Layouts/Default'
+  import Layout from '@/Layouts/Container'
   import AppNumber from '@/Components/AppNumber'
   import AppMoney from '@/Components/AppMoney'
   import MonthPicker from '@/Components/budget/MonthPicker'
@@ -111,12 +111,10 @@
       PrevIcon: iconComponent({ icon: faChevronLeft, fixedWidth: true }),
       CogIcon: iconComponent({ icon: faCog }),
     },
-    mounted () {
-      if (window.innerWidth >= 768 && !this.$slots.default && this.$page.budget.categories.length) {
-        this.$inertia.visit(this.$page.budget.categories[0].links.show, { replace: true })
-      }
-    },
     computed: {
+      links () {
+        return this.$page.budget.categories.map(category => category.links.show)
+      },
       monthObject () {
         return Month.fromString(this.$page.budget.month.value)
       }

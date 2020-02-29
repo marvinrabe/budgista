@@ -1,71 +1,68 @@
 <template>
   <Layout :title="$t('title.budget') + ': ' + monthObject.format()">
-    <template v-slot:container>
-      <div class="flex items-center flex-wrap justify-between mb-4">
-        <MonthPicker
-          :month="monthObject"
-          :next="links.next"
-          :prev="links.prev"
-          slot="title"
-        />
+    <div class="flex items-center flex-wrap justify-between mb-4">
+      <MonthPicker
+        :month="monthObject"
+        :next="links.next"
+        :prev="links.prev"
+        slot="title"
+      />
 
-        <div class="lg:order-last flex">
-          <AppButton :to="'/budget/'+monthObject.toString()" icon>
-            <ListIcon/>
-          </AppButton>
-        </div>
-
-        <div class="mt-4 w-full lg:mt-0 lg:w-auto lg:ml-auto">
-          <div class="flex -mx-2">
-            <AppNumber
-              :label="$t('form.previousMonth')"
-              :value="budget.previousMonth"
-              class="hidden md:flex items-start lg:items-end"
-            />
-            <AppNumber
-              :label="$t('form.income')"
-              :value="budget.income"
-              class="items-start md:items-center lg:items-end"
-            />
-            <AppNumber
-              :label="$t('form.unallocated')"
-              :value="budget.unallocated"
-              class="items-end"
-              color
-            />
-          </div>
-        </div>
+      <div class="lg:order-last flex">
+        <AppButton :to="'/budget/'+monthObject.toString()" icon>
+          <ListIcon/>
+        </AppButton>
       </div>
 
-      <template v-if="budget.categories.length">
-        <Budget class="card">
-          <draggable
-            handle=".budget-row-handle"
-            class="budget-categories"
-            v-model="budget.categories"
-            @input="sortCategories"
-          >
-            <BudgetCategory
-              :month="monthObject"
-              :category="category"
-              :key="category.id"
-              v-for="category in budget.categories"
-            />
-          </draggable>
-        </Budget>
-
-        <div class="py-2 flex">
-          <inertia-link
-            class="pill"
-            href="/categories">
-            <CogIcon class="text-gray-6"/>
-            {{ $t('action.manageCategories') }}
-          </inertia-link>
+      <div class="mt-4 w-full lg:mt-0 lg:w-auto lg:ml-auto">
+        <div class="flex -mx-2">
+          <AppNumber
+            :label="$t('form.previousMonth')"
+            :value="budget.previousMonth"
+            class="hidden md:flex items-start lg:items-end"
+          />
+          <AppNumber
+            :label="$t('form.income')"
+            :value="budget.income"
+            class="items-start md:items-center lg:items-end"
+          />
+          <AppNumber
+            :label="$t('form.unallocated')"
+            :value="budget.unallocated"
+            class="items-end"
+            color
+          />
         </div>
-      </template>
-      <CategoryListEmpty v-else/>
+      </div>
+    </div>
 
+    <template v-if="budget.categories.length">
+      <Budget class="card">
+        <draggable
+          handle=".budget-row-handle"
+          class="budget-categories"
+          v-model="budget.categories"
+          @input="sortCategories"
+        >
+          <BudgetCategory
+            :month="monthObject"
+            :category="category"
+            :key="category.id"
+            v-for="category in budget.categories"
+          />
+        </draggable>
+      </Budget>
+
+      <div class="py-2 flex">
+        <inertia-link
+          class="pill"
+          href="/categories">
+          <CogIcon class="text-gray-6"/>
+          {{ $t('action.manageCategories') }}
+        </inertia-link>
+      </div>
     </template>
+    <CategoryListEmpty v-else/>
   </Layout>
 </template>
 

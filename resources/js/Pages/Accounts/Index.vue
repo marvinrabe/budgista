@@ -1,5 +1,5 @@
 <template>
-  <Layout :title="$t('title.accounts')">
+  <Layout :title="$t('title.accounts')" :redirect="links">
     <template v-slot:menu>
       <h2 class="text-xl text-gray-8 mb-4 px-4">
         {{ $t('title.accounts') }}
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-  import Layout from '@/Layouts/Default'
+  import Layout from '@/Layouts/Container'
   import MenuItem from '@/Components/accounts/MenuItem'
   import AppButton from '@/Components/form/AppButton'
   import AppMenu from '@/Components/AppMenu'
@@ -64,12 +64,10 @@
       MenuItem,
       PlusIcon: iconComponent({ icon: faPlus }),
     },
-    mounted () {
-      if (window.innerWidth >= 768 && !this.$slots.default && this.spendingAccounts.length) {
-        this.$inertia.visit(this.spendingAccounts[0].links.show, { replace: true })
-      }
-    },
     computed: {
+      links () {
+        return this.$page.user.accounts.map(account => account.links.show)
+      },
       spendingAccounts () {
         return this.$page.user.accounts
           .filter(account => !account.tracking)

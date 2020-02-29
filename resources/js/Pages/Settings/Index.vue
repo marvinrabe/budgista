@@ -1,5 +1,5 @@
 <template>
-  <Layout :title="$t('title.settings')">
+  <Layout :title="$t('title.settings')" redirect="/settings/profile">
     <template v-slot:menu>
       <h2 class="text-xl text-gray-8 mb-4 px-4">
         {{ $t('title.settings') }}
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import Layout from '@/Layouts/Default'
+  import Layout from '@/Layouts/Container'
   import AppMenu from '@/Components/AppMenu'
   import AppMenuItem from '@/Components/AppMenuItem'
 
@@ -29,11 +29,6 @@
       AppMenu,
       AppMenuItem,
       Layout,
-    },
-    mounted () {
-      if (window.innerWidth >= 768 && !this.$slots.default) {
-        this.$inertia.visit('/settings/profile', { replace: true })
-      }
-    },
+    }
   }
 </script>
