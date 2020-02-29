@@ -11,6 +11,12 @@ use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
+    public function index()
+    {
+        return Inertia::render('Categories/Index', [
+            'categories' => Category::all()
+        ]);
+    }
 
     public function create()
     {
@@ -25,7 +31,7 @@ class CategoryController extends Controller
                 'name' => 'required'
             ]));
 
-        return Redirect::route('budget');
+        return Redirect::route('categories.index');
     }
 
     public function edit(Category $category)
@@ -47,7 +53,7 @@ class CategoryController extends Controller
             ])
         );
 
-        return Redirect::route('budget');
+        return Redirect::route('categories.index');
     }
 
     public function destroy(Category $category)
@@ -80,7 +86,7 @@ class CategoryController extends Controller
 
         $category->delete();
 
-        return Redirect::route('budget');
+        return Redirect::route('categories.index');
     }
 
     public function sort()

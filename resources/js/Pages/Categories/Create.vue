@@ -1,6 +1,11 @@
 <template>
   <Layout :title="$t('action.create.category')">
     <div class="card">
+      <div class="card-header">
+        <h2 class="text-xl">
+          {{ $t('action.create.category') }}
+        </h2>
+      </div>
       <div class="card-body">
         <AppForm @submit="save">
           <FormGroup name="name">
@@ -27,7 +32,7 @@
 </template>
 
 <script>
-  import Layout from '@/Layouts/Default'
+  import Layout from '@/Pages/Settings/Index'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import FormGroup from '@/Components/form/FormGroup'

@@ -113,6 +113,7 @@ export default {
     or: 'or',
     termsOfService: 'Terms of Service',
     transaction: 'Transaction',
+    category: 'Category',
     verified: 'Verified',
     unverified: 'Unverified'
   },

@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*
      * Categories
      */
-    Route::resource('categories', CategoryController::class)->except(['index', 'show', 'destroy']);
+    Route::resource('categories', CategoryController::class)->except(['show', 'destroy']);
     Route::post('categories/{category}/delete',
         [Controllers\CategoryController::class, 'destroy'])->name('categories.destroy');
     Route::post('categories/sort', [Controllers\CategoryController::class, 'sort'])->name('categories.sort');

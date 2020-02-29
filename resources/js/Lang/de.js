@@ -113,6 +113,7 @@ export default {
     or: 'oder',
     termsOfService: 'Nutzungsbedingungen',
     transaction: 'Kontobewegung',
+    category: 'Kategorie',
     verified: 'Verifiziert',
     unverified: 'Unverifiziert'
   },
