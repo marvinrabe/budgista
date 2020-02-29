@@ -7,7 +7,7 @@
         src="../../Assets/undraw_credit_card.svg"
         style="max-width: 250px;"
       >
-      <h2 class="text-xl" v-t="'title.noTransactions'"/>
+      <h3 class="text-xl" v-t="'title.noTransactions'"/>
       <div class="mt-2">
         <p class="m-0">
           <span v-t="'message.addTransaction'"/>

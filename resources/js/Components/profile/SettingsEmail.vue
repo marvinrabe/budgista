@@ -2,7 +2,7 @@
   <AppForm @submit="save" ref="form">
     <div class="flex -mx-1 flex-wrap items-baseline">
       <div class="px-1 w-full lg:w-4/12">
-        <h2
+        <h3
           class="text-xl mb-2"
           v-t="'title.updateEmail'"
         />

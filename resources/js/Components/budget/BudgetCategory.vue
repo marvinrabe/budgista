@@ -1,10 +1,5 @@
 <template>
   <div class="budget-row">
-    <div class="handle budget-row-handle">
-      <span class="small text-dark">
-        <GripIcon/>
-      </span>
-    </div>
     <div
       @click.stop="$refs.input.focus()"
       class="data cursor-pointer"
@@ -33,9 +28,6 @@
         />
       </div>
     </div>
-    <div class="actions">
-      <CategorySettings :category="category"/>
-    </div>
   </div>
 </template>
 
@@ -45,14 +37,12 @@
   import { faGripLinesVertical } from '@fortawesome/free-solid-svg-icons'
   import { mixin as moneyMixin } from '@/Utils/Money'
   import { iconComponent } from '@/Utils/Icons'
-  import CategorySettings from '../categories/CategorySettings'
 
   export default {
     components: {
       AppMoney,
       AppMoneyInput,
-      GripIcon: iconComponent({ icon: faGripLinesVertical, fixedWidth: true }),
-      CategorySettings
+      GripIcon: iconComponent({ icon: faGripLinesVertical, fixedWidth: true })
     },
     mixins: [moneyMixin],
     props: {

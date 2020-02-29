@@ -38,19 +38,12 @@
 
     <template v-if="budget.categories.length">
       <Budget class="card">
-        <draggable
-          handle=".budget-row-handle"
-          class="budget-categories"
-          v-model="budget.categories"
-          @input="sortCategories"
-        >
-          <BudgetCategory
-            :month="monthObject"
-            :category="category"
-            :key="category.id"
-            v-for="category in budget.categories"
-          />
-        </draggable>
+        <BudgetCategory
+          :month="monthObject"
+          :category="category"
+          :key="category.id"
+          v-for="category in budget.categories"
+        />
       </Budget>
 
       <div class="py-2 flex">
@@ -67,7 +60,6 @@
 </template>
 
 <script>
-  import draggable from 'vuedraggable'
   import Layout from '@/Layouts/Default'
   import AppNumber from '@/Components/AppNumber'
   import Budget from '@/Components/budget/Budget'
@@ -88,7 +80,6 @@
       Budget,
       BudgetCategory,
       MonthPicker,
-      draggable,
       ListIcon: iconComponent({ icon: faThLarge }),
       CogIcon: iconComponent({ icon: faCog }),
     },
@@ -99,15 +90,6 @@
     computed: {
       monthObject () {
         return Month.fromString(this.budget.month.value)
-      }
-    },
-    methods: {
-      sortCategories (result) {
-        const ids = result.map(category => category.id).filter(x => x)
-
-        this.$inertia.post('/categories/sort', {
-          categories: ids
-        }, { preserveScroll: true })
       }
     }
   }

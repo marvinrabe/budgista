@@ -2,7 +2,7 @@
   <Layout :title="$t('action.edit.account')">
     <div class="card">
       <div class="card-header">
-        {{ $t('action.edit.account') }}
+        <h2 class="text-xl">{{ $t('action.edit.account') }}</h2>
       </div>
       <div class="card-body">
         <AppForm @submit="save">
@@ -47,9 +47,9 @@
       <div class="card-body border-t border-gray-3">
         <form @submit.prevent="deleteAccount" class="flex -mx-1 flex-wrap items-end justify-between">
           <div class="flex-1 px-1">
-            <h2 class="text-xl mb-2">
+            <h3 class="text-xl mb-2">
               {{ $t('action.delete.account') }}
-            </h2>
+            </h3>
             <p>{{ $t('hint.deleteAccount') }}</p>
           </div>
           <div class="lg:ml-4 mt-4 w-full lg:w-auto flex justify-end">

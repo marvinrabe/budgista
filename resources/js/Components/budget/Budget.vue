@@ -1,9 +1,6 @@
 <template>
   <div class="budget">
     <div class="budget-header">
-      <div class="handle">
-        &nbsp;
-      </div>
       <div class="data">
         <div class="budget-column-name">
           {{ $t('form.category') }}
@@ -17,9 +14,6 @@
         <div class="budget-column-available">
           <span>{{ $t('form.available') }}</span>
         </div>
-      </div>
-      <div class="actions">
-        &nbsp;
       </div>
     </div>
 

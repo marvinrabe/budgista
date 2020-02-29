@@ -3,7 +3,7 @@
 
     <div class="card">
       <div class="card-header">
-        <h2 class="text-xl text-gray-8">
+        <h2 class="text-xl">
           {{ category.name }}
         </h2>
       </div>

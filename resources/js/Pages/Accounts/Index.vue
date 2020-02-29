@@ -1,7 +1,7 @@
 <template>
   <Layout :title="$t('title.accounts')" :redirect="links">
     <template v-slot:menu>
-      <h2 class="text-xl text-gray-8 mb-4 px-4">
+      <h2 class="text-xl mb-4 px-4">
         {{ $t('title.accounts') }}
       </h2>
 

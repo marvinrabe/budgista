@@ -2,7 +2,7 @@
   <Layout :title="$t('action.create.account')">
     <div class="card">
       <div class="card-header">
-        {{ $t('action.create.account') }}
+        <h2 class="text-xl">{{ $t('action.create.account') }}</h2>
       </div>
       <div class="card-body">
         <AppForm @submit="save">

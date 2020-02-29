@@ -1,10 +1,9 @@
 <template>
   <Layout :title="$t('title.statisticNetWorth')">
     <div class="card">
-      <div
-        class="card-header"
-        v-t="'title.statisticNetWorth'"
-      />
+      <div class="card-header">
+        <h2 class="text-xl">{{ $t('title.statisticNetWorth')}}</h2>
+      </div>
       <div class="flex justify-center p-4">
         <LinearChart :chart-data="chartData" class="w-full"/>
       </div>

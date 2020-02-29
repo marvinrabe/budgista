@@ -1,7 +1,9 @@
 <template>
   <Layout :title="$t('title.verify')">
     <div class="card">
-      <div class="card-header" v-t="'title.verify'"></div>
+      <div class="card-header">
+        <h2 class="text-xl">{{ $t('title.verify') }}</h2>
+      </div>
 
       <div class="card-body">
         {{ $t('message.verificationCheckEmail') }}

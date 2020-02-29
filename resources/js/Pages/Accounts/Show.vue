@@ -2,7 +2,7 @@
   <Layout :title="account.name">
     <div class="card ">
       <div class="card-header flex items-center">
-        <h2 class="text-xl text-gray-8">
+        <h2 class="text-xl">
           {{ account.name }}
         </h2>
 

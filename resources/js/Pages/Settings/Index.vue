@@ -1,7 +1,7 @@
 <template>
   <Layout :title="$t('title.settings')" redirect="/settings/profile">
     <template v-slot:menu>
-      <h2 class="text-xl text-gray-8 mb-4 px-4">
+      <h2 class="text-xl mb-4 px-4">
         {{ $t('title.settings') }}
       </h2>
 
@@ -12,6 +12,9 @@
         <AppMenuItem
           :label="$t('title.general')"
           href="/settings/edit"/>
+        <AppMenuItem
+          :label="$t('title.categories')"
+          href="/categories"/>
       </AppMenu>
     </template>
 

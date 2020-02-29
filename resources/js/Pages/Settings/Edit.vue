@@ -2,13 +2,15 @@
   <Layout :title="$t('title.general')">
     <div class="card">
       <div class="card-header">
-        {{ $t('title.general') }}
+        <h2 class="text-xl">
+          {{ $t('title.general') }}
+        </h2>
       </div>
       <div class="card-body">
         <AppForm @submit="save" ref="form">
           <div class="flex flex-wrap items-baseline">
             <div class="w-full lg:w-4/12">
-              <h2
+              <h3
                 class="text-xl mb-2"
                 v-t="'title.localisation'"
               />

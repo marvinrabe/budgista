@@ -2,8 +2,9 @@
   <Layout :title="$t('title.profile')">
     <div class="card">
       <div class="card-header">
-        {{ $t('title.profile') }}
+        <h2 class="text-xl">{{ $t('title.profile')}}</h2>
       </div>
+
       <div class="card-body">
         <SettingsEmail/>
       </div>

@@ -4,36 +4,9 @@
     @apply flex flex-wrap flex-1 items-center -mx-1;
   }
 
-  .actions {
-    flex: 48px;
-    flex-shrink: 0;
-    flex-grow: 0;
-    padding: .5em .5em .5em 0;
-  }
-
-  .handle {
-    @apply p-2 -mx-1 text-center text-gray-6;
-    flex: 36px;
-    flex-shrink: 0;
-    flex-grow: 0;
-    cursor: move;
-    cursor: -webkit-grab;
-    cursor: -moz-grab;
-  }
-
-  .dropdown-toggle,
-  .handle {
-    visibility: hidden;
-  }
-
   &-header,
   &-row {
     @apply flex items-center;
-
-    &:hover .dropdown-toggle,
-    &:hover .handle {
-      visibility: visible;
-    }
   }
 
   &-header {
@@ -78,13 +51,13 @@
 
     &-name {
       flex: 2;
-      @apply p-1;
+      @apply py-2 px-4;
     }
 
     &-budget,
     &-activity,
     &-available {
-      @apply p-1 text-right;
+      @apply py-2 px-4 text-right;
       flex: 1;
       white-space: nowrap;
     }
@@ -140,5 +113,5 @@
 }
 
 .sortable-chosen {
-  @apply shadow-lg -mx-2;
+  @apply shadow bg-white -mx-1;
 }

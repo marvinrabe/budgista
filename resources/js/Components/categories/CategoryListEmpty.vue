@@ -1,9 +1,9 @@
 <template>
   <div class="card flex flex-column justify-center">
     <div class="my-5 text-center">
-      <h2 class="text-xl text-gray-8">
+      <h3 class="text-xl">
         {{ $t('title.noCategories') }}
-      </h2>
+      </h3>
       <div class="flex flex-col items-center mt-2">
         <p class="mb-4">
           {{ $t('message.addCategory') }}
