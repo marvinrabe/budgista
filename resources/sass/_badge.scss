@@ -1,0 +1,17 @@
+.badge {
+  @apply rounded p-2 uppercase font-bold tracking-wide;
+  //color: rgba(0,0,0,.75);
+
+  &--green {
+    @apply bg-green-0 text-green-9;
+  }
+
+  &--yellow {
+    @apply bg-yellow-0 text-yellow-9;
+  }
+
+  &--red {
+    @apply bg-red-0 text-yellow-9;
+  }
+
+}

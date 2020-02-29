@@ -12,17 +12,17 @@
           <div class="form-text">
             {{ $page.user.email }}
             <span
-              class="bg-green-0 rounded p-1 text-xs"
+              class="badge badge--green text-xs"
               v-if="$page.user.email_verified_at"
               v-t="'word.verified'"
             />
             <span
-              class="bg-yellow-0 rounded p-1 text-xs"
+              class="badge badge--yellow text-xs"
               v-else
               v-t="'word.unverified'"
             />
             <resend-verification
-              class="btn-sm"
+              class="inline-block"
               v-if="!$page.user.email_verified_at"
             />
           </div>
@@ -94,7 +94,7 @@
         this.saving = true
 
         this.$inertia
-          .post('/settings/email', this.form)
+          .post('/profile/email', this.form)
           .then(() => {
             this.reset()
           })

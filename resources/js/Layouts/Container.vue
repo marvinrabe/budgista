@@ -2,13 +2,13 @@
   <Layout :title="title">
     <div class="flex -m-2 items-stretch">
       <div class="p-2 lg:w-1/3 xl:w-1/4"
-           :class="{'hidden lg:block w-5/12': hasContent, 'w-full lg:w-5/12 ': !hasContent}">
+           :class="{'hidden lg:block': hasContent, 'w-full': !hasContent}">
         <div class="sticky" style="top: 5rem;">
           <slot name="menu"/>
         </div>
       </div>
       <div class="p-2 lg:w-2/3 xl:w-3/4"
-           :class="{'w-full lg:w-7/12': hasContent, 'hidden lg:block w-7/12 ': !hasContent}">
+           :class="{'w-full': hasContent, 'hidden lg:block': !hasContent}">
         <slot>
           <slot name="placeholder"/>
         </slot>
