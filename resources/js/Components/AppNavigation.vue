@@ -1,7 +1,7 @@
 <template>
   <nav
     class="border-t md:border-t-0 md:border-b border-gray-3 fixed bottom-0 md:bottom-auto md:top-0 bg-white w-full z-10">
-    <div class="container px-4 py-2 flex items-center">
+    <div class="container px-1 md:px-4 py-2 flex items-center">
       <AppLogo
         class="hidden md:block"
         style="height: 40px;"
@@ -35,7 +35,7 @@
       </nav>
 
       <inertia-link
-        class="ml-auto hidden lg:block text-gray-6 hover:text-gray-8"
+        class="ml-auto hidden md:block text-gray-6 hover:text-gray-8"
         href="/settings"
         :title="$t('title.settings')"
       >
