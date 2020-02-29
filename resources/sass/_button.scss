@@ -7,7 +7,7 @@
     @apply mr-2;
   }
 
-  &.dropdown-toggle, &--icon {
+  &--icon {
     @apply p-2 mx-1;
 
     svg, img {
@@ -67,7 +67,7 @@
     }
   }
 
-  &--icon, &.dropdown-toggle, &--subtle, &--subtle:hover, &--subtle:active {
+  &--icon, &--subtle, &--subtle:hover, &--subtle:active {
     @apply font-normal;
     border: 0 !important;
     box-shadow: none !important;

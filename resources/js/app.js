@@ -5,9 +5,6 @@ import { i18n, loadLanguage } from './Utils/Language'
 import { flashMessages } from './Utils/Flash'
 import './Utils/ServiceWorker'
 
-import { DropdownPlugin } from 'bootstrap-vue'
-Vue.use(DropdownPlugin)
-
 Vue.use(InertiaApp)
 
 const app = document.getElementById('app')

@@ -14,7 +14,7 @@ mix
     postCss: [tailwind('tailwind.config.js')],
   })
   .purgeCss({
-    whitelistPatternsChildren: [/dropdown/,/notyf/,/nprogress/]
+    whitelistPatternsChildren: [/notyf/,/nprogress/]
   })
   .polyfill({
     enabled: true,
