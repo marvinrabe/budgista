@@ -56,8 +56,8 @@
             <div class="w-full flex justify-end">
               <BudgetProgress
                 class="w-1/4"
-                :activity="-category.activity"
-                :total="category.budget"/>
+                :category="category"
+              />
             </div>
           </AppMenuItem>
         </AppMenu>

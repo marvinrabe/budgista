@@ -21,6 +21,9 @@
     computed: {
       colorClass () {
         if (this.color) {
+          if(this.value === 0) {
+            return 'text-gray-6';
+          }
           return this.value >= 0 ? 'text-green-9' : 'text-red-9'
         }
         return ''

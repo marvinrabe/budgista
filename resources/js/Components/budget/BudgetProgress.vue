@@ -1,5 +1,5 @@
 <template>
-  <div class="my-1 rounded-full bg-gray-1 h-1">
+  <div class="my-1 rounded-full bg-gray-3 h-1">
     <div class="h-full  rounded-full" :style="{width}" :class="color"></div>
   </div>
 </template>
@@ -7,8 +7,7 @@
 <script>
   export default {
     props: {
-      activity: Number,
-      total: Number
+      category: Object
     },
     computed: {
       percentage () {
@@ -16,14 +15,22 @@
           return 0
         }
 
-        return this.activity / this.total
+        if (this.category.activity > 0) {
+          return 0
+        }
+
+        return -this.category.activity / this.category.budget
       },
       width () {
         return this.percentage > 1 ? '100%' : (this.percentage * 100 + '%')
       },
       color () {
-        if (this.percentage === 1) {
-          return 'bg-gray-3'
+        if (this.category.available < 0) {
+          return 'bg-red-9'
+        } else if (this.percentage === 1 || this.category.available === 0) {
+          return 'bg-gray-6'
+        } else if (this.category.available >= 0 && this.percentage >= 1) {
+          return 'bg-yellow-7' // based on date
         } else if (this.percentage >= 1) {
           return 'bg-red-9'
         }
