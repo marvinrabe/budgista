@@ -18,7 +18,7 @@ class CategoryCreateTest extends TestCase
             ->post('/categories', [
                 'name' => 'New category'
             ])
-            ->assertRedirect('/budget');
+            ->assertRedirect('/categories');
 
         $this->assertDatabaseHas('categories', [
             'user_id' => Auth::id(),

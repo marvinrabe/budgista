@@ -66,7 +66,7 @@
         this.deleting = true
 
         this.$inertia
-          .post('/settings/terminate', this.form)
+          .post('/profile/terminate', this.form)
           .finally(() => {
             this.deleting = false
           })

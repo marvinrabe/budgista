@@ -59,7 +59,7 @@
         this.removing = true
 
         this.$inertia
-          .delete('/settings/google')
+          .delete('/profile/google')
           .finally(() => {
             this.removing = false
           })

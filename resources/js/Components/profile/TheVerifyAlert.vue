@@ -14,7 +14,7 @@
           <AppButton
             class="hover:underline"
             :label="$t('action.changeEmail')"
-            to="/settings/profile"
+            to="/profile"
             subtle
             small
           />

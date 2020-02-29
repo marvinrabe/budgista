@@ -27,7 +27,7 @@ class CategoryDeleteTest extends TestCase
         $this
             ->signIn($category->user)
             ->post("/categories/{$category->id}/delete")
-            ->assertRedirect('/budget');
+            ->assertRedirect('/categories');
 
         $this->assertDatabaseMissing('categories', [
             'id' => $category->id,

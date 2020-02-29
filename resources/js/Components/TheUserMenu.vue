@@ -77,7 +77,7 @@
         this.$inertia.visit('/settings/edit')
       },
       profile () {
-        this.$inertia.visit('/settings/profile')
+        this.$inertia.visit('/profile')
       },
       help () {
         window.location = 'mailto:support@budgista.com'

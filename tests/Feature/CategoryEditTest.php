@@ -20,7 +20,7 @@ class CategoryEditTest extends TestCase
             ->put("/categories/{$category->id}", [
                 'name' => 'New Name'
             ])
-            ->assertRedirect('/budget');
+            ->assertRedirect('/categories');
 
         $this->assertDatabaseHas('categories', [
             'id' => $category->id,

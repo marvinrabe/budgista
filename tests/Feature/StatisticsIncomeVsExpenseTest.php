@@ -4,15 +4,15 @@ namespace Tests\Feature;
 
 use App\Account;
 use App\Category;
+use App\Month;
 use App\Transaction;
 use App\User;
+use App\ViewModels\IncomeVsExpenseChart;
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class StatisticTest extends TestCase
+class StatisticsIncomeVsExpenseTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -29,27 +29,30 @@ class StatisticTest extends TestCase
                     'user_id' => Auth()->id(),
                     'account_id' => $account->id,
                     'category_id' => $amount < 0 ? $category->id : null,
-                    'date' => $date,
+                    'date' => $date->firstDay(),
                     'amount' => $amount
                 ]);
             }
         }
     }
 
+    /**
+     * @return Month[]
+     */
     protected function lastYearMonths()
     {
         $months = [];
         for ($i = 0; $i <= 11; $i++) {
-            $months[] = Carbon::now()->subMonthNoOverflow(11 - $i);
+            $months[] = Month::fromString(Carbon::now()->subMonthNoOverflow(11 - $i)->format('Y-m'));
         }
         return $months;
     }
 
-    public function testDisplayStatistics()
+    public function testDisplay()
     {
         $this->signIn()
-            ->get('/statistics')
-            ->assertInertiaViewIs('Statistics')
+            ->get('/statistics/incomeVsExpense')
+            ->assertInertiaViewIs('Statistics/IncomeVsExpense')
             ->assertHasProp('data');
     }
 
@@ -60,16 +63,15 @@ class StatisticTest extends TestCase
         $expectedData = [];
         foreach ($this->lastYearMonths() as $key => $date) {
             $expectedData[] = [
-                'month' => $date->format('Y-m'),
-                'worth' => $key * 100 + 100,
+                'month' => $date->value(),
                 'income' => 200,
                 'expense' => 100
             ];
         }
 
-        $response = $this->get('/statistics');
+        $response = new IncomeVsExpenseChart($this->lastYearMonths());
 
-        $this->assertEquals($expectedData, $response->props()['data']);
+        $this->assertEquals($expectedData, $response->data()->toArray());
     }
 
     public function testBasedOnlyOnUserData()
@@ -80,16 +82,15 @@ class StatisticTest extends TestCase
         $expectedData = [];
         foreach ($this->lastYearMonths() as $key => $date) {
             $expectedData[] = [
-                'month' => $date->format('Y-m'),
-                'worth' => $key * 100 + 100,
+                'month' => $date->value(),
                 'income' => 200,
                 'expense' => 100
             ];
         }
 
-        $response = $this->get('/statistics');
+        $response = new IncomeVsExpenseChart($this->lastYearMonths());
 
-        $this->assertEquals($expectedData, $response->props()['data']);
+        $this->assertEquals($expectedData, $response->data()->toArray());
     }
 
     public function testReturnsLastTwelveMonths()
@@ -103,9 +104,9 @@ class StatisticTest extends TestCase
             $expected[] = '2018-'.str_pad($month, 2, '0', STR_PAD_LEFT);
         }
 
-        $response = $this->get('/statistics');
+        $response = new IncomeVsExpenseChart($this->lastYearMonths());
 
-        $result = Collection::make($response->props()['data'])
+        $result = $response->data()
             ->map(function ($item) {
                 return $item['month'];
             })
