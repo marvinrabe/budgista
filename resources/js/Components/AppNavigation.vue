@@ -21,7 +21,7 @@
             href="/accounts"
           />
           <inertia-link
-            href="/transactions/create"
+            :href="createTransactionRoute"
             :title="$t('action.create.transaction')"
             class="text-white hover:text-white flex items-center justify-center text-xl shadow-lg rounded-full w-10 h-10 bg-blue-6 hover:bg-blue-7 mx-2 md:hidden">
             <PlusIcon/>
@@ -43,7 +43,7 @@
       <div class="ml-auto hidden md:flex items-center">
         <AppButton
           :title="$t('action.create.transaction')"
-          to="/transactions/create"
+          :to="createTransactionRoute"
           variant="primary"
         >
           <PlusIcon/>
@@ -68,6 +68,7 @@
   import { iconComponent } from '@/Utils/Icons'
   import FormGroup from '@/Components/form/FormGroup'
   import AppButton from '@/Components/form/AppButton'
+  import { transactionRoute } from '@/Utils/Route'
 
   export default {
     components: {
@@ -85,6 +86,11 @@
           statistics: faChartBar,
           settings: faCog
         }
+      }
+    },
+    computed: {
+      createTransactionRoute() {
+        return transactionRoute(this.$page)
       }
     }
   }

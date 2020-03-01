@@ -18,7 +18,7 @@
             {{ $t('form.amount') }}
           </div>
         </div>
-        <div class="transaction-clear">
+        <div class="transaction-clear" v-if="column !== 'account'">
           &nbsp;
         </div>
       </div>

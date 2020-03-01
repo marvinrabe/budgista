@@ -36,16 +36,24 @@
       TransactionForm
     },
     props: {
+      referer: {
+        type: String,
+        default: null
+      },
       account: {
         type: Object,
-        required: false,
+        default: null
+      },
+      category: {
+        type: Object,
         default: null
       }
     },
     data () {
       return {
         form: {
-          account_id: this.account ? this.account.id : null
+          account_id: this.account ? this.account.id : null,
+          category_id: this.category ? this.category.id : null
         },
         saving: false
       }
@@ -55,7 +63,10 @@
         this.saving = true
 
         this.$inertia
-          .post('/transactions', this.form)
+          .post('/transactions', {
+            ...this.form,
+            referer: this.referer
+          })
           .finally(() => {
             this.saving = false
           })

@@ -9,14 +9,14 @@
         <div class="flex ml-auto">
           <inertia-link
             :title="$t('action.previousMonth')"
-            :href="$page.budget.month.links.prev"
+            :href="prevLink"
             class="btn btn--icon"
           >
             <PrevIcon/>
           </inertia-link>
           <inertia-link
             :title="$t('action.nextMonth')"
-            :href="$page.budget.month.links.next"
+            :href="nextLink"
             class="btn btn--icon"
           >
             <NextIcon/>
@@ -93,6 +93,7 @@
   import { iconComponent } from '@/Utils/Icons'
   import { faChevronLeft, faChevronRight, faCog, faTable } from '@fortawesome/free-solid-svg-icons'
   import CategoryListEmpty from '@/Components/categories/CategoryListEmpty'
+  import { budgetRoute } from '@/Utils/Route'
 
   export default {
     components: {
@@ -117,6 +118,12 @@
       },
       monthObject () {
         return Month.fromString(this.$page.budget.month.value)
+      },
+      prevLink() {
+        return budgetRoute(this.$page.budget.month.links.prev, this.$page.category)
+      },
+      nextLink() {
+        return budgetRoute(this.$page.budget.month.links.prev, this.$page.category)
       }
     },
     methods: {

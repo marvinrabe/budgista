@@ -21,7 +21,7 @@
         <AppMoney :value="transaction.amount" color/>
       </div>
     </inertia-link>
-    <div class="transaction-clear">
+    <div class="transaction-clear" v-if="column !== 'account'">
       <ClearInput :transaction="transaction" v-if="!isFuture"/>
     </div>
   </div>

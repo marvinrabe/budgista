@@ -33,6 +33,7 @@
         </div>
         <AmountInput
           class="text-4xl rounded-tl-none"
+          :type="type"
           v-bind="bindings"
           v-model="form.amount"
         />
@@ -171,11 +172,9 @@
     methods: {
       setToExpense () {
         this.type = EXPENSE
-        this.input()
       },
       setToIncome () {
         this.type = INCOME
-        this.input()
       }
     }
   }

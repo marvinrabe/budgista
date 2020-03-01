@@ -1,8 +1,8 @@
 <template>
   <AppMoneyInput
-    @input="input"
+    :value="absValue"
+    @input="setInput"
     ref="amount"
-    v-model="amount"
   />
 </template>
 
@@ -17,19 +17,19 @@
       value: Number,
       type: Number
     },
-    data () {
-      return {
-        amount: Math.abs(this.value)
+    computed: {
+      absValue () {
+        return Math.abs(this.value)
       }
     },
     watch: {
-      value () {
-        this.amount = Math.abs(this.value)
+      type () {
+        this.setInput(this.absValue)
       }
     },
     methods: {
-      input () {
-        this.$emit('input', this.type * this.amount)
+      setInput (result) {
+        this.$emit('input', this.type * result)
       }
     }
   }

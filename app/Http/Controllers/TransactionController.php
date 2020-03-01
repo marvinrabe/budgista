@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\Category;
 use App\Transaction;
 use App\Rules\Own;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class TransactionController extends Controller
@@ -19,7 +22,11 @@ class TransactionController extends Controller
         return Inertia::render('Transactions/Create', [
             'account' => $request->has('account')
                 ? Account::find($request->get('account'))
-                : null
+                : null,
+            'category' => $request->has('category')
+                ? Category::find($request->get('category'))
+                : null,
+            'referer' => $request->get('referer')
         ]);
     }
 
@@ -49,7 +56,30 @@ class TransactionController extends Controller
 
         $transaction->save();
 
+        $referer = request('referer');
+        if ($this->validReferer($referer)) {
+            return Redirect::to($referer);
+        }
+
         return Redirect::route('accounts.show', [$transaction->account]);
+    }
+
+    protected function validReferer($referer)
+    {
+        if (empty($referer)) {
+            return false;
+        }
+        if (!Str::startsWith($referer, '/')) {
+            return false;
+        }
+        $routes = Route::getRoutes();
+        $request = Request::create($referer);
+        try {
+            $result = $routes->match($request);
+            return true;
+        } catch (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e) {
+            return false;
+        }
     }
 
     public function edit(Transaction $transaction)
