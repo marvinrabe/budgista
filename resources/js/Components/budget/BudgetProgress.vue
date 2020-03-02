@@ -11,7 +11,7 @@
     },
     computed: {
       percentage () {
-        if (this.total === 0) {
+        if (this.category.budget === 0) {
           return 0
         }
 
