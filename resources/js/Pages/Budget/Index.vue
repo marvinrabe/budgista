@@ -123,7 +123,7 @@
         return budgetRoute(this.$page.budget.month.links.prev, this.$page.category)
       },
       nextLink() {
-        return budgetRoute(this.$page.budget.month.links.prev, this.$page.category)
+        return budgetRoute(this.$page.budget.month.links.next, this.$page.category)
       }
     },
     methods: {
