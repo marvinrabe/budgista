@@ -5,26 +5,27 @@ workbox.setConfig({
 })
 
 workbox.routing.registerRoute(
-  new RegExp('.*rsms\.me.*$'),
-  new workbox.strategies.CacheFirst(),
-)
-
-workbox.routing.registerRoute(
   /\.(?:png|gif|jpg|jpeg|svg|js|css)/,
   new workbox.strategies.CacheFirst({
     cacheName: 'static',
     plugins: [
       new workbox.expiration.ExpirationPlugin({
         maxEntries: 60,
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+        maxAgeSeconds: 14 * 24 * 60 * 60, // 14 Days
       }),
     ],
   })
 )
 
+const defaultExpiration = new workbox.expiration.ExpirationPlugin({
+  maxEntries: 60,
+  maxAgeSeconds: 24 * 60 * 60, // 1 Day
+});
+
 const inertiaStrategy = new workbox.strategies.NetworkFirst({
   cacheName: 'inertia',
   plugins: [
+    defaultExpiration,
     new workbox.cacheableResponse.CacheableResponsePlugin({
       headers: {
         'x-inertia': 'true',
@@ -33,7 +34,12 @@ const inertiaStrategy = new workbox.strategies.NetworkFirst({
   ]
 })
 
-const defaultStrategy = new workbox.strategies.NetworkFirst()
+const defaultStrategy = new workbox.strategies.NetworkFirst({
+  cacheName: 'pages',
+  plugins: [
+    defaultExpiration
+  ]
+})
 
 workbox.routing.registerRoute(
   /(.*)/,
