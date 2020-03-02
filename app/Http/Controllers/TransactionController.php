@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Laracasts\Flash\Flash;
 
 class TransactionController extends Controller
 {
@@ -55,6 +56,8 @@ class TransactionController extends Controller
         }
 
         $transaction->save();
+
+        Flash::success(__('Transaction saved.'));
 
         $referer = request('referer');
         if ($this->validReferer($referer)) {
@@ -117,6 +120,8 @@ class TransactionController extends Controller
             ])
         );
 
+        Flash::success(__('Transaction saved.'));
+
         return Redirect::route('accounts.show', [$transaction->account]);
     }
 
@@ -125,6 +130,8 @@ class TransactionController extends Controller
         $this->authorize('delete', $transaction);
 
         $transaction->delete();
+
+        Flash::success(__('Transaction deleted.'));
 
         return Redirect::route('accounts.show', [$transaction->account]);
     }
