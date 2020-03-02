@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
             $months->prepend($thisMonth->subMonths($i));
         }
 
-        $months->each(function (CarbonImmutable $month) use ($user) {
+        $months->each(function (CarbonImmutable $month) use ($user, $thisMonth) {
             $income = $this->randomize(254983);
 
             factory(\App\Transaction::class)->create([
@@ -71,7 +71,7 @@ class DatabaseSeeder extends Seeder
 
             $budget = $this->expenses($expense, $user, $month,
                 [$cashPercent, $creditPercent, (1 - $cashPercent - $creditPercent)]);
-            $left = $income-$budget;
+            $left = $income - $budget;
 
             $aBudget = rand(0, $left);
             $bBudget = $this->randomize($left - $aBudget);
@@ -79,35 +79,40 @@ class DatabaseSeeder extends Seeder
             $user->categories[11]
                 ->budget(Month::fromString($month->format('Y-m')))
                 ->update([
-                    'amount'=> $aBudget
+                    'amount' => $aBudget
                 ]);
 
             $user->categories[12]
                 ->budget(Month::fromString($month->format('Y-m')))
                 ->update([
-                    'amount'=> $bBudget
+                    'amount' => $bBudget
                 ]);
 
 
         });
     }
 
-    public function expenses($expense, $user, $month, $accountShare)
+    public function expenses($expense, $user, CarbonImmutable $month, $accountShare)
     {
         $budgetSum = 0;
         foreach ($user->categories as $key => $category) {
-            if(!isset($this->categories[$key])) {
+            if (!isset($this->categories[$key])) {
                 continue;
             }
 
             $part = $expense * $this->categories[$key];
+
+            $lift = 1;
+            if (\Carbon\Carbon::now()->format('Y-m') == $month->format('Y-m')) {
+                $lift = 0.3;
+            }
 
             factory(\App\Transaction::class)->create([
                 'user_id' => $user->id,
                 'category_id' => $user->categories[$key]->id,
                 'date' => $month,
                 'account_id' => $user->accounts[0]->id,
-                'amount' => (int) (-$part * $accountShare[0])
+                'amount' => (int) (-$part * $lift * $accountShare[0])
             ]);
 
             factory(\App\Transaction::class)->create([
@@ -115,7 +120,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => $user->categories[$key]->id,
                 'date' => $month,
                 'account_id' => $user->accounts[1]->id,
-                'amount' => (int) (-$part * $accountShare[1])
+                'amount' => (int) (-$part * $lift * $accountShare[1])
             ]);
 
             factory(\App\Transaction::class)->create([
@@ -123,14 +128,14 @@ class DatabaseSeeder extends Seeder
                 'category_id' => $user->categories[$key]->id,
                 'date' => $month,
                 'account_id' => $user->accounts[2]->id,
-                'amount' => (int) (-$part * $accountShare[2])
+                'amount' => (int) (-$part * $lift * $accountShare[2])
             ]);
 
-            $budget = (int) (round($part/100)*100);
+            $budget = (int) (round($part / 100) * 100);
             $category
                 ->budget(Month::fromString($month->format('Y-m')))
                 ->update([
-                    'amount'=> (round($part/100)*100)
+                    'amount' => (round($part / 100) * 100)
                 ]);
             $budgetSum += $budget;
         }
