@@ -1,8 +1,16 @@
 [
   {
+    "date": "2020-03-02",
+    "changes": [
+      "We changed the structure of the app. Navigate on mobile via a toolbar at the bottom of the screen.",
+      "Add transactions on any page of the app, not just the account screen.",
+      "See your spending progress in the budget view additional category insights. You can still access the old tabular budget for quick budget entry."
+    ]
+  },
+  {
     "date": "2020-02-24",
     "changes": [
-      "Google-Login is now available. Connect your Budgista account with Google to log in easily."
+      "Google-Login is now available. Connect your account with Google to log in easily."
     ]
   }
 ]
