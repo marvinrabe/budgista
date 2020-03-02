@@ -51,6 +51,7 @@ h1, h2, h3, h4, h5, h6 {
 @import "badge";
 @import "button";
 @import "card";
+@import "flash";
 @import "hr";
 @import "input";
 @import "pill";
@@ -60,7 +61,6 @@ h1, h2, h3, h4, h5, h6 {
 @import "password";
 @import "budget";
 @import "transactions";
-@import "~notyf/notyf.min.css";
 
 @tailwind utilities;
 
