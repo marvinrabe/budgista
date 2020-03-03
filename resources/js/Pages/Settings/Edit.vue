@@ -23,11 +23,11 @@
                   v-model="form.currency"
                 >
                   <option
-                    :key="currency"
-                    :value="currency"
-                    v-for="currency in currencies"
-                    v-t="'currency.'+currency"
-                  />
+                    :key="key"
+                    :value="key"
+                    v-for="(currency, key) in currencies">
+                    {{ currency }}
+                  </option>
                 </AppSelect>
               </FormGroup>
 
@@ -92,6 +92,9 @@
       Layout,
       FormGroup
     },
+    props: {
+      currencies: Object
+    },
     data () {
       return {
         form: {
@@ -108,9 +111,6 @@
       },
       locales () {
         return Object.keys(this.$i18n.messages[this.$i18n.locale].language)
-      },
-      currencies () {
-        return Object.keys(this.$i18n.messages[this.$i18n.locale].currency)
       }
     },
     methods: {

@@ -19,7 +19,9 @@ class SettingsController extends Controller
 
     public function edit()
     {
-        return Inertia::render('Settings/Edit');
+        return Inertia::render('Settings/Edit', [
+            'currencies' => Currency::all()
+        ]);
     }
 
     public function update()

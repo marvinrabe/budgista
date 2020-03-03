@@ -13,6 +13,14 @@ class SettingsTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function testListCurrencies()
+    {
+        $this->signIn()
+            ->get('/settings/edit')
+            ->assertInertiaViewIs('Settings/Edit')
+            ->assertHasProp('currencies');
+    }
+
     public function testUpdateSettings()
     {
         $this
