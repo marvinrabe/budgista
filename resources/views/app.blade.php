@@ -44,7 +44,6 @@
     </div>
 </noscript>
 @auth
-    <!-- Download Canny SDK -->
     <script>!function (w, d, i, s) {
         function l () {
           if (!d.getElementById(i)) {
@@ -58,8 +57,6 @@
           c.q = [], w.Canny = c, 'complete' === d.readyState ? l() : w.attachEvent ? w.attachEvent('onload', l) : w.addEventListener('load', l, !1)
         }
       }(window, document, 'canny-jssdk', 'script')</script>
-
-    <!-- Use the Canny SDK to identify the current user of your website -->
     <script>
       Canny('identify', {
         appID: '5e5e763047312543ec5d137b',
@@ -69,11 +66,6 @@
         },
       })
     </script>
-    <a href="https://feedback.budgista.com/feedback"
-       class="text-white hover:no-underline hover:text-white hover:bg-blue-8 font-bold py-2 px-6 shadow bg-blue-6 hidden md:block fixed bottom-0 right-0 mr-6 rounded-t"
-       target="_blank">
-        Give us Feedback
-    </a>
 @endauth
 </body>
 </html>
