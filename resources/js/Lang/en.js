@@ -68,6 +68,7 @@ export default {
     manageCategories: 'Manage Categories'
   },
   form: {
+    description: 'Description',
     pleaseSelect: 'Please Choose...',
     newEmail: 'New Email address',
     currentEmail: 'Current Email address',

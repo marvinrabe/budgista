@@ -28,7 +28,8 @@ class CategoryController extends Controller
         Auth::user()
             ->categories()
             ->create(request()->validate([
-                'name' => 'required'
+                'name' => ['required', 'string'],
+                'description' => ['nullable', 'string'],
             ]));
 
         return Redirect::route('categories.index');
@@ -49,7 +50,8 @@ class CategoryController extends Controller
 
         $category->update(
             request()->validate([
-                'name' => 'required'
+                'name' => ['required', 'string'],
+                'description' => ['nullable', 'string'],
             ])
         );
 

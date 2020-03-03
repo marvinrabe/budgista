@@ -68,6 +68,7 @@ export default {
     manageCategories: 'Kategorien verwalten'
   },
   form: {
+    description: 'Beschreibung',
     pleaseSelect: 'Bitte Auswählen...',
     newEmail: 'Neue E-Mail Adresse',
     currentEmail: 'Aktuelle E-Mail Adresse',

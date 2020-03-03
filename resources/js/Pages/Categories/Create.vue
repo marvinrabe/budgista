@@ -18,6 +18,16 @@
             >
           </FormGroup>
 
+          <FormGroup name="description" optional>
+            <input
+              class="form-control"
+              slot-scope="{bindings}"
+              type="text"
+              v-bind="bindings"
+              v-model="form.description"
+            >
+          </FormGroup>
+
           <template slot="actions">
             <AppButton
               :label="$t('action.save')"
@@ -53,7 +63,8 @@
     data () {
       return {
         form: {
-          name: ''
+          name: '',
+          description: ''
         },
         saving: false
       }

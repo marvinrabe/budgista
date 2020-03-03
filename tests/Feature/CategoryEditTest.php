@@ -18,14 +18,16 @@ class CategoryEditTest extends TestCase
         $this
             ->signIn($category->user)
             ->put("/categories/{$category->id}", [
-                'name' => 'New Name'
+                'name' => 'New Name',
+                'description' => 'A brand new category'
             ])
             ->assertRedirect('/categories');
 
         $this->assertDatabaseHas('categories', [
             'id' => $category->id,
             'user_id' => $category->user_id,
-            'name' => 'New Name'
+            'name' => 'New Name',
+            'description' => 'A brand new category'
         ]);
     }
 

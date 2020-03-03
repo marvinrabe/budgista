@@ -3,15 +3,16 @@
 
     <div class="card">
       <div class="card-header flex justify-between items-center">
-        <h2 class="text-xl">
-          {{ category.name }}
-        </h2>
+        <div>
+          <h2 class="text-xl leading-tight">
+            {{ category.name }}
+          </h2>
+          <p class="mt-1 text-gray-6" v-if="category.description">{{ category.description }}</p>
+        </div>
 
-        <AppMoney
-          :value="categoryBudget.available"
-          class="ml-auto badge text-xl"
-          :class="{'badge--red': categoryBudget.available < 0, 'badge--green': categoryBudget.available > 0, 'badge--gray': categoryBudget.available === 0, }"
-        />
+        <AppButton :to="category.links.edit" icon :title="$t('action.edit.category')">
+          <CogIcon/>
+        </AppButton>
       </div>
 
       <div class="card-body border-b border-gray-3 flex flex-wrap items-baseline -mx-2">
@@ -41,28 +42,32 @@
               {{ $t('form.previousMonth')}}
             </span>
 
-            <AppMoney :value="categoryBudget.previousMonth"/>
+            <AppMoney :value="categoryBudget.previousMonth" class="text-sm"/>
           </div>
           <div class="px-4 py-1 flex items-center justify-between">
             <span class="text-xs tracking-wide font-bold uppercase ">
               {{ $t('form.budget')}}
             </span>
 
-            <AppMoney :value="categoryBudget.budget"/>
+            <AppMoney :value="categoryBudget.budget" class="text-sm"/>
           </div>
-          <div class="border-b-2 border-gray-3 px-4 py-1 flex items-center justify-between">
+          <div class="px-4 py-1 flex items-center justify-between">
             <span class="text-xs tracking-wide font-bold uppercase ">
               {{ $t('form.activity')}}
             </span>
 
-            <AppMoney :value="categoryBudget.activity"/>
+            <AppMoney :value="categoryBudget.activity" class="text-sm"/>
           </div>
-          <div class="px-4 py-1 flex items-center justify-between">
+          <div class="px-4 py-1 flex items-center justify-between -mr-4">
             <span class="text-xs tracking-wide font-bold uppercase ">
               {{ $t('form.available')}}
             </span>
 
-            <AppMoney :value="categoryBudget.available"/>
+            <AppMoney
+              :value="categoryBudget.available"
+              class="badge text-xl"
+              :class="{'badge--red': categoryBudget.available < 0, 'badge--green': categoryBudget.available > 0, 'badge--gray': categoryBudget.available === 0, }"
+            />
           </div>
         </div>
       </div>
@@ -85,6 +90,9 @@
   import AppMoneyInput from '@/Components/form/AppMoneyInput'
   import AppPagination from '@/Components/AppPagination'
   import AppMoney from '@/Components/AppMoney'
+  import { iconComponent } from '@/Utils/Icons'
+  import { faCog } from '@fortawesome/free-solid-svg-icons'
+  import AppButton from '@/Components/form/AppButton'
 
   export default {
     props: {
@@ -93,10 +101,12 @@
       transactions: Object
     },
     components: {
+      AppButton,
       AppMoney,
       AppMoneyInput,
       AppPagination,
       FormGroup,
+      CogIcon: iconComponent({ icon: faCog }),
       Layout,
       TransactionList
     },

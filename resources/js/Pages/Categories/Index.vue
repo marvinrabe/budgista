@@ -27,7 +27,10 @@
             <GripIcon/>
           </div>
           <a :href="category.links.edit" class="flex-1 flex items-center justify-between hover:no-underline">
-            <span class="text-gray-7 font-medium tracking-wide">{{ category.name }}</span>
+            <div class="flex">
+              <span class="text-gray-7 font-medium tracking-wide">{{ category.name }}</span>
+              <span class="text-gray-6 ml-2" v-if="category.description">{{ category.description }}</span>
+            </div>
             <ChevronIcon class="text-gray-6"/>
           </a>
         </div>

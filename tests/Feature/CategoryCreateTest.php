@@ -16,13 +16,15 @@ class CategoryCreateTest extends TestCase
             ->signIn()
             ->withoutExceptionHandling()
             ->post('/categories', [
-                'name' => 'New category'
+                'name' => 'New category',
+                'description' => 'A brand new category'
             ])
             ->assertRedirect('/categories');
 
         $this->assertDatabaseHas('categories', [
             'user_id' => Auth::id(),
-            'name' => 'New category'
+            'name' => 'New category',
+            'description' => 'A brand new category'
         ]);
     }
 
