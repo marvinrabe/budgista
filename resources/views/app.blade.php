@@ -64,13 +64,8 @@
       Canny('identify', {
         appID: '5e5e763047312543ec5d137b',
         user: {
-          // Replace these values with the current user's data
           email: "{{ auth()->user()->email }}",
-          id: "{{ auth()->user()->id }}",
-
-          // These fields are optional, but recommended:
-          avatarURL: user.avatarURL,
-          created: new Date(user.created).toISOString(),
+          id: "{{ auth()->user()->id }}"
         },
       })
     </script>
