@@ -1,7 +1,7 @@
 <template>
   <AppSelect
     :value="value"
-    @input="e => $emit('input', e.target.value)"
+    @input="value => $emit('input', value)"
   >
     <option :value="null" v-if="income">
       {{ $t('form.income') }} ({{ $t('form.unallocated')}})

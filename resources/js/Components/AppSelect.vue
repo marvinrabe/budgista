@@ -4,7 +4,7 @@
       class="form-control"
       v-bind="$attrs"
       :value="value"
-      @input="e => $emit('input', e.target.value)"
+      @input="select"
     >
       <slot/>
     </select>
@@ -23,6 +23,11 @@
     props: ['value'],
     components: {
       SelectIcon: iconComponent({ icon: faChevronDown }),
+    },
+    methods: {
+      select (event) {
+        this.$emit('input', event.target.value)
+      }
     }
   }
 </script>
