@@ -4,7 +4,7 @@
       class="form-control"
       v-bind="$attrs"
       :value="value"
-      @input="v => $emit('input', v)"
+      @input="e => $emit('input', e.target.value)"
     >
       <slot/>
     </select>
