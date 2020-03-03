@@ -1,5 +1,13 @@
 [
   {
+    "date": "2020-03-03",
+    "changes": [
+      "Add descriptions to your budget categories, to easily distinguish them.",
+      "Available money is now display more prominently and easier to understand.",
+      "Leave feedback anytime by clicking the \"Give us Feedback\" button at the end of the page."
+    ]
+  },
+  {
     "date": "2020-03-02",
     "changes": [
       "We changed the structure of the app. Navigate on mobile via a toolbar at the bottom of the screen.",
