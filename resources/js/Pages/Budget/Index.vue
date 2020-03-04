@@ -112,6 +112,12 @@
       PrevIcon: iconComponent({ icon: faChevronLeft, fixedWidth: true }),
       CogIcon: iconComponent({ icon: faCog }),
     },
+    props: {
+      title: {
+        type: String,
+        default: null
+      }
+    },
     computed: {
       links () {
         return this.$page.budget.categories.map(category => category.links.show)

@@ -63,6 +63,12 @@
       MenuItem,
       PlusIcon: iconComponent({ icon: faPlus }),
     },
+    props: {
+      title: {
+        type: String,
+        default: null
+      }
+    },
     computed: {
       links () {
         return this.$page.user.accounts.map(account => account.links.show)

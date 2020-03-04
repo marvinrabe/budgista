@@ -46,6 +46,12 @@
       AppMenuItem,
       Layout,
     },
+    props: {
+      title: {
+        type: String,
+        default: null
+      }
+    },
     data() {
       return {
         icons: {
