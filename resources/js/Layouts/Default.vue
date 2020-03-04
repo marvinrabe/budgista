@@ -6,18 +6,22 @@
       <VerifyAlert/>
 
       <slot/>
+
+      <FeedbackWidget />
     </div>
   </div>
 </template>
 
 <script>
   import AppNavigation from '@/Components/AppNavigation'
+  import FeedbackWidget from '@/Components/FeedbackWidget'
   import VerifyAlert from '@/Components/profile/TheVerifyAlert'
   import base from '@/Layouts/base'
 
   export default {
     components: {
       AppNavigation,
+      FeedbackWidget,
       VerifyAlert
     },
     mixins: [base]

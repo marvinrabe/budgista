@@ -114,11 +114,6 @@
 
         this.$inertia
           .post('/register', this.form)
-          .then(() => {
-            if (_.isFunction(window.gtag)) {
-              window.gtag('event', 'registration')
-            }
-          })
           .finally(() => {
             this.loading = false
           })

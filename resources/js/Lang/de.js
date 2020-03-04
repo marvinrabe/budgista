@@ -19,7 +19,14 @@ export default {
     googleNotConnected: 'Nicht mit deinem Google-Konto verbunden.',
     addAccount: 'Füge jetzt ein Konto hinzu.',
     addCategory: 'Erstelle jetzt Kategorien.',
-    addTransaction: 'Füge jetzt Kontobewegungen hinzu.'
+    addTransaction: 'Füge jetzt Kontobewegungen hinzu.',
+    setupCurrency: 'Lass uns Budgista für dich einrichten. Wähle eine Währung. Die ist die Hauptwährung die für dein Budget verwendet wird.',
+    setupCategories: 'Wähl die Kategorien aus, die du für dein Budget verwenden willst. Du kannst später jederzeit weitere Kategorien anlegen.',
+    setupNoCategories: 'Willst du wirklich fortfahren ohne eine Kategorie ausgewählt zu haben?',
+    setupAccounts: 'Gib deine Bankkonten mit den aktuellen Kontoständen ein. Falls du die Kontostände gerade nicht kennst, kannst du diese auch später eingeben.',
+    setupNoAccounts: 'Willst du wirklich fortfahren ohne ein Bankkonto eingegeben zu haben?',
+    setupReady: 'Wir haben jetzt alles für dich eingerichtet. Trage nun regelmäßig jede Kontobewegung (Einnahmen und Ausgaben) ein die ab jetzt passiert.',
+    setupContact: 'Falls du Fragen oder Feedback haben solltest, kannst du uns gerne jederzeit kontaktieren. Wir sind für dich da!',
   },
   hint: {
     deleteAccount: 'Lösche dieses Konto mit ALLEN Kontobewegungen.',
@@ -65,7 +72,9 @@ export default {
     sendVerification: 'Verifizierungs Link versenden',
     changeEmail: 'E-Mail Adresse ändern',
     verificationResend: 'klicke hier um eine neue zu bekommen.',
-    manageCategories: 'Kategorien verwalten'
+    manageCategories: 'Kategorien verwalten',
+    continue: 'Fortfahren',
+    add: 'Hinzufügen'
   },
   form: {
     description: 'Beschreibung',
@@ -94,7 +103,8 @@ export default {
     balance: {
       cleared: 'Abgerechneter Betrag',
       uncleared: 'Offener Betrag',
-      working: 'Verfügbarer Betrag'
+      working: 'Verfügbarer Betrag',
+      default: 'Kontostand'
     },
     initialBalance: 'Anfangskontostand',
     date: 'Datum',
@@ -110,6 +120,9 @@ export default {
     oldPassword: 'Altes Passwort',
     newPassword: 'Neues Passwort'
   },
+  placeholder: {
+    accountName: 'Bargeld, Girokonto, ...'
+  },
   word: {
     or: 'oder',
     termsOfService: 'Nutzungsbedingungen',
@@ -117,7 +130,8 @@ export default {
     category: 'Kategorie',
     verified: 'Verifiziert',
     unverified: 'Unverifiziert',
-    recommended: 'Empfohlen'
+    recommended: 'Empfohlen',
+    step: 'Schritt'
   },
   title: {
     transactions: 'Kontobewegungen',
@@ -146,6 +160,11 @@ export default {
     noAccounts: 'Keine Konten vorhanden.',
     noCategories: 'Keine Kategorien vorhanden.',
     noTransactions: 'Keine Kontobewegungen vorhanden.',
+    setup: 'Einrichtung',
+    setupCurrency: 'Währung setzen',
+    setupCategories: 'Kategorien anpassen',
+    setupAccounts: 'Bankkonten hinzufügen',
+    setupReady: 'Loslegen!',
   },
   recurrence: {
     DAILY: 'Keine Wiederholung | Jeden Tag | Alle {n} Tage',

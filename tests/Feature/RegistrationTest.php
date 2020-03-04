@@ -16,64 +16,6 @@ class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testCreatesSampleContent()
-    {
-        $this
-            ->post('/register', [
-                'email' => 'john.doe@example.com',
-                'password' => 'password',
-                'terms' => true
-            ]);
-
-        $user = User::where('email', 'john.doe@example.com')->first();
-
-        $this->assertGreaterThan(0, $user->categories()->withoutGlobalScope(UserScope::class)->count());
-        $this->assertEquals('Groceries', $user->categories()->withoutGlobalScope(UserScope::class)->first()->name);
-
-        $this->assertGreaterThan(0, $user->accounts()->withoutGlobalScope(UserScope::class)->count());
-        $this->assertEquals('Cash', $user->accounts()->withoutGlobalScope(UserScope::class)->first()->name);
-    }
-
-    public function testLocalizedSampleContent()
-    {
-        App::setLocale('de');
-
-        $this->withoutMiddleware(DetectLocale::class);
-
-        $this
-            ->post('/register', [
-                'email' => 'john.doe@example.com',
-                'password' => 'password',
-                'terms' => true
-            ]);
-
-        $user = User::where('email', 'john.doe@example.com')->first();
-
-        $this->assertEquals('de', $user->language);
-
-        $this->assertGreaterThan(0, $user->categories()->withoutGlobalScope(UserScope::class)->count());
-        $this->assertEquals('Lebensmittel', $user->categories()->withoutGlobalScope(UserScope::class)->first()->name);
-
-        $this->assertGreaterThan(0, $user->accounts()->withoutGlobalScope(UserScope::class)->count());
-        $this->assertEquals('Bargeld', $user->accounts()->withoutGlobalScope(UserScope::class)->first()->name);
-    }
-
-    public function testCashAccountHasWalletIcon()
-    {
-        $this
-            ->post('/register', [
-                'email' => 'john.doe@example.com',
-                'password' => 'password',
-                'terms' => true
-            ]);
-
-        $user = User::where('email', 'john.doe@example.com')->first();
-
-        $account = $user->accounts()->withoutGlobalScope(UserScope::class)->where('name', 'Cash')->first();
-
-        $this->assertEquals('wallet', $account->icon);
-    }
-
     public function testUserCanViewARegistrationForm()
     {
         $response = $this->get('/register');
@@ -95,13 +37,14 @@ class RegistrationTest extends TestCase
     {
         Event::fake();
 
-        $response = $this->post('/register', [
-            'email' => 'john@example.com',
-            'password' => 'i-love-laravel',
-            'terms' => true,
-        ]);
+        $this
+            ->post('/register', [
+                'email' => 'john@example.com',
+                'password' => 'i-love-laravel',
+                'terms' => true,
+            ])
+            ->assertRedirect('/setup');
 
-        $response->assertRedirect('/');
         $this->assertCount(1, $users = User::all());
         $this->assertAuthenticatedAs($user = $users->first());
         $this->assertEquals('john@example.com', $user->email);

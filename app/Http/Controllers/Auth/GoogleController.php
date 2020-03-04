@@ -52,6 +52,10 @@ class GoogleController extends Controller
             ]);
 
             event(new Registered($user));
+
+            Auth::login($user, true);
+
+            return Redirect::route('setup');
         }
 
         Auth::login($user, true);

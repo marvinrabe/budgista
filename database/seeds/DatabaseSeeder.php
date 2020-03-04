@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class DatabaseSeeder extends Seeder
 {
+    protected $accounts = [
+        [
+            'name' => 'Cash',
+            'icon' => 'wallet'
+        ],
+        ['name' => 'Debit Card'],
+        ['name' => 'Credit Card']
+    ];
 
     protected $categories = [
         0 => 0.08,
@@ -37,6 +45,10 @@ class DatabaseSeeder extends Seeder
             'currency' => 'USD',
             'email_verified_at' => now()
         ]);
+
+        foreach ($this->accounts as $account) {
+            $user->accounts()->create($account);
+        }
 
         event(new \Illuminate\Auth\Events\Registered($user));
 

@@ -19,7 +19,15 @@ export default {
     googleNotConnected: 'Not connected with your Google Account.',
     addAccount: 'Add an Account now.',
     addCategory: 'Add some Categories now.',
-    addTransaction: 'Add a Transaction now.'
+    addTransaction: 'Add a Transaction now.',
+    emptyAccountName: 'Please enter an account name.',
+    setupCurrency: 'Let\'s customize Budgista to your needs. Choose your currency. This is the main currency that is used for your budget.',
+    setupCategories: 'Choose the categories you would like to use in your budget. You can add custom categories later.',
+    setupNoCategories: 'Are you sure to continue without choosing atleast one category?',
+    setupAccounts: 'Enter your bank accounts with your current account balances. If you don\'t know the balance at the moment, you can provide this information later.',
+    setupNoAccounts: 'Are you sure to continue without adding atleast one account?',
+    setupReady: 'Your account is now ready. Start by entering every Transaction (like expenses or income) the occurs starting now.',
+    setupContact: 'If you have any questions or feedback, feel free to contact us any time. We will be there for you!',
   },
   hint: {
     deleteAccount: 'Delete this account with ALL transactions.',
@@ -65,7 +73,9 @@ export default {
     sendVerification: 'Send Verfication Link',
     changeEmail: 'Change email address',
     verificationResend: 'click here to request another.',
-    manageCategories: 'Manage Categories'
+    manageCategories: 'Manage Categories',
+    continue: 'Continue',
+    add: 'Add'
   },
   form: {
     description: 'Description',
@@ -94,7 +104,8 @@ export default {
     balance: {
       cleared: 'Cleared Balance',
       uncleared: 'Uncleared Balance',
-      working: 'Available Balance'
+      working: 'Available Balance',
+      default: 'Balance'
     },
     initialBalance: 'Initial Balance',
     date: 'Date',
@@ -110,6 +121,9 @@ export default {
     oldPassword: 'Old Password',
     newPassword: 'New Password'
   },
+  placeholder: {
+    accountName: 'Cash, Visa, ...'
+  },
   word: {
     or: 'or',
     termsOfService: 'Terms of Service',
@@ -117,7 +131,8 @@ export default {
     category: 'Category',
     verified: 'Verified',
     unverified: 'Unverified',
-    recommended: 'Recommended'
+    recommended: 'Recommended',
+    step: 'Step'
   },
   title: {
     transactions: 'Transactions',
@@ -146,6 +161,11 @@ export default {
     noAccounts: 'No Accounts present.',
     noCategories: 'No Categories present.',
     noTransactions: 'No Transactions present.',
+    setup: 'Account Setup',
+    setupCurrency: 'Set Currency',
+    setupCategories: 'Customize Categories',
+    setupAccounts: 'Add Bank Accounts',
+    setupReady: 'Get Started!',
   },
   recurrence: {
     DAILY: 'No Recurrence | Every Day Tag | Every {n} days',

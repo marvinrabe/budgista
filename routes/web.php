@@ -62,5 +62,16 @@ Route::group(['middleware' => ['auth']], function () {
      */
     Route::get('statistics', [Controllers\StatisticsController::class, 'index'])->name('statistics.index');
     Route::get('statistics/netWorth', [Controllers\StatisticsController::class, 'netWorth'])->name('statistics.netWorth');
-    Route::get('statistics/incomeVsExpense', [Controllers\StatisticsController::class, 'incomeVsExpense'])->name('statistics.incomeVsExpense');
+    Route::get('statistics/incomeVsExpense',  [Controllers\StatisticsController::class, 'incomeVsExpense'])->name('statistics.incomeVsExpense');
+
+    /*
+     * Setup
+     */
+    Route::get('setup', [Controllers\SetupController::class, 'index'])->name('setup');
+    Route::post('setup', [Controllers\SetupController::class, 'postIndex']);
+    Route::get('setup/2', [Controllers\SetupController::class, 'step2']);
+    Route::post('setup/2', [Controllers\SetupController::class, 'postStep2']);
+    Route::get('setup/3', [Controllers\SetupController::class, 'step3']);
+    Route::post('setup/3', [Controllers\SetupController::class, 'postStep3']);
+    Route::get('setup/4', [Controllers\SetupController::class, 'step4']);
 });

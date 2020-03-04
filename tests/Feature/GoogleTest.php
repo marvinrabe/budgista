@@ -41,7 +41,7 @@ class GoogleTest extends TestCase
 
         $this
             ->get('/login/google/callback')
-            ->assertRedirect('/');
+            ->assertRedirect('/setup');
 
         $this->assertAuthenticated();
         $this->assertDatabaseHas('users', [
@@ -66,7 +66,7 @@ class GoogleTest extends TestCase
 
         $this
             ->get('/login/google/callback')
-            ->assertRedirect('/');
+            ->assertRedirect('/setup');
 
         $user = User::firstWhere('google_id', $id);
 
