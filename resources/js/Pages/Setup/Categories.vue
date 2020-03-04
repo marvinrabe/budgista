@@ -28,13 +28,13 @@
     },
     data () {
       return {
-        selected: []
+        selected: this.samples.map((_, index) => index)
       }
     },
     methods: {
       save () {
-        if(!this.selected.length && !window.confirm(this.$t('message.setupNoCategories'))) {
-          return;
+        if (!this.selected.length && !window.confirm(this.$t('message.setupNoCategories'))) {
+          return
         }
 
         this.$inertia.post('/setup/2', {
