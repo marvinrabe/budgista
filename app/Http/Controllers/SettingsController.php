@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Laracasts\Flash\Flash;
-use Propaganistas\LaravelIntl\Facades\Currency;
-use Propaganistas\LaravelIntl\Facades\Language;
+use MarvinRabe\LaravelIntl\Facades\Currency;
+use MarvinRabe\LaravelIntl\Facades\Language;
 
 class SettingsController extends Controller
 {
