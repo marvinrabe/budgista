@@ -33,6 +33,7 @@ export default {
     deleteCategory: 'Lösche diese Kategorie. Zugewiesene Kontobewegungen werden zur angegebenen Kategorie übertragen.',
   },
   action: {
+    feedback: 'Funktionen wünschen',
     current: 'Kürzlich',
     save: 'Speichern',
     'futureTransactions': 'Keine vorgemerkt | 1 vorgemerkt | {count} vorgemerkt',
