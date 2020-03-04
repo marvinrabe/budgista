@@ -67,8 +67,8 @@
     },
     methods: {
       save () {
-        if(!this.accounts.length && !window.confirm(this.$t('message.setupNoAccounts'))) {
-          return;
+        if (!this.accounts.length && !window.confirm(this.$t('message.setupNoAccounts'))) {
+          return
         }
 
         this.$inertia.post('/setup/3', {
@@ -82,8 +82,11 @@
         }
 
         this.accounts.push(JSON.parse(JSON.stringify(this.form)))
-        this.form.name = null
-        this.form.amount = null
+
+        this.$nextTick(() => {
+          this.form.name = null
+          this.form.amount = 0
+        })
       },
       removeAccount (index) {
         this.accounts.splice(index)

@@ -1,10 +1,10 @@
 <template>
   <input
     :placeholder="placeholder"
-    @blur="onBlur($event.target.value)"
+    @blur="onBlur"
     @focus="onFocus"
     @input="onInput($event.target.value)"
-    @keyup.enter="onBlur($event.target.value)"
+    @keypress.enter="onEnter"
     class="form-control text-right"
     ref="input"
     type="text"
@@ -75,11 +75,13 @@
         this.number = this.moneyFormat.unformat(value, this.allowNegative)
         this.$emit('input', this.number)
       },
-      onBlur (value) {
+      onBlur () {
         this.hasFocus = false
         this.$emit('change', this.number)
-        this.onInput(value)
         this.unprepareValue()
+      },
+      onEnter () {
+        this.$el.blur()
       },
       selectAll () {
         let input = this.$el
