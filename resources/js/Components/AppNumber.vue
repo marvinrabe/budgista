@@ -1,6 +1,6 @@
 <template>
   <div class="numeric">
-    <span class="numeric__label">
+    <span class="label">
       {{ label }}
     </span>
     <AppMoney

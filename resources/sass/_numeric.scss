@@ -3,7 +3,6 @@
   flex-direction: column;
   flex: 1;
 
-  &__label,
   &__value {
     flex: 1;
     flex-grow: 0;
@@ -12,9 +11,5 @@
 
   &__value {
     @apply font-light;
-  }
-
-  &__label {
-    @apply text-xs text-gray-6 uppercase tracking-wide;
   }
 }

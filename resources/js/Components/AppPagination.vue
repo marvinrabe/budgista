@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center" v-if="paginator.last_page !== 1">
-    <span class="text-gray-7">
+    <span>
       {{ $t('pagination.info', { from, to, total }) }}
     </span>
     <AppButton
