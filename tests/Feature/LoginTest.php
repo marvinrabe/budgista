@@ -47,23 +47,6 @@ class LoginTest extends TestCase
             'password' => $password,
         ]);
 
-        $response->assertRedirect('/');
-        $this->assertAuthenticatedAs($user);
-    }
-
-    public function testRememberMeFunctionality()
-    {
-        $user = factory(User::class)->create([
-            'id' => random_int(1, 100),
-            'password' => Hash::make($password = 'i-love-laravel'),
-        ]);
-
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => $password,
-            'remember' => 'on',
-        ]);
-
         $user = $user->fresh();
 
         $response->assertRedirect('/');

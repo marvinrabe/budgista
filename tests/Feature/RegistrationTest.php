@@ -8,6 +8,7 @@ use App\Scopes\UserScope;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
@@ -37,7 +38,7 @@ class RegistrationTest extends TestCase
     {
         Event::fake();
 
-        $this
+        $response = $this
             ->post('/register', [
                 'email' => 'john@example.com',
                 'password' => 'i-love-laravel',
@@ -47,6 +48,13 @@ class RegistrationTest extends TestCase
 
         $this->assertCount(1, $users = User::all());
         $this->assertAuthenticatedAs($user = $users->first());
+
+        $response->assertCookie(Auth::guard()->getRecallerName(), vsprintf('%s|%s|%s', [
+            $user->id,
+            $user->getRememberToken(),
+            $user->password,
+        ]));
+
         $this->assertEquals('john@example.com', $user->email);
         $this->assertTrue(Hash::check('i-love-laravel', $user->password));
         Event::assertDispatched(Registered::class, function ($e) use ($user) {
