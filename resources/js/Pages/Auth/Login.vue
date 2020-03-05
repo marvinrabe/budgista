@@ -1,9 +1,9 @@
 <template>
   <Layout :title="$t('title.login')">
     <div class="card">
-      <div class="card-body">
+      <div class="card-body p-6">
         <h1
-          class="card-title h4"
+          class="card-title text-center mb-6"
           v-t="'title.login'"
         />
 
@@ -33,14 +33,6 @@
           </FormGroup>
 
           <FormGroup name="password">
-            <template v-slot:additional>
-              <inertia-link
-                href="/password/reset"
-                class="text-sm ml-auto text-gray-6 hover:text-gray-8"
-                v-t="'message.forgotPassword'"
-              />
-            </template>
-
             <template slot-scope="{bindings}">
               <PasswordInput
                 :disable-strength="true"
@@ -53,20 +45,11 @@
 
           <template slot="actions">
             <div class="mb-4 mr-auto">
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  id="remember"
-                  tabindex="3"
-                  type="checkbox"
-                  v-model="form.remember"
-                >
-                <label
-                  class="form-check-label"
-                  for="remember"
-                  v-t="'form.remember'"
-                />
-              </div>
+              <inertia-link
+                href="/password/reset"
+                class="text-sm ml-auto text-gray-6 hover:text-gray-8"
+                v-t="'message.forgotPassword'"
+              />
             </div>
 
             <AppButton
@@ -83,7 +66,7 @@
         <span class="mr-1" v-t="'message.noAccount'"/>
         <inertia-link
           href="/register"
-          v-t="'message.noAccountSignUp'"
+          v-t="'action.register'"
         />
       </div>
     </div>

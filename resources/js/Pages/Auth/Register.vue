@@ -1,9 +1,9 @@
 <template>
   <Layout :title="$t('title.register')">
     <div class="card">
-      <div class="card-body">
+      <div class="card-body p-6">
         <h1
-          class="card-title h4"
+          class="card-title text-center mb-6"
           v-t="'title.register'"
         />
 
@@ -72,6 +72,14 @@
             />
           </template>
         </AppForm>
+      </div>
+
+      <div class="card-footer p-4 text-center">
+        <span class="mr-1" v-t="'message.haveAccount'"/>
+        <inertia-link
+          href="/login"
+          v-t="'action.login'"
+        />
       </div>
     </div>
   </Layout>

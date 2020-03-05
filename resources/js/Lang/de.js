@@ -11,7 +11,7 @@ export default {
     deleteTransaction: 'Möchtest diese Kontobewegung wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
     forgotPassword: 'Passwort vergessen?',
     noAccount: 'Kein Konto vorhanden?',
-    noAccountSignUp: 'Jetzt registrieren',
+    haveAccount: 'Bereits registriert?',
     verifyEmail: 'Bitte bestätige deine E-Mail Adresse {email}.',
     verificationCheckEmail: 'Bevor du fortfährst, bitte überprüfe deine E-Mail Postfach für einen Verifizierungs Link.',
     verificationNotReceived: 'Falls du die E-Mail nicht erhalten haben solltest,',

@@ -11,7 +11,7 @@ export default {
     deleteTransaction: 'Do you really want to delete this transaction? This action can\'t be reversed.',
     forgotPassword: 'Forgot Your Password?',
     noAccount: 'Don\'t have an account?',
-    noAccountSignUp: 'Sign up now',
+    haveAccount: 'Already signed up?',
     verifyEmail: 'Please verify your email address {email}.',
     verificationCheckEmail: 'Before proceeding, please check your email for a verification link.',
     verificationNotReceived: 'If you did not receive the email, ',
