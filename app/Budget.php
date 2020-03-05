@@ -2,17 +2,14 @@
 
 namespace App;
 
-use App\Forecast;
-use App\Month;
 use App\Traits\HasCompositeKey;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
-/**
- * @property Category $category
- */
-class Budget extends Model implements \JsonSerializable
+class Budget extends Model
 {
+    protected $attributes = [
+        'amount' => 0
+    ];
 
     use HasCompositeKey;
 
@@ -21,16 +18,6 @@ class Budget extends Model implements \JsonSerializable
     protected $fillable = ['category_id', 'month', 'amount'];
 
     protected $primaryKey = ['category_id', 'month'];
-
-    public function getMonthAttribute($value)
-    {
-        return Month::fromString($value);
-    }
-
-    public function setMonthAttribute($value)
-    {
-        $this->attributes['month'] = (string) $value;
-    }
 
     protected $casts = [
         'amount' => 'int'
@@ -65,7 +52,25 @@ class Budget extends Model implements \JsonSerializable
         );
     }
 
-    public function previousMonth()
+    public function upcomingTransactions()
+    {
+        return $this
+            ->transactions()
+            ->whereHas('account', fn($query) => $query->where('tracking', false))
+            ->where('date', '>=', $this->month->firstDay());
+    }
+
+    public function getMonthAttribute($value)
+    {
+        return Month::fromString($value);
+    }
+
+    public function setMonthAttribute($value)
+    {
+        $this->attributes['month'] = (string) $value;
+    }
+
+    public function getPreviousMonthAttribute()
     {
         $budget = $this->related()
             ->where('month', '<', (string) $this->month)
@@ -81,7 +86,7 @@ class Budget extends Model implements \JsonSerializable
         return $budget + $activity;
     }
 
-    public function activity()
+    public function getActivityAttribute()
     {
         return $this->transactions()
             ->whereHas('account', function ($query) {
@@ -94,38 +99,18 @@ class Budget extends Model implements \JsonSerializable
             ->sum('amount');
     }
 
-    public function available()
+    public function getAvailableAttribute()
     {
-        return $this->previousMonth() + $this->amount + $this->activity();
+        return $this->previousMonth + $this->amount + $this->activity;
     }
 
-    public function recommendedBudget()
+    public function getRecommendedBudgetAttribute()
     {
-        $upcomingTransactions = $this->category
-            ->transactions()
-            ->whereHas('account', function ($query) {
-                $query->where('tracking', false);
-            })
-            ->where('date', '>=', $this->month->firstDay())
-            ->get();
-
         return (new Forecast(
             $this->month,
-            $upcomingTransactions,
-            $this->previousMonth()
+            $this->upcomingTransactions,
+            $this->previousMonth
         ))->recommendedBudget();
-    }
-
-    function jsonSerialize()
-    {
-        return [
-            'month' => (string) $this->month,
-            'previousMonth' => (int) $this->previousMonth(),
-            'budget' => (int) $this->amount,
-            'activity' => (int) $this->activity(),
-            'available' => (int) $this->available(),
-            'recommendedBudget' => (int) $this->recommendedBudget()
-        ];
     }
 
 }

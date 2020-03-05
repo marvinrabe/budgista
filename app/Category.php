@@ -4,7 +4,6 @@ namespace App;
 
 use App\Traits\HasUuidKey;
 use Illuminate\Database\Eloquent\Model;
-use App\Month;
 use App\Traits\BelongsToUser;
 use App\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Builder;
@@ -57,17 +56,14 @@ class Category extends Model
         ];
     }
 
-    /**
-     * Returns the budget of this category for a specific month.
-     * @param  Month  $month
-     * @return Budget
-     */
     public function budget(Month $month)
     {
-        return Budget::firstOrCreate([
-            'category_id' => $this->id,
-            'month' => $month
-        ]);
+        return either(
+            $this->budgets->firstWhere('month', (string) $month),
+            fn() => $this->budgets()->make([
+                'month' => $month
+            ])
+        );
     }
 
     /**

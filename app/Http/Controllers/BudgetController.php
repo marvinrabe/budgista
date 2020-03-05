@@ -12,7 +12,6 @@ use Inertia\Inertia;
 
 class BudgetController extends Controller
 {
-
     public function index($month = null)
     {
         $month = $this->getMonth($month);
@@ -26,10 +25,17 @@ class BudgetController extends Controller
     {
         $month = $this->getMonth($month);
 
+        $category->load([
+            'budgets' => fn($query) => $query->where('month', $month),
+            'budgets.upcomingTransactions'
+        ]);
+
         return Inertia::render('Budget/Show', [
             'budget' => (new Budget($month))->toArray(),
             'category' => $category,
-            'categoryBudget' => $category->budget($month),
+            'categoryBudget' => $category->budget($month)->append([
+                'previousMonth', 'activity', 'available', 'recommendedBudget'
+            ]),
             'transactions' => $category
                 ->transactions()
                 ->whereBetween('date', [
@@ -48,15 +54,14 @@ class BudgetController extends Controller
 
         $this->authorize('update', $category);
 
-        request()->validate([
-            'amount' => 'required'
-        ]);
-
         $category
             ->budget($month)
-            ->update(
-                request(['amount'])
-            );
+            ->fill(
+                request()->validate([
+                    'amount' => 'required'
+                ])
+            )
+            ->save();
 
         return Redirect::back();
     }

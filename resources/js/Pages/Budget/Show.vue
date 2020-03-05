@@ -31,7 +31,7 @@
             </div>
           </template>
           <AppMoneyInput
-            :value="categoryBudget.budget"
+            :value="categoryBudget.amount"
             @change="val => updateBudget(val)"
             allow-negative
           />
@@ -49,7 +49,7 @@
               {{ $t('form.budget')}}
             </span>
 
-            <AppMoney :value="categoryBudget.budget" class="text-sm"/>
+            <AppMoney :value="categoryBudget.amount" class="text-sm"/>
           </div>
           <div class="px-4 py-1 flex items-center justify-between">
             <span class="text-xs tracking-wide font-bold uppercase ">

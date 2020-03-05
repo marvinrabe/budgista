@@ -28,6 +28,7 @@ class Budget extends ViewModel
     {
         return Auth::user()
             ->categories()
+            ->with(['budgets' => fn ($query) => $query->where('month', $this->month)])
             ->get()
             ->map(function (Category $category) {
                 $budget = $category->budget($this->month);
@@ -36,10 +37,8 @@ class Budget extends ViewModel
                     'id' => $category->id,
                     'name' => $category->name,
                     'budget' => (int) $budget->amount,
-                    'activity' => (int) $budget->activity(),
-                    'available' => (int) $budget->available(),
-                    'previousMonth' => (int) $budget->previousMonth(),
-                    'recommendedBudget' => (int) $budget->recommendedBudget(),
+                    'activity' => (int) $budget->activity,
+                    'available' => (int) $budget->available,
                     'links' => [
                         'show' => URL::route('budget.show', [
                             'month' => $this->month,

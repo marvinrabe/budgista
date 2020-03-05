@@ -208,15 +208,13 @@ class BudgetTest extends TestCase
             'user_id' => Auth()->id()
         ]);
 
-        $response = $this->get('/budget/'.$month)
+        $response = $this->get("/budget/{$month}/categories/{$category->id}")
             ->assertSuccessful();
 
-        $row = Collection::make($response->props('budget')['categories'])
-            ->where('id', $category->id)
-            ->first();
+        $budget = $response->props('categoryBudget');
 
-        $this->assertEquals(10, $row['previousMonth']);
-        $this->assertEquals(10, $row['recommendedBudget']);
+        $this->assertEquals(10, $budget['previousMonth']);
+        $this->assertEquals(10, $budget['recommendedBudget']);
     }
 
     public function testStoreBudget()
@@ -244,13 +242,13 @@ class BudgetTest extends TestCase
         $category = factory(Category::class)->create();
         $month = Month::current();
 
-        $category->budget($month)->update([
+        $category->budget($month)->fill([
             'amount' => 0
-        ]);
+        ])->save();
 
-        $category->budget($month->previous())->update([
+        $category->budget($month->previous())->fill([
             'amount' => 123
-        ]);
+        ])->save();
 
         $this->assertEquals(2, DB::table('budgets')->count());
 
