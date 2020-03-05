@@ -18,6 +18,10 @@
           :label="$t('title.categories')"
           :icon="icons.categories"
           href="/categories"/>
+        <AppMenuItem
+          :label="$t('action.feedback')"
+          :icon="icons.feedback"
+          link="https://feedback.budgista.com/feedback"/>
       </AppMenu>
 
       <div class="py-2 flex justify-center">
@@ -38,7 +42,7 @@
   import AppMenu from '@/Components/AppMenu'
   import AppMenuItem from '@/Components/AppMenuItem'
   import { clearCache } from '@/Utils/ServiceWorker'
-  import { faUserCircle, faInbox, faCog } from '@fortawesome/free-solid-svg-icons'
+  import { faUserCircle, faInbox, faCog, faBullhorn } from '@fortawesome/free-solid-svg-icons'
 
   export default {
     components: {
@@ -57,7 +61,8 @@
         icons: {
           profile: faUserCircle,
           general: faCog,
-          categories: faInbox
+          categories: faInbox,
+          feedback: faBullhorn
         }
       }
     },

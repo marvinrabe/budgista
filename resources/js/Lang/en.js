@@ -34,7 +34,7 @@ export default {
     deleteCategory: 'Delete this category. Related Transactions will be transferred to the specified category.',
   },
   action: {
-    feedback: 'Request Features',
+    feedback: 'Give us Feedback',
     current: 'Recent',
     save: 'Save',
     'cancel': 'Cancel',
