@@ -56,6 +56,7 @@ class AccountController extends Controller
                 ->transactions()
                 ->current()
                 ->with('category')
+                ->appends('balance_cleared')
                 ->orderBy('date', 'desc')
                 ->paginate(25),
             'futureCount' => $account->transactions()->future()->count()

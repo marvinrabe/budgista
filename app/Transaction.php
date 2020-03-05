@@ -36,15 +36,6 @@ class Transaction extends Model
         'date' => 'date:Y-m-d'
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::addGlobalScope('sort', function (Builder $builder) {
-            $builder->orderBy('date', 'desc');
-        });
-    }
-
     public function account()
     {
         return $this->belongsTo(Account::class);

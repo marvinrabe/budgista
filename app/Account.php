@@ -20,8 +20,10 @@ class Account extends Model
         'icon'
     ];
 
+    protected $with = ['balanceSum'];
+
     protected $appends = [
-        'balance', 'balance_cleared', 'links'
+        'balance', 'links'
     ];
 
     protected $casts = [
@@ -56,9 +58,22 @@ class Account extends Model
         ];
     }
 
+    public function balanceSum()
+    {
+        return $this->transactions()
+            ->selectRaw('SUM(amount) as aggregate')
+            ->where('date', '<=', Carbon::now());
+    }
+
     public function getBalanceAttribute()
     {
-        return $this->workingBalance();
+        if (!$this->relationLoaded('balanceSum')) {
+            $this->load('balanceSum');
+        }
+
+        $related = $this->getRelation('balanceSum')->first();
+
+        return $related ? (int) $related->aggregate : 0;
     }
 
     public function getBalanceClearedAttribute()
@@ -85,17 +100,9 @@ class Account extends Model
             ->sum('amount');
     }
 
-    public function workingBalance()
-    {
-        return (int) $this
-            ->transactions()
-            ->where('date', '<=', Carbon::now())
-            ->sum('amount');
-    }
-
     public function reconcile($newBalance)
     {
-        $difference = $newBalance - $this->workingBalance();
+        $difference = $newBalance - $this->balance;
 
         $this->transactions()->create([
             'date' => Carbon::now(),
