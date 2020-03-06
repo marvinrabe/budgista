@@ -11,7 +11,8 @@ class Kernel extends ConsoleKernel
         Commands\Clean::class,
         Commands\ProcessRecurringTransactions::class,
         Commands\Statistic::class,
-        Commands\SendFollowUpEmail::class
+        Commands\SendFollowUpEmail::class,
+        Commands\RunScheduler::class
     ];
 
     protected function schedule(Schedule $schedule)
