@@ -51,12 +51,12 @@ class AccountController extends Controller
 
         return Inertia::render('Accounts/Show', [
             'accounts' => Account::all(),
-            'account' => $account,
+            'account' => $account
+                ->append('balance_cleared'),
             'transactions' => $account
                 ->transactions()
                 ->current()
                 ->with('category')
-                ->appends('balance_cleared')
                 ->orderBy('date', 'desc')
                 ->paginate(25),
             'futureCount' => $account->transactions()->future()->count()

@@ -2,22 +2,16 @@
 
 namespace App;
 
-use App\Scopes\UserScope;
 use App\Traits\HasCompositeKey;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
 
 class Budget extends Model
 {
+    use HasCompositeKey;
+
     protected $attributes = [
         'amount' => 0
     ];
-
-    protected $with = [
-        'activitySum', 'previousBudgetSum', 'previousActivitySum'
-    ];
-
-    use HasCompositeKey;
 
     public $timestamps = false;
 
@@ -62,8 +56,7 @@ class Budget extends Model
 
     public function upcomingTransactions()
     {
-        return $this
-            ->transactions()
+        return $this->transactions()
             ->where('date', '>=', $this->month->firstDay());
     }
 
@@ -77,69 +70,27 @@ class Budget extends Model
         $this->attributes['month'] = (string) $value;
     }
 
-    public function previousBudgetSum()
-    {
-        return $this->related()
-            ->selectRaw('SUM(amount) as aggregate, categories.id')
-            ->where('month', '<=', $this->month->previous()->lastDay())
-            ->groupBy('categories.id');
-    }
-
-    public function getPreviousBudgetAttribute()
-    {
-        if (!$this->relationLoaded('previousBudgetSum')) {
-            $this->load('previousBudgetSum');
-        }
-
-        $related = $this->getRelation('previousBudgetSum')->first();
-
-        return $related ? (int) $related->aggregate : 0;
-    }
-
-    public function previousActivitySum()
-    {
-        return $this->transactions()
-            ->selectRaw('SUM(amount) as aggregate, categories.id')
-            ->where('date', '<=', $this->month->previous()->lastDay())
-            ->groupBy('categories.id');
-    }
-
-    public function getPreviousActivityAttribute()
-    {
-        if (!$this->relationLoaded('previousActivitySum')) {
-            $this->load('previousActivitySum');
-        }
-
-        $related = $this->getRelation('previousActivitySum')->first();
-
-        return $related ? (int) $related->aggregate : 0;
-    }
-
     public function getPreviousMonthAttribute()
     {
-        return $this->previousBudget + $this->previousActivity;
-    }
+        $budget = $this->related()
+            ->where('month', '<', (string) $this->month)
+            ->sum('amount');
 
-    public function activitySum()
-    {
-        return $this->transactions()
-            ->selectRaw('SUM(amount) as aggregate, categories.id')
-            ->whereBetween('date', [
-                $this->month->firstDay(),
-                $this->month->lastDay()
-            ])
-            ->groupBy('categories.id');
+        $activity = $this->transactions()
+            ->where('date', '<=', $this->month->previous()->lastDay())
+            ->sum('amount');
+
+        return $budget + $activity;
     }
 
     public function getActivityAttribute()
     {
-        if (!$this->relationLoaded('activitySum')) {
-            $this->load('activitySum');
-        }
-
-        $related = $this->getRelation('activitySum')->first();
-
-        return $related ? (int) $related->aggregate : 0;
+        return $this->transactions()
+            ->whereBetween('date', [
+                $this->month->firstDay(),
+                $this->month->lastDay()
+            ])
+            ->sum('amount');
     }
 
     public function getAvailableAttribute()
@@ -155,5 +106,4 @@ class Budget extends Model
             $this->previousMonth
         ))->recommendedBudget();
     }
-
 }
