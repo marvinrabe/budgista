@@ -1,5 +1,11 @@
 [
   {
+    "date": "2020-03-09",
+    "changes": [
+      "Now you can add notes to your transactions."
+    ]
+  },
+  {
     "date": "2020-03-03",
     "changes": [
       "Add descriptions to your budget categories to easily distinguish them.",

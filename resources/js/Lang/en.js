@@ -79,6 +79,7 @@ export default {
     add: 'Add'
   },
   form: {
+    notes: 'Notes',
     description: 'Description',
     pleaseSelect: 'Please Choose...',
     newEmail: 'New Email address',

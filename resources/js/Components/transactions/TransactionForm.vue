@@ -104,6 +104,14 @@
       </div>
     </div>
 
+
+    <FormGroup name="notes">
+      <AppTextarea
+        slot-scope="{bindings}"
+        v-bind="bindings"
+        v-model="form.notes" />
+    </FormGroup>
+
   </div>
 </template>
 
@@ -121,12 +129,14 @@
   import RecurringInput from './RecurringInput'
   import AccountSelect from '@/Components/accounts/AccountSelect'
   import _ from 'lodash'
+  import AppTextarea from '@/Components/AppTextarea'
 
   const EXPENSE = -1
   const INCOME = 1
 
   export default {
     components: {
+      AppTextarea,
       AccountSelect,
       RecurringIcon: iconComponent({ icon: faHistory }),
       IncomeIcon: iconComponent({ icon: faSignInAlt }),
@@ -154,6 +164,7 @@
           amount: 0,
           recurrence: null,
           payee: '',
+          notes: null,
           category_id: null,
           account_id: null,
           date: dayjs().format('YYYY-MM-DD'),

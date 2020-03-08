@@ -6,12 +6,13 @@ use App\Account;
 use App\Category;
 use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class TransactionCreateTest extends TestCase
 {
 
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     public function testPreselectAccount()
     {
@@ -58,13 +59,36 @@ class TransactionCreateTest extends TestCase
         ]);
 
         $this
-            ->withoutExceptionHandling()
             ->signIn($account->user)
             ->post('/transactions', $transaction)
             ->assertRedirect("/accounts/{$account->id}");
 
         $this->assertDatabaseHas('transactions', [
             'account_id' => $account->id,
+            'payee' => $transaction['payee'],
+            'amount' => $transaction['amount'],
+            'date' => $transaction['date'],
+        ]);
+    }
+
+    public function testStoreNote()
+    {
+        $note = $this->faker->text;
+        $account = factory(Account::class)->create();
+
+        $transaction = factory(Transaction::class)->raw([
+            'account_id' => $account->id,
+            'notes' => $note
+        ]);
+
+        $this
+            ->signIn($account->user)
+            ->post('/transactions', $transaction)
+            ->assertRedirect("/accounts/{$account->id}");
+
+        $this->assertDatabaseHas('transactions', [
+            'account_id' => $account->id,
+            'notes' => $note,
             'payee' => $transaction['payee'],
             'amount' => $transaction['amount'],
             'date' => $transaction['date'],

@@ -24,7 +24,8 @@ class Transaction extends Model
         'account_id',
         'payee',
         'amount',
-        'cleared'
+        'cleared',
+        'notes'
     ];
 
     protected $hidden = ['rrule'];

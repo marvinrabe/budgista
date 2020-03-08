@@ -7,12 +7,13 @@ use App\Category;
 use App\Transaction;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class TransactionTest extends TestCase
 {
 
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     public function testUpdateTransaction()
     {
@@ -41,6 +42,23 @@ class TransactionTest extends TestCase
             'account_id' => $account->id,
             'category_id' => $category->id,
             'payee' => 'Acme Co.'
+        ]);
+    }
+
+    public function testUpdateNote()
+    {
+        $transaction = factory(Transaction::class)->create();
+        $data = $transaction->getRawOriginal();
+        $data['notes'] = $this->faker->text;
+
+        $this
+            ->signIn($transaction->user)
+            ->put("/transactions/{$transaction->id}", $data)
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('transactions', [
+            'id' => $transaction->id,
+            'notes' =>  $data['notes']
         ]);
     }
 

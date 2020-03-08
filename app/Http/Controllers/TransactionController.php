@@ -47,7 +47,8 @@ class TransactionController extends Controller
                     new Own('categories')
                 ],
                 'amount' => 'required|integer',
-                'date' => 'required'
+                'date' => 'required',
+                'notes' => ['nullable', 'string']
             ])
         );
 
@@ -116,7 +117,8 @@ class TransactionController extends Controller
                 'category_id' => [
                     'nullable',
                     new Own('categories')
-                ]
+                ],
+                'notes' => ['nullable', 'string']
             ])
         );
 

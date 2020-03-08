@@ -78,6 +78,7 @@ export default {
     add: 'Hinzufügen'
   },
   form: {
+    notes: 'Notizen',
     description: 'Beschreibung',
     pleaseSelect: 'Bitte Auswählen...',
     newEmail: 'Neue E-Mail Adresse',
