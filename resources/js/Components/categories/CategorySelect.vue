@@ -4,7 +4,7 @@
     @input="value => $emit('input', value)"
   >
     <option :value="null" v-if="income">
-      {{ $t('form.income') }} ({{ $t('form.unallocated')}})
+      {{ $t('form.income') }}
     </option>
     <option :value="null" v-else>
       {{ $t('form.uncategorized') }}

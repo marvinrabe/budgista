@@ -12,7 +12,7 @@ use Spatie\ViewModels\ViewModel;
 class Budget extends ViewModel
 {
 
-    protected $month;
+    protected Month $month;
 
     public function __construct(Month $month)
     {
@@ -28,7 +28,7 @@ class Budget extends ViewModel
     {
         return Auth::user()
             ->categories()
-            ->with(['budgets' => fn ($query) => $query->where('month', $this->month)])
+            ->with(['budgets' => fn($query) => $query->where('month', $this->month)])
             ->get()
             ->map(function (Category $category) {
                 $budget = $category->budget($this->month);
@@ -87,9 +87,18 @@ class Budget extends ViewModel
             ->sum('amount');
     }
 
-    public function unallocated()
+    public function available()
     {
         return $this->previousMonth() + $this->income() - $this->allocated();
+    }
+
+    public function links()
+    {
+        return [
+            'uncategorized' => URL::route('budget.uncategorized', ['month' => $this->month], false),
+            'prev' => URL::route('budget', ['month' => $this->month->previous()]),
+            'next' => URL::route('budget', ['month' => $this->month->next()])
+        ];
     }
 
 }

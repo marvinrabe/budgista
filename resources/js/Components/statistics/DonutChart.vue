@@ -8,7 +8,7 @@
     extends: Doughnut,
     mixins: [reactiveProp, moneyMixin],
     mounted () {
-      const self = this;
+      const self = this
 
       this.renderChart(
         this.chartData,
@@ -20,19 +20,20 @@
           legend: false,
           tooltips: {
             callbacks: {
-              label: function (item, {datasets, labels}) {
+              label: function (item, { datasets, labels }) {
                 let label = labels[item.index]
-                if(label == null) {
-                  label = self.$t('form.uncategorized');
+                if (label == null) {
+                  label = self.$t('form.uncategorized')
                 }
 
-                let value = self.moneyFormat.format(datasets[item.datasetIndex].data[item.index]);
+                let value = self.moneyFormat.format(datasets[item.datasetIndex].data[item.index])
 
                 return `${label}: ${value}`
               }
             }
           }
-        })
+        }
+      )
     }
   }
 </script>

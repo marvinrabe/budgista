@@ -7,7 +7,6 @@ use App\Category;
 use App\ViewModels\Budget;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\URL;
 use Inertia\Inertia;
 
 class BudgetController extends Controller
@@ -18,6 +17,25 @@ class BudgetController extends Controller
 
         return Inertia::render('Budget/Index', [
             'budget' => (new Budget($month))->toArray()
+        ]);
+    }
+
+    public function uncategorized($month)
+    {
+        $month = $this->getMonth($month);
+
+        return Inertia::render('Budget/Uncategorized', [
+            'budget' => (new Budget($month))->toArray(),
+            'transactions' => Auth::user()
+                ->transactions()
+                ->whereNull('category_id')
+                ->whereBetween('date', [
+                    $month->firstDay(),
+                    $month->lastDay()
+                ])
+                ->with('account')
+                ->orderBy('date', 'desc')
+                ->paginate(25),
         ]);
     }
 

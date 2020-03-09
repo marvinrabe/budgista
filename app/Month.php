@@ -104,11 +104,7 @@ class Month implements Arrayable
     public function toArray()
     {
         return [
-            'value' => $this->value(),
-            'links' => [
-                'prev' => URL::route('budget', ['month' => $this->previous()]),
-                'next' => URL::route('budget', ['month' => $this->next()])
-            ]
+            'value' => $this->value()
         ];
     }
 }

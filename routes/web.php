@@ -24,6 +24,8 @@ Route::group(['middleware' => ['auth']], function () {
      * Budget
      */
     Route::get('budget/{month?}', [Controllers\BudgetController::class, 'index'])->name('budget');
+    Route::get('budget/{month}/uncategorized',
+        [Controllers\BudgetController::class, 'uncategorized'])->name('budget.uncategorized');
     Route::get('budget/{month}/categories/{category}',
         [Controllers\BudgetController::class, 'show'])->name('budget.show');
     Route::post('budget/{month}/categories/{category}',

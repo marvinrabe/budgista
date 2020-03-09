@@ -27,8 +27,8 @@
             class="items-start md:items-center lg:items-end"
           />
           <AppNumber
-            :label="$t('form.unallocated')"
-            :value="budget.unallocated"
+            :label="$t('form.available')"
+            :value="budget.available"
             class="items-end"
             color
           />
