@@ -65,15 +65,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function terminate($reason = null)
     {
-        $deletedUserLog = DeletedUser::create([
-            'feedback' => $reason,
-            'created_at' => $this->created_at
-        ]);
-
         $this->delete();
 
         if (!empty($reason)) {
-            Mail::to(config('app.email'))->send(new UserDeleted($deletedUserLog));
+            Mail::to(config('app.email'))->send(new UserDeleted($reason));
         }
     }
 }

@@ -2,4 +2,4 @@
 
 <p>He provided Feedback:</p>
 
-<p>{{ nl2br($user->feedback) }}</p>
+<p>{{ nl2br($reason) }}</p>

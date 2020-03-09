@@ -2,7 +2,6 @@
 
 namespace App\Mails;
 
-use App\DeletedUser;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -11,15 +10,11 @@ class UserDeleted extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $user;
+    protected $reason;
 
-    /**
-     * Create a new message instance.
-     * @return void
-     */
-    public function __construct(DeletedUser $user)
+    public function __construct($reason)
     {
-        $this->user = $user;
+        $this->reason = $reason;
     }
 
     /**
@@ -28,6 +23,6 @@ class UserDeleted extends Mailable
      */
     public function build()
     {
-        return $this->view('email.userDeleted')->with(['user' => $this->user]);
+        return $this->view('email.userDeleted')->with(['reason' => $this->reason]);
     }
 }

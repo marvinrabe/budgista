@@ -51,24 +51,6 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function testLogsDeletions()
-    {
-        $this->signIn();
-
-        $user = Auth()->user();
-
-        $this
-            ->post('/profile/terminate', [
-                'feedback' => 'my feedback',
-                'password' => 'password'
-            ]);
-
-        $this->assertDatabaseHas('deleted_users', [
-            'created_at' => $user->created_at,
-            'feedback' => 'my feedback',
-        ]);
-    }
-
     public function testEmailUserFeedback()
     {
         Mail::fake();
@@ -82,11 +64,6 @@ class UserTest extends TestCase
                 'feedback' => 'my feedback',
                 'password' => 'password'
             ]);
-
-        $this->assertDatabaseHas('deleted_users', [
-            'created_at' => $user->created_at,
-            'feedback' => 'my feedback',
-        ]);
 
         Mail::assertSent(UserDeleted::class);
     }

@@ -10,7 +10,6 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\Clean::class,
         Commands\ProcessRecurringTransactions::class,
-        Commands\Statistic::class,
         Commands\SendFollowUpEmail::class,
         Commands\RunScheduler::class
     ];
