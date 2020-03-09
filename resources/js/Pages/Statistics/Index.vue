@@ -14,6 +14,14 @@
           :label="$t('title.statisticIncomeVsExpense')"
           :icon="icons.incomeVsExpense"
           href="/statistics/incomeVsExpense"/>
+        <AppMenuItem
+          :label="$t('title.statisticExpense')"
+          :icon="icons.pieChart"
+          href="/statistics/expense"/>
+        <AppMenuItem
+          :label="$t('title.statisticIncome')"
+          :icon="icons.pieChart"
+          href="/statistics/incomes"/>
       </AppMenu>
     </template>
 
@@ -25,7 +33,7 @@
   import Layout from '@/Layouts/Container'
   import AppMenu from '@/Components/AppMenu'
   import AppMenuItem from '@/Components/AppMenuItem'
-  import { faChartLine, faChartBar } from '@fortawesome/free-solid-svg-icons'
+  import { faChartLine, faChartBar, faChartPie } from '@fortawesome/free-solid-svg-icons'
 
   export default {
     components: {
@@ -43,7 +51,8 @@
       return {
         icons: {
           netWorth: faChartLine,
-          incomeVsExpense: faChartBar
+          incomeVsExpense: faChartBar,
+          pieChart: faChartPie
         }
       }
     },

@@ -8,6 +8,26 @@ use Tests\TestCase;
 
 class MonthTest extends TestCase
 {
+    public function validData()
+    {
+        return [
+            [1900, 1],
+            [2099, 12],
+            [2017, 6]
+        ];
+    }
+
+    /**
+     * @dataProvider validData
+     */
+    public function testConstructor($year, $month)
+    {
+        $monthObject = new Month($year, $month);
+
+        $this->assertInstanceOf(Month::class, $monthObject);
+        $this->assertEquals($year, $monthObject->getYear());
+        $this->assertEquals($month, $monthObject->getMonth());
+    }
 
     public function invalidData()
     {
@@ -20,50 +40,24 @@ class MonthTest extends TestCase
     }
 
     /**
-     * @test
      * @dataProvider invalidData
      */
-    public function test_invalid_constructor($year, $month)
+    public function testValidation($year, $month)
     {
         $this->expectException(\InvalidArgumentException::class);
 
         new Month($year, $month);
     }
 
-
-    public function validData()
-    {
-        return [
-            [1900, 1],
-            [2099, 12],
-            [2017, 6]
-        ];
-    }
-
-    /**
-     * @test
-     * @dataProvider validData
-     */
-    public function test_valid_constructor($year, $month)
-    {
-        $monthObject = new Month($year, $month);
-
-        $this->assertInstanceOf(Month::class, $monthObject);
-        $this->assertEquals($year, $monthObject->getYear());
-        $this->assertEquals($month, $monthObject->getMonth());
-    }
-
-    /** @test */
-    public function converts_to_proper_string()
+    public function testToString()
     {
         $month = new Month(2017, 6);
 
-        $this->assertEquals('2017-06', (string)$month);
+        $this->assertEquals('2017-06', (string) $month);
 
     }
 
-    /** @test */
-    public function can_be_created_from_string()
+    public function testFromString()
     {
         $month = Month::fromString('2017-06');
 
@@ -71,7 +65,6 @@ class MonthTest extends TestCase
         $this->assertEquals(6, $month->getMonth());
 
     }
-
 
     public function nextAndPreviousData()
     {
@@ -83,10 +76,9 @@ class MonthTest extends TestCase
     }
 
     /**
-     * @test
      * @dataProvider nextAndPreviousData
      */
-    public function previous_and_next_return_correct_month($year, $month, $prev, $next)
+    public function testPreviousMonthAndNextMonth($year, $month, $prev, $next)
     {
         $monthObject = new Month($year, $month);
 
@@ -98,9 +90,7 @@ class MonthTest extends TestCase
         $this->assertEquals($month, $monthObject->getMonth());
     }
 
-
-    /** @test */
-    public function create_month_that_equals_current_month()
+    public function testCurrentMonth()
     {
         $knownDate = Carbon::create(2001, 5, 21);
         Carbon::setTestNow($knownDate);
@@ -111,9 +101,7 @@ class MonthTest extends TestCase
         $this->assertEquals(5, $month->getMonth());
     }
 
-
-    /** @test */
-    public function test_first_and_last_day()
+    public function testFirstAndLastDay()
     {
         $month = new Month(2017, 10);
 
@@ -125,6 +113,37 @@ class MonthTest extends TestCase
 
         $this->assertEquals('20171130', $month->next()->lastDay()->format('Ymd'));
         $this->assertEquals('20171101', $month->next()->firstDay()->format('Ymd'));
+    }
+
+    public function testRange()
+    {
+        $expected = ['2017-12'];
+        for ($month = 1; $month <= 11; $month++) {
+            $expected[] = '2018-'.str_pad($month, 2, '0', STR_PAD_LEFT);
+        };
+
+        $result = Month::range(Month::fromString('2017-12'), Month::fromString('2018-11'))
+            ->map(function (Month $month) {
+                return (string) $month;
+            })
+            ->toArray();
+
+        $this->assertTrue(array_diff($expected, $result) == []);
+
+    }
+
+    public function testSingleRange()
+    {
+        $expected = ['2017-12'];
+
+        $result = Month::range(Month::fromString('2017-12'), Month::fromString('2017-12'))
+            ->map(function (Month $month) {
+                return (string) $month;
+            })
+            ->toArray();
+
+        $this->assertTrue(array_diff($expected, $result) == []);
+
     }
 
 }

@@ -37,15 +37,14 @@ class StatisticsIncomeVsExpenseTest extends TestCase
     }
 
     /**
-     * @return Month[]
+     * @return iterable|Month[]
      */
     protected function lastYearMonths()
     {
-        $months = [];
-        for ($i = 0; $i <= 11; $i++) {
-            $months[] = Month::fromString(Carbon::now()->subMonthNoOverflow(11 - $i)->format('Y-m'));
-        }
-        return $months;
+        return Month::range(
+            Month::fromString(Carbon::now()->subMonthsNoOverflow(11)->format('Y-m')),
+            Month::current()
+        );
     }
 
     public function testDisplay()
@@ -91,27 +90,5 @@ class StatisticsIncomeVsExpenseTest extends TestCase
         $response = new IncomeVsExpenseChart($this->lastYearMonths());
 
         $this->assertEquals($expectedData, $response->data()->toArray());
-    }
-
-    public function testReturnsLastTwelveMonths()
-    {
-        $knownDate = Carbon::create(2018, 11, 30); // create testing date
-        Carbon::setTestNow($knownDate);
-        $this->prepareTransactions();
-
-        $expected = ['2017-12'];
-        for ($month = 1; $month <= 11; $month++) {
-            $expected[] = '2018-'.str_pad($month, 2, '0', STR_PAD_LEFT);
-        }
-
-        $response = new IncomeVsExpenseChart($this->lastYearMonths());
-
-        $result = $response->data()
-            ->map(function ($item) {
-                return $item['month'];
-            })
-            ->toArray();
-
-        $this->assertTrue(array_diff($expected, $result) == []);
     }
 }

@@ -158,6 +158,8 @@ export default {
     statistics: 'Statistics',
     statisticNetWorth: 'Net Worth',
     statisticIncomeVsExpense: 'Income vs. Expense',
+    statisticIncome: 'Income',
+    statisticExpense: 'Expense',
     verify: 'Verify Your Email Address',
     googleAccount: 'Connect Your Google Account',
     noAccounts: 'No Accounts present.',

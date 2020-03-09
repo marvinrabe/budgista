@@ -63,6 +63,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('statistics', [Controllers\StatisticsController::class, 'index'])->name('statistics.index');
     Route::get('statistics/netWorth', [Controllers\StatisticsController::class, 'netWorth'])->name('statistics.netWorth');
     Route::get('statistics/incomeVsExpense',  [Controllers\StatisticsController::class, 'incomeVsExpense'])->name('statistics.incomeVsExpense');
+    Route::get('statistics/expense',  [Controllers\StatisticsController::class, 'expense'])->name('statistics.expense');
+    Route::get('statistics/incomes',  [Controllers\StatisticsController::class, 'income'])->name('statistics.income');
 
     /*
      * Setup

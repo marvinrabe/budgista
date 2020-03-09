@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\URL;
 
 class Month implements Arrayable
@@ -21,6 +22,19 @@ class Month implements Arrayable
         }
 
         $this->date = Carbon::createFromDate($year, $month, 1);
+    }
+
+    public static function range(Month $start, Month $end): iterable
+    {
+        if ($start > $end) {
+            throw new \InvalidArgumentException("Range is invalid.");
+        }
+
+        $result = Collection::make();
+        for ($pointer = $start; $pointer < $end->next(); $pointer = $pointer->next()) {
+            $result->push($pointer);
+        }
+        return $result;
     }
 
     public static function current()
