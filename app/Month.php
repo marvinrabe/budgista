@@ -26,12 +26,12 @@ class Month implements Arrayable
 
     public static function range(Month $start, Month $end): iterable
     {
-        if ($start > $end) {
+        if ((string) $start > (string) $end) {
             throw new \InvalidArgumentException("Range is invalid.");
         }
 
         $result = Collection::make();
-        for ($pointer = $start; $pointer < $end->next(); $pointer = $pointer->next()) {
+        for ($pointer = $start; (string) $pointer <= (string) $end; $pointer = $pointer->next()) {
             $result->push($pointer);
         }
         return $result;
