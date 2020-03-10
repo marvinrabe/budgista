@@ -5,11 +5,13 @@ namespace App;
 use App\Transaction;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Collection;
 use RRule\RRule;
 
 class Recurring extends RRule implements Arrayable
 {
-    public static function fromString($string) {
+    public static function fromString($string)
+    {
         return new static($string);
     }
 
@@ -48,26 +50,18 @@ class Recurring extends RRule implements Arrayable
     public function generateOccurrences(Transaction $transaction)
     {
         $occurrences = $this->getPendingOccurrences($transaction);
+
         if (count($occurrences) == 0) {
-            return [$transaction];
+            return Collection::make();
         }
 
-        $transaction->recurrence = null;
-
-        $results = collect($occurrences)
+        return Collection::make($occurrences)
             ->map(function ($date) use ($transaction) {
-                $newTransaction = $transaction->replicate(['id', 'date', 'cleared']);
+                $newTransaction = $transaction->replicate(['id', 'date', 'cleared', 'related_id']);
                 $newTransaction->date = $date;
-                $newTransaction->family = $transaction->family ?? $transaction->id;
                 $newTransaction->cleared = false;
                 return $newTransaction;
-            })
-            ->prepend($transaction);
-
-        $last = $results->pop();
-        $last->recurrence = $this->toArray();
-
-        return $results->push($last);
+            });
     }
 
     public function getPendingOccurrences(Transaction $transaction)

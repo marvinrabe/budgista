@@ -32,7 +32,7 @@ class RecurringTransactionsTest extends TestCase
         $this->assertDatabaseHas('transactions', [
             'amount' => $transaction->amount,
             'cleared' => false,
-            'recurring' => 1,
+            'recurring' => true,
             'date' => Carbon::now()->addDay()->format('Y-m-d')
         ]);
     }

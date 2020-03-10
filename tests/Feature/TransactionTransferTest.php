@@ -133,7 +133,8 @@ class TransactionTransferTest extends TestCase
         $transaction = factory(Transaction::class)->state('transfer')->create([
             'rrule' => 'FREQ=DAILY',
             'recurring' => true,
-            'date' => Carbon::now()
+            'date' => Carbon::now(),
+            'amount' => 12300 // Only positive amounts are recurred properly
         ]);
 
         $this->signIn($transaction->user);

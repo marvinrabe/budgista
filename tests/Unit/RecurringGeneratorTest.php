@@ -37,16 +37,13 @@ class RecurringGeneratorTest extends TestCase
 
         $results = $recurrence->generateOccurrences($transaction);
 
-        $this->assertCount(3, $results);
-        $this->assertEquals(Carbon::now()->subDay()->format('Y-m-d'), $results[0]->date->format('Y-m-d'));
-        $this->assertEquals(123, $results[0]->id);
+        $this->assertCount(2, $results);
+        $this->assertEquals(Carbon::now()->format('Y-m-d'), $results[0]->date->format('Y-m-d'));
+        $this->assertNull($results[0]->id);
         $this->assertFalse($results[0]->recurring);
-        $this->assertEquals(Carbon::now()->format('Y-m-d'), $results[1]->date->format('Y-m-d'));
+        $this->assertEquals(Carbon::now()->addDay()->format('Y-m-d'), $results[1]->date->format('Y-m-d'));
         $this->assertNull($results[1]->id);
         $this->assertFalse($results[1]->recurring);
-        $this->assertEquals(Carbon::now()->addDay()->format('Y-m-d'), $results[2]->date->format('Y-m-d'));
-        $this->assertNull($results[2]->id);
-        $this->assertTrue($results[2]->recurring);
     }
 
 }

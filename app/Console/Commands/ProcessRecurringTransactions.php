@@ -15,16 +15,16 @@ class ProcessRecurringTransactions extends Command
     {
         $this->info('Processing...');
 
-        $transactions = Transaction::withoutGlobalScope(UserScope::class)
+        Transaction::withoutGlobalScope(UserScope::class)
+            ->with('related')
             ->where('date', '<=', Carbon::now())
             ->where('recurring', '=', true)
-            ->cursor();
+            ->cursor()
+            ->each(function(Transaction $transaction) {
+                $transaction->processRecurring();
 
-        foreach ($transactions as $transaction) {
-            $transaction->processRecurring();
-
-            $this->info('Transaction: '.$transaction->id);
-        }
+                $this->info('Transaction: '.$transaction->id);
+            });
 
         $this->info('Done');
     }

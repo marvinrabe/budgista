@@ -2,15 +2,13 @@
 
 namespace App;
 
+use App\Scopes\UserScope;
 use App\Traits\HasUuidKey;
-use App\Recurring;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\BelongsToUser;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Str;
 
 class Transaction extends Model
 {
@@ -18,6 +16,8 @@ class Transaction extends Model
         BelongsToUser;
 
     protected $appends = ['links', 'recurrence'];
+
+    protected $attributes = ['recurring' => false];
 
     protected $fillable = [
         'date',
@@ -50,7 +50,7 @@ class Transaction extends Model
 
     public function related()
     {
-        return $this->belongsTo(Transaction::class);
+        return $this->belongsTo(Transaction::class)->withoutGlobalScope(UserScope::class);
     }
 
     public function scopeFuture($query)
@@ -93,28 +93,46 @@ class Transaction extends Model
 
     public function processRecurring()
     {
-        $transactions = optional($this->recurrence)->generateOccurrences($this);
+        $recurring = $this->recurrence;
 
-        DB::transaction(function () use ($transactions) {
-            foreach ($transactions as $transaction) {
+        if (!$this->family) {
+            $this->family = $this->id;
+        }
+        $this->recurrence = null;
+
+        if ($this->related_id && $this->amount < 0) {
+            $this->save();
+            return;
+        }
+
+        DB::transaction(function () use ($recurring) {
+            $transactions = $recurring->generateOccurrences($this);
+
+            $transactions->last()->recurrence = $recurring->toArray();
+
+            $transactions->each(function (Transaction $transaction) {
                 $transaction->save();
-            }
-        });
+                optional(
+                    $this->related,
+                    fn($related) => $transaction->createRelated($related->account_id)
+                );
+            });
 
-        return $transactions;
+            $this->save();
+        });
     }
 
     public function createRelated($account_id)
     {
         $oldRelation = null;
-        if($this->related) {
+        if ($this->related) {
             $oldRelation = $this->related;
         }
 
         $related = $this->replicate(['amount', 'account_id', 'cleared', 'related_id']);
         $related->account_id = $account_id;
         $related->amount = -1 * $this->amount;
-        if($oldRelation) {
+        if ($oldRelation) {
             $related->cleared = $oldRelation->cleared;
         }
         $related->related_id = $this->id;
@@ -124,7 +142,7 @@ class Transaction extends Model
         $this->setRelation('related', $related);
         $this->save();
 
-        if($oldRelation) {
+        if ($oldRelation) {
             $oldRelation->delete();
         }
     }
