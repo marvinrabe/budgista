@@ -87,6 +87,7 @@ export default {
     'name': 'Name',
     'amount': 'Amount',
     'recurring': 'Repeat',
+    'recurringInterval': 'Repeat every',
     category_id: 'Category',
     account_id: 'Account',
     budget: 'Budget',
