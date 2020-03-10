@@ -2,7 +2,7 @@
   <li class="flex-1 md:flex-auto">
     <inertia-link
       :href="href"
-      class="font-medium p-1 md:px-4 hover:no-underline text-gray-6 hover:text-gray-8 rounded flex flex-wrap flex-col md:flex-row justify-center items-center"
+      class="font-medium p-1 md:px-4 md:py-2 hover:no-underline text-gray-6 hover:text-gray-8 rounded flex flex-wrap flex-col md:flex-row justify-center items-center"
       :class="{'bg-gray-0 font-bold': active, 'tracking-wide': !active}">
       <FontAwesomeIcon
         :icon="icon"
