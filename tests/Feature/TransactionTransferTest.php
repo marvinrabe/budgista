@@ -8,7 +8,6 @@ use App\Transaction;
 use App\ViewModels\TransactionForm;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use RRule\RRule;
 use Tests\TestCase;
 
 class TransactionTransferTest extends TestCase
@@ -146,5 +145,8 @@ class TransactionTransferTest extends TestCase
 
         $this->assertEquals(0,  Transaction::sum('amount'));
         $this->assertEquals(4,  Transaction::count());
+
+        // Recurred Transactions relate to each other not to parent.
+        $this->assertEquals(1,  Transaction::where('related_id', $transaction->id)->count());
     }
 }
