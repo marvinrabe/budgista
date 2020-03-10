@@ -1,12 +1,12 @@
 <template>
   <input
     :placeholder="placeholder"
+    inputmode="decimal"
     @blur="onBlur"
     @focus="onFocus"
     @input="onInput($event.target.value)"
     @keypress.enter="onEnter"
     class="form-control text-right"
-    ref="input"
     type="text"
   >
 </template>
@@ -64,7 +64,7 @@
         }
       },
       focus () {
-        this.$refs.input.focus()
+        this.$el.focus()
       },
       onFocus () {
         this.hasFocus = true
