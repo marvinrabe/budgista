@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 class Transaction extends Model
 {
@@ -47,6 +48,11 @@ class Transaction extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function related()
+    {
+        return $this->belongsTo(Transaction::class);
+    }
+
     public function scopeFuture($query)
     {
         return $query->where('date', '>', now());
@@ -60,9 +66,7 @@ class Transaction extends Model
     public function getLinksAttribute()
     {
         return [
-            'edit' => URL::route('transactions.edit', $this),
-            'update' => URL::route('transactions.update', $this),
-            'destroy' => URL::route('transactions.destroy', $this)
+            'edit' => URL::route('transactions.edit', $this)
         ];
     }
 
@@ -98,6 +102,31 @@ class Transaction extends Model
         });
 
         return $transactions;
+    }
+
+    public function createRelated($account_id)
+    {
+        $oldRelation = null;
+        if($this->related) {
+            $oldRelation = $this->related;
+        }
+
+        $related = $this->replicate(['amount', 'account_id', 'cleared', 'related_id']);
+        $related->account_id = $account_id;
+        $related->amount = -1 * $this->amount;
+        if($oldRelation) {
+            $related->cleared = $oldRelation->cleared;
+        }
+        $related->related_id = $this->id;
+        $related->save();
+
+        $this->related_id = $related->id;
+        $this->setRelation('related', $related);
+        $this->save();
+
+        if($oldRelation) {
+            $oldRelation->delete();
+        }
     }
 
 }

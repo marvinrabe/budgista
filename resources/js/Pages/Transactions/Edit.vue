@@ -62,7 +62,8 @@
       TransactionForm
     },
     props: {
-      transaction: Object
+      transaction: Object,
+      links: Object
     },
     data () {
       return {
@@ -75,14 +76,14 @@
         this.saving = true
 
         this.$inertia
-          .put(this.transaction.links.update, this.form)
+          .put(this.links.update, this.form)
           .finally(() => {
             this.saving = false
           })
       },
       deleteTransaction () {
         if (window.confirm(this.$t('message.deleteTransaction'))) {
-          this.$inertia.delete(this.transaction.links.destroy)
+          this.$inertia.delete(this.links.destroy)
         }
       }
     }

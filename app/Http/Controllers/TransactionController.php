@@ -6,6 +6,8 @@ use App\Account;
 use App\Category;
 use App\Transaction;
 use App\Rules\Own;
+use App\ViewModels\TransactionForm;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -18,45 +20,58 @@ class TransactionController extends Controller
 
     public function create(Request $request)
     {
-        $this->authorize('create', Transaction::class);
-
-        return Inertia::render('Transactions/Create', [
-            'account' => $request->has('account')
-                ? Account::find($request->get('account'))
-                : null,
-            'category' => $request->has('category')
-                ? Category::find($request->get('category'))
-                : null,
-            'referer' => $request->get('referer')
+        $transaction = Transaction::make([
+            'account_id' => $request->get('account', null),
+            'category_id' => $request->get('category', null),
+            'date' => Carbon::now()
         ]);
+
+        return Inertia::render('Transactions/Create', new TransactionForm($transaction));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $this->authorize('create', Transaction::class);
+        $isTransfer = Str::startsWith($request->get('category_id'), 'account:');
+
+        $request->validate([
+            'payee' => $isTransfer ? 'nullable' : 'required',
+            'account_id' => [
+                'required',
+                new Own('accounts')
+            ],
+            'category_id' => $isTransfer ? [
+                new Own('accounts', 'account:')
+            ] : [
+                'nullable',
+                new Own('categories')
+            ],
+            'amount' => ['required', 'integer'],
+            'date' => ['required', 'date'],
+            'notes' => ['nullable', 'string']
+        ]);
 
         $transaction = Transaction::make(
-            request()->validate([
-                'payee' => 'required',
-                'account_id' => [
-                    'required',
-                    new Own('accounts')
-                ],
-                'category_id' => [
-                    'nullable',
-                    new Own('categories')
-                ],
-                'amount' => 'required|integer',
-                'date' => 'required',
-                'notes' => ['nullable', 'string']
-            ])
+            $request->only(['payee', 'account_id', 'amount', 'date', 'notes'])
         );
 
-        if (!empty(request('recurrence'))) {
-            $transaction->recurrence = request('recurrence');
+        if ($request->has('recurrence')) {
+            $transaction->recurrence = $request->get('recurrence');
         }
 
-        $transaction->save();
+        if ($isTransfer) {
+            $payee = $request->get('payee');
+            if (empty($payee)) {
+                $transaction->payee = trans('action.transfer');
+            }
+            $transaction->save();
+            $transaction->createRelated(
+                Str::replaceFirst('account:', '', $request->get('category_id'))
+            );
+        } else {
+            $transaction->category_id = $request->get('category_id');
+            $transaction->save();
+        }
+
 
         Flash::success(__('Transaction saved.'));
 
@@ -90,14 +105,31 @@ class TransactionController extends Controller
     {
         $this->authorize('view', $transaction);
 
-        return Inertia::render('Transactions/Edit', [
-            'transaction' => $transaction
-        ]);
+        return Inertia::render('Transactions/Edit', new TransactionForm($transaction));
     }
 
-    public function update(Transaction $transaction)
+    public function update(Request $request, Transaction $transaction)
     {
         $this->authorize('update', $transaction);
+
+        $isTransfer = Str::startsWith($request->get('category_id'), 'account:');
+
+        $request->validate([
+            'payee' => $isTransfer ? 'nullable' : 'required',
+            'account_id' => [
+                'required',
+                new Own('accounts')
+            ],
+            'category_id' => $isTransfer ? [
+                new Own('accounts', 'account:')
+            ] : [
+                'nullable',
+                new Own('categories')
+            ],
+            'amount' => ['required', 'integer'],
+            'date' => ['required', 'date'],
+            'notes' => ['nullable', 'string']
+        ]);
 
         if (!empty(request('recurrence'))) {
             $transaction->recurrence = request('recurrence');
@@ -105,22 +137,29 @@ class TransactionController extends Controller
             $transaction->recurrence = null;
         }
 
-        $transaction->update(
-            request()->validate([
-                'payee' => 'required',
-                'amount' => 'required|integer',
-                'date' => 'required|date',
-                'account_id' => [
-                    'required',
-                    new Own('accounts')
-                ],
-                'category_id' => [
-                    'nullable',
-                    new Own('categories')
-                ],
-                'notes' => ['nullable', 'string']
-            ])
+        $transaction = $transaction->fill(
+            $request->only(['payee', 'account_id', 'amount', 'date', 'notes'])
         );
+
+        if ($request->has('recurrence')) {
+            $transaction->recurrence = $request->get('recurrence');
+        } else {
+            $transaction->recurrence = null;
+        }
+
+        if ($isTransfer) {
+            $payee = $request->get('payee');
+            if (empty($payee)) {
+                $transaction->payee = trans('action.transfer');
+            }
+            $transaction->save();
+            $transaction->createRelated(
+                Str::replaceFirst('account:', '', $request->get('category_id'))
+            );
+        } else {
+            $transaction->category_id = $request->get('category_id');
+            $transaction->save();
+        }
 
         Flash::success(__('Transaction saved.'));
 

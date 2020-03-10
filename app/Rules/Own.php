@@ -4,30 +4,27 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class Own implements Rule
 {
 
     protected $table;
 
-    /**
-     * Own constructor.
-     * @param $table string Name of the table
-     */
-    public function __construct($table)
+    protected $strip;
+
+    public function __construct($table, $strip = null)
     {
         $this->table = $table;
+        $this->strip = $strip;
     }
 
-    /**
-     * Determine if the validation rule passes.
-     *
-     * @param  string $attribute
-     * @param  mixed $value
-     * @return bool
-     */
     public function passes($attribute, $value)
     {
+        if ($this->strip) {
+            $value = Str::replaceFirst($this->strip, '', $value);
+        }
+
         return DB::table($this->table)
             ->where([
                 ['id', '=', $value],
@@ -45,5 +42,5 @@ class Own implements Rule
     {
         return trans('validation.exists');
     }
-    
+
 }

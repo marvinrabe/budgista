@@ -40,21 +40,12 @@
         type: String,
         default: null
       },
-      account: {
-        type: Object,
-        default: null
-      },
-      category: {
-        type: Object,
-        default: null
-      }
+      transaction: Object,
+      links: Object
     },
     data () {
       return {
-        form: {
-          account_id: this.account ? this.account.id : null,
-          category_id: this.category ? this.category.id : null
-        },
+        form: this.transaction,
         saving: false
       }
     },
@@ -63,7 +54,7 @@
         this.saving = true
 
         this.$inertia
-          .post('/transactions', {
+          .post(this.links.store, {
             ...this.form,
             referer: this.referer
           })

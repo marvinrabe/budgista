@@ -2,6 +2,7 @@
 
 return [
 
-    'reconciliation' => 'Abstimmung'
+    'reconciliation' => 'Abstimmung',
+    'transfer' => 'Umbuchung'
 
 ];

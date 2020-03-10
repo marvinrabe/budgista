@@ -45,6 +45,7 @@
         <FormGroup name="payee">
           <PayeeInput
             slot-scope="{bindings}"
+            :placeholder="isTransfer ? $t('form.transferPayee') : undefined"
             v-bind="bindings"
             v-model="form.payee"
           />
@@ -109,7 +110,7 @@
       <AppTextarea
         slot-scope="{bindings}"
         v-bind="bindings"
-        v-model="form.notes" />
+        v-model="form.notes"/>
     </FormGroup>
 
   </div>
@@ -118,7 +119,6 @@
 <script>
   import FormGroup from '@/Components/form/FormGroup.vue'
   import { faHistory, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
-  import dayjs from 'dayjs'
   import { iconComponent } from '@/Utils/Icons'
   import CategorySelect from '../categories/CategorySelect'
   import AppButton from '../form/AppButton'
@@ -151,25 +151,17 @@
       RecurringInput
     },
     props: {
-      value: {
-        type: Object,
-        default: null
-      }
+      value: Object
     },
     data () {
       return {
         type: _.get(this.value, 'amount', 0) <= 0 ? EXPENSE : INCOME,
-        form: {
-          recurring: false,
-          amount: 0,
-          recurrence: null,
-          payee: '',
-          notes: null,
-          category_id: null,
-          account_id: null,
-          date: dayjs().format('YYYY-MM-DD'),
-          ...this.value,
-        }
+        form: this.value
+      }
+    },
+    computed: {
+      isTransfer () {
+        return this.form.category_id ? this.form.category_id.startsWith('account:') : false
       }
     },
     watch: {

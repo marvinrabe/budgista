@@ -78,6 +78,9 @@ export default {
     add: 'Add'
   },
   form: {
+    transferTo: 'Transfer to',
+    transferFrom: 'Transfer from',
+    transferPayee: 'Transfer',
     notes: 'Notes',
     description: 'Description',
     pleaseSelect: 'Please Choose...',

@@ -32,3 +32,14 @@ $factory->state(Transaction::class, 'uncleared', function () {
         'cleared' => false,
     ];
 });
+
+$factory->state(Transaction::class, 'transfer', function () {
+    return [
+        'payee' => trans('action.transfer'),
+        'category_id' => null,
+    ];
+});
+
+$factory->afterCreatingState(Transaction::class, 'transfer', function (Transaction $transaction) {
+    $transaction->createRelated($transaction->account_id);
+});

@@ -22,8 +22,8 @@ class TransactionCreateTest extends TestCase
             ->signIn($account->user)
             ->get("/transactions/create?account={$account->id}");
 
-        $response->assertHasProp('account');
-        $this->assertEquals($account->id, $response->props()['account']['id']);
+        $response->assertHasProp('transaction');
+        $this->assertEquals($account->id, $response->props()['transaction']['account_id']);
     }
 
     public function testPreselectCategory()
@@ -34,8 +34,8 @@ class TransactionCreateTest extends TestCase
             ->signIn($category->user)
             ->get("/transactions/create?category={$category->id}");
 
-        $response->assertHasProp('category');
-        $this->assertEquals($category->id, $response->props()['category']['id']);
+        $response->assertHasProp('transaction');
+        $this->assertEquals($category->id, $response->props()['transaction']['category_id']);
     }
 
     public function testSetReferer()

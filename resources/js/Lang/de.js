@@ -77,6 +77,9 @@ export default {
     add: 'Hinzufügen'
   },
   form: {
+    transferTo: 'Überwiesen an',
+    transferFrom: 'Überwiesen von',
+    transferPayee: 'Umbuchung',
     notes: 'Notizen',
     description: 'Beschreibung',
     pleaseSelect: 'Bitte Auswählen...',
