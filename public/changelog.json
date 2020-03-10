@@ -1,5 +1,12 @@
 [
   {
+    "date": "2020-03-10",
+    "changes": [
+      "Money input fields have now decimal input keyboard on mobile devices.",
+      "You can now transfer money between accounts. Simply select the receiving account in the category select."
+    ]
+  },
+  {
     "date": "2020-03-09",
     "changes": [
       "Now you can add notes to your transactions.",
