@@ -32,7 +32,7 @@ class SetupController extends Controller
             ])
         );
 
-        return Redirect::to('/setup/2');
+        return Redirect::to('/setup/categories');
     }
 
     public function step2()
@@ -57,7 +57,7 @@ class SetupController extends Controller
                 Auth::user()->categories()->create($category);
             });
 
-        return Redirect::to('/setup/3');
+        return Redirect::to('/setup/accounts');
     }
 
     public function step3()
@@ -83,12 +83,7 @@ class SetupController extends Controller
                 }
             });
 
-        return Redirect::to('/setup/4');
-    }
-
-    public function step4()
-    {
-        return Inertia::render('Setup/Ready');
+        return Redirect::to('/budget');
     }
 
 }

@@ -71,7 +71,7 @@
           return
         }
 
-        this.$inertia.post('/setup/3', {
+        this.$inertia.post('/setup/accounts', {
           accounts: this.accounts
         })
       },

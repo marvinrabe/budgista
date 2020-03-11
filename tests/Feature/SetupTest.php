@@ -26,7 +26,7 @@ class SetupTest extends TestCase
             ->post('/setup', [
                 'currency' => 'USD'
             ])
-            ->assertRedirect('/setup/2');
+            ->assertRedirect('/setup/categories');
 
         $this->assertEquals('USD', $user->fresh()->currency);
     }
@@ -51,7 +51,7 @@ class SetupTest extends TestCase
     public function testListCategories()
     {
         $this->signIn()
-            ->get('/setup/2')
+            ->get('/setup/categories')
             ->assertInertiaViewIs('Setup/Categories')
             ->assertHasProp('samples');
     }
@@ -63,10 +63,10 @@ class SetupTest extends TestCase
         $this->assertCount(0, $user->categories);
 
         $this->signIn($user)
-            ->post('/setup/2', [
+            ->post('/setup/categories', [
                 'categories' => [0, 1, 2]
             ])
-            ->assertRedirect('/setup/3');
+            ->assertRedirect('/setup/accounts');
 
         $this->assertCount(3, $user->fresh()->categories);
     }
@@ -78,8 +78,8 @@ class SetupTest extends TestCase
         $this->assertCount(0, $user->categories);
 
         $this->signIn($user)
-            ->post('/setup/2', [])
-            ->assertRedirect('/setup/3');
+            ->post('/setup/categories', [])
+            ->assertRedirect('/setup/accounts');
 
         $this->assertCount(0, $user->refresh()->categories);
     }
@@ -91,10 +91,10 @@ class SetupTest extends TestCase
         $this->assertCount(0, $user->categories);
 
         $this->signIn($user)
-            ->post('/setup/2', [
+            ->post('/setup/categories', [
                 'categories' => [9999]
             ])
-            ->assertRedirect('/setup/3');
+            ->assertRedirect('/setup/accounts');
 
         $this->assertCount(0, $user->fresh()->categories);
     }
@@ -106,13 +106,13 @@ class SetupTest extends TestCase
         $this->assertCount(0, $user->accounts);
 
         $this->signIn($user)
-            ->post('/setup/3', [
+            ->post('/setup/accounts', [
                 'accounts' => [
                     ['name' => 'Cash', 'amount' => 123],
                     ['name' => 'Visa', 'amount' => 999]
                 ]
             ])
-            ->assertRedirect('/setup/4');
+            ->assertRedirect('/budget');
 
         $this->assertCount(2, $user->refresh()->accounts);
 
@@ -128,8 +128,8 @@ class SetupTest extends TestCase
         $this->assertCount(0, $user->accounts);
 
         $this->signIn($user)
-            ->post('/setup/3', [])
-            ->assertRedirect('/setup/4');
+            ->post('/setup/accounts', [])
+            ->assertRedirect('/budget');
 
         $this->assertCount(0, $user->refresh()->accounts);
     }
@@ -141,14 +141,14 @@ class SetupTest extends TestCase
         $this->assertCount(0, $user->accounts);
 
         $this->signIn($user)
-            ->post('/setup/3', [
+            ->post('/setup/accounts', [
                 'accounts' => [
                     ['name' => '', 'amount' => null],
                     ['name' => null],
                     []
                 ]
             ])
-            ->assertRedirect('/setup/4');
+            ->assertRedirect('/budget');
 
         $this->assertCount(0, $user->fresh()->accounts);
     }

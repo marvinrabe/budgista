@@ -26,8 +26,6 @@ export default {
     setupNoCategories: 'Are you sure to continue without choosing atleast one category?',
     setupAccounts: 'Enter your bank accounts with your current account balances. If you don\'t know the balance at the moment, you can provide this information later.',
     setupNoAccounts: 'Are you sure to continue without adding atleast one account?',
-    setupReady: 'Your account is now ready. Start by entering every Transaction (like expenses or income) the occurs starting now.',
-    setupContact: 'If you have any questions or feedback, feel free to contact us any time. We will be there for you!',
   },
   hint: {
     deleteAccount: 'Delete this account with ALL transactions.',

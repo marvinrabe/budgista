@@ -25,8 +25,6 @@ export default {
     setupNoCategories: 'Willst du wirklich fortfahren ohne eine Kategorie ausgewählt zu haben?',
     setupAccounts: 'Gib deine Bankkonten mit den aktuellen Kontoständen ein. Falls du die Kontostände gerade nicht kennst, kannst du diese auch später eingeben.',
     setupNoAccounts: 'Willst du wirklich fortfahren ohne ein Bankkonto eingegeben zu haben?',
-    setupReady: 'Wir haben jetzt alles für dich eingerichtet. Trage nun regelmäßig jede Transaktion (Einnahmen und Ausgaben) ein die ab jetzt passiert.',
-    setupContact: 'Falls du Fragen oder Feedback haben solltest, kannst du uns gerne jederzeit kontaktieren. Wir sind für dich da!',
   },
   hint: {
     deleteAccount: 'Lösche dieses Konto mit ALLEN Transaktionen.',

@@ -37,7 +37,7 @@
           return
         }
 
-        this.$inertia.post('/setup/2', {
+        this.$inertia.post('/setup/categories', {
           categories: this.selected
         })
       }
