@@ -1,5 +1,14 @@
 [
   {
+    "date": "2020-03-11",
+    "changes": [
+      "New \"All Transactions\" view added under Transactions. See all transactions from all accounts in one place.",
+      "Transfers are now excluded from any statistic and from the budget.",
+      "See target account of a transfer in transaction list.",
+      "Consistent styling of the transaction list on any screen size."
+    ]
+  },
+  {
     "date": "2020-03-10",
     "changes": [
       "Money input fields have now decimal input keyboard on mobile devices.",
