@@ -1,19 +1,19 @@
 <template>
   <div class="min-w-screen flex justify-center items-center">
-    <div class="card w-full xl:w-3/4 my-8 mx-4">
+    <div class="w-full xl:w-3/4 m-4 md:my-8">
       <div class="flex flex-wrap items-stretch">
-        <div class="w-full md:w-1/3 bg-blue-6 p-4 md:p-6 rounded-t md:rounded-t-none md:rounded-l">
+        <div class="w-full md:w-auto p-4 md:p-6">
           <div class="flex md:flex-col items-center justify-between md:items-start">
-            <span class="text-white text-sm md:text-xs font-medium uppercase tracking-wide md:mb-2">
+            <span class="label md:mb-2">
               {{ $t('title.setup') }}
             </span>
-            <div class="w-24 border border-white rounded-sm md:hidden">
-              <div class="bg-white opacity-75 h-2" :style="{width: percentage + '%'}"></div>
+            <div class="w-24 border border-gray-4 bg-gray-0 rounded-sm md:hidden overflow-hidden">
+              <div class="bg-blue-5 h-2" :style="{width: percentage + '%'}"></div>
             </div>
-            <ol class="hidden text-white text-sm md:flex flex-col">
+            <ol class="hidden text-sm md:flex flex-col">
               <li class="p-2" v-for="(stepTitle, stepNumber) in steps"
-                  :class="{'opacity-50': stepNumber > step, 'font-medium': stepNumber === step}">
-                <DoneIcon class="mr-2 opacity-75" v-if="stepNumber < step"/>
+                  :class="{'opacity-50 text-gray-6': stepNumber > step, 'font-bold tracking-wide text-blue-7': stepNumber === step}">
+                <DoneIcon class="mr-2 text-green-7 opacity-75" v-if="stepNumber < step"/>
                 <CurrentIcon class="mr-2 opacity-75" v-else-if="stepNumber === step"/>
                 <PendingIcon class="mr-2 opacity-75" v-else/>
                 {{ stepTitle }}
@@ -21,7 +21,7 @@
             </ol>
           </div>
         </div>
-        <div class="flex-1 p-4 md:p-6">
+        <div class="flex-1 p-4 md:p-6 card">
           <div class="flex flex-col min-h-full">
             <span class="text-gray-6">{{ $t('word.step')}} {{ step }}</span>
             <h1 class="text-2xl font-medium">{{ stepTitle }}</h1>

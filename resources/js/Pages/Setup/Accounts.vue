@@ -10,7 +10,7 @@
         </AppButton>
       </li>
       <li class="p-2 bg-gray-0 rounded-sm">
-        <form @submit.prevent="addAccount" class="gutter-1 flex flex-col md:flex-row md:items-end">
+        <form @submit.prevent="addAccount" class="gutter-1 flex flex-col md:flex-row md:items-end justify-center">
           <FormGroup name="name" class="md:mb-0">
             <input
               class="form-control"
