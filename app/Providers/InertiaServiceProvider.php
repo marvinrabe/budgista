@@ -18,9 +18,13 @@ class InertiaServiceProvider extends ServiceProvider
 
         Inertia::share([
             'user' => function () {
-                return Auth::check()
-                    ? Auth::user()->load(['accounts', 'categories'])
-                    : null;
+                if (Auth::check()) {
+                    $user = Auth::user();
+                    $user->load(['accounts', 'categories']);
+                    $user->accounts->each(fn($account) => $account->append('balance'));
+                    return $user;
+                }
+                return null;
             },
             'flash' => function () {
                 return Session::get('flash_notification') ?? [];

@@ -75,6 +75,19 @@ class Transaction extends Model
         return $query->where('date', '<=', now());
     }
 
+    public function scopeNoTransfers($query)
+    {
+        return $query->whereNull('related_id');
+    }
+
+    public function scopeInMonth($query, Month $month)
+    {
+        return $query->whereBetween('date', [
+            $month->firstDay(),
+            $month->lastDay()
+        ]);
+    }
+
     public function getLinksAttribute()
     {
         return [

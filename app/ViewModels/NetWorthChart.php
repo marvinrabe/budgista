@@ -24,6 +24,7 @@ class NetWorthChart extends ViewModel
             return [
                 'month' => (string) $month,
                 'worth' => (int) Auth()->user()->transactions()
+                    ->noTransfers()
                     ->where('date', '<=', $month->lastDay())
                     ->sum('amount')
             ];

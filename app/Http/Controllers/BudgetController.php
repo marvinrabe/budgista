@@ -28,11 +28,9 @@ class BudgetController extends Controller
             'budget' => (new Budget($month))->toArray(),
             'transactions' => Auth::user()
                 ->transactions()
+                ->noTransfers()
+                ->inMonth($month)
                 ->whereNull('category_id')
-                ->whereBetween('date', [
-                    $month->firstDay(),
-                    $month->lastDay()
-                ])
                 ->with(['account', 'targetAccount'])
                 ->orderBy('date', 'desc')
                 ->paginate(25),

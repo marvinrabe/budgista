@@ -51,7 +51,7 @@ class AccountController extends Controller
 
         return Inertia::render('Accounts/Show', [
             'account' => $account
-                ->append('balance_cleared'),
+                ->append(['balance', 'balance_cleared']),
             'transactions' => $account
                 ->transactions()
                 ->current()

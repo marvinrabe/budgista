@@ -27,6 +27,7 @@ class IncomeChart extends ViewModel
             ->selectRaw('payee as category')
             ->where('user_id', Auth::id())
             ->where('amount', '>', 0)
+            ->whereNull('related_id')
             ->groupBy('payee')
             ->orderByDesc('income')
             ->get();

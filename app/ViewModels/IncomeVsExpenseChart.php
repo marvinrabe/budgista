@@ -24,11 +24,13 @@ class IncomeVsExpenseChart extends ViewModel
             return [
                 'month' => (string) $month,
                 'income' => (int) Auth()->user()->transactions()
-                    ->whereBetween('date', [$month->firstDay(), $month->lastDay()])
+                    ->noTransfers()
+                    ->inMonth($month)
                     ->whereNull('category_id')
                     ->sum('amount'),
                 'expense' => abs(Auth()->user()->transactions()
-                    ->whereBetween('date', [$month->firstDay(), $month->lastDay()])
+                    ->noTransfers()
+                    ->inMonth($month)
                     ->whereNotNull('category_id')
                     ->sum('amount'))
             ];

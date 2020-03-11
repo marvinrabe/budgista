@@ -28,6 +28,7 @@ class ExpenseChart extends ViewModel
             ->leftJoin('categories', 'transactions.category_id', '=','categories.id')
             ->where('transactions.user_id', Auth::id())
             ->where('amount', '<', 0)
+            ->whereNull('related_id')
             ->groupBy('categories.name')
             ->orderByDesc('expense')
             ->get();

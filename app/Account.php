@@ -20,9 +20,7 @@ class Account extends Model
         'icon'
     ];
 
-    protected $appends = [
-        'balance', 'links'
-    ];
+    protected $appends = ['links'];
 
     protected $casts = [
         'tracking' => 'boolean'
