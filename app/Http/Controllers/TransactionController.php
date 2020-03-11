@@ -29,7 +29,7 @@ class TransactionController extends Controller
             'transactions' => Auth::user()
                 ->transactions()
                 ->current()
-                ->with('category')
+                ->with(['category', 'account', 'targetAccount'])
                 ->orderBy('date', 'desc')
                 ->paginate(25),
         ]);

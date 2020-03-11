@@ -43,6 +43,18 @@ class Transaction extends Model
         return $this->belongsTo(Account::class);
     }
 
+    public function targetAccount()
+    {
+        return $this->hasOneThrough(
+            Account::class,
+            Transaction::class,
+            'id', // Foreign key on trans table...
+            'id', // Foreign key on account table...
+            'related_id', // Local key on this table...
+            'account_id' // Local key on trans table...
+        );
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

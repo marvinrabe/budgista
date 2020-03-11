@@ -55,7 +55,7 @@ class AccountController extends Controller
             'transactions' => $account
                 ->transactions()
                 ->current()
-                ->with('category')
+                ->with(['category', 'targetAccount'])
                 ->orderBy('date', 'desc')
                 ->paginate(25),
             'futureCount' => $account->transactions()->future()->count()
@@ -71,7 +71,7 @@ class AccountController extends Controller
             'transactions' => $account
                 ->transactions()
                 ->future()
-                ->with('category')
+                ->with(['category', 'targetAccount'])
                 ->orderBy('date', 'asc')
                 ->paginate(25),
             'futureCount' => $account->transactions()->future()->count()

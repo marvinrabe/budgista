@@ -2,27 +2,6 @@
   <div class="card">
     <TransactionListEmpty v-if="isEmpty"/>
     <div v-else>
-      <div class="card-header p-0 hidden sm:flex">
-        <div class="transaction-item">
-          &nbsp;
-          <div class="transaction-date">
-            {{ $t('form.date') }}
-          </div>
-          <div class="transaction-payee">
-            {{ $t('form.payee') }}
-          </div>
-          <div class="transaction-category">
-            {{ $t('form.' + column + '_id') }}
-          </div>
-          <div class="transaction-amount">
-            {{ $t('form.amount') }}
-          </div>
-        </div>
-        <div class="transaction-clear" v-if="column !== 'account'">
-          &nbsp;
-        </div>
-      </div>
-
       <TransactionListItem
         :key="transaction.id"
         :column="column"

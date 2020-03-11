@@ -2,8 +2,8 @@
   <Layout :title="account.name">
     <div class="card ">
       <div class="card-header flex items-center">
-        <h2 class="text-xl">
-          {{ account.name }}
+        <h2 class="text-xl ellipsis">
+          <span>{{ account.name }}</span>
         </h2>
 
         <div class="ml-auto flex">

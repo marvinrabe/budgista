@@ -1,28 +1,46 @@
 <template>
-  <div class="transactions-row">
+  <div class="border-b border-gray-3 hover:bg-gray-0 flex items-baseline">
     <inertia-link
       :href="transaction.links.edit"
-      class="transaction-item"
+      class="flex flex-1 min-w-0 flex-col px-4 py-3 hover:no-underline"
     >
-      <div class="transaction-date">
-        <DateFormat :value="transaction.date"/>
-        <RecurringIcon :value="transaction.recurrence" class="ml-1"/>
-      </div>
-      <div class="transaction-payee ellipsis">
-        <span>{{ transaction.payee }}</span>
-      </div>
-      <div class="transaction-category ellipsis" v-if="transaction[column]">
-        <span>{{ transaction[column].name }}</span>
-      </div>
-      <div class="transaction-category ellipsis" v-else>
-        <span>{{ $t('form.uncategorized') }}</span>
-      </div>
-      <div class="transaction-amount">
+      <div class="w-full flex justify-between">
+        <div class="ellipsis text-gray-8 mr-2">
+          <span>{{ transaction.payee }}</span>
+        </div>
+
         <AppMoney :value="transaction.amount" color/>
       </div>
+      <div class="w-full flex justify-between text-sm text-gray-6 font-weigh-medium tracking-wide">
+        <div class="mr-2">
+          <DateFormat :value="transaction.date"/>
+          <RecurringIcon :value="transaction.recurrence" class="ml-1"/>
+        </div>
+
+        <div class="text-right ellipsis">
+          <span v-if="transaction.account && transaction.target_account">
+            <span class="text-xs">{{ transaction.target_account.name }} &rarr;</span>
+            {{ transaction.account.name }}
+          </span>
+          <span v-else-if="transaction.target_account">
+            {{ transaction.target_account.name }}
+          </span>
+          <span v-else>
+            <template v-if="(column === 'account'|| !column) && transaction.account">
+              {{ transaction.account.name }}
+            </template>
+            <template v-if="!column">&middot;</template>
+            <template v-if="column === 'category' || !column">
+              <template v-if="transaction.category">{{ transaction.category.name }}</template>
+              <template v-else-if="transaction.amount > 0">{{ $t('form.income')}}</template>
+              <template v-else>{{ $t('form.uncategorized')}}</template>
+            </template>
+          </span>
+        </div>
+      </div>
     </inertia-link>
-    <div class="transaction-clear" v-if="column !== 'account'">
-      <ClearInput :transaction="transaction" v-if="!isFuture"/>
+    <div class="pl-0 pr-4 py-3" v-if="!(transaction.account && !isFuture)">
+      <ClearInput :transaction="transaction"/>
     </div>
   </div>
 </template>
@@ -43,7 +61,10 @@
     },
     props: {
       transaction: Object,
-      column: String
+      column: {
+        type: String,
+        default: null,
+      }
     },
     computed: {
       isFuture () {

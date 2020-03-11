@@ -4,8 +4,8 @@
     <div class="card">
       <div class="card-header flex justify-between items-center">
         <div>
-          <h2 class="text-xl leading-tight">
-            {{ category.name }}
+          <h2 class="text-xl leading-tight ellipsis">
+            <span>{{ category.name }}</span>
           </h2>
           <p class="mt-1 text-gray-6" v-if="category.description">{{ category.description }}</p>
         </div>

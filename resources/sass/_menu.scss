@@ -6,8 +6,6 @@
 .menu__item {
   @apply block border-b border-gray-3 py-2 px-4;
   @apply flex flex-wrap items-center;
-  flex-shrink: 0;
-  transition: background-color .2s ease-in, color .2s ease-in, font-weight .2s;
 
   svg {
     @apply text-gray-6;
