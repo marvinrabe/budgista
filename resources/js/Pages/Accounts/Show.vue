@@ -50,6 +50,7 @@
 
     <TransactionList
       :transactions="transactions.data"
+      with-state
       column="category"
     />
 

@@ -7,6 +7,7 @@
         :column="column"
         :transaction="transaction"
         v-for="transaction of transactions"
+        :with-state="withState"
       />
     </div>
   </div>
@@ -23,7 +24,11 @@
     },
     props: {
       transactions: Array,
-      column: String
+      column: String,
+      withState: {
+        type: Boolean,
+        default: false
+      }
     },
     computed: {
       isEmpty () {

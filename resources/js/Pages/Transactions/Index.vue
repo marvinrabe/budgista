@@ -15,7 +15,10 @@
       </div>
     </div>
 
-    <TransactionList :transactions="transactions.data" />
+    <TransactionList
+      :transactions="transactions.data"
+      with-state
+    />
 
     <div class="flex items-center justify-end">
       <AppPagination :paginator="transactions"/>

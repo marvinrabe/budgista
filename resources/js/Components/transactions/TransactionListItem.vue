@@ -39,7 +39,7 @@
         </div>
       </div>
     </inertia-link>
-    <div class="pl-0 pr-4 py-3" v-if="!(transaction.account && !isFuture)">
+    <div class="pl-0 pr-4 py-3" v-if="withState && !isFuture">
       <ClearInput :transaction="transaction"/>
     </div>
   </div>
@@ -61,6 +61,10 @@
     },
     props: {
       transaction: Object,
+      withState: {
+        type: Boolean,
+        default: false
+      },
       column: {
         type: String,
         default: null,
