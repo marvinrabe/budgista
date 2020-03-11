@@ -16,7 +16,7 @@
             href="/budget"
           />
           <AppNavigationItem
-            :label="$t('title.accounts')"
+            :label="$t('title.transactions')"
             :icon="icons.transactions"
             href="/accounts"
           />
