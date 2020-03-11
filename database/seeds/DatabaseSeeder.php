@@ -19,16 +19,14 @@ class DatabaseSeeder extends Seeder
 
     protected $categories = [
         0 => 0.08,
-        1 => 0.06,
-        2 => 0.05,
-        3 => 0.14,
-        4 => 0.06,
-        5 => 0.25,
-        6 => 0.11,
-        7 => 0.1,
-        8 => 0.05,
-        9 => 0.02,
-        10 => 0.08
+        1 => 0.05,
+        2 => 0.14,
+        3 => 0.06,
+        4 => 0.25,
+        5 => 0.11,
+        6 => 0.1,
+        7 => 0.05,
+        8 => 0.02
     ];
 
     /**
@@ -45,6 +43,10 @@ class DatabaseSeeder extends Seeder
             'currency' => 'USD',
             'email_verified_at' => now()
         ]);
+
+        foreach (trans('samples.categories') as $category) {
+            $user->categories()->create($category);
+        }
 
         foreach ($this->accounts as $account) {
             $user->accounts()->create($account);
@@ -88,17 +90,19 @@ class DatabaseSeeder extends Seeder
             $aBudget = rand(0, $left);
             $bBudget = $this->randomize($left - $aBudget);
 
-            $user->categories[11]
+            $user->categories[9]
                 ->budget(Month::fromString($month->format('Y-m')))
-                ->update([
+                ->fill([
                     'amount' => $aBudget
-                ]);
+                ])
+                ->save();
 
-            $user->categories[12]
+            $user->categories[10]
                 ->budget(Month::fromString($month->format('Y-m')))
-                ->update([
+                ->fill([
                     'amount' => $bBudget
-                ]);
+                ])
+                ->save();
 
 
         });
@@ -146,9 +150,10 @@ class DatabaseSeeder extends Seeder
             $budget = (int) (round($part / 100) * 100);
             $category
                 ->budget(Month::fromString($month->format('Y-m')))
-                ->update([
+                ->fill([
                     'amount' => (round($part / 100) * 100)
-                ]);
+                ])
+                ->save();
             $budgetSum += $budget;
         }
         return $budgetSum;
@@ -156,20 +161,15 @@ class DatabaseSeeder extends Seeder
 
     public function transfer($amount, $a, $b, $month)
     {
-        factory(\App\Transaction::class)->create([
+        $transaction = factory(\App\Transaction::class)->state('transfer')->create([
             'user_id' => $a->user_id,
             'date' => $month,
             'account_id' => $a->id,
-            'payee' => 'Transfer',
             'amount' => (int) -$amount
         ]);
 
-        factory(\App\Transaction::class)->create([
-            'user_id' => $b->user_id,
-            'date' => $month,
-            'account_id' => $b->id,
-            'payee' => 'Transfer',
-            'amount' => (int) $amount
+        $transaction->related->update([
+            'account_id' => $b->id
         ]);
     }
 
