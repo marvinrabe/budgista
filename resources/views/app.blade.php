@@ -62,6 +62,7 @@
         appID: '5e5e763047312543ec5d137b',
         user: {
           email: "{{ auth()->user()->email }}",
+          name: "{{ auth()->user()->name }}",
           id: "{{ auth()->user()->id }}"
         },
       })
