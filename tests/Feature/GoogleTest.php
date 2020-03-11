@@ -32,8 +32,9 @@ class GoogleTest extends TestCase
         Event::fake();
 
         $email = $this->faker->email;
+        $name = $this->faker->name;
         $id = $this->faker->randomNumber();
-        $this->mockSocialiteFacade($email, $id);
+        $this->mockSocialiteFacade($name, $email, $id);
 
         $this->assertDatabaseMissing('users', [
             'email' => $email
@@ -45,6 +46,7 @@ class GoogleTest extends TestCase
 
         $this->assertAuthenticated();
         $this->assertDatabaseHas('users', [
+            'name' => $name,
             'email' => $email,
             'google_id' => $id,
             'password' => null
@@ -56,9 +58,10 @@ class GoogleTest extends TestCase
     {
         Mail::fake();
 
+        $name = $this->faker->name;
         $email = $this->faker->email;
         $id = $this->faker->randomNumber();
-        $this->mockSocialiteFacade($email, $id);
+        $this->mockSocialiteFacade($name, $email, $id);
 
         $this->assertDatabaseMissing('users', [
             'email' => $email
@@ -84,7 +87,7 @@ class GoogleTest extends TestCase
             'google_id' => null
         ]);
 
-        $this->mockSocialiteFacade($user->email, $id);
+        $this->mockSocialiteFacade($user->name, $user->email, $id);
 
         $this
             ->get('/login/google/callback')
@@ -102,7 +105,7 @@ class GoogleTest extends TestCase
             'google_id' => $id
         ]);
 
-        $this->mockSocialiteFacade($user->email, $id);
+        $this->mockSocialiteFacade($user->name, $user->email, $id);
 
         $this
             ->get('/login/google/callback')
@@ -119,7 +122,7 @@ class GoogleTest extends TestCase
             'google_id' => null
         ]);
 
-        $this->mockSocialiteFacade($user->email, $id);
+        $this->mockSocialiteFacade($user->name, $user->email, $id);
 
         $this
             ->signIn($user)
@@ -137,7 +140,7 @@ class GoogleTest extends TestCase
             'google_id' => $id
         ]);
 
-        $this->mockSocialiteFacade($user->email, $id);
+        $this->mockSocialiteFacade($user->name, $user->email, $id);
 
         $this
             ->signIn()
@@ -177,9 +180,10 @@ class GoogleTest extends TestCase
         $this->assertNotNull($user->fresh()->google_id);
     }
 
-    public function mockSocialiteFacade($email = 'foo@bar.com', $id = 1, $token = 'foo')
+    public function mockSocialiteFacade($name = 'Foo Bar', $email = 'foo@bar.com', $id = 1, $token = 'foo')
     {
         $socialiteUser = $this->createMock(GoogleUser::class);
+        $socialiteUser->name = $name;
         $socialiteUser->token = $token;
         $socialiteUser->id = $id;
         $socialiteUser->email = $email;

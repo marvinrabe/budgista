@@ -17,10 +17,19 @@
         <hr class="hr-text" :data-content="$t('word.or')">
 
         <AppForm @submit="register">
+          <FormGroup name="name">
+            <input
+              class="form-control"
+              slot-scope="{bindings}"
+              type="text"
+              v-bind="bindings"
+              v-model="form.name"
+            >
+          </FormGroup>
+
           <FormGroup name="email">
             <input
               class="form-control"
-              data-vv-validate-on="input"
               slot-scope="{bindings}"
               type="email"
               v-bind="bindings"
@@ -108,6 +117,7 @@
     data () {
       return {
         form: {
+          name: '',
           email: '',
           password: '',
           terms: false

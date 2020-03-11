@@ -43,6 +43,7 @@ class GoogleController extends Controller
             }
 
             $user = User::create([
+                'name' => $googleUser->name,
                 'email' => $googleUser->email,
                 'google_id' => $googleUser->id,
                 'email_verified_at' => now(),

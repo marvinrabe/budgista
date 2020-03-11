@@ -7,6 +7,7 @@ use App\User;
 use App\Scopes\UserScope;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
@@ -15,7 +16,7 @@ use Tests\TestCase;
 
 class RegistrationTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     public function testUserCanViewARegistrationForm()
     {
@@ -40,6 +41,7 @@ class RegistrationTest extends TestCase
 
         $response = $this
             ->post('/register', [
+                'name' => $this->faker->name,
                 'email' => 'john@example.com',
                 'password' => 'i-love-laravel',
                 'terms' => true,
@@ -139,6 +141,7 @@ class RegistrationTest extends TestCase
 
         $this
             ->post('/register', [
+                'name' => $this->faker->name,
                 'email' => 'john.doe@example.com',
                 'password' => 'password',
                 'terms' => true
@@ -162,6 +165,7 @@ class RegistrationTest extends TestCase
 
         $this
             ->post('/register', [
+                'name' => $this->faker->name,
                 'email' => 'john.doe@example.com',
                 'password' => 'password',
                 'terms' => true
