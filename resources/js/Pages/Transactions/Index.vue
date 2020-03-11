@@ -15,10 +15,7 @@
       </div>
     </div>
 
-    <TransactionList
-      :transactions="transactions.data"
-      column="category"
-    />
+    <TransactionList :transactions="transactions.data" />
 
     <div class="flex items-center justify-end">
       <AppPagination :paginator="transactions"/>

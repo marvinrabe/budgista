@@ -46,10 +46,7 @@
       </div>
     </div>
 
-    <TransactionList
-      :transactions="transactions.data"
-      column="account"
-    />
+    <TransactionList :transactions="transactions.data" />
 
     <div class="flex items-center justify-end">
       <AppPagination :paginator="transactions"/>
