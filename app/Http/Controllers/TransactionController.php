@@ -9,6 +9,7 @@ use App\Rules\Own;
 use App\ViewModels\TransactionForm;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -17,6 +18,22 @@ use Laracasts\Flash\Flash;
 
 class TransactionController extends Controller
 {
+
+    public function index()
+    {
+        return Inertia::render('Transactions/Index', [
+            'netWorth' => Auth::user()
+                ->transactions()
+                ->current()
+                ->sum('amount'),
+            'transactions' => Auth::user()
+                ->transactions()
+                ->current()
+                ->with('category')
+                ->orderBy('date', 'desc')
+                ->paginate(25),
+        ]);
+    }
 
     public function create(Request $request)
     {

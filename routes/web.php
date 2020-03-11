@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
     /*
      * Transactions
      */
-    Route::resource('transactions', TransactionController::class)->except(['index', 'show']);
+    Route::resource('transactions', TransactionController::class)->except(['show']);
     Route::resource('clearedTransactions', ClearedTransactionController::class)->only(['store', 'destroy']);
 
     /*

@@ -121,7 +121,8 @@ export default {
     email: 'Email Address',
     password: 'Password',
     oldPassword: 'Old Password',
-    newPassword: 'New Password'
+    newPassword: 'New Password',
+    netWorth: 'Net-Worth'
   },
   placeholder: {
     accountName: 'Cash, Visa, ...'
@@ -138,6 +139,7 @@ export default {
   },
   title: {
     transactions: 'Transactions',
+    allTransactions: 'All Transactions',
     localisation: 'Localisation',
     deleteUser: 'Delete user account',
     profile: 'User Account',

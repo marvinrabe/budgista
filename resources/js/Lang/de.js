@@ -6,9 +6,9 @@ export default {
   },
   message: {
     deleteUser: 'Wenn du dein Benutzerkonto löscht, dann werden deine Daten sofort, vollständig und unwiderruflich entfernt. Bitte gib dein Passwort ein um die Löschung zu bestätigen.',
-    deleteAccount: 'Möchtest du {name} wirklich löschen? Alle Kontobewegungen werden entfernt. Dies kann nicht rückgängig gemacht werden.',
+    deleteAccount: 'Möchtest du {name} wirklich löschen? Alle Transaktionen werden entfernt. Dies kann nicht rückgängig gemacht werden.',
     deleteCategory: 'Möchtest du {name} wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
-    deleteTransaction: 'Möchtest diese Kontobewegung wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
+    deleteTransaction: 'Möchtest diese Transaktion wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
     forgotPassword: 'Passwort vergessen?',
     noAccount: 'Kein Konto vorhanden?',
     haveAccount: 'Bereits registriert?',
@@ -19,18 +19,18 @@ export default {
     googleNotConnected: 'Nicht mit deinem Google-Konto verbunden.',
     addAccount: 'Füge jetzt ein Konto hinzu.',
     addCategory: 'Erstelle jetzt Kategorien.',
-    addTransaction: 'Füge jetzt Kontobewegungen hinzu.',
+    addTransaction: 'Füge jetzt Transaktionen hinzu.',
     setupCurrency: 'Lass uns Budgista für dich einrichten. Wähle eine Währung. Die ist die Hauptwährung die für dein Budget verwendet wird.',
     setupCategories: 'Wähl die Kategorien aus, die du für dein Budget verwenden willst. Du kannst später jederzeit weitere Kategorien anlegen.',
     setupNoCategories: 'Willst du wirklich fortfahren ohne eine Kategorie ausgewählt zu haben?',
     setupAccounts: 'Gib deine Bankkonten mit den aktuellen Kontoständen ein. Falls du die Kontostände gerade nicht kennst, kannst du diese auch später eingeben.',
     setupNoAccounts: 'Willst du wirklich fortfahren ohne ein Bankkonto eingegeben zu haben?',
-    setupReady: 'Wir haben jetzt alles für dich eingerichtet. Trage nun regelmäßig jede Kontobewegung (Einnahmen und Ausgaben) ein die ab jetzt passiert.',
+    setupReady: 'Wir haben jetzt alles für dich eingerichtet. Trage nun regelmäßig jede Transaktion (Einnahmen und Ausgaben) ein die ab jetzt passiert.',
     setupContact: 'Falls du Fragen oder Feedback haben solltest, kannst du uns gerne jederzeit kontaktieren. Wir sind für dich da!',
   },
   hint: {
-    deleteAccount: 'Lösche dieses Konto mit ALLEN Kontobewegungen.',
-    deleteCategory: 'Lösche diese Kategorie. Zugewiesene Kontobewegungen werden zur angegebenen Kategorie übertragen.',
+    deleteAccount: 'Lösche dieses Konto mit ALLEN Transaktionen.',
+    deleteCategory: 'Lösche diese Kategorie. Zugewiesene Transaktionen werden zur angegebenen Kategorie übertragen.',
   },
   action: {
     feedback: 'Feedback geben',
@@ -51,17 +51,17 @@ export default {
     'create': {
       'account': 'Konto hinzufügen',
       'category': 'Kategorie erstellen',
-      'transaction': 'Kontobewegung hinzufügen'
+      'transaction': 'Transaktion hinzufügen'
     },
     'edit': {
       category: 'Kategorie bearbeiten',
       account: 'Konto bearbeiten',
-      transaction: 'Kontobewegung bearbeiten'
+      transaction: 'Transaktion bearbeiten'
     },
     'delete': {
       category: 'Kategorie löschen',
       account: 'Konto löschen',
-      transaction: 'Kontobewegung löschen'
+      transaction: 'Transaktion löschen'
     },
     'settings': {
       'password': 'Passwort ändern',
@@ -113,14 +113,15 @@ export default {
     payee: 'Empfänger',
     expense: 'Ausgabe',
     income: 'Einnahme',
-    transferTransactions: 'Kontobewegungen übertragen nach',
+    transferTransactions: 'Transaktionen übertragen nach',
     language: 'Sprache',
     locale: 'Gebietsschema',
     currency: 'Währung',
     email: 'E-Mail Adresse',
     password: 'Passwort',
     oldPassword: 'Altes Passwort',
-    newPassword: 'Neues Passwort'
+    newPassword: 'Neues Passwort',
+    netWorth: 'Vermögen'
   },
   placeholder: {
     accountName: 'Bargeld, Girokonto, ...'
@@ -128,7 +129,7 @@ export default {
   word: {
     or: 'oder',
     termsOfService: 'Nutzungsbedingungen',
-    transaction: 'Kontobewegung',
+    transaction: 'Transaktion',
     category: 'Kategorie',
     verified: 'Verifiziert',
     unverified: 'Unverifiziert',
@@ -136,7 +137,8 @@ export default {
     step: 'Schritt'
   },
   title: {
-    transactions: 'Kontobewegungen',
+    transactions: 'Transaktionen',
+    allTransactions: 'Alle Transaktionen',
     localisation: 'Lokalisierung',
     deleteUser: 'Benutzerkonto löschen',
     profile: 'Benutzerkonto',
@@ -162,7 +164,7 @@ export default {
     googleAccount: 'Verknüpfe dein Google-Konto',
     noAccounts: 'Keine Konten vorhanden.',
     noCategories: 'Keine Kategorien vorhanden.',
-    noTransactions: 'Keine Kontobewegungen vorhanden.',
+    noTransactions: 'Keine Transaktionen vorhanden.',
     setup: 'Einrichtung',
     setupCurrency: 'Währung setzen',
     setupCategories: 'Kategorien anpassen',

@@ -1,12 +1,19 @@
 <template>
-  <Layout :title="$t('title.accounts')" :redirect="links">
+  <Layout :title="$t('title.transactions')" redirect="/transactions">
     <template v-slot:menu>
       <h2 class="text-xl mb-4 px-4">
-        {{ $t('title.accounts') }}
+        {{ $t('title.transactions') }}
       </h2>
 
+      <AppMenu>
+        <AppMenuItem
+          :label="$t('title.allTransactions')"
+          :icon="icons.transactions"
+          href="/transactions"/>
+      </AppMenu>
+
       <template v-if="$page.user.accounts.length">
-        <AppMenu>
+        <AppMenu :title="$t('title.accounts')">
           <menu-item
             :account="account"
             :key="account.id"
@@ -49,7 +56,7 @@
   import AppButton from '@/Components/form/AppButton'
   import AppMenu from '@/Components/AppMenu'
   import { iconComponent } from '@/Utils/Icons'
-  import { faPlus } from '@fortawesome/free-solid-svg-icons'
+  import { faInbox, faPlus } from '@fortawesome/free-solid-svg-icons'
   import AppMenuItem from '@/Components/AppMenuItem'
   import AccountListEmpty from '@/Components/accounts/AccountListEmpty'
 
@@ -69,10 +76,14 @@
         default: null
       }
     },
+    data () {
+      return {
+        icons: {
+          transactions: faInbox
+        }
+      }
+    },
     computed: {
-      links () {
-        return this.$page.user.accounts.map(account => account.links.show)
-      },
       spendingAccounts () {
         return this.$page.user.accounts
           .filter(account => !account.tracking)

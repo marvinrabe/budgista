@@ -50,7 +50,6 @@ class AccountController extends Controller
         $this->authorize('view', $account);
 
         return Inertia::render('Accounts/Show', [
-            'accounts' => Account::all(),
             'account' => $account
                 ->append('balance_cleared'),
             'transactions' => $account
