@@ -42,7 +42,7 @@
             <BudgetProgress
               class="w-1/4"
               :activity="$page.budget.expenses"
-              :budget="$page.budget.expenses + $page.budget.available"
+              :budget="$page.budget.available - $page.budget.expenses"
               :available="$page.budget.available"
             />
           </div>
