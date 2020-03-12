@@ -26,6 +26,13 @@
           </div>
           <div class="px-4 py-1 flex items-center justify-between">
             <span class="text-xs tracking-wide font-bold uppercase ">
+              {{ $t('form.expense')}}
+            </span>
+
+            <AppMoney :value="$page.budget.expenses" class="text-sm"/>
+          </div>
+          <div class="px-4 py-1 flex items-center justify-between">
+            <span class="text-xs tracking-wide font-bold uppercase ">
               {{ $t('form.allocated')}}
             </span>
 

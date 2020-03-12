@@ -38,6 +38,14 @@
             class="ml-auto pl-2 text-xs font-medium"
             color
           />
+          <div class="w-full flex justify-end">
+            <BudgetProgress
+              class="w-1/4"
+              :activity="$page.budget.expenses"
+              :budget="$page.budget.expenses + $page.budget.available"
+              :available="$page.budget.available"
+            />
+          </div>
         </AppMenuItem>
         <AppMenuItem
           v-for="category in $page.budget.categories"

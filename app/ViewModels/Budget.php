@@ -76,7 +76,21 @@ class Budget extends ViewModel
                 $query->where('tracking', false);
             })
             ->whereNull('category_id')
-            ->whereBetween('date', [$this->month->firstDay(), $this->month->lastDay()])
+            ->income()
+            ->inMonth($this->month)
+            ->sum('amount');
+    }
+
+    public function expenses()
+    {
+        return Auth::user()
+            ->transactions()
+            ->whereHas('account', function (Builder $query) {
+                $query->where('tracking', false);
+            })
+            ->whereNull('category_id')
+            ->expenses()
+            ->inMonth($this->month)
             ->sum('amount');
     }
 
@@ -89,7 +103,7 @@ class Budget extends ViewModel
 
     public function available()
     {
-        return $this->previousMonth() + $this->income() - $this->allocated();
+        return $this->previousMonth() + $this->income() - $this->allocated() - $this->expenses();
     }
 
     public function links()

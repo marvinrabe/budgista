@@ -80,6 +80,16 @@ class Transaction extends Model
         return $query->whereNull('related_id');
     }
 
+    public function scopeIncome($query)
+    {
+        return $query->noTransfers()->where('amount', '>', 0);
+    }
+
+    public function scopeExpenses($query)
+    {
+        return $query->noTransfers()->where('amount', '<', 0);
+    }
+
     public function scopeInMonth($query, Month $month)
     {
         return $query->whereBetween('date', [
