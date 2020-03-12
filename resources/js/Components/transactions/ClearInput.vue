@@ -1,11 +1,11 @@
 <template>
-  <a
+  <button
+    type="button"
+    :title="$t(this.transaction.paid ? 'hint.paid' : 'hint.unpaid')"
     :class="classes"
-    @click.prevent="toggle"
-    href="#"
-  >
+    @click.prevent="toggle">
     <CheckIcon/>
-  </a>
+  </button>
 </template>
 
 <script>

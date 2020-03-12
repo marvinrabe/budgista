@@ -29,6 +29,8 @@ export default {
   hint: {
     deleteAccount: 'Lösche dieses Konto mit ALLEN Transaktionen.',
     deleteCategory: 'Lösche diese Kategorie. Zugewiesene Transaktionen werden zur angegebenen Kategorie übertragen.',
+    paid: 'Bezahlt',
+    unpaid: 'Unbezahlt'
   },
   action: {
     feedback: 'Feedback geben',

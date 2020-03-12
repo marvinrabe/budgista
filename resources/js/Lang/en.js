@@ -30,6 +30,8 @@ export default {
   hint: {
     deleteAccount: 'Delete this account with ALL transactions.',
     deleteCategory: 'Delete this category. Related Transactions will be transferred to the specified category.',
+    paid: 'Paid',
+    unpaid: 'Unpaid'
   },
   action: {
     feedback: 'Give us Feedback',
