@@ -21,15 +21,15 @@ $factory->define(Transaction::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(Transaction::class, 'cleared', function () {
+$factory->state(Transaction::class, 'paid', function () {
     return [
-        'cleared' => true,
+        'paid' => true,
     ];
 });
 
-$factory->state(Transaction::class, 'uncleared', function () {
+$factory->state(Transaction::class, 'unpaid', function () {
     return [
-        'cleared' => false,
+        'paid' => false,
     ];
 });
 

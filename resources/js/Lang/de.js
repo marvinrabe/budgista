@@ -101,9 +101,9 @@ export default {
     allocated: 'Budgetiert',
     termsOfService: 'Ich akzeptiere die {0}.',
     balance: {
-      cleared: 'Abgerechneter Betrag',
-      uncleared: 'Offener Betrag',
-      working: 'Verfügbarer Betrag',
+      cleared: 'Abgerechnet',
+      outstanding: 'Offen',
+      working: 'Verfügbar',
       default: 'Kontostand'
     },
     initialBalance: 'Anfangskontostand',

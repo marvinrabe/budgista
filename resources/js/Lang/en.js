@@ -102,9 +102,9 @@ export default {
     previousMonth: 'Previous Month',
     termsOfService: 'I agree to the {0}.',
     balance: {
-      cleared: 'Cleared Balance',
-      uncleared: 'Uncleared Balance',
-      working: 'Available Balance',
+      cleared: 'Cleared',
+      outstanding: 'Outstanding',
+      working: 'Available',
       default: 'Balance'
     },
     initialBalance: 'Initial Balance',

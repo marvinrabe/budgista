@@ -57,9 +57,9 @@ class Recurring extends RRule implements Arrayable
 
         return Collection::make($occurrences)
             ->map(function ($date) use ($transaction) {
-                $newTransaction = $transaction->replicate(['id', 'date', 'cleared', 'related_id']);
+                $newTransaction = $transaction->replicate(['id', 'date', 'paid', 'related_id']);
                 $newTransaction->date = $date;
-                $newTransaction->cleared = false;
+                $newTransaction->paid = false;
                 return $newTransaction;
             });
     }

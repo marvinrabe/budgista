@@ -194,15 +194,4 @@ class TransactionController extends Controller
         return Redirect::route('accounts.show', [$transaction->account]);
     }
 
-    public function clear(Transaction $transaction)
-    {
-        $this->authorize('update', $transaction);
-
-        $transaction->update([
-            'cleared' => !$transaction->cleared
-        ]);
-
-        return Redirect::back();
-    }
-
 }

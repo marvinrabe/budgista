@@ -6,72 +6,72 @@ use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ClearedTransactionsTest extends TestCase
+class PaidTransactionsTest extends TestCase
 {
 
     use RefreshDatabase;
 
     public function testClearTransaction()
     {
-        $transaction = factory(Transaction::class)->state('uncleared')->create();
+        $transaction = factory(Transaction::class)->state('unpaid')->create();
 
-        $this->assertFalse($transaction->cleared);
+        $this->assertFalse($transaction->paid);
 
         $this
             ->signIn($transaction->user)
             ->from("/accounts/{$transaction->account_id}")
-            ->post('/clearedTransactions', [
+            ->post('/paidTransactions', [
                 'id' => $transaction->id
             ])
             ->assertRedirect("/accounts/{$transaction->account_id}");
 
-        $this->assertTrue($transaction->fresh()->cleared);
+        $this->assertTrue($transaction->fresh()->paid);
     }
 
     public function testUnclearTransaction()
     {
-        $transaction = factory(Transaction::class)->state('cleared')->create();
+        $transaction = factory(Transaction::class)->state('paid')->create();
 
-        $this->assertTrue($transaction->cleared);
+        $this->assertTrue($transaction->paid);
 
         $this
             ->signIn($transaction->user)
             ->from("/accounts/{$transaction->account_id}")
-            ->delete("/clearedTransactions/{$transaction->id}")
+            ->delete("/paidTransactions/{$transaction->id}")
             ->assertRedirect("/accounts/{$transaction->account_id}");
 
-        $this->assertFalse($transaction->fresh()->cleared);
+        $this->assertFalse($transaction->fresh()->paid);
     }
 
     public function testCanNotClearOtherUsersTransactions()
     {
-        $transaction = factory(Transaction::class)->state('uncleared')->create();
+        $transaction = factory(Transaction::class)->state('unpaid')->create();
 
-        $this->assertFalse($transaction->cleared);
+        $this->assertFalse($transaction->paid);
 
         $this
             ->signIn()
-            ->post('/clearedTransactions', [
+            ->post('/paidTransactions', [
                 'id' => $transaction->id
             ])
             ->assertSessionHasErrors('id');
 
-        $this->assertFalse($transaction->refresh()->cleared);
+        $this->assertFalse($transaction->refresh()->paid);
     }
 
     public function testCanNotUnclearOtherUsersTransactions()
     {
-        $transaction = factory(Transaction::class)->state('cleared')->create();
+        $transaction = factory(Transaction::class)->state('paid')->create();
 
-        $this->assertTrue($transaction->cleared);
+        $this->assertTrue($transaction->paid);
 
         $this
             ->signIn()
             ->from("/accounts/{$transaction->account_id}")
-            ->delete("/clearedTransactions/{$transaction->id}")
+            ->delete("/paidTransactions/{$transaction->id}")
             ->assertNotFound();
 
-        $this->assertTrue($transaction->fresh()->cleared);
+        $this->assertTrue($transaction->fresh()->paid);
     }
 
 }

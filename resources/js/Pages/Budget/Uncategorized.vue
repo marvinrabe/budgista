@@ -7,38 +7,37 @@
         </h2>
       </div>
 
-      <div class="card-body border-b border-gray-3 flex flex-wrap items-baseline -mx-2">
-        <div class="w-full lg:w-1/2 px-2"></div>
-        <div class="flex flex-1 flex-col px-2">
-          <div class="px-4 py-1 flex items-center justify-between">
+      <div class="card-body border-b border-gray-3 flex flex-wrap items-baseline justify-center -mx-4">
+        <div class="w-full lg:w-3/4 xl:w-1/2 flex flex-col px-4">
+          <div class="py-1 flex items-center justify-between">
             <span class="text-xs tracking-wide font-bold uppercase ">
               {{ $t('form.previousMonth')}}
             </span>
 
             <AppMoney :value="$page.budget.previousMonth" class="text-sm"/>
           </div>
-          <div class="px-4 py-1 flex items-center justify-between">
+          <div class="py-1 flex items-center justify-between">
             <span class="text-xs tracking-wide font-bold uppercase ">
               {{ $t('form.income')}}
             </span>
 
             <AppMoney :value="$page.budget.income" class="text-sm"/>
           </div>
-          <div class="px-4 py-1 flex items-center justify-between">
+          <div class="py-1 flex items-center justify-between">
             <span class="text-xs tracking-wide font-bold uppercase ">
               {{ $t('form.expense')}}
             </span>
 
             <AppMoney :value="$page.budget.expenses" class="text-sm"/>
           </div>
-          <div class="px-4 py-1 flex items-center justify-between">
+          <div class="py-1 flex items-center justify-between">
             <span class="text-xs tracking-wide font-bold uppercase ">
               {{ $t('form.allocated')}}
             </span>
 
             <AppMoney :value="$page.budget.allocated" class="text-sm"/>
           </div>
-          <div class="px-4 py-1 flex items-center justify-between -mr-4">
+          <div class="py-1 flex items-center justify-between -mr-4">
             <span class="text-xs tracking-wide font-bold uppercase ">
               {{ $t('form.available')}}
             </span>

@@ -62,22 +62,20 @@ class Account extends Model
             ->sum('amount');
     }
 
-    public function getBalanceClearedAttribute()
+    public function getClearedBalanceAttribute()
     {
         return (int) $this
             ->transactions()
-            ->where('cleared', '=', true)
+            ->where('paid', '=', true)
             ->sum('amount');
     }
 
-    public function getUnclearedBalanceAttribute()
+    public function getOutstandingBalanceAttribute()
     {
         return (int) $this
             ->transactions()
-            ->where([
-                ['cleared', '=', false],
-                ['date', '<=', Carbon::now()]
-            ])
+            ->current()
+            ->where('paid', '=', false)
             ->sum('amount');
     }
 
@@ -91,7 +89,7 @@ class Account extends Model
             'amount' => $difference
         ]);
 
-        $this->transactions()->update(['cleared' => true]);
+        $this->transactions()->update(['paid' => true]);
     }
 
 }

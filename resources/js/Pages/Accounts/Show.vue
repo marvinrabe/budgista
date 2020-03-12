@@ -13,18 +13,31 @@
         </div>
       </div>
 
-      <div class="card-body flex -mx-4">
+      <div class="card-body flex flex-wrap items-baseline -mx-4">
         <AppNumber
-          :color="true"
-          :label="$t('form.balance.cleared')"
-          :value="account.balance_cleared"
-        />
-        <AppNumber
-          class="items-end"
           :color="true"
           :label="$t('form.balance.working')"
           :value="account.balance"
+          class="md:order-2 items-end"
         />
+        <div class="md:order-1 w-full md:w-auto flex flex-col px-4">
+          <div class="py-1 flex items-center justify-between">
+            <span class="label mr-8">
+              <CheckIcon class="text-green-7 mr-1"/>
+              {{ $t('form.balance.cleared')}}
+            </span>
+
+            <AppMoney :value="account.cleared_balance" class="text-sm"/>
+          </div>
+          <div class="py-1 flex items-center justify-between">
+            <span class="label mr-8">
+              <CheckIcon class="text-gray-5 mr-1"/>
+              {{ $t('form.balance.outstanding')}}
+            </span>
+
+            <AppMoney :value="account.outstanding_balance" class="text-sm"/>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -61,19 +74,22 @@
 </template>
 
 <script>
-  import { faPlus, faCog } from '@fortawesome/free-solid-svg-icons'
+  import { faPlus, faCog, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
   import AppNumber from '@/Components/AppNumber'
   import AppButton from '@/Components/form/AppButton'
   import TransactionList from '@/Components/transactions/TransactionList'
   import { iconComponent } from '@/Utils/Icons'
   import AppPagination from '@/Components/AppPagination'
   import Layout from '@/Pages/Accounts/Index'
+  import AppMoney from '@/Components/AppMoney'
 
   export default {
     components: {
+      AppMoney,
       Layout,
       PlusIcon: iconComponent({ icon: faPlus }),
       CogIcon: iconComponent({ icon: faCog }),
+      CheckIcon: iconComponent({ icon: faCheckCircle }),
       AppButton,
       AppNumber,
       AppPagination,

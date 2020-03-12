@@ -25,7 +25,7 @@ class Transaction extends Model
         'account_id',
         'payee',
         'amount',
-        'cleared',
+        'paid',
         'notes'
     ];
 
@@ -34,7 +34,7 @@ class Transaction extends Model
     protected $casts = [
         'amount' => 'int',
         'recurring' => 'bool',
-        'cleared' => 'bool',
+        'paid' => 'bool',
         'date' => 'date:Y-m-d'
     ];
 
@@ -164,11 +164,11 @@ class Transaction extends Model
             $oldRelation = $this->related;
         }
 
-        $related = $this->replicate(['amount', 'account_id', 'cleared', 'related_id']);
+        $related = $this->replicate(['amount', 'account_id', 'paid', 'related_id']);
         $related->account_id = $account_id;
         $related->amount = -1 * $this->amount;
         if ($oldRelation) {
-            $related->cleared = $oldRelation->cleared;
+            $related->paid = $oldRelation->paid;
         }
         $related->related_id = $this->id;
         $related->save();

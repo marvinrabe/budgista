@@ -7,7 +7,7 @@ use App\Rules\Own;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class ClearedTransactionController extends Controller
+class PaidTransactionController extends Controller
 {
 
     public function store(Request $request)
@@ -17,18 +17,18 @@ class ClearedTransactionController extends Controller
         ]);
 
         Transaction::find($request->get('id'))->update([
-            'cleared' => true
+            'paid' => true
         ]);
 
         return Redirect::back();
     }
 
-    public function destroy(Transaction $clearedTransaction)
+    public function destroy(Transaction $paidTransaction)
     {
-        $this->authorize('update', $clearedTransaction);
+        $this->authorize('update', $paidTransaction);
 
-        $clearedTransaction->update([
-            'cleared' => false
+        $paidTransaction->update([
+            'paid' => false
         ]);
 
         return Redirect::back();

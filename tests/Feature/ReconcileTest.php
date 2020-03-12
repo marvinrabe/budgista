@@ -97,11 +97,11 @@ class ReconcileTest extends TestCase
 
         $this->assertDatabaseHas('transactions', [
             'amount' => 12345,
-            'cleared' => true
+            'paid' => true
         ]);
     }
 
-    public function testMarkTransactionsCleared()
+    public function testMarkTransactionsPaid()
     {
         $account = factory(Account::class)->create();
 
@@ -116,7 +116,7 @@ class ReconcileTest extends TestCase
                 'amount' => 12345
             ]);
 
-        $this->assertTrue($transaction->refresh()->cleared);
+        $this->assertTrue($transaction->refresh()->paid);
     }
 
 }

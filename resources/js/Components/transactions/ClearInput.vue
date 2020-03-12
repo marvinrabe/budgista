@@ -21,24 +21,24 @@
     },
     computed: {
       classes () {
-        return this.transaction.cleared ? 'text-green-7 hover:text-green-9' : 'text-gray-5 hover:text-gray-6'
+        return this.transaction.paid ? 'text-green-7 hover:text-green-9' : 'text-gray-5 hover:text-gray-6'
       }
     },
     methods: {
       toggle () {
-        if (this.transaction.cleared) {
+        if (this.transaction.paid) {
           this.unclear()
         } else {
           this.clear()
         }
       },
       clear () {
-        this.$inertia.post('/clearedTransactions', {
+        this.$inertia.post('/paidTransactions', {
           id: this.transaction.id
         })
       },
       unclear () {
-        this.$inertia.delete(`/clearedTransactions/${this.transaction.id}`, { preserveScroll: true })
+        this.$inertia.delete(`/paidTransactions/${this.transaction.id}`, { preserveScroll: true })
       }
     }
   }

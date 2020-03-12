@@ -50,7 +50,7 @@ class AccountController extends Controller
         $this->authorize('view', $account);
 
         return Inertia::render('Accounts/Show', [
-            'account' => $account->append(['balance', 'balance_cleared']),
+            'account' => $account->append(['balance', 'cleared_balance', 'outstanding_balance']),
             'transactions' => $account
                 ->transactions()
                 ->current()
@@ -66,7 +66,7 @@ class AccountController extends Controller
         $this->authorize('view', $account);
 
         return Inertia::render('Accounts/Show', [
-            'account' => $account->append(['balance', 'balance_cleared']),
+            'account' => $account->append(['balance', 'cleared_balance', 'outstanding_balance']),
             'transactions' => $account
                 ->transactions()
                 ->future()

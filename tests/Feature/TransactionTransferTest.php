@@ -76,8 +76,8 @@ class TransactionTransferTest extends TestCase
     public function testKeepStateOnUpdate()
     {
         $transaction = factory(Transaction::class)->state('transfer')->create();
-        $transaction->related->update(['cleared' => true]);
-        $this->assertTrue($transaction->related->cleared);
+        $transaction->related->update(['paid' => true]);
+        $this->assertTrue($transaction->related->paid);
 
         $date = Carbon::now()->format('Y-m-d');
         $this
@@ -92,7 +92,7 @@ class TransactionTransferTest extends TestCase
             ])
             ->assertRedirect("/accounts/{$transaction->account_id}");
 
-        $this->assertTrue($transaction->fresh()->related->cleared);
+        $this->assertTrue($transaction->fresh()->related->paid);
     }
 
     public function testDeletesRelatedTransaction()

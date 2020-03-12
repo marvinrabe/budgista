@@ -21,7 +21,7 @@ class RecurringTransactionsTest extends TestCase
     public function testRecursTransactions()
     {
         $transaction = factory(Transaction::class)->make();
-        $transaction->cleared = true;
+        $transaction->paid = true;
         $transaction->date = Carbon::now()->format('Y-m-d');
         $transaction->recurring = true;
         $transaction->rrule = (string) new RRule('FREQ=DAILY');
@@ -31,7 +31,7 @@ class RecurringTransactionsTest extends TestCase
 
         $this->assertDatabaseHas('transactions', [
             'amount' => $transaction->amount,
-            'cleared' => false,
+            'paid' => false,
             'recurring' => true,
             'date' => Carbon::now()->addDay()->format('Y-m-d')
         ]);
