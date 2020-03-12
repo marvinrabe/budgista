@@ -23,7 +23,7 @@ class SendFollowUpEmail extends Command
                 Carbon::yesterday()->endOfDay()
             ]
         )->each(function (User $user) {
-            Mail::to($user)->send(new FollowUpEmail);
+            Mail::to($user)->send(new FollowUpEmail($user));
         });
 
         $this->info('Done');

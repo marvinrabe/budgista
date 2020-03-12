@@ -10,11 +10,19 @@ class FollowUpEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $user;
+
+    public function __construct($user)
+    {
+        $this->user = $user;
+    }
+
     public function build()
     {
         return $this
             ->from('marvin@budgista.com', 'Marvin (from Budgista)')
-            ->subject('Quick Tip for Starting Your Budget')
-            ->text('email.followUp');
+            ->subject('One quick question...')
+            ->view('email.followUp', ['user' => $this->user])
+            ->text('email.followUpText', ['user' => $this->user]);
     }
 }

@@ -1,11 +1,32 @@
-Hello,
+<div style="font-family: Arial, Helvetica, sans-serif; font-size:16px; color: #495057;  margin: 0 auto; width: 500px;">
+    <div style="padding-bottom: 8px; padding-top: 16px;">
+        <p>Hey {{$user->name}},</p>
+        <p>Thank you for your sign-up at <a href="https://www.budgista.com" style="text-decoration: none; color: #228be6">Budgista</a>. What a blast to have you on board!</p>
+        <p>I have one quick question for you:</p>
+        <p>Was everything clear during the sign up so far? Can we help with anything?</p>
+        <p>If you have a minute to answer, that would be great. If you have any questions of your own, I'd be happy to answer.</p>
+        <p>Nevertheless, I wish you a good time managing your finances with Budgista. You can contact me anytime.</p>
+        <p>Best,</p>
+        <p>Marvin</p>
+    </div>
+    <table cellspacing="0" cellpadding="0" border="0">
+        <tbody>
+        <tr>
+            <td style="vertical-align: top;">
+                <img
+                        src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/2wCEAAwICAgJCAwJCQwRCwoLERUPDAwPFRgTExUTExgXEhQUFBQSFxcbHB4cGxckJCcnJCQ1MzMzNTs7Ozs7Ozs7OzsBDQsLDQ4NEA4OEBQODw4UFBARERAUHRQUFRQUHSUaFxcXFxolICMeHh4jICgoJSUoKDIyMDIyOzs7Ozs7Ozs7O//AABEIAJoAmQMBIgACEQEDEQH/xACMAAABBQEBAQAAAAAAAAAAAAAAAQIEBQYDBwgQAAIBAwIDBgQEBQMFAAAAAAECAwAEERIhBTFBBhMiUWFxMoGRoQcUQrEVUmJy8BaS4SOCosHRAQADAQEAAAAAAAAAAAAAAAAAAQIDBBEAAgIBBAICAwEBAAAAAAAAAAECESEDMUFRBBJxkSJhoRMy/9oADAMBAAIRAxEAPwD1SiiigAooooAKKKQnFAATTJriGFNcrhVJwCTjJOwAzUPiPFYbCN55t0jBAA5k4zivPOI9u7qSQyRjLEEYUatKnfYgEj1zUuaRSjfwaXtL2zjssWvD2Vrlhl3xqCZOAP7tqx8vHXnk76dDeSb7vlwCfMZKKPTPyqoPFEmleW6tRMX3ZpZWZm/7F1D5E1zuOJpcHT3bKo2VDpEfsFDZrNtt2WkkWY7TSoREixxaSCiw4iII3+KMA1cWfbvjtrDqNv38Ue7MdUhI328OWG551iRBZOSvd93IfOQn7Sf/AGpMdu9uQQJI8DZ4HTP0ywoungbX6PR+F/ibwm4AW9t5rV+RZV71PUjRlgPcVqbPivDr5BJaXEcqn+Vhn5jnXindLvJ45cjGrT3bj3x4T9KgiXRcxl0DMh8MjgavQFuZ+vzqlJ8kOKPoMHNLWQ7FdorO8iWzeYx3SjaB21BvWNmyfkTWuzVppktULRRRTEFFFFABRRRQAUUUUAJTJye7bTzwcY9qfVb2iuzacJuJhkELgFTg77bHpSYGD7YcWEt0lshyIzpZVyyjfHiO2T6VmJLA94znPd/oBOEG52AXH3FTOH28nFeMi0XIiDFpW88HJ/et8nBrQQhO7BHqKwk3do3jDB5U8oiYrsBnYAE/TAFdYeN2cY0TROw5DTqGc884at7ddkLKQswTGegrOcQ7MKr6GGB+luQPlnPWkpLlMr/N7orI+LcK1EwxBcc+8DY9STk7VxueIyRN36RhEO4wNSEeYIyDUhuzFzoW4gGls6Tp2IYcvka629vGEVbgBWkyGQqAGI5kDbfzp3HgVSI7Xcl1b64cByNwuke/hODUKS3fu+81rKTsygYI8utWbQcPxpiGkDcEHf6Gqq/VoZco2Cw1KfamnYpRo4W11PZ3Ed1ExUwsrjGxypyfbyr6A4VfQcQsILyBtccqBgeo8wfUcjXz86Plm6g5bHyOfOvXvwvulm7MrFnLW00kbKegJ1oP9rCtY4ZlKzX0UUVRIUUUUAFFFFABRRRQAVVdp4BPwS5U8gus+ynVj7Va1G4lC09hcQoMtJGyqPUg4pPZjR5z2BtM3l7cMNxpUegJJwK3SRjGOgrOdhocW19IylCZ9GG5+Ebj5HatKNqyo6IvAvdrjFQbrhsUw3AyOnMVYU5QDR6pj9qMq3C7ixnLCNriyl2kVd5I2PJlB+JR161VcX7PSamntZGMZyRhSCjdG0MOXmNq9BwuOVcpI0Pl6H/DSen0CnnKPNYOBx36lCVW5QDWqqVXP8yjfGT61Xcd7P3FlbLJOyylemMHHUZ9a9OeGGIsY0VSTvgDJ9zWb7YQM/D5JMZVASR6b71KwypU0zzpMBg0J3/Urb6htz9q9E/CtrqMX8AANsWST+oPjRn2KqM15xAoEgGefiUen+GvV/w24RJaWMt+5IN3pXSeWmPOlh76q2ic0mbLrS0lLVkBRRRQAUUUUAFFFFABTWIAyelOprgMpU8iMGhjRhW7SCwivryOFTHezCS2giRhKAVUapFI/VjJ5YOx3qFF+IMSjVcwSxAfFlDgdP1AfatHLHILT8tbhe+jZ4wX3A0scEj1BB3qgu+E8Wa3WF5GaYuWedX0oVPIaFGFx6Vg3brY6FHH4qy74b2o4ffAd04JxnHXz38qszfQqNRYY8xv+1edcQ4ZJaxnv2Ugq5MsYZZFO5QxuuCDqxzJBqZxDs1xK14M98OK3bpGFkkty3OPIMg1IA2cZ96W3JSS5VGj4l2z4Xw4hZi5Y52Vc4xtueQzUD/XRm3t7GZkI8LSeAb+eaiDgMUkcM8AEkMgDF+cmkjoXyT75pqdm+JG4drQtHAzgqxZSQg5qqsCDn1+tUnYNVlK0Wll2h/N+C8jFtKfg8QZWHlnzrnx3inDba1eO9nRO9UqiEgsxIIACjeqPi/CL/8AJzQXcMDSEHuLiJAjhicIx04OQccqs+GdlLPh0GqQG4ucZ76U6myRjPPbOKml2N3sl9mV7Ldk7riji7nYQWSeBpDux0/Eqj7GvW+CXVtPaCO2GI7bEQ2xso25gVmeCrc8Ps4UmgBgDOzNnBBkckHGN/rWm4RCIxMV5O+QPkKuDtmepBKFtZLCloorU5wooooAKKKKACiiigApDS0hoApuJWssU7z2rhWlwZI3XKMQMBsjBBxVY8/EMnNmr+WmU4/8krQ3gBcE7bVBlkCjw4zWM1lnTpNOJSfkLu8uVNyqwxowYxKxdmI5BmIAA9AKvJY1eAxOuVYYZTvkHmKhW/ErAy/lmJSc+I68gE9cHGK6XXFbW3Ohsttnwgsftmpwa1+iLapdcNtltDbtf20W0MkTL3ip0VldlyVG2QTn359DxEDZLC9LdV0oPuzgU+C7hvQHtSwC5DFgVx6bgGpdvcBmMUoxIm/uPOmhOPP8K5re84jLH+YtvytqjrIwkYNK5Q6lXCZVRnBznpyqRevgHzFTpXAXyqqvXLN6daGuiWyWqGaFYyvgVUA/qbnj5VcWkJihCn4ju3ua48PtRHEruvjIBx5f81MrSEayYT1LwthaKKKszCiiigAooooAKKKKACiikNAEa9B0gj2rK8R4wIbxrbIRVIUuT1PzrXzxiSJlIySNvesw9vbz8TlUqpGkBgRzPKsdXhnRoyWzZUzWMlxdpL3gdM5TB2PluDVjPGYYAuNRx4mz6H3rv/ALBMd3EiZ5+HqaP4VanGtFcDkCWwPlnFQonSvSv+iHZ3M1lCXuWUFjhcHz5HeoV92jKzeAjvomBidcEZzuCQeTVbNwDh0jAmFM9fCP/dMvrXhzTWtoVVFUllQDA8IO5x603hESceHbZP70yRIcaSygkH13+2a5pD393FD0LAt7DxH9qc8mFJPNsYHpsMCu3BNEt5JJkFkXwj+7n9MVUVbRlOVIvBS0gpa2OYKKKKACiiigApM0Go1xeCJiijURuaaTeEJtIkiiqeW8uJTudI6AVHM0wzhjVLSfZL1F0X7Oi/EQPc1xkv7NNjKpP8oOT9BVIVkYanYnPQ/81DuH0Loi2dub9RVR0u39EvVrZfZdXPaCyhB0hpCDsoHP67/asnHxGKPtPc/mD3PeBXUE53P6duWKtobWK3iMz/EilmY+2+M9Tyryybjkl3xy5mHNnIi9ApwB67Co1oRSpGmjJuVvCPW5uIQaSEYE42PSotjOrM5Z8+L7DasZbcd0RZkYk43z+3pTbfjDRoTFLjUdQHufX0zXLUjrUlR6KZYVBJYbYznpnlWN4rxZJe0VpAr/AAuMEeTZ6fKs9xDtNcGRtLkIRgem+Bn96d2WsLrinEV4hLq7i3JxJ0YjIwM8wM70/XFvgn2t0t2bmW5eVtCHYfE/z6VMtWezeORfiHMeYO5zXOxtldsDaKM7/wBTc8fLrUyWLbUP0neunxoYcmt8L4Obyp5UU9sv5L6ORZEEi/CwyKdnpVNZ8Q/LKIpFLoOTDmAemKtoZ4pl1RMGX06e9EouPwKM0/k6UUlLUlBRRRQBynlEaE9fKqxjklj160+5mLht9yRmuWcr863hCkYzeRABp9abpB3py5waVF61RIyUf9I42NRre27x9bDKL+9TD4jVdLPxW1LmIxyxj4A6bj5g043lL+ik0s9De1EptOA3ki/EInb/AGgnb514tYIwvEbqpAOP3r0LjvGOM3dlfW10sbQvC+kBSpXGABnJrHcCtFnvJo/1adWn+0+L6ZFY+RFxpPerwb+NNTTa7rJt7PgXCeJ24a4izIBu6MUJ8idNRbjsfajKwvJGCctltWfLmKsuEK0MSA9NqvRGkgzjHWuTPZ10ujHWvYiw7zXLrl8gx2+gx7VpYbZYRHZWaiNiMKANkUYBb/Odd52EKgKpZ22RRzJqXYWht4yZfFPJ4pG/ZQfIVpp6bm87IjUmtOON2doYY4Y1ij+FRt5+pPqTTxtseRpw2FIcV2L9HC3y9yNcBQB59KbG8sT64yVb9/cdae695Mc/An39qG0nYb1WKI5vYs7TiccuEl8EnLfkam5rOlD1rvb39xb+Fj3kfkeY9qylpLeP0bR1Hs/svKKjW99b3HwNg/ynnUjNZNNbo1TT2M8smuSQZ5MMV1BOn51XWk2rvjnk4X5/4assYA9K6mqwcqdpjhyp3wr6mgDYU3JJqShcdetc7hA8ZFdKCNqa7CsFFJw5JZSXUMCCGUjIIIIIIPnWWTgP8H4nHfROUtoCWmjdS+YidLqGHMYweXSvQxEuc1ymtIphodQQwKn1BBBFNuMsSV43Jj7QT9XRCPDBoWW0cPGw1LnyPLDcjXXVLawvJNEyrGuXJHIfP7VUdjrgwWt5aOSVtp20LknSG5quegOfrVregSETSuZETaCLoCPJeWQetYS8VOdJ4OiHlP0TZTScfNlcLcz2rSl893GrDVFGCME6hgs2cnfblV7w3jNhxOPXaSZI+KFhpdT6p0+VRoOExyIXmXMkp1Of2G+dhmuknArKRCNOk8wVyrZ9GXfb3roUNOMVFWnyzmc9WTcm0+kWnPamsP8Aiq+Dh15bppjvZGA+ESgSY9MsNX3qXbpcgH8w6OR8JRSv1BZqTS7BN9HQoCMUiIqdM+tdcUEA7VJZGYktnHyoIzXfQDTHGOlUmKiM6Fd15+lJ3l1/O31NSUXzp+3lRjlAr7KTheBbq/M3F0QPLZgo+y1dcz71muCsTcwLk6RO23TmelacfH86eriRGk/xEc4OB0pVFN/Waeag0EJHKlpv6qf+qhjQYxTWwu55Dc58qf1qLcjPPfcUllilsVXCYeEWTSraz/mp7mR5HdAXGc7jw5VcZ86slt0d1LrjTuF8s7/eusUMMee7jVMtvpAGdjzxT1JyR0HIVd88kpccC4HKlA2o60tSMTGaXFApaBoKKKKACkbypaYedACZwcH60avWg/CaZTEf/9k="
+                        style="width: 70px; height: 70px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; margin-right: 10px;"
+                />
+            </td>
+            <td style="vertical-align: top; padding-left: 16px;">
+                <strong style="color: #228be6">Marvin Rabe</strong><br>
+                Founder of Budgista
 
-I am the developer of Budgista. I noticed your sign up. Thank you for your trust!
-
-You likely feel overwhelmed with budgeting at first, so I thought I’d share a quick tip many people have found helpful: Ignore the budget at the beginning and simply enter transactions as they come along. Let entering transactions become a habit you do daily. Over time you get a feel on how much money you spend and the rest will follow automatically.
-
-Let me know if you have any questions or feedback.
-
-Best,
-
-Marvin
+                <div style="font-size: .8em; padding-top: .5em;">
+                    <strong>Email: </strong> marvin@budgista.com
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
