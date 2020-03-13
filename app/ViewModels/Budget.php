@@ -103,7 +103,7 @@ class Budget extends ViewModel
 
     public function available()
     {
-        return $this->previousMonth() + $this->income() - $this->allocated() - $this->expenses();
+        return $this->previousMonth() + $this->income() - $this->allocated() + $this->expenses();
     }
 
     public function links()
