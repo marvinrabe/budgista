@@ -8,6 +8,7 @@
 <script>
   import LinearChart from '@/Components/statistics/LinearChart'
   import Month from '@/Utils/Month'
+  import { blue } from 'open-color/open-color'
 
   export default {
     components: {
@@ -30,8 +31,8 @@
         return [
           {
             label: this.$t('title.statisticNetWorth'),
-            borderColor: 'rgba(33, 150, 243, 0.3)',
-            pointBackgroundColor: '#2196F3',
+            borderColor: blue[1],
+            pointBackgroundColor: blue[6],
             backgroundColor: 'transparent',
             type: 'line',
             data: this.data.map(x => x.worth)

@@ -8,6 +8,7 @@
 <script>
   import LinearChart from '@/Components/statistics/LinearChart'
   import Month from '@/Utils/Month'
+  import { red, green } from 'open-color/open-color'
 
   export default {
     components: {
@@ -30,14 +31,16 @@
         return [
           {
             label: this.$t('form.income'),
-            backgroundColor: '#48BB78',
-            borderWidth: 0,
+            borderColor: green[7],
+            backgroundColor: green[2],
+            borderWidth: 1,
             data: this.data.map(x => x.income)
           },
           {
             label: this.$t('form.expense'),
-            backgroundColor: '#F56565',
-            borderWidth: 0,
+            borderColor: red[7],
+            backgroundColor: red[2],
+            borderWidth: 1,
             data: this.data.map(x => x.expense)
           }
         ]

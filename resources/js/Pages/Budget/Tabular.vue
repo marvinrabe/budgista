@@ -8,12 +8,6 @@
         slot="title"
       />
 
-      <div class="lg:order-last flex">
-        <AppButton :to="'/budget/'+monthObject.toString()" icon>
-          <ListIcon/>
-        </AppButton>
-      </div>
-
       <div class="mt-4 w-full lg:mt-0 lg:w-auto lg:ml-auto">
         <div class="flex -mx-2">
           <AppNumber
@@ -24,6 +18,11 @@
           <AppNumber
             :label="$t('form.income')"
             :value="budget.income"
+            class="items-start md:items-center lg:items-end"
+          />
+          <AppNumber
+            :label="$t('form.expense')"
+            :value="budget.expenses"
             class="items-start md:items-center lg:items-end"
           />
           <AppNumber
@@ -68,7 +67,7 @@
   import Month from '@/Utils/Month.js'
   import AppButton from '@/Components/form/AppButton'
   import { iconComponent } from '@/Utils/Icons'
-  import { faThLarge, faCog } from '@fortawesome/free-solid-svg-icons'
+  import { faCog } from '@fortawesome/free-solid-svg-icons'
   import CategoryListEmpty from '@/Components/categories/CategoryListEmpty'
 
   export default {
@@ -80,7 +79,6 @@
       Budget,
       BudgetCategory,
       MonthPicker,
-      ListIcon: iconComponent({ icon: faThLarge }),
       CogIcon: iconComponent({ icon: faCog }),
     },
     props: {
