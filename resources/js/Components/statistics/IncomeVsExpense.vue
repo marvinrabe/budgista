@@ -1,24 +1,16 @@
 <template>
-  <Layout :title="$t('title.statisticIncomeVsExpense')">
-    <div class="card">
-      <div class="card-header">
-        <h2 class="text-xl">{{ $t('title.statisticIncomeVsExpense')}}</h2>
-      </div>
-      <div class="flex justify-center p-4">
-        <LinearChart :chart-data="chartData" class="w-full"/>
-      </div>
-    </div>
-  </Layout>
+  <div>
+    <h3 class="text-lg mb-4">{{ $t('title.statisticIncomeVsExpense')}}</h3>
+    <LinearChart :chart-data="chartData" class="w-full"/>
+  </div>
 </template>
 
 <script>
-  import Layout from '@/Pages/Statistics/Index'
   import LinearChart from '@/Components/statistics/LinearChart'
   import Month from '@/Utils/Month'
 
   export default {
     components: {
-      Layout,
       LinearChart
     },
     props: {
@@ -38,16 +30,14 @@
         return [
           {
             label: this.$t('form.income'),
-            borderColor: '#4CAF50',
-            backgroundColor: 'rgba(76, 173, 80, 0.5)',
-            borderWidth: 1,
+            backgroundColor: '#48BB78',
+            borderWidth: 0,
             data: this.data.map(x => x.income)
           },
           {
             label: this.$t('form.expense'),
-            borderColor: '#F44336',
-            backgroundColor: 'rgba(244, 67, 54, 0.5)',
-            borderWidth: 1,
+            backgroundColor: '#F56565',
+            borderWidth: 0,
             data: this.data.map(x => x.expense)
           }
         ]

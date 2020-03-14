@@ -14,16 +14,16 @@ use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class StatisticsIncomeTest extends TestCase
+class ReportsExpensesTest extends TestCase
 {
     use RefreshDatabase;
 
     public function testDisplay()
     {
         $this->signIn()
-            ->get('/statistics/incomes')
-            ->assertInertiaViewIs('Statistics/Income')
-            ->assertHasProp('data');
+            ->get('/reports')
+            ->assertInertiaViewIs('Reports')
+            ->assertHasProp('expense');
     }
 
     public function testBasedOnlyOnUserData()
@@ -32,10 +32,10 @@ class StatisticsIncomeTest extends TestCase
 
         // Transaction from a different user
         factory(Transaction::class)->create([
-            'amount' => 123
+            'amount' => -123
         ]);
 
-        $response = new IncomeChart(Month::current(), Month::current());
+        $response = new ExpenseChart(Month::current(), Month::current());
 
         $this->assertEquals([], $response->data()->toArray());
     }

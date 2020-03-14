@@ -155,7 +155,7 @@ export default {
     trackingAccounts: 'Tracking Konten',
     pageNotFound: 'Nicht gefunden',
     reset: 'Passwort zurücksetzen',
-    statistics: 'Statistiken',
+    reports: 'Berichte',
     statisticNetWorth: 'Vermögen',
     statisticIncomeVsExpense: 'Einnahmen vs. Ausgaben',
     statisticIncome: 'Einnahmen',

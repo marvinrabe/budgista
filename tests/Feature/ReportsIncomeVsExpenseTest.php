@@ -7,12 +7,12 @@ use App\Category;
 use App\Month;
 use App\Transaction;
 use App\User;
-use App\ViewModels\NetWorthChart;
+use App\ViewModels\IncomeVsExpenseChart;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class StatisticsNetWorthTest extends TestCase
+class ReportsIncomeVsExpenseTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -23,7 +23,7 @@ class StatisticsNetWorthTest extends TestCase
         $account = factory(Account::class)->create(['user_id' => Auth()->id()]);
         $category = factory(Category::class)->create(['user_id' => Auth()->id()]);
 
-        foreach ($this->lastYearMonths() as $date) {
+        foreach (Month::range(...$this->lastYearMonths()) as $date) {
             foreach ([-100, 200] as $amount) {
                 factory(Transaction::class)->create([
                     'user_id' => Auth()->id(),
@@ -41,18 +41,18 @@ class StatisticsNetWorthTest extends TestCase
      */
     protected function lastYearMonths()
     {
-        return Month::range(
+        return [
             Month::fromString(Carbon::now()->subMonthsNoOverflow(11)->format('Y-m')),
             Month::current()
-        );
+        ];
     }
 
     public function testDisplay()
     {
         $this->signIn()
-            ->get('/statistics/netWorth')
-            ->assertInertiaViewIs('Statistics/NetWorth')
-            ->assertHasProp('data');
+            ->get('/reports')
+            ->assertInertiaViewIs('Reports')
+            ->assertHasProp('incomeVsExpense');
     }
 
     public function testMonthlyStatistics()
@@ -60,14 +60,15 @@ class StatisticsNetWorthTest extends TestCase
         $this->prepareTransactions();
 
         $expectedData = [];
-        foreach ($this->lastYearMonths() as $key => $date) {
+        foreach (Month::range(...$this->lastYearMonths()) as $key => $date) {
             $expectedData[] = [
                 'month' => $date->value(),
-                'worth' => $key * 100 + 100
+                'income' => 200,
+                'expense' => 100
             ];
         }
 
-        $response = new NetWorthChart($this->lastYearMonths());
+        $response = new IncomeVsExpenseChart(... $this->lastYearMonths());
 
         $this->assertEquals($expectedData, $response->data()->toArray());
     }
@@ -78,14 +79,15 @@ class StatisticsNetWorthTest extends TestCase
         $this->prepareTransactions(factory(User::class)->create());
 
         $expectedData = [];
-        foreach ($this->lastYearMonths() as $key => $date) {
+        foreach (Month::range(...$this->lastYearMonths()) as $key => $date) {
             $expectedData[] = [
                 'month' => $date->value(),
-                'worth' => $key * 100 + 100
+                'income' => 200,
+                'expense' => 100
             ];
         }
 
-        $response = new NetWorthChart($this->lastYearMonths());
+        $response = new IncomeVsExpenseChart(... $this->lastYearMonths());
 
         $this->assertEquals($expectedData, $response->data()->toArray());
     }

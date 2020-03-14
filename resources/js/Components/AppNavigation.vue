@@ -10,9 +10,9 @@
           href="/budget"
         />
         <AppNavigationItem
-          :label="$t('title.statistics')"
-          :icon="icons.statistics"
-          href="/statistics"
+          :label="$t('title.reports')"
+          :icon="icons.reports"
+          href="/reports"
         />
       </ul>
       <p class="label px-4 pt-3 pb-1 text-gray-6">
@@ -82,7 +82,7 @@
         icons: {
           budget: faEnvelope,
           transactions: faUniversity,
-          statistics: faChartBar,
+          reports: faChartBar,
           settings: faCog,
           allTransactions: faInbox,
           plus: faPlus

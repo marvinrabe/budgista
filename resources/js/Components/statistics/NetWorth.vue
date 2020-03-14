@@ -1,24 +1,16 @@
 <template>
-  <Layout :title="$t('title.statisticNetWorth')">
-    <div class="card">
-      <div class="card-header">
-        <h2 class="text-xl">{{ $t('title.statisticNetWorth')}}</h2>
-      </div>
-      <div class="flex justify-center p-4">
-        <LinearChart :chart-data="chartData" class="w-full"/>
-      </div>
-    </div>
-  </Layout>
+  <div>
+    <h3 class="text-lg mb-4">{{ $t('title.statisticNetWorth')}}</h3>
+    <LinearChart :chart-data="chartData" class="w-full"/>
+  </div>
 </template>
 
 <script>
-  import Layout from '@/Pages/Statistics/Index'
   import LinearChart from '@/Components/statistics/LinearChart'
   import Month from '@/Utils/Month'
 
   export default {
     components: {
-      Layout,
       LinearChart
     },
     props: {
