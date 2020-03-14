@@ -1,19 +1,17 @@
 <template>
   <Layout :title="$t('title.transactions')">
-    <div class="card ">
-      <div class="card-header flex items-center border-b-0">
-        <h2 class="text-xl">
-          {{ $t('title.allTransactions') }}
-        </h2>
-        <div class="ml-auto text-right">
-          <AppNumber
-            :color="true"
-            :label="$t('form.netWorth')"
-            :value="netWorth"
-          />
-        </div>
+    <template v-slot:header>
+      <h2 class="text-xl">
+        {{ $t('title.allTransactions') }}
+      </h2>
+      <div class="ml-auto text-right">
+        <AppNumber
+          :color="true"
+          :label="$t('form.netWorth')"
+          :value="netWorth"
+        />
       </div>
-    </div>
+    </template>
 
     <TransactionList
       :transactions="transactions.data"
@@ -27,13 +25,10 @@
 </template>
 
 <script>
-  import { faPlus, faCog } from '@fortawesome/free-solid-svg-icons'
   import AppNumber from '@/Components/AppNumber'
-  import AppButton from '@/Components/form/AppButton'
   import TransactionList from '@/Components/transactions/TransactionList'
-  import { iconComponent } from '@/Utils/Icons'
   import AppPagination from '@/Components/AppPagination'
-  import Layout from '@/Pages/Accounts/Index'
+  import Layout from '@/Layouts/Default'
 
   export default {
     components: {

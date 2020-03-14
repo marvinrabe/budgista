@@ -1,19 +1,27 @@
 <template>
-  <li class="flex-1 md:flex-auto">
+  <li>
     <inertia-link
       :href="href"
-      class="font-medium p-1 md:px-4 md:py-2 hover:no-underline text-gray-6 hover:text-gray-8 rounded flex flex-wrap flex-col md:flex-row justify-center items-center"
-      :class="{'bg-gray-0 font-bold': active, 'tracking-wide': !active}">
+      class="font-medium px-4 py-3 hover:no-underline text-gray-7 hover:text-gray-8 rounded flex items-center"
+      :class="{'bg-gray-0 ': active, }">
       <FontAwesomeIcon
         :icon="icon"
-        class="mr-1 text-gray-5"
-        :class="{'text-blue-7': active}"
+        class="mr-2 text-gray-6"
+        :class="{'text-blue-6': active}"
         v-if="icon"
       />
-      <span
-        class="text-xs md:text-base"
-        :class="{'text-gray-8': active}">
-        {{ label }}
+      <span class="flex flex-col min-w-0">
+        <span
+          class="ellipsis leading-tight"
+          :class="{'text-gray-8 font-bold': active, 'tracking-wide': !active}">
+          <span>{{ label }}</span>
+        </span>
+        <AppMoney
+          v-if="amount !== null"
+          :value="amount"
+          class="text-xs"
+          color
+        />
       </span>
     </inertia-link>
   </li>
@@ -21,9 +29,11 @@
 
 <script>
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import AppMoney from '@/Components/AppMoney'
 
   export default {
     components: {
+      AppMoney,
       FontAwesomeIcon
     },
     props: {
@@ -34,6 +44,10 @@
       },
       icon: {
         type: Object,
+        default: null
+      },
+      amount: {
+        type: Number,
         default: null
       }
     },

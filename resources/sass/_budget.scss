@@ -10,15 +10,7 @@
   }
 
   &-header {
-    @apply bg-gray-0 text-gray-7 border-b-2 border-gray-3 font-bold;
-
-    .budget-column-budget,
-    .budget-column-activity,
-    .budget-column-available {
-      span {
-        @apply text-sm font-medium;
-      }
-    }
+    @apply border-b-2 border-gray-3;
 
     * {
       cursor: default !important;

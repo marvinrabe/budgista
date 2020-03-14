@@ -2,16 +2,16 @@
   <div class="budget">
     <div class="budget-header">
       <div class="data">
-        <div class="budget-column-name">
+        <div class="label budget-column-name">
           {{ $t('form.category_id') }}
         </div>
-        <div class="budget-column-budget">
+        <div class="label budget-column-budget">
           <span>{{ $t('form.budget') }}</span>
         </div>
-        <div class="budget-column-activity">
+        <div class="label budget-column-activity">
           <span>{{ $t('form.activity') }}</span>
         </div>
-        <div class="budget-column-available">
+        <div class="label budget-column-available">
           <span>{{ $t('form.available') }}</span>
         </div>
       </div>

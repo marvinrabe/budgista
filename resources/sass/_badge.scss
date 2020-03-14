@@ -6,6 +6,11 @@
     @apply bg-green-0 text-green-9;
   }
 
+  &--green-solid {
+    @apply bg-green-8;
+    color: rgba(255,255,255,.95)
+  }
+
   &--yellow {
     @apply bg-yellow-0 text-yellow-9;
   }
@@ -14,8 +19,18 @@
     @apply bg-red-0 text-red-9;
   }
 
+  &--red-solid {
+    @apply bg-red-8;
+    color: rgba(255,255,255,.95)
+  }
+
   &--gray {
     @apply bg-gray-0 text-gray-7;
+  }
+
+  &--gra-solid {
+    @apply bg-gray-3 bg-gray-8;
+    color: rgba(255,255,255,.95)
   }
 
 }

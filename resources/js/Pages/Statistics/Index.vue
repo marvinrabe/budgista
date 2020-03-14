@@ -1,10 +1,6 @@
 <template>
   <Layout :title="$t('title.statistics')" redirect="/statistics/netWorth">
     <template v-slot:menu>
-      <h2 class="text-xl mb-4 px-4">
-        {{ $t('title.statistics') }}
-      </h2>
-
       <AppMenu>
         <AppMenuItem
           :label="$t('title.statisticNetWorth')"

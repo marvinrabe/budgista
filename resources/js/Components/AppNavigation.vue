@@ -1,74 +1,73 @@
 <template>
-  <nav
-    class="border-t md:border-t-0 md:border-b border-gray-3 fixed bottom-0 md:bottom-auto md:top-0 bg-white w-full z-20">
-    <div class="container p-1 md:px-4 md:py-2 flex items-center">
-      <AppLogo
-        class="hidden md:block"
-        style="height: 40px;"
-        :height="40"
-      />
+  <div class="h-screen overflow-auto p-2 flex flex-col">
+    <AppLogo :height="40" class="mt-2 mb-4 h-10"/>
 
-      <nav class="w-full md:w-auto md:ml-2">
-        <ul class="flex">
-          <AppNavigationItem
-            :label="$t('title.budget')"
-            :icon="icons.budget"
-            href="/budget"
-          />
-          <AppNavigationItem
-            :label="$t('title.transactions')"
-            :icon="icons.transactions"
-            href="/accounts"
-          />
-          <inertia-link
-            :href="createTransactionRoute"
-            :title="$t('action.create.transaction')"
-            class="text-white hover:text-white flex items-center justify-center text-xl shadow-lg rounded-full w-10 h-10 bg-blue-6 hover:bg-blue-7 mx-2 md:hidden">
-            <PlusIcon/>
-          </inertia-link>
-          <AppNavigationItem
-            :label="$t('title.statistics')"
-            :icon="icons.statistics"
-            href="/statistics"
-          />
-          <AppNavigationItem
-            :label="$t('title.settings')"
-            :icon="icons.settings"
-            href="/settings"
-            class="md:hidden"
-          />
-        </ul>
-      </nav>
-
-      <div class="ml-auto hidden md:flex items-center">
-        <AppButton
-          :title="$t('action.create.transaction')"
-          :to="createTransactionRoute"
-          variant="primary"
-        >
-          <PlusIcon/>
-          {{ $t('word.transaction') }}
-        </AppButton>
-        <inertia-link
-          class="ml-2 text-gray-6 hover:text-gray-8"
+    <nav class="mb-4">
+      <ul class="flex flex-col">
+        <AppNavigationItem
+          :label="$t('title.budget')"
+          :icon="icons.budget"
+          href="/budget"
+        />
+        <AppNavigationItem
+          :label="$t('title.statistics')"
+          :icon="icons.statistics"
+          href="/statistics"
+        />
+      </ul>
+      <p class="label px-4 pt-3 pb-1 text-gray-6">
+        {{ $t('title.accounts') }}
+      </p>
+      <ul>
+        <AppNavigationItem
+          :label="$t('title.allTransactions')"
+          :icon="icons.allTransactions"
+          href="/transactions"
+        />
+        <AppNavigationItem
+          :label="account.name"
+          :key="account.id"
+          :icon="accountIcon(account)"
+          :amount="account.balance"
+          :href="account.links.show"
+          @click.native="$emit('navigate')"
+          v-for="account in $page.user.accounts"
+        />
+        <AppNavigationItem
+          :label="$t('action.create.account')"
+          :icon="icons.plus"
+          href="/accounts/create"
+        />
+      </ul>
+    </nav>
+    <nav class="mt-auto">
+      <ul>
+        <AppNavigationItem
+          :label="$t('title.settings')"
+          :icon="icons.settings"
           href="/settings"
-          :title="$t('title.settings')"
-        >
-          <CogIcon/>
-        </inertia-link>
-      </div>
-    </div>
-  </nav>
+        />
+      </ul>
+    </nav>
+  </div>
 </template>
 
 <script>
   import AppLogo from './AppLogo'
   import AppNavigationItem from '@/Components/AppNavigationItem'
-  import { faEnvelope, faUniversity, faChartBar, faCog, faPlus } from '@fortawesome/free-solid-svg-icons'
+  import {
+    faEnvelope,
+    faUniversity,
+    faChartBar,
+    faCog,
+    faPlus,
+    faInbox,
+    faCreditCard
+  } from '@fortawesome/free-solid-svg-icons'
   import { iconComponent } from '@/Utils/Icons'
-  import FormGroup from '@/Components/form/FormGroup'
   import AppButton from '@/Components/form/AppButton'
   import { transactionRoute } from '@/Utils/Route'
+  import accountIcons from '@/Components/accounts/accountIcons'
 
   export default {
     components: {
@@ -84,13 +83,24 @@
           budget: faEnvelope,
           transactions: faUniversity,
           statistics: faChartBar,
-          settings: faCog
+          settings: faCog,
+          allTransactions: faInbox,
+          plus: faPlus
         }
       }
     },
     computed: {
-      createTransactionRoute() {
+      createTransactionRoute () {
         return transactionRoute(this.$page)
+      }
+    },
+    methods: {
+      accountIcon (account) {
+        let icon = accountIcons.find(x => x.name === account.icon)
+        if (icon) {
+          return icon.icon
+        }
+        return faCreditCard
       }
     }
   }

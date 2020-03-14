@@ -1,63 +1,65 @@
 <template>
   <Layout :title="account.name">
-    <div class="card ">
-      <div class="card-header flex items-center">
-        <h2 class="text-xl ellipsis">
-          <span>{{ account.name }}</span>
-        </h2>
+    <template v-slot:header>
+      <h2 class="text-xl ellipsis">
+        <span>{{ account.name }}</span>
+      </h2>
 
-        <div class="ml-auto flex">
-          <AppButton :to="account.links.edit" icon :title="$t('action.edit.account')">
-            <CogIcon/>
-          </AppButton>
-        </div>
+      <div class="ml-auto -mr-2">
+        <AppButton :to="account.links.edit" icon :title="$t('action.edit.account')">
+          <CogIcon/>
+        </AppButton>
       </div>
+    </template>
 
-      <div class="card-body flex flex-wrap items-baseline -mx-4">
-        <AppNumber
-          :color="true"
-          :label="$t('form.balance.working')"
-          :value="account.balance"
-          class="md:order-2 items-end"
-        />
-        <div class="md:order-1 w-full md:w-auto flex flex-col px-4">
-          <div class="py-1 flex items-center justify-between">
-            <span class="label mr-8">
-              <CheckIcon class="text-green-7 mr-1"/>
-              {{ $t('form.balance.cleared')}}
-            </span>
+    <div class="flex flex-wrap items-baseline mb-4 -mx-4">
+      <AppNumber
+        :color="true"
+        :label="$t('form.balance.working')"
+        :value="account.balance"
+        class="items-start mb-2 lg:mb-0"
+      />
+      <div class="flex flex-col px-4">
+        <div class="py-1 flex items-center justify-between">
+          <span class="label mr-8">
+            <CheckIcon class="text-green-7 mr-1"/>
+            {{ $t('form.balance.cleared')}}
+          </span>
 
-            <AppMoney :value="account.cleared_balance" class="text-sm"/>
-          </div>
-          <div class="py-1 flex items-center justify-between">
-            <span class="label mr-8">
-              <CheckIcon class="text-gray-5 mr-1"/>
-              {{ $t('form.balance.outstanding')}}
-            </span>
+          <AppMoney :value="account.cleared_balance" class="text-sm"/>
+        </div>
+        <div class="py-1 flex items-center justify-between">
+          <span class="label mr-8">
+            <CheckIcon class="text-gray-5 mr-1"/>
+            {{ $t('form.balance.outstanding')}}
+          </span>
 
-            <AppMoney :value="account.outstanding_balance" class="text-sm"/>
-          </div>
+          <AppMoney :value="account.outstanding_balance" class="text-sm"/>
         </div>
       </div>
     </div>
 
-    <div class="flex justify-center sm:justify-start py-4" v-if="futureCount">
-      <div class="px-1">
-        <inertia-link
-          class="pill"
-          :class="{'pill--active': !showFuture}"
-          :href="account.links.show">
-          {{ $t('action.current') }}
-        </inertia-link>
-      </div>
+    <div class="flex justify-between items-baseline">
+      <h3 class="text-lg mb-2">{{ $t('title.transactions')}}</h3>
 
-      <div class="px-1">
-        <inertia-link
-          class="pill"
-          :href="account.links.future"
-          :class="{'pill--active': showFuture}">
-          {{ $tc('action.futureTransactions', futureCount, { count: futureCount }) }}
-        </inertia-link>
+      <div class="flex justify-center sm:justify-start py-4" v-if="futureCount">
+        <div class="px-1">
+          <inertia-link
+            class="pill"
+            :class="{'pill--active': !showFuture}"
+            :href="account.links.show">
+            {{ $t('action.current') }}
+          </inertia-link>
+        </div>
+
+        <div class="px-1">
+          <inertia-link
+            class="pill"
+            :href="account.links.future"
+            :class="{'pill--active': showFuture}">
+            {{ $tc('action.futureTransactions', futureCount, { count: futureCount }) }}
+          </inertia-link>
+        </div>
       </div>
     </div>
 
@@ -80,7 +82,7 @@
   import TransactionList from '@/Components/transactions/TransactionList'
   import { iconComponent } from '@/Utils/Icons'
   import AppPagination from '@/Components/AppPagination'
-  import Layout from '@/Pages/Accounts/Index'
+  import Layout from '@/Layouts/Default'
   import AppMoney from '@/Components/AppMoney'
 
   export default {

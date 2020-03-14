@@ -12,7 +12,7 @@
   }
 
   &--active {
-    @apply bg-gray-0 relative;
+    @apply bg-gray-0 relative shadow-sm;
     overflow: visible;
 
     svg {

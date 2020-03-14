@@ -1,17 +1,17 @@
 <template>
   <Layout :title="title">
-    <div class="flex -m-2 items-stretch">
-      <div class="p-2 lg:w-1/3 xl:w-1/4"
+    <template v-slot:header>
+      <slot name="header"/>
+    </template>
+
+    <div class="flex -mx-6 items-stretch">
+      <div class="px-6 lg:w-5/12 xl:w-1/3"
            :class="{'hidden lg:block': hasContent, 'w-full': !hasContent}">
-        <div class="sticky" style="top: 5rem;">
-          <slot name="menu"/>
-        </div>
+        <slot name="menu"/>
       </div>
-      <div class="p-2 lg:w-2/3 xl:w-3/4"
+      <div class="px-6 lg:w-7/12 xl:w-2/3"
            :class="{'w-full': hasContent, 'hidden lg:block': !hasContent}">
-        <slot>
-          <slot name="placeholder"/>
-        </slot>
+        <slot></slot>
       </div>
     </div>
   </Layout>

@@ -1,6 +1,6 @@
 <template>
   <Layout :title="$t('title.budget') + ': ' + monthObject.format()">
-    <div class="flex items-center flex-wrap justify-between mb-4">
+    <template v-slot:header>
       <MonthPicker
         :month="monthObject"
         :next="links.next"
@@ -34,7 +34,7 @@
           />
         </div>
       </div>
-    </div>
+    </template>
 
     <template v-if="budget.categories.length">
       <Budget class="card">

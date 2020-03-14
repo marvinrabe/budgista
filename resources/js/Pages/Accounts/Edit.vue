@@ -1,73 +1,68 @@
 <template>
   <Layout :title="$t('action.edit.account')">
-    <div class="card">
-      <div class="card-header">
-        <h2 class="text-xl">{{ $t('action.edit.account') }}</h2>
-      </div>
-      <div class="card-body">
-        <AppForm @submit="save">
-          <FormGroup name="name">
-            <input
-              class="form-control"
-              slot-scope="{bindings}"
-              type="text"
-              v-bind="bindings"
-              v-model="form.name"
-            >
-          </FormGroup>
+    <AppForm @submit="save">
+      <FormGroup name="name">
+        <input
+          class="form-control"
+          slot-scope="{bindings}"
+          type="text"
+          v-bind="bindings"
+          v-model="form.name"
+        >
+      </FormGroup>
 
-          <FormGroup name="icon">
-            <account-icon-picker v-model="form.icon"/>
-          </FormGroup>
+      <FormGroup name="icon">
+        <account-icon-picker v-model="form.icon"/>
+      </FormGroup>
 
-          <div class="form-check">
-            <input
-              :value="true"
-              class="form-check-input"
-              id="tracking"
-              type="checkbox"
-              v-model="form.tracking"
-            >
-            <label
-              class="form-check-label"
-              for="tracking"
-              v-t="'form.trackingAccount'"
-            />
-          </div>
+      <div class="form-check">
+        <input
+          :value="true"
+          class="form-check-input"
+          id="tracking"
+          type="checkbox"
+          v-model="form.tracking"
+        >
+        <label
+          class="form-check-label"
+          for="tracking"
+          v-t="'form.trackingAccount'"
+        />
+      </div>
 
-          <template slot="actions">
-            <AppButton
-              :label="$t('action.save')"
-              :loading="saving"
-              variant="primary"
-            />
-          </template>
-        </AppForm>
+      <template slot="actions">
+        <AppButton
+          :label="$t('action.save')"
+          :loading="saving"
+          variant="primary"
+        />
+      </template>
+    </AppForm>
+
+    <hr class="border-t-2 border-gray-1 -mx-4 my-16 mb-4"/>
+
+    <form @submit.prevent="deleteAccount" class="flex -mx-1 flex-wrap items-end justify-between">
+      <div class="flex-1 px-1">
+        <h3 class="text-xl mb-2">
+          {{ $t('action.delete.account') }}
+        </h3>
+        <p>{{ $t('hint.deleteAccount') }}</p>
       </div>
-      <div class="card-body border-t border-gray-3">
-        <form @submit.prevent="deleteAccount" class="flex -mx-1 flex-wrap items-end justify-between">
-          <div class="flex-1 px-1">
-            <h3 class="text-xl mb-2">
-              {{ $t('action.delete.account') }}
-            </h3>
-            <p>{{ $t('hint.deleteAccount') }}</p>
-          </div>
-          <div class="lg:ml-4 mt-4 w-full lg:w-auto flex justify-end">
-            <AppButton
-              type="submit"
-              :label="$t('action.delete.account')"
-              :loading="saving"
-              variant="danger"
-            />
-          </div>
-        </form>
+      <div class="lg:ml-4 mt-4 w-full lg:w-auto flex justify-end">
+        <AppButton
+          type="submit"
+          :label="$t('action.delete.account')"
+          :loading="saving"
+          variant="danger"
+        />
       </div>
-    </div>
+    </form>
+
   </Layout>
 </template>
 
 <script>
-  import Layout from '@/Pages/Accounts/Index'
+  import Layout from '@/Layouts/Default'
   import AppButton from '@/Components/form/AppButton'
   import AppForm from '@/Components/form/AppForm'
   import AccountIconPicker from '@/Components/accounts/AccountIconPicker'
@@ -108,7 +103,7 @@
           })
       },
       deleteAccount () {
-        if (window.confirm(this.$t('message.deleteAccount', {name: this.account.name}))) {
+        if (window.confirm(this.$t('message.deleteAccount', { name: this.account.name }))) {
           this.$inertia.delete(this.account.links.destroy)
         }
       }

@@ -7,7 +7,7 @@
         </h2>
       </div>
 
-      <div class="card-body border-b border-gray-3 flex flex-wrap items-baseline justify-center -mx-4">
+      <div class="card-body flex flex-wrap items-baseline justify-center -mx-4">
         <div class="w-full lg:w-3/4 xl:w-1/2 flex flex-col px-4">
           <div class="py-1 flex items-center justify-between">
             <span class="text-xs tracking-wide font-bold uppercase ">

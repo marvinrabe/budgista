@@ -1,24 +1,16 @@
 <template>
   <Layout :title="$t('action.create.transaction')">
-    <h2 class="text-xl mb-4 px-4">
-      {{ $t('action.create.transaction') }}
-    </h2>
+    <AppForm @submit="save">
+      <TransactionForm v-model="form"/>
 
-    <div class="card">
-      <div class="card-body">
-        <AppForm @submit="save">
-          <TransactionForm v-model="form"/>
-
-          <template slot="actions">
-            <AppButton
-              :label="$t('action.save')"
-              :loading="saving"
-              variant="primary"
-            />
-          </template>
-        </AppForm>
-      </div>
-    </div>
+      <template slot="actions">
+        <AppButton
+          :label="$t('action.save')"
+          :loading="saving"
+          variant="primary"
+        />
+      </template>
+    </AppForm>
   </Layout>
 </template>
 

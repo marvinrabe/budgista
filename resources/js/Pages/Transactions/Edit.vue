@@ -1,36 +1,16 @@
 <template>
   <Layout :title="$t('action.edit.transaction')">
-    <template v-slot:actions>
-      <AppButton
-        :title="$t('action.delete.transaction')"
-        @click="deleteTransaction"
-        subtle
-        variant="danger"
-        icon
-      >
-        <DeleteIcon/>
-      </AppButton>
-    </template>
+    <AppForm @submit="saveTransaction">
+      <TransactionForm v-model="form"/>
 
-    <h2 class="text-xl mb-4 px-4">
-      {{ $t('action.edit.transaction') }}
-    </h2>
-
-    <div class="card" v-if="transaction">
-      <div class="card-body">
-        <AppForm @submit="saveTransaction">
-          <TransactionForm v-model="form"/>
-
-          <template slot="actions">
-            <AppButton
-              :label="$t('action.save')"
-              :loading="saving"
-              variant="primary"
-            />
-          </template>
-        </AppForm>
-      </div>
-    </div>
+      <template slot="actions">
+        <AppButton
+          :label="$t('action.save')"
+          :loading="saving"
+          variant="primary"
+        />
+      </template>
+    </AppForm>
 
     <div class="text-right">
       <AppButton

@@ -30,7 +30,7 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply text-gray-8;
+  @apply text-gray-8 font-semibold;
 }
 
 @tailwind components;
@@ -59,9 +59,26 @@ h1, h2, h3, h4, h5, h6 {
 @import "menu";
 @import "numeric";
 @import "password";
+@import "sidebar";
 @import "budget";
 
 @tailwind utilities;
+
+.min-h-10 {
+  min-height: 2.5rem;
+}
+
+.hover\:show-icon {
+  svg {
+    display: none;
+  }
+
+  &:hover {
+    svg {
+      display: inherit;
+    }
+  }
+}
 
 .text-black-25 {
   color: rgba(0, 0, 0, .25);

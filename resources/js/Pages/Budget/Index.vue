@@ -1,35 +1,35 @@
 <template>
   <Layout :title="$t('title.budget') + ': ' + monthObject.format()" :redirect="$page.budget.links.uncategorized">
-    <template v-slot:menu>
+    <template v-slot:header>
+      <h2 class="text-xl">
+        {{ monthObject.format() }}
+      </h2>
 
-      <div class="flex items-center mb-4">
-          <span class="text-gray-8 text-xl px-4">
-            {{ monthObject.format() }}
-          </span>
-        <div class="flex ml-auto">
-          <inertia-link
-            :title="$t('action.previousMonth')"
-            :href="prevLink"
-            class="btn btn--icon"
-          >
-            <PrevIcon/>
-          </inertia-link>
-          <inertia-link
-            :title="$t('action.nextMonth')"
-            :href="nextLink"
-            class="btn btn--icon"
-          >
-            <NextIcon/>
-          </inertia-link>
-          <AppButton
-            :to="'/tabularBudget/'+monthObject.toString()"
-            class="hidden md:block"
-            icon>
-            <TableIcon/>
-          </AppButton>
-        </div>
+      <div class="flex ml-auto -mr-2">
+        <inertia-link
+          :title="$t('action.previousMonth')"
+          :href="prevLink"
+          class="btn btn--icon"
+        >
+          <PrevIcon/>
+        </inertia-link>
+        <inertia-link
+          :title="$t('action.nextMonth')"
+          :href="nextLink"
+          class="btn btn--icon"
+        >
+          <NextIcon/>
+        </inertia-link>
+        <AppButton
+          :to="'/tabularBudget/'+monthObject.toString()"
+          class="hidden md:block"
+          icon>
+          <TableIcon/>
+        </AppButton>
       </div>
+    </template>
 
+    <template v-slot:menu>
       <AppMenu>
         <AppMenuItem class="border-b-2" :label="$t('form.uncategorized')" :href="$page.budget.links.uncategorized">
           <AppMoney
@@ -68,7 +68,6 @@
         </AppMenuItem>
       </AppMenu>
     </template>
-
     <slot/>
   </Layout>
 </template>

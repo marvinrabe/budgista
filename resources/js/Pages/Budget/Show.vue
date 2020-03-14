@@ -1,34 +1,71 @@
 <template>
   <Layout>
 
-    <div class="card">
-      <div class="card-header flex justify-between items-center">
+    <div class="rounded bg-gray-0 shadow -mx-4 p-4 mb-4">
+      <div class="relative flex items-start">
         <div>
-          <h2 class="text-xl leading-tight ellipsis">
-            <span>{{ category.name }}</span>
-          </h2>
-          <p class="mt-1 text-gray-6" v-if="category.description">{{ category.description }}</p>
+          <inertia-link
+            :href="category.links.edit"
+            :title="$t('action.edit.category')"
+            class="text-gray-8 hover:text-gray-8">
+            <h2 class="text-lg leading-tight ellipsis flex">
+              <span>{{ category.name }}</span>
+            </h2>
+          </inertia-link>
+          <p class="mb-3 text-sm" v-if="category.description">{{ category.description }}</p>
         </div>
 
-        <AppButton :to="category.links.edit" icon :title="$t('action.edit.category')">
-          <CogIcon/>
-        </AppButton>
+        <div class="ml-auto text-lg leading-tight p-2 flex items-center -mr-2 -mt-2">
+          <AppMoney class="font-light" color :value="categoryBudget.available"/>
+          <InfoIcon
+            class="ml-2 text-sm text-gray-6 hover:text-gray-8 cursor-pointer"
+            @click="() => {showInfo = !showInfo}"
+          />
+        </div>
+
+        <div
+          class="flex-col px-6 py-4 bg-white z-10 absolute right-0 top-0 rounded shadow-lg"
+          :class="{'hidden': !showInfo, 'flex': showInfo}"
+          @click.stop="() => {showInfo = false}"
+        >
+          <div class="py-1 flex items-baseline justify-between">
+            <div class="label mr-6">
+              {{ $t('form.previousMonth')}}
+            </div>
+
+            <AppMoney :value="categoryBudget.previousMonth" class="text-sm"/>
+          </div>
+          <div class="py-1 flex items-baseline justify-between">
+            <div class="label mr-6">
+              {{ $t('form.budget')}}
+            </div>
+
+            <AppMoney :value="categoryBudget.amount" class="text-sm"/>
+          </div>
+          <div class="py-1 flex items-baseline justify-between">
+            <div class="label mr-6">
+              {{ $t('form.activity')}}
+            </div>
+
+            <AppMoney :value="categoryBudget.activity" class="text-sm"/>
+          </div>
+          <div class="py-1 flex items-baseline justify-between">
+            <div class="label mr-6">
+              {{ $t('form.available')}}
+            </div>
+
+            <AppMoney :value="categoryBudget.available" class="text-sm"/>
+          </div>
+        </div>
       </div>
 
-      <div class="card-body border-b border-gray-3 flex flex-wrap items-baseline -mx-4">
+      <div class="flex flex-col">
         <FormGroup
           name="amount"
           label="budget"
-          class="w-full lg:w-1/2 px-4">
-          <template v-slot:additional v-if="categoryBudget.recommendedBudget > 0">
-            <div class="ml-auto text-gray-6 text-sm px-1 font-medium">
-              {{ $t('word.recommended')}}:
-              <AppMoney
-                :value="categoryBudget.recommendedBudget"
-                class="cursor-pointer hover:text-gray-8"
-                @click.native="() => updateBudget(categoryBudget.recommendedBudget)"
-              />
-            </div>
+          class="mb-0">
+          <template v-slot:additional>
+
           </template>
           <AppMoneyInput
             :value="categoryBudget.amount"
@@ -36,42 +73,24 @@
             allow-negative
           />
         </FormGroup>
-        <div class="flex flex-1 flex-col px-4">
-          <div class="py-1 flex items-center justify-between">
-            <span class="text-xs tracking-wide font-bold uppercase ">
-              {{ $t('form.previousMonth')}}
-            </span>
 
-            <AppMoney :value="categoryBudget.previousMonth" class="text-sm"/>
-          </div>
-          <div class="py-1 flex items-center justify-between">
-            <span class="text-xs tracking-wide font-bold uppercase ">
-              {{ $t('form.budget')}}
-            </span>
-
-            <AppMoney :value="categoryBudget.amount" class="text-sm"/>
-          </div>
-          <div class="py-1 flex items-center justify-between">
-            <span class="text-xs tracking-wide font-bold uppercase ">
-              {{ $t('form.activity')}}
-            </span>
-
-            <AppMoney :value="categoryBudget.activity" class="text-sm"/>
-          </div>
-          <div class="py-1 flex items-center justify-between -mr-4">
-            <span class="text-xs tracking-wide font-bold uppercase ">
-              {{ $t('form.available')}}
-            </span>
-
-            <AppMoney
-              :value="categoryBudget.available"
-              class="badge text-xl"
-              :class="{'badge--red': categoryBudget.available < 0, 'badge--green': categoryBudget.available > 0, 'badge--gray': categoryBudget.available === 0, }"
-            />
-          </div>
+        <div
+          class="w-full mt-2 px-4 flex items-baseline justify-end"
+          v-if="categoryBudget.recommendedBudget > 0 && categoryBudget.amount < categoryBudget.recommendedBudget">
+          <span class="label mr-2">
+            <TipIcon class="text-yellow-5 mr-1"/>
+            {{ $t('word.recommended')}}:
+          </span>
+          <AppMoney
+            :value="categoryBudget.recommendedBudget"
+            class="cursor-pointer hover:text-gray-8 hover:underline text-sm"
+            @click.native="() => updateBudget(categoryBudget.recommendedBudget)"
+          />
         </div>
       </div>
     </div>
+
+    <h3 class="text-lg mb-2">{{ $t('title.transactions')}}</h3>
 
     <TransactionList
       :transactions="transactions.data"
@@ -91,7 +110,7 @@
   import AppPagination from '@/Components/AppPagination'
   import AppMoney from '@/Components/AppMoney'
   import { iconComponent } from '@/Utils/Icons'
-  import { faCog } from '@fortawesome/free-solid-svg-icons'
+  import { faInfoCircle, faLightbulb } from '@fortawesome/free-solid-svg-icons'
   import AppButton from '@/Components/form/AppButton'
 
   export default {
@@ -106,9 +125,15 @@
       AppMoneyInput,
       AppPagination,
       FormGroup,
-      CogIcon: iconComponent({ icon: faCog }),
+      InfoIcon: iconComponent({ icon: faInfoCircle }),
+      TipIcon: iconComponent({ icon: faLightbulb }),
       Layout,
       TransactionList
+    },
+    data () {
+      return {
+        showInfo: false
+      }
     },
     methods: {
       updateBudget (value) {

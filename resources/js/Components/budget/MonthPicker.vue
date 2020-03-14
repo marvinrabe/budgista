@@ -1,8 +1,8 @@
 <template>
   <div class="flex items-center">
-    <span class="text-gray-8 text-xl px-4">
+    <h2 class="text-xl">
       {{ month.format() }}
-    </span>
+    </h2>
     <div class="flex">
       <inertia-link
         :title="$t('action.previousMonth')"
