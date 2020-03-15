@@ -4,12 +4,12 @@
       <slot name="header"/>
     </template>
 
-    <div class="flex -mx-6 items-stretch">
-      <div class="px-6 lg:w-5/12 xl:w-1/3"
+    <div class="flex -mx-4 items-stretch">
+      <div class="px-4 lg:w-5/12 xl:w-1/3"
            :class="{'hidden lg:block': hasContent, 'w-full': !hasContent}">
         <slot name="menu"/>
       </div>
-      <div class="px-6 lg:w-7/12 xl:w-2/3"
+      <div class="px-4 lg:w-7/12 xl:w-2/3"
            :class="{'w-full': hasContent, 'hidden lg:block': !hasContent}">
         <slot></slot>
       </div>
@@ -30,6 +30,10 @@
       redirect: {
         type: [String, Array],
         default: null
+      },
+      hasContent: {
+        type: Boolean,
+        default: true
       }
     },
     mounted () {
@@ -44,9 +48,6 @@
         } else {
           return this.redirect
         }
-      },
-      hasContent () {
-        return !!this.$slots.default
       }
     }
   }

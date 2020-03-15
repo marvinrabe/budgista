@@ -1,10 +1,10 @@
 <template>
   <Layout :title="$t('title.reports')" redirect="/statistics/netWorth">
-    <NetWorth v-bind="netWorth" class="mb-8 pb-4 border-b-2 border-gray-3"/>
-    <IncomeVsExpense v-bind="incomeVsExpense" class="mb-8 pb-4 border-b-2 border-gray-3"/>
+    <NetWorth v-bind="netWorth"/>
+    <IncomeVsExpense v-bind="incomeVsExpense"/>
     <div class="-mx-2 flex flex-wrap">
       <div class="w-full lg:w-1/2 px-2">
-        <Income v-bind="income" class="mb-8 pb-4 border-b-2 border-gray-3 lg:m-0 lg:p-0 lg:border-0"/>
+        <Income v-bind="income"/>
       </div>
       <div class="w-full lg:w-1/2 px-2">
         <Expense v-bind="expense"/>

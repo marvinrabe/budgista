@@ -8,11 +8,40 @@ use App\ViewModels\Budget;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Money\Converter;
+use Money\Exchange\FixedExchange;
+use Money\Money;
+use Money\Currency;
+use Money\Currencies\ISOCurrencies;
+use Money\Parser\IntlLocalizedDecimalParser;
+
 
 class BudgetController extends Controller
 {
     public function index($month = null)
     {
+        /*$currencies = new ISOCurrencies();
+
+        $numberFormatter = new \NumberFormatter('de_DE', \NumberFormatter::DECIMAL);
+        $moneyParser = new IntlLocalizedDecimalParser($numberFormatter, $currencies);
+
+        $yen = $moneyParser->parse('1.000,00', new Currency('JPY'));
+
+        $exchange = new FixedExchange([
+            'EUR' => [
+                'JPY' => 132.41
+            ],
+            'JPY' => [
+                'EUR' => 0.0083956007
+            ]
+        ]);
+
+        $converter = new Converter(new ISOCurrencies(), $exchange);
+
+        $eur = $converter->convert($yen, new Currency('EUR'));
+
+        ddd($eur->getAmount());}*/
+
         $month = $this->getMonth($month);
 
         return Inertia::render('Budget/Index', [

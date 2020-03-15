@@ -39,7 +39,7 @@
       </template>
     </AppForm>
 
-    <hr class="border-t-2 border-gray-1 -mx-4 my-16 mb-4"/>
+    <hr class="border-t-2 border-gray-1 my-16 mb-4"/>
 
     <form @submit.prevent="deleteAccount" class="flex -mx-1 flex-wrap items-end justify-between">
       <div class="flex-1 px-1">

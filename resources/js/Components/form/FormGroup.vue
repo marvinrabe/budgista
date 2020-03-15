@@ -1,6 +1,6 @@
 <template>
   <div class="form-group">
-    <div class="flex items-center mb-2" v-if="hasLabel">
+    <div class="flex items-baseline mb-2" v-if="hasLabel">
       <label
         v-t="labelTranslation"
         :for="name"

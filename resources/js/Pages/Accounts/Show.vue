@@ -5,44 +5,46 @@
         <span>{{ account.name }}</span>
       </h2>
 
-      <div class="ml-auto -mr-2">
+      <div class="ml-auto">
         <AppButton :to="account.links.edit" icon :title="$t('action.edit.account')">
           <CogIcon/>
         </AppButton>
       </div>
     </template>
 
-    <div class="flex flex-wrap items-baseline mb-4 -mx-4">
-      <AppNumber
-        :color="true"
-        :label="$t('form.balance.working')"
-        :value="account.balance"
-        class="items-start mb-2 lg:mb-0"
-      />
-      <div class="flex flex-col px-4">
-        <div class="py-1 flex items-center justify-between">
+    <div class="card px-4 py-2 mb-4">
+      <div class="flex flex-wrap items-baseline -mx-4">
+        <AppNumber
+          :color="true"
+          :label="$t('form.balance.working')"
+          :value="account.balance"
+          class="items-start mb-2 lg:mb-0"
+        />
+        <div class="flex flex-col px-4">
+          <div class="py-1 flex items-center justify-between">
           <span class="label mr-8">
             <CheckIcon class="text-green-7 mr-1"/>
             {{ $t('form.balance.cleared')}}
           </span>
 
-          <AppMoney :value="account.cleared_balance" class="text-sm"/>
-        </div>
-        <div class="py-1 flex items-center justify-between">
+            <AppMoney :value="account.cleared_balance" class="text-sm"/>
+          </div>
+          <div class="py-1 flex items-center justify-between">
           <span class="label mr-8">
             <CheckIcon class="text-gray-5 mr-1"/>
             {{ $t('form.balance.outstanding')}}
           </span>
 
-          <AppMoney :value="account.outstanding_balance" class="text-sm"/>
+            <AppMoney :value="account.outstanding_balance" class="text-sm"/>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="flex justify-between items-baseline">
-      <h3 class="text-lg mb-2">{{ $t('title.transactions')}}</h3>
+      <h3 class="text-lg mb-2 px-4">{{ $t('title.transactions')}}</h3>
 
-      <div class="flex justify-center sm:justify-start py-4" v-if="futureCount">
+      <div class="flex py-4" v-if="futureCount">
         <div class="px-1">
           <inertia-link
             class="pill"

@@ -23,6 +23,10 @@
     @apply text-gray-8 no-underline;
   }
 
+  &:focus {
+    @apply shadow-sm;
+  }
+
   &--small {
     @apply mx-1 py-1 px-2 text-sm;
   }
@@ -31,7 +35,7 @@
     @apply text-white bg-blue-6;
 
     &:hover {
-      @apply text-white shadow bg-blue-8;
+      @apply text-white bg-blue-8;
     }
   }
 

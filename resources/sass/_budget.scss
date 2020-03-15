@@ -92,18 +92,9 @@
       .budget-column-name {
         flex: 100%;
       }
-
-      .budget-column-budget,
-      .budget-column-activity,
-      .budget-column-available {
-        @apply text-sm font-medium;
-      }
     }
 
   }
 
 }
 
-.sortable-chosen {
-  @apply shadow bg-white -mx-1;
-}

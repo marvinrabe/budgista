@@ -1,5 +1,9 @@
 <template>
-  <Layout :title="$t('title.settings')" redirect="/profile">
+  <Layout
+    :title="$t('title.settings')"
+    redirect="/profile"
+    :has-content="!!this.$slots.default"
+  >
     <template v-slot:menu>
       <AppMenu>
         <AppMenuItem
@@ -48,7 +52,7 @@
         default: null
       }
     },
-    data() {
+    data () {
       return {
         icons: {
           profile: faUserCircle,

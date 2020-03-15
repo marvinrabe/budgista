@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h3 class="text-lg mb-4">{{ $t('title.statisticIncome')}}</h3>
-    <DonutChart :chart-data="chartData" class="w-full"/>
+    <h3 class="text-lg mb-2 px-4">{{ $t('title.statisticIncome')}}</h3>
+    <div class="card p-8">
+      <DonutChart :chart-data="chartData" class="w-full"/>
+    </div>
   </div>
 </template>
 

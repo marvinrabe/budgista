@@ -103,3 +103,7 @@ h1, h2, h3, h4, h5, h6 {
 .font-numeric {
   font-variant-numeric: tabular-nums;
 }
+
+.sortable-chosen {
+  @apply shadow bg-white -mx-1;
+}

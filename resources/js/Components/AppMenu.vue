@@ -6,7 +6,7 @@
       </h3>
       <slot name="header"/>
     </div>
-    <div class="menu__body -mx-4 mb-4 lg:border-r border-gray-3">
+    <div class="menu__body lg:-mx-4 mb-4 card">
       <slot></slot>
     </div>
   </div>

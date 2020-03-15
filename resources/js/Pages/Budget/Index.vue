@@ -1,11 +1,15 @@
 <template>
-  <Layout :title="$t('title.budget') + ': ' + monthObject.format()" :redirect="$page.budget.links.uncategorized">
+  <Layout
+    :title="$t('title.budget') + ': ' + monthObject.format()"
+    :redirect="$page.budget.links.uncategorized"
+    :has-content="!!this.$slots.default"
+  >
     <template v-slot:header>
       <h2 class="text-xl">
         {{ monthObject.format() }}
       </h2>
 
-      <div class="flex ml-auto -mr-2">
+      <div class="flex ml-auto">
         <inertia-link
           :title="$t('action.previousMonth')"
           :href="prevLink"

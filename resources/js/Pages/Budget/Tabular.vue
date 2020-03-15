@@ -36,7 +36,7 @@
     </template>
 
     <template v-if="budget.categories.length">
-      <Budget class="card">
+      <Budget>
         <BudgetCategory
           :month="monthObject"
           :category="category"

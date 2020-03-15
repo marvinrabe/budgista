@@ -3,10 +3,10 @@
     <div class="container">
       <div class="flex items-start">
         <AppSidebar/>
-        <div class="flex-1 min-w-0 py-4 px-6 lg:px-8">
+        <div class="flex-1 min-w-0 py-4 px-6 lg:px-8 lg:mt-2">
           <VerifyAlert/>
 
-          <div class="flex flex-wrap items-center mb-4 min-h-10">
+          <div class="flex flex-wrap items-center mb-2 min-h-10">
             <AppSidebarToggle class="-ml-2 lg:hidden"/>
             <slot name="header">
               <h2 class="text-xl">
@@ -37,11 +37,5 @@
       VerifyAlert
     },
     mixins: [base],
-    mounted() {
-      document.body.classList.add('bg-white');
-    },
-    beforeDestroy() {
-      document.body.classList.remove('bg-white');
-    }
   }
 </script>

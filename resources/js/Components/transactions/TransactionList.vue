@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white border-t border-gray-3 -mx-4 mb-4">
+  <div class="card mb-4">
     <TransactionListEmpty v-if="isEmpty"/>
     <div v-else>
       <TransactionListItem

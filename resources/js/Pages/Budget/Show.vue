@@ -1,14 +1,13 @@
 <template>
   <Layout>
-
-    <div class="rounded bg-gray-0 shadow -mx-4 p-4 mb-4">
+    <div class="card p-4">
       <div class="relative flex items-start">
         <div>
           <inertia-link
             :href="category.links.edit"
             :title="$t('action.edit.category')"
             class="text-gray-8 hover:text-gray-8">
-            <h2 class="text-lg leading-tight ellipsis flex">
+            <h2 class="text-xl leading-tight ellipsis flex">
               <span>{{ category.name }}</span>
             </h2>
           </inertia-link>
@@ -65,7 +64,19 @@
           label="budget"
           class="mb-0">
           <template v-slot:additional>
-
+            <div
+              class="ml-auto mt-2 px-4 flex items-baseline justify-end"
+              v-if="categoryBudget.recommendedBudget > 0 && categoryBudget.amount < categoryBudget.recommendedBudget">
+          <span class="label mr-2">
+            <TipIcon class="text-yellow-5 mr-1"/>
+            {{ $t('word.recommended')}}:
+          </span>
+              <AppMoney
+                :value="categoryBudget.recommendedBudget"
+                class="cursor-pointer hover:text-gray-8 hover:underline text-sm"
+                @click.native="() => updateBudget(categoryBudget.recommendedBudget)"
+              />
+            </div>
           </template>
           <AppMoneyInput
             :value="categoryBudget.amount"
@@ -74,23 +85,11 @@
           />
         </FormGroup>
 
-        <div
-          class="w-full mt-2 px-4 flex items-baseline justify-end"
-          v-if="categoryBudget.recommendedBudget > 0 && categoryBudget.amount < categoryBudget.recommendedBudget">
-          <span class="label mr-2">
-            <TipIcon class="text-yellow-5 mr-1"/>
-            {{ $t('word.recommended')}}:
-          </span>
-          <AppMoney
-            :value="categoryBudget.recommendedBudget"
-            class="cursor-pointer hover:text-gray-8 hover:underline text-sm"
-            @click.native="() => updateBudget(categoryBudget.recommendedBudget)"
-          />
-        </div>
+
       </div>
     </div>
 
-    <h3 class="text-lg mb-2">{{ $t('title.transactions')}}</h3>
+    <h3 class="text-lg mb-2 px-4">{{ $t('title.transactions')}}</h3>
 
     <TransactionList
       :transactions="transactions.data"

@@ -8,60 +8,55 @@
       </div>
       <div class="card-body">
         <AppForm @submit="save" ref="form">
-          <div class="flex flex-wrap items-baseline">
-            <div class="w-full xl:w-4/12">
-              <h3
-                class="text-xl mb-2"
-                v-t="'title.localisation'"
+          <h3
+            class="text-xl mb-4"
+            v-t="'title.localisation'"
+          />
+
+          <FormGroup name="currency">
+            <AppSelect
+              slot-scope="{bindings}"
+              v-bind="bindings"
+              v-model="form.currency"
+            >
+              <option
+                :key="key"
+                :value="key"
+                v-for="(currency, key) in currencies">
+                {{ currency }}
+              </option>
+            </AppSelect>
+          </FormGroup>
+
+          <FormGroup name="language">
+            <AppSelect
+              slot-scope="{bindings}"
+              v-bind="bindings"
+              v-model="form.language"
+            >
+              <option
+                :key="language"
+                :value="language"
+                v-for="language in languages"
+                v-t="'language.'+language"
               />
-            </div>
-            <div class="w-full xl:w-8/12">
-              <FormGroup name="currency">
-                <AppSelect
-                  slot-scope="{bindings}"
-                  v-bind="bindings"
-                  v-model="form.currency"
-                >
-                  <option
-                    :key="key"
-                    :value="key"
-                    v-for="(currency, key) in currencies">
-                    {{ currency }}
-                  </option>
-                </AppSelect>
-              </FormGroup>
+            </AppSelect>
+          </FormGroup>
 
-              <FormGroup name="language">
-                <AppSelect
-                  slot-scope="{bindings}"
-                  v-bind="bindings"
-                  v-model="form.language"
-                >
-                  <option
-                    :key="language"
-                    :value="language"
-                    v-for="language in languages"
-                    v-t="'language.'+language"
-                  />
-                </AppSelect>
-              </FormGroup>
-
-              <FormGroup name="locale">
-                <AppSelect
-                  slot-scope="{bindings}"
-                  v-bind="bindings"
-                  v-model="form.locale"
-                >
-                  <option
-                    :key="locale"
-                    :value="locale"
-                    v-for="locale in locales"
-                    v-t="'language.'+locale"
-                  />
-                </AppSelect>
-              </FormGroup>
-            </div>
-          </div>
+          <FormGroup name="locale">
+            <AppSelect
+              slot-scope="{bindings}"
+              v-bind="bindings"
+              v-model="form.locale"
+            >
+              <option
+                :key="locale"
+                :value="locale"
+                v-for="locale in locales"
+                v-t="'language.'+locale"
+              />
+            </AppSelect>
+          </FormGroup>
 
           <div slot="actions">
             <AppButton

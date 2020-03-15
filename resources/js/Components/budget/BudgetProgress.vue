@@ -13,6 +13,10 @@
     },
     computed: {
       percentage () {
+        if (this.budget === 0 && this.available < 0) {
+          return 1
+        }
+
         if (this.budget === 0) {
           return 0
         }
