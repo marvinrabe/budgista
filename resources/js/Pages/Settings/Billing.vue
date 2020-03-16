@@ -7,36 +7,34 @@
         </h2>
       </div>
       <div class="card-body">
-        <div class="mb-4">
-          <p v-if="subscriptionEnded" class="text-red-9">
-            Your subscription has run out at:
-            <DateFormat :value="$page.user.subscription_ends_at"/>
-          </p>
-          <p v-else-if="$page.user.subscription_state === 'trial'">
-            Your are currently on trial. Your trial ends at:
-            <DateFormat :value="$page.user.subscription_ends_at"/>
-          </p>
-          <p v-else-if="$page.user.subscription_state === 'active'">
-            Your are currently subscribed. Next billing is due at:
-            <DateFormat :value="$page.user.subscription_ends_at"/>
-            <template v-if="!canCheckout">
-              <div class="mt-2">
-                <a class="font-medium tracking-wide" :href="$page.user.paddle_cancel_url">Cancel Subscription</a>
-                &middot;
-                <a class="font-medium tracking-wide" :href="$page.user.paddle_update_url">Update Billing Details</a>
-              </div>
-            </template>
-          </p>
-          <p v-else-if="$page.user.subscription_state === 'cancelled'">
-            Your subscription has been cancelled and will end at:
-            <DateFormat :value="$page.user.subscription_ends_at"/>
-            <span class="block text-gray-6 mt-2">
+        <p v-if="subscriptionEnded" class="text-red-9">
+          Your subscription has run out at:
+          <DateFormat :value="$page.user.subscription_ends_at"/>
+        </p>
+        <p v-else-if="$page.user.subscription_state === 'trial'">
+          You are currently on trial. Your trial ends at:
+          <DateFormat :value="$page.user.subscription_ends_at"/>
+        </p>
+        <p v-else-if="$page.user.subscription_state === 'active'">
+          You are currently subscribed. Next payement is due at:
+          <DateFormat :value="$page.user.subscription_ends_at"/>
+          <template v-if="!canCheckout">
+            <div class="mt-2">
+              <a class="font-medium tracking-wide" :href="$page.user.paddle_update_url">Update Billing Details</a>
+              &middot;
+              <a class="font-medium tracking-wide" :href="$page.user.paddle_cancel_url">Cancel Subscription</a>
+            </div>
+          </template>
+        </p>
+        <p v-else-if="$page.user.subscription_state === 'cancelled'">
+          Your subscription has been canceled and will end at:
+          <DateFormat :value="$page.user.subscription_ends_at"/>
+          <span class="block text-gray-6 mt-2">
               You can resubscribe when your subscription phase has ran out.
             </span>
-          </p>
-        </div>
+        </p>
 
-        <template v-if="canCheckout">
+        <div class="mt-4" v-if="canCheckout">
           <AppButton
             @click="subscribe"
             variant="primary"
@@ -44,12 +42,11 @@
           />
 
           <p class="text-gray-6 mt-8">
-            It might take a few seconds for your subscription to process.
-            Refresh this page to see when your subscription has been processed.
+            It might take a few seconds for your subscription to be processed.
             If you experience issues after purchase please contact us at
             <a href="mailto:support@budgista.com" class="text-gray-7">support@budgista.com</a>.
           </p>
-        </template>
+        </div>
       </div>
     </div>
   </Layout>
