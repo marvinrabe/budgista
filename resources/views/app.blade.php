@@ -35,6 +35,7 @@
 </head>
 <body>
 @inertia
+@paddle
 <noscript>
     <div class="w-full h-full flex items-center justify-center">
         <div class="border-t-4 border-red-8 rounded-b inline-block m-6 p-6 bg-white shadow" role="alert">

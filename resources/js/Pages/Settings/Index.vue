@@ -11,6 +11,10 @@
           :icon="icons.profile"
           href="/profile"/>
         <AppMenuItem
+          :label="$t('title.billing')"
+          :icon="icons.billing"
+          href="/settings/billing"/>
+        <AppMenuItem
           :label="$t('title.general')"
           :icon="icons.general"
           href="/settings/edit"/>
@@ -38,7 +42,7 @@
   import AppMenu from '@/Components/AppMenu'
   import AppMenuItem from '@/Components/AppMenuItem'
   import { clearCache } from '@/Utils/ServiceWorker'
-  import { faUserCircle, faInbox, faCog } from '@fortawesome/free-solid-svg-icons'
+  import { faUserCircle, faInbox, faCog, faWallet } from '@fortawesome/free-solid-svg-icons'
 
   export default {
     components: {
@@ -57,7 +61,8 @@
         icons: {
           profile: faUserCircle,
           general: faCog,
-          categories: faInbox
+          categories: faInbox,
+          billing: faWallet
         }
       }
     },

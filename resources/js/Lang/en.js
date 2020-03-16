@@ -138,6 +138,7 @@ export default {
     step: 'Step'
   },
   title: {
+    billing: 'Subscription',
     transactions: 'Transactions',
     allTransactions: 'All Transactions',
     localisation: 'Localisation',

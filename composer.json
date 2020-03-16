@@ -20,6 +20,7 @@
         "laravel/ui": "^2.0",
         "marvinrabe/laravel-intl": "^1.0",
         "moneyphp/money": "^3.3",
+        "protonemedia/laravel-paddle": "^1.1",
         "rlanvin/php-rrule": "1.*",
         "sentry/sentry-laravel": "^1.6.1",
         "spatie/laravel-view-models": "^1.2"

@@ -137,6 +137,7 @@ export default {
     step: 'Schritt'
   },
   title: {
+    billing: 'Abonnement',
     transactions: 'Transaktionen',
     allTransactions: 'Alle Transaktionen',
     localisation: 'Lokalisierung',

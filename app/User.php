@@ -18,7 +18,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'last_login_at' => 'datetime'
+        'last_login_at' => 'datetime',
+        'subscription_ends_at' => 'date'
     ];
 
     protected $fillable = [

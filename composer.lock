@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b82cae886237d30aa8cdf8cf640de3bb",
+    "content-hash": "1f43722e9af3cf81c13695db9f195b5c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1228,6 +1228,52 @@
                 "versions"
             ],
             "time": "2018-06-13T13:22:40+00:00"
+        },
+        {
+            "name": "kitetail/zttp",
+            "version": "v0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kitetail/zttp.git",
+                "reference": "92662d7f9025b4c9a0b8a585e31810461fcca435"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kitetail/zttp/zipball/92662d7f9025b4c9a0b8a585e31810461fcca435",
+                "reference": "92662d7f9025b4c9a0b8a585e31810461fcca435",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0",
+                "php": ">=7.0",
+                "tightenco/collect": "^5.4"
+            },
+            "require-dev": {
+                "laravel/lumen-framework": "5.5.*",
+                "phpunit/phpunit": "^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Zttp.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Wathan",
+                    "email": "adam.wathan@gmail.com"
+                }
+            ],
+            "description": "A developer-experience focused HTTP client, optimized for most common use cases.",
+            "keywords": [
+                "Guzzle",
+                "http"
+            ],
+            "time": "2019-06-10T12:18:52+00:00"
         },
         {
             "name": "laracasts/flash",
@@ -2927,6 +2973,66 @@
                 "type"
             ],
             "time": "2019-12-15T19:35:24+00:00"
+        },
+        {
+            "name": "protonemedia/laravel-paddle",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pascalbaljetmedia/laravel-paddle.git",
+                "reference": "2a9dc08e6f7683b96f8155cd28d698aa411ca99c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pascalbaljetmedia/laravel-paddle/zipball/2a9dc08e6f7683b96f8155cd28d698aa411ca99c",
+                "reference": "2a9dc08e6f7683b96f8155cd28d698aa411ca99c",
+                "shasum": ""
+            },
+            "require": {
+                "egulias/email-validator": "^2.1.10",
+                "ext-openssl": "*",
+                "illuminate/support": "5.8.* || ^6.0 || ^7.0",
+                "illuminate/validation": "5.8.* || ^6.0 || ^7.0",
+                "kitetail/zttp": "^0.6.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.8 || ^4.0 || ^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ProtoneMedia\\LaravelPaddle\\PaddleServiceProvider"
+                    ],
+                    "aliases": {
+                        "Paddle": "ProtoneMedia\\LaravelPaddle\\Paddle"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ProtoneMedia\\LaravelPaddle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pascal Baljet",
+                    "email": "pascal@protone.media",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Paddle.com integration",
+            "homepage": "https://github.com/protonemedia/laravel-paddle",
+            "keywords": [
+                "laravel-paddle",
+                "protonemedia"
+            ],
+            "time": "2020-03-03T20:24:52+00:00"
         },
         {
             "name": "psr/container",
@@ -5320,6 +5426,56 @@
                 "dump"
             ],
             "time": "2020-02-26T22:30:10+00:00"
+        },
+        {
+            "name": "tightenco/collect",
+            "version": "v5.6.33",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tightenco/collect.git",
+                "reference": "d7381736dca44ac17d0805a25191b094e5a22446"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tightenco/collect/zipball/d7381736dca44ac17d0805a25191b094e5a22446",
+                "reference": "d7381736dca44ac17d0805a25191b094e5a22446",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.3",
+                "symfony/var-dumper": ">=3.1.10"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1.0",
+                "nesbot/carbon": "~1.20",
+                "phpunit/phpunit": "~7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Collect/Support/helpers.php",
+                    "src/Collect/Support/alias.php"
+                ],
+                "psr-4": {
+                    "Tightenco\\Collect\\": "src/Collect"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                }
+            ],
+            "description": "Collect - Illuminate Collections as a separate package.",
+            "keywords": [
+                "collection",
+                "laravel"
+            ],
+            "time": "2018-08-09T16:56:26+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
