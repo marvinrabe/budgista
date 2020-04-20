@@ -14,16 +14,16 @@
           :icon="icons.reports"
           href="/reports"
         />
-      </ul>
-      <p class="label px-4 pt-3 pb-1 text-gray-6">
-        {{ $t('title.accounts') }}
-      </p>
-      <ul>
         <AppNavigationItem
           :label="$t('title.allTransactions')"
           :icon="icons.allTransactions"
           href="/transactions"
         />
+      </ul>
+      <p class="label px-4 pt-3 pb-1 text-gray-6">
+        {{ $t('title.accounts') }}
+      </p>
+      <ul>
         <AppNavigationItem
           :label="account.name"
           :key="account.id"
@@ -31,14 +31,30 @@
           :amount="account.balance"
           :href="account.links.show"
           @click.native="$emit('navigate')"
-          v-for="account in $page.user.accounts"
-        />
-        <AppNavigationItem
-          :label="$t('action.create.account')"
-          :icon="icons.plus"
-          href="/accounts/create"
+          v-for="account in spendingAccounts"
         />
       </ul>
+      <template v-if="trackingAccounts.length">
+        <p class="label px-4 pt-3 pb-1 text-gray-6">
+          {{ $t('title.trackingAccounts') }}
+        </p>
+        <ul>
+          <AppNavigationItem
+            :label="account.name"
+            :key="account.id"
+            :icon="accountIcon(account)"
+            :amount="account.balance"
+            :href="account.links.show"
+            @click.native="$emit('navigate')"
+            v-for="account in trackingAccounts"
+          />
+        </ul>
+      </template>
+      <AppNavigationItem
+        :label="$t('action.create.account')"
+        :icon="icons.plus"
+        href="/accounts/create"
+      />
     </nav>
     <nav class="mt-auto">
       <ul>
@@ -90,8 +106,15 @@
       }
     },
     computed: {
-      createTransactionRoute () {
-        return transactionRoute(this.$page)
+      spendingAccounts () {
+        return this.$page.user.accounts
+          .filter(account => !account.tracking)
+          .sort((a, b) => a.name.localeCompare(b.name))
+      },
+      trackingAccounts () {
+        return this.$page.user.accounts
+          .filter(account => account.tracking)
+          .sort((a, b) => a.name.localeCompare(b.name))
       }
     },
     methods: {
