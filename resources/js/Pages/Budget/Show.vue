@@ -8,12 +8,12 @@
             </h2>
             <p class="text-sm text-gray-6" v-if="category.description">{{ category.description }}</p>
           </div>
-        <inertia-link
-          :href="category.links.edit"
+        <AppButton
+          :to="category.links.edit"
           :title="$t('action.edit.category')"
-          class="text-gray-8 hover:text-gray-8">
-          EDIT
-        </inertia-link>
+          icon>
+          <CogIcon />
+        </AppButton>
       </div>
 
       <div class="card-body flex items-start -mx-2">
@@ -114,7 +114,7 @@
   import AppPagination from '@/Components/AppPagination'
   import AppMoney from '@/Components/AppMoney'
   import { iconComponent } from '@/Utils/Icons'
-  import { faInfoCircle, faLightbulb } from '@fortawesome/free-solid-svg-icons'
+  import { faInfoCircle, faLightbulb, faCog } from '@fortawesome/free-solid-svg-icons'
   import AppButton from '@/Components/form/AppButton'
 
   export default {
@@ -130,6 +130,7 @@
       AppPagination,
       FormGroup,
       InfoIcon: iconComponent({ icon: faInfoCircle }),
+      CogIcon: iconComponent({ icon: faCog }),
       TipIcon: iconComponent({ icon: faLightbulb }),
       Layout,
       TransactionList
