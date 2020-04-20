@@ -9,3 +9,7 @@
 .form-input, .form-select {
   @apply w-full;
 }
+
+.form-group {
+  @apply mb-4; // Work Around: To be able to remove margin with mb-0
+}

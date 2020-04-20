@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white flex border border-gray-4 rounded p-2 flex-wrap">
+  <div class="bg-white flex border border-gray-4 rounded p-2 flex-wrap leading-tight">
     <div
       :class="{'bg-blue-6 text-white': icon.name === value}"
       :key="icon.name"

@@ -37,23 +37,24 @@
           </template>
         </AppForm>
       </div>
-      <div class="card-body border-t border-gray-3">
-        <form @submit.prevent="deleteCategory" class="flex -mx-1 flex-wrap items-end justify-between">
-          <div class="flex-1 px-1">
-            <h3 class="text-lg mb-2">
-              {{ $t('action.delete.category') }}
-            </h3>
-            <p class="mb-4">{{ $t('hint.deleteCategory') }}</p>
-            <FormGroup name="category_id" label="transferTransactions" class="mb-0">
-              <CategorySelect
-                :exclude="category.id"
-                slot-scope="{bindings}"
-                v-bind="bindings"
-                v-model="deleteForm.category_id"
-              />
-            </FormGroup>
-          </div>
-          <div class="lg:ml-4 mt-4 w-full lg:w-auto flex justify-end">
+
+      <form @submit.prevent="deleteCategory" class="card-body border-t border-gray-3">
+        <h3 class="text-lg mb-2">
+          {{ $t('action.delete.category') }}
+        </h3>
+        <p class="mb-4">{{ $t('hint.deleteCategory') }}</p>
+
+        <div class="flex flex-col lg:flex-row items-end">
+          <FormGroup name="category_id" label="transferTransactions" class="w-full flex-1 mb-0">
+            <CategorySelect
+              :exclude="category.id"
+              slot-scope="{bindings}"
+              v-bind="bindings"
+              v-model="deleteForm.category_id"
+            />
+          </FormGroup>
+
+          <div class="lg:ml-2 mt-2">
             <AppButton
               type="submit"
               :label="$t('action.delete.category')"
@@ -61,8 +62,8 @@
               variant="danger"
             />
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </Layout>
 </template>
