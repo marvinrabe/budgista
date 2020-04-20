@@ -5,9 +5,14 @@
         <span>{{ account.name }}</span>
       </h2>
 
-      <div class="ml-auto">
+      <div class="ml-auto flex">
         <AppButton :to="account.links.edit" icon :title="$t('action.edit.account')">
           <CogIcon/>
+        </AppButton>
+
+        <AppButton :to="account.links.transactions.create" variant="primary" :title="$t('action.create.transaction')" class="ml-2">
+          <PlusIcon/>
+          {{ $t('word.transaction')}}
         </AppButton>
       </div>
     </template>
