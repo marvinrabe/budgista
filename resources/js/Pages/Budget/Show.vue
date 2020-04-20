@@ -1,95 +1,100 @@
 <template>
   <Layout>
-    <div class="card p-4">
-      <div class="relative flex items-start">
-        <div>
-          <inertia-link
-            :href="category.links.edit"
-            :title="$t('action.edit.category')"
-            class="text-gray-8 hover:text-gray-8">
+    <div class="card">
+      <div class="card-header flex justify-between items-center">
+          <div class="flex flex-col">
             <h2 class="text-xl leading-tight ellipsis flex">
               <span>{{ category.name }}</span>
             </h2>
-          </inertia-link>
-          <p class="mb-3 text-sm" v-if="category.description">{{ category.description }}</p>
-        </div>
-
-        <div class="ml-auto text-lg leading-tight p-2 flex items-center -mr-2 -mt-2">
-          <AppMoney class="font-light" color :value="categoryBudget.available"/>
-          <InfoIcon
-            class="ml-2 text-sm text-gray-6 hover:text-gray-8 cursor-pointer"
-            @click="() => {showInfo = !showInfo}"
-          />
-        </div>
-
-        <div
-          class="flex-col px-6 py-4 bg-white z-10 absolute right-0 top-0 rounded shadow-lg"
-          :class="{'hidden': !showInfo, 'flex': showInfo}"
-          @click.stop="() => {showInfo = false}"
-        >
-          <div class="py-1 flex items-baseline justify-between">
-            <div class="label mr-6">
-              {{ $t('form.previousMonth')}}
-            </div>
-
-            <AppMoney :value="categoryBudget.previousMonth" class="text-sm"/>
+            <p class="text-sm text-gray-6" v-if="category.description">{{ category.description }}</p>
           </div>
-          <div class="py-1 flex items-baseline justify-between">
-            <div class="label mr-6">
-              {{ $t('form.budget')}}
-            </div>
-
-            <AppMoney :value="categoryBudget.amount" class="text-sm"/>
-          </div>
-          <div class="py-1 flex items-baseline justify-between">
-            <div class="label mr-6">
-              {{ $t('form.activity')}}
-            </div>
-
-            <AppMoney :value="categoryBudget.activity" class="text-sm"/>
-          </div>
-          <div class="py-1 flex items-baseline justify-between">
-            <div class="label mr-6">
-              {{ $t('form.available')}}
-            </div>
-
-            <AppMoney :value="categoryBudget.available" class="text-sm"/>
-          </div>
-        </div>
+        <inertia-link
+          :href="category.links.edit"
+          :title="$t('action.edit.category')"
+          class="text-gray-8 hover:text-gray-8">
+          EDIT
+        </inertia-link>
       </div>
 
-      <div class="flex flex-col">
-        <FormGroup
-          name="amount"
-          label="budget"
-          class="mb-0">
-          <template v-slot:additional>
-            <div
-              class="ml-auto mt-2 px-4 flex items-baseline justify-end"
-              v-if="categoryBudget.recommendedBudget > 0 && categoryBudget.amount < categoryBudget.recommendedBudget">
+      <div class="card-body flex items-start -mx-2">
+        <div class="flex flex-1 flex-col px-2">
+          <FormGroup
+            name="amount"
+            label="budget"
+            class="mb-0">
+            <template v-slot:additional>
+              <div
+                class="ml-auto mt-2 px-4 flex items-baseline justify-end"
+                v-if="categoryBudget.recommendedBudget > 0 && categoryBudget.amount < categoryBudget.recommendedBudget">
           <span class="label mr-2">
             <TipIcon class="text-yellow-5 mr-1"/>
             {{ $t('word.recommended')}}:
           </span>
-              <AppMoney
-                :value="categoryBudget.recommendedBudget"
-                class="cursor-pointer hover:text-gray-8 hover:underline text-sm"
-                @click.native="() => updateBudget(categoryBudget.recommendedBudget)"
-              />
-            </div>
-          </template>
-          <AppMoneyInput
-            :value="categoryBudget.amount"
-            @change="val => updateBudget(val)"
-            allow-negative
-          />
-        </FormGroup>
+                <AppMoney
+                  :value="categoryBudget.recommendedBudget"
+                  class="cursor-pointer hover:text-gray-8 hover:underline text-sm"
+                  @click.native="() => updateBudget(categoryBudget.recommendedBudget)"
+                />
+              </div>
+            </template>
+            <AppMoneyInput
+              :value="categoryBudget.amount"
+              @change="val => updateBudget(val)"
+              allow-negative
+            />
+          </FormGroup>
 
+        </div>
 
+        <div class="flex flex-1 flex-col px-2">
+          <div class="flex items-baseline">
+            <span class="label mr-6">
+              {{ $t('form.available')}}
+            </span>
+
+            <details class="dropdown ml-auto">
+              <summary>
+                <InfoIcon class="ml-2 text-sm text-gray-6 hover:text-gray-8 cursor-pointer" />
+              </summary>
+              <div class="dropdown__body border border-gray-3 flex-col px-6 py-4 bg-white right-0 top-0 mt-6 rounded shadow-lg" >
+                <div class="py-1 flex items-baseline justify-between">
+                  <div class="label mr-6">
+                    {{ $t('form.previousMonth')}}
+                  </div>
+
+                  <AppMoney :value="categoryBudget.previousMonth" class="text-sm"/>
+                </div>
+                <div class="py-1 flex items-baseline justify-between">
+                  <div class="label mr-6">
+                    {{ $t('form.budget')}}
+                  </div>
+
+                  <AppMoney :value="categoryBudget.amount" class="text-sm"/>
+                </div>
+                <div class="py-1 flex items-baseline justify-between">
+                  <div class="label mr-6">
+                    {{ $t('form.activity')}}
+                  </div>
+
+                  <AppMoney :value="categoryBudget.activity" class="text-sm"/>
+                </div>
+                <div class="py-1 flex items-baseline justify-between">
+                  <div class="label mr-6">
+                    {{ $t('form.available')}}
+                  </div>
+
+                  <AppMoney :value="categoryBudget.available" class="text-sm"/>
+                </div>
+              </div>
+            </details>
+          </div>
+          <AppMoney class="font-light" color :value="categoryBudget.available"/>
+        </div>
       </div>
+
     </div>
 
-    <h3 class="text-lg mb-2 px-4">{{ $t('title.transactions')}}</h3>
+    <h3 class="text-lg mb-2">{{ $t('title.transactions')}}</h3>
 
     <TransactionList
       :transactions="transactions.data"

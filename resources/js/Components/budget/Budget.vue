@@ -1,5 +1,5 @@
 <template>
-  <div class="budget card mb-4">
+  <div class="budget card">
     <div class="budget-header">
       <div class="data">
         <div class="label budget-column-name">

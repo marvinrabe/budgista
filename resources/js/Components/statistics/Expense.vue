@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-lg mb-2 px-4">{{ $t('title.statisticExpense')}}</h3>
+    <h3 class="text-lg mb-2">{{ $t('title.statisticExpense')}}</h3>
     <div class="card p-8">
       <DonutChart :chart-data="chartData" class="w-full"/>
     </div>

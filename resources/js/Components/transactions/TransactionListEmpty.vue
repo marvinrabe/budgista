@@ -1,5 +1,5 @@
 <template functional>
-  <div class="flex flex-col opacity-75 my-5 items-center text-center">
+  <div class="flex flex-col opacity-75 items-center text-center p-6">
     <img
       alt=""
       class="mb-5"

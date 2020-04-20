@@ -7,8 +7,8 @@
             <span class="label md:mb-2">
               {{ $t('title.setup') }}
             </span>
-            <div class="w-24 border border-gray-4 bg-gray-0 rounded-sm md:hidden overflow-hidden">
-              <div class="bg-blue-5 h-2" :style="{width: percentage + '%'}"></div>
+            <div class="w-24 border border-blue-6 bg-white rounded-full md:hidden overflow-hidden">
+              <div class="bg-blue-3 h-2" :style="{width: percentage + '%'}"></div>
             </div>
             <ol class="hidden text-sm md:flex flex-col">
               <li class="p-2" v-for="(stepTitle, stepNumber) in steps"

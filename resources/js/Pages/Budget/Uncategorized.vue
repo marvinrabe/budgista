@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <h3 class="text-lg mb-2 px-4">{{ $t('title.transactions')}}</h3>
+    <h3 class="text-lg mb-2">{{ $t('title.transactions')}}</h3>
 
     <TransactionList :transactions="transactions.data" />
 
