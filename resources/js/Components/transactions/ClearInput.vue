@@ -35,7 +35,7 @@
       clear () {
         this.$inertia.post('/paidTransactions', {
           id: this.transaction.id
-        })
+        }, { preserveScroll: true })
       },
       unclear () {
         this.$inertia.delete(`/paidTransactions/${this.transaction.id}`, { preserveScroll: true })
