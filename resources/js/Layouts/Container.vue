@@ -9,7 +9,7 @@
            :class="{'hidden lg:block': hasContent, 'w-full': !hasContent}">
         <slot name="menu"/>
       </div>
-      <div class="ml-4 lg:w-7/12 xl:w-2/3"
+      <div class="lg:ml-4 lg:w-7/12 xl:w-2/3"
            :class="{'w-full': hasContent, 'hidden lg:block': !hasContent}">
         <slot></slot>
       </div>

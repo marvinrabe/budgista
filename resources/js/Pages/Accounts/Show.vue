@@ -27,7 +27,7 @@
         />
         <div class="flex flex-col px-4">
           <div class="py-1 flex items-center justify-between">
-          <span class="label mr-8">
+          <span class="label whitespace-no-wrap mr-8">
             <CheckIcon class="text-green-7 mr-1"/>
             {{ $t('form.balance.cleared')}}
           </span>
@@ -35,7 +35,7 @@
             <AppMoney :value="account.cleared_balance" class="text-sm"/>
           </div>
           <div class="py-1 flex items-center justify-between">
-          <span class="label mr-8">
+          <span class="label whitespace-no-wrap mr-8">
             <CheckIcon class="text-gray-5 mr-1"/>
             {{ $t('form.balance.outstanding')}}
           </span>

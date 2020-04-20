@@ -4,6 +4,7 @@
     :aria-label="$t('action.navigation')"
     aria-controls="menu"
     icon
+    class="mr-2"
   >
     <BarsIcon/>
   </AppButton>
