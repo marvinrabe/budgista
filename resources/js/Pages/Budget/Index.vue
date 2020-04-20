@@ -5,11 +5,10 @@
     :has-content="!!this.$slots.default"
   >
     <template v-slot:header>
-      <h2 class="text-xl">
-        {{ monthObject.format() }}
-      </h2>
-
-      <div class="flex ml-auto">
+      <div class="flex">
+        <h2 class="text-xl">
+          {{ monthObject.format() }}
+        </h2>
         <inertia-link
           :title="$t('action.previousMonth')"
           :href="prevLink"
@@ -24,6 +23,9 @@
         >
           <NextIcon/>
         </inertia-link>
+      </div>
+
+      <div class="flex ml-auto">
         <AppButton
           :to="'/tabularBudget/'+monthObject.toString()"
           class="hidden md:block"

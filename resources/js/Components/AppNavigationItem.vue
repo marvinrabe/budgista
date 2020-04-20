@@ -3,7 +3,7 @@
     <inertia-link
       :href="href"
       class="font-medium px-4 py-3 hover:no-underline text-gray-7 hover:text-gray-8 rounded flex items-center"
-      :class="{'bg-gray-0 ': active, }">
+      :class="{'bg-gray-0': active, }">
       <FontAwesomeIcon
         :icon="icon"
         class="mr-2 text-gray-6"

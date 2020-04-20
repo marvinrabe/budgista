@@ -1,7 +1,6 @@
 <template>
-  <div class="h-screen overflow-auto p-2 flex flex-col">
-    <AppLogo :height="40" class="mt-2 mb-4 h-10"/>
-
+  <div class="h-screen overflow-auto px-2 flex flex-col">
+    <AppLogo :height="40" class="my-4 h-10"/>
     <nav class="mb-4">
       <ul class="flex flex-col">
         <AppNavigationItem
