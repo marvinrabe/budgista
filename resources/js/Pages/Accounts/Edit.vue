@@ -43,7 +43,7 @@
 
     <form @submit.prevent="deleteAccount" class="flex -mx-1 flex-wrap items-end justify-between">
       <div class="flex-1 px-1">
-        <h3 class="text-xl mb-2">
+        <h3 class="text-lg mb-2">
           {{ $t('action.delete.account') }}
         </h3>
         <p>{{ $t('hint.deleteAccount') }}</p>

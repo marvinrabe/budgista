@@ -4,7 +4,7 @@
     ref="form"
   >
     <h3
-      class="text-xl mb-4"
+      class="text-lg mb-4"
       v-t="'title.updatePassword'"
     />
 

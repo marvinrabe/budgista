@@ -2,7 +2,7 @@
   <div class="flex -mx-1 flex-wrap items-end justify-between">
     <div class="px-1">
       <h3
-        class="text-xl mb-4"
+        class="text-lg mb-4"
         v-t="'title.googleAccount'"
       />
       <div class="flex items-center">

@@ -40,7 +40,7 @@
       <div class="card-body border-t border-gray-3">
         <form @submit.prevent="deleteCategory" class="flex -mx-1 flex-wrap items-end justify-between">
           <div class="flex-1 px-1">
-            <h3 class="text-xl mb-2">
+            <h3 class="text-lg mb-2">
               {{ $t('action.delete.category') }}
             </h3>
             <p class="mb-4">{{ $t('hint.deleteCategory') }}</p>

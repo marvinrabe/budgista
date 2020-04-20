@@ -9,7 +9,7 @@
       <div class="card-body">
         <AppForm @submit="save" ref="form">
           <h3
-            class="text-xl mb-4"
+            class="text-lg mb-4"
             v-t="'title.localisation'"
           />
 
