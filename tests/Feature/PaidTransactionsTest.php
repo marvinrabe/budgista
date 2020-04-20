@@ -19,11 +19,10 @@ class PaidTransactionsTest extends TestCase
 
         $this
             ->signIn($transaction->user)
-            ->from("/accounts/{$transaction->account_id}")
-            ->post('/paidTransactions', [
+            ->post('/api/paidTransactions', [
                 'id' => $transaction->id
             ])
-            ->assertRedirect("/accounts/{$transaction->account_id}");
+            ->assertSuccessful();
 
         $this->assertTrue($transaction->fresh()->paid);
     }
@@ -36,9 +35,8 @@ class PaidTransactionsTest extends TestCase
 
         $this
             ->signIn($transaction->user)
-            ->from("/accounts/{$transaction->account_id}")
-            ->delete("/paidTransactions/{$transaction->id}")
-            ->assertRedirect("/accounts/{$transaction->account_id}");
+            ->delete("/api/paidTransactions/{$transaction->id}")
+            ->assertSuccessful();
 
         $this->assertFalse($transaction->fresh()->paid);
     }
