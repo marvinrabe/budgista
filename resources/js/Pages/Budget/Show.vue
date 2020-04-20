@@ -2,17 +2,17 @@
   <Layout>
     <div class="card">
       <div class="card-header flex justify-between items-center">
-          <div class="flex flex-col">
-            <h2 class="text-xl leading-tight ellipsis flex">
-              <span>{{ category.name }}</span>
-            </h2>
-            <p class="text-sm text-gray-6" v-if="category.description">{{ category.description }}</p>
-          </div>
+        <div class="flex flex-col">
+          <h2 class="text-xl leading-tight ellipsis flex">
+            <span>{{ category.name }}</span>
+          </h2>
+          <p class="text-sm text-gray-6" v-if="category.description">{{ category.description }}</p>
+        </div>
         <AppButton
           :to="category.links.edit"
           :title="$t('action.edit.category')"
           icon>
-          <CogIcon />
+          <CogIcon/>
         </AppButton>
       </div>
 
@@ -46,49 +46,51 @@
 
         </div>
 
-        <div class="flex flex-1 flex-col px-2">
-          <div class="flex items-baseline">
-            <span class="label mr-6">
-              {{ $t('form.available')}}
-            </span>
-
-            <details class="dropdown ml-auto">
-              <summary>
-                <InfoIcon class="ml-2 text-sm text-gray-6 hover:text-gray-8 cursor-pointer" />
-              </summary>
-              <div class="dropdown__body border border-gray-3 flex-col px-6 py-4 bg-white right-0 top-0 mt-6 rounded shadow-lg" >
-                <div class="py-1 flex items-baseline justify-between">
-                  <div class="label mr-6">
-                    {{ $t('form.previousMonth')}}
-                  </div>
-
-                  <AppMoney :value="categoryBudget.previousMonth" class="text-sm"/>
-                </div>
-                <div class="py-1 flex items-baseline justify-between">
-                  <div class="label mr-6">
-                    {{ $t('form.budget')}}
-                  </div>
-
-                  <AppMoney :value="categoryBudget.amount" class="text-sm"/>
-                </div>
-                <div class="py-1 flex items-baseline justify-between">
-                  <div class="label mr-6">
-                    {{ $t('form.activity')}}
-                  </div>
-
-                  <AppMoney :value="categoryBudget.activity" class="text-sm"/>
-                </div>
-                <div class="py-1 flex items-baseline justify-between">
-                  <div class="label mr-6">
-                    {{ $t('form.available')}}
-                  </div>
-
-                  <AppMoney :value="categoryBudget.available" class="text-sm"/>
-                </div>
-              </div>
-            </details>
+        <div class="flex flex-1 flex-col px-2 items-end">
+          <div class="label mb-2">
+            {{ $t('form.available')}}
           </div>
-          <AppMoney class="font-light" color :value="categoryBudget.available"/>
+
+          <details class="dropdown ml-auto">
+            <summary
+              class="badge border border-transparent px-4 py-2 text-right cursor-pointer"
+              :class="{'badge--red': categoryBudget.available < 0, 'badge--green': categoryBudget.available > 0, 'badge--gray': categoryBudget.available === 0, }"
+            >
+              <InfoIcon class="text-sm opacity-50 hover:opacity-75"/>
+              <AppMoney class="ml-2" color :value="categoryBudget.available"/>
+            </summary>
+            <div
+              class="dropdown__body border border-gray-3 flex-col px-6 py-4 bg-white right-0 top-0 mt-10 rounded shadow-lg">
+              <div class="py-1 flex items-baseline justify-between">
+                <div class="label mr-6">
+                  {{ $t('form.previousMonth')}}
+                </div>
+
+                <AppMoney :value="categoryBudget.previousMonth" class="text-sm"/>
+              </div>
+              <div class="py-1 flex items-baseline justify-between">
+                <div class="label mr-6">
+                  {{ $t('form.budget')}}
+                </div>
+
+                <AppMoney :value="categoryBudget.amount" class="text-sm"/>
+              </div>
+              <div class="py-1 flex items-baseline justify-between">
+                <div class="label mr-6">
+                  {{ $t('form.activity')}}
+                </div>
+
+                <AppMoney :value="categoryBudget.activity" class="text-sm"/>
+              </div>
+              <div class="py-1 flex items-baseline justify-between">
+                <div class="label mr-6">
+                  {{ $t('form.available')}}
+                </div>
+
+                <AppMoney :value="categoryBudget.available" class="text-sm"/>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
