@@ -50,11 +50,13 @@
           />
         </ul>
       </template>
-      <AppNavigationItem
-        :label="$t('action.create.account')"
-        :icon="icons.plus"
-        href="/accounts/create"
-      />
+      <ul>
+        <AppNavigationItem
+          :label="$t('action.create.account')"
+          :icon="icons.plus"
+          href="/accounts/create"
+        />
+      </ul>
     </nav>
     <nav class="mt-auto">
       <ul>
