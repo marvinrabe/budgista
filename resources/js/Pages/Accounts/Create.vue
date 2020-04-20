@@ -1,51 +1,53 @@
 <template>
   <Layout :title="$t('action.create.account')">
-    <AppForm @submit="save">
-      <FormGroup name="name">
-        <input
-          class="form-input"
-          slot-scope="{bindings}"
-          type="text"
-          v-bind="bindings"
-          v-model="form.name"
-        >
-      </FormGroup>
+    <div class="card">
+      <AppForm @submit="save" class="card-body">
+        <FormGroup name="name">
+          <input
+            class="form-input"
+            slot-scope="{bindings}"
+            type="text"
+            v-bind="bindings"
+            v-model="form.name"
+          >
+        </FormGroup>
 
-      <FormGroup name="initialBalance">
-        <app-money-input
-          slot-scope="{bindings}"
-          v-bind="bindings"
-          v-model="form.initial_balance"
-        />
-      </FormGroup>
+        <FormGroup name="initialBalance">
+          <app-money-input
+            slot-scope="{bindings}"
+            v-bind="bindings"
+            v-model="form.initial_balance"
+          />
+        </FormGroup>
 
-      <FormGroup name="icon">
-        <account-icon-picker v-model="form.icon"/>
-      </FormGroup>
+        <FormGroup name="icon">
+          <account-icon-picker v-model="form.icon"/>
+        </FormGroup>
 
-      <div class="form-check">
-        <input
-          :value="true"
-          class="form-checkbox"
-          id="tracking"
-          type="checkbox"
-          v-model="form.tracking"
-        >
-        <label
-          class="checkbox-label"
-          for="tracking"
-          v-t="'form.trackingAccount'"
-        />
-      </div>
+        <div class="form-check">
+          <input
+            :value="true"
+            class="form-checkbox"
+            id="tracking"
+            type="checkbox"
+            v-model="form.tracking"
+          >
+          <label
+            class="checkbox-label"
+            for="tracking"
+            v-t="'form.trackingAccount'"
+          />
+        </div>
 
-      <template slot="actions">
-        <AppButton
-          :label="$t('action.save')"
-          :loading="saving"
-          variant="primary"
-        />
-      </template>
-    </AppForm>
+        <template slot="actions">
+          <AppButton
+            :label="$t('action.save')"
+            :loading="saving"
+            variant="primary"
+          />
+        </template>
+      </AppForm>
+    </div>
   </Layout>
 </template>
 

@@ -20,6 +20,7 @@
 
     <div class="text-right">
       <AppButton
+        class="hover:text-red-9"
         :label="$t('title.deleteUser')"
         to="/profile/terminate"
         subtle

@@ -1,16 +1,18 @@
 <template>
   <Layout :title="$t('action.create.transaction')">
-    <AppForm @submit="save">
-      <TransactionForm v-model="form"/>
+    <div class="card">
+      <AppForm @submit="save" class="card-body">
+        <TransactionForm v-model="form"/>
 
-      <template slot="actions">
-        <AppButton
-          :label="$t('action.save')"
-          :loading="saving"
-          variant="primary"
-        />
-      </template>
-    </AppForm>
+        <template slot="actions">
+          <AppButton
+            :label="$t('action.save')"
+            :loading="saving"
+            variant="primary"
+          />
+        </template>
+      </AppForm>
+    </div>
   </Layout>
 </template>
 

@@ -1,18 +1,19 @@
 <template>
   <Layout :title="$t('action.edit.transaction')">
-    <AppForm @submit="saveTransaction">
-      <TransactionForm v-model="form"/>
+    <div class="card">
+      <AppForm @submit="saveTransaction" class="card-body">
+        <TransactionForm v-model="form"/>
 
-      <template slot="actions">
-        <AppButton
-          :label="$t('action.save')"
-          :loading="saving"
-          variant="primary"
-        />
-      </template>
-    </AppForm>
+        <template slot="actions">
+          <AppButton
+            :label="$t('action.save')"
+            :loading="saving"
+            variant="primary"
+          />
+        </template>
+      </AppForm>
+    </div>
 
-    <div class="text-right">
       <AppButton
         type="button"
         class="hover:text-red-9"
@@ -20,8 +21,6 @@
         @click="deleteTransaction"
         subtle
       />
-    </div>
-
   </Layout>
 </template>
 
