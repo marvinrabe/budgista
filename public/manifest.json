@@ -4,7 +4,7 @@
   "description": "Free Budget App",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#339af0",
+  "theme_color": "#f1f3f5",
   "background_color": "#f1f3f5",
   "orientation": "portrait",
   "icons": [
