@@ -9,6 +9,7 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use ProtoneMedia\LaravelPaddle\Events\SubscriptionCancelled;
 use ProtoneMedia\LaravelPaddle\Events\SubscriptionCreated;
+use ProtoneMedia\LaravelPaddle\Events\SubscriptionPaymentSucceeded;
 use ProtoneMedia\LaravelPaddle\Events\SubscriptionUpdated;
 
 class EventServiceProvider extends ServiceProvider
@@ -28,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         SubscriptionCancelled::class => [
             Listeners\CancelSubscription::class
+        ],
+        SubscriptionPaymentSucceeded::class => [
+            Listeners\ExtendSubscription::class
         ]
     ];
 }
