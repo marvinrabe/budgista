@@ -17,7 +17,7 @@ Route::group(['middleware' => ['auth']], function () {
         /*
          * Accounts
          */
-        Route::resource('accounts', AccountController::class);
+        Route::resource('accounts', AccountController::class)->except(['index']);
         Route::get('accounts/{account}/future',
             [Controllers\AccountController::class, 'future'])->name('accounts.future');
         Route::post('accounts/{account}/reconcile',

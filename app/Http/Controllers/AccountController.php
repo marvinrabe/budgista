@@ -11,11 +11,6 @@ use Inertia\Inertia;
 
 class AccountController extends Controller
 {
-    public function index()
-    {
-        return Inertia::render('Accounts/Index');
-    }
-
     public function create()
     {
         return Inertia::render('Accounts/Create');
