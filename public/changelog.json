@@ -1,5 +1,20 @@
 [
   {
+    "date": "2020-04-20",
+    "changes": [
+      "From now on Budgista requires a subscription. Every new account starts with a 14 day trial.",
+      "New sidebar design to easily switch between your accounts and budget."
+    ]
+  },
+  {
+    "date": "2020-04-16",
+    "changes": [
+      "We added important security configurations to keep your data even more safe.",
+      "When you marked a transaction as cleared the scroll position changed. This is now fixed.",
+      "The feedback widget has been removed for now. If you want to give feedback, contact us via email or on social media."
+    ]
+  },
+  {
     "date": "2020-03-11",
     "changes": [
       "New \"All Transactions\" view added under Transactions. See all transactions from all accounts in one place.",
