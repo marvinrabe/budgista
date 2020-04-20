@@ -26,13 +26,13 @@
           <div class="handle text-gray-6 cursor-move pr-0">
             <GripIcon/>
           </div>
-          <a :href="category.links.edit" class="flex-1 flex items-center justify-between hover:no-underline">
+          <inertia-link :href="category.links.edit" class="flex-1 flex items-center justify-between hover:no-underline">
             <div class="flex flex-col">
               <span class="text-gray-7 font-medium tracking-wide">{{ category.name }}</span>
               <span class="text-gray-6 text-sm" v-if="category.description">{{ category.description }}</span>
             </div>
             <ChevronIcon class="text-gray-6"/>
-          </a>
+          </inertia-link>
         </div>
       </draggable>
     </div>
