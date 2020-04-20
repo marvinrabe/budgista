@@ -1,4 +1,20 @@
 export default {
+  subscription: {
+    title: 'Abonnement',
+    action: {
+      cancel: 'Abonnement kündigen',
+      subscribe: 'Jetzt Abonnieren',
+      update: 'Zahlungsdetails bearbeiten'
+    },
+    message: {
+      cancelled: 'Dein Abonnement wurde gekündigt und läuft aus zum:',
+      ended: 'Dein Abonnement ist ausgelaufen am:',
+      trial: 'Du bist aktuell in der Testphase. Die Testphase endet am:',
+      resubscribe: 'Du kannst erneut abonnieren sobald deine restliche Zeit abgelaufen ist.',
+      active: 'Dein Abonnement ist aktiv. Nächste Zahlung ist fällig am:',
+      checkoutNotice: 'Es kann wenige Sekunden dauern bis dein Abonnement verarbeitet wurde. Falls du Probleme haben solltest, kontaktiere uns per E-Mail: '
+    }
+  },
   pagination: {
     next: 'Ältere',
     previous: 'Neuere',
@@ -137,7 +153,6 @@ export default {
     step: 'Schritt'
   },
   title: {
-    billing: 'Abonnement',
     transactions: 'Transaktionen',
     allTransactions: 'Alle Transaktionen',
     localisation: 'Lokalisierung',

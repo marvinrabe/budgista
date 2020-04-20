@@ -11,9 +11,9 @@
           :icon="icons.profile"
           href="/profile"/>
         <AppMenuItem
-          :label="$t('title.billing')"
-          :icon="icons.billing"
-          href="/settings/billing"/>
+          :label="$t('subscription.title')"
+          :icon="icons.subscription"
+          href="/settings/subscription"/>
         <AppMenuItem
           :label="$t('title.general')"
           :icon="icons.general"
@@ -62,7 +62,7 @@
           profile: faUserCircle,
           general: faCog,
           categories: faInbox,
-          billing: faWallet
+          subscription: faWallet
         }
       }
     },

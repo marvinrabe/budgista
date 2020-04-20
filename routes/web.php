@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('settings', [Controllers\SettingsController::class, 'index'])->name('settings.index');
     Route::get('settings/edit', [Controllers\SettingsController::class, 'edit'])->name('settings.edit');
     Route::post('settings', [Controllers\SettingsController::class, 'update'])->name('settings.update');
-    Route::get('settings/billing', [Controllers\BillingController::class, 'index'])->name('settings.billing');
+    Route::get('settings/subscription', [Controllers\SubscriptionController::class, 'index'])->name('settings.subscription');
     Route::get('/profile', [Controllers\UserController::class, 'edit'])->name('user.edit');
     Route::post('/profile/email', [Controllers\UserController::class, 'email'])->name('user.email');
     Route::delete('profile/google', [Controllers\Auth\GoogleController::class, 'destroy'])->name('google.destroy');

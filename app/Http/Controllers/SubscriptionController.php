@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 
-class BillingController extends Controller
+class SubscriptionController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Settings/Billing', [
+        return Inertia::render('Settings/Subscription', [
             'product' => config('paddle.product_id')
         ]);
     }

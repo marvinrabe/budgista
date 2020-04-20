@@ -1,4 +1,20 @@
 export default {
+  subscription: {
+    title: 'Subscription',
+    action: {
+      cancel: 'Cancel Subscription',
+      subscribe: 'Subscribe now',
+      update: 'Update Billing Details'
+    },
+    message: {
+      cancelled: 'Your subscription has been canceled and will end at:',
+      ended: 'Your subscription has run out at:',
+      trial: 'You are currently on trial. Your trial ends at:',
+      resubscribe: 'You can resubscribe when your current subscription phase has ran out.',
+      active: 'You are currently subscribed. Next payment is due at:',
+      checkoutNotice: 'It might take a few seconds for your subscription to be processed. If you experience issues after purchase please contact us at '
+    }
+  },
   pagination: {
     next: 'Older',
     previous: 'Newer',
