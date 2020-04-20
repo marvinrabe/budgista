@@ -230,7 +230,6 @@ return [
         /*
          * Intl
          */
-        'Carbon' => MarvinRabe\LaravelIntl\Facades\Carbon::class,
         'Currency' => MarvinRabe\LaravelIntl\Facades\Currency::class,
         'Language' => MarvinRabe\LaravelIntl\Facades\Language::class,
     ],

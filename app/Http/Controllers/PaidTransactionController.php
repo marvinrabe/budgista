@@ -5,22 +5,22 @@ namespace App\Http\Controllers;
 use App\Transaction;
 use App\Rules\Own;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class PaidTransactionController extends Controller
 {
-
     public function store(Request $request)
     {
         $request->validate([
             'id' => [new Own('transactions')]
         ]);
 
-        Transaction::find($request->get('id'))->update([
+        $transaction = Transaction::find($request->get('id'));
+
+        $transaction->update([
             'paid' => true
         ]);
 
-        return Redirect::back();
+        return $transaction;
     }
 
     public function destroy(Transaction $paidTransaction)
@@ -31,7 +31,6 @@ class PaidTransactionController extends Controller
             'paid' => false
         ]);
 
-        return Redirect::back();
+        return $paidTransaction;
     }
-
 }

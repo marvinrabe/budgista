@@ -9,6 +9,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
   import { iconComponent } from '@/Utils/Icons'
 
@@ -33,12 +34,14 @@
         }
       },
       clear () {
-        this.$inertia.post('/paidTransactions', {
-          id: this.transaction.id
-        }, { preserveScroll: true })
+        axios
+          .post('/api/paidTransactions', { id: this.transaction.id })
+          .then(() => this.$inertia.reload({ preserveScroll: true }))
       },
       unclear () {
-        this.$inertia.delete(`/paidTransactions/${this.transaction.id}`, { preserveScroll: true })
+        axios
+          .delete(`/api/paidTransactions/${this.transaction.id}`)
+          .then(() => this.$inertia.reload({ preserveScroll: true }))
       }
     }
   }
