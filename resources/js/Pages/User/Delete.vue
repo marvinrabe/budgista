@@ -7,7 +7,7 @@
         <AppForm @submit="deleteUser">
           <FormGroup name="feedback">
             <textarea
-              class="form-control"
+              class="form-input"
               slot-scope="{bindings}"
               v-bind="bindings"
               v-model="form.feedback"

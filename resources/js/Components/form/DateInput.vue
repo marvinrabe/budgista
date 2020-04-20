@@ -1,6 +1,6 @@
 <template>
   <input
-    class="form-control"
+    class="form-input"
     type="date"
     :value="value"
     @input="e => this.$emit('input', e.target.value)"

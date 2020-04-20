@@ -2,7 +2,7 @@
   <FormGroup name="recurring" label="recurringInterval">
     <div class="flex items-stretch mb-3">
       <input
-        class="form-control border-gray-4 flex-1 w-auto min-w-0 rounded-r-none border-r-0 text-right font-numeric"
+        class="form-input border-gray-4 flex-1 w-auto min-w-0 rounded-r-none border-r-0 text-right font-numeric"
         max="50"
         style="width: initial;"
         min="1"
@@ -11,7 +11,7 @@
         v-model="interval"
       >
       <select
-        class="form-control w-auto rounded-l-none"
+        class="form-input w-auto rounded-l-none"
         v-model="frequency"
       >
         <option value="DAILY">

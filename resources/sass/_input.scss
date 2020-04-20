@@ -1,19 +1,11 @@
-.form-group {
-  @apply mb-4;
-}
-
-label, .label {
+.label {
   @apply block uppercase tracking-wide text-xs font-bold;
 }
 
-.form-control {
-  @apply block appearance-none w-full bg-white border border-gray-4 rounded py-3 px-4 leading-tight;
-
-  &:focus {
-    @apply outline-none shadow-outline bg-white border-blue-5;
-  }
+.checkbox-label {
+  @apply mr-2 inline text-sm font-normal normal-case;
 }
 
-.form-check-label {
-  @apply mr-2 inline text-sm font-normal normal-case;
+.form-input, .form-select {
+  @apply w-full;
 }

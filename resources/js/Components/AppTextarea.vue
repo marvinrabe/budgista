@@ -1,7 +1,7 @@
 <template>
   <textarea
     :value="value"
-    class="form-control"
+    class="form-input"
     @input="e => $emit('input', e.target.value)"></textarea>
 </template>
 

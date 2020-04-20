@@ -19,7 +19,7 @@
         <AppForm @submit="register">
           <FormGroup name="name">
             <input
-              class="form-control"
+              class="form-input"
               slot-scope="{bindings}"
               type="text"
               v-bind="bindings"
@@ -29,7 +29,7 @@
 
           <FormGroup name="email">
             <input
-              class="form-control"
+              class="form-input"
               slot-scope="{bindings}"
               type="email"
               v-bind="bindings"
@@ -54,14 +54,14 @@
               slot-scope="{bindings, id}"
             >
               <input
-                class="form-check-input"
+                class="form-checkbox"
                 type="checkbox"
                 v-bind="bindings"
                 v-model="form.terms"
               >
               <i18n
                 :for="id"
-                class="form-check-label"
+                class="checkbox-label"
                 path="form.termsOfService"
                 tag="label"
               >

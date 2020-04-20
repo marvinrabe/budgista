@@ -10,7 +10,7 @@
         <AppForm @submit="save">
           <FormGroup name="name">
             <input
-              class="form-control"
+              class="form-input"
               slot-scope="{bindings}"
               type="text"
               v-bind="bindings"
@@ -20,7 +20,7 @@
 
           <FormGroup name="description" optional>
             <input
-              class="form-control"
+              class="form-input"
               slot-scope="{bindings}"
               type="text"
               v-bind="bindings"

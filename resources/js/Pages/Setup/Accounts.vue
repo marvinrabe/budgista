@@ -13,7 +13,7 @@
         <form @submit.prevent="addAccount" class="gutter-1 flex flex-col md:flex-row md:items-end justify-center">
           <FormGroup name="name" class="md:mb-0">
             <input
-              class="form-control"
+              class="form-input"
               :placeholder="$t('placeholder.accountName')"
               slot-scope="{bindings}"
               v-model="form.name"

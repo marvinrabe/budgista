@@ -2,7 +2,7 @@
     <input
       :value="value"
       @input="e => $emit('input', e.target.value)"
-      class="form-control"
+      class="form-input"
       type="text"
     >
 </template>

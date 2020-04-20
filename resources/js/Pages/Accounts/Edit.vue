@@ -3,7 +3,7 @@
     <AppForm @submit="save">
       <FormGroup name="name">
         <input
-          class="form-control"
+          class="form-input"
           slot-scope="{bindings}"
           type="text"
           v-bind="bindings"
@@ -18,13 +18,13 @@
       <div class="form-check">
         <input
           :value="true"
-          class="form-check-input"
+          class="form-checkbox"
           id="tracking"
           type="checkbox"
           v-model="form.tracking"
         >
         <label
-          class="form-check-label"
+          class="checkbox-label"
           for="tracking"
           v-t="'form.trackingAccount'"
         />

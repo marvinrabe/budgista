@@ -27,7 +27,7 @@
 
     <FormGroup name="newEmail">
       <input
-        class="form-control"
+        class="form-input"
         slot-scope="{bindings}"
         type="email"
         v-bind="bindings"

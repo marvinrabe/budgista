@@ -4,7 +4,7 @@
       <input
         :type="type"
         :value="value"
-        class="form-control w-full pr-10"
+        class="form-input w-full pr-10"
         v-bind="$attrs"
         @input="emitInput"
       >

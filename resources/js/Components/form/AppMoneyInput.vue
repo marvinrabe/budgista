@@ -6,7 +6,7 @@
     @focus="onFocus"
     @input="onInput($event.target.value)"
     @keypress.enter="onEnter"
-    class="form-control text-right"
+    class="form-input text-right"
     type="text"
   >
 </template>
