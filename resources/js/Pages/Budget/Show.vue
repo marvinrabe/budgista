@@ -16,7 +16,7 @@
         </AppButton>
       </div>
 
-      <div class="card-body flex items-start -mx-2">
+      <div class="card-body flex items-baseline -mx-2">
         <div class="flex flex-1 flex-col px-2">
           <FormGroup
             name="amount"
