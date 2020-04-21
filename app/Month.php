@@ -101,10 +101,16 @@ class Month implements Arrayable
         return (clone $this->date)->lastOfMonth();
     }
 
+    public function isCurrent(): bool
+    {
+        return static::current()->value() === $this->value();
+    }
+
     public function toArray()
     {
         return [
-            'value' => $this->value()
+            'value' => $this->value(),
+            'isCurrent' => $this->isCurrent()
         ];
     }
 }

@@ -22,28 +22,25 @@
             name="amount"
             label="budget"
             class="mb-0">
-            <template v-slot:additional>
-              <div
-                class="ml-auto mt-2 px-4 flex items-baseline justify-end"
-                v-if="categoryBudget.recommendedBudget > 0 && categoryBudget.amount < categoryBudget.recommendedBudget">
-          <span class="label mr-2">
-            <TipIcon class="text-yellow-5 mr-1"/>
-            {{ $t('word.recommended')}}:
-          </span>
-                <AppMoney
-                  :value="categoryBudget.recommendedBudget"
-                  class="cursor-pointer hover:text-gray-8 hover:underline text-sm"
-                  @click.native="() => updateBudget(categoryBudget.recommendedBudget)"
-                />
-              </div>
-            </template>
             <AppMoneyInput
               :value="categoryBudget.amount"
               @change="val => updateBudget(val)"
               allow-negative
             />
           </FormGroup>
-
+          <div
+            class="ml-auto px-3 mt-2 flex items-baseline justify-end"
+            v-if="categoryBudget.recommendedBudget > 0 && categoryBudget.amount < categoryBudget.recommendedBudget && $page.budget.month.isCurrent">
+            <span class="label mr-2">
+              <TipIcon class="text-yellow-5 mr-1"/>
+              {{ $t('word.recommended')}}
+            </span>
+            <AppMoney
+              :value="categoryBudget.recommendedBudget"
+              class="cursor-pointer hover:text-gray-8 hover:underline text-sm"
+              @click.native="() => updateBudget(categoryBudget.recommendedBudget)"
+            />
+          </div>
         </div>
 
         <div class="flex flex-1 flex-col px-2 items-end">
