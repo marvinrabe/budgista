@@ -1,7 +1,7 @@
 export default {
   budget: {
     title: {
-      uncategorized: 'Frei Verfügbar'
+      uncategorized: 'Für das Budget'
     }
   },
   subscription: {
