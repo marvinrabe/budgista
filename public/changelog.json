@@ -1,9 +1,17 @@
 [
   {
+    "date": "2020-04-21",
+    "changes": [
+      "You can switch to the category settings from your Budget view by pressing 'Manage Categories'.",
+      "It was impossible to remove recurrence rules from existing transactions. This has now been fixed.",
+      "Uncategorized & income transactions are now displayed more compact and renamed as 'To be Budgeted'."
+    ]
+  },
+  {
     "date": "2020-04-20",
     "changes": [
-      "From now on Budgista requires a subscription. Every new account starts with a 14 day trial.",
-      "New sidebar design to easily switch between your accounts and budget."
+      "From now on Budgista requires a yearly subscription. Every new account starts with a 14 day trial.",
+      "New sidebar design for switching easily between your accounts and budget."
     ]
   },
   {
