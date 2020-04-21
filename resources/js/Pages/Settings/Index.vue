@@ -24,7 +24,7 @@
           href="/categories"/>
       </AppMenu>
 
-      <div class="py-2 flex justify-center">
+      <div class="flex justify-center">
         <button
           class="pill"
           @click="logout">

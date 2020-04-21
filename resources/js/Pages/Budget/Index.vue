@@ -73,6 +73,14 @@
           </div>
         </AppMenuItem>
       </AppMenu>
+
+      <div class="flex justify-center">
+        <inertia-link
+          class="pill"
+          href="/categories">
+          {{ $t('action.manageCategories') }}
+        </inertia-link>
+      </div>
     </template>
     <slot/>
   </Layout>
