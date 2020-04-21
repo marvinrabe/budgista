@@ -51,46 +51,46 @@
             {{ $t('form.available')}}
           </div>
 
-          <details class="dropdown ml-auto">
-            <summary
-              class="badge border border-transparent px-4 py-2 text-right cursor-pointer"
-              :class="{'badge--red': categoryBudget.available < 0, 'badge--green': categoryBudget.available > 0, 'badge--gray': categoryBudget.available === 0, }"
-            >
-              <InfoIcon class="text-sm opacity-50 hover:opacity-75"/>
-              <AppMoney class="ml-2" color :value="categoryBudget.available"/>
-            </summary>
-            <div
-              class="dropdown__body border border-gray-3 flex-col px-6 py-4 bg-white right-0 top-0 mt-10 rounded shadow-lg">
-              <div class="py-1 flex items-baseline justify-between">
-                <div class="label mr-6">
-                  {{ $t('form.previousMonth')}}
-                </div>
-
-                <AppMoney :value="categoryBudget.previousMonth" class="text-sm"/>
+          <AppDropDown body-class="flex-col right-0 top-0 mt-10 whitespace-no-wrap">
+            <template v-slot:activator>
+              <div
+                class="badge border border-transparent px-4 py-2 text-right"
+                :class="{'badge--red': categoryBudget.available < 0, 'badge--green': categoryBudget.available > 0, 'badge--gray': categoryBudget.available === 0, }"
+              >
+                <InfoIcon class="text-sm opacity-50 hover:opacity-75"/>
+                <AppMoney class="ml-2" color :value="categoryBudget.available"/>
               </div>
-              <div class="py-1 flex items-baseline justify-between">
-                <div class="label mr-6">
-                  {{ $t('form.budget')}}
-                </div>
+            </template>
 
-                <AppMoney :value="categoryBudget.amount" class="text-sm"/>
+            <div class="py-1 flex items-baseline justify-between">
+              <div class="label mr-6">
+                {{ $t('form.previousMonth')}}
               </div>
-              <div class="py-1 flex items-baseline justify-between">
-                <div class="label mr-6">
-                  {{ $t('form.activity')}}
-                </div>
 
-                <AppMoney :value="categoryBudget.activity" class="text-sm"/>
-              </div>
-              <div class="py-1 flex items-baseline justify-between">
-                <div class="label mr-6">
-                  {{ $t('form.available')}}
-                </div>
-
-                <AppMoney :value="categoryBudget.available" class="text-sm"/>
-              </div>
+              <AppMoney :value="categoryBudget.previousMonth" class="text-sm"/>
             </div>
-          </details>
+            <div class="py-1 flex items-baseline justify-between">
+              <div class="label mr-6">
+                {{ $t('form.budget')}}
+              </div>
+
+              <AppMoney :value="categoryBudget.amount" class="text-sm"/>
+            </div>
+            <div class="py-1 flex items-baseline justify-between">
+              <div class="label mr-6">
+                {{ $t('form.activity')}}
+              </div>
+
+              <AppMoney :value="categoryBudget.activity" class="text-sm"/>
+            </div>
+            <div class="py-1 flex items-baseline justify-between">
+              <div class="label mr-6">
+                {{ $t('form.available')}}
+              </div>
+
+              <AppMoney :value="categoryBudget.available" class="text-sm"/>
+            </div>
+          </AppDropDown>
         </div>
       </div>
 
@@ -118,6 +118,7 @@
   import { iconComponent } from '@/Utils/Icons'
   import { faInfoCircle, faLightbulb, faCog } from '@fortawesome/free-solid-svg-icons'
   import AppButton from '@/Components/form/AppButton'
+  import AppDropDown from '@/Components/AppDropDown'
 
   export default {
     props: {
@@ -126,6 +127,7 @@
       transactions: Object
     },
     components: {
+      AppDropDown,
       AppButton,
       AppMoney,
       AppMoneyInput,

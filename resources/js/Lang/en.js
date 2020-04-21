@@ -1,4 +1,9 @@
 export default {
+  budget: {
+    title: {
+      uncategorized: 'To be Budgeted'
+    }
+  },
   subscription: {
     title: 'Subscription',
     action: {

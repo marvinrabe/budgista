@@ -1,4 +1,9 @@
 export default {
+  budget: {
+    title: {
+      uncategorized: 'Frei Verfügbar'
+    }
+  },
   subscription: {
     title: 'Abonnement',
     action: {

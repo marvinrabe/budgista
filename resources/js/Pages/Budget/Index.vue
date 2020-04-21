@@ -37,7 +37,7 @@
 
     <template v-slot:menu>
       <AppMenu>
-        <AppMenuItem class="border-b-2" :label="$t('form.uncategorized')" :href="$page.budget.links.uncategorized">
+        <AppMenuItem class="border-b-2" :label="$t('budget.title.uncategorized')" :href="$page.budget.links.uncategorized">
           <AppMoney
             :value="$page.budget.available"
             :color="$page.budget.available !== 0"

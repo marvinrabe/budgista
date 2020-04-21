@@ -14,11 +14,11 @@
   }
 
   summary {
-    @apply list-none;
+    @apply list-none cursor-pointer;
   }
 
   &__body {
-    @apply z-50 absolute;
+    @apply z-50 absolute border border-gray-3 rounded shadow-lg px-6 py-4 bg-white;
   }
 }
 
