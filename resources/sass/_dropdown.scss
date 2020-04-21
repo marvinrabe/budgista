@@ -1,5 +1,5 @@
 .dropdown {
-  @apply relative;
+  @apply relative appearance-none;
 
   &[open] > summary::before {
     @apply fixed z-40;
@@ -14,7 +14,11 @@
   }
 
   summary {
-    @apply list-none cursor-pointer;
+    @apply list-none appearance-none cursor-pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display:none;
   }
 
   &__body {
