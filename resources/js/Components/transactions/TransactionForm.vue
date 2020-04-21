@@ -87,7 +87,7 @@
               <div class="border border-l-0 border-gray-4 rounded-r flex items-center">
                 <AppButton
                   :title="$t('form.recurring')"
-                  @click="form.recurring = !form.recurring"
+                  @click="toggleRecurring"
                   :class="{'text-blue-7 hover:text-blue-9': form.recurring}"
                   icon
                 >
@@ -178,6 +178,12 @@
       },
       setToIncome () {
         this.type = INCOME
+      },
+      toggleRecurring() {
+        this.form.recurring = !this.form.recurring
+        if(!this.form.recurring) {
+          this.form.recurrence = null
+        }
       }
     }
   }

@@ -73,6 +73,8 @@ class TransactionController extends Controller
 
         if ($request->has('recurrence')) {
             $transaction->recurrence = $request->get('recurrence');
+        } else {
+            $transaction->recurrence = null;
         }
 
         if ($isTransfer) {
@@ -147,12 +149,6 @@ class TransactionController extends Controller
             'date' => ['required', 'date'],
             'notes' => ['nullable', 'string']
         ]);
-
-        if (!empty(request('recurrence'))) {
-            $transaction->recurrence = request('recurrence');
-        } else {
-            $transaction->recurrence = null;
-        }
 
         $transaction = $transaction->fill(
             $request->only(['payee', 'account_id', 'amount', 'date', 'notes'])
