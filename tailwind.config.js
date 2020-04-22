@@ -1,9 +1,11 @@
 const colors = require('open-color')
+const chroma = require('chroma-js')
 
 module.exports = {
   theme: {
     colors: {
       ...colors,
+      gray: colors.gray.map((color, index) => chroma.mix(color, colors.red[index], 0.13, 'hsl').hex()),
       transparent: 'transparent'
     },
     container: {

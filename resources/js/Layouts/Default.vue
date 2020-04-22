@@ -3,7 +3,7 @@
     <div class="container">
       <div class="flex items-start">
         <AppSidebar/>
-        <div class="flex-1 min-w-0 px-2 py-4">
+        <div class="flex-1 min-w-0 p-4 md:px-8">
           <VerifyAlert/>
 
           <div class="flex flex-wrap items-center mb-4 min-h-10">

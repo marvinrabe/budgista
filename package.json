@@ -24,6 +24,7 @@
     "autosize": "^4.0.2",
     "axios": "^0.19",
     "chart.js": "^2.9.3",
+    "chroma-js": "^2.1.0",
     "cross-env": "^5.2",
     "dayjs": "^1.8.20",
     "dinero.js": "^1.6.0",

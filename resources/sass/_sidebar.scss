@@ -5,7 +5,16 @@ $zindex-fixed: 10;
   @apply sticky top-0;
 }
 
+.sidebar::before {
+  @apply absolute block h-screen bg-gray-9;
+  width: 9999em;
+  right: 0;
+  top: 0;
+  content: "";
+}
+
 .sidebar__content {
+  @apply relative z-10;
   width: $menu-width;
 }
 
@@ -30,7 +39,7 @@ $zindex-fixed: 10;
   }
 
   .sidebar__content {
-    background: linear-gradient(0deg, $oc-gray-0, $oc-gray-1);
+    @apply bg-gray-9;
     position: relative;
     max-width: $menu-width;
     width: 90%;

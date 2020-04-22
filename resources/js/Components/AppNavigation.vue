@@ -25,7 +25,7 @@
           href="/transactions"
         />
       </ul>
-      <p class="label px-4 pt-3 pb-1 text-gray-6">
+      <p class="label px-4 pt-3 pb-1 text-gray-4">
         {{ $t('title.accounts') }}
       </p>
       <ul>
@@ -40,7 +40,7 @@
         />
       </ul>
       <template v-if="trackingAccounts.length">
-        <p class="label px-4 pt-3 pb-1 text-gray-6">
+        <p class="label px-4 pt-3 pb-1 text-gray-4">
           {{ $t('title.trackingAccounts') }}
         </p>
         <ul>
