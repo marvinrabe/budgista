@@ -1,5 +1,5 @@
 <template>
-  <Layout :title="$t('title.reports')" redirect="/statistics/netWorth">
+  <Layout :title="$t('title.reports')">
     <NetWorth v-bind="netWorth"/>
     <IncomeVsExpense v-bind="incomeVsExpense"/>
     <div class="-mx-2 flex flex-wrap">
