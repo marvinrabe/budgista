@@ -149,6 +149,7 @@ export default {
     accountName: 'Cash, Visa, ...'
   },
   word: {
+    total: 'Total',
     or: 'or',
     termsOfService: 'Terms of Service',
     transaction: 'Transaction',

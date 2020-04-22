@@ -148,6 +148,7 @@ export default {
     accountName: 'Bargeld, Girokonto, ...'
   },
   word: {
+    total: 'Gesamt',
     or: 'oder',
     termsOfService: 'Nutzungsbedingungen',
     transaction: 'Transaktion',
