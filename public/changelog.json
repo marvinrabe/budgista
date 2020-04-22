@@ -1,5 +1,12 @@
 [
   {
+    "date": "2020-04-22",
+    "changes": [
+      "Income and Expense charts display total amount.",
+      "Improved chart colors. No ugly poison green anymore."
+    ]
+  },
+  {
     "date": "2020-04-21",
     "changes": [
       "You can switch to the category settings from your Budget view by pressing 'Manage Categories'.",
