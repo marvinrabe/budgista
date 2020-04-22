@@ -30,7 +30,6 @@
           scales: {
             yAxes: [{
               ticks: {
-                beginAtZero: true,
                 callback: function (value) {
                   return self.moneyFormat.format(value)
                 }
