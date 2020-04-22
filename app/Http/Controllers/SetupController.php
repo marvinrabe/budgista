@@ -83,7 +83,7 @@ class SetupController extends Controller
                 }
             });
 
-        return Redirect::to('/budget');
+        return Redirect::to('/');
     }
 
 }
