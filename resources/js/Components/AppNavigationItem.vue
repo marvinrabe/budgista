@@ -8,6 +8,7 @@
         :icon="icon"
         class="mr-2 text-gray-6"
         :class="{'text-blue-6': active}"
+        fixed-width
         v-if="icon"
       />
       <span class="flex flex-col min-w-0">
