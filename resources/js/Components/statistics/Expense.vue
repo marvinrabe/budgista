@@ -24,7 +24,10 @@
           labels: this.data.map((x) => x.category),
           datasets: [{
             backgroundColor: ({ dataIndex }) => {
-              return red[6 - dataIndex % 5]
+              return red[6 - dataIndex % 5] + 'C0' // 75% Opacity
+            },
+            hoverBackgroundColor: ({ dataIndex }) => {
+              return red[6]
             },
             data: this.data.map(x => x.expense)
           }]

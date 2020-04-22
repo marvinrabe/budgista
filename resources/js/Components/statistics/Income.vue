@@ -9,7 +9,7 @@
 
 <script>
   import DonutChart from '@/Components/statistics/DonutChart'
-  import { green } from 'open-color'
+  import { green, red } from 'open-color'
 
   export default {
     components: {
@@ -24,7 +24,10 @@
           labels: this.data.map((x) => x.category),
           datasets: [{
             backgroundColor: ({ dataIndex }) => {
-              return green[6 - dataIndex % 5]
+              return green[6 - dataIndex % 5] + 'C0' // 75% Opacity
+            },
+            hoverBackgroundColor: ({ dataIndex }) => {
+              return green[6]
             },
             data: this.data.map(x => x.income)
           }]

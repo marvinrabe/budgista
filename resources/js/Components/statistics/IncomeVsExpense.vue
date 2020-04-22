@@ -34,14 +34,16 @@
           {
             label: this.$t('form.income'),
             borderColor: green[7],
-            backgroundColor: green[2],
+            backgroundColor: green[6] + 'C0', // 75% Opacity
+            hoverBackgroundColor: green[6],
             borderWidth: 1,
             data: this.data.map(x => x.income)
           },
           {
             label: this.$t('form.expense'),
             borderColor: red[7],
-            backgroundColor: red[2],
+            backgroundColor: red[6] + 'C0', // 75% Opacity
+            hoverBackgroundColor: red[6],
             borderWidth: 1,
             data: this.data.map(x => x.expense)
           }
