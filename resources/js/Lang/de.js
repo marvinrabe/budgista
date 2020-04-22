@@ -25,6 +25,43 @@ export default {
     previous: 'Neuere',
     info: '{from}-{to} von {total}'
   },
+  welcome: {
+    title: 'Los geht\'s',
+    headline: {
+      title: 'Starte mit Budgista.',
+      description: 'Wir geben dir alles, um deine Finanzen zu überblicken.'
+    },
+    steps: [
+      {
+        title: 'Gib Kontobewegungen ein',
+        description: 'Sobald du Geld ausgibst, trage die Kontobewegungen in das zugehörige Konto ein.'
+      },
+      {
+        title: 'Erstelle wiederkehrende Kontobewegungen',
+        description: 'Spare etwas Zeit, indem du wiederkehrende Kontobewegungen einträgst (z. B. dein Gehalt).'
+      },
+      {
+        title: 'Führe ein Budget',
+        description: 'Teile dein Geld in deine Kategorien auf, um ein Budget zu erstellen. Restbeträge am Ende des Monats werden auf den Nächsten übertragen.'
+      },
+      {
+        title: 'Abonniere Budgista',
+        description: 'Gebe deine Zahlungsinformationen ein, um Budgista auch nach der Testphase weiterhin nutzen zu können.'
+      }
+    ],
+    subscription: {
+      message: 'Du hast noch {count} Tag deiner Testphase übrig.|Du hast noch {count} Tage deiner Testphase übrig.',
+      action: 'Jetzt Abonnieren'
+    },
+    help: {
+      title: 'Du brauchst Hilfe?',
+      description: 'Kontaktiere uns mit deinen Fragen, Wünschen und Problemen. Wir helfen dir!'
+    },
+    social: {
+      title: 'Lass uns Freunde sein',
+      description: 'Folge Budgista auf Social Media, um über Neuerungen informiert zu werden.'
+    }
+  },
   message: {
     deleteUser: 'Wenn du dein Benutzerkonto löscht, dann werden deine Daten sofort, vollständig und unwiderruflich entfernt. Bitte gib dein Passwort ein um die Löschung zu bestätigen.',
     deleteAccount: 'Möchtest du {name} wirklich löschen? Alle Transaktionen werden entfernt. Dies kann nicht rückgängig gemacht werden.',

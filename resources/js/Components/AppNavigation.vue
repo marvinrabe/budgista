@@ -4,6 +4,12 @@
     <nav class="mb-4">
       <ul class="flex flex-col">
         <AppNavigationItem
+          :label="$t('welcome.title')"
+          :icon="icons.welcome"
+          href="/welcome"
+          v-if="$page.user.subscription_state === 'trial'"
+        />
+        <AppNavigationItem
           :label="$t('title.budget')"
           :icon="icons.budget"
           href="/budget"
@@ -73,6 +79,7 @@
   import AppLogo from './AppLogo'
   import AppNavigationItem from '@/Components/AppNavigationItem'
   import {
+    faLightbulb,
     faEnvelope,
     faUniversity,
     faChartBar,
@@ -97,6 +104,7 @@
     data () {
       return {
         icons: {
+          welcome: faLightbulb,
           budget: faEnvelope,
           transactions: faUniversity,
           reports: faChartBar,

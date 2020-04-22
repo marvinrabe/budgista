@@ -2,6 +2,7 @@
   {
     "date": "2020-04-22",
     "changes": [
+      "We added a 'Getting Started' page for new users.",
       "Income and Expense charts display total amount.",
       "Improved chart colors. No ugly poison green anymore."
     ]

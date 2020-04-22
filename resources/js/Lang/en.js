@@ -25,6 +25,43 @@ export default {
     previous: 'Newer',
     info: '{from}-{to} of {total}'
   },
+  welcome: {
+    title: 'Get started',
+    headline: {
+      title: 'Get started with Budgista.',
+      description: 'We give you everything to keep track of your finances.'
+    },
+    steps: [
+      {
+        title: 'Enter Transactions',
+        description: 'As soon as you spend money, enter the transaction in the corresponding account.'
+      },
+      {
+        title: 'Setup recurring Transactions',
+        description: 'Save yourself some time and enter recurring transactions (e.g. your salary).'
+      },
+      {
+        title: 'Keep a Budget',
+        description: 'Split your money between your categories to create a budget. What is leftover at the end of the month is carried over to the next.'
+      },
+      {
+        title: 'Subscribe to Budgista',
+        description: 'Enter your payment details to keep having access after the trial.'
+      }
+    ],
+    subscription: {
+      message: 'You have {count} day left on your trial.|You have {count} days left on your trial.',
+      action: 'Subscribe Now'
+    },
+    help: {
+      title: 'Need Help?',
+      description: 'Contact us with all your questions, feedback, or problems. We\'ll help you!'
+    },
+    social: {
+      title: 'Let\'s be Friends',
+      description: 'Follow Budgista on Social Medial to get notified about the newest features.'
+    }
+  },
   message: {
     deleteUser: 'If you delete your user account all your data will be immediately, completely and irrevocably lost. Please enter your password to confirm the deletion.',
     deleteAccount: 'Do you really want to delete {name}? All transactions will be lost. This action can\'t be reversed.',
