@@ -108,6 +108,7 @@ class GoogleTest extends TestCase
         $this->mockSocialiteFacade($user->name, $user->email, $id);
 
         $this
+            ->withoutExceptionHandling()
             ->get('/login/google/callback')
             ->assertRedirect('/');
 

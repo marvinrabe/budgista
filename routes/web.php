@@ -11,7 +11,7 @@ Route::get('login/google/callback', [Controllers\Auth\GoogleController::class, '
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/', HomeController::class);
+    Route::get('/', HomeController::class)->name('home');
     Route::inertia('/welcome', 'Welcome');
 
     Route::group(['middleware' => \App\Http\Middleware\RequiresSubscription::class], function () {

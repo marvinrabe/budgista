@@ -112,7 +112,7 @@ class SetupTest extends TestCase
                     ['name' => 'Visa', 'amount' => 999]
                 ]
             ])
-            ->assertRedirect('/budget');
+            ->assertRedirect('/');
 
         $this->assertCount(2, $user->refresh()->accounts);
 
@@ -129,7 +129,7 @@ class SetupTest extends TestCase
 
         $this->signIn($user)
             ->post('/setup/accounts', [])
-            ->assertRedirect('/budget');
+            ->assertRedirect('/');
 
         $this->assertCount(0, $user->refresh()->accounts);
     }
@@ -148,7 +148,7 @@ class SetupTest extends TestCase
                     []
                 ]
             ])
-            ->assertRedirect('/budget');
+            ->assertRedirect('/');
 
         $this->assertCount(0, $user->fresh()->accounts);
     }
