@@ -26,7 +26,7 @@
     },
     computed: {
       total () {
-        return this.data.reduce((acc, x) => acc + x.expense, 0)
+        return this.data.reduce((acc, x) => acc + parseInt(x.expense), 0)
       },
       chartData () {
         return {
