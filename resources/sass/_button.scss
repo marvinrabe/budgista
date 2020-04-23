@@ -1,5 +1,5 @@
 .btn {
-  @apply font-bold py-2 px-4 rounded cursor-pointer shadow-sm text-center;
+  @apply font-semibold py-2 px-4 rounded cursor-pointer shadow-sm text-center;
   @apply flex items-center justify-center;
   transition: background-color 0.2s ease 0s, color 0.2s ease 0s;
 
@@ -40,7 +40,7 @@
   }
 
   &--subtle {
-    @apply font-normal bg-transparent;
+    @apply bg-transparent;
     border: 0 !important;
     box-shadow: none !important;
 

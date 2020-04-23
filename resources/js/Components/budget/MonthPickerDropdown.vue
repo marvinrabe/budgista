@@ -1,14 +1,14 @@
 <template>
-  <AppDropDown body-class="left-0 top-0 mt-12">
+  <AppDropDown body-class="left-0 top-0 mt-12 p-2">
     <template v-slot:activator>
       <slot/>
     </template>
     <div class="flex flex-col">
-      <div class="flex justify-center items-center">
+      <div class="flex justify-center items-center bg-gray-1 mb-2 py-1 rounded-sm">
         <AppButton icon @click="lastYear">
           <PrevIcon/>
         </AppButton>
-        <div class="font-bold">
+        <div class="font-bold px-1 text-lg">
           {{ year }}
         </div>
         <AppButton icon @click="nextYear">
@@ -17,7 +17,9 @@
       </div>
       <div class="flex flex-wrap w-56">
         <AppButton
-          class="w-1/3" subtle variant="light"
+          subtle
+          variant="light"
+          class="w-1/3"
           v-for="(month, index) in $t('month')" :key="index"
           @click="() => selectMonth(index)"
         >
