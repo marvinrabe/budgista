@@ -19,7 +19,7 @@ class ChangePasswordTest extends TestCase
         $this
             ->signIn($user)
             ->from('/profile')
-            ->post('/profile/password', [
+            ->post('/settings/security/password', [
                 'password' => 'password',
                 'new_password' => 'newpassword123'
             ])
@@ -32,7 +32,7 @@ class ChangePasswordTest extends TestCase
     {
         $this
             ->signIn()
-            ->post('/profile/password', [
+            ->post('/settings/security/password', [
                 'password' => 'wrongpassword',
                 'new_password' => 'newpassword123'
             ])
@@ -44,7 +44,7 @@ class ChangePasswordTest extends TestCase
     {
         $this
             ->signIn()
-            ->post('/profile/password', [
+            ->post('/settings/security/password', [
                 'password' => 'password',
                 'new_password' => 'secret1'
             ])
