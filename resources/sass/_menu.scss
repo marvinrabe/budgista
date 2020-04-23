@@ -1,11 +1,17 @@
+@import "~open-color/open-color.scss";
 
 .menu__body *:last-child {
-  @apply border-0;
+  @apply border-b-0;
 }
 
 .menu__item {
-  @apply block border-b border-gray-3 py-2 px-4;
+  @apply block border-b border-gray-3 py-2 px-4 border-l-2;
   @apply flex flex-wrap items-center;
+  border-left-color: transparent;
+
+  &:hover {
+    border-left-color: $oc-gray-0;
+  }
 
   svg {
     @apply text-gray-6;
@@ -13,10 +19,20 @@
 
   &--active {
     @apply bg-gray-0 relative shadow-sm;
+    border-left-color: $oc-blue-5;
+
+    &:hover {
+      border-left-color: $oc-blue-5;
+    }
+
     overflow: visible;
 
     svg {
       @apply text-blue-6;
+    }
+
+    .menu__item-label {
+      @apply text-gray-8;
     }
 
     &:after {

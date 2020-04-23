@@ -6,7 +6,7 @@ $zindex-fixed: 10;
 }
 
 .sidebar::before {
-  @apply absolute block h-screen bg-gray-9;
+  @apply absolute block h-screen bg-white border-r border-gray-3;
   width: 9999em;
   right: 0;
   top: 0;
@@ -39,7 +39,7 @@ $zindex-fixed: 10;
   }
 
   .sidebar__content {
-    @apply bg-gray-9;
+    @apply bg-white;
     position: relative;
     max-width: $menu-width;
     width: 90%;

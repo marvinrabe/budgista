@@ -2,19 +2,18 @@
   <li>
     <inertia-link
       :href="href"
-      class="font-medium px-4 py-3 hover:no-underline text-gray-3 hover:text-gray-2 rounded flex items-center"
-      :class="{'bg-gray-8': active, }">
+      class="font-medium px-4 py-3 hover:no-underline text-gray-7 hover:text-gray-8 rounded flex items-center">
       <FontAwesomeIcon
         :icon="icon"
         class="mr-2 text-gray-6"
-        :class="{'text-blue-4': active}"
+        :class="{'text-blue-5': active}"
         fixed-width
         v-if="icon"
       />
       <span class="flex flex-col min-w-0">
         <span
           class="ellipsis leading-tight"
-          :class="{'text-gray-3 font-bold': active, 'tracking-wide': !active}">
+          :class="{'text-blue-7': active}">
           <span>{{ label }}</span>
         </span>
         <AppMoney
