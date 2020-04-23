@@ -42,7 +42,7 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: 7.4
-          extensions: mbstring, bcmath, intl
+          extensions: mbstring, bcmath, intl, redis
       - name: Copy ENV Laravel Configuration for CI
         run: php -r "file_exists('.env') || copy('.github/.env.testing', '.env');"
       - name: Install Dependencies (PHP vendors)
