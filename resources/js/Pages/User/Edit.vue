@@ -6,11 +6,11 @@
       </div>
 
       <div class="card-body">
-        <SettingsEmail/>
+        <SettingsProfile/>
       </div>
 
       <div class="card-body border-t border-gray-3">
-        <SettingsPassword/>
+        <SettingsEmail/>
       </div>
 
       <div class="card-body border-t border-gray-3">
@@ -35,14 +35,15 @@
   import SettingsEmail from '@/Components/profile/SettingsEmail.vue'
   import SettingsGoogle from '@/Components/profile/SettingsGoogle.vue'
   import SettingsPassword from '@/Components/profile/SettingsPassword.vue'
+  import SettingsProfile from '@/Components/profile/SettingsProfile'
 
   export default {
     components: {
+      SettingsProfile,
       Layout,
       AppButton,
       SettingsEmail,
-      SettingsGoogle,
-      SettingsPassword
+      SettingsGoogle
     }
   }
 </script>

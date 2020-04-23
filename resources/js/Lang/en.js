@@ -4,6 +4,9 @@ export default {
       uncategorized: 'To be Budgeted'
     }
   },
+  security: {
+    title: 'Security'
+  },
   subscription: {
     title: 'Subscription',
     action: {
@@ -123,6 +126,7 @@ export default {
       transaction: 'Delete Transaction'
     },
     'settings': {
+      profile: 'Save Profile',
       'password': 'Change Password',
       'email': 'Change Email Address'
     },
@@ -197,6 +201,7 @@ export default {
     step: 'Step'
   },
   title: {
+    updateProfile: 'Edit Profile',
     billing: 'Subscription',
     transactions: 'Transactions',
     allTransactions: 'All Transactions',

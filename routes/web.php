@@ -63,12 +63,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('settings/edit', [Controllers\SettingsController::class, 'edit'])->name('settings.edit');
     Route::post('settings', [Controllers\SettingsController::class, 'update'])->name('settings.update');
     Route::get('settings/subscription', [Controllers\SubscriptionController::class, 'index'])->name('settings.subscription');
-    Route::get('/profile', [Controllers\UserController::class, 'edit'])->name('user.edit');
-    Route::post('/profile/email', [Controllers\UserController::class, 'email'])->name('user.email');
+    Route::inertia('settings/security', 'User/Security')->name('user.security');
+    Route::post('settings/security/password', [Controllers\UserController::class, 'password'])->name('user.password');
+
+    Route::get('profile', [Controllers\UserController::class, 'edit'])->name('user.edit');
+    Route::post('profile', [Controllers\UserController::class, 'update'])->name('user.update');
+    Route::post('profile/email', [Controllers\UserController::class, 'email'])->name('user.email');
     Route::delete('profile/google', [Controllers\Auth\GoogleController::class, 'destroy'])->name('google.destroy');
-    Route::post('/profile/password', [Controllers\UserController::class, 'password'])->name('user.password');
-    Route::get('/profile/terminate', [Controllers\UserController::class, 'delete'])->name('user.delete');
-    Route::post('/profile/terminate', [Controllers\UserController::class, 'destroy'])->name('user.destroy');
+    Route::get('profile/terminate', [Controllers\UserController::class, 'delete'])->name('user.delete');
+    Route::post('profile/terminate', [Controllers\UserController::class, 'destroy'])->name('user.destroy');
+
 
     /*
      * Setup

@@ -8,6 +8,7 @@ use App\Rules\ValidPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 use Laracasts\Flash\Flash;
 
@@ -17,6 +18,19 @@ class UserController extends Controller
     public function edit()
     {
         return Inertia::render('User/Edit');
+    }
+
+    public function update()
+    {
+        Auth()->user()->update(
+            request()->validate([
+                'name' => 'required'
+            ])
+        );
+
+        Flash::success(__('Profile has been updated.'));
+
+        return Redirect::back();
     }
 
     public function email()

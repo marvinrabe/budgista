@@ -12,6 +12,43 @@ class UserTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function testUpdateUser()
+    {
+        $this->signIn();
+
+        $user = Auth()->user();
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'name' => $user->name,
+        ]);
+
+        $this->post('/profile', [
+            'name' => 'New Name'
+        ]);
+
+        $this->assertDatabaseMissing('users', [
+            'id' => $user->id,
+            'email' => 'New Name',
+        ]);
+    }
+
+    public function testUserRequiresName()
+    {
+        $this->signIn();
+
+        $user = Auth()->user();
+
+        $this->post('/profile', [
+            'name' => null
+        ])->assertSessionHasErrors('name');
+
+        $this->assertDatabaseMissing('users', [
+            'id' => $user->id,
+            'email' =>  $user->name,
+        ]);
+    }
+
     public function testDeleteUser()
     {
         $this->signIn();

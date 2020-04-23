@@ -11,6 +11,10 @@
           :icon="icons.profile"
           href="/profile"/>
         <AppMenuItem
+          :label="$t('security.title')"
+          :icon="icons.security"
+          href="/settings/security"/>
+        <AppMenuItem
           :label="$t('subscription.title')"
           :icon="icons.subscription"
           href="/settings/subscription"/>
@@ -42,7 +46,7 @@
   import AppMenu from '@/Components/AppMenu'
   import AppMenuItem from '@/Components/AppMenuItem'
   import { clearCache } from '@/Utils/ServiceWorker'
-  import { faUserCircle, faInbox, faCog, faWallet } from '@fortawesome/free-solid-svg-icons'
+  import { faUserCircle, faInbox, faCog, faWallet, faKey } from '@fortawesome/free-solid-svg-icons'
 
   export default {
     components: {
@@ -61,6 +65,7 @@
         icons: {
           profile: faUserCircle,
           general: faCog,
+          security: faKey,
           categories: faInbox,
           subscription: faWallet
         }
