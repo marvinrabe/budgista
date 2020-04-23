@@ -1,11 +1,11 @@
-import {Inertia} from '@inertiajs/inertia'
+import { Inertia } from '@inertiajs/inertia'
 import _ from 'lodash'
 
-export function budgetRoute (base, category = null) {
+export function budgetRoute (base, month, category = null) {
   if (category) {
-    return base + '/categories/' + category.id
+    return base + '/' + month.toString() + '/categories/' + category.id
   }
-  return base
+  return base + '/' + month.toString()
 }
 
 export function transactionRoute (page) {

@@ -1,33 +1,15 @@
 <template>
   <Layout
-    :title="$t('title.budget') + ': ' + monthObject.format()"
+    :title="$t('title.budget') + ': ' + month.format()"
     :redirect="$page.budget.links.uncategorized"
     :has-content="!!this.$slots.default"
   >
     <template v-slot:header>
-      <div class="flex">
-        <h2 class="text-xl">
-          {{ monthObject.format() }}
-        </h2>
-        <inertia-link
-          :title="$t('action.previousMonth')"
-          :href="prevLink"
-          class="btn btn--icon"
-        >
-          <PrevIcon/>
-        </inertia-link>
-        <inertia-link
-          :title="$t('action.nextMonth')"
-          :href="nextLink"
-          class="btn btn--icon"
-        >
-          <NextIcon/>
-        </inertia-link>
-      </div>
+      <MonthPicker :value="month" @input="changeMonth"/>
 
       <div class="flex ml-auto">
         <AppButton
-          :to="'/tabularBudget/'+monthObject.toString()"
+          :to="'/tabularBudget/'+month.toString()"
           class="hidden md:block"
           icon>
           <TableIcon/>
@@ -37,7 +19,8 @@
 
     <template v-slot:menu>
       <AppMenu>
-        <AppMenuItem class="border-b-2" :label="$t('budget.title.uncategorized')" :href="$page.budget.links.uncategorized">
+        <AppMenuItem class="border-b-2" :label="$t('budget.title.uncategorized')"
+                     :href="$page.budget.links.uncategorized">
           <AppMoney
             :value="$page.budget.available"
             :color="$page.budget.available !== 0"
@@ -78,6 +61,7 @@
         <inertia-link
           class="pill"
           href="/categories">
+          <CogIcon class="text-gray-6"/>
           {{ $t('action.manageCategories') }}
         </inertia-link>
       </div>
@@ -98,7 +82,7 @@
   import AppMenuItem from '@/Components/AppMenuItem'
   import AppButton from '@/Components/form/AppButton'
   import { iconComponent } from '@/Utils/Icons'
-  import { faChevronLeft, faChevronRight, faCog, faTable } from '@fortawesome/free-solid-svg-icons'
+  import { faCog, faTable } from '@fortawesome/free-solid-svg-icons'
   import { budgetRoute } from '@/Utils/Route'
 
   export default {
@@ -113,8 +97,6 @@
       MonthPicker,
       draggable,
       TableIcon: iconComponent({ icon: faTable }),
-      NextIcon: iconComponent({ icon: faChevronRight, fixedWidth: true }),
-      PrevIcon: iconComponent({ icon: faChevronLeft, fixedWidth: true }),
       CogIcon: iconComponent({ icon: faCog }),
     },
     props: {
@@ -123,15 +105,14 @@
         default: null
       }
     },
-    computed: {
-      monthObject () {
-        return Month.fromString(this.$page.budget.month.value)
-      },
-      prevLink () {
-        return budgetRoute(this.$page.budget.links.prev, this.$page.category)
-      },
-      nextLink () {
-        return budgetRoute(this.$page.budget.links.next, this.$page.category)
+    data () {
+      return {
+        month: Month.fromString(this.$page.budget.month.value)
+      }
+    },
+    methods: {
+      changeMonth (month) {
+        this.$inertia.visit(budgetRoute('/budget', month, this.$page.category))
       }
     }
   }

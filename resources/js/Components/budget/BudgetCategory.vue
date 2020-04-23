@@ -34,15 +34,12 @@
 <script>
   import AppMoney from '../AppMoney'
   import AppMoneyInput from '../form/AppMoneyInput'
-  import { faGripLinesVertical } from '@fortawesome/free-solid-svg-icons'
   import { mixin as moneyMixin } from '@/Utils/Money'
-  import { iconComponent } from '@/Utils/Icons'
 
   export default {
     components: {
       AppMoney,
-      AppMoneyInput,
-      GripIcon: iconComponent({ icon: faGripLinesVertical, fixedWidth: true })
+      AppMoneyInput
     },
     mixins: [moneyMixin],
     props: {

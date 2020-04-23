@@ -1,23 +1,23 @@
 <template>
   <div class="flex items-center">
-    <h2 class="text-xl">
-      {{ month.format() }}
-    </h2>
+    <MonthPickerDropdown :value="value" @input="(m) => $emit('input', m)">
+      <div class="btn btn--subtle light font-semibold text-xl">
+        {{ value.format() }}
+      </div>
+    </MonthPickerDropdown>
     <div class="flex">
-      <inertia-link
+      <AppButton
         :title="$t('action.previousMonth')"
-        :href="prev"
-        class="btn btn--icon"
-      >
-        <PrevIcon />
-      </inertia-link>
-      <inertia-link
+        @click="prev"
+        icon>
+        <PrevIcon/>
+      </AppButton>
+      <AppButton
         :title="$t('action.nextMonth')"
-        :href="next"
-        class="btn btn--icon"
-      >
-        <NextIcon />
-      </inertia-link>
+        @click="next"
+        icon>
+        <NextIcon/>
+      </AppButton>
     </div>
   </div>
 </template>
@@ -26,16 +26,26 @@
   import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
   import Month from '@/Utils/Month'
   import { iconComponent } from '@/Utils/Icons'
+  import AppButton from '@/Components/form/AppButton'
+  import MonthPickerDropdown from '@/Components/budget/MonthPickerDropdown'
 
   export default {
     components: {
-      NextIcon: iconComponent({ icon: faChevronRight, fixedWidth: true }),
-      PrevIcon: iconComponent({ icon: faChevronLeft, fixedWidth: true })
+      MonthPickerDropdown,
+      AppButton,
+      NextIcon: iconComponent({ icon: faChevronRight }),
+      PrevIcon: iconComponent({ icon: faChevronLeft })
     },
     props: {
-      month: Month,
-      next: String,
-      prev: String
+      value: Month
+    },
+    methods: {
+      next () {
+        this.$emit('input', this.value.next())
+      },
+      prev () {
+        this.$emit('input', this.value.previous())
+      }
     }
   }
 </script>

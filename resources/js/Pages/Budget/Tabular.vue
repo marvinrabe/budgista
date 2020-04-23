@@ -1,12 +1,7 @@
 <template>
-  <Layout :title="$t('title.budget') + ': ' + monthObject.format()">
+  <Layout :title="$t('title.budget') + ': ' + month.format()">
     <template v-slot:header>
-      <MonthPicker
-        :month="monthObject"
-        :next="links.next"
-        :prev="links.prev"
-        slot="title"
-      />
+      <MonthPicker :value="month" @input="changeMonth"/>
 
       <div class="mt-4 w-full lg:mt-0 lg:w-auto lg:ml-auto">
         <div class="flex -mx-2">
@@ -38,7 +33,7 @@
     <template v-if="budget.categories.length">
       <Budget>
         <BudgetCategory
-          :month="monthObject"
+          :month="month"
           :category="category"
           :key="category.id"
           v-for="category in budget.categories"
@@ -69,6 +64,7 @@
   import { iconComponent } from '@/Utils/Icons'
   import { faCog } from '@fortawesome/free-solid-svg-icons'
   import CategoryListEmpty from '@/Components/categories/CategoryListEmpty'
+  import { budgetRoute } from '@/Utils/Route'
 
   export default {
     components: {
@@ -82,12 +78,16 @@
       CogIcon: iconComponent({ icon: faCog }),
     },
     props: {
-      budget: Object,
-      links: Object
+      budget: Object
     },
-    computed: {
-      monthObject () {
-        return Month.fromString(this.budget.month.value)
+    data () {
+      return {
+        month: Month.fromString(this.budget.month.value)
+      }
+    },
+    methods: {
+      changeMonth (month) {
+        this.$inertia.visit(budgetRoute('/tabularBudget', month))
       }
     }
   }

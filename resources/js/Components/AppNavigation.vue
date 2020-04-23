@@ -98,7 +98,7 @@
       AppButton,
       AppNavigationItem,
       AppLogo,
-      CogIcon: iconComponent({ icon: faCog, fixedWidth: true }),
+      CogIcon: iconComponent({ icon: faCog }),
       PlusIcon: iconComponent({ icon: faPlus }),
     },
     data () {

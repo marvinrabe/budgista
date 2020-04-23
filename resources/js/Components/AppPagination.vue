@@ -30,8 +30,8 @@
   export default {
     components: {
       AppButton,
-      NextIcon: iconComponent({ icon: faChevronRight, fixedWidth: true }),
-      PrevIcon: iconComponent({ icon: faChevronLeft, fixedWidth: true })
+      NextIcon: iconComponent({ icon: faChevronRight }),
+      PrevIcon: iconComponent({ icon: faChevronLeft })
     },
     props: {
       paginator: Object

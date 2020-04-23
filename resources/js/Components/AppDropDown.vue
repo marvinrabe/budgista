@@ -3,7 +3,7 @@
     <summary>
       <slot name="activator" />
     </summary>
-    <div class="dropdown__body" :class="bodyClass">
+    <div class="dropdown__body -mx-2" :class="bodyClass">
       <slot />
     </div>
   </details>
