@@ -71,7 +71,6 @@
 </template>
 
 <script>
-  import draggable from 'vuedraggable'
   import Layout from '@/Layouts/Container'
   import AppNumber from '@/Components/AppNumber'
   import AppMoney from '@/Components/AppMoney'
@@ -95,7 +94,6 @@
       AppNumber,
       AppMoney,
       MonthPicker,
-      draggable,
       TableIcon: iconComponent({ icon: faTable }),
       CogIcon: iconComponent({ icon: faCog }),
     },
