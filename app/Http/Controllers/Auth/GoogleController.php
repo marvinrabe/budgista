@@ -49,9 +49,7 @@ class GoogleController extends Controller
                 'email_verified_at' => now(),
                 'language' => App::getLocale(),
                 'locale' => App::getLocale(),
-                'currency' => App::getLocale() == 'en' ? 'USD' : 'EUR',
-                'subscription_state' => 'trial',
-                'subscription_ends_at' => now()->addDays(14)
+                'currency' => App::getLocale() == 'en' ? 'USD' : 'EUR'
             ]);
 
             event(new Registered($user));

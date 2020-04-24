@@ -60,8 +60,6 @@ class RegisterController extends Controller
             'language' => App::getLocale(),
             'locale' => App::getLocale(),
             'currency' => App::getLocale() == 'en' ? 'USD' : 'EUR',
-            'subscription_state' => 'trial',
-            'subscription_ends_at' => now()->addDays(14)
         ]);
     }
 

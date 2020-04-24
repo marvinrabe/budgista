@@ -11,15 +11,14 @@ export default {
     title: 'Subscription',
     action: {
       cancel: 'Cancel Subscription',
-      subscribe: 'Subscribe now',
+      subscribe: 'Subscribe to Premium Now',
       update: 'Update Billing Details'
     },
     message: {
       cancelled: 'Your subscription has been canceled and will end at:',
-      ended: 'Your subscription has run out at:',
-      trial: 'You are currently on trial. Your trial ends at:',
+      trial: 'You are currently using Budgista for free.',
       resubscribe: 'You can resubscribe when your current subscription phase has ran out.',
-      active: 'You are currently subscribed. Next payment is due at:',
+      active: 'You are currently subscribed to Budgista Premium. Next payment is due at:',
       checkoutNotice: 'It might take a few seconds for your subscription to be processed. If you experience issues after purchase please contact us at '
     }
   },
@@ -48,13 +47,13 @@ export default {
         description: 'Split your money between your categories to create a budget. What is leftover at the end of the month is carried over to the next.'
       },
       {
-        title: 'Subscribe to Budgista',
-        description: 'Enter your payment details to keep having access after the trial.'
+        title: 'Get Budgista Premium',
+        description: 'Subscribe to Budgista Premium to get even more features.'
       }
     ],
-    subscription: {
-      message: 'You have {count} day left on your trial.|You have {count} days left on your trial.',
-      action: 'Subscribe Now'
+    premium: {
+      message: 'Some features require a payed subscription.',
+      action: 'Subscribe to Premium'
     },
     help: {
       title: 'Need Help?',

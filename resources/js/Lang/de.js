@@ -11,15 +11,14 @@ export default {
     title: 'Abonnement',
     action: {
       cancel: 'Abonnement kündigen',
-      subscribe: 'Jetzt Abonnieren',
+      subscribe: 'Jetzt Premium buchen',
       update: 'Zahlungsdetails bearbeiten'
     },
     message: {
       cancelled: 'Dein Abonnement wurde gekündigt und läuft aus zum:',
-      ended: 'Dein Abonnement ist ausgelaufen am:',
-      trial: 'Du bist aktuell in der Testphase. Die Testphase endet am:',
-      resubscribe: 'Du kannst erneut abonnieren sobald deine restliche Zeit abgelaufen ist.',
-      active: 'Dein Abonnement ist aktiv. Nächste Zahlung ist fällig am:',
+      trial: 'Aktuell benutzt du Budgista kostenlos.',
+      resubscribe: 'Du kannst erneut abonnieren, sobald deine verbleibende Zeit ausgelaufen ist.',
+      active: 'Dein Budgista Premium Abonnement ist aktiv. Nächste Zahlung ist fällig am:',
       checkoutNotice: 'Es kann wenige Sekunden dauern bis dein Abonnement verarbeitet wurde. Falls du Probleme haben solltest, kontaktiere uns per E-Mail: '
     }
   },
@@ -48,13 +47,13 @@ export default {
         description: 'Teile dein Geld in deine Kategorien auf, um ein Budget zu erstellen. Restbeträge am Ende des Monats werden auf den Nächsten übertragen.'
       },
       {
-        title: 'Abonniere Budgista',
-        description: 'Gebe deine Zahlungsinformationen ein, um Budgista auch nach der Testphase weiterhin nutzen zu können.'
+        title: 'Hole dir Budgista Premium',
+        description: 'Buche Budgista Premium um noch mehr Funktionen freizuschalten.'
       }
     ],
-    subscription: {
-      message: 'Du hast noch {count} Tag deiner Testphase übrig.|Du hast noch {count} Tage deiner Testphase übrig.',
-      action: 'Jetzt Abonnieren'
+    premium: {
+      message: 'Einige Funktionen benötigen eine bezahlte Mitgliedschaft.',
+      action: 'Premium buchen'
     },
     help: {
       title: 'Du brauchst Hilfe?',

@@ -14,47 +14,45 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', HomeController::class)->name('home');
     Route::inertia('/welcome', 'Welcome');
 
-    Route::group(['middleware' => \App\Http\Middleware\RequiresSubscription::class], function () {
-        /*
-         * Accounts
-         */
-        Route::resource('accounts', AccountController::class)->except(['index']);
-        Route::get('accounts/{account}/future',
-            [Controllers\AccountController::class, 'future'])->name('accounts.future');
-        Route::post('accounts/{account}/reconcile',
-            [Controllers\AccountController::class, 'reconcile'])->name('accounts.reconcile');
+    /*
+     * Accounts
+     */
+    Route::resource('accounts', AccountController::class)->except(['index']);
+    Route::get('accounts/{account}/future',
+        [Controllers\AccountController::class, 'future'])->name('accounts.future');
+    Route::post('accounts/{account}/reconcile',
+        [Controllers\AccountController::class, 'reconcile'])->name('accounts.reconcile');
 
-        /*
-         * Budget
-         */
-        Route::get('budget/{month?}', [Controllers\BudgetController::class, 'index'])->name('budget');
-        Route::get('budget/{month}/uncategorized',
-            [Controllers\BudgetController::class, 'uncategorized'])->name('budget.uncategorized');
-        Route::get('budget/{month}/categories/{category}',
-            [Controllers\BudgetController::class, 'show'])->name('budget.show');
-        Route::post('budget/{month}/categories/{category}',
-            [Controllers\BudgetController::class, 'store'])->name('budget.store');
-        Route::get('tabularBudget/{month?}', TabularBudget::class)->name('budget.tabular');
+    /*
+     * Budget
+     */
+    Route::get('budget/{month?}', [Controllers\BudgetController::class, 'index'])->name('budget');
+    Route::get('budget/{month}/uncategorized',
+        [Controllers\BudgetController::class, 'uncategorized'])->name('budget.uncategorized');
+    Route::get('budget/{month}/categories/{category}',
+        [Controllers\BudgetController::class, 'show'])->name('budget.show');
+    Route::post('budget/{month}/categories/{category}',
+        [Controllers\BudgetController::class, 'store'])->name('budget.store');
+    Route::get('tabularBudget/{month?}', TabularBudget::class)->name('budget.tabular');
 
-        /*
-         * Categories
-         */
-        Route::resource('categories', CategoryController::class)->except(['show', 'destroy']);
-        Route::post('categories/{category}/delete',
-            [Controllers\CategoryController::class, 'destroy'])->name('categories.destroy');
-        Route::post('categories/sort', [Controllers\CategoryController::class, 'sort'])->name('categories.sort');
+    /*
+     * Categories
+     */
+    Route::resource('categories', CategoryController::class)->except(['show', 'destroy']);
+    Route::post('categories/{category}/delete',
+        [Controllers\CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::post('categories/sort', [Controllers\CategoryController::class, 'sort'])->name('categories.sort');
 
-        /*
-         * Transactions
-         */
-        Route::resource('transactions', TransactionController::class)->except(['show']);
-        Route::resource('paidTransactions', PaidTransactionController::class)->only(['store', 'destroy']);
+    /*
+     * Transactions
+     */
+    Route::resource('transactions', TransactionController::class)->except(['show']);
+    Route::resource('paidTransactions', PaidTransactionController::class)->only(['store', 'destroy']);
 
-        /*
-         * Reports
-         */
-        Route::get('reports', ReportsController::class);
-    });
+    /*
+     * Reports
+     */
+    Route::get('reports', ReportsController::class);
 
     /*
      * Settings
@@ -62,7 +60,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('settings', [Controllers\SettingsController::class, 'index'])->name('settings.index');
     Route::get('settings/edit', [Controllers\SettingsController::class, 'edit'])->name('settings.edit');
     Route::post('settings', [Controllers\SettingsController::class, 'update'])->name('settings.update');
-    Route::get('settings/subscription', [Controllers\SubscriptionController::class, 'index'])->name('settings.subscription');
+    Route::get('settings/subscription',
+        [Controllers\SubscriptionController::class, 'index'])->name('settings.subscription');
     Route::inertia('settings/security', 'User/Security')->name('user.security');
     Route::post('settings/security/password', [Controllers\UserController::class, 'password'])->name('user.password');
 

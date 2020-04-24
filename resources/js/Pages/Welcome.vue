@@ -16,13 +16,13 @@
             </li>
           </ol>
         </div>
-        <div class="card-footer flex flex-col md:flex-row flex-wrap items-center justify-center" v-if="$page.user.subscription_state === 'trial'">
+        <div class="card-footer flex flex-col md:flex-row flex-wrap items-center justify-center" v-if="!$page.user.premium">
           <div class="flex items-center">
-            <ClockIcon class="mr-2 text-gray-6"/>
-            <div>{{ $tc('welcome.subscription.message', daysInTrial) }}</div>
+            <PremiumIcon class="mr-2 text-blue-5"/>
+            <div>{{ $t('welcome.premium.message') }}</div>
           </div>
           <AppButton to="/settings/subscription" variant="primary" class="mt-2 md:mt-0 md:ml-auto">
-            {{ $t('welcome.subscription.action') }}
+            {{ $t('welcome.premium.action') }}
           </AppButton>
         </div>
       </div>
@@ -53,19 +53,18 @@
 
 <script>
   import Layout from '@/Layouts/Default'
-  import dayjs from 'dayjs'
   import { faTwitter, faInstagram, faFacebookSquare, faYoutube } from '@fortawesome/free-brands-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
   import AppButton from '@/Components/form/AppButton'
   import { iconComponent } from '@/Utils/Icons'
-  import { faLightbulb, faClock } from '@fortawesome/free-solid-svg-icons'
+  import { faCertificate } from '@fortawesome/free-solid-svg-icons'
 
   export default {
     components: {
       AppButton,
       Layout,
       FontAwesomeIcon,
-      ClockIcon: iconComponent({ icon: faClock }),
+      PremiumIcon: iconComponent({ icon: faCertificate }),
     },
     data () {
       return {
@@ -91,12 +90,6 @@
             href: 'https://www.youtube.com/channel/UCoGUQ3puDzsL0W8-GPFab-A'
           }
         ]
-      }
-    },
-    computed: {
-      daysInTrial () {
-        const days = Math.ceil(dayjs(this.$page.user.subscription_ends_at).diff(dayjs(), 'day', true))
-        return days > 0 ? days : 0
       }
     }
   }

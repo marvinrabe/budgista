@@ -7,13 +7,8 @@
         </h2>
       </div>
       <div class="card-body">
-        <p v-if="subscriptionEnded" class="text-red-9">
-          {{ $t('subscription.message.ended')}}
-          <DateFormat :value="$page.user.subscription_ends_at"/>
-        </p>
-        <p v-else-if="$page.user.subscription_state === 'trial'">
+        <p v-if="!$page.user.premium">
           {{ $t('subscription.message.trial')}}
-          <DateFormat :value="$page.user.subscription_ends_at"/>
         </p>
         <p v-else-if="$page.user.subscription_state === 'active'">
           {{ $t('subscription.message.active')}}
