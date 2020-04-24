@@ -22,6 +22,9 @@
         sidebar.classList.remove('sidebar--animatable')
       }, false)
     },
+    beforeDestroy () {
+      document.body.style.removeProperty('overflow')
+    },
     methods: {
       hide () {
         document.body.style.removeProperty('overflow')
