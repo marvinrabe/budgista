@@ -10,7 +10,7 @@ class HomeController
 
     public function __invoke()
     {
-        if (Auth::user()->subscription_state == 'trial') {
+        if (Auth::user()->is_newbie) {
             return Redirect::to('/welcome');
         }
 

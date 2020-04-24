@@ -13,7 +13,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable;
 
-    protected $appends = ['has_password'];
+    protected $appends = ['has_password', 'is_newbie'];
 
     protected $casts = [
         'email_verified_at' => 'datetime',
@@ -37,6 +37,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token'
     ];
+
+    public function getIsNewbieAttribute()
+    {
+        return $this->created_at->diffInDays() <= 6;
+    }
 
     public function categories()
     {

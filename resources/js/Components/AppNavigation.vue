@@ -7,7 +7,7 @@
           :label="$t('welcome.title')"
           :icon="icons.welcome"
           href="/welcome"
-          v-if="$page.user.subscription_state === 'trial'"
+          v-if="$page.user.is_newbie"
         />
         <AppNavigationItem
           :label="$t('title.budget')"
