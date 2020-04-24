@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
 <head>
-    <script async defer data-domain="budgista.com" src="https://stats.budgista.com/js/index.js"></script>
-    <script
-            src="https://browser.sentry-cdn.com/5.12.1/bundle.min.js"
-            integrity="sha384-y+an4eARFKvjzOivf/Z7JtMJhaN6b+lLQ5oFbBbUwZNNVir39cYtkjW1r6Xjbxg3"
-            crossorigin="anonymous"></script>
-    <script>Sentry.init(@json(['dsn' => config('services.sentry')]))</script>
+    @if(App::environment('production'))
+        <script async defer data-domain="budgista.com" src="https://stats.budgista.com/js/index.js"></script>
+        <script
+                src="https://browser.sentry-cdn.com/5.12.1/bundle.min.js"
+                integrity="sha384-y+an4eARFKvjzOivf/Z7JtMJhaN6b+lLQ5oFbBbUwZNNVir39cYtkjW1r6Xjbxg3"
+                crossorigin="anonymous"></script>
+        <script>Sentry.init(@json(['dsn' => config('services.sentry')]))</script>
+    @endif
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet"></link>
