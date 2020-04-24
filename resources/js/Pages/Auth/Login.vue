@@ -23,7 +23,6 @@
           <FormGroup name="email">
             <input
               class="form-input"
-              data-vv-validate-on="input"
               slot-scope="{bindings}"
               tabindex="1"
               type="email"

@@ -66,6 +66,7 @@ export default {
     }
   },
   message: {
+    newPassword: 'Your user account has currently no password.',
     deleteUser: 'If you delete your user account all your data will be immediately, completely and irrevocably lost. Please enter your password to confirm the deletion.',
     deleteAccount: 'Do you really want to delete {name}? All transactions will be lost. This action can\'t be reversed.',
     deleteCategory: 'Do you really want to delete {name}? This action can\'t be reversed.',
@@ -95,6 +96,7 @@ export default {
     unpaid: 'Unpaid'
   },
   action: {
+    newPassword: 'Set Password',
     feedback: 'Give us Feedback',
     current: 'Recent',
     save: 'Save',

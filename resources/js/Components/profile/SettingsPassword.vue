@@ -1,45 +1,61 @@
 <template>
-  <AppForm
-    @submit="save"
-    ref="form"
-  >
+  <div>
     <h3
       class="text-lg mb-4"
       v-t="'title.updatePassword'"
     />
 
-    <div class="flex flex-wrap gutter-1">
-      <div class="w-full xl:w-1/2">
-        <FormGroup
-          label="oldPassword"
-          name="password"
-        >
-          <PasswordInput
-            :disable-strength="true"
-            v-model="form.password"
-          />
-        </FormGroup>
+    <AppForm @submit="save" v-if="$page.user.has_password">
+      <div class="flex flex-wrap gutter-1">
+        <div class="w-full xl:w-1/2">
+          <FormGroup
+            label="oldPassword"
+            name="password"
+          >
+            <PasswordInput
+              :disable-strength="true"
+              v-model="form.password"
+            />
+          </FormGroup>
+        </div>
+        <div class="w-full xl:w-1/2">
+          <FormGroup name="newPassword">
+            <PasswordInput
+              slot-scope="{bindings}"
+              v-bind="bindings"
+              v-model="form.new_password"
+              validation="required|min:6"
+            />
+          </FormGroup>
+        </div>
       </div>
-      <div class="w-full xl:w-1/2">
-        <FormGroup name="newPassword">
-          <PasswordInput
-            slot-scope="{bindings}"
-            v-bind="bindings"
-            v-model="form.new_password"
-            validation="required|min:6"
-          />
-        </FormGroup>
-      </div>
-    </div>
 
-    <div slot="actions">
+      <div slot="actions">
+        <AppButton
+          :label="$t('action.settings.password')"
+          :loading="saving"
+          variant="primary"
+        />
+      </div>
+    </AppForm>
+    <div v-else>
+      <p class="text-gray-6 mb-4">
+        {{ $t('message.newPassword')}}
+      </p>
+
+      <p class="text-red-9 mb-4" v-if="$page.errors['email']">
+        {{ $page.errors['email'][0]}}
+      </p>
+
       <AppButton
-        :label="$t('action.settings.password')"
+        :label="$t('action.newPassword')"
+        @click="newPassword"
         :loading="saving"
         variant="primary"
+        class="ml-auto"
       />
     </div>
-  </AppForm>
+  </div>
 </template>
 
 <script>
@@ -78,6 +94,15 @@
           .post('/settings/security/password', this.form)
           .then(() => {
             this.reset()
+          })
+          .finally(() => {
+            this.saving = false
+          })
+      },
+      newPassword () {
+        this.$inertia
+          .post('/password/email', {
+            email: this.$page.user.email
           })
           .finally(() => {
             this.saving = false

@@ -14,13 +14,10 @@
           <FormGroup name="email">
             <input
               class="form-input"
-              data-vv-validate-on="input"
               slot-scope="{bindings}"
               type="email"
               v-bind="bindings"
-              v-focus
               v-model="form.email"
-              v-validate="'required|email'"
             >
           </FormGroup>
 

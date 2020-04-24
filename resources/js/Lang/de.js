@@ -66,6 +66,7 @@ export default {
     }
   },
   message: {
+    newPassword: 'Dein Benutzerkonto hat momentan kein Passwort.',
     deleteUser: 'Wenn du dein Benutzerkonto löscht, dann werden deine Daten sofort, vollständig und unwiderruflich entfernt. Bitte gib dein Passwort ein um die Löschung zu bestätigen.',
     deleteAccount: 'Möchtest du {name} wirklich löschen? Alle Transaktionen werden entfernt. Dies kann nicht rückgängig gemacht werden.',
     deleteCategory: 'Möchtest du {name} wirklich löschen? Dies kann nicht rückgängig gemacht werden.',
@@ -94,6 +95,7 @@ export default {
     unpaid: 'Unbezahlt'
   },
   action: {
+    newPassword: 'Passwort setzen',
     feedback: 'Feedback geben',
     current: 'Kürzlich',
     save: 'Speichern',
