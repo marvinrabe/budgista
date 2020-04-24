@@ -40,8 +40,8 @@
       </div>
     </FormGroup>
 
-    <div class="flex flex-wrap -mx-1">
-      <div class="w-full md:w-1/2 px-1">
+    <div class="flex flex-wrap md:space-x-2">
+      <div class="w-full md:flex-1">
         <FormGroup name="payee">
           <PayeeInput
             slot-scope="{bindings}"
@@ -52,7 +52,7 @@
         </FormGroup>
       </div>
 
-      <div class="w-full md:w-1/2 px-1">
+      <div class="w-full md:flex-1">
         <FormGroup name="category_id">
           <CategorySelect
             slot-scope="{bindings}"
@@ -64,8 +64,8 @@
       </div>
     </div>
 
-    <div class="flex flex-wrap -mx-1 justify-end">
-      <div class="w-full md:w-1/2 px-1">
+    <div class="flex flex-wrap justify-end md:space-x-2">
+      <div class="w-full md:flex-1">
         <FormGroup name="account_id">
           <AccountSelect
             slot-scope="{bindings}"
@@ -75,7 +75,7 @@
         </FormGroup>
       </div>
 
-      <div class="w-full md:w-1/2 px-1">
+      <div class="w-full md:flex-1">
         <FormGroup name="date">
           <template slot-scope="{bindings}">
             <div class="flex items-stretch">

@@ -10,7 +10,8 @@
           <CogIcon/>
         </AppButton>
 
-        <AppButton :to="account.links.transactions.create" variant="primary" :title="$t('action.create.transaction')" class="ml-2">
+        <AppButton :to="account.links.transactions.create" variant="primary" :title="$t('action.create.transaction')"
+                   class="ml-2">
           <PlusIcon/>
           {{ $t('word.transaction')}}
         </AppButton>
@@ -18,30 +19,26 @@
     </template>
 
     <div class="card px-4 py-2 mb-4">
-      <div class="flex flex-wrap items-baseline -mx-4">
-        <AppNumber
+      <div class="flex flex-wrap items-baseline justify-between space-x-2">
+        <MoneyColumn
           :color="true"
           :label="$t('form.balance.working')"
           :value="account.balance"
           class="items-start mb-2 lg:mb-0"
         />
-        <div class="flex flex-col px-4">
-          <div class="py-1 flex items-center justify-between">
-          <span class="label whitespace-no-wrap mr-8">
-            <CheckIcon class="text-green-7 mr-1"/>
-            {{ $t('form.balance.cleared')}}
-          </span>
-
-            <AppMoney :value="account.cleared_balance" class="text-sm"/>
-          </div>
-          <div class="py-1 flex items-center justify-between">
-          <span class="label whitespace-no-wrap mr-8">
-            <CheckIcon class="text-gray-5 mr-1"/>
-            {{ $t('form.balance.outstanding')}}
-          </span>
-
-            <AppMoney :value="account.outstanding_balance" class="text-sm"/>
-          </div>
+        <div class="flex flex-col">
+          <MoneyRow :value="account.cleared_balance">
+            <template v-slot:label>
+              <CheckIcon class="text-green-7 mr-1"/>
+              {{ $t('form.balance.cleared')}}
+            </template>
+          </MoneyRow>
+          <MoneyRow :value="account.outstanding_balance">
+            <template v-slot:label>
+              <CheckIcon class="text-gray-5 mr-1"/>
+              {{ $t('form.balance.outstanding')}}
+            </template>
+          </MoneyRow>
         </div>
       </div>
     </div>
@@ -84,23 +81,25 @@
 
 <script>
   import { faPlus, faCog, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
-  import AppNumber from '@/Components/AppNumber'
+  import MoneyColumn from '@/Components/MoneyColumn'
   import AppButton from '@/Components/form/AppButton'
   import TransactionList from '@/Components/transactions/TransactionList'
   import { iconComponent } from '@/Utils/Icons'
   import AppPagination from '@/Components/AppPagination'
   import Layout from '@/Layouts/Default'
   import AppMoney from '@/Components/AppMoney'
+  import MoneyRow from '@/Components/MoneyRow'
 
   export default {
     components: {
+      MoneyRow,
       AppMoney,
       Layout,
       PlusIcon: iconComponent({ icon: faPlus }),
       CogIcon: iconComponent({ icon: faCog }),
       CheckIcon: iconComponent({ icon: faCheckCircle }),
       AppButton,
-      AppNumber,
+      MoneyColumn,
       AppPagination,
       TransactionList
     },

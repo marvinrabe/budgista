@@ -10,48 +10,18 @@
           <template v-slot:activator>
             <div
               class="badge border border-transparent px-4 py-2 text-right"
-              :class="{'badge--red': $page.budget.available < 0, 'badge--green': $page.budget.available > 0, 'badge--gray': $page.budget.available === 0, }"
+              :class="{'badge--red': $page.budget.available < 0, 'badge--green': $page.budget.available > 0, 'badge--gray': $page.budget.available === 0 }"
             >
               <InfoIcon class="text-sm opacity-50 hover:opacity-75"/>
               <AppMoney class="ml-2" color :value="$page.budget.available"/>
             </div>
           </template>
 
-          <div class="py-1 flex items-center justify-between">
-            <span class="label mr-6">
-              {{ $t('form.previousMonth')}}
-            </span>
-
-            <AppMoney :value="$page.budget.previousMonth" class="text-sm"/>
-          </div>
-          <div class="py-1 flex items-center justify-between">
-            <span class="label mr-6 ">
-              {{ $t('form.income')}}
-            </span>
-
-            <AppMoney :value="$page.budget.income" class="text-sm"/>
-          </div>
-          <div class="py-1 flex items-center justify-between">
-            <span class="label mr-6 ">
-              {{ $t('form.expense')}}
-            </span>
-
-            <AppMoney :value="$page.budget.expenses" class="text-sm"/>
-          </div>
-          <div class="py-1 flex items-center justify-between">
-            <span class="label mr-6 ">
-              {{ $t('form.allocated')}}
-            </span>
-
-            <AppMoney :value="$page.budget.allocated" class="text-sm"/>
-          </div>
-          <div class="py-1 flex items-center justify-between">
-            <span class="label mr-6">
-              {{ $t('form.available')}}
-            </span>
-
-            <AppMoney :value="$page.budget.available" class="text-sm"/>
-          </div>
+          <MoneyRow :label="$t('form.previousMonth')" :value="$page.budget.previousMonth"/>
+          <MoneyRow :label="$t('form.income')" :value="$page.budget.income"/>
+          <MoneyRow :label="$t('form.expense')" :value="$page.budget.expenses"/>
+          <MoneyRow :label="$t('form.allocated')" :value="$page.budget.allocated"/>
+          <MoneyRow :label="$t('form.available')" :value="$page.budget.available"/>
         </AppDropDown>
       </div>
     </div>
@@ -73,12 +43,14 @@
   import AppDropDown from '@/Components/AppDropDown'
   import { iconComponent } from '@/Utils/Icons'
   import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+  import MoneyRow from '@/Components/MoneyRow'
 
   export default {
     props: {
       transactions: Object
     },
     components: {
+      MoneyRow,
       AppDropDown,
       AppMoney,
       AppPagination,

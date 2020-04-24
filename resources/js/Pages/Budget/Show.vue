@@ -16,8 +16,8 @@
         </AppButton>
       </div>
 
-      <div class="card-body flex items-baseline -mx-2">
-        <div class="flex flex-1 flex-col px-2">
+      <div class="card-body flex items-baseline space-x-2">
+        <div class="flex flex-1 flex-col">
           <FormGroup
             name="amount"
             label="budget"
@@ -43,8 +43,8 @@
           </div>
         </div>
 
-        <div class="flex flex-1 flex-col px-2 items-end">
-          <div class="label mb-2">
+        <div class="flex flex-1 flex-col items-end">
+          <div class="label mb-1">
             {{ $t('form.available')}}
           </div>
 
@@ -59,34 +59,10 @@
               </div>
             </template>
 
-            <div class="py-1 flex items-baseline justify-between">
-              <div class="label mr-6">
-                {{ $t('form.previousMonth')}}
-              </div>
-
-              <AppMoney :value="categoryBudget.previousMonth" class="text-sm"/>
-            </div>
-            <div class="py-1 flex items-baseline justify-between">
-              <div class="label mr-6">
-                {{ $t('form.budget')}}
-              </div>
-
-              <AppMoney :value="categoryBudget.amount" class="text-sm"/>
-            </div>
-            <div class="py-1 flex items-baseline justify-between">
-              <div class="label mr-6">
-                {{ $t('form.activity')}}
-              </div>
-
-              <AppMoney :value="categoryBudget.activity" class="text-sm"/>
-            </div>
-            <div class="py-1 flex items-baseline justify-between">
-              <div class="label mr-6">
-                {{ $t('form.available')}}
-              </div>
-
-              <AppMoney :value="categoryBudget.available" class="text-sm"/>
-            </div>
+            <MoneyRow :label="$t('form.previousMonth')" :value="categoryBudget.previousMonth"/>
+            <MoneyRow :label="$t('form.budget')" :value="categoryBudget.amount"/>
+            <MoneyRow :label="$t('form.activity')" :value="categoryBudget.activity"/>
+            <MoneyRow :label="$t('form.available')" :value="categoryBudget.available"/>
           </AppDropDown>
         </div>
       </div>
@@ -116,6 +92,7 @@
   import { faInfoCircle, faLightbulb, faCog } from '@fortawesome/free-solid-svg-icons'
   import AppButton from '@/Components/form/AppButton'
   import AppDropDown from '@/Components/AppDropDown'
+  import MoneyRow from '@/Components/MoneyRow'
 
   export default {
     props: {
@@ -124,6 +101,7 @@
       transactions: Object
     },
     components: {
+      MoneyRow,
       AppDropDown,
       AppButton,
       AppMoney,

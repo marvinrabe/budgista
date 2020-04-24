@@ -109,9 +109,7 @@ class Budget extends ViewModel
     public function links()
     {
         return [
-            'uncategorized' => URL::route('budget.uncategorized', ['month' => $this->month], false),
-            'prev' => URL::route('budget', ['month' => $this->month->previous()]),
-            'next' => URL::route('budget', ['month' => $this->month->next()])
+            'uncategorized' => URL::route('budget.uncategorized', ['month' => $this->month], false)
         ];
     }
 

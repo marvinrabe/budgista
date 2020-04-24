@@ -11,8 +11,8 @@
       fixed-width
       v-if="icon"
     />
-    <div class="text-gray-8 font-medium ellipsis">
-      <span class="menu__item-label">{{ label }}</span>
+    <div class="font-medium ellipsis">
+      <span class="menu__item-label text-gray-8">{{ label }}</span>
     </div>
     <slot></slot>
   </inertia-link>

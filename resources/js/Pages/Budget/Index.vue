@@ -18,24 +18,20 @@
     </template>
 
     <template v-slot:menu>
+      <inertia-link
+        class="hover:no-underline flex block rounded px-4 py-2 mb-2"
+        :class="{'bg-red-7 hover:bg-red-6 text-white hover:text-white': $page.budget.available < 0, 'bg-green-7 hover:bg-green-6 text-white hover:text-white': $page.budget.available > 0, 'bg-gray-3 hover:bg-gray-2 text-gray-6 hover:text-gray-6': $page.budget.available === 0 }"
+        :href="$page.budget.links.uncategorized">
+        <span class="label">
+          {{ $t('budget.title.uncategorized') }}
+        </span>
+        <AppMoney
+          :value="$page.budget.available"
+          class="ml-auto pl-2 text-xs font-medium"
+        />
+      </inertia-link>
+
       <AppMenu>
-        <AppMenuItem class="border-b-2" :label="$t('budget.title.uncategorized')"
-                     :href="$page.budget.links.uncategorized">
-          <AppMoney
-            :value="$page.budget.available"
-            :color="$page.budget.available !== 0"
-            class="ml-auto pl-2 text-xs font-medium"
-            color
-          />
-          <div class="w-full flex justify-end">
-            <BudgetProgress
-              class="w-1/4"
-              :activity="$page.budget.expenses"
-              :budget="$page.budget.available - $page.budget.expenses"
-              :available="$page.budget.available"
-            />
-          </div>
-        </AppMenuItem>
         <AppMenuItem
           v-for="category in $page.budget.categories"
           :key="category.id"
@@ -72,7 +68,7 @@
 
 <script>
   import Layout from '@/Layouts/Container'
-  import AppNumber from '@/Components/AppNumber'
+  import MoneyColumn from '@/Components/MoneyColumn'
   import AppMoney from '@/Components/AppMoney'
   import MonthPicker from '@/Components/budget/MonthPicker'
   import Month from '@/Utils/Month.js'
@@ -83,15 +79,17 @@
   import { iconComponent } from '@/Utils/Icons'
   import { faCog, faTable } from '@fortawesome/free-solid-svg-icons'
   import { budgetRoute } from '@/Utils/Route'
+  import MoneyRow from '@/Components/MoneyRow'
 
   export default {
     components: {
+      MoneyRow,
       AppButton,
       AppMenuItem,
       AppMenu,
       BudgetProgress,
       Layout,
-      AppNumber,
+      MoneyColumn,
       AppMoney,
       MonthPicker,
       TableIcon: iconComponent({ icon: faTable }),

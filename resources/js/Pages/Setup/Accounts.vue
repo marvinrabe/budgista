@@ -10,7 +10,7 @@
         </AppButton>
       </li>
       <li class="p-4 bg-gray-0 rounded-sm">
-        <form @submit.prevent="addAccount" class="gutter-1 flex flex-col md:flex-row md:items-end justify-center">
+        <form @submit.prevent="addAccount" class="flex flex-col md:flex-row md:items-end justify-center md:space-x-2">
           <FormGroup name="name" class="md:mb-0">
             <input
               class="form-input"
@@ -25,12 +25,10 @@
               v-model="form.amount"
               v-bind="bindings"/>
           </FormGroup>
-          <div class="ml-auto md:ml-0 px-1">
-            <AppButton type="submit" variant="light" class="">
-              <PlusIcon/>
-              {{ $t('action.add')}}
-            </AppButton>
-          </div>
+          <AppButton type="submit" variant="light">
+            <PlusIcon/>
+            {{ $t('action.add')}}
+          </AppButton>
         </form>
       </li>
     </ul>

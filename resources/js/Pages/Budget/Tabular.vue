@@ -4,23 +4,23 @@
       <MonthPicker :value="month" @input="changeMonth"/>
 
       <div class="mt-4 w-full lg:mt-0 lg:w-auto lg:ml-auto">
-        <div class="flex -mx-2">
-          <AppNumber
+        <div class="flex space-x-4">
+          <MoneyColumn
             :label="$t('form.previousMonth')"
             :value="budget.previousMonth"
             class="hidden md:flex items-start lg:items-end"
           />
-          <AppNumber
+          <MoneyColumn
             :label="$t('form.income')"
             :value="budget.income"
             class="items-start md:items-center lg:items-end"
           />
-          <AppNumber
+          <MoneyColumn
             :label="$t('form.expense')"
             :value="budget.expenses"
             class="items-start md:items-center lg:items-end"
           />
-          <AppNumber
+          <MoneyColumn
             :label="$t('form.available')"
             :value="budget.available"
             class="items-end"
@@ -55,7 +55,7 @@
 
 <script>
   import Layout from '@/Layouts/Default'
-  import AppNumber from '@/Components/AppNumber'
+  import MoneyColumn from '@/Components/MoneyColumn'
   import Budget from '@/Components/budget/Budget'
   import BudgetCategory from '@/Components/budget/BudgetCategory'
   import MonthPicker from '@/Components/budget/MonthPicker'
@@ -71,7 +71,7 @@
       CategoryListEmpty,
       AppButton,
       Layout,
-      AppNumber,
+      MoneyColumn,
       Budget,
       BudgetCategory,
       MonthPicker,

@@ -5,7 +5,7 @@
         {{ $t('title.allTransactions') }}
       </h2>
       <div class="ml-auto text-right">
-        <AppNumber
+        <MoneyColumn
           :color="true"
           :label="$t('form.netWorth')"
           :value="netWorth"
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import AppNumber from '@/Components/AppNumber'
+  import MoneyColumn from '@/Components/MoneyColumn'
   import TransactionList from '@/Components/transactions/TransactionList'
   import AppPagination from '@/Components/AppPagination'
   import Layout from '@/Layouts/Default'
@@ -33,7 +33,7 @@
   export default {
     components: {
       Layout,
-      AppNumber,
+      MoneyColumn,
       AppPagination,
       TransactionList
     },

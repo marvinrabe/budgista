@@ -6,29 +6,24 @@
     />
 
     <AppForm @submit="save" v-if="$page.user.has_password">
-      <div class="flex flex-wrap gutter-1">
-        <div class="w-full xl:w-1/2">
-          <FormGroup
-            label="oldPassword"
-            name="password"
-          >
-            <PasswordInput
-              :disable-strength="true"
-              v-model="form.password"
-            />
-          </FormGroup>
-        </div>
-        <div class="w-full xl:w-1/2">
-          <FormGroup name="newPassword">
-            <PasswordInput
-              slot-scope="{bindings}"
-              v-bind="bindings"
-              v-model="form.new_password"
-              validation="required|min:6"
-            />
-          </FormGroup>
-        </div>
-      </div>
+      <FormGroup
+        label="oldPassword"
+        name="password"
+      >
+        <PasswordInput
+          :disable-strength="true"
+          v-model="form.password"
+        />
+      </FormGroup>
+
+      <FormGroup name="newPassword">
+        <PasswordInput
+          slot-scope="{bindings}"
+          v-bind="bindings"
+          v-model="form.new_password"
+          validation="required|min:6"
+        />
+      </FormGroup>
 
       <div slot="actions">
         <AppButton

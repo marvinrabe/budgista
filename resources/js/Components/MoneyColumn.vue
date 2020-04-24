@@ -1,12 +1,12 @@
 <template>
-  <div class="numeric">
+  <div class="flex flex-col">
     <span class="label whitespace-no-wrap">
       {{ label }}
     </span>
     <AppMoney
       :value="value"
       :color="color"
-      class="numeric__value text-xl"
+      class="flex-1 whitespace-no-wrap text-xl"
     />
   </div>
 </template>

@@ -2,11 +2,11 @@
   <Layout :title="$t('title.reports')">
     <NetWorth v-bind="netWorth"/>
     <IncomeVsExpense v-bind="incomeVsExpense"/>
-    <div class="-mx-2 flex flex-wrap">
-      <div class="w-full lg:w-1/2 px-2">
+    <div class="flex flex-wrap lg:space-x-2">
+      <div class="w-full lg:w-1/2">
         <Income v-bind="income"/>
       </div>
-      <div class="w-full lg:w-1/2 px-2">
+      <div class="w-full lg:w-1/2">
         <Expense v-bind="expense"/>
       </div>
     </div>
