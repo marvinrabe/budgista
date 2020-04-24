@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
 <head>
-    <script async defer data-domain="budgista.com" src="https://plausible.io/js/plausible.js"></script>
+    <script async defer data-domain="budgista.com" src="https://stats.budgista.com/js/index.js"></script>
     <script
             src="https://browser.sentry-cdn.com/5.12.1/bundle.min.js"
             integrity="sha384-y+an4eARFKvjzOivf/Z7JtMJhaN6b+lLQ5oFbBbUwZNNVir39cYtkjW1r6Xjbxg3"
