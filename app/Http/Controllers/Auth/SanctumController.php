@@ -25,6 +25,9 @@ class SanctumController
             ]);
         }
 
-        return ['token' => $user->createToken($request->device_name)->plainTextToken];
+        return [
+            'token' => $user->createToken($request->device_name)->plainTextToken,
+            'user' => $user
+        ];
     }
 }

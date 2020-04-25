@@ -26,7 +26,11 @@ class SanctumTest extends TestCase
                 'password' => 'password',
                 'device_name' => 'unit test'
             ])
-            ->assertSuccessful();
+            ->assertSuccessful()
+            ->assertJsonFragment([
+                'name' => $user->name,
+                'email' => $user->email,
+            ]);
 
         $this->assertDatabaseHas('personal_access_tokens', [
             'tokenable_type' => User::class,
