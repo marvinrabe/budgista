@@ -3,10 +3,10 @@
     <NetWorth v-bind="netWorth"/>
     <IncomeVsExpense v-bind="incomeVsExpense"/>
     <div class="flex flex-wrap lg:space-x-2">
-      <div class="w-full lg:w-1/2">
+      <div class="w-full lg:flex-1">
         <Income v-bind="income"/>
       </div>
-      <div class="w-full lg:w-1/2">
+      <div class="w-full lg:flex-1">
         <Expense v-bind="expense"/>
       </div>
     </div>
