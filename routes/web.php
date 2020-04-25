@@ -47,7 +47,6 @@ Route::group(['middleware' => ['auth']], function () {
      * Transactions
      */
     Route::resource('transactions', TransactionController::class)->except(['show']);
-    Route::resource('paidTransactions', PaidTransactionController::class)->only(['store', 'destroy']);
 
     /*
      * Reports

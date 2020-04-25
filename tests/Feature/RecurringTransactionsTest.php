@@ -1,11 +1,8 @@
 <?php
 
-
 namespace Tests\Feature;
 
-
 use App\Console\Commands\ProcessRecurringTransactions;
-use App\Account;
 use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;

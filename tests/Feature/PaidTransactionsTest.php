@@ -49,7 +49,7 @@ class PaidTransactionsTest extends TestCase
 
         $this
             ->signIn()
-            ->post('/paidTransactions', [
+            ->post('/api/paidTransactions', [
                 'id' => $transaction->id
             ])
             ->assertSessionHasErrors('id');
@@ -66,10 +66,9 @@ class PaidTransactionsTest extends TestCase
         $this
             ->signIn()
             ->from("/accounts/{$transaction->account_id}")
-            ->delete("/paidTransactions/{$transaction->id}")
+            ->delete("/api/paidTransactions/{$transaction->id}")
             ->assertNotFound();
 
         $this->assertTrue($transaction->fresh()->paid);
     }
-
 }
