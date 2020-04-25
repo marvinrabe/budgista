@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Transaction;
 use App\Rules\Own;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class PaidTransactionController extends Controller
+class PaidTransactionController
 {
+    use AuthorizesRequests;
+
     public function store(Request $request)
     {
         $request->validate([
