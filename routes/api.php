@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AccountController;
+use App\Http\Controllers\Api\BudgetController;
 use App\Http\Controllers\Auth\SanctumController;
 use App\Http\Controllers\Api\PaidTransactionController;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +14,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return ['user' => Auth()->user()];
     });
 
+    Route::get('budget/{month}', [BudgetController::class, 'index']);
     Route::apiResource('accounts', AccountController::class);
     Route::apiResource('paidTransactions', PaidTransactionController::class)->only(['store', 'destroy']);
 });
