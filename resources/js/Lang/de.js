@@ -192,6 +192,7 @@ export default {
   word: {
     total: 'Gesamt',
     or: 'oder',
+    of: 'von',
     termsOfService: 'Nutzungsbedingungen',
     transaction: 'Kontobewegung',
     category: 'Kategorie',

@@ -193,6 +193,7 @@ export default {
   word: {
     total: 'Total',
     or: 'or',
+    of: 'of',
     termsOfService: 'Terms of Service',
     transaction: 'Transaction',
     category: 'Category',

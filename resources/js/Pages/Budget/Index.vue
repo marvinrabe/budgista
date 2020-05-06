@@ -35,13 +35,27 @@
         <AppMenuItem
           v-for="category in $page.budget.categories"
           :key="category.id"
+          class="swiper"
           :label="category.name"
           :href="category.links.show">
-          <AppMoney
-            :value="category.available"
-            class="ml-auto pl-2 text-xs font-medium"
-            color
-          />
+          <div class="ml-auto pl-2 swiper__container justify-end whitespace-no-wrap h-4">
+            <AppMoney
+              :value="category.available"
+              class="text-xs font-medium swiper__a"
+              color
+            />
+            <div class="swiper__b text-xs text-gray-7">
+              <AppMoney
+                :value="category.activity * -1"
+                class="text-xs font-medium"
+              />
+              {{ $t('word.of') }}
+              <AppMoney
+                :value="category.budget"
+                class="text-xs font-medium"
+              />
+            </div>
+          </div>
           <div class="w-full flex justify-end">
             <BudgetProgress
               class="w-1/4"

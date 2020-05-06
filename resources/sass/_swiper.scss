@@ -1,0 +1,27 @@
+.swiper__container {
+  display: flex;
+  position: relative;
+}
+
+.swiper .swiper__a, .swiper .swiper__b {
+  position: absolute;
+  transition: opacity 300ms ease, top 200ms ease;
+}
+
+.swiper .swiper__a {
+  top: 0;
+  opacity: 1;
+}
+.swiper .swiper__b {
+  top: 1em;
+  opacity: 0;
+}
+
+.swiper:hover .swiper__a {
+  top: -1em;
+  opacity: 0;
+}
+.swiper:hover .swiper__b {
+  top: 0;
+  opacity: 1;
+}
