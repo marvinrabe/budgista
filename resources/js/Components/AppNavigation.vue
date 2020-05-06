@@ -81,7 +81,6 @@
   import {
     faLightbulb,
     faEnvelope,
-    faUniversity,
     faChartBar,
     faCog,
     faPlus,
@@ -90,7 +89,6 @@
   } from '@fortawesome/free-solid-svg-icons'
   import { iconComponent } from '@/Utils/Icons'
   import AppButton from '@/Components/form/AppButton'
-  import { transactionRoute } from '@/Utils/Route'
   import accountIcons from '@/Components/accounts/accountIcons'
 
   export default {
@@ -106,7 +104,6 @@
         icons: {
           welcome: faLightbulb,
           budget: faEnvelope,
-          transactions: faUniversity,
           reports: faChartBar,
           settings: faCog,
           allTransactions: faInbox,
