@@ -24,7 +24,7 @@
           <account-icon-picker v-model="form.icon"/>
         </FormGroup>
 
-        <div class="form-check">
+        <div class="form-check flex items-center mb-4">
           <input
             :value="true"
             class="form-checkbox"
@@ -32,11 +32,14 @@
             type="checkbox"
             v-model="form.tracking"
           >
-          <label
-            class="checkbox-label"
-            for="tracking"
-            v-t="'form.trackingAccount'"
-          />
+          <div class="ml-2">
+            <label
+                class="checkbox-label"
+                for="tracking"
+                v-t="'form.trackingAccount'"
+            />
+            <p class="text-gray-6 text-xs" v-t="'message.trackingHint'"></p>
+          </div>
         </div>
 
         <template slot="actions">

@@ -87,6 +87,7 @@ export default {
     setupNoCategories: 'Are you sure to continue without choosing atleast one category?',
     setupAccounts: 'Enter your bank accounts with your current account balances. If you don\'t know the balance at the moment, you can provide this information later.',
     setupNoAccounts: 'Are you sure to continue without adding atleast one account?',
+    trackingHint: 'Transactions on tracking accounts won\'t be considered for your budget. This kind of accounts are perfect for tracking assets.',
   },
   hint: {
     deleteAccount: 'Delete this account with ALL transactions.',

@@ -86,6 +86,7 @@ export default {
     setupNoCategories: 'Willst du wirklich fortfahren ohne eine Kategorie ausgewählt zu haben?',
     setupAccounts: 'Gib deine Bankkonten mit den aktuellen Kontoständen ein. Falls du die Kontostände gerade nicht kennst, kannst du diese auch später eingeben.',
     setupNoAccounts: 'Willst du wirklich fortfahren ohne ein Bankkonto eingegeben zu haben?',
+    trackingHint: 'Kontobewegungen in Tracking Accounts werden nicht im Budget berücksichtigt. Diese Konten sind ideal um Vermögenswerte zu beobachten.',
   },
   hint: {
     deleteAccount: 'Lösche dieses Konto mit ALLEN Kontobewegungen.',
