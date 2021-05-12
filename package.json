@@ -23,7 +23,7 @@
     "@tailwindcss/custom-forms": "^0.2.1",
     "autosize": "^4.0.2",
     "axios": "^0.19",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "chroma-js": "^2.1.0",
     "cross-env": "^5.2",
     "dayjs": "^1.8.20",
