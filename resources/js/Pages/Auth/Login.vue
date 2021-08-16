@@ -60,14 +60,6 @@
           </template>
         </AppForm>
       </div>
-
-      <div class="card-footer p-4 text-center">
-        <span class="mr-1" v-t="'message.noAccount'"/>
-        <inertia-link
-          href="/register"
-          v-t="'action.register'"
-        />
-      </div>
     </div>
   </Layout>
 </template>
