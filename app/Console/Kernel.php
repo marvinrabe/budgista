@@ -15,9 +15,5 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        // Use Heroku Scheduler
-        // $schedule->command(Commands\Clean::class)->monthly();
-        // $schedule->command(Commands\SendFollowUpEmail::class)->daily();
-        // $schedule->command(Commands\ProcessRecurringTransactions::class)->hourly();
     }
 }
